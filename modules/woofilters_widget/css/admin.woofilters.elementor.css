@@ -1,0 +1,240 @@
+[class*="__f_mlist"] .elementor-control-input-wrapper,
+[class*="__f_options"] .elementor-control-input-wrapper{
+	width: 100%;
+}
+#elementor-panel .woobewoo-plugin .clear {
+	width: 100%;
+}
+#elementor-panel .woobewoo-plugin .clear:after {
+	content: '';
+	display: table;
+	width: 100%;
+	clear: both;
+}
+#elementor-panel .woobewoo-plugin {
+	font-family: inherit;
+	background: transparent;
+	color: inherit;
+}
+#wpfChooseFiltersBlock.woobewoo-input-group {
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-ms-flex-align: center;
+	align-items: center;
+}
+#wpfChooseFiltersBlock.woobewoo-input-group .woobewoo-group-label {
+	width: 100%;
+	margin: 0;
+}
+#wpfChooseFiltersBlock.woobewoo-input-group select {
+	width: 80%;
+	height: 28px;
+	line-height: 28px;
+	min-height: 28px;
+	padding: 0 5px;
+}
+#wpfChooseFiltersBlock.woobewoo-input-group .button {
+	width: 20%;
+}
+#wpfChooseFiltersBlock.woobewoo-input-group .button,
+button[data-event="saveFilter"]{
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	height: 28px;
+	line-height: 28px;
+	min-height: 28px;
+	margin: 0;
+	border-width: 1px;
+	border: none;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	color: #fff;
+	background-color: #39b54a;
+	padding: 0 8px;
+	cursor: pointer;
+	text-align: center;
+}
+#elementor-panel .wpfFiltersBlock .wpfFilter {
+	background: #404349;
+}
+#elementor-panel .wpfFilter .wpfHeaders {
+	position: relative;
+	padding-bottom: 7px;
+}
+#elementor-panel .woobewoo-color-picker .wp-picker-holder {
+	left: -95px;
+}
+#elementor-panel .woobewoo-color-picker .iris-picker .iris-strip {
+	max-height: 100%;
+}
+#elementor-panel .wpfFiltersBlock .wpfOptions {
+	background: #404349;
+}
+#elementor-panel .wpfDelete, #elementor-panel .wpfToggle {
+	position: absolute;
+	z-index: 1;
+	right: 0;
+	top: 0;
+	width: 20px;
+	text-align: center;
+}
+#elementor-panel .wpfToggle {
+	top: 25px;
+}
+#elementor-panel .wpfFiltersBlock .wpfFilter .wpfFilterTitle {
+	white-space: normal;
+	width: calc(100% - 20px);
+	float: none;
+}
+#elementor-panel .wpfFilterFrontTitleOpt, #elementor-panel .wpfFilterFrontDescOpt {
+	float: none;
+}
+#elementor-panel .wpfMainTabsContainer {
+	padding: 0;
+}
+#elementor-panel .wpfMainTabsContainer > .row {
+	margin-right: -10px;
+	margin-left: -10px;
+}
+#elementor-panel .wpfFiltersTabContents {
+	background: transparent;
+	padding: 0;
+}
+#elementor-panel .row-settings-block {
+	padding: 0 10px;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	max-width: 100%;
+}
+#elementor-panel .sub-block-values {
+	max-width: 100%;
+	line-height: inherit;
+}
+#elementor-panel .row-settings-block .settings-block-label {
+	width: 50%;
+}
+#elementor-panel .row-settings-block .settings-block-values {
+	width: 50%;
+}
+#elementor-panel .containerWrapperElementor .row-settings-block .settings-block-values{
+	width: 40%;
+}
+#elementor-panel #sub-tab-design-floating .row-settings-block .settings-block-label {
+	width: 30%;
+}
+#elementor-panel .containerWrapperElementor #sub-tab-design-floating .row-settings-block .settings-block-values {
+	width: 30%;
+}
+#elementor-panel .row-settings-block .settings-w100{
+	width: 100%!important;
+	margin-top: 10px;
+}
+#elementor-panel .row-settings-block .settings-values-w100 {
+	width: 100%!important;
+	margin-top: -30px;
+}
+#elementor-panel .row-settings-block .settings-value.settings-w100 {
+	float: none;
+	margin-top: 0;
+}
+#elementor-panel .row-settings-block .settings-w50 {
+	float: left;
+	width: 50%;
+}
+#elementor-panel .containerWrapperElementor .settings-block-values .settings-value {
+	margin-right: 0;
+	margin-bottom: 10px;
+}
+#elementor-panel .woobewoo-plugin label.toggle {
+	margin-left: auto;
+	min-width: 30px;
+}
+#elementor-panel .settings-value-elementor-row-revert {
+	-ms-flex-direction: row-reverse;
+	flex-direction: row-reverse;
+}
+.wpfFiltersBlock {
+	max-width: 100%;
+}
+.wpfFiltersBlock select,
+.row-tab select {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+.wpfFiltersBlock select::-ms-expand,
+.wpfFiltersBlock select.woobewoo-flat-input::-ms-expand,
+#containerWrapperElementorOptions select::-ms-expand {
+	display: none;
+}
+.wpfFiltersBlock .settings-block-label {
+	margin-bottom: 10px;
+}
+.wpfFiltersBlock .settings-block-values,
+.wpfFiltersBlock .sub-block-values{
+	padding-left: 10px;
+}
+.wpfFiltersBlock .settings-block-values .settings-value,
+.wpfFiltersBlock .sub-block-values .settings-value {
+	margin-right: 0;
+}
+
+#elementor-panel .wpfFilter .wpfHeaders input {
+	color: #000;
+}
+#elementor-panel select.woobewoo-flat-input {
+	padding-right: 30px;
+}
+#elementor-panel select.woobewoo-flat-input option {
+	color: #000;
+}
+
+#elementor-panel .elementor-control-filter_trigger,
+#elementor-panel .elementor-control-filter_options_trigger,
+#elementor-panel .elementor-control-filter_design_trigger {
+	display: none!important;
+}
+
+#elementor-preview .wpfLoaderLayout {
+	display: none!important;
+}
+#elementor-preview .wpfFilterWrapper {
+	visibility: visible!important;
+}
+
+#containerWrapperElementor {
+	position: relative;
+}
+#elementor-panel .wpfMessage,
+#containerWrapperElementor .wpfLoading {
+	position: absolute;
+	z-index: 9999;
+	width: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	color: #fff;
+	background: rgba(0,0,0,0.7);
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+#elementor-panel .wpfTermsOptionsForm {
+	width: 100%!important;
+}
+.chooseLoaderIcon {
+	padding: 0 5px;
+}

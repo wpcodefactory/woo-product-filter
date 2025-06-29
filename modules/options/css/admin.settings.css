@@ -1,0 +1,108 @@
+@media screen and (max-width: 768px) {
+	#wpfSettingsForm .form-table th,
+	#wpfSettingsForm .form-table td{
+		width: 100%;
+	}
+	#wpfSettingsForm #wpfFormOptDetails_loader_icon {
+		padding-top: 30px;
+	}
+}
+.woobewoo-container.woobewoo-gopro {
+	background-color: #f8fafb;
+}
+.wpf-gopro {
+	background-image: url("img/30.png");
+	background-repeat: no-repeat;
+	background-position: top right 20px;
+	background-color: #f8fafb;
+	max-width: 1000px;
+	color: #03a9f4;
+	padding: 20px;
+	margin: 0 auto;
+}
+.wpf-gopro-bundle.wpf-gopro {
+	background-image: none;
+}
+.wpf-gopro-header-title {
+	color: #64808e;
+	text-align: center;
+	font-size: 34px;
+	font-weight: bold;
+}
+.wpf-gopro-header-subtitle {
+	color: #64808e;
+	text-align: center;
+	font-size: 24px;
+	margin-top: 20px;
+}
+.wpf-gopro-switch {
+	display: flex;
+	justify-content: center;
+	font-size: 22px;
+	margin: 50px auto 20px auto;
+}
+.wpf-gopro-switch .wpf-gopro-text {
+	color: #bac5ca;
+	margin: 0 15px;
+	font-size: 30px;
+	font-weight: bold;
+}
+.wpf-gopro-switch .wpf-gopro-text.active {
+	color: #03a9f4;
+}
+.wpf-gopro-block {
+	font-size: 12px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	max-width: 1200px;
+	padding: 20px;
+	min-width: 240px;
+}
+.wpf-gopro-bundle .wpf-gopro-block {
+	background-color: #03a9f4;
+	color: #fff;
+}
+.wpf-gopro-block-row {
+	max-width: 1030px;
+}
+.wpf-gopro-title, .wpf-gopro-desc, .wpf-gopro-price {
+	font-size: 24px;
+	text-align: center;
+	padding: 30px 0;
+	font-weight: 600;
+}
+.wpf-gopro-desc {
+	font-size: 20px;
+}
+.wpf-gopro-price {
+	font-size: 34px;
+}
+.wpf-gopro-desc i {
+	vertical-align: super;
+	color: #03a9f4 !important;
+}
+.woobewoo-plugin a.wpf-gopro-button.button {
+	background-color: #03a9f4 !important;
+	border: 2px #03a9f4 solid !important;
+	min-width: 200px;
+	border-radius: 15px !important;
+	font-size: 18px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+.woobewoo-plugin a.wpf-gopro-button.button:hover, .woobewoo-plugin a.wpf-gopro-button.button:focus {
+	background-color: #fff !important;
+	color: #03a9f4 !important;
+}
+.wpf-gopro-bundle a.wpf-gopro-button.button {
+	background-color: #7e57c2 !important;
+	border: 2px #7e57c2 solid !important;
+}
+.wpf-gopro-bundle a.wpf-gopro-button.button:hover, .wpf-gopro-bundle a.wpf-gopro-button.button:focus {
+	background-color: #fff !important;
+	color: #7e57c2 !important;
+}
+.wpf-gopro-hidden {
+	display: none;
+}

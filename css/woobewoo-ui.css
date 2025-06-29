@@ -1,0 +1,1159 @@
+.woobewoo-wrap {
+    background-color: #ffffff;
+    margin: 0;
+    margin-left: -20px;
+    height: 100%;
+    padding: 5px;
+    border: #eceff1 1px solid;
+}
+.woobewoo-plugin {
+    width: 100%;
+	font-size: 13px;
+    background-color: #eceff1;
+    font-family: Arial,sans-serif;
+    color: #64808e;
+}
+.woobewoo-plugin.ui-dialog-content {
+    color: #64808e !important;
+}
+.woobewoo-plugin * {
+	box-sizing: border-box;
+}
+.woobewoo-plugin a,
+.tooltipster-content a,
+.woobewoo-plugin.ui-widget-content a {
+	color: #03a9f4;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+    text-decoration: none;
+}
+.woobewoo-plugin legend a {
+	color: #000;
+}
+.woobewoo-plugin .woobewoo-content {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: transparent;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 353px;
+}
+/*.woobewoo-plugin .row > div {
+    padding-left: 15px;
+    padding-right: 15px;
+}*/
+.woobewoo-plugin .woobewoo-content .woobewoo-container {
+    margin-left: 80px;
+}
+.woobewoo-plugin .woobewoo-content .woobewoo-navigation {
+    background-color: transparent;
+    float: left;
+    margin-right: 10px;
+    position: absolute;
+    width: 80px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.woobewoo-navigation ul {
+    padding: 0;
+    margin: 0;
+}
+.woobewoo-navigation ul li {
+    text-align: center;
+    background-color: transparent;
+    margin: 0;
+    padding: 10px 0;
+    -webkit-transition: background 500ms;
+    -moz-transition: background 500ms;
+    -ms-transition: background 500ms;
+    -o-transition: background 500ms;
+    transition: background 500ms;
+}
+.woobewoo-navigation ul li:hover,
+.woobewoo-navigation ul li.active {
+    background-color: #f8fafb;
+}
+.woobewoo-navigation ul li:hover a i,
+.woobewoo-navigation ul li.active a i {
+   color: #3dbaf3;
+}
+.woobewoo-navigation ul li a {
+    color: #64808e;
+    text-decoration: none;
+    font-weight: 600;
+	-moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.woobewoo-navigation ul li a i {
+    display: block;
+    color: #03a9f4;
+    font-size: 2.2em;
+    margin-bottom: 5px;
+}
+.woobewoo-navigation .woobewoo-tab-gopro a, .woobewoo-navigation .woobewoo-tab-gopro i {
+	color: green !important;
+}
+.woobewoo-navigation ul li.woobewoo-pro {
+    background-color: #e74c3c;
+}
+.woobewoo-bar {
+    min-height: 50px;
+    padding: 10px;
+    background-color: #fff;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#table-toolbar.woobewoo-bar {
+    height: 67px;
+    margin-left: -10px;
+    padding: 10px;
+    background-color: inherit !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+ul.woobewoo-bar-controls {
+	display: inline;
+}
+ul.woobewoo-bar-controls > li {
+    float: left;
+    margin-left: 5px;
+}
+ul.woobewoo-bar-controls > li.separator {
+    color: #ddd;
+    margin-top: 5px;
+}
+
+/* Loading */
+.woobewoo-inline-loader {
+    min-width: 128px;
+    min-height: 15px;
+    background: url('../img/ajax-loader.gif') no-repeat center center;
+}
+
+/* Modal Loading */
+.woobewoo-modal-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    opacity: .6;
+    -ms-filter: Alpha(opacity=60);
+    filter: Alpha(opacity=60);
+    z-index: 100000;
+    display: none;
+    overflow: hidden;
+}
+.woobewoo-modal-loading-object {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    text-align: center;
+    z-index: 100001;
+    display: none;
+    overflow: hidden;
+    font-weight: 700;
+}
+.woobewoo-modal-loading-object img {
+    position: relative;
+    top: 4px;
+    overflow: hidden;
+}
+.woobewoo-modal-loading-object p {
+    overflow: hidden;
+}
+
+/* Helpers */
+.woobewoo-centered {
+    text-align: center;
+}
+.jGrowl.top-right {
+    top: 50px !important;
+}
+.woobewoo-plugin .ui-jqgrid-btable {
+    table-layout: auto !important;
+}
+
+/* jQuery UI Dialog */
+.woobewoo-plugin.ui-dialog {
+    padding: 0;
+}
+.ui-widget-overlay {
+    background: #aaaaaa !important;
+    opacity: .3;
+    -ms-filter: Alpha(opacity=30);
+    filter: Alpha(opacity=30);
+}
+.ui-widget-overlay.ui-front {
+    z-index: 10;
+}
+.woobewoo-plugin .ui-widget-content.ui-dialog-content {
+    font-size: 13px;
+    color: #6a8592;
+}
+.woobewoo-plugin input::placeholder {
+    color: #bfcbd0;
+}
+.ui-widget-content:not(.iris-slider-offset) {
+    background: #fff !important;
+    padding: 0;
+}
+.woobewoo-plugin .iris-strip .ui-slider-handle::before {
+	content: none;
+}
+.ui-widget-header {
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    background: none !important;
+    font-weight: bold;
+    border-radius: 0 !important;
+}
+.ui-dialog-titlebar-close {
+    background: none !important;
+    margin-top: -14px !important;
+}
+.woobewoo-plugin .ui-dialog-titlebar {
+    background-color: #03a9f4 !important;
+    padding: 15px 30px !important;
+    height: auto;
+}
+.woobewoo-plugin .ui-dialog-buttonpane {
+    background-color: #03a9f4 !important;
+    padding: 0 20px !important;
+}
+.woobewoo-plugin button span:not(.ui-icon-closethick) {
+    font-family: Arial,sans-serif;
+    padding: 0 5px;
+}
+.woobewoo-plugin .ui-dialog-buttonpane button {
+    background-color: #ffffff !important;
+    color: #03a9f4 !important;
+    height: 40px;
+    min-height: 40px;
+    font-size: 18px;
+    padding: 0 10px;
+}
+.woobewoo-plugin .ui-dialog-buttonpane button:hover, .woobewoo-plugin .ui-dialog-buttonpane button:focus {
+    background-color: #6cc9f3 !important;
+    color: #ffffff !important;
+}
+.woobewoo-plugin.ui-dialog .ui-dialog-title {
+    color: #ffffff !important;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Arial,sans-serif;
+    line-height: 22px;
+}
+.woobewoo-plugin .ui-icon-closethick {
+    color: #ffffff !important;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+}
+.woobewoo-title-row {
+    padding: 5px 0 !important;
+    border-bottom: 1px solid #eee;
+}
+.woobewoo-title-row h3 {
+    padding: 0;
+    margin: 0;
+    font-weight: 100;
+    font-size: 1.4em;
+}
+
+/*Admin footer links*/
+.wpfAdminFooterCell {
+	float: left;
+	margin-right: 5px;
+	padding-top: 8px;
+}
+.wpfAdminFooterShell {
+    color: #777777;
+    font-size: 12px;
+	margin: 0 20px 0 165px;
+    padding-bottom: 45px;
+	border-top: 1px solid #DFDFDF;
+    color: #777777;
+    font-size: 12px;
+    height: 65px;
+	clear: both;
+}
+
+/*Breadcrumbs*/
+.woobewoo-breadcrumbs {
+    background-color: #f8fafb;
+    padding: 7px 15px;
+    line-height: 26px;
+}
+.woobewoo-breadcrumbs > a {
+    text-decoration: none;
+    padding: 0 5px;
+	color: #64808e;
+    font-size: 12px;
+}
+.woobewoo-breadcrumbs .breadcrumbs-separator {
+	background-image: url("images/arrows-sprite.png");
+	background-repeat: no-repeat;
+	padding: 0 3px;
+    background-position: -52px 2px;
+}
+.woobewoo-item {
+    background: #f8fafb;
+    padding: 10px 20px 0 20px;
+    position: relative;
+    min-height: 500px;
+}
+.woobewoo-item p {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.woobewoo-welcome-page-content .woobewoo-item p {
+	white-space: normal;
+}
+.woobewoo-item small {
+    display: block;
+    color: #ccc;
+}
+
+/*Options additional classes*/
+.wpfOptDetailsShell {
+	display: none;
+	font-size: 12px;
+}
+.wpfOptDetailsShell input {
+	font-size: 12px;
+}
+.wpfSmallTbl tr {
+	height: auto !important;
+}
+.wpfHtaccessPre {
+	background-color: #eef;
+	padding: 10px;
+}
+
+/*tabs*/
+.woobewoo-plugin .nav-tab {
+	margin-left: 1px;
+	margin-right: -3px;
+	color: #000;
+	font-size: 16px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	-webkit-transition-property: none;
+	-moz-transition-property: none;
+	-o-transition-property: none;
+	transition-property: none;
+}
+.woobewoo-plugin .nav-tab-active,
+.woobewoo-plugin .nav-tab-active:hover {
+    background-color: #fff;
+	border-bottom-color: #fff !important;
+}
+.wpfTabContent {
+	padding: 10px;
+	border: none;
+	display: none;
+}
+
+/*buttons*/
+.woobewoo-plugin .button,
+.woobewoo-plugin .button-primary,
+.ui-dialog .button,
+.ui-dialog .button-primary,
+.ui-button:not(.ui-dialog-titlebar-close),
+.wp-core-ui .woobewoo-plugin .button,
+.wp-core-ui.woobewoo-plugin .button-primary
+ {
+    font-size: 13px;
+    color: #ffffff;
+    height: 35px;
+    min-height: 35px;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    line-height: 35px;
+    background-color: #03a9f4;
+    font-weight: bold !important;
+    border: none;
+}
+.woobewoo-plugin .button.button-small {
+    height: 28px;
+    line-height: 28px;
+    min-height: 28px;
+}
+.woobewoo-plugin .button.button-mini {
+    height: 25px;
+    line-height: 25px;
+    min-height: 25px;
+}
+.wp-core-ui .ui-dialog .ui-button.ui-widget.ui-dialog-titlebar-close {
+    right: 20px;
+    color: transparent;
+    outline: none;
+}
+
+/* Fix for WP 4.4 */
+.woobewoo-plugin .button-primary,
+.ui-dialog .button-primary,
+.wp-core-ui .woobewoo-plugin .button-primary,
+.wp-core-ui .ui-dialog .button-primary {
+	text-shadow: none;
+}
+.woobewoo-plugin .button.button-primary.button-hero,
+.ui-dialog .button.button-primary.button-hero,
+.wp-core-ui .woobewoo-plugin .button.button-primary.button-hero,
+.wp-core-ui .ui-dialog .button.button-primary.button-hero {
+	box-shadow: none;
+}
+.woobewoo-plugin .wp-media-buttons .button,
+.woobewoo-plugin .wp-media-buttons .button-primary,
+.woobewoo-plugin .button.button-sup-small,
+.woobewoo-plugin .button-primary.button-sup-small,
+.wp-core-ui .woobewoo-plugin .wp-media-buttons .button,
+.wp-core-ui .woobewoo-plugin .wp-media-buttons .button-primary,
+.wp-core-ui .woobewoo-plugin .button.button-sup-small,
+.wp-core-ui .woobewoo-plugin .button-primary.button-sup-small {
+	height: 30px;
+	line-height: 28px;
+}
+.woobewoo-plugin .button.hover,
+.woobewoo-plugin .button:hover,
+.woobewoo-plugin .button.focus,
+.woobewoo-plugin .button:focus,
+.woobewoo-plugin .button-primary.hover,
+.woobewoo-plugin .button-primary:hover,
+.woobewoo-plugin .button-primary.focus,
+.woobewoo-plugin .button-primary:focus,
+.ui-dialog .button:hover,
+.ui-dialog .button-primary:focus,
+.ui-button.ui-state-hover,
+.ui-button:hover,
+.ui-button:focus,
+.wp-core-ui .woobewoo-plugin .button.hover,
+.wp-core-ui .woobewoo-plugin .button:hover,
+.wp-core-ui .woobewoo-plugin .button.focus,
+.wp-core-ui .woobewoo-plugin .button:focus,
+.wp-core-ui .woobewoo-plugin .button-primary.hover,
+.wp-core-ui .woobewoo-plugin .button-primary:hover,
+.wp-core-ui .woobewoo-plugin .button-primary.focus,
+.wp-core-ui .woobewoo-plugin .button-primary:focus,
+.wp-core-ui .ui-dialog .button:hover,
+.wp-core-ui .ui-dialog .button-primary:focus,
+.wp-core-ui .ui-button.ui-state-hover,
+.wp-core-ui .ui-button:hover,
+.wp-core-ui .ui-button:focus {
+	background: #03a9f4;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+    color: #00669b;
+}
+.woobewoo-plugin .button[disabled],
+.woobewoo-plugin .button:disabled,
+.woobewoo-plugin .button.disabled:not(.woobewoo-paginate),
+.woobewoo-plugin .button-secondary[disabled],
+.woobewoo-plugin .button-secondary:disabled,
+.woobewoo-plugin .button-secondary.disabled,
+.woobewoo-plugin .button-disabled {
+	color: #ffffff !important;
+	background-color: #b0bec5 !important;
+    text-shadow: none !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+.button.button-small.wp-picker-default {
+	margin: 10px 0 0 10px;
+}
+.button.woobewoo-paginate {
+    color: #64808e !important;
+    background: transparent !important;
+}
+.button.woobewoo-paginate.disabled {
+    background: transparent !important;
+}
+.button.woobewoo-paginate i {
+    width: 8px;
+    font-size: 18px;
+    padding-top: 4px;
+}
+.button.woobewoo-paginate:hover, .button.woobewoo-paginate:focus,
+.ui-dialog-titlebar-close:hover, .ui-dialog-titlebar-close:focus {
+    background: #03a9f4 !important;
+}
+.button.woobewoo-paginate.current {
+    color: #03a9f4 !important;
+}
+.button.woobewoo-paginate:hover {
+    color: #ffffff !important;
+}
+
+/*tooltip*/
+.fa-question.woobewoo-tooltip,
+.fa-question.woobewoo-tooltip-bottom,
+.fa-question.woobewoo-tooltip-left,
+.fa-question.woobewoo-tooltip-right {
+	border: 1px solid #d8dfe3;
+    background-color: #ffffff;
+	border-radius: 50%;
+	margin: 1px 3px 0 3px;
+	padding: 1px 3px;
+    font-size: 10px;
+    height: 15px;
+    width: 15px;
+}
+.fa-question.woobewoo-tooltip.fa-2x {
+	padding: 0 6px;
+}
+
+/*sticky items*/
+.woobewoo-sticky-active {
+    position: fixed !important;
+    z-index: 99;
+}
+.woobewoo-sticky-active.woobewoo-sticky-active-bordered {
+	border-bottom: 2px solid #ddd !important;
+}
+.sticky-full-width {
+	width: calc(99% - 75px - 200px);
+}
+
+/*textboxes*/
+.woobewoo-plugin input[type=text], .woobewoo-plugin input[type=search],
+.woobewoo-plugin select, .woobewoo-plugin button.ms-choice,
+.woobewoo-plugin .chosen-container-multi .chosen-choices {
+	background-color: #ffffff;
+    color: #64808e !important;
+	border: 1px solid #d8dfe3;
+    height: 28px;
+    min-height: 20px !important;
+    font-size: 13px !important;
+    outline: none;
+}
+.woobewoo-plugin select {
+    background: #fff url(images/down.png) no-repeat right 5px top 55% !important;
+}
+.woobewoo-plugin .dataTables_filter input {
+    height: 28px;
+    min-height: 28px;
+    box-sizig: border-box !important;
+}
+.woobewoo-plugin textarea {
+    background-color: #ffffff;
+    color: #64808e;
+    border: 1px solid #d8dfe3;
+    font-size: 13px;
+    line-height: 20px;
+}
+.woobewoo-plugin button.ms-choice {
+    outline: none;
+}
+.woobewoo-plugin input, .woobewoo-plugin select {
+    outline: none;
+    margin:0;
+    line-height: normal;
+}
+.woobewoo-plugin input:not([type=radio]), .woobewoo-plugin select, .woobewoo-plugin textarea {
+    border-radius: 0 !important;
+    border-color: #e2e7ea !important;
+}
+.woobewoo-plugin input[type=text] {
+    padding: 7px 5px;
+}
+.woobewoo-flat-input {
+    background-color: transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    height: 20px !important;
+    font-weight: normal;
+    line-height: normal !important;
+}
+input.woobewoo-flat-input {
+    padding: 1px 5px !important;
+}
+select.woobewoo-flat-input {
+    padding-left: 5px !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    background: transparent url(images/down.png) no-repeat right 5px top 55% !important;
+}
+select.woobewoo-flat-input:focus {
+    border-color: #e2e7ea !important;
+}
+select.woobewoo-flat-input option {
+    background-color: #fafafa !important;
+}
+.woobewoo-plugin label {
+    margin: 0 5px 0 0;
+    cursor: default;
+}
+.woobewoo-plugin input:focus,
+.woobewoo-plugin select:focus,
+.woobewoo-plugin textarea:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-color: #3dbaf3;
+    outline: none !important;
+}
+.woobewoo-plugin input[type=text].wpfInputError,
+.woobewoo-plugin textarea.wpfInputError {
+	border-color: #fa4e7f;
+	border-bottom: none !important;
+	border-left: none !important;
+	border-right: none !important;
+	border-width: 1px !important;
+}
+.woobewoo-input-group {
+    display: inline-flex;
+    line-height: 28px;
+    margin-top: 10px;
+}
+.woobewoo-group-label {
+    margin: 0 15px;
+    font-weight: 700;
+}
+.woobewoo-check-group {
+    display: inline-flex;
+    line-height: 28px;
+}
+.woobewoo-check-group input {
+    position: relative;
+    top: 5px;
+}
+.woobewoo-check-group label {
+    margin: 0 5px;
+}
+.woobewoo-plugin input[type=search] {
+    background-image: url('images/search.png');    
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-position: right 5px center;
+    padding-right: 24px;
+    width: 100px;
+}
+.woobewoo-plugin input.toggle{
+    display: none;
+}
+.woobewoo-plugin label.toggle {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 30px;
+	min-width: 30px;
+    height: 16px;
+    background: #b0bec5;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    margin: 2px 0;
+}
+.woobewoo-plugin label.toggle:after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+.woobewoo-plugin input.toggle:checked + label.toggle {
+    background: #03a9f4;
+}
+.woobewoo-plugin input.toggle:checked + label.toggle:after {
+    left: calc(100% - 1px);
+    transform: translateX(-100%);
+}
+.woobewoo-plugin label.toggle:active:after {
+    width: 16px;
+}
+
+/*form tables*/
+.woobewoo-plugin .form-table th {
+	font-size: 16px;
+}
+.woobewoo-plugin .description,
+.woobewoo-plugin i:not(.fa):not(.mce-ico) {
+	font-style: normal;
+	color: #a4aaac;
+	font-weight: 500;
+}
+.woobewoo-plugin .wpfDescription i,
+.woobewoo-plugin .wpfTitle i {
+	color:inherit !important;
+    font-style: italic !important;
+}
+.woobewoo-plugin .form-table tr:not(:last-child) {
+	border-bottom: 1px solid #e9edee;
+}
+.woobewoo-plugin .ui-pg-table {
+	color: #a6aaab;
+}
+.woobewoo-plugin .ui-pg-table td {
+    height: 28px;
+}
+.woobewoo-plugin .ui-pg-table .ui-pg-input {
+	margin: 0px 7px;
+    height: 28px !important;
+}
+.woobewoo-plugin .ui-pg-table .ui-icon {
+	background-image: url("images/arrows-sprite.png") !important;
+	background-repeat: no-repeat !important;
+	width: 8px;
+	height: 10px;
+	opacity: 1 !important;
+	margin: 0px 7px;
+}
+.woobewoo-plugin .ui-pg-table .ui-icon.ui-icon-seek-prev,
+.woobewoo-plugin .ui-pg-table .ui-icon.ui-icon-seek-next {
+	width: 5px;
+}
+.woobewoo-plugin .ui-pg-table .ui-icon.ui-icon-seek-first {
+	background-position: 0px 0px !important;
+}
+.woobewoo-plugin .ui-pg-table .ui-icon.ui-icon-seek-prev {
+	background-position: -10px 0px !important;
+}
+.woobewoo-plugin .ui-pg-table .ui-icon.ui-icon-seek-next {
+	background-position: -17px 0px !important;
+}
+.woobewoo-plugin .ui-pg-table .ui-icon.ui-icon-seek-end {
+	background-position: -24px 0px !important;
+}
+.woobewoo-plugin .s-ico .ui-grid-ico-sort {
+	background-image: url("images/arrows-sprite.png") !important;
+	background-repeat: no-repeat !important;
+	width: 8px;
+	height: 4px;
+}
+.woobewoo-plugin .s-ico .ui-grid-ico-sort.ui-icon-triangle-1-n {
+	background-position: -68px -6px !important;
+}
+.woobewoo-plugin .s-ico .ui-grid-ico-sort.ui-icon-triangle-1-s {
+	background-position: -68px 0px !important;
+}
+.woobewoo-plugin .ui-th-column .icheckbox_minimal {
+	margin-bottom: 7px;
+}
+
+/*Table cols width manipulations*/
+.form-table .col-w-1perc {
+	width: 1%;
+}
+.form-table .col-w-10perc {
+	width: 10%;
+}
+.form-table .col-w-20perc {
+	width: 20%;
+}
+.form-table .col-w-30perc {
+	width: 30%;
+}
+.form-table .col-w-40perc {
+	width: 40%;
+}
+.form-table .col-w-50perc {
+	width: 50%;
+}
+.form-table .col-w-60perc {
+	width: 60%;
+}
+
+/*fieldsets*/
+.woobewoo-plugin fieldset {
+	border: 1px solid #000;
+	padding: 5px;
+}
+
+/*chosen selects*/
+.woobewoo-plugin .chosen-container-multi .chosen-choices li.search-choice {
+	background-image: none;
+	background-color: transparent;
+	border: 1px solid #d8dfe3;
+	border-radius: 0;
+    color: #64808e;
+    box-shadow: none;
+}
+.woobewoo-plugin .chosen-container-multi input {
+    color: #64808e !important;
+}
+.woobewoo-plugin .chosen-container-multi .chosen-choices {
+    background-image: none;
+}
+.woobewoo-plugin .chosen-container-active .chosen-choices {
+	border-color: #4ae8ea;
+    box-shadow: none;
+}
+.woobewoo-plugin .chosen-container.chosen-container-multi:not(.chosen-responsive) {
+	min-width: 100px;	/*As if select is hidden on chosen init action - it will be with width: 0 - and this is really bad*/
+}
+.woobewoo-plugin .chosen-responsive {
+	width: 100% !important;
+}
+
+/*back to top*/
+#wpfPopupGoToTop {
+	position: fixed;
+	z-index: 1000;
+	text-align: center;
+	bottom: 20px;
+	right: 80px;
+	display: none;
+}
+#wpfPopupGoToTopBtn,
+#wpfPopupGoToTopBtn:hover,
+#wpfPopupGoToTopBtn:active {
+	color: #000;
+	text-decoration: none;
+}
+
+/*shortcode text*/
+.sup-shortcode {
+	background-color: #F5F5F5;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    color: #333333;
+    font-size: 13px;
+    line-height: 3.42857;
+    margin: 0 0 10px;
+    padding: 9.5px;
+    word-break: break-all;
+    word-wrap: break-word;
+	font-family: monospace;
+	cursor: pointer;
+	white-space: nowrap;
+}
+.woobewoo-plugin .wpfCopyTextCode {
+	background-color: #fff  !important;
+    border: 1px solid #000 !important;
+    border-radius: 0px !important;
+    color: #000 !important;
+    font-size: 13px !important;
+    margin: 0 0 10px !important;
+    padding: 9.5px !important;
+	font-family: monospace !important;
+	cursor: pointer;
+	width: 100%;
+}
+
+/*additional styles*/
+.wpfOptLabel {
+	font-weight: bold;
+	display: block;
+	clear: both;
+}
+.woobewoo-hidden {
+    display: none;
+}
+.woobewoo-clear {
+    clear: both;
+}
+.woobewoo-width1 {
+    width: 1px;
+}
+.woobewoo-width40 {
+    width: 40px !important;
+}
+.woobewoo-width60 {
+    width: 60px !important;
+}
+.woobewoo-width80 {
+    width: 80px !important;
+}
+.woobewoo-width100 {
+    width: 100px;
+}
+.woobewoo-width120 {
+    width: 120px;
+}
+.woobewoo-width150 {
+    width: 150px !important;
+}
+.woobewoo-width-full {
+    width: 100%;
+}
+.woobewoo-maxwidth-full {
+    max-width: 100%;
+}
+.woobewoo-width300 {
+    width: 300px;
+}
+.woobewoo-border-right {
+	border-right: 1px solid rgba(164, 170, 172, 0.28);
+}
+.supsistic-half-side-box {
+	float: left;
+	width: 50%;
+	padding-right: 1%;
+}
+@media (max-width: 800px) {
+	.supsistic-half-side-box {
+		float: none;
+		width: 100%;
+		padding: inherit;
+	}
+}
+
+/*datepicker*/
+.ui-datepicker {
+	border: 1px solid #000;
+}
+.ui-datepicker .ui-datepicker-header .ui-icon {
+	width: 18px;
+	height: 21px;
+	margin-top: -5px;
+	cursor: pointer;
+	font-size: 1.5em;
+}
+.ui-datepicker .ui-datepicker-header .ui-state-hover .ui-icon {
+	color: #4ae8ea !important;
+}
+.ui-datepicker .ui-datepicker-header .ui-datepicker-prev {
+	left: 2px;
+	top: 2px;
+}
+.ui-datepicker .ui-datepicker-header .ui-datepicker-next {
+	right: 2px;
+	top: 2px;
+}
+.ui-icon-circle-triangle-w:before {
+	content: "\f060";
+}
+.ui-icon-circle-triangle-e:before {
+	content: "\f061";
+}
+.ui-datepicker td span, .ui-datepicker td a {
+	text-align: center !important;
+}
+#containerWrapper {
+	min-height: 308px;
+}
+
+/*link with some input inside*/
+.woobewoo-plugin .sup-promolink-input {
+	color: #000;
+	text-decoration: none;
+}
+
+/*pro links styles*/
+.wpfProOptMiniLabel {
+	display: block;
+	margin-bottom: -15px;
+}
+.wpfProOptMiniLabel a {
+	font-size: 10px;
+	text-decoration: none;
+	color: #0074a2;
+}
+.wpfProOptMiniLabel a:hover {
+	color: #2ea2cc;
+}
+
+/*Preset lists - any templates, present or other lists with images and description*/
+.preset {
+    position: relative;
+    float: left;
+    margin: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 320px;
+    height: 222px;
+}
+.preset .preset-overlay {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background-color: #ffffff;
+    opacity: 0.0;
+    -moz-transition: all 500ms;
+    -ms-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+}
+.preset:hover .preset-overlay {
+    opacity: 1.0;
+}
+.preset img {
+    width: 310px;
+    height: 222px;
+    cursor: pointer;
+}
+.preset.active .preset-overlay {
+    opacity: 1.0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.74);
+}
+.preset:hover img {
+    box-shadow: inset 0 0 10px #bdc3c7;
+}
+.preset.disabled:hover img {
+    outline: none;
+    opacity: 0.2;
+}
+.woobewoo-plugin .wp-color-result {
+	height: auto;
+    border: 1px solid #d8dfe3 !important;
+    border-right: none !important;
+}
+.woobewoo-plugin .slimScrollBar{
+    background-color: #b0bec5 !important;
+}
+@media screen and (max-width: 1024px) {
+	.woobewoo-plugin .woobewoo-content .woobewoo-navigation {
+		width: 35px;
+	}
+	.woobewoo-plugin .woobewoo-content .woobewoo-container {
+		margin-left: 35px;
+	}
+	.woobewoo-navigation .sup-tab-label {
+		display: none;
+	}
+	.woobewoo-breadcrumbs {
+		display: none;
+	}
+	.woobewoo-plugin .chosen-container.chosen-container-multi {
+		min-width: 50px;
+	}
+	#wpfPopupMainControllsShell {
+		padding-right: 45px !important;
+	}
+}
+@media screen and (max-width: 800px) {
+	.woobewoo-item .wpfPopupMainOptSect {
+		float: none;
+		max-width: 100%;
+		width: 100%;
+		padding-right: 0;
+	}
+}
+
+/*tables - jqgrid - responsivness*/
+@media (max-width: 1280px) {
+	.woobewoo-tbl-pagination-shell .ui-pg-table .ui-paging-info {
+		display: none !important;
+	}
+}
+/*wp add transition for all links in admin area, this is not required for our chosen "x" buttons*/
+a.search-choice-close {
+	transition-duration: 0s;
+}
+
+.woobewoo-color-picker {
+    padding: 0;
+    display: inline-flex;
+    vertical-align: top;
+}
+.woobewoo-color-result-text {
+    width: 70px !important;
+    height: 25px !important;
+    margin: 0 !important;
+}
+.woobewoo-color-picker .wp-color-result-text {
+    display: none;
+}
+.woobewoo-color-picker .wp-color-result {
+    width: 25px !important;
+    height: 25px !important;
+    min-height: 25px !important;
+    padding: 0 !important;
+    margin: 0;
+    overflow: hidden;
+}
+.woobewoo-color-picker .wp-picker-container {
+    min-width: 25px;
+    position: relative;
+}
+.woobewoo-color-picker button {
+    margin: 0 !important;
+    display: inline !important;
+    background: #fff;
+    color: #fff;
+}
+.woobewoo-color-picker .button:focus, .woobewoo-color-picker .button:hover {
+    background: currentColor !important;
+    border: 1px solid #64808e !important;
+}
+.woobewoo-color-picker .wp-picker-input-wrap {
+    display: none;
+}
+.woobewoo-color-picker .wp-picker-holder {
+    left: initial;
+    position: absolute;
+    z-index: 100;
+}
+#chooseIconPopup .items-list {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+#chooseIconPopup .items-list .item {
+    cursor: pointer;
+    width: 20%;
+    position: relative;
+    height: 150px;
+    text-align: center;
+    float: left;
+    -webkit-transition: all 250ms linear;
+    -moz-transition: all 250ms linear;
+    -o-transition: all 250ms linear;
+    transition: all 250ms linear;
+}
+#chooseIconPopup .items-list .item .item-inner {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -ms-flex-pack: center;
+    -ms-flex-align: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    align-items: center;
+}
+#chooseIconPopup .items-list .item .item-title {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    line-height: 1em;
+    text-align: center;
+}
+.woobewoo-tooltips-wrapper {
+    text-align: center;
+}
+.woobewoo-tooltips-wrapper .woobewoo-tooltips-text{
+    margin-bottom: 4px;
+    text-align: left;
+}
+.woobewoo-tooltips-wrapper img{
+    max-width: 400px;
+}
+@media screen and (min-width: 768px) {
+	.pl-sm-0 {
+		padding-left: 0!important;
+	}
+}
+.s-notify i {
+	margin: 0 5px;
+}

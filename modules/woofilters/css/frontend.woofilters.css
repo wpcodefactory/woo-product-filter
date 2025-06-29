@@ -1,0 +1,432 @@
+.wpfFilterWrapper label {
+	margin: 0;
+}
+.wpfHidden{
+	display: none!important;
+}
+.wpfClear{
+	clear: both;
+}
+.wpfVisibilityHidden{
+	visibility: hidden;
+}
+.wpfFilterWrapper {
+	box-sizing: border-box;
+}
+.wpfFilterTitle {
+	margin-bottom: 5px;
+}
+/*Price filter css*/
+.wpfFilterWrapper .ui-slider-horizontal {
+	height: .6em;
+	margin-top: 5px;
+	width:100%;
+}
+.wpfFilterWrapper .ui-slider-range {
+	padding: 0 !important;
+}
+.wpfFilterWrapper .wpfPriceInputs {
+	margin-top: 10px;
+	text-align:center;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+.wpfFilterDelimeter {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.wpfFilterWrapper .wpfCurrencySymbol + div + input,
+.wpfFilterWrapper input + .wpfCurrencySymbol{
+	margin-left: 10px;
+}
+.wpfPriceInputs .wpfCurrencySymbol {
+	margin-right: 3px;
+}
+.wpfFilterWrapper .ui-widget-header {
+	background: #3FE331;
+}
+.wpfPriceRangeField#wpfMinPrice,
+.wpfPriceRangeField#wpfMaxPrice {
+	width: 35%;
+	min-width: 16%;
+	display: inline-block;
+}
+.wpfSearchResultsBlock{
+	position: relative;
+	display: block;
+	clear: both;
+}
+.wpfFilterWrapper{
+	padding: 5px;
+	min-width: 150px;
+	margin: 0 auto;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	width: 100%;
+}
+.wpfFilterWrapper[data-filter-type] {
+	padding: 5px;
+}
+.wpfFilterWrapper[data-display-type="switch"],
+.wpfFilterWrapper[data-display-type="switch"] + .wpfFilterWrapper{
+	margin-top: 0;
+}
+.wpfPriceFilterRange{
+	margin: 0 auto;
+	margin-bottom: 15px;
+	width: 100%;
+}
+.wpfFilterWrapper .wfpTitle{
+	display: inline-block;
+}
+.wpfFilterWrapper .wfpDescription{
+	padding-bottom: 5px;
+}
+.wpfCheckbox {
+	vertical-align: middle;
+	display: inline-block;
+}
+.wpfCheckbox input{
+	cursor: pointer;
+	display: block;
+}
+.wpfCheckboxHier ul{
+	text-align: left;
+	list-style: none;
+}
+.wpfCheckboxHier > ul{
+	margin-left: 0px;
+	margin-bottom: 0px;
+}
+.wpfValue {
+	padding-left: 5px !important;
+}
+.wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfValue {
+	padding-left: 10px !important;
+}
+.wpfFilterTaxImgWrapper {
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+.wpfFilterTaxNameWrapper {
+	display: inline;
+}
+.rtl .wpfValue{
+	padding-left: 0 !important;
+	padding-right: 5px !important;
+}
+.wpfFilterButtons{
+	clear: both;
+}
+.wpfFilterButtons .wpfButton{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+}
+.wpfFilterButton.wpfButton, .wpfClearButton.wpfButton{
+	width: 47%;
+}
+.wpfPreview{
+	margin: 0 auto;
+	width: 70px;
+}
+.wpfFilterVerScroll li {
+	display:block;
+	width:100%;
+}
+.wpfFilterVerScroll{
+	overflow-y: auto;
+}
+.wpfFilterVerScroll li label {
+	display: block;
+	vertical-align: baseline;
+}
+.wpfFilterWrapper select{
+	width: 100%;
+	width: -moz-available;          /* WebKit-based browsers will ignore this. */
+	width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+	width: fill-available;
+}
+.woocommerce-ordering{
+	display: none;
+}
+.wpfSearchWrapper{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.wpfSearchWrapper .wpfSearchFieldsFilter{
+	width: 100%;
+	margin: 5px 0px;
+}
+.wpfSlugWrapper{
+	display: block;
+	padding: 10px 0px;
+	clear: both;
+}
+.wpfSlugTitle{
+	display: inline-block;
+}
+.wpfSlugDelete{
+	display: inline-block;
+	cursor: pointer;
+}
+.wpfSlug{
+	display: inline-block;
+	padding: 5px 15px;
+	margin: 5px;
+	background-color: #eae1e1;
+	border-radius: 33px;
+}
+.wpfSlugTitle{
+	padding-right: 5px;
+}
+#wpfOverlay{
+	position: fixed; /* Sit on top of the page content */
+	display: none; /* Hidden by default */
+	width: 100%; /* Full width (cover the whole page) */
+	height: 100%; /* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+	z-index: 10000; /* Specify a stack order in case you're using a different order for other elements */
+	cursor: pointer; /* Add a pointer on hover */
+}
+#wpfOverlayText{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 50px;
+	color: white;
+	transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+}
+#wpfOverlay .wpfPreview{
+	display: inline-block;
+	margin: 20px;
+    vertical-align: middle;
+}
+.wpfFilterWrapper i, .wpfFilterWrapper svg {
+	display: inline-block;
+	float: right;
+}
+.wpfMainWrapper .wpfCount{
+	font-size: smaller;
+	padding-left: 9px;
+}
+.wpfMainWrapper .wpfBlockClear{
+	display:none;
+	cursor: pointer;
+	font-size: smaller;
+	text-decoration: underline;
+}
+.wpfPriceTooltipShowAsText {
+	padding:0px !important;
+	margin:0px !important;
+	min-width:auto !important;
+	font-size: inherit !important;
+	color: inherit !important;
+	background:transparent !important;
+	border:none !important;
+	box-shadow:none !important;
+	text-align:center !important;
+	outline:0 !important;
+}
+.wpfVisibleBufferMin, .wpfVisibleBufferMax{
+	position: absolute;
+	top: -1000px;
+	left: -1000px;
+	visibility: hidden;
+	white-space: nowrap;
+}
+.rtl .wpfVisibleBufferMin, .rtl .wpfVisibleBufferMax{
+    right: -1000px;
+    left: 0;
+}
+.wpfTitleToggle {
+	position:relative;
+	display:inline-block;
+	margin-right: 0;
+	text-align: center;
+	padding-top: 0px;
+	cursor:pointer;
+}
+.wpfTitleToggle::before {
+	display: inline-block;
+	cursor:pointer;
+}
+.wpfColorsFilterHor .wpfColorsRow div {
+	display:inline-block;
+}
+.ms-options ul {
+	margin-left:0px;
+}
+.wpfFilterWrapper .ui-slider-horizontal {
+	margin-top:20px !important;
+}
+.wpfFilterWrapper input[type=checkbox], .wpfFilterWrapper input[type=radio] {
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+}
+.wpfColorsFilter input {
+	display:none !important;
+}
+.wpfFilterWrapper ul li::before {
+  display:none !important;
+}
+.wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
+	width: auto !important;
+}
+.wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+}
+.rtl .wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
+  padding-right: 0px !important;
+  padding-left: 10px !important;
+  margin-right: 0px !important;
+}
+.wpfFilterWrapper label, .wpfFilterWrapper select, .wpfPriceFilterRange, .wpfFilterWrapper .ui-slider-handle {
+	cursor:pointer !important;
+}
+.wpfFilterVerScroll {
+	display: block;
+	position: relative;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	padding-inline-start: 0;
+	padding-left: 0px;
+	padding-bottom: 1px;
+}
+.wpfFilterLayoutVer, .wpfFilterLayoutHor {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-ms-flex-align: start;
+	align-items: start;
+}
+.wpfFilterLayoutVer>li, .wpfFilterLayoutHor>li {
+	width: auto;
+	margin-right: 0;
+	margin-left: 0;
+	padding-right: 10px;
+}
+.rtl .wpfFilterLayoutVer>li, .rtl .wpfFilterLayoutHor>li {
+	padding-right: 0;
+	padding-left: 10px;
+}
+
+.wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckbox input {
+  position: relative;
+}
+.wpfFilterWrapper .irs-line {
+	overflow: initial;
+}
+.wpfCheckboxHier li>ul {
+    margin-left: 1em;
+	padding-left: 0;
+}
+.wpfCheckboxHier li>ul.wpfHideParent li {
+	width: 100%!important;
+}
+.wfpClickable {
+	cursor: pointer;
+}
+.rtl .wpfFilterWrapper li {
+	text-align: right !important;
+}
+.rtl .wpfTitleToggle {
+	float: left !important;
+}
+.wpfBlockAnimated.wpfHide {
+    max-height: 0;
+    -webkit-transition: max-height 0.4s ease-out;
+	-moz-transition: max-height 0.4s ease-out;
+	transition: max-height 0.4s ease-out;
+}
+.wpfFilterContent {
+    width: 100%;
+    box-sizing: border-box;
+}
+.wpfFilterContent ul input[type="checkbox"] {
+    appearance: auto !important;
+}
+.wpfBlockAnimated {
+	overflow: hidden;
+    max-height: 1000px;
+    -webkit-transition: max-height 0.8s ease-in;
+	-moz-transition: max-height 0.8s ease-in;
+	transition: max-height 0.8s ease-in;
+}
+.wpfFilterWrapper[data-filter-type="wpfPrice"] .wpfFilterContent {
+	overflow: visible;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.wpfFilterWrapper[data-filter-type="wpfPrice"] .wpfFilterContent.wpfHide {
+	display: none;
+}
+.wpfOptionDisabled {
+	color: #acacac;
+}
+.wpfPriceRangeField::-webkit-outer-spin-button,
+.wpfPriceRangeField::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.wpfSearchHidden, .wpfSelectCopies {
+	display: none !important;
+}
+.wpfFilterContent .ms-search {
+	display: inline-block;
+	margin: 0;
+	min-height: 26px;
+	padding: 4px;
+	position: relative;
+	white-space: nowrap;
+	width: 100%;
+}
+.wpfFilterWrapper .wpfFilterContent .ms-options-wrap > .ms-options > .ms-search input {
+	border: 1px groove;
+	width: 100%;
+	outline: none;
+	border-radius: 0;
+	height: auto;
+}
+@media only screen and (min-width : 1140px) {
+	.wpfFilterWrapper .wpfPriceInputs {
+		white-space: nowrap;
+	}
+}
+
+.hidePageCategory {
+	display: none !important;
+}
+
+ul ul.wpfHideAllParent {
+	margin: 0;
+}
+.rtl .wpfSingleInputSearch button, .rtl .wpfSearchWrapper button {
+	left: 0 !important;
+	right: auto !important;
+}
+.rtl .wpfSingleInputSearch input, .rtl .wpfSearchWrapper input {
+	padding-left: 25px !important;
+}
+.rtl .wpfMainWrapper .wpfCount {
+	padding-left: 0;
+	padding-right: 10px;
+}
+.rtl .wpfFilterWrapper i, .rtl .wpfFilterWrapper svg {
+    float: left;
+}

@@ -1,0 +1,8 @@
+.woobewoo-plugin,
+.woobewoo-plugin:before,
+.woobewoo-plugin:after,
+.woobewoo-plugin *,
+.woobewoo-plugin *:before,
+.woobewoo-plugin *:after {
+	box-sizing: border-box;
+}

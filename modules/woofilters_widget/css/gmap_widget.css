@@ -1,0 +1,25 @@
+.widget-content .wpfWidgetRow.wpfMapRow {
+	margin: 10px 0;
+}
+.widget-content .wpfWidgetRowCell {
+	float: left;
+	margin-bottom: 10px;
+}
+.widget-content .wpfWidgetRowCell .wpfWidgetSuboptionsCell {
+	margin-top: 10px;
+}
+.widget-content .wpfWidgetRowCell.wpfFirstCell {
+	width: 40%;
+}
+.widget-content .wpfWidgetRowCell.wpfLastCell {
+	width: 60%;
+}
+.widget-content .wpfWidgetRow input[type="text"], .widget-content .wpfWidgetRow select {
+	width: 100%;
+}
+.widget-content .wpfWidgetRow input[type="checkbox"] {
+	vertical-align: bottom;
+}
+.widget-content .woobewoo-info {
+	vertical-align: middle;
+}

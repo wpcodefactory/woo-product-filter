@@ -1,0 +1,38 @@
+.wpfErrorMsg {
+    color: #fa4e7f;
+}
+.wpfSuccessMsg {
+    color: #4ae8ea;
+}
+.wpfInputError {
+    border: 1px #fa4e7f solid !important;
+}
+.toeUpdateQtyButtonsWrapper {float:left; margin:4px 0 0 -22px;}
+
+.toeIncDecButton {
+    width: 8px;
+    height: 7px;
+    background: url("../img/toeIncDec.png") top right no-repeat;
+    text-decoration:none;
+    cursor: pointer;
+    text-indent: -9999px;
+}
+.toeIncButton {
+    margin-bottom:5px;
+    background-position: top left;
+}
+#toplevel_page_wpf-table-press li.wp-first-item{
+	display: none;
+}
+.wpfDialogSave {
+	padding: 4px 10px;
+}
+.wpfIconRotate360 {
+	-webkit-animation:spin 1s linear infinite;
+    -moz-animation:spin 1s linear infinite;
+    animation:spin 1s linear infinite;
+	margin-right: 5px;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

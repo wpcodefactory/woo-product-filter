@@ -1,0 +1,4 @@
+.wpfFilterVerScroll li > div {
+	display: block;
+	vertical-align: baseline;
+}

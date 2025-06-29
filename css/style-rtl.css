@@ -1,0 +1,70 @@
+.woobewoo-wrap{
+	margin-right: -20px;
+	margin-left: 0;
+}
+.woobewoo-plugin .woobewoo-content .woobewoo-navigation {
+	left: 0;
+}
+.woobewoo-plugin .woobewoo-content .woobewoo-navigation.woobewoo-sticky-active {
+	left: 6px;
+}
+#woobewoo-breadcrumbs {
+	left: 0;
+}
+#wpfPopupMainControllsShell {
+	padding-right: 15px !important;
+}
+#woobewoo-breadcrumbs.woobewoo-sticky-active #wpfPopupMainControllsShell {
+	padding-right: 270px !important;
+}
+.woobewoo-tour-btns .woobewoo-tour-next-btn {
+	float: right;
+}
+.woobewoo-plugin .wpfCopyTextCode,
+#wpfPopupEditors textarea, 
+#wpfPopupEditors .CodeMirror {
+	direction: ltr;
+}
+.chosen-container-single.chosen-container-single-nosearch .chosen-search,
+.chosen-container .chosen-drop {
+	left: 9999px;
+}
+.woobewoo-plugin select {
+    background: #fff url(images/down.png) no-repeat left 5px top 55% !important;
+    padding-left: 24px !important;
+}
+#wpfFiltersEditForm .chosen-container-multi {
+	max-width: 100% !important;
+}
+.sub-block-values {
+	direction: ltr;
+}
+.sub-block-values input, .sub-block-values select, .sub-block-values .woobewoo-color-picker {
+	direction: rtl;
+}
+.woobewoo-plugin .wp-color-result {
+	border-left-style: none !important;
+	border-right: #d8dfe3 solid 1px !important;
+}
+.wpfRightLabel {
+    margin-right: 5px;
+    margin-left: 0;
+}
+.settings-value-label {
+	margin-left: 5px;
+}
+.wpfFilterWrapper i, .wpfFilterWrapper svg{
+    float: left !important;
+}
+.wpfSingleInputSearch button, .wpfSearchWrapper button {
+	left: 0 !important;
+	right: auto !important;
+}
+.wpfSingleInputSearch input, .wpfSearchWrapper input {
+	padding-left: 25px !important;
+}
+.wpfMainWrapper .wpfCount {
+	padding-left: 0;
+	padding-right: 10px;
+}
+

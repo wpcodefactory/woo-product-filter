@@ -1,0 +1,198 @@
+.wpf-overview-title {
+	color: #000000;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 20px;
+	max-width: 1200px;
+}
+.wpf-overview-panel {
+	background-color: #ffffff;
+	padding: 10px 20px;
+}
+.wpf-overview-block {
+	font-size: 12px;
+	background: #eceff1;
+    border-radius: 10px;
+	margin-bottom: 20px;
+	max-width: 1200px;
+}
+.wpf-overview-block-row {
+	max-width: 1230px;
+}
+.wpf-overview-block-50 {
+	width: 50%;
+}
+.wpf-overview-block-header {
+	padding: 15px 20px 0;
+    border-bottom: #c1c1c1 solid 1px;
+}
+.wpf-overview-header-title {
+	color: #000000;
+    font-size: 16px;
+}
+.wpf-overview-header-desc {
+    margin: 5px 0;
+}
+.wpf-overview-block-body {
+	padding: 15px 20px;
+}
+.wpf-overview-body-title {
+	color: #000000;
+    font-size: 16px;
+}
+.wpf-overview-img {
+    background-repeat: no-repeat;
+    padding-left: 50px;
+	margin-bottom: 20px;
+}
+.wpf-overview-img-wp {
+	background-image: url(../img/wordpress.svg);
+}
+.wpf-overview-img-dc {
+	background-image: url(../img/docs.svg);
+}
+.wpf-overview-img-ct {
+	background-image: url(../img/custom.svg);
+}
+.wpf-overview-img-pt {
+	background-image: url(../img/producttable.png);
+}
+.wpf-overview-img-cr {
+	background-image: url(../img/currency.png);
+}
+.wpf-overview-img-rp {
+	background-image: url(../img/rewardpoints.png);
+}
+.wpf-overview-block a {
+	color: inherit;
+}
+.wpf-overview-block ul {
+	list-style: disc;
+    margin: 5px 20px;
+}
+.wpf-overview-block ul li {
+    margin: 0;
+}
+.wpf-overview-body-text {
+	margin: 5px 0;
+}
+.wpf-overview-body-text a:hover, .wpf-overview-body-text a:focus {
+    text-decoration: none;
+}
+.wpf-overview-center {
+	text-align: center;
+}
+.woobewoo-plugin button.wpf-overview-center {
+	display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.woobewoo-plugin a.wpf-overview-button.button, .woobewoo-plugin button.wpf-overview-button.button {
+	background-color: #939292 !important;
+    min-width: 200px;
+    border-radius: 15px !important;
+	font-size: 18px;
+    height: 40px;
+    line-height: 43px;
+	text-align: center;
+}
+.woobewoo-plugin button.wpf-overview-button.button i {
+	padding: 10px;
+}
+.woobewoo-plugin button.wpf-overview-submit.button:not([disabled]) {
+	background-color: #03a9f4 !important;
+}
+
+.woobewoo-plugin input.wpf-overview-input {
+	border-radius: 15px !important;
+    width: 90%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #939292 !important;
+    margin-bottom: 10px;
+}
+.woobewoo-plugin .wpf-overview-textarea {
+	border-radius: 15px !important;
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #939292 !important;
+    margin-bottom: 10px;
+}
+.woobewoo-plugin .wpf-field-fullwidth {
+	width: 100% !important;
+}
+.woobewoo-plugin .wpf-overview-textarea::placeholder {
+    color: #bfcbd0;
+}
+.wpfLineStarsRating {
+    min-height: 160px;
+	padding: 30px 0;
+}
+.wpfStarsRatingLine{
+    display: inline-flex;
+    line-height: 20px;
+    height: 0;
+    font-size: 20px;
+	color: #eeeeee;
+}
+.wpfStarInput{
+    position: absolute;
+    left: -9999px;
+}
+.wpfLineChecked .wpfStarsAdditional{
+    font-weight: bold;
+}
+.wpfStarItem{
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;  
+    position: relative;
+    padding-right: 3px;
+    margin-left: 0 !important;
+}
+.wpfRatingStar{
+    display: flex;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    stroke: #a3a3a3;
+    stroke-width: 2px;
+}
+.wpfStarsRatingLine .checked {
+    color: #eeee22;
+}
+.wpfRatingStar {
+    display: flex;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    stroke: #a3a3a3;
+    stroke-width: 2px;
+    stroke: #a3a3a3;
+    font-size: 30px;
+    line-height: 30px;
+}
+.wpfStarDefault, .wpf-overview-hidden {
+    display: none;
+}
+.wpfLineStarsRating .wpfStarItem:hover ~ .wpfStarItem{color: #eeeeee;}
+.wpfLineStarsRating .wpfStarsRatingLine:hover,
+.wpfStarInput:nth-of-type(1):checked ~ .active:nth-of-type(1),
+.wpfStarInput:nth-of-type(2):checked ~ .active:nth-of-type(-n+2),
+.wpfStarInput:nth-of-type(3):checked ~ .active:nth-of-type(-n+3),
+.wpfStarInput:nth-of-type(4):checked ~ .active:nth-of-type(-n+4),
+.wpfStarInput:nth-of-type(5):checked ~ .active:nth-of-type(-n+5){
+	color: #eeee22; 
+}
+.wpf-ads-reward {
+	background-image: url(../img/reward_full.svg);
+	background-repeat: no-repeat;
+	height: 650px !important;
+	position: relative;
+}
+.wpf-ads-reward .wpf-overview-center {
+    bottom: 15px;
+    position: absolute;
+}
+

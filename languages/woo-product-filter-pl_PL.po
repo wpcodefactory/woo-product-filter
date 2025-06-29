@@ -1,0 +1,3123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Woo Product Filter\n"
+"POT-Creation-Date: 2021-10-08 16:37+0300\n"
+"PO-Revision-Date: 2021-10-08 16:37+0300\n"
+"Last-Translator: \n"
+"Language-Team: supsystic.com <supsystic.team@gmail.com>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: classes/modInstaller.php:38
+#, php-format
+msgid "Move files for %s failed"
+msgstr "Przeniesienie plików dla %s nie powiodło się"
+
+#: classes/modInstaller.php:42
+#, php-format
+msgid "%s is not plugin module"
+msgstr "%s nie jest modułem wtyczki"
+
+#: classes/modInstaller.php:167
+#, php-format
+msgid "Install %s failed"
+msgstr "Instalacja %s nie powiodła się"
+
+#: classes/validator.php:32
+#, fuzzy, php-format
+#| msgid "Invalid length for %s, max length is %s"
+msgid "Invalid length for %1$s, max length is %2$s"
+msgstr "Niewłaściwa długość %s, maksymalna długość to %s"
+
+#: classes/validator.php:46
+#, php-format
+msgid "Invalid numeric value for %s"
+msgstr "Niewłaściwa wartość liczbowa dla %s"
+
+#: classes/validator.php:76
+#, php-format
+msgid "Please enter %s"
+msgstr "Proszę wprowadzić %s"
+
+#: classes/validator.php:84
+#, php-format
+msgid "Please select %s"
+msgstr "Proszę wybrać %s"
+
+#: classes/validator.php:92 classes/validator.php:111
+#, php-format
+msgid "Invalid %s"
+msgstr "Niewłaściwy %s"
+
+#: classes/validator.php:96
+#, php-format
+msgid "%s is already registered"
+msgstr "%s jest już zarejestrowany"
+
+#: doc/woofilter-pro/license/models/license.php:218
+#, php-format
+msgid "License for plugin %s will expire today."
+msgstr ""
+
+#: doc/woofilter-pro/license/models/license.php:221
+#, php-format
+msgid "License for plugin %s will expire tomorrow."
+msgstr ""
+
+#: doc/woofilter-pro/license/models/license.php:224
+#, php-format
+msgid "License for plugin %1$s will expire in %2$d days."
+msgstr ""
+
+#: doc/woofilter-pro/license/views/tpl/licenseAdmin.php:47
+msgid "Your email address, used on checkout procedure on"
+msgstr ""
+
+#: doc/woofilter-pro/license/views/tpl/licenseAdmin.php:90
+msgid "Your License Key from your account on"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/mod.php:80
+#, fuzzy
+#| msgid "Show count"
+msgid "Show More"
+msgstr "Pokaż ilość"
+
+#: doc/woofilter-pro/woofilterpro/mod.php:81
+#, fuzzy
+#| msgid "Show search"
+msgid "Show Fewer"
+msgstr "Pokaż wyszukiwane"
+
+#: doc/woofilter-pro/woofilterpro/models/autocomplete.php:112
+#, fuzzy
+#| msgid "No attribute"
+msgid "product attribute"
+msgstr "Brak atrybutów"
+
+#: doc/woofilter-pro/woofilterpro/models/autocomplete.php:235
+#, fuzzy
+#| msgid "Product categories"
+msgid "product category"
+msgstr "Kategorie produktów"
+
+#: doc/woofilter-pro/woofilterpro/models/autocomplete.php:241
+#, fuzzy
+#| msgid "Product tags"
+msgid "product tag"
+msgstr "Tagi produktów"
+
+#: doc/woofilter-pro/woofilterpro/models/autocomplete.php:247
+#, fuzzy
+#| msgid "Sort product list by title."
+msgid "product title"
+msgstr "Sortuj listę produktów wg tytułu."
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:16
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:185
+#, fuzzy
+#| msgid ""
+#| "Choose your custom styles for filter blocks. Any settings you leave blank "
+#| "will default."
+msgid ""
+"Choose custom styles for filter blocks. Any settings you leave blank will "
+"default."
+msgstr ""
+"Wybierz własne style dla bloków filtra. Jeśli pozostawione puste, "
+"zastosowane będą domyślne style."
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:16
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignButtonsPro.php:23
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:16
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersAttributeSliderPro.php:19
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:16
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:30
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:75
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:119
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:130
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:141
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersVendorsPro.php:53
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabOptionsContentPro.php:164
+#: modules/woofilters/views/tpl/woofiltersEditAdmin.php:73
+#: modules/woofilters/views/tpl/woofiltersEditTabCommonTitle.php:4
+#: modules/woofilters/views/tpl/woofiltersEditTabCustomTags.php:4
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:15
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:57
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:99
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:185
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:205
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:225
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:4
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:42
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:111
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:140
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:151
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:166
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:193
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:239
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:250
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:272
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:7
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:22
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:47
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:63
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:78
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:95
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:117
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:7
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:36
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:67
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:105
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:122
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:138
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:166
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:177
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:186
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:195
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:213
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:235
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:246
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:257
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:268
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:296
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:307
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:329
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersInStock.php:27
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersInStock.php:43
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersInStock.php:66
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPrice.php:23
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:7
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:42
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:51
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:65
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:84
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:93
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:102
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:112
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:137
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:16
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:35
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:64
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:80
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersSortBy.php:27
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:7
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:39
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:50
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:64
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:96
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:107
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:118
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:136
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:153
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:164
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:211
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:222
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:244
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:19
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:130
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:147
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:166
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:193
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:224
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:244
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:257
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:358
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:404
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:435
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:456
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:493
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:512
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:535
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:550
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:565
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:595
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:610
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:665
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:683
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:692
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:702
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:731
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:761
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:786
+msgid "Learn More"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:123
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:109
+msgid "Set borders width in this order: top, right, bottom, left."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:152
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignButtonsPro.php:466
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:138
+msgid "Set paddings in this order: top, right, bottom, left."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:181
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignButtonsPro.php:495
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:167
+msgid "Set margins in this order: top, right, bottom, left."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:210
+msgid "Set styles for checkboxes."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:299
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:220
+msgid "plus/minus"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:300
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:221
+msgid "chevron"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:301
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:222
+msgid "angle double"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:312
+msgid "You can resize the icon for collapsing / expanding categories"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignBlocksPro.php:332
+#, fuzzy
+#| msgid "Enable filter icon on load"
+msgid "Make category icons bold"
+msgstr "Włącz wyświetlanie ikony filtra podczas ładowania"
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignButtonsPro.php:23
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:225
+#, fuzzy
+#| msgid ""
+#| "Choose your custom styles for filter buttons. Any settings you leave "
+#| "blank will default."
+msgid ""
+"Choose custom styles for filter buttons. Any settings you leave blank will "
+"default."
+msgstr ""
+"Wybierz własne style dla przycisków filtra. Jeśli pozostawione puste, "
+"zastosowane będą domyślne style."
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:16
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:205
+#, fuzzy
+#| msgid ""
+#| "Choose your custom styles for filter titles. Any settings you leave blank "
+#| "will default."
+msgid ""
+"Choose custom styles for filter titles. Any settings you leave blank will "
+"default."
+msgstr ""
+"Wybierz własne style dla tytułów filtra. Jeśli pozostawione puste, "
+"zastosowane będą domyślne style."
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabDesignTitlesPro.php:196
+msgid ""
+"You can set title height by that increase clickable title area for a open / "
+"close functionality."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersAttributeSliderPro.php:19
+#, fuzzy
+#| msgid "Select attribute"
+msgid "Select the attribute slider skin."
+msgstr "Wybierz atrybut"
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersBrandPro.php:120
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:131
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:204
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPerfectBrand.php:154
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:127
+msgid ""
+"By default if a value is selected in the filter, items without products will "
+"still be displayed (this was done on purpose so that you can quickly switch "
+"between items).If the option is enabled, empty elements will be hidden "
+"regardless of the filter activity (this also applies to loading via ajax and "
+"when reloading the page with the parameters specified in the url)."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersCollapseLevelPro.php:4
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:91
+msgid "The level of child categories from which to start collapsing"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersCollapseLevelPro.php:19
+msgid ""
+"Оn the category page automatically put a check mark for current category"
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersPriceSkinPro.php:29
+msgid "Set sliders step. Always > 0. Could be fractional."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:16
+msgid "Set filter title as search input placeholder."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:30
+msgid "Chose searching params."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:75
+msgid "Only full matches search by default."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:119
+msgid "Search only by full words only."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:130
+msgid ""
+"Exclude from search results selected items or items with selected taxonomies."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersSearchTextPro.php:141
+msgid ""
+"Autocomplete relevant variants. Works only when searching by title, "
+"categories and tags."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabFiltersVendorsPro.php:53
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:63
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:50
+#, fuzzy
+#| msgid "show the search field in supported filters."
+msgid "Show search field in multiple dropdown box."
+msgstr "pokaż pole wyszukiwania w obsługiwanych filtrach."
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabOptionsContentPro.php:37
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:674
+msgid "Selected parameters will be displayed in the top/bottom of the filter."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabOptionsContentPro.php:164
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:692
+msgid ""
+"Turn on only when necessary. Please note that \"slug\" should only contain "
+"lowercase Latin letters, numbers and hyphens."
+msgstr ""
+
+#: doc/woofilter-pro/woofilterpro/views/tpl/partEditTabOptionsMainPro.php:9
+msgid ""
+"You can select one of the available pages to redirect to it after selecting "
+"a filter"
+msgstr ""
+
+#: modules/mail/views/tpl/mailAdmin.php:53
+#: modules/options/views/tpl/optionsSettingsTabContent.php:51
+#, php-format
+msgid "Turned On %s"
+msgstr "Włączono %s"
+
+#: modules/mail/views/tpl/mailAdmin.php:56
+#: modules/options/views/tpl/optionsSettingsTabContent.php:54
+#, php-format
+msgid "Turned Off %s"
+msgstr "Wyłączono %s"
+
+#: modules/promo/mod.php:40
+#, php-format
+msgid "Hey, I noticed you just use %s over a week – that’s awesome!"
+msgstr ""
+
+#: modules/promo/mod.php:47
+#, fuzzy, php-format
+#| msgid "<h3>More then eleven days with our %s plugin - Congratulations!</h3>"
+msgid "More then eleven days with our %s plugin - Congratulations!"
+msgstr "<h3>Ponad jedenaście dni z naszą wtyczką %s - Gratualcje!</h3>"
+
+#: modules/promo/views/tpl/pluginDeactivation.php:33
+#, php-format
+msgid "If you have a moment, please share why you are deactivating %s"
+msgstr "Jeśli masz chwilę, powiedz dlaczego dezaktywujesz %s"
+
+#: modules/woofilters/views/tpl/woofiltersEditAdmin.php:73
+#, fuzzy
+#| msgid ""
+#| "Using short code you can display the filter and products in the desired "
+#| "place of the template."
+msgid ""
+"Using short code display the filter and products in the desired place of the "
+"template."
+msgstr ""
+"Stosując shortkod możesz wyświetlać filtr i produkty w wybranym miejscu "
+"szablonu."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabCommonTitle.php:4
+msgid ""
+"Show title label with open/close filter functionality. Be carefull when show "
+"it as close with \"Hide filter by title click\" filter oprionality. In such "
+"case users do not see filter content."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabCustomTags.php:4
+#, fuzzy
+#| msgid ""
+#| "Choose your custom styles for filter titles. Any settings you leave blank "
+#| "will default."
+msgid ""
+"Choose tags for filter titles. Any settings you leave blank will default."
+msgstr ""
+"Wybierz własne style dla tytułów filtra. Jeśli pozostawione puste, "
+"zastosowane będą domyślne style."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:15
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:57
+#, fuzzy
+#| msgid "Here you can set the filter width in pixels or percent."
+msgid "Set the filter width in pixels or percent."
+msgstr "Tutaj możesz ustawić szerokość filtra w pikselach lub procentach."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabDesign.php:99
+#, fuzzy
+#| msgid ""
+#| "Here you can set the filter block height in pixels. If not filled, then "
+#| "the height is calculated automatically based on the content of the "
+#| "filter. Please note that if the value of the Maximum height in frontend "
+#| "of the filter is greater than the specified value, some data may be "
+#| "hidden."
+msgid ""
+"Set the filter block height in pixels. If not filled, then the height is "
+"calculated automatically based on the content of the filter. Please note "
+"that if the value of the Maximum height in frontend of the filter is greater "
+"than the specified value, some data may be hidden."
+msgstr ""
+"Tu możesz ustawić wysokość bloku filtra w pikselach. Jeśli puste, wysokość "
+"jest obliczana automatycznie na podstawie zawartości filtra. Proszę zauważyć "
+"ze jeśli wartość Maksymalnej wysokości wyświetlanej na stronie jest większa "
+"niż wpisana wartość, niektóre dane mogą być ukryte."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:4
+#, fuzzy
+#| msgid ""
+#| "Here you may select attribute to be displayed on your site from the list."
+msgid "Select attribute to be displayed on site from the list."
+msgstr "Z tej listy możesz wybrać atrybut do wyświetlenia na twojej stronie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:42
+#, fuzzy
+#| msgid ""
+#| "Depending on whether you need one or several attributes to be available "
+#| "at the same time, you may show your attributes list as checkbox or "
+#| "dropdown."
+msgid ""
+"Depending on whether you need one or several attributes to be available at "
+"the same time, show attributes list as checkbox or dropdown. "
+"<strong>Attention!</strong> Slider type work only with numeric titles of "
+"attributes."
+msgstr ""
+"W zależności od tego czy potrzebujesz jednego czy kilku atrybutów dostępnych "
+"jednocześnie, możesz pokazać swoją listę atrybutów jako listę wielokrotnego "
+"wyboru lub listę rozwijaną."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:111
+msgid ""
+"Attributes are displayed according to the order of their selection in the "
+"input fields."
+msgstr ""
+"Atrybuty wyświetlane są wg kolejności ich wyboru w polach wprowadzania."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:140
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:107
+msgid ""
+"Show count display the number of products that have the appropriate "
+"parameter."
+msgstr "Pokaż ilość wyświetla ilość produktów z właściwym parametrem."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:151
+#, fuzzy
+#| msgid ""
+#| "Here you may select attributes to be displayed on your site from the "
+#| "list. If you want to select several attributes, hold the \"Shift\" button "
+#| "and click on names. Or you can hold \"Ctrl\" and click on names. Press "
+#| "\"Ctrl\" + \"a\" for checking all names. "
+msgid ""
+"Select attributes to be displayed on site from the list. If you want to "
+"select several attributes, hold the \"Shift\" button and click on names. Or "
+"you can hold \"Ctrl\" and click on names. Press \"Ctrl\" + \"a\" for "
+"checking all names."
+msgstr ""
+"Z tej listy możesz wybrać atrybuty do wyświetlenia na twojej stronie. Jeśli "
+"chcesz wybrać kilka atrybutów, przytrzymaj klawisz \"Shift\" i kliknij na "
+"wybranych nazwach, lub przytrzymaj klawisz \"Ctrl\" i kliknij na nazwy "
+"atrybutów. Przyciśnij klawisze \"Ctrl\" + \"a\" aby zaznaczyć wszystkie "
+"nazwy. "
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:166
+msgid "Selected attributes will be marked as default."
+msgstr "Wybrane atrybuty zostaną oznaczone jako domyślne."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:193
+#, fuzzy
+#| msgid "Here you may set attributes sorting by ascendance or descendance."
+msgid "Set attributes sorting by ascendance or descendance."
+msgstr "Tutaj możesz ustawić sortowanie atrybutów rosnąco lub malejąco."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:239
+#, fuzzy
+#| msgid ""
+#| "If checked, the entire list of attributes will always be visible, "
+#| "otherwise only available for filtered items"
+msgid ""
+"If checked, the entire list of attributes will always be visible, otherwise "
+"only available for filtered items."
+msgstr ""
+"Jeśli zaznaczone, cała lista atrybutów będzie zawsze widoczna, w przeciwnym "
+"wypadku dostępne będą jedynie opcje dla filtrowanych pozycji"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:250
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:307
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:112
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:222
+msgid "Select a vertical or horizontal layout and set the count of columns."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAttribute.php:272
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:117
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:329
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:137
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:244
+msgid "Set maximum displayed height in frontend."
+msgstr "Ustaw maksymalną wysokość wyświetlaną na stronie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:7
+#, fuzzy
+#| msgid "You can define which role show users in the drop down"
+msgid "Define which role show users in the drop down."
+msgstr ""
+"Możesz określić, którą rolę pokazywać użytkownikom na liście rozwijanej"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:22
+#, fuzzy
+#| msgid "You may show your roles list as checkbox or dropdown."
+msgid "Show your roles list as checkbox or dropdown."
+msgstr ""
+"Możesz pokazywać swoją listę ról jako pola checkbox lub listę rozwijaną"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:47
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:122
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersInStock.php:27
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:35
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:39
+msgid "Dropdown first option text."
+msgstr "Tekst pierwszej opcji listy rozwijanej."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:78
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersAuthor.php:95
+msgid "Show search display the bar for searching by author name in the filter."
+msgstr "Pokaż wyszukiwane wyświetla w filtrze pole wyszukiwania wg autora."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:7
+msgid ""
+"Depending on whether you need one or several categories to be available at "
+"the same time, you may show your categories list as checkbox or dropdown."
+msgstr ""
+"W zależności od tego czy potrzebujesz jednej czy kilku dostępnych "
+"jednocześnie kategorii, możesz pokazać swoją listę kategorii jako listę "
+"wielokrotnego wyboru albo jako listę rozwijaną."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:36
+msgid ""
+"Show paternal and subsidiary categories (for checkbox list). If you display "
+"only some categories, make sure that the parent categories are selected."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:67
+msgid ""
+"Restrict filtering result only to child categories or only to parent if both "
+"of them selected in the same time."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:105
+msgid ""
+"If parent filter category was selected then extend filter result to child "
+"categories."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:138
+#, fuzzy
+#| msgid "Here you may set categories sorting by ascendance or descendance."
+msgid "Set categories sorting by ascendance or descendance."
+msgstr "Tutaj możesz ustawić sortowanie kategorii rosnąco lub malejąco."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:166
+msgid ""
+"Categories are displayed according to the order of their selection in the "
+"input fields."
+msgstr "Kategorie są wyświetlane wg kolejności wyboru w polach wprowadzania."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:177
+msgid ""
+"Show count display the number of products that have the appropriate "
+"parameter (attribute, category, tag)."
+msgstr ""
+"Pokaż ilość produktów, które mają właściwy parametr (atrybut, kategoria, "
+"tag)."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:186
+msgid ""
+"Count for parent category also her children count. <strong>Warning!</strong> "
+"If filtering will slow do uncheck this option."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:195
+#, fuzzy
+#| msgid "Hide categories without products"
+msgid "Hide categories without products."
+msgstr "Ukryj kategorie bez produktów"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:213
+#, fuzzy
+#| msgid ""
+#| "Here you may select product categories to be displayed on your site from "
+#| "the list. If you want to select several categories, hold the \"Shift\" "
+#| "button and click on category names. Or you can hold \"Ctrl\" and click on "
+#| "category names. Press \"Ctrl\" + \"a\" for checking all categories."
+msgid ""
+"Select product categories to be displayed on site from the list. If you want "
+"to select several categories, hold the \"Shift\" button and click on "
+"category names. Or you can hold \"Ctrl\" and click on category names. Press "
+"\"Ctrl\" + \"a\" for checking all categories."
+msgstr ""
+"Z tej listy możesz wybrać kategorie do wyświetlenia na Twojej stronie. Jeśli "
+"chcesz wybrać kilka kategorii, przytrzymaj klawisz \"Shift\" i kliknij na "
+"wybranych nazwach kategorii, lub przytrzymaj klawisz \"Ctrl\" i kliknij na "
+"nazwy kategorii. Przyciśnij klawisze \"Ctrl\" i \"a\" aby zaznaczyć "
+"wszystkie kategorie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:235
+msgid "Selected categories will be marked as default and hidden on frontend."
+msgstr "Wybrane kategorie będą oznaczone jako domyślne i ukryte na stronie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:246
+#, fuzzy
+#| msgid ""
+#| "When the filter is clear, he will be filtered only by selected items. Be "
+#| "careful when using two or more category filters!"
+msgid ""
+"When the filter is clear, he will be restrict filtered results only by "
+"selected items. Be careful when using with other filters in block!."
+msgstr ""
+"Kiedy filtr jest pusty, będzie pokazywał jedynie wybrane opcje. Bądź "
+"ostrożny używając dwóch lub więcej filtrów kategorii!"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:257
+#, fuzzy
+#| msgid ""
+#| "Here you may exclude category terms from filter by ids. Example input: "
+#| "1,2,3 "
+msgid "Exclude category terms from filter by ids. Example input: 1,2,3."
+msgstr ""
+"Tu możesz wykluczyć określenia kategorii z filtra wg id. Przykładowa "
+"wartość: 1, 2, 3"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:268
+msgid ""
+"Show search display the bar for searching by category name in the filter."
+msgstr ""
+"Pokaż wyszukiwane wyświetla w filtrze pole wyszukiwania wg nazwy kategorii."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersCategory.php:296
+#, fuzzy
+#| msgid ""
+#| "If checked, the entire list of categories will always be visible, "
+#| "otherwise only available for filtered items"
+msgid ""
+"If checked, the entire list of categories will always be visible, otherwise "
+"only available for filtered items."
+msgstr ""
+"Jeśli zaznaczone, cała lista kategorii będzie zawsze widoczna, w przeciwnym "
+"wypadku będą wyświetlane jedynie filtrowane"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersInStock.php:43
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersSortBy.php:27
+#, fuzzy
+#| msgid ""
+#| "Here you may select the sorting options available for your site users "
+#| "(min two options)."
+msgid "Select the sorting options available for site users (min two options)."
+msgstr ""
+"Tu możesz wybrać opcje sortowania dla użytkowników twojej strony (minimum "
+"dwie opcje)."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersInStock.php:66
+#, fuzzy
+#| msgid "Change status names"
+msgid "Change stock status names."
+msgstr "Zmień nazwy stanów"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPrice.php:23
+#, fuzzy
+#| msgid "Here you may select the price filter skin"
+msgid "Select the price filter skin."
+msgstr "Tutaj możesz wybrać skórkę filtra cen"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:7
+#, fuzzy
+#| msgid ""
+#| "Depending on whether you need one or several categories to be available "
+#| "at the same time, you may show your categories list as checkbox or "
+#| "dropdown."
+msgid ""
+"Depending on whether you need one or several categories to be available at "
+"the same time, show your categories list as checkbox or dropdown."
+msgstr ""
+"W zależności od tego czy potrzebujesz jednej czy kilku dostępnych "
+"jednocześnie kategorii, możesz pokazać swoją listę kategorii jako listę "
+"wielokrotnego wyboru albo jako listę rozwijaną."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:42
+#, fuzzy
+#| msgid ""
+#| "If this option is enabled, you may set the price range settings "
+#| "automatically."
+msgid "If this option is enabled, set the price range settings automatically."
+msgstr ""
+"Jeśli ta opcja jest aktywna, możesz wybrać automatyczne ustawianie zakresu "
+"cen."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:51
+#, fuzzy
+#| msgid ""
+#| "Here you may set the value of prise increase step. The default value is "
+#| "set to 20. All the steps are equal. When setting the step, please note "
+#| "that the number of elements in the list should not exceed 100, otherwise "
+#| "the step setting will be reset and automatically calculated."
+msgid ""
+"Set the value of prise increase step. The default value is set to 20. All "
+"the steps are equal. When setting the step, please note that the number of "
+"elements in the list should not exceed 100, otherwise the step setting will "
+"be reset and automatically calculated."
+msgstr ""
+"Tutaj możesz ustawić wartość próg wysokości ceny. Domyślna wartość to 20. "
+"Wszystkie progi są równe. Podczas ustawiania progu, proszę zauważyć, że "
+"ilość elementów na liście nie powinna przekroczyć 100, w przeciwnym razie "
+"ustawianie progu będą zresetowane i obliczone automatycznie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:65
+#, fuzzy
+#| msgid ""
+#| "If this option is enabled, you may press the \"Setup\" button and "
+#| "customize your price range settings. You may increase or decrease the "
+#| "number of steps and set different values for each step."
+msgid ""
+"If this option is enabled, press the \"Setup\" button and customize price "
+"range settings. Increase or decrease the number of steps and set different "
+"values for each step."
+msgstr ""
+"Jeśli ta opcja jest aktywna, możesz nacisnąć przycisk \"Ustaw\" i "
+"zmodyfikować ustawienia zakresu cen. Możesz zwiększyć lub zmniejszyć ilość "
+"stopni zakresu cen i ustawić różne wartości dla każdego stopnia."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:84
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:93
+msgid "Use Under/Over label instead of minimum and maximum values."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersPriceRange.php:102
+msgid "This sets the number of decimal points shown in displayed prices."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:16
+#, fuzzy
+#| msgid ""
+#| "Depending on whether you need one or several attributes to be available "
+#| "at the same time, you may show your attributes list as checkbox or "
+#| "dropdown."
+msgid ""
+"Depending on whether you need one or several attributes to be available at "
+"the same time, show your attributes list as checkbox or dropdown."
+msgstr ""
+"W zależności od tego czy potrzebujesz jednego czy kilku atrybutów dostępnych "
+"jednocześnie, możesz pokazać swoją listę atrybutów jako listę wielokrotnego "
+"wyboru lub listę rozwijaną."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:64
+msgid "Additional text for 1-4 rating filter."
+msgstr "Dodatkowy tekst dla filtra ocen 1-4."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersRating.php:80
+msgid "Additional text for 5-star rating filter."
+msgstr "Dodatkowy tekst dla filtra ocen 5."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersSortBy.php:7
+msgid "You can choose to display the sorting by dropdown or radio buttons"
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:7
+#, fuzzy
+#| msgid ""
+#| "Depending on whether you need one or several tags to be available at the "
+#| "same time, you may show your tags list as checkbox or dropdown."
+msgid ""
+"Depending on whether you need one or several tags to be available at the "
+"same time, show tags list as checkbox or dropdown."
+msgstr ""
+"W zależności od tego czy potrzebujesz jednego czy kilku tagów dostępnych "
+"jednocześnie, możesz pokazać swoją listę tagów jako listę wielokrotnego "
+"wyboru lub listę rozwijaną."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:64
+#, fuzzy
+#| msgid "Here you may set tags sorting by ascendance or descendance."
+msgid "Set tags sorting by ascendance or descendance."
+msgstr "Tutaj możesz ustawić sortowanie tagów rosnąco lub malejąco."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:96
+msgid ""
+"Tags are displayed according to the order of their selection in the input "
+"fields."
+msgstr "Tagi są wyświetlane wg kolejności ich wyboru w polach wprowadzania."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:118
+#, fuzzy
+#| msgid "Hide tags without products"
+msgid "Hide tags without products."
+msgstr "Ukryj tagi bez produktów."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:136
+#, fuzzy
+#| msgid ""
+#| "Here you may select product tags to be displayed on your site from the "
+#| "list. If you want to select several tags, hold the \"Shift\" button and "
+#| "click on category names. Or you can hold \"Ctrl\" and click on category "
+#| "names. Press \"Ctrl\" + \"a\" for checking all tags. "
+msgid ""
+"Select product tags to be displayed on site from the list. If you want to "
+"select several tags, hold the \"Shift\" button and click on tag names. Or "
+"hold \"Ctrl\" and click on tag names. Press \"Ctrl\" + \"a\" for checking "
+"all tags."
+msgstr ""
+"Z tej listy możesz wybrać tagi produktów do wyświetlenia na twojej stronie. "
+"Jeśli chcesz wybrać kilka tagów, przytrzymaj klawisz \"Shift\" i kliknij na "
+"wybranych nazwach tagów, lub przytrzymaj klawisz \"Ctrl\" i kliknij na nazwy "
+"tagów. Przyciśnij klawisze \"Ctrl\" i \"a\" aby zaznaczyć wszystkie tagi "
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:153
+#, fuzzy
+#| msgid ""
+#| "Selected categories will be marked as default and hidden on frontend."
+msgid "Selected tags will be marked as default and hidden on frontend."
+msgstr "Wybrane kategorie będą oznaczone jako domyślne i ukryte na stronie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:164
+#, fuzzy
+#| msgid ""
+#| "Here you may exclude tags terms from filter by ids. Example input: 1,2,3 "
+msgid "Exclude tags terms from filter by ids. Example input: 1,2,3."
+msgstr ""
+"Tutaj możesz wykluczyć określenia tagów z filtra wg id. Na przykład: 1,2,3"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabFiltersTags.php:211
+#, fuzzy
+#| msgid ""
+#| "If checked, the entire list of tags will always be visible, otherwise "
+#| "only available for filtered items"
+msgid ""
+"If checked, the entire list of tags will always be visible, otherwise only "
+"available for filtered items."
+msgstr ""
+"Jeśli zaznaczone, cała lista tagów będzie zawsze widoczna, w przeciwnym "
+"wypadku będzie dostępna dla filtrowanych pozycji"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:19
+#, fuzzy
+#| msgid "Chose page for filter"
+msgid "Choose page for filter."
+msgstr "Wybierz stronę dla filtra"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:81
+#, fuzzy
+#| msgid "Always display all categories"
+msgid "The filter will be displayed on all child categories"
+msgstr "Zawsze wyświetlaj wszystkie kategorie"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:98
+msgid ""
+"By default, the filter added by the shortcode is displayed everywhere. This "
+"option allows you to restrict the display to only those selected in "
+"\"Display on pages\"."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:119
+msgid ""
+"You can select one of the available pages to redirect to it after selecting "
+"a filter."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:130
+#, fuzzy
+#| msgid "Chose where display filter"
+msgid "Choose where display filter."
+msgstr "Wybierz gdzie wyświetlać filtr"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:147
+msgid "Remove other woofilters on page except current filter."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:166
+msgid ""
+"Set breakpoint for all options that depend on a mobile/desktop view. \"Show "
+"title label\", \"Display filter on\" etc."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:193
+msgid ""
+"Hide filter on shop and categories pages that displays only categories or "
+"subcategories without products."
+msgstr ""
+"Ukryj filtr na stronach sklepu i kategorii, gdzie wyświetlane są jedynie "
+"kategorie lub podkategorie bez produktów."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:224
+msgid ""
+"Set number of products per row. This number will only be shown after filter "
+"is applied!"
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:244
+msgid ""
+"This option enables Ajax search. Product filtering and displaying results in "
+"a browser will be run in the background without full page reload."
+msgstr ""
+"Ta opcja aktywuje wyszukiwanie Ajax. Filtrowanie produktów i wyświetlanie "
+"wyników w przeglądarce będzie działało w tle bez przeładowania całej strony."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:257
+msgid ""
+"Enable this option when ajax filtering does not work as expected. For "
+"example, sorting does not work. Removes filters such as posts_orderby and "
+"pre_get_posts."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:270
+msgid ""
+"Custom selector for loading a loader and updating the product list. The "
+"default product selector is `ul.products`. If the Filter after ajax "
+"filtering does not find the product block and cannot replace it with the "
+"filtered list of products, the page will reload. In this case, you need to "
+"specify the product block selector in this setting."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:287
+msgid ""
+"If there are several product shortcodes on the page, you can add a container "
+"selector that will limit the effect of this filter only inside it."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:304
+msgid ""
+"If after ajax filtering there are differences in the styles of the list of "
+"products, pagination or count-block, then enable this option. Important: for "
+"correct operation, we recommend filling the Product container selector "
+"option."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:320
+msgid ""
+"This option recalculates all filters and can be slow if the product base is "
+"large"
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:333
+msgid "Do not use shortcut settings on standard WooCommers pages"
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:358
+#, fuzzy
+#| msgid ""
+#| "If this option is enabled, the \"Filter\" button appears at the page. It "
+#| "allows users to set all necessary filter parameters before starting the "
+#| "filtering. If this option is not enabled, filtering starts as soon as "
+#| "filter elements change and the data reloads automatically."
+msgid ""
+"If \"Filtering button\" option was selected, the \"Filter\" button appears "
+"at the page. It allows users to set all necessary filter parameters before "
+"starting the filtering. If \"Auto filtering\" option was selected, filtering "
+"starts as soon as filter elements change and the data reloads automatically."
+msgstr ""
+"Jeśli ta opcja jest włączona, przycisk \"Filtruj\" pojawi się na stronie. "
+"Pozwala to użytkownikom ustawić wszystkie potrzebne parametry filtra przed "
+"rozpoczęciem filtrowania. Jeśli ta opcja nie jest aktywna, filtrowanie "
+"rozpoczyna się zaraz po zmianie opcji i dane przeładowują się automatycznie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:388
+msgid ""
+"When you select one filter element, the rest of the elements will be updated "
+"based on its"
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:404
+msgid ""
+"If this option is enabled, the \"Clear\" button appears at the page. All "
+"filter presets will be removed after pressing the button."
+msgstr ""
+"Jeśli ta opcja jest aktywna, przycisk \"Wyczyść\" pojawi się na stronie. "
+"Wszystkie ustawienia filtra zostaną zresetowane po naciśnięciu tego "
+"przycisku."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:435
+#, fuzzy
+#| msgid "Here you may select the position of filter buttons on the page."
+msgid "Select the position of filter buttons on the page."
+msgstr "Tutaj możesz wybrać pozycję przycisków filtra na stronie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:456
+#, fuzzy
+#| msgid "Here you may select the position of filter buttons on the page."
+msgid "Change the order of filter buttons on the page."
+msgstr "Tutaj możesz wybrać pozycję przycisków filtra na stronie."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:493
+msgid ""
+"Search for a filtering results among all shop products on any shop pages."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:512
+msgid ""
+"If this option is enabled, the \"< clear\" links appears at the page next to "
+"the filter block titles. The presets of this filter block will be deleted "
+"after clicking on the link."
+msgstr ""
+"Jeśli ta opcja jest aktywna, link \"< wyczyść\" pojawi się na stronie obok "
+"tytułów bloków filtra. Wszystkie zapisane ustawienia filtra zostaną "
+"zresetowane po naciśnięciu tego linka."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:535
+msgid ""
+"Automatically recount product by selected filters (If product category "
+"loading slowly - Disable this function)."
+msgstr ""
+"Automatycznie przeliczaj ponownie produkty wg wybranych filtrów (Jeśli "
+"kategoria produktu ładuje się zbyt wolno - wyłącz tą funkcję)."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:550
+#, fuzzy
+#| msgid ""
+#| "Automatically recount product by selected filters (If product category "
+#| "loading slowly - Disable this function)."
+msgid ""
+"Automatically change min/max price by selected filters (If product category "
+"loading slowly - Disable this function)."
+msgstr ""
+"Automatycznie przeliczaj ponownie produkty wg wybranych filtrów (Jeśli "
+"kategoria produktu ładuje się zbyt wolno - wyłącz tą funkcję)."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:565
+msgid ""
+"Automatically disabled parameters without products. Works only when options "
+"Show count and Always display all... are enabled."
+msgstr ""
+"Automatycznie deaktywowane parametry bez produktów. Działa jedynie gdy opcje "
+"'Pokaż ilość i Zawsze wyświetlaj wszystko...' są zaznaczone."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:595
+#, fuzzy
+#| msgid "Lets checked terms will be on the top"
+msgid "Lets checked terms will be on the top."
+msgstr "Zaznaczone określenia będą na górze"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:610
+#, fuzzy
+#| msgid "Here you may input \"no products found\" text for category"
+msgid "Input \"no products found\" text for category."
+msgstr "Tu możesz wpisać tekst \"brak produktów\" dla kategorii"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:665
+#, fuzzy
+#| msgid "For long vertical lists, \"View more\" will be displayed."
+msgid "For long vertical lists, \"Show more\" will be displayed."
+msgstr "Dla długich list pionowych, wyświetlane będzie \"Pokaż więcej\"."
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:683
+msgid ""
+"When you click on the block open icon, all other open blocks will be "
+"automatically closed"
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:702
+msgid ""
+"Be careful when deactivate it with filter titles shown as close, In such "
+"case users do not see filter content."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:731
+#, fuzzy
+#| msgid "Hide categories without products"
+msgid "Filtering of categories list on filter process."
+msgstr "Ukryj kategorie bez produktów"
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:746
+msgid ""
+"ATTENTION!!! This option can greatly slow down page loading if you have a "
+"lot of products."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:761
+msgid ""
+"Filter products by different filter blocks of categories / tags / attributes "
+"by logic and / or."
+msgstr ""
+
+#: modules/woofilters/views/tpl/woofiltersEditTabOptions.php:786
+msgid "Enable filter icon while filtering results are loading."
+msgstr "Włącz wyświetlanie ikony podczas ładowania wyników filtrowania."
+
+#: modules/woofilters_widget/elementor/woofilters.php:88
+#, fuzzy
+#| msgid "Filters"
+msgid "Woofilters"
+msgstr "Filtry"
+
+#: modules/woofilters_widget/elementor/woofilters.php:120
+#, fuzzy
+#| msgid "Select filter"
+msgid "Select Woofilter"
+msgstr "Wybierz filtr"
+
+#: modules/woofilters_widget/elementor/woofilters.php:127
+#, fuzzy
+#| msgid "Select filter"
+msgid "Select Filter"
+msgstr "Wybierz filtr"
+
+#: modules/woofilters_widget/elementor/woofilters.php:137
+#, fuzzy
+#| msgid "Filter name:"
+msgid "Filter Name"
+msgstr "Nazwa filtra:"
+
+#: modules/woofilters_widget/elementor/woofilters.php:139
+msgid "Enter product filter name"
+msgstr "Wprowadź nazwę filtra produktów"
+
+#: modules/woofilters_widget/elementor/woofilters.php:151
+#, fuzzy
+#| msgid "Filter"
+msgid "Create Filter"
+msgstr "Filtr"
+
+#: modules/woofilters_widget/elementor/woofilters.php:154
+msgid "Create"
+msgstr ""
+
+#: modules/woofilters_widget/elementor/woofilters.php:217
+#: modules/woofilters_widget/elementor/woofilters.php:262
+#: modules/woofilters_widget/elementor/woofilters.php:306
+msgid "Save"
+msgstr "Zapisz"
+
+#: modules/woofilters_widget/elementor/woofilters.php:279
+msgid "Design"
+msgstr "Wygląd"
+
+#~ msgid "Done"
+#~ msgstr "Gotowe"
+
+#~ msgid "Select"
+#~ msgstr "Wybierz"
+
+#~ msgid "N/A"
+#~ msgstr "N/D"
+
+#~ msgid "Add Checkbox"
+#~ msgstr "Dodaj checkbox"
+
+#~ msgid "Add Item"
+#~ msgstr "Dodaj pozycję"
+
+#~ msgid "Add Radio Button"
+#~ msgstr "Dodaj przycisk typu radio"
+
+#~ msgid "Dimensions"
+#~ msgstr "Wymiary"
+
+#~ msgid "width"
+#~ msgstr "szerokość"
+
+#~ msgid "height"
+#~ msgstr "wysokość"
+
+#~ msgid "Click to set field \"id\" and \"class\""
+#~ msgstr "Kliknij by ustawić pole \"id\" i \"class\""
+
+#~ msgid "Attributes"
+#~ msgstr "Atrybuty"
+
+#~ msgid "There are no configuration options for this module"
+#~ msgstr "Opcje konfiguracji są niedostępne dla tego modułu"
+
+#~ msgid "Apply To"
+#~ msgstr "Zastosuj Do"
+
+#~ msgid "Address"
+#~ msgstr "Adres"
+
+#~ msgid "Destination"
+#~ msgstr "Miejsce Docelowe"
+
+#~ msgid "Country"
+#~ msgstr "Kraj"
+
+#~ msgid "Categories"
+#~ msgstr "Kategorie"
+
+#~ msgid "You have no categories"
+#~ msgstr "Brak kategorii"
+
+#~ msgid "Brands"
+#~ msgstr "Marki"
+
+#~ msgid "You have no brands"
+#~ msgstr "Brak marek"
+
+#~ msgid "Tax Rate"
+#~ msgstr "Kwota Podatku"
+
+#~ msgid "Absolute"
+#~ msgstr "Całkowity"
+
+#~ msgid "Not selected"
+#~ msgstr "Nie wybrano"
+
+#~ msgid "class"
+#~ msgstr "klasa"
+
+#~ msgid "id"
+#~ msgstr "id"
+
+#~ msgid "You have no permissions to view this page"
+#~ msgstr "Nie masz uprawnień by przeglądać tą stronę"
+
+#~ msgid "Upload"
+#~ msgstr "Wyślij na serwer"
+
+#~ msgid "ON"
+#~ msgstr "WŁĄCZ"
+
+#~ msgid "OFF"
+#~ msgstr "WYŁĄCZ"
+
+#~ msgid "Select %s"
+#~ msgstr "Wybierz %s"
+
+#~ msgid "Choose Icon"
+#~ msgstr "Wybierz ikonę"
+
+#~ msgid "Cannot create module directory. Try to set permission to "
+#~ msgstr "Nie można utworzyć katalogu modułu. Spróbuj ustawić uprawnienia na "
+
+#~ msgid "No modules were found in XML file"
+#~ msgstr "Nie znaleziono modułów w pliku XML"
+
+#~ msgid "Invalid XML file"
+#~ msgstr "Niewłaściwy plik XML"
+
+#~ msgid "No XML file were found"
+#~ msgstr "Nie znaleziono plików XML"
+
+#~ msgid "Error Activate module"
+#~ msgstr "Błąd Aktywuj moduł"
+
+#~ msgid "Error Deactivation module"
+#~ msgstr "Błąd wyłączenie modułu"
+
+#~ msgid "Error Activating module"
+#~ msgstr "Błąd aktywacji modułu"
+
+#~ msgid "Database error detected"
+#~ msgstr "Wykryto błąd bazy danych"
+
+#~ msgid "Invalid ID"
+#~ msgstr "Niewłaściwe ID"
+
+#~ msgid "Empty or invalid ID"
+#~ msgstr "Puste lub niewłaściwe ID"
+
+#~ msgid "Nothing to update"
+#~ msgstr "Wszystko zaktualizowane"
+
+#~ msgid "Database error. Please contact your developer."
+#~ msgstr "Błąd bazy danych. Skontaktuj się ze swoim webdeveloperem."
+
+#~ msgid "Label"
+#~ msgstr "Etykieta"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Active"
+#~ msgstr "Aktywny"
+
+#~ msgid "Params"
+#~ msgstr "Parametry"
+
+#~ msgid "Code"
+#~ msgstr "Kod"
+
+#~ msgid "External plugin directory"
+#~ msgstr "Zewnętrzny katalog wtyczki"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "code"
+#~ msgstr "kod"
+
+#~ msgid "visits"
+#~ msgstr "odwiedzin"
+
+#~ msgid "spent_time"
+#~ msgstr "spędzonego_czasu"
+
+#~ msgid "modify_timestamp"
+#~ msgstr "modyfikuj_czas"
+
+#~ msgid ""
+#~ "Cool WordPress plugins from woobewoo.com developers. I tried %s - and "
+#~ "this was what I need! #woobewoo.com"
+#~ msgstr ""
+#~ "Świetne wtyczki WordPress od webdeweloperów woobewoo.com. Wypróbowałem %s "
+#~ "- i tego mi było trzeba! #woobewoo.com"
+
+#~ msgid "Settings"
+#~ msgstr "Ustawienia"
+
+#~ msgid "More plugins for your WordPress site here!"
+#~ msgstr "Więcej wtyczek do Twojej witryny WordPress znajdziesz tutaj!"
+
+#~ msgid "Spread the word!"
+#~ msgstr "Głoś słowo!"
+
+#~ msgid "Now check your email inbox / spam folders for test mail."
+#~ msgstr ""
+#~ "Teraz poszukaj wiadomości testowej w folderach poczty przychodzącej i "
+#~ "spamu."
+
+#~ msgid "Cannot send email - problem with send server"
+#~ msgstr ""
+#~ "Nie można wysłać wiadomości email - problem serwera poczty wychodzącej"
+
+#~ msgid "Mail"
+#~ msgstr "Poczta"
+
+#~ msgid "Mail function tested and work"
+#~ msgstr "Funkcja poczty przetestowana i działająca"
+
+#~ msgid "Notify Email"
+#~ msgstr "Email Powiadomień"
+
+#~ msgid "Email address used for all email notifications from plugin"
+#~ msgstr "Adres email używany do wszystkich powiadomień wtyczki"
+
+#~ msgid "Test email functionality"
+#~ msgstr "Działanie testowej wiadomości email"
+
+#~ msgid ""
+#~ "This is a test email for testing email functionality on your site, %s."
+#~ msgstr ""
+#~ "To jest testowa wiadomość email sprawdzająca funkcjonowanie poczty na "
+#~ "Twojej stronie www, %s."
+
+#~ msgid "Empty email address"
+#~ msgstr "Brak adresu email"
+
+#~ msgid "Send test email to"
+#~ msgstr "Wyślij testową wiadomość email do"
+
+#~ msgid "Send test"
+#~ msgstr "Wyślij test"
+
+#~ msgid "This option allows you to check your server mail functionality"
+#~ msgstr ""
+#~ "Ta opcja pozwala sprawdzić funkcjonowanie twojego serwera poczty email"
+
+#~ msgid "Did you receive test email?"
+#~ msgstr "Czy otrzymałeś(łaś) testową wiadomość email?"
+
+#~ msgid "Yes! It works!"
+#~ msgstr "Tak! Działa!"
+
+#~ msgid "No, I need to contact my hosting provider with mail function issue."
+#~ msgstr ""
+#~ "Nie, nie ma potrzeby kontaktowania się z dostawcą hostingu w sprawie "
+#~ "problemu z funkcjonowaniem poczty."
+
+#~ msgid "Great! Mail function was tested and is working fine."
+#~ msgstr ""
+#~ "Wspaniale! Działanie poczty zostało przetestowane i działa poprawnie."
+
+#~ msgid ""
+#~ "Bad, please contact your hosting provider and ask them to setup mail "
+#~ "functionality on your server."
+#~ msgstr ""
+#~ "Źle, proszę skontaktować się z dostawcą hostingu i poprosić o ustawienie "
+#~ "funkcji poczty na Twoim serwerze."
+
+#~ msgid "General"
+#~ msgstr "Ogólne"
+
+#~ msgid "Send usage statistics"
+#~ msgstr "Wyślij statystyki użytkowania"
+
+#~ msgid ""
+#~ "Send information about what plugin options you prefer to use, this will "
+#~ "help us make our solution better for You."
+#~ msgstr ""
+#~ "Wyślij informacje o preferencjach używania wtyczki, to pomoże nam w "
+#~ "tworzeniu lepszych rozwiązań dla Ciebie."
+
+#~ msgid "Set number of displayed products"
+#~ msgstr "Ustaw ilość wyświetlanych produktów"
+
+#~ msgid "Set number of displayed products. Leave blank for the default value."
+#~ msgstr ""
+#~ "Ustaw ilość wyświetlanych produktów. Pozostaw puste w przypadku wartości "
+#~ "domyślnej."
+
+#~ msgid "Move Sidebar To Top For Mobile"
+#~ msgstr "Umieść Panel Boczny Na Górze Dla Urządzeń Mobilnych"
+
+#~ msgid ""
+#~ "Turn on if you want the sidebar to appear above content on mobile devices."
+#~ msgstr ""
+#~ "Włącz jeśli chcesz by panel boczny pojawiał się nad treścią dla urządzeń "
+#~ "mobilnych."
+
+#~ msgid "Module Updated"
+#~ msgstr "Moduł Zaktualizowany"
+
+#~ msgid "Module Update Failed"
+#~ msgstr "Aktualizacja Modułu Nie Powiodła Się"
+
+#~ msgid "Error module ID"
+#~ msgstr "Błąd ID modułu"
+
+#~ msgid "Empty data to save option"
+#~ msgstr "Brak danych do zapisania"
+
+#~ msgid "Main page Go here!!!!"
+#~ msgstr "Przejdź do strony głównej tutaj!!!!"
+
+#~ msgid "Save all options"
+#~ msgstr "Zapisz wszystkie opcje"
+
+#~ msgid "PRO option"
+#~ msgstr "Opcja PRO"
+
+#~ msgid "Delete Plugin Data (options, setup data, database tables, etc.)"
+#~ msgstr "Usuń Dane Wtyczki(opcje, dane ustawień, tabele bazy danych, etc.)"
+
+#~ msgid "Information was saved. Thank you!"
+#~ msgstr "Informacje zapisane. Dziękuję!"
+
+#~ msgid ""
+#~ "Please don't send contact requests so often - wait for response for your "
+#~ "previous requests."
+#~ msgstr ""
+#~ "Proszę nie wysyłać zapytań kontaktowych tak często - proszę zaczekać na "
+#~ "odpowiedź na poprzednie zapytania."
+
+#~ msgid "Please enter valid email address"
+#~ msgstr "Proszę wprowadzić poprawny adres email"
+
+#~ msgid "Thank you for Feedback!"
+#~ msgstr "Dziękuję za informację zwrotną!"
+
+#~ msgid ""
+#~ "<h3>Hey, I noticed you just use %s over a week – that’s awesome!</"
+#~ "h3><p>Could you please do me a BIG favor and give it a 5-star rating on "
+#~ "WordPress? Just to help us spread the word and boost our motivation.</p>"
+#~ msgstr ""
+#~ "<h3>Hej, zauważyłem że używasz %s ponad tydzień - to wspaniale!</"
+#~ "h3><p>Czy mógł/mogła byś oddać mi WIELKĄ przysługę i dać ocenę 5 gwiazdek "
+#~ "w WordPress? Po to by pomóc nam głosić słowo i wzmocnić naszą motywację.</"
+#~ "p>"
+
+#~ msgid "Ok, you deserve it"
+#~ msgstr "OK, zasłużyłeś(łaś) na to"
+
+#~ msgid "Nope, maybe later"
+#~ msgstr "Niee, może później"
+
+#~ msgid "I already did"
+#~ msgstr "Już to zrobiłem"
+
+#~ msgid ""
+#~ "<p>On behalf of the entire <a href=\"https://woobewoo.com/\" target="
+#~ "\"_blank\">woobewoo.com</a> company I would like to thank you for been "
+#~ "with us, and I really hope that our software helped you.</p>"
+#~ msgstr ""
+#~ "<p>W imieniu całej firmy <a href=\"https://woobewoo.com/\" target=\"_blank"
+#~ "\">woobewoo.com</a>pragnąłbym Ci podziękować za bycie z nami, i mam "
+#~ "nadzieję że nasze oprogramowanie pomogło Ci.</p>"
+
+#~ msgid ""
+#~ "<p>And today, if you want, - you can help us. This is really simple - you "
+#~ "can just add small promo link to our site under your PopUps. This is "
+#~ "small step for you, but a big help for us! Sure, if you don't want - just "
+#~ "skip this and continue enjoy our software!</p>"
+#~ msgstr ""
+#~ "<p>A dzisiaj, jeśli chcesz, Ty możesz pomóc nam. To naprawdę proste - "
+#~ "możesz dodać mały link promocyjny pod twoimi PopUps. To mały krok dla "
+#~ "ciebie, ale duża pomoc dla nas! Jeśli jednak nie chcesz, po prostu pomiń "
+#~ "ten krok i używaj naszego oprogramowania!</p>"
+
+#~ msgid "Skip"
+#~ msgstr "Pomiń"
+
+#~ msgid ""
+#~ "You can help us improve our plugin - by <a href=\"%s\" data-statistic-"
+#~ "code=\"hide\" class=\"button button-primary wpfEnbStatsAdBtn\">enabling "
+#~ "Usage Statistics</a>. We will collect only our plugin usage statistic "
+#~ "data - to understand Your needs and make our solution better for You."
+#~ msgstr ""
+#~ "Możesz nam pomóc udoskonalać naszą wtyczkę <a href=\"%s\" data-statistic-"
+#~ "code=\"hide\" class=\"button button-primary wpfEnbStatsAdBtn\">włączając "
+#~ "Statystyki Użytkowania</a>. Zbieramy jedynie statystyki użytkowania "
+#~ "naszej wtyczki - by poznać Twoje potrzeby i tworzyć dla Ciebie lepsze "
+#~ "rozwiązania."
+
+#~ msgid ""
+#~ "Check out <a href=\"%s\" target=\"_blank\" class=\"button button-primary"
+#~ "\" data-statistic-code=\"hide\">our other Plugins</a>! Years of "
+#~ "experience in WordPress plugins developers made those list unbreakable!"
+#~ msgstr ""
+#~ "Sprawdź <a href=\"%s\" target=\"_blank\" class=\"button button-primary\" "
+#~ "data-statistic-code=\"hide\">nasze pozostałe wtyczki</a>! Wieloletnie "
+#~ "doświadczenie naszych developerów w tworzeniu wtyczek WordPress sprawia "
+#~ "że lista jest nie do pobicia!"
+
+#~ msgid "Constant Contact - PRO"
+#~ msgstr "Ciągły Kontakt - PRO"
+
+#~ msgid "Campaign Monitor - PRO"
+#~ msgstr "Monitor Kampanii - PRO"
+
+#~ msgid "Vertical Response - PRO"
+#~ msgstr "Pionowa Reakcja - PRO"
+
+#~ msgid "SendGrid - PRO"
+#~ msgstr "SendGrid - PRO"
+
+#~ msgid "GetResponse - PRO"
+#~ msgstr "Otrzymaj Odpowiedź - PRO"
+
+#~ msgid "iContact - PRO"
+#~ msgstr "iContact - PRO"
+
+#~ msgid "Active Campaign - PRO"
+#~ msgstr "Aktywna Kampania - PRO"
+
+#~ msgid "Mailrelay - PRO"
+#~ msgstr "Mailrelay - PRO"
+
+#~ msgid "arpReach - PRO"
+#~ msgstr "appReach - PRO"
+
+#~ msgid "SG Autorepondeur - PRO"
+#~ msgstr "Autoresponder SG - PRO"
+
+#~ msgid "Benchmark - PRO"
+#~ msgstr "Benchmark - PRO"
+
+#~ msgid "InfusionSoft - PRO"
+#~ msgstr "InfusionSoft - PRO"
+
+#~ msgid "SalesForce - Web-to-Lead - PRO"
+#~ msgstr "SalesForce - Web-to-Lead - PRO"
+
+#~ msgid "ConvertKit - PRO"
+#~ msgstr "ConvertKit - PRO"
+
+#~ msgid "Emma - PRO"
+#~ msgstr "Emma - Pro"
+
+#~ msgid "SendinBlue - PRO"
+#~ msgstr "SendinBlue - PRO"
+
+#~ msgid "Vision6 - PRO"
+#~ msgstr "Vision6 - PRO"
+
+#~ msgid "Vtiger - PRO"
+#~ msgstr "Vtiger - PRO"
+
+#~ msgid "Your Mailing List Provider (Ymlp) - PRO"
+#~ msgstr "Twój Dostawca Listy Mailowej (Ymlp) - PRO"
+
+#~ msgid "4Dem.it - PRO"
+#~ msgstr "4Dem.it - PRO"
+
+#~ msgid "Testing"
+#~ msgstr "Testowanie"
+
+#~ msgid "Get PRO"
+#~ msgstr "Uzyskaj PRO"
+
+#~ msgid "Login/Registration"
+#~ msgstr "Logowanie/Rejestracja"
+
+#~ msgid "Popup Location"
+#~ msgstr "Położenie okienka Popup"
+
+#~ msgid "Name"
+#~ msgstr "Nazwa"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Website"
+#~ msgstr "Strona www"
+
+#~ msgid "Subject"
+#~ msgstr "Przedmiot"
+
+#~ msgid "Topic"
+#~ msgstr "Temat"
+
+#~ msgid "Plugin options"
+#~ msgstr "Opcje wtyczki"
+
+#~ msgid "Report a bug"
+#~ msgstr "Zgłoś błąd"
+
+#~ msgid "Require a new functionality"
+#~ msgstr "Zażądaj nowej funkcji"
+
+#~ msgid "Other"
+#~ msgstr "Inne"
+
+#~ msgid "Message"
+#~ msgstr "Wiadomość"
+
+#~ msgid "Hello Supsystic Team!"
+#~ msgstr "Witaj zespole Supsystic!"
+
+#~ msgid "Where's my subscribers?"
+#~ msgstr "Gdzie są moi subskrybenci?"
+
+#~ msgid ""
+#~ "By default all subscribers add to the WordPress. \n"
+#~ "\t\t\t\t\tTo find your subscribers go to Users tab on the left navigation "
+#~ "menu of WordPress admin area. \n"
+#~ "\t\t\t\t\tAlso available subscription to the Aweber, MailChimp, MailPoet "
+#~ "<a href='%s' target='_blank'>and other</a>. \n"
+#~ "\t\t\t\t\tIf you want to add another subscription service - just <a "
+#~ "href='%s' target='_blank'>contact us</a> and provide URL of the "
+#~ "subscription service."
+#~ msgstr ""
+#~ "Domyślnie, wszyscy subskrybenci dodawani są do WordPress.\n"
+#~ "\t\t\t\t\tBy znaleźć swoich subskrybentów przejdź do zakładki Użytkownicy "
+#~ "w lewym menu obszaru administracyjnego WordPress'a.\n"
+#~ "\t\t\t\t\tDostępna także subskrypcja Awber, MailChimp, Mail Poet <a "
+#~ "href='%s' target='_blank'>i inne</a>. \n"
+#~ "\t\t\t\t\tJeśli chcesz dodać inną usługę subskrypcji, po prostu <a "
+#~ "href='%s' target='_blank'>skontaktuj się z nami</a> i dostarcz nam adres "
+#~ "URL usługi subskrypcji."
+
+#~ msgid "PopUp doesn't appear on the website"
+#~ msgstr "PopUp nie pojawia się na stronie www"
+
+#~ msgid ""
+#~ "If you setup you're PopUp properly, and it still doesn't show on the page "
+#~ "- there are can be conflict with your WordPress theme or other plugins. "
+#~ "<a href='%s' target='_blank'>Contact us</a> with the URL of the webpage "
+#~ "you add popup and screenshots / text of the error messages, if you have "
+#~ "one - and we will help you resolve your issue."
+#~ msgstr ""
+#~ "Jeśli ustawiłeś swój PopUp właściwie, ale nadal nie pojawia się na "
+#~ "stronie, może to wynikać z konfliktu twojego szablonu z innymi wtyczkami. "
+#~ "<a href='%s' target='_blank'>Skontaktuj się z nami</a> podając adres URL "
+#~ "Twojej strony internetowej gdzie dodałeś(łaś) PopUp, oraz załączając "
+#~ "zrzuty ekranu / tekst powiadomień o błędach, jeśli takie są - a my "
+#~ "pomożemy rozwiązać Twój problem."
+
+#~ msgid ""
+#~ "There were some problems while trying to retrieve our news, but you can "
+#~ "always check all list <a target=\"_blank\" href=\"%s\">here</a>."
+#~ msgstr ""
+#~ "Wystąpiły problemy podczas próby odebrania naszych wiadomości, ale możesz "
+#~ "zawsze przejrzeć całą listę <a target=\"_blank\" href=\"%s\">tutaj</a>."
+
+#~ msgid "Yes"
+#~ msgstr "Tak"
+
+#~ msgid "No"
+#~ msgstr "Nie"
+
+#~ msgid "Popup Plugin"
+#~ msgstr "Wtyczka wyskakującego okna"
+
+#~ msgid ""
+#~ "The Best WordPress PopUp option plugin to help you gain more subscribers, "
+#~ "social followers or advertisement. Responsive pop-ups with friendly "
+#~ "options."
+#~ msgstr ""
+#~ "Najlepsza wtyczka PopUp dla WordPress pomagająca w pozyskaniu większej "
+#~ "ilości subskrybentów, społecznych followersów czy reklam. Responsywne "
+#~ "wyskakujące okienka pop-up z przystępnymi opcjami."
+
+#~ msgid "Photo Gallery Plugin"
+#~ msgstr "Wtyczka Galerii Zdjęć"
+
+#~ msgid ""
+#~ "Photo Gallery Plugin with a great number of layouts will help you to "
+#~ "create quality respectable portfolios and image galleries."
+#~ msgstr ""
+#~ "Wtyczka Galerii Zdjęć z ogromną liczbą układów pomoże Ci stworzyć "
+#~ "wywierające wrażenie porflolia i galerie obrazów."
+
+#~ msgid "Contact Form Plugin"
+#~ msgstr "Wtyczka Formularza Kontaktowego"
+
+#~ msgid ""
+#~ "One of the best plugin for creating Contact Forms on your WordPress site. "
+#~ "Changeable fonts, backgrounds, an option for adding fields etc."
+#~ msgstr ""
+#~ "Jedna z najlepszych wtyczek do tworzenia Formularzy Kontaktowych na "
+#~ "twojej stronie WordPress. Edytowalne czcionki, tła, opcja dodawania pól, "
+#~ "itp."
+
+#~ msgid "Newsletter Plugin"
+#~ msgstr "Wtyczka Newslettera"
+
+#~ msgid ""
+#~ "Supsystic Newsletter plugin for automatic mailing of your letters. You "
+#~ "will have no need to control it or send them manually. No coding, hard "
+#~ "skills or long hours of customizing are required."
+#~ msgstr ""
+#~ "Wtyczka Newslettera Supsystic do automatycznego wysyłania wiadomości. Nie "
+#~ "będziesz musiał(ła) ich nadzorować ani wysyłać ręcznie. Żadnego "
+#~ "kodowania, umiejętności czy długich godzin personalizowania."
+
+#~ msgid "Membership by Supsystic"
+#~ msgstr "Członkostwo Supsystic"
+
+#~ msgid ""
+#~ "Create online membership community with custom user profiles, roles, "
+#~ "FrontEnd registration and login. Members Directory, activity, groups, "
+#~ "messages."
+#~ msgstr ""
+#~ "Twórz społeczność członkowską online wraz z personalizowanymi profilami "
+#~ "użytkowników, rolami, frontendową rejestracją i logowaniem. Członkowie, "
+#~ "Katalog, aktywność, grupy, wiadomości."
+
+#~ msgid "Google Maps Easy"
+#~ msgstr "Google Maps Easy"
+
+#~ msgid ""
+#~ "Display custom Google Maps. Set markers and locations with text, images, "
+#~ "categories and links. Customize google map in a simple and intuitive way."
+#~ msgstr ""
+#~ "Wyświetlaj personalizowane Mapy Google. Ustawiaj znaczniki i położenie z "
+#~ "tekstem, obrazami, kategoriami i linkami. Personalizuj mapę google w "
+#~ "prosty i intuicyjny sposób."
+
+#~ msgid "Data Tables Generator"
+#~ msgstr "Generator Tabel Danych"
+
+#~ msgid ""
+#~ "Create and manage beautiful data tables with custom design. No HTML "
+#~ "knowledge is required."
+#~ msgstr ""
+#~ "Twórz i zarządzaj pięknymi tabelami danych ze spersonalizowanym układem. "
+#~ "Znajomość HTML nie jest wymagana."
+
+#~ msgid "Slider Plugin"
+#~ msgstr "Wtyczka Pokazu Slajdów"
+
+#~ msgid ""
+#~ "Creating slideshows with Slider plugin is fast and easy. Simply select "
+#~ "images from your WordPress Media Library, Flickr, Instagram or Facebook, "
+#~ "set slide captions, links and SEO fields all from one page."
+#~ msgstr ""
+#~ "Tworzenie pokazu slajdów przy pomocy tej wtyczki jest szybkie i łatwe. Po "
+#~ "prostu wybierz obrazy z Biblioteki Mediów twojego WordPress'a, Flickr'a, "
+#~ "Instagram'a czy też Facebook'a, ustawiaj podpisy, linki i pola SEO, "
+#~ "wszystko na jedenj stronie."
+
+#~ msgid "Social Share Buttons"
+#~ msgstr "Przyciski Udostępniania Społecznościowego"
+
+#~ msgid ""
+#~ "Social share buttons to increase social traffic and popularity. Social "
+#~ "sharing to Facebook, Twitter and other social networks."
+#~ msgstr ""
+#~ "Przyciski udostępniania społecznościowego zwiększają ruch na stronie "
+#~ "internetowej oraz popularność. Udostępnianie do Facebook'a, Twitter'a i "
+#~ "innych sieci społecznościowych."
+
+#~ msgid "Live Chat Plugin"
+#~ msgstr "Wtyczka Live Chat"
+
+#~ msgid ""
+#~ "Be closer to your visitors and customers with Live Chat Support by "
+#~ "Supsystic. Help you visitors, support them in real-time with exceptional "
+#~ "Live Chat WordPress plugin by Supsystic."
+#~ msgstr ""
+#~ "Bądź bliżej odwiedzających i klientów ze wsparciem Live Chat od "
+#~ "Supsystic. Pomagaj swoim odwiedzającym, wspieraj ich w czasie "
+#~ "rzeczywistym przy pomocy wyjątkowej wtyczki WordPress Live Chat od "
+#~ "Supsystic."
+
+#~ msgid "Pricing Table"
+#~ msgstr "Cennik"
+
+#~ msgid ""
+#~ "It’s never been so easy to create and manage pricing and comparison "
+#~ "tables with table builder. Any element of the table can be customise with "
+#~ "mouse click."
+#~ msgstr ""
+#~ "Nigdy wcześniej zarządzanie cennikiem i tabelami porównawczymi nie było "
+#~ "takie łatwe. Każdy element tabeli może być dostosowany za kliknięciem "
+#~ "myszki."
+
+#~ msgid "Coming Soon Plugin"
+#~ msgstr "Wtyczka Już Wkrótce"
+
+#~ msgid ""
+#~ "Coming soon page with drag-and-drop builder or under construction | "
+#~ "maintenance mode to notify visitors and collects emails."
+#~ msgstr ""
+#~ "Strona 'już wkrótce' z kreatorem przeciągnij-upuść lub 'w budowie' / "
+#~ "'prace konserwacyjne' do powiadamiania odwiedzających i zbierania "
+#~ "wiadomości email."
+
+#~ msgid "Backup Plugin"
+#~ msgstr "Wtyczka Kopii Zapasowej"
+
+#~ msgid ""
+#~ "Backup and Restore WordPress Plugin by Supsystic provides quick and "
+#~ "unhitched DropBox, FTP, Amazon S3, Google Drive backup for your WordPress "
+#~ "website."
+#~ msgstr ""
+#~ "Wtyczka WordPress Kopia Zapasowa i Przywracanie od Supstystic zapewnia "
+#~ "szybką i nieprzerwaną usługę kopii zapasowej twojej strony WordPress do "
+#~ "DropBox, FTP, Amazon S3, czy Google Drive."
+
+#~ msgid "Digital Publication Plugin"
+#~ msgstr "Wtyczka Cyfrowych Publikacji"
+
+#~ msgid ""
+#~ "Digital Publication WordPress Plugin by Supsystic for Magazines, "
+#~ "Catalogs, Portfolios. Convert images, posts, PDF to the page flip book."
+#~ msgstr ""
+#~ "Wtyczka WordPress Cyfrowe Publikacje od Supsystic dla Czasopism, "
+#~ "Katalogów, Portfolio. Konwertuj obrazy, posty, pliki PDF do flip book'a."
+
+#~ msgid ""
+#~ "Show when user tries to exit from your site. <a target=\"_blank\" href="
+#~ "\"%s\">Check example.</a>"
+#~ msgstr ""
+#~ "Pokaż gdy użytkownik próbuje opuścić Twoją stronę. <a target=\"_blank\" "
+#~ "href=\"%s\">Zobacz przykład.</a>"
+
+#~ msgid "On Exit from Site"
+#~ msgstr "Przy Opuszczeniu Strony"
+
+#~ msgid "Available in PRO"
+#~ msgstr "Dostępnę w wersji PRO"
+
+#~ msgid "Version"
+#~ msgstr "Wersja"
+
+#~ msgid "Go"
+#~ msgstr "Przejdź"
+
+#~ msgid "PRO"
+#~ msgstr "PRO"
+
+#~ msgid "Support"
+#~ msgstr "Wsparcie"
+
+#~ msgid "Welcome to %s plugin!"
+#~ msgstr "Witaj we wtyczce %s!"
+
+#~ msgid ""
+#~ "Thank you for choosing our %s plugin. Just click here to start using it - "
+#~ "and we will show you it's possibilities and powerfull features."
+#~ msgstr ""
+#~ "Dziękujemy za wybranie wtyczki %s. Po prostu kliknij tutaj by zacząć jej "
+#~ "używać - a my pokażemy Ci jej potężne możliwości."
+
+#~ msgid "Close"
+#~ msgstr "Zamknij"
+
+#~ msgid "Next"
+#~ msgstr "Następny"
+
+#~ msgid "Create your firs PopUp"
+#~ msgstr "Stwórz swój pierwszy PopUp"
+
+#~ msgid ""
+#~ "Click on \"Add New PopUp\" button to create your firs PopUp. Just try - "
+#~ "this is really simple!"
+#~ msgstr ""
+#~ "Kliknij na przycisku \"Dodaj Nowy PopUp\" by utworzyć swój pierwszy "
+#~ "PopUp. Po prostu spróbuj - to naprawdę proste!"
+
+#~ msgid "Enter name for your PopUp"
+#~ msgstr "Wprowadź nazwę swojego PopUp'u"
+
+#~ msgid "This will be name of your PopUp. You can change it latter."
+#~ msgstr "To będzie nazwa Twojego PopUp'u. Możesz ją zmienić później."
+
+#~ msgid "Selecte template for your PopUp"
+#~ msgstr "Wybierz szablon swojego PopUp'u"
+
+#~ msgid ""
+#~ "Choose any templates from this list. You will be able to customize it "
+#~ "after creation, and also - you will be able to change it latter if you "
+#~ "will need this."
+#~ msgstr ""
+#~ "Wybierz którykolwiek szablon z tej listy. Będziesz mógł go zmodyfikować "
+#~ "po utworzeniu, będziesz mógł/mogła również go zmienić później wedle "
+#~ "potrzeby."
+
+#~ msgid "Save first PopUp"
+#~ msgstr "Zapisz pierwszy PopUp"
+
+#~ msgid ""
+#~ "After you entered name of your PopUp and selected it's template - just "
+#~ "save it, and you will be redirected to PopUp edit screen - where you will "
+#~ "be able to customize your PopUp."
+#~ msgstr ""
+#~ "Po wpisaniu nazwy swojego PopUp'u i wybraniu szablonu, po prostu go "
+#~ "zapisz, potem zostaniesz przekierowany(a) do ekranu edycji PopUp'u, gdzie "
+#~ "będziesz mógł/mogła zmodyfikować swój PopUp."
+
+#~ msgid "Main Settings"
+#~ msgstr "Ustawienia Główne"
+
+#~ msgid ""
+#~ "Here you can setup main display settings for your PopUp - when it should "
+#~ "be visible for your user, when it need to be closed, if required - select "
+#~ "specific pages/posts where you need to show your PopUp."
+#~ msgstr ""
+#~ "Tutaj możesz ustawić główne parametry swojego PopUp'u - kiedy powinny być "
+#~ "widoczne dla użytkownika, kiegy powinny być zamknięte - wybierz strony/"
+#~ "posty na których chcesz pokazać swój PopUp."
+
+#~ msgid "Design Settings"
+#~ msgstr "Ustawienia wyglądu"
+
+#~ msgid ""
+#~ "One of our most powerfull features - possibility to <strong>customize</"
+#~ "strong> design for each PopUp window for your needs. In this section you "
+#~ "can select your PopUp colors and images, enter required texts that will "
+#~ "describe your neds for your visitors, setup social settings (if "
+#~ "required), select PopUp location, and in the end - select Animation style "
+#~ "for your PopUp from list of more then 20 different animation styles!"
+#~ msgstr ""
+#~ "Jedna z naszych najpotężniejszych właściwości - możliwość "
+#~ "<strong>dostosowania</strong> wyglądu każdego okna PopUp do Twoich "
+#~ "potrzeb. W tej sekcji możesz wybrać kolory i obrazy, wprowadzić tekst "
+#~ "który określi Twoje potrzeby odnośnie odwiedzających, zmienić ustawienia "
+#~ "społecznościowe, wybrać położenie PopUp'u, i w końcu, wybrać styl "
+#~ "Animacji wyskakującego okna z listy ponad 20 różnych stylów animacji!"
+
+#~ msgid "Subscribe Settings"
+#~ msgstr "Ustawiania Subskrypcji"
+
+#~ msgid ""
+#~ "Setup your Subscription settings here - select Subscribers destination in "
+#~ "\"Subscribe to\" option - it allow to flow your subscribers not only to "
+#~ "WordPress Users, but to other popular subscribe services. With other "
+#~ "subscription options you will be able to easily customize your subscribe "
+#~ "form in PopUp window."
+#~ msgstr ""
+#~ "Tutaj zmodyfikujesz ustawiania Subskrypcji - wybierz cel w opcji "
+#~ "\"Subskrybuj do\" - pozwoli Ci to przekierować Twoich subskrybentów nie "
+#~ "tylko do Twoich użytkowników WordPress'a, ale także do innych popularnych "
+#~ "usług subskrypcyjnych. Przy pomocy innych opcji subskrypcji będziesz mógł "
+#~ "łatwo zmodyfikować swój formularz subskrypcji w oknie PopUp."
+
+#~ msgid "PopUp Statistwpf"
+#~ msgstr "PopUp Statistwpf"
+
+#~ msgid ""
+#~ "After you will setup your PopUp - it will start displaying to your site "
+#~ "visitors. And now - you need to check it's displaying statistwpf. Here, "
+#~ "in Statistwpf tab, you will be able to see how many times PopUp was shown "
+#~ "to your visitors, how many times visitors subscribed to it (if "
+#~ "subscription is enabled), how many times visitors shared your site using "
+#~ "Social Share PopUp functionality and what social networks for share is "
+#~ "most popular (if it was enabled). If you will use AB Testing feature to "
+#~ "increase your site popularity - you will see here all your main and "
+#~ "tested PopUps statistwpf - in one graph or diagramm, - and this will "
+#~ "provide you with all required information about your POpUp popularity!"
+#~ msgstr ""
+#~ "Po ustawieniu swojego okna PopUp zacznie się ono wyświetlać "
+#~ "odwiedzającym. A teraz sprawdź czy wyświetla statistwpf. Tutaj, w "
+#~ "zakładce Statistwpf, będziesz mógł zobaczyć ile razy PopUp wyświetlił się "
+#~ "odwiedzającym, ile razy odwiedzający subskrybowali go (jeśli subskrypcja "
+#~ "jest aktywna), ile razy użytkownicy udostępnili twoją stronę używając "
+#~ "funkcji Udostępniania Społecznościowego i jakie sieci społecznościowe są "
+#~ "najpopularniejsze (jeśli zostały aktywowane). Jeśli będziesz używać "
+#~ "funkcji Testowania AB by zwiększyć popularność swojej strony, zobaczysz "
+#~ "tutaj wszystkie swoje główne i przetestowane statystyki PopUp'ów - na "
+#~ "pojedynczym diagramie lub wykresie - a to zapewni Ci wszelkie potrzebne "
+#~ "informacje o popularności Twojego PopUp'u!"
+
+#~ msgid "PopUp CSS / HTML Code"
+#~ msgstr "CSS PopUp'u / Kod HTML"
+
+#~ msgid ""
+#~ "In case you will need modify source CSS / HTML code of your PopUp - you "
+#~ "can easily do this here. Just make sure that you know what you are doing "
+#~ "- don't break PopUp. You can also find additional information about "
+#~ "editing source code <a href=\"%s\" target=\"_blank\">here</a>."
+#~ msgstr ""
+#~ "Na wypadek gdybyś potrzebował(a) zmodyfikować źródłowy kod CSS / HTML "
+#~ "swojego PopUp'u, możesz to łatwo zrobić tutaj. Tylko upewnij się że "
+#~ "wiesz, co robisz - nie zepsuj okna PopUp. Dodatkowe informacje na temat "
+#~ "edycji kodu źródłowego znajdziesz także <a href=\"%s\" target=\"_blank"
+#~ "\">tutaj</a>."
+
+#~ msgid "Well Done!"
+#~ msgstr "Dobra Robota!"
+
+#~ msgid ""
+#~ "<b>Upgrading</b> <br>Once you have purchased Premium version of plugin  - "
+#~ "you’ll have to enter license key (you can find it in your personal "
+#~ "account on our site). Go to the License tab and enter your email and "
+#~ "license key. Once you have activated your PRO license - you can use all "
+#~ "its advanced options. <br><br>That's it! Now you know how to use our %s. "
+#~ "Just save your PopUp after you will setup it - and you will see results. "
+#~ "You can also check our site - <a href=\"%s\" target=\"_blank\">woobewoo."
+#~ "com</a> to find out more about our %s plugin. If you will have any "
+#~ "questions - you can always contact us on <a href=\"%s\" target=\"_blank"
+#~ "\">WordPress plugin forum</a> or in <a href=\"%s\" target=\"_blank\">our "
+#~ "support system</a>. Besides you can always describe your questions on <a "
+#~ "href=\"%s\" target=\"_blank\">Supsystic Forum.</a> <br><br><b>Enjoy this "
+#~ "plugin?</b> <br>It will be nice if you`ll help us and boost plugin with "
+#~ "<a href=\"%s\" target=\"_blank\">Five Stars rating on WordPress.org.</a>  "
+#~ "<br><br>We really hope that our solution will be helpful for you. Good "
+#~ "luck!"
+#~ msgstr ""
+#~ "<b>Upgrade do wyższej wersji</b> <br>Gdy zakupiłeś(łaś) już wersję "
+#~ "Premium wtyczki, będziesz musiał(a) wprowadzić klucz licencji (znajdziesz "
+#~ "go na swoim koncie na naszej stronie internetowej). Przejdź do zakładki "
+#~ "Licencja i wprowadź swój adres email oraz klucz licencyjny. Gdy już "
+#~ "aktywowałeś(łaś) swoją licencję PRO, możesz używać wszystkich "
+#~ "zaawansowanych funkcji.<br><br>To wszystko! Teraz wiesz jak używać "
+#~ "naszego/naszej %s. Po prostu zapisz swój PopUp po ustawieniu go i "
+#~ "zobaczysz rezultaty. Możesz także odwiedzić naszą stronę <a href=\"%s\" "
+#~ "target=\"_blank\">woobewoo.com</a> by dowiedzieć się więcej o naszej "
+#~ "wtyczce %s. Jeśli masz jakieś pytania, możesz zawsze się z nami "
+#~ "skontaktować na <a href=\"%s\" target=\"_blank\">forum wtyczek "
+#~ "WordPress'a</a> albo w <a href=\"%s\" target=\"_blank\">naszym systemie "
+#~ "wsparcia</a>. Poza tym, zawsze możesz opisać swój problem na <a href=\"%s"
+#~ "\" target=\"_blank\">Forum Supsystic.</a><br><br><b>Podoba Ci się ta "
+#~ "wtyczka?</b><br>Było by miło gdybyś pomógł nam ulepszyć wtyczkę dając <a "
+#~ "href=\"%s\" target=\"_blank\">Pięć Gwiazdek na WordPress.org.</"
+#~ "a><br><br>Na prawdę mamy nadzieję, że nasze rozwiązania będą Ci pomocne. "
+#~ "Powodzenia!"
+
+#~ msgid "Finish"
+#~ msgstr "Zakończ"
+
+#~ msgid "Get plugins bundle today and save over 80%"
+#~ msgstr "Otrzymaj paczkę wtyczek już dziś i zaoszczędź ponad 80%"
+
+#~ msgid "Check It out"
+#~ msgstr "Sprawdź to"
+
+#~ msgid "More info"
+#~ msgstr "Więcej informacji"
+
+#~ msgid "Download"
+#~ msgstr "Pobierz"
+
+#~ msgid "Enable Layered PopUp Style"
+#~ msgstr "Aktywuj Styl Warstwowego PopUp'u"
+
+#~ msgid ""
+#~ "By default all PopUps have modal style: it appears on user screen over "
+#~ "the whole site. Layered style allows you to show your PopUp - on selected "
+#~ "position: top, bottom, etc. and not over your site - but right near your "
+#~ "content."
+#~ msgstr ""
+#~ "Domyślnie, wszystkie PopUp'y mają styl modal: pojawiają się one "
+#~ "użytkownikowi na obszarze całej strony. Warstwowy styl pozwala na "
+#~ "pokazanie Twojego PopUp'u w wybranych pozycjach: góra, dół, itp., nie na "
+#~ "całej stronie - ale blicko treści."
+
+#~ msgid "Select position for your PopUp"
+#~ msgstr "Wybierz pozycję dla Twojego PopUp'u"
+
+#~ msgid "Top Left"
+#~ msgstr "Góra po lewej stronie"
+
+#~ msgid "Top"
+#~ msgstr "Góra"
+
+#~ msgid "Top Right"
+#~ msgstr "Góra po prawej stronie"
+
+#~ msgid "Center Left"
+#~ msgstr "Środek po lewej stronie"
+
+#~ msgid "Center"
+#~ msgstr "Środek"
+
+#~ msgid "Center Right"
+#~ msgstr "Środek po prawej stronie"
+
+#~ msgid "Bottom Left"
+#~ msgstr "Dół po lewej stronie"
+
+#~ msgid "Bottom"
+#~ msgstr "Dół"
+
+#~ msgid "Bottom Right"
+#~ msgstr "Dół po prawej stronie"
+
+#~ msgid "Improve Free version"
+#~ msgstr "Ulepsz swoją darmową wersję"
+
+#~ msgid ""
+#~ "This functionality and more - is available in PRO version. <a class="
+#~ "\"button button-primary\" target=\"_blank\" href=\"%s\">Get it</a> today "
+#~ "for 29$"
+#~ msgstr ""
+#~ "Ta funkcja i więcej jest dostępna w wersji PRO. <a class=\"button button-"
+#~ "primary\" target=\"_blank\" href=\"%s\">Zdobądź ją</a> dzisiaj za 29$"
+
+#~ msgid "FAQ and Documentation"
+#~ msgstr "Często Zadawane Pytania(FAQ) i Dokumentacja"
+
+#~ msgid "Check all FAQs"
+#~ msgstr "Przejrzyj wszystkie Często Zadawane Pytania (FAQ)"
+
+#~ msgid "Video Tutorial"
+#~ msgstr "Tutorial Wideo"
+
+#~ msgid "Server Settings"
+#~ msgstr "Ustawienia Serwera"
+
+#~ msgid "News"
+#~ msgstr "Wiadomości"
+
+#~ msgid "All news and info"
+#~ msgstr "Wszystkie wiadomości i informacje"
+
+#~ msgid "Contact form"
+#~ msgstr "Formularz kontaktowy"
+
+#~ msgid "Send email"
+#~ msgstr "Wyślij wiadomość email"
+
+#~ msgid ""
+#~ "Your email was sent, we will try to respond to your as soon as possible. "
+#~ "Thank you for support!"
+#~ msgstr ""
+#~ "Twoja wiadomość email została wysłana, odpowiemy na nią tak szybko, jak "
+#~ "to możliwe. Dziękujemy za Twoje wsparcie!"
+
+#~ msgid "Your Feedback"
+#~ msgstr "Twoja Informacja Zwrotna"
+
+#~ msgid "Couldn't get the plugin to work"
+#~ msgstr "Nie udało się uruchomić wtyczki"
+
+#~ msgid ""
+#~ "If you have a question, <a href=\"%s\" target=\"_blank\">contact us</a> "
+#~ "and will do our best to help you"
+#~ msgstr ""
+#~ "Jeśli masz pytanie, <a href=\"%s\" target=\"_blank\">skontaktuj się z "
+#~ "nami</a> a my zrobimy wszystko by Ci pomóc"
+
+#~ msgid "I found a better plugin"
+#~ msgstr "Znalazłem lepszą wtyczkę"
+
+#~ msgid "If it's possible, specify plugin name"
+#~ msgstr "Jeśli to możliwe, określ nazwę wtyczki"
+
+#~ msgid "I no longer need the plugin"
+#~ msgstr "Nie potrzebuję już tej wtyczki"
+
+#~ msgid "It's a temporary deactivation"
+#~ msgstr "To chwilowa dezaktywacja"
+
+#~ msgid "What is the reason?"
+#~ msgstr "Jaki jest powód?"
+
+#~ msgid "Skip & Deactivate"
+#~ msgstr "Pomiń i Wyłącz"
+
+#~ msgid "Welcome to the %s v %s"
+#~ msgstr "Witaj w %s v %s"
+
+#~ msgid "Skip tutorial"
+#~ msgstr "Pomiń tutorial"
+
+#~ msgid ""
+#~ "The best way to collect subscribers and show notifications.<br />We are "
+#~ "trying to make our plugin work in most comfortable way for you. Here is "
+#~ "some base information about it."
+#~ msgstr ""
+#~ "Najlepszy sposób by zgromadzić subskrybentów i pokazać powiadomienia. "
+#~ "<br />Staramy się by nasza wtyczka działała na rzecz twojej wygody. Tu "
+#~ "znajdziesz podstawowe informacje o niej."
+
+#~ msgid "Step-by-step tutorial"
+#~ msgstr "Tutorial krok po kroku"
+
+#~ msgid ""
+#~ "There're really many options of popup customization. So as soon as you "
+#~ "close that page, I'll show you step-by-step tutorial of how to use "
+#~ "plugin. Hope it will be usefull for you :)"
+#~ msgstr ""
+#~ "Jest na prawdę wiele opcji modyfikacji wyskakującego okna. Więc, jak "
+#~ "tylko zamkniesz tą stronę, pokażemy Ci tutorial krok po kroku o tym jak "
+#~ "używać wtyczki. Mamy nadzieję, że będzie dla Ciebie przydatny :)"
+
+#~ msgid "As an option we can install and setup plugin for you."
+#~ msgstr "Jest także możliwość zainstalowania i ustawienia wtyczki przez nas."
+
+#~ msgid ""
+#~ "We love our plugin and do the best to improve all features for You. But "
+#~ "sometimes issues happened, or you can't find required feature that you "
+#~ "need. Don't worry, just <a href='%s' target='_blank'>contact us</a> and "
+#~ "we will help you!"
+#~ msgstr ""
+#~ "Uwielbiamy naszą wtyczkę i robimy co w naszej mocy by udoskonalać "
+#~ "wszystkie opcje dla Ciebie. Ale czasem zdarzają się problemy, lub nie "
+#~ "możesz znaleźć opcji której potrzebujesz. Nie martw się, po prostu <a "
+#~ "href='%s' target='_blank'>skontaktuj się z nami</a> a my Ci pomożemy!"
+
+#~ msgid "Frequently Asked Questions"
+#~ msgstr "Często Zadawane Pytania"
+
+#~ msgid "Let's Start!"
+#~ msgstr "Rozpoczynajmy!"
+
+#~ msgid "Prewiew"
+#~ msgstr "Podgląd"
+
+#~ msgid "Duplicate filter"
+#~ msgstr "Zduplikuj filtr"
+
+#~ msgid "Add New Filter"
+#~ msgstr "Dodaj Nowy Filtr"
+
+#~ msgid "Edit"
+#~ msgstr "Edytuj"
+
+#~ msgid "Show All Filters"
+#~ msgstr "Pokaż Wszystkie Filtry"
+
+#~ msgid "Default"
+#~ msgstr "Domyślne"
+
+#~ msgid "Popularity"
+#~ msgstr "Popularność"
+
+#~ msgid "Rating"
+#~ msgstr "Ocena"
+
+#~ msgid "Newness"
+#~ msgstr "Nowość"
+
+#~ msgid "Price: low to high"
+#~ msgstr "Cena: od najniższej"
+
+#~ msgid "Price: high to low"
+#~ msgstr "Cena: od najwyższej"
+
+#~ msgid "Random"
+#~ msgstr "Losowo"
+
+#~ msgid "In Stock"
+#~ msgstr "Na stanie"
+
+#~ msgid "Out of Stock"
+#~ msgstr "Brak w magazynie"
+
+#~ msgid "On Backorder"
+#~ msgstr "Na zamówienie"
+
+#~ msgid "On Sale"
+#~ msgstr "Promocja"
+
+#~ msgid "Search ..."
+#~ msgstr "Wyszukaj ..."
+
+#~ msgid "Delete selected"
+#~ msgstr "Usuń wybrane"
+
+#~ msgid "Search"
+#~ msgstr "Wyszukaj"
+
+#~ msgid ""
+#~ "You have no Filters for now. <a href=\"%s\" style=\"font-style: italic;"
+#~ "\">Create</a> your Filter!"
+#~ msgstr ""
+#~ "Na razie nie ma żadnych Filtrów. <a href=\"%s\" style=\"font-style: "
+#~ "italic;\">Utwórz</a> Swój Filtr!"
+
+#~ msgid "Select..."
+#~ msgstr "Wybierz ..."
+
+#~ msgid "Click to edit"
+#~ msgstr "Kliknij by edytować"
+
+#~ msgid "Filter Shortcode"
+#~ msgstr "Szortkod filtra"
+
+#~ msgid "Filter PHP code"
+#~ msgstr "Filtruj kod PHP"
+
+#~ msgid "Product Shortcode"
+#~ msgstr "Szortkod Produktu"
+
+#~ msgid "Product PHP code"
+#~ msgstr "Kod PHP produktu"
+
+#~ msgid "Delete"
+#~ msgstr "Usuń"
+
+#~ msgid "Options"
+#~ msgstr "Opcje"
+
+#~ msgid "Advanced"
+#~ msgstr "Zaawansowane"
+
+#~ msgid "Filtering"
+#~ msgstr "Filtrowanie"
+
+#~ msgid "Enable Cross filtration"
+#~ msgstr "Aktywuj filtrowanie krzyżowe"
+
+#~ msgid ""
+#~ "Enable Cross filtration. For example, if you select the category \"new\" "
+#~ "in the category filter, all filters will hide options in products that do "
+#~ "not have the category \"new\"."
+#~ msgstr ""
+#~ "Aktywuj filtrowanie krzyżowe. Na przykład, jeśli wybierzesz kategorię "
+#~ "\"nowe\" w filtrze kategorii, wszystkie filtry ukryją opcje w produktach "
+#~ "które nie mają kategorii \"nowe\"."
+
+#~ msgid "Cross filter style"
+#~ msgstr "Styl filtra krzyżowego"
+
+#~ msgid "Select mobile filter location."
+#~ msgstr "Wybierz miejsce dla filtra w wersji mobilnej."
+
+#~ msgid "Cross filter Term Products Count Mode"
+#~ msgstr "Filtr krzyżowy - tryb Ilości Okresowych Produktów"
+
+#~ msgid "Cross filter Term Products Count Mode displayed in frontend."
+#~ msgstr ""
+#~ "Filtr krzyżowy - tryb Ilości Okresowych Produktów wyświetlany na stronie."
+
+#~ msgid "Reorder Cross filter Terms"
+#~ msgstr "Przesegreguj okresy filtra krzyżowego"
+
+#~ msgid ""
+#~ "After filtering, sort the items in the filters (active / clickable "
+#~ "options move up)."
+#~ msgstr ""
+#~ "Po filtrowaniu, sortuj pozycje w filtrach (aktywny / opcje klikane "
+#~ "przesuwają się do góry)."
+
+#~ msgid ""
+#~ "Set number of displayed products. This number will only be shown after "
+#~ "filter is applied! You must set the same number as in the basic store "
+#~ "settings or in the basic filter <a href=\""
+#~ msgstr ""
+#~ "Ustaw liczbę wyświetlanych produktów. Liczba będzie wyświetlana tylko po "
+#~ "zastosowaniu filtra! Musisz ustawić taką liczbę jaką ustawiłeś w "
+#~ "podstawowych ustawieniach sklepu lub w podstawowym filtrze <a href-\""
+
+#~ msgid "CSS editor"
+#~ msgstr "Etytor CSS"
+
+#~ msgid "Custom CSS"
+#~ msgstr "Własny CSS"
+
+#~ msgid "JS editor"
+#~ msgstr "Edytor JS"
+
+#~ msgid "Custom JS"
+#~ msgstr "Własny JS"
+
+#~ msgid "Display only on page"
+#~ msgstr "Wyświetl tylko na stronie"
+
+#~ msgid "Hide filter on shop pages without products"
+#~ msgstr "Ukryj filtr na stronach sklepu bez produktów"
+
+#~ msgid "Hide filter by title click"
+#~ msgstr "Ukryj filtr po kliknięciu w tytuł"
+
+#~ msgid "Hide filter by title click."
+#~ msgstr "Ukryj filtr po kliknięciu w tytuł."
+
+#~ msgid "Do not run filter on page load"
+#~ msgstr " Nie uruchamiaj filtra podczas ładowania strony"
+
+#~ msgid ""
+#~ "Prevents the filter from starting when the page loads, even if it "
+#~ "contains blocks with the \"Selected categories/tags/attributes will be "
+#~ "marked as default\" flag enabled. Caution, in this case, blocks with such "
+#~ "flags may not work correctly."
+#~ msgstr ""
+#~ "Zapobiega ładowaniu filtra podczas ładowania strony, nawet jeśli zawiera "
+#~ "bloki z włączoną flagą \"Zaznaczone kategorie/tagi/atrybuty będą "
+#~ "oznaczone jako domyślne\". Uwaga, w tym przypadku, bloki z takimi flagami "
+#~ "mogą nie działać poprawnie."
+
+#~ msgid "Show Term Products Count"
+#~ msgstr "Pokaż Ilość Produktów Okresowych"
+
+#~ msgid "Show the number of products next to the title."
+#~ msgstr "Pokaż liczbę produktów obok tytułu."
+
+#~ msgid "Show Term Search Fields"
+#~ msgstr "Pokaż Pola Wyszukiwania Okresów"
+
+#~ msgid "Stepped Filter Selection"
+#~ msgstr "Krokowy Wybór Filtra"
+
+#~ msgid ""
+#~ "After selection filter options, you can confirm filtering in \"Show result"
+#~ "\" popup."
+#~ msgstr ""
+#~ "Po wybraniu opcji filtra możesz potwierdzić filtrowanie w wyskakującym "
+#~ "oknie \"Pokaż wyniki\"."
+
+#~ msgid "Enable Ajax"
+#~ msgstr "Włącz Ajax"
+
+#~ msgid "Show Filtering button"
+#~ msgstr "Pokaż przycisk filtrowania"
+
+#~ msgid "Filtering button text"
+#~ msgstr "Tekst przycisku fitrowania"
+
+#~ msgid "Here you may change filtering button word"
+#~ msgstr "Tutaj możesz zmienić tekst przycisku filtrowania"
+
+#~ msgid "Selected Terms Collector"
+#~ msgstr "Kolektor Wybranych Określeń"
+
+#~ msgid ""
+#~ "Show the selected filter elements above the products, with the ability to "
+#~ "remove them from the filter."
+#~ msgstr ""
+#~ "Pokaż wybrane elementy filtra nad produktami, z możliwością usunięcia ich "
+#~ "z filtra."
+
+#~ msgid "Show Clear all button"
+#~ msgstr "Pokaż przycisk \"Wyczyść wszystko\""
+
+#~ msgid "Clear all button word"
+#~ msgstr "Tekst przycisku 'Wyczyść wszystko'"
+
+#~ msgid "Here you may change Clear all button word. Default is \"Clear\"."
+#~ msgstr ""
+#~ "Tu możesz zmienić tekst przycisku 'Wyczyść wszystko'. Domyślnym tekstem "
+#~ "jest 'Wyczyść'."
+
+#~ msgid "Clear"
+#~ msgstr "Wyczyść"
+
+#~ msgid "Select Filter Buttons Position"
+#~ msgstr "Wybierz pozycję przycisków filtra"
+
+#~ msgid "Show Clear block"
+#~ msgstr "Pokaż 'Wyczyść blok'"
+
+#~ msgid "Clear block word"
+#~ msgstr "Tekst 'Wyczyść blok'"
+
+#~ msgid "Here you may change Clear block word. Default is \"clear\"."
+#~ msgstr "Tutaj możesz zmienić tekst 'Wyczyść blok'. Domyślny to \"wyczyść\"."
+
+#~ msgid "clear"
+#~ msgstr "wyczyść"
+
+#~ msgid "Display items in a row"
+#~ msgstr "Wyświetla pozycje w rzędzie"
+
+#~ msgid "Show filter items as row"
+#~ msgstr "Pokazuj pozycje filtra w rzędzie"
+
+#~ msgid "Display cols in a row"
+#~ msgstr "Wyświetlaj kolumny w rzędzie"
+
+#~ msgid "Show filter items as cols in row"
+#~ msgstr "Pokazuj pozycje filtra jako kolumny w rzędzie"
+
+#~ msgid "Display filter on"
+#~ msgstr "'Wyświetlaj filtr' włączony"
+
+#~ msgid "Recount products by selected filter"
+#~ msgstr "Przelicz ponownie produkty wg wybranego filtra"
+
+#~ msgid "Show parameters without products as disabled"
+#~ msgstr "Pokazuj parametry bez produktów jako nieaktywne"
+
+#~ msgid "Sort by title after filtering"
+#~ msgstr "Sortuj wg tytułu po przefiltrowaniu"
+
+#~ msgid "Checked items to the top"
+#~ msgstr "Zaznaczone opcje na górze"
+
+#~ msgid "Filter Width"
+#~ msgstr "Szerokość Fltra"
+
+#~ msgid "Filter Block Width"
+#~ msgstr "Szerokość Bloku Filtra"
+
+#~ msgid "Here you can set the filter block width in pixels or percent."
+#~ msgstr ""
+#~ "Tu możesz ustawić szerokość bloku filtra w pikselach lub procentach."
+
+#~ msgid "Filter Block Height"
+#~ msgstr "Wysokość Bloku Filtra"
+
+#~ msgid "Display \"View more\""
+#~ msgstr "Wyświetl \"Pokaż więcej\""
+
+#~ msgid "Display selected parameters of filters"
+#~ msgstr "Wyświetl wybrane parametry filtrów"
+
+#~ msgid "Display selected parameters of filters."
+#~ msgstr "Wyświetl wybrane parametry filtrów."
+
+#~ msgid "Display Hide Filters button"
+#~ msgstr "Wyświetl przycisk 'Ukryj Filtry'"
+
+#~ msgid "Apply loader settings to all filters."
+#~ msgstr "Zastosuj ustawienia ładowania dla wszystkich filtrów."
+
+#~ msgid "Filter Loader Icon"
+#~ msgstr "Ikona ładowania filtra"
+
+#~ msgid ""
+#~ "Here you may select the animated loader, which appears when filtering "
+#~ "results are loading."
+#~ msgstr ""
+#~ "Tutaj możesz wybrać animację wczytywania, która pojawia się gdy wyniki "
+#~ "filtrowania się ładują."
+
+#~ msgid "Select icon"
+#~ msgstr "Wybierz ikonę"
+
+#~ msgid "Filter Loader Color"
+#~ msgstr "Kolor Ikony Ładowania Filtra"
+
+#~ msgid "Here you may select the color of filter loader animation."
+#~ msgstr "Tutaj możesz wybrać kolor animacji ładowania filtra."
+
+#~ msgid "Enable overlay"
+#~ msgstr "Aktywuj przysłonę"
+
+#~ msgid "Enable overlay."
+#~ msgstr "Aktywuj przysłonę."
+
+#~ msgid "Overlay background color and opacity"
+#~ msgstr "Kolor i przezroczystość tła przysłony"
+
+#~ msgid "Overlay background color and opacity."
+#~ msgstr "Kolor i przezroczystość tła przysłony."
+
+#~ msgid "Show Loader Icon on overlay"
+#~ msgstr "Pokazuj Ikonę Ładowania na przysłonie"
+
+#~ msgid "Enable filter icon while filtering process ongoing."
+#~ msgstr "Aktywuj ikonę ładowania podczas procesu filtrowania."
+
+#~ msgid "Show loading word on overlay"
+#~ msgstr "Pokaż tekst ładowania na przysłonie"
+
+#~ msgid "Show search word on overlay"
+#~ msgstr "Pokaż tekst wyszukiwania na przysłonie"
+
+#~ msgid "Set loading word for overlay"
+#~ msgstr "Ustaw tekst ładowania dla przysłony"
+
+#~ msgid "Here you may select overlay word for filter"
+#~ msgstr "Tutaj możesz wybrać tekst przysłony dla filtra"
+
+#~ msgid "Set no products found text"
+#~ msgstr "Wpisz tekst dla 'brak produktów'"
+
+#~ msgid "Filter style"
+#~ msgstr "Styl filtra"
+
+#~ msgid ""
+#~ "Full screen filter - is located over products and occupies the entire "
+#~ "width of the screen, with the ability to collapse / expand."
+#~ msgstr ""
+#~ "Filtr pełnoekranowy - umieszczony jest ponad produktami i zajmuje całą "
+#~ "szerokość ekranu, z możliwością rozwijania i zwijania."
+
+#~ msgid "Max Columns"
+#~ msgstr "Maksymalna Liczba Kolumn"
+
+#~ msgid "For Full screen filter mode - how many columns will be displayed"
+#~ msgstr "Dla trybu pełnoekranowego filtra - ile kolumn będzie wyświetlanych"
+
+#~ msgid "Max Height in px"
+#~ msgstr "Maks. wysokość w px"
+
+#~ msgid ""
+#~ "The maximum height for each of the filters, if the height is greater than "
+#~ "display scroll "
+#~ msgstr ""
+#~ "Maksymalna wysokość każdego filtra, jeśli wysokość jest większa niż ekran "
+#~ "wyświetla pasek przewijania "
+
+#~ msgid "Max Height in px (Full screen mode)"
+#~ msgstr "Maks. wysokoś w px (tryb pełnoekranowy)"
+
+#~ msgid "The maximum height container for Full screen mode filter "
+#~ msgstr "Maksymalna wysokość kontenera dla filtra w trybie pełnoekranowym "
+
+#~ msgid "Custom scroll bar"
+#~ msgstr "Własny pasek przewijania"
+
+#~ msgid "Enable beautiful scrollbar."
+#~ msgstr "Aktywuj piękny pasek przewijania."
+
+#~ msgid "Select checkbox style"
+#~ msgstr "Wybierz styl listy wielokrotnego wyboru"
+
+#~ msgid "Select checkbox style in frontend."
+#~ msgstr "Wybierz styl listy wielokrotnego wyboru na stronie."
+
+#~ msgid "Select Hierarchy Style"
+#~ msgstr "Wybierz styl hierarchii"
+
+#~ msgid "Select hierarchy style in frontend."
+#~ msgstr "Wybierz styl hierarchii na stronie."
+
+#~ msgid "Select Mobile Filter Position"
+#~ msgstr "Wybierz pozycję filtra w wersji mobilnej"
+
+#~ msgid "Set mobile resolution px"
+#~ msgstr "Wybierz rozdzielczość w px dla wersji mobilnej"
+
+#~ msgid "The width of the screen at which the mobile filter is turned on."
+#~ msgstr ""
+#~ "Szerokość ekranu przy której filtr w wersji mobilnej będzie włączony."
+
+#~ msgid "Use theme styles"
+#~ msgstr "Używaj stylów szablonu"
+
+#~ msgid ""
+#~ "Disable the use of custom plugin styles for filter elements. This option "
+#~ "does not work in admin preview."
+#~ msgstr ""
+#~ "Wyłącz używanie własnych stylów wtyczki dla elementów filtra. Ta opcja "
+#~ "nie działa w poglądzie administratora."
+
+#~ msgid "Blocks Styling"
+#~ msgstr "Style Bloków"
+
+#~ msgid "Titles Styling"
+#~ msgstr "Style Tytułów"
+
+#~ msgid "Buttons Styling"
+#~ msgstr "Style Przycisków"
+
+#~ msgid "Add Attribute filter"
+#~ msgstr "Dodaj filtr Atrybutów"
+
+#~ msgid "Brand"
+#~ msgstr "Marka"
+
+#~ msgid "Custom meta"
+#~ msgstr "Własne meta"
+
+#~ msgid "From"
+#~ msgstr "Od"
+
+#~ msgid "To"
+#~ msgstr "Do"
+
+#~ msgid "Add"
+#~ msgstr "Dodaj"
+
+#~ msgid "Enable"
+#~ msgstr "Włącz"
+
+#~ msgid "Show options"
+#~ msgstr "Pokaż opcje"
+
+#~ msgid "Hide options"
+#~ msgstr "Ukryj opcje"
+
+#~ msgid "Description"
+#~ msgstr "Opis"
+
+#~ msgid "Title"
+#~ msgstr "Tytuł"
+
+#~ msgid "Show title label"
+#~ msgstr "Pokaż etykietę tytułu"
+
+#~ msgid "Filter skin"
+#~ msgstr "Skórka filtra"
+
+#~ msgid "Show price input fields"
+#~ msgstr "Pokaż pola wprowadzania dla ceny"
+
+#~ msgid "Symbol position"
+#~ msgstr "Pozycja symbolu"
+
+#~ msgid "Show currency as"
+#~ msgstr "Pokaż walutę jako"
+
+#~ msgid "Use text tooltip instead of input fields"
+#~ msgstr "Pokaż wskazówkę zamiast pól wprowadzania"
+
+#~ msgid "Price"
+#~ msgstr "Cena"
+
+#~ msgid "Show on frontend as"
+#~ msgstr "Pokaż na stronie jako"
+
+#~ msgid "Dropdown label"
+#~ msgstr "Etykieta listy rozwijanej"
+
+#~ msgid "Select all"
+#~ msgstr "Wybierz wszystko"
+
+#~ msgid "Set range automatically"
+#~ msgstr "Ustaw zakres automatycznie"
+
+#~ msgid "Set start price"
+#~ msgstr "Ustaw cenę początkową"
+
+#~ msgid ""
+#~ "Set the minimum price. If field live empty  will be set the price of the "
+#~ "cheapest product from the store."
+#~ msgstr ""
+#~ "Ustaw minimalną cenę. Jeśli to pole jest puste, zostanie wybrana cena "
+#~ "najtańszego produktu w sklepie."
+
+#~ msgid "Set end price"
+#~ msgstr "Wybierz cenę końcową"
+
+#~ msgid ""
+#~ "Set the maximum price. If field live empty  will be set the price of the "
+#~ "dearest product from the store."
+#~ msgstr ""
+#~ "Ustaw cenę maksymalną. Jeśli to pole jest puste zostanie ustawiona cena "
+#~ "najdroższego produktu w sklepie."
+
+#~ msgid "Set the range between prices"
+#~ msgstr "Ustaw zakres między cenami"
+
+#~ msgid "Set the price range between the filter options."
+#~ msgstr "Ustaw zakres cen między opcjami filtra."
+
+#~ msgid "Set maximum range count"
+#~ msgstr "Ustaw maksymalną liczbę zakresów"
+
+#~ msgid "Evenly calculate the range for a given number of positions."
+#~ msgstr "Równomiernie policz zakres dla danej liczby pozycji."
+
+#~ msgid "Price range step"
+#~ msgstr "Stopień wzrostu zakresu cen"
+
+#~ msgid "Set range manually"
+#~ msgstr "Ustaw zakres ręcznie"
+
+#~ msgid "Setup"
+#~ msgstr "Ustaw"
+
+#~ msgid "Maximum height in frontend"
+#~ msgstr "Maks. wysokość na stronie"
+
+#~ msgid "Price range"
+#~ msgstr "Zakres cen"
+
+#~ msgid "Sort options"
+#~ msgstr "Opcje sortowania"
+
+#~ msgid "Sort by"
+#~ msgstr "Sortuj wg"
+
+#~ msgid "Order by custom"
+#~ msgstr "Kolejność wg 'własne'"
+
+#~ msgid "Show search field"
+#~ msgstr "Pokaż pole wyszukiwania"
+
+#~ msgid "Show fast search field."
+#~ msgstr "Pokaż pole szybkiego wyszukiwania."
+
+#~ msgid "Show hierarchical"
+#~ msgstr "Pokazuj chierarchicznie"
+
+#~ msgid "Show paternal and subsidiary categories (for checkbox list)."
+#~ msgstr ""
+#~ "Pokaż nadrzędne i podrzędne kategorie (dla listy wielokrotnego wyboru)."
+
+#~ msgid "Hierarchical limit"
+#~ msgstr "Ograniczenie chierarchii"
+
+#~ msgid "Hierarchical limit ."
+#~ msgstr "Ograniczenie hierarchii."
+
+#~ msgid "Hide categories parent"
+#~ msgstr "Ukryj kategorię nadrzędną"
+
+#~ msgid "Show only categories children."
+#~ msgstr "Pokazuj jedynie podkategorie"
+
+#~ msgid "Make selected categories as default"
+#~ msgstr "Zmień wybrane kategorie na domyślne"
+
+#~ msgid "Clear filter only to selected categories"
+#~ msgstr "Wyczyść filtr tylko dla wybranych kategorii"
+
+#~ msgid "Exclude terms ids"
+#~ msgstr "Wyklucz id określeń"
+
+#~ msgid "Hide child"
+#~ msgstr "Ukryj podrzędne"
+
+#~ msgid "Hide child taxonomy."
+#~ msgstr "Ukryj taksonomię podrzędnych."
+
+#~ msgid "Show hierarchical."
+#~ msgstr "Pokaż hierarchicznie."
+
+#~ msgid "No tags"
+#~ msgstr "Brak tagów"
+
+#~ msgid "Make selected tags as default"
+#~ msgstr "Zamień wybrane tagi na domyślne"
+
+#~ msgid "Selected tags will be marked as default."
+#~ msgstr "Wybrane tagi będą oznaczone jako domyślne."
+
+#~ msgid "Logic"
+#~ msgstr "Logika"
+
+#~ msgid "Show search."
+#~ msgstr "Pokaż wyszukiwanie."
+
+#~ msgid "Always display all tags"
+#~ msgstr "Zawsze wyświetlaj wszystkie tagi"
+
+#~ msgid "Hide attributes without products"
+#~ msgstr "Ukryj atrybuty bez produktów"
+
+#~ msgid "No attributes"
+#~ msgstr "Brak atrybutów"
+
+#~ msgid "Make selected attributes as default"
+#~ msgstr "Zamień wybrane atrybuty na domyślne"
+
+#~ msgid "Don't sort"
+#~ msgstr "Nie sortuj"
+
+#~ msgid "Always display all attributes"
+#~ msgstr "Zawsze wyświetlaj wszystkie atrybuty"
+
+#~ msgid "Attribute"
+#~ msgstr "Atrybut"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#~ msgid "Featured"
+#~ msgstr "Wyróżnione"
+
+#~ msgid "Checkbox label"
+#~ msgstr "Etykieta pola wyboru"
+
+#~ msgid "On sale"
+#~ msgstr "Promocja"
+
+#~ msgid "Stock status"
+#~ msgstr "Stan magazynowy"
+
+#~ msgid "Here you may change stock status names."
+#~ msgstr "Tu możesz zmienić nazwy stanów magazynowych"
+
+#~ msgid "Additional text for 1-4"
+#~ msgstr "Dodatkowy tekst dla 1-4"
+
+#~ msgid "and up"
+#~ msgstr "i więcej"
+
+#~ msgid "Additional text for 5"
+#~ msgstr "Dodatkowy tekst dla 5"
+
+#~ msgid "5 only"
+#~ msgstr "tylko 5"
+
+#~ msgid "Search by Text"
+#~ msgstr "Wyszukaj wg tekstu"
+
+#~ msgid "Product brands"
+#~ msgstr "Marki produktów"
+
+#~ msgid "price"
+#~ msgstr "cena"
+
+#~ msgid "Price range filter is empty. Please setup filter correctly."
+#~ msgstr "Filtr zakresu cen jest pusty. Proszę poprawnie ustawić filtr."
+
+#~ msgid "price range"
+#~ msgstr "zakres cen"
+
+#~ msgid "sort by"
+#~ msgstr "sortuj wg"
+
+#~ msgid "category"
+#~ msgstr "kategoria"
+
+#~ msgid "tag"
+#~ msgstr "tag"
+
+#~ msgid "author"
+#~ msgstr "autor"
+
+#~ msgid "featured"
+#~ msgstr "wyróżnione"
+
+#~ msgid "on sale"
+#~ msgstr "promocja"
+
+#~ msgid "stock status"
+#~ msgstr "stan magazynowy"
+
+#~ msgid "rating"
+#~ msgstr "ocena"
+
+#~ msgid "Displays Filters"
+#~ msgstr "Wyświetla Filtry"
+
+#~ msgid "You have no filters"
+#~ msgstr "Brak filtrów"
+
+#~ msgid "Please enter Name"
+#~ msgstr "Proszę wpisać Nazwę"
+
+#~ msgid "Add new filter"
+#~ msgstr "Dodaj nowy filtr"
+
+#~ msgid ""
+#~ "Table PHP code: lets display the table through themes/plugins files (for "
+#~ "example in the site footer). You can use shortcode in this way. "
+#~ msgstr ""
+#~ "Kod PHP tabeli: wyświetlmy tą tabelę poprzez pliki szablonu/wtyczki (na "
+#~ "przykład: w stopce strony). Możesz do tego użyć szortkodu "
+
+#~ msgid "Choose parameters to show:"
+#~ msgstr "Wybierz parametry do wyświetlenia:"
+
+#~ msgid "Tags"
+#~ msgstr "Tagi"
+
+#~ msgid "Filter description"
+#~ msgstr "Opis filtra"
+
+#~ msgid "Enter the \"Price\" filter description."
+#~ msgstr "Wprowadź opis filtra \"Cen\"."
+
+#~ msgid "Price filter description"
+#~ msgstr "Opis filtra cen"
+
+#~ msgid "Show inputs to price entry"
+#~ msgstr "Pokaż pola wprowadzania do wpisywania cen"
+
+#~ msgid "Display inputs to price entry"
+#~ msgstr "Wyświetl pola wprowadzania do wpisywania cen"
+
+#~ msgid "Enter the \"Price range\" filter title."
+#~ msgstr "Wprowadź tytuł filtra \"Zakresu cen\"."
+
+#~ msgid "Price range filter title"
+#~ msgstr "Tytuł filtra zakresu cen"
+
+#~ msgid "Enter the \"Price range\" filter description."
+#~ msgstr "Wprowadź opis filtra \"Zakresu cen\"."
+
+#~ msgid "Price range filter description"
+#~ msgstr "Opis filtra zakresu cen"
+
+#~ msgid ""
+#~ "Here you may set the value of prise increase step. The default value is "
+#~ "set to 20. All the steps are equal."
+#~ msgstr ""
+#~ "Tutaj możesz ustawić wartość stopnia wzrostu zakresu cen. Domyślną "
+#~ "wartością jest 20. Wszystkie stopnie są równe."
+
+#~ msgid "Enter the \"Sort by\" filter title."
+#~ msgstr "Wprowadź tytuł filtra \"Sortuj wg\"."
+
+#~ msgid "Enter the \"Sort by\" filter description."
+#~ msgstr "Wprowadź opis filtra \"Sortuj wg\"."
+
+#~ msgid "Sort by filter description"
+#~ msgstr "Opis filtra sortuj wg"
+
+#~ msgid "Enter the \"Category\" filter title."
+#~ msgstr "Wprowadź tytuł filtra \"Kategorie\"."
+
+#~ msgid "Category filter title"
+#~ msgstr "Tytuł filtra kategorii"
+
+#~ msgid "Enter the \"Category\" filter description."
+#~ msgstr "Wprowadź opis filtra \"Kategorie\"."
+
+#~ msgid "Category filter description"
+#~ msgstr "Opis filtra kategorii"
+
+#~ msgid "Show count."
+#~ msgstr "Pokaż ilość."
+
+#~ msgid "Enter the \"Tags\" filter title."
+#~ msgstr "Wprowadź tytuł filtra \"Tagi\"."
+
+#~ msgid "Tags filter title"
+#~ msgstr "Tytuł filtra tagów"
+
+#~ msgid "Enter the \"Tags\" filter description."
+#~ msgstr "Wprowadź opis filtra \"Tagi\"."
+
+#~ msgid "Tags filter description"
+#~ msgstr "Opis filtra tagów"
+
+#~ msgid "Enter the \"Attribute\" filter title."
+#~ msgstr "Wprowadź tytuł filtra \"Atrybut\"."
+
+#~ msgid "Enter the \"Attribute\" filter description."
+#~ msgstr "Wprowadź opis filtra \"Atrybut\"."
+
+#~ msgid "Attribute filter description"
+#~ msgstr "Opis filtra atrybutów"
+
+#~ msgid ""
+#~ "This button is necessary, when ajax mode is disabled. It allows users to "
+#~ "set all necessary filter parameters before starting the filtering."
+#~ msgstr ""
+#~ "Ten przycisk jest konieczny, gdy tryb ajax jest wyłączony. Pozwala on "
+#~ "użytkownikom ustawić wszystkie potrzebne parametry filtra przed "
+#~ "rozpoczęciem filtrowania."
+
+#~ msgid "Select tag"
+#~ msgstr "Wybierz tag"

@@ -1,0 +1,94 @@
+
+.woobewoo-overview .faq-title {
+    cursor: pointer;
+}
+
+.woobewoo-overview .faq-title .description {
+    margin-top: 10px;
+    border: none !important;
+}
+
+.woobewoo-overview .faq-list {
+    margin-bottom: 10px;
+}
+.woobewoo-overview-news-content {
+	padding: 0 10px 10px 0;
+}
+.woobewoo-overview .faq-title,
+.woobewoo-overview-news-content h3 {
+    padding: 10px 20px;
+    margin-bottom: 4px;
+    background-color: rgba(164, 170, 172, 0.28);
+}
+
+.woobewoo-overview .woobewoo-overview-news-content h3 {
+    line-height: 2;
+}
+.woobewoo-overview .video {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    
+}
+
+.woobewoo-overview .settings-title {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.woobewoo-overview .woobewoo-overview-news {
+    margin-right: 10px;
+}
+
+.woobewoo-overview .woobewoo-overview-news-content p,
+.woobewoo-overview .woobewoo-overview-news-content ul {
+    white-space: normal !important;
+    margin:0 8px;
+}
+
+.woobewoo-overview .woobewoo-overview-news-content p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.woobewoo-overview .woobewoo-overview-news-content ul {
+    list-style-type: disc;
+}
+
+.woobewoo-overview .woobewoo-overview-news-content li {
+    margin-left: 20px;
+}
+
+.woobewoo-overview form {
+    border: none !important;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.woobewoo-overview form label {
+    float: left;
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.woobewoo-overview form input,
+.woobewoo-overview form select,
+.woobewoo-overview form textarea {
+    float: left;
+    margin-left: 50px;
+	width: calc(100% - 50px);
+}
+.woobewoo-overview .faq-list,
+.woobewoo-overview .description,
+.woobewoo-overview .video,
+.woobewoo-overview .woobewoo-overview-news {
+	border-bottom: 1px solid rgba(164, 170, 172, 0.28);
+	padding-bottom: 20px;
+}
+.woobewoo-overview .contact-form-table th {
+	vertical-align: top;
+	text-align: left;
+	white-space: nowrap;
+}

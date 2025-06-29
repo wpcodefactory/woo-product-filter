@@ -1,0 +1,254 @@
+.wpfFilterWrapper label{
+	font-weight: normal;
+}
+.wpfPriceRangeField#wpfMinPrice,
+.wpfPriceRangeField#wpfMaxPrice {
+	background-color: #f9f9f9;
+	border: 1px solid #6e6666;
+	color: black;
+	font-family: myFont;
+	font: normal 14px Arial, Helvetica, sans-serif;
+	border-radius: 5px;
+	height: 26px;
+	padding: 5px;
+	-moz-appearance: textfield;
+}
+.wpfFilterWrapper .wfpTitle{
+	font-size: 16px;
+	font-weight: bold;
+	height: 25px;
+	margin: inherit;
+	padding: inherit;
+	color: inherit;
+	line-height: inherit;
+}
+.wpfFilterWrapper .wfpDescription{
+	font-size: 14px;
+}
+.wpfFilterButtons{
+	min-width: 150px;
+}
+.wpfFilterButton.wpfButton, .wpfClearButton.wpfButton{
+	padding: 5px;
+	align-items: center;
+	min-height: 52px;
+	border-radius: 4px;
+	font-size: 17px;
+	text-decoration: none !important;
+	text-align: center;
+	text-transform: uppercase;
+	transition: all 0.2s;
+	white-space: normal;
+	cursor: pointer;
+	border:none;
+	font-weight:bold;
+	outline: none;
+}
+.wpfFilterVerScroll::-webkit-scrollbar-track {
+	border: 1px solid #000;
+	padding: 2px 0;
+	background-color: #404040;
+}
+.wpfFilterVerScroll::-webkit-scrollbar {
+	width: 10px;
+}
+
+.wpfFilterVerScroll::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #737272;
+	border: 1px solid #000;
+}
+.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfFilterContent .wpfCheckboxHier input,
+.wpfFilterWrapper[data-filter-type="wpfRating"] .wpfFilterContent .wpfCheckboxHier input,
+.wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfFilterContent .wpfCheckboxHier input[type="checkbox"]{
+	width: 1.3em;
+	height: 1.3em;
+	background-color: white;
+	border-radius: 50%;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+	-webkit-appearance: none;
+	outline: none;
+	cursor: pointer;
+}
+.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfFilterContent .wpfCheckboxHier .ms-options input {
+	border-radius: 0;
+}
+.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfCheckboxHier input:checked,
+.wpfFilterWrapper[data-filter-type="wpfRating"] .wpfCheckboxHier input:checked,
+.wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckboxHier input:checked{
+	background-color: gray;
+}
+
+.wpfFilterWrapper input[type=number]::-webkit-inner-spin-button,
+.wpfFilterWrapper input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+.wpfFilterDelimeter{
+	font-weight: bold;
+}
+.wpfFilterWrapper[data-display-type="mul_dropdown"] select{
+	height: 100px;
+}
+.wpfSearchWrapper .wpfSearchFieldsFilter{
+	height: 30px;
+}
+.wpfMainWrapper .wpfCount{
+	font-size: 0.9em;
+}
+.wpfMainWrapper .wpfBlockClear{
+	color: #0074a2;
+	text-decoration: none;
+}
+.wpfMainWrapper .wpfBlockClear:before{
+	content: '\f104';
+	font-family: FontAwesome;
+	margin: 0 5px 0 5px;
+	text-decoration: none;
+}
+.wpfFilterWrapper input[type=checkbox], .wpfFilterWrapper input[type=radio] {
+	border: 1px solid #b4b9be;
+	background: #fff;
+	color: #555;
+	height: 18px !important;
+	margin: -4px 4px 0 0;
+	outline: 0;
+	padding: 0!important;
+	text-align: center;
+	vertical-align: middle;
+	width: 18px !important;
+	min-width: 18px;
+	-webkit-appearance: none;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	transition: .05s border-color ease-in-out;
+}
+.wpfFilterWrapper input[type=checkbox] {
+	border-radius: 0;
+}
+
+.wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckbox input[type=checkbox]:checked:before {
+	content:none;
+}
+.wpfFilterWrapper  .ms-options-wrap > .ms-options > ul label {
+	line-height: 30px;
+}
+.wpfFilterTitle {
+	display: block;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	line-height: 16px;
+	min-height: 20px;
+}
+.wpfFilterWrapper .wpfFilterTitle {
+	cursor: pointer;
+}
+.wpfFilterWrapper .ms-options input[type=checkbox]:checked:before, input[type=radio]:checked:before {
+	float: left;
+	display: inline-block;
+	vertical-align: middle;
+	width: 16px;
+	height: 16px;
+	font: normal 21px/1 dashicons;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	outline:0;
+}
+.wpfFilterWrapper .ms-options input[type=checkbox]:checked:before {
+	content: "";
+	/*margin:0px;*/
+	/*font-size: 8px !important;*/
+	/*color:rgb(68, 68, 68);*/
+	/*outline:0;*/
+	/*transform: none;*/
+	/*background: url(../../../img/tick.png) !important;*/
+	/*background-size: 100% 100% !important;*/
+	/*left: 0;*/
+}
+.wpfFilterWrapper .ms-options input[type=checkbox]:checked {
+	outline:0;
+}
+.wpfFilterWrapper .wpfCheckbox label {
+	width: 16px !important;
+	height: 16px !important;
+}
+.wpfFilterWrapper .wpfCheckbox label::before{
+	display: table-cell !important;
+	position: absolute !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+	transform: inherit !important;
+	left: 0px !important;
+	top: 0px !important;
+	margin: 0px !important;
+	height: 100% !important;
+	width: 100% !important;
+	font-size: 8px !important;
+	background-color: rgb(255, 255, 255) !important;
+	border: 1px solid rgb(204, 204, 204) !important;
+	color: rgb(68, 68, 68) !important;
+}
+.wpfFilterWrapper .wpfCheckbox label::after {
+	height: 3.5px !important;
+	width: 6.8px !important;
+	left: 50% !important;
+	top: 4px !important;
+	transform: translate(-50%,-50%) !important;
+	-webkit-transform: translate(-50%,-50%) !important;
+	-moz-transform: translate(-50%,-50%) !important;
+	-o-transform: translate(-50%,-50%) !important;
+}
+.wpfFilterWrapper .wpfCheckbox input[type="checkbox"] {
+	opacity: 0;
+	display:none !important;
+}
+.wpfFilterWrapper .wpfCheckbox label {
+	position: relative !important;
+	display: inline-block !important;
+	margin-bottom: 0;
+}
+.wpfFilterWrapper .wpfCheckbox label::before,
+.wpfFilterWrapper .wpfCheckbox label::after {
+	position: absolute !important;
+	content: "" !important;
+	display: inline-block !important;
+}
+.wpfFilterWrapper .wpfCheckbox input[type="checkbox"] + label::after {
+	content: none !important;
+}
+.wpfFilterWrapper .wpfCheckbox input[type="checkbox"]:checked + label::before {
+	background: url('../../../img/tick.png') !important;
+	background-size: 100% 100% !important;
+}
+.wpfFilterWrapper .wpfCheckbox input[type="checkbox"]:focus + label::before {
+	outline: rgb(59, 153, 252) auto 5px !important;
+}
+.wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckbox input:checked {
+	background: url('../../../img/tick.png') !important;
+	background-size: 100% 100% !important;
+}
+.wpfFilterWrapper[data-radio="1"] .wpfCheckbox label:before {
+	border-radius: 50% !important;
+	width: 16px;
+	height:16px;
+}
+.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfMulti label:before {
+	border-radius: 0 !important;
+}
+.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfCheckbox input[type="checkbox"]:checked + label::after {
+	margin-left: 1px;
+}
+
+.wpfFilterWrapper .wpfFilterTaxNameWrapper {
+	color: inherit;
+	font-size: inherit;
+	margin: inherit;
+	padding: inherit;
+	line-height: inherit;
+	font-weight: inherit;
+}
