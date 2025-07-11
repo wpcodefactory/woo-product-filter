@@ -4,10 +4,10 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.8
-Stable tag: 2.8.4
+Stable tag: 2.8.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
- 
+
 Filter products by categories, attributes, prices, and more. Elementor Compatibility. Shoppers easily find products with WooCommerce Product Filter
 
 == Description ==
@@ -27,14 +27,14 @@ present the filters in various formats to suit your storefront's design and user
 Enable instant results without page reloads for a faster shopping  with AJAX live search. AJAX search provides instant filtering results without the need to reload the page. This feature can be configured to activate immediately after a user selects their desired filter options and clicks the filter button, making product searches faster and more intuitive.
 
 **[Elementor Integration](https://woobewoo.com/documentation/elementor-compatibility/ "Elementor Compatibility")**
-WooCommerce Product Filter compatible with Ellementor. Seamlessly create and customize filters using Elementor’s interface. 
+WooCommerce Product Filter compatible with Ellementor. Seamlessly create and customize filters using Elementor’s interface.
 All features of the WooCommerce Product Filter by WBW are accessible within the Elementor tab, providing a streamlined workflow for page building.
 
 To help you get started, there's a comprehensive video tutorial available that guides you through the process of setting up the WooCommerce Product Filter by WBW, ensuring you can make the most of its features to improve your online store's functionality and user experience.
-[youtube https://youtu.be/5uFBMl5OLW0] 
+[youtube https://youtu.be/5uFBMl5OLW0]
 
 Product filters are the key things that allow your customers to view the products in a particular way and easily find the necessary items.
- 
+
 **[Statistics](https://woobewoo.com/documentation/product-filter-statistics/ "Analytics")**
 Product Filter by WBW comes with a detailed filter statistics section to make it easier to collect, analyze data and subsequently support global business growth. Gather information about filtering and searching for products by your buyer and convert them into business solutions.
 
@@ -56,14 +56,14 @@ Adjust them manually and specify the exact value of every step as well.
 **[Show Count](https://woobewoo.com/documentation/show-count-option/ "Show Count") and Recount products by selected filter**
 Recount the products by selected filters and display the exact number of products matching the filter results.
 
-**[Fully responsive](https://woobewoo.com/feature/looks-and-works-great-on-all-devices?utm_source=wordpress&utm_medium=responsive&utm_campaign=filter "Looks and works great on all devices")** 
+**[Fully responsive](https://woobewoo.com/feature/looks-and-works-great-on-all-devices?utm_source=wordpress&utm_medium=responsive&utm_campaign=filter "Looks and works great on all devices")**
 The filter looks and works properly on different devices particularly mobile phones and tablets as well as desktops and laptops.
 
 = Support and suggestions for WooCommerce Product Filter Plugin =
 
 Ask your questions in the [support forum](https://wordpress.org/support/plugin/woo-product-filter/), or [contact us directly](https://woobewoo.com/contact-us/)
 
-== Installation == 
+== Installation ==
 
 a) VIA FTP
 A download zip archive with WooCommerce Product Filter by WBW plugin
@@ -71,7 +71,7 @@ Extract files
 Copy the folder with the plugin
 Open via FTP folder \wp-content\plugins\
 Paste plugin folder into here
-Go to admin panel => Plugins => WooCommerce Product Filter by WBW press activate 
+Go to admin panel => Plugins => WooCommerce Product Filter by WBW press activate
 
 B) DIRECT UPLOAD VIA ADMIN AREA
 A download zip archive with plugin
@@ -91,7 +91,7 @@ Press Activate button
 == Screenshots ==
 
 1. WooCommerce Product Filter FrontEnd
-2. Product filter demo 
+2. Product filter demo
 3. Product filter example
 4. Product filter on Shop Page
 5. Product filter constructor. Price
@@ -112,12 +112,12 @@ Now there is an ability to sort results by popularity, rating, newness, a price 
 Depending on the type and specificity of the filter, you can configure:
 
 * Filter title and description.
-* Way to display a filter label on the page: no label, show as close/opened. 
+* Way to display a filter label on the page: no label, show as close/opened.
 * Type: checkbox list/drop-down, multiple drop-down or icons.
 * Drop-down label. Set a drop-down first option text.
 * Show search and more.
 
-= How to add product filter to the store? = 
+= How to add product filter to the store? =
 After creating the filter you can [add a filer it in 2 ways](https://woobewoo.com/documentation/how-to-add-woocommerce-product-filter-to-shop?utm_source=wordpress&utm_medium=addfiltertothestore&utm_campaign=filter "How to add WooCommerce product filter"): with shortcode and PHP code ( you can find them under the settings tab) or add WBW Product Filter widget.
 
 * **Input shortcode**
@@ -128,12 +128,12 @@ PHP code can be inserted at any place of the page code to display exactly in thi
 
 * **Display Widget**
 In case you are utilizing Product Filter in your internet store sidebar, Product Filter Widget can also be included.
-To display the Product Filter on a sidebar, move to the WP Admin > Appearance > Widgets. Expand the sidebar dropdown option then drag and drop the Filter widget. Select the filter you need to display and Save. 
+To display the Product Filter on a sidebar, move to the WP Admin > Appearance > Widgets. Expand the sidebar dropdown option then drag and drop the Filter widget. Select the filter you need to display and Save.
 
-= Is the Product filter plugin responsive? 
-WooCommerce Product Filter is fully compatible and responsive! A plugin is working and displaying perfectly on tablets or phones, making it easy and convenient for customers to enjoy their shopping time and make purchases on all devices. 
+= Is the Product filter plugin responsive?
+WooCommerce Product Filter is fully compatible and responsive! A plugin is working and displaying perfectly on tablets or phones, making it easy and convenient for customers to enjoy their shopping time and make purchases on all devices.
 
-= Why do I need a product filter? = 
+= Why do I need a product filter? =
 On the standard site, customers have to scroll a lot of pages and links to find a product. It is an exhausted and time-consuming process, and there is where the product filtering comes. This feature allows users to find their route to a product, tuning different characteristics.
 
 You can read about [How to make the filtering works in the best way](https://woobewoo.com/blog/complete-guide-to-product-filtering-and-how-to-use-it-with-woobewoo-plugin?utm_source=wordpress&utm_medium=tipforsettings&utm_campaign=filter "How to make the filtering works in the best way")
@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 2.8.5 - 11/07/2025 =
+* WC tested up to: 9.9.
+
 = 2.8.4 =
  * Fix joint use 'open_one_by_one' and 'display_only_children_category'
  * Added option Check product category
@@ -167,7 +170,7 @@ You may help us translate the plugin into your language and get the PRO version 
 
 = 2.8.2 =
  * Fixed display subcategories
- * Minor issues fix 
+ * Minor issues fix
 
 = 2.8.1 =
  * Fix elementor pagination
@@ -177,7 +180,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Hierarchical open_one_by_one added
 
 = 2.8.0 =
- * Fixed conflict with custom-woocommerce-enhancements 
+ * Fixed conflict with custom-woocommerce-enhancements
  * Fix open_one_by_one filter functionality
  * Add space between taxonomy attributes
  * Fix subcategory display
@@ -197,7 +200,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fixed option Hide filter with single item for sliders
  * Fixed order by woocommerce select-block
  * Fixed option Display Only Children Of Current Category by simple ajax
- * Minor issues fix 
+ * Minor issues fix
 
 = 2.7.7 =
  * Fixed compatibility with Advanced Woo Search
@@ -241,7 +244,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fixed compatibility with theme Sydney
  * Added hook for item display name
  * Added option in Search Number filter
- 
+
 = 2.6.9 =
  * Added compatibility with Beaver Builder block Posts
  * Added compatibility for ACF-attributes type Number
@@ -285,7 +288,7 @@ You may help us translate the plugin into your language and get the PRO version 
 = 2.6.2 =
  * Render fix
  * Missing meta fix
- 
+
 = 2.6.1 =
  * Fixed fatal by deactivation and uninstall
  * Added option Keep Min/Max Price By Reload
@@ -329,10 +332,10 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fixed statistics for Menu mode
  * Fixed reseting of button filters
  * Minor issues fix
- 
+
 = 2.5.3 =
  * Fixed overlay for floating filter
- * Fixed filter overlay for several filters on page 
+ * Fixed filter overlay for several filters on page
  * Fixed option Check page category
  * Fixed indexing for attributes with Emojis in slugs
  * Fixed Alphabetical index
@@ -435,7 +438,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Added selection of filter blocks by creating a new product filter
  * Fixed Clear All button
  * Minor issues fix
- 
+
 = 2.4.0 =
  * Fixed loader style
  * Fixed count products for Always Filtering By All Products
@@ -549,7 +552,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Minor issues fix
 
 = 2.2.3 =
- * Added Select All for muiliselect in adminarea 
+ * Added Select All for muiliselect in adminarea
  * Fixed ACF attributtes
  * Fixed brands filter
  * Fixed Fusion builder post query
@@ -659,7 +662,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fixed multi logic
  * Added reset counters
  * Minor issues fix
- 
+
 = 2.1.4 =
  * Fixed making changes to the request plugin "YITH WooCommerce Ajax Product Filter Premium"
  * Added option Sort In stock first
@@ -754,7 +757,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fixed selection filter parameters
  * Added bold for selected items
  * Added custom line-height style for blocks
- * Added custom styling for Hide Button 
+ * Added custom styling for Hide Button
  * Added tooltip to "Floating button on mobile" checkbox
  * Minor code fixes
 
@@ -906,7 +909,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Added litespeed cache is clear on filter save
  * Add localization js
  * Minor code fixes
- 
+
 = 1.5.2 =
  * Added filter sync with product shortcode
  * Fix search
@@ -955,7 +958,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fixed condition for adding post_type
  * Fixed filter selection by default together with WooCommerce sorting
  * Minor code fixes
- 
+
 = 1.4.8 =
  * Fix reload the page on click back button of the browser
  * Added Collapse children on parent deselect in category filter
@@ -963,13 +966,13 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fix slider price issue
  * Fix checkbox color
  * Fix error WP_Scripts::localize
- * Fix dropdown display 
+ * Fix dropdown display
  * Fix force numeric values bug
  * Fix for php 8
  * Keep open checked filters
  * Add slider disable number formatting
  * Minor code fixes
- 
+
 = 1.4.7 =
  * Fixed defaults for Stock Status Filter
  * SQL optimization for large databases
@@ -1001,7 +1004,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Added search shortcode inside the container
  * Add use meta-fields search by text
  * Fixed Attributes Color Filter
- * Fixed preselects 
+ * Fixed preselects
  * Fixed autocomplete for search field
  * Fixed slider styles
  * Fixed dropdown filters for Safari
@@ -1041,7 +1044,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Add custom title for selected, featured
  * Added compatibility with Infinite scroll
  * Added DE translation
- 
+
 = 1.4.1 =
  * Fixed SortBy Filter
  * Fix for OceanWP theme
@@ -1080,7 +1083,7 @@ You may help us translate the plugin into your language and get the PRO version 
  * Fixed autoscroll to products
  * Sort by radio buttons mode added
  * Fix compatible with Theme Astra
-  
+
 = 1.3.9 =
  * Add input fields to attribute slider
  * Fix slider filter attribute type issue with multiple slides
@@ -1137,7 +1140,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Code fixes for filtering exists terms
 * Fix pagination issue with query-based permalink type
 * Fix wordpress.com base site console errors
-* Minor code fixes 
+* Minor code fixes
 
 = 1.3.5 =
 * Fixes for WC vendors page filtering
@@ -1220,7 +1223,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Added WC Vendors support added
 
 = 1.3.3 =
-* Fix for old Pro 
+* Fix for old Pro
 
 = 1.3.2 =
 * Minor issues fix
@@ -1242,7 +1245,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Change "Show Filtering Button" option on more clear dropdown optionality
 * Fixed option Move to top for mobile
 * Add additional exclude functionality to attribute filter logic options
-* Fixed loading filter with shortcode [products] 
+* Fixed loading filter with shortcode [products]
 * Added option Count products per row
 * Fixed pagination for shortcode [products]
 * Change CDN URL
@@ -1282,7 +1285,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Added current category id to filter exists terms
 * Added option Use title as placeholder fro search filter
 * Fixes for bu width/height
-* Added custom attributes from Custom Post Type UI ACF 
+* Added custom attributes from Custom Post Type UI ACF
 * New Admin pages Design
 * Replace chevrons with plus/minus icons
 * Fixed Hierarchical mode for manual category list
@@ -1290,7 +1293,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Added option User title as slug
 * Added Polish language files
 * Added design for checkboxes
-* Fixes for IRS rtl style 
+* Fixes for IRS rtl style
 
 = 1.2.6 =
 * Added Buttons and Text filter types
@@ -1363,12 +1366,12 @@ You may help us translate the plugin into your language and get the PRO version 
 * Fixed autorun by page load
 * Minor issues fix
 
-= 1.1.6 = 
+= 1.1.6 =
 * Added Always display all categories
 * Fixed non-ajax attributes visibility
 * Minor issues fix
 
-= 1.1.5 = 
+= 1.1.5 =
 * Fix pagination
 * Fix stock status filter
 * Add translate fields for filters labels
@@ -1377,12 +1380,12 @@ You may help us translate the plugin into your language and get the PRO version 
 * Add Custom Loader
 * Minor issues fix
 
-= 1.1.4 = 
+= 1.1.4 =
 * Fix price filter
 * Attributes filter fix
 * Fix categories menus bug
 
-= 1.1.3 = 
+= 1.1.3 =
 * Added compatibility WooCommerce Product Image Flipper
 * Fixed filter count_product_shop option
 * Added ability to modify clear buttons
@@ -1397,7 +1400,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Fixed colors bugs
 * Remove admin attr notice
 
-= 1.1.2 = 
+= 1.1.2 =
 * Fixed tax query filter logic
 * Fixed filtering with two cats|tags-filters
 * Add ability to change the name of the filter button
@@ -1415,7 +1418,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Added hide/show tags by filtered cats option
 * Fixed supplied for foreach
 * Minor issues fix
-= 1.1.1 = 
+= 1.1.1 =
 * Check filtering issue
 * Filter name, button loader, time for the title
 * Add function second sort by title
@@ -1434,8 +1437,8 @@ You may help us translate the plugin into your language and get the PRO version 
 * Add sorting by default selected terms issue
 * Hide selected cats|tags|atts as default issue
 * Check selected atts after create new atts filter issue
-* Check Display items in a row issue 
-* Check slider fractal problem issue 
+* Check Display items in a row issue
+* Check slider fractal problem issue
 * Set cat children selectable issue
 * Fixed clear btn with default cats issue
 * Add Order by the custom option to Attributes issue
@@ -1464,13 +1467,13 @@ You may help us translate the plugin into your language and get the PRO version 
 * Fix issue with products attribute filter display
 * Fix for tooltips
 * Fix widget save for customize.php
-* Minor issues fix 
+* Minor issues fix
 
 
 = 1.0.9 =
 * Add feature duplicate filter
 * Colors preview fix
-* Minor issues fix 
+* Minor issues fix
 
 = 1.0.8 =
 * Added ajax preview
@@ -1514,10 +1517,10 @@ You may help us translate the plugin into your language and get the PRO version 
 = 1.0.4 =
 * Update wpf.php
 * Update readme.txt
-* Add Star Rating Filter 
-* Add Colors Filter 
+* Add Star Rating Filter
+* Add Colors Filter
 * Screenshots added
-* Add PRO version and SearchText Filter 
+* Add PRO version and SearchText Filter
 * Moved Rating Stars Filter to Pro and added List Star Rating
 * Move Color Filter to PRO
 * Minor issues fix
