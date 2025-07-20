@@ -13,6 +13,7 @@
  * WC tested up to: 10.0
  * Requires Plugins: woocommerce
  **/
+
 /**
  * Base config constants and functions
  */
