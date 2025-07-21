@@ -1,10 +1,29 @@
+/**
+ * Product Filter by WBW - Frontend Woofilters JS
+ *
+ * @version 2.8.6
+ *
+ * @author  woobewoo
+ */
+
+/**
+ * Main function.
+ *
+ * @version 2.8.6
+ */
 (function ($, app) {
 	"use strict";
+
+	/**
+	 * WpfFrontendPage.
+	 *
+	 * @version 2.8.6
+	 */
 	function WpfFrontendPage() {
 		this.$obj = this;
 		this.noWoo = this.$obj.checkNoWooPage();
 		this.readyFuncs = ['.berocket_load_more_preload', 'woocommerce-product-bundle-hide', 'show_variation', 'woo_variation_swatches_pro_init', '.variations_form', 'yith_infs_start', 'flatsome_infinite_scroll','.dipl_woo_products_pagination_wrapper', 'divi_filter_loadmore_ajax_handler'];
-		this.isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && navigator.userAgent.indexOf('CriOS') == -1 && navigator.userAgent.indexOf('FxiOS') == -1;
+		this.isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && ((navigator.userAgent && navigator.userAgent.indexOf('CriOS') == -1 && navigator.userAgent.indexOf('FxiOS') == -1) || (navigator.platform && /iPhone|iPad|iPod/.test(navigator.platform)));
 		this.disableScrollJs = true;
 		this.lastFids = [];
 		return this.$obj;
@@ -150,13 +169,23 @@
 			}
 		});
 	});
+
+	/**
+	 * removeHiddenOptionsForSafari.
+	 *
+	 * @version 2.8.6
+	 */
 	WpfFrontendPage.prototype.removeHiddenOptionsForSafari = (function() {
 		var _thisObj = this.$obj;
 		if (!_thisObj.isSafari) return;
-
-		jQuery('.wpfFilterWrapper[data-display-type="dropdown"] select:visible option').each(function() {
-			if (jQuery(this).css('display') == 'none') jQuery(this).remove();
-		});
+		
+		var $found = jQuery('.wpfFilterWrapper[data-display-type="dropdown"] select:visible option[style*="none"]');
+		if ($found.length) $found.remove();
+		else {
+			jQuery('.wpfFilterWrapper[data-display-type="dropdown"] select:visible option').each(function() {
+				if (jQuery(this).css('display') == 'none') jQuery(this).remove();
+			});
+		}
 	});
 
 	WpfFrontendPage.prototype.checkForceFilters = (function() {
@@ -1846,25 +1875,41 @@
 
 	});
 
+	/**
+	 * changeSlugByUrl.
+	 *
+	 * @version 2.8.6
+	 */
 	WpfFrontendPage.prototype.changeSlugByUrl = (function () {
 		jQuery('.wpfSlugWrapper .wpfSlug').remove();
 		var _thisObj = this.$obj,
-			noWooPage = _thisObj.noWoo;
-		if(noWooPage){
-			if( jQuery('.wpfMainWrapper').first().attr('data-hide-url')){
-				var searchParams =  jQuery.toQueryParams(jQuery('.wpfMainWrapper').first().attr('data-hide-url'));
+			noWooPage = _thisObj.noWoo,
+			searchParams = jQuery.toQueryParams(window.location.search);
+		if (noWooPage) {
+			if( jQuery('.wpfMainWrapper').first().attr('data-hide-url')) {
+				searchParams =  jQuery.toQueryParams(jQuery('.wpfMainWrapper').first().attr('data-hide-url'));
 			}
-		}else{
-			var searchParams = jQuery.toQueryParams(window.location.search);
 		}
+		
+		var isRedirect = 'redirect' in searchParams && searchParams['redirect'] == 1;
 
 		for (var key in searchParams) {
 			if(key === 'wpf_min_price'){
 				key = 'wpf_min_price,wpf_max_price,tax';
 			}
+			var $elem = jQuery('.wpfFilterWrapper[data-get-attribute="'+key+'"]');
+			if (!$elem.length && isRedirect) {
+				var parts = key.split('_'),
+					cnt = parts.length;
+				if (cnt > 2 && isNumber(parts[cnt-1])) {
+					parts.pop();
+					$elem = jQuery('.wpfFilterWrapper[data-get-attribute^="'+parts.join('_')+'"]');
+					_thisObj.QStringWork(key, '', false, $elem.closest('.wpfMainWrapper'), 'remove');
 
-			if(jQuery('.wpfFilterWrapper[data-get-attribute="'+key+'"]').length > 0){
-				var elem = jQuery('.wpfFilterWrapper[data-get-attribute="'+key+'"]').first(),
+				}
+			}
+			if($elem.length > 0) {
+				var elem = $elem.first(),
 					$slug = elem.attr('data-slug'),
 					$label = elem.attr('data-label'),
 					$title = elem.attr('data-title'),
@@ -1887,6 +1932,10 @@
 						jQuery('.storefront-sorting').append(html);
 					}
 				}
+			}
+			if (isRedirect && history.pushState && app.wpfNewUrl != window.wpfOldUrl)  {
+				history.pushState({state: 1, rand: Math.random(), wpf: true}, '', app.wpfNewUrl);
+				app.wpfOldUrl = app.wpfNewUrl;
 			}
 		}
 
