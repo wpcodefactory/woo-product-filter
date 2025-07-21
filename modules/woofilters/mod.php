@@ -337,6 +337,11 @@ class WoofiltersWpf extends ModuleWpf {
 		$q = new WP_Query($args);
 	}
 
+	/**
+	 * forceProductFilter.
+	 *
+	 * @version 2.8.6
+	 */
 	public function forceProductFilter( $query ) {
 		$existFilter = false;
 		$blocksApi   = false;
@@ -493,7 +498,7 @@ class WoofiltersWpf extends ModuleWpf {
 			}       
 		}
 
-		if ( $this->isProductQuery($query->get('post_type')) && $this->isFiltered(false) && empty($query->query_vars['wpf_query']) ) {		
+		if ( $this->isProductQuery($query->get('post_type')) && $this->isFiltered(false) && empty($query->query_vars['wpf_query']) ) {
 			if ( ! empty($this->mainWCQueryFiltered) ) {
 				foreach ( $this->mainWCQueryFiltered as $key => $value ) {
 					if ( ! in_array($key, array('paged', 'posts_per_page', 'post_type')) ) {
@@ -504,6 +509,12 @@ class WoofiltersWpf extends ModuleWpf {
 				$query->set('wpf_query', 1);
 			} else {
 				$this->loadProductsFilter($query);
+			}
+		}
+		if ($query->is_main_query() && $this->isProductQuery($query->get('post_type')) && $this->isFiltered(false) && !empty($query->get('post__in'))) {
+			$postIn = $query->get('post__in');
+			if (is_array($postIn) && isset($postIn[0]) && is_object($postIn[0])) {
+				$query->set('post__in', array());
 			}
 		}
 
