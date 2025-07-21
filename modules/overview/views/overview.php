@@ -10,17 +10,25 @@
 defined( 'ABSPATH' ) || exit;
 
 class OverviewViewWpf extends ViewWpf {
+
+	/**
+	 * getOverviewTabContent.
+	 */
 	public function getOverviewTabContent() {
 		FrameWpf::_()->addScript('admin.overview', $this->getModule()->getModPath() . 'js/admin.overview.js');
-		
+
 		FrameWpf::_()->getModule('templates')->loadJqueryUi();
 		FrameWpf::_()->getModule('templates')->loadBootstrap();
 		FrameWpf::_()->addScript('notify-js', WPF_JS_PATH . 'notify.js', array(), false, true);
 		FrameWpf::_()->addStyle('admin.overview.css', $this->getModule()->getModPath() . 'css/admin.overview.css');
-		
+
 		$this->assign('isWeek', ( time() - $this->getModel()->getFirstOverview() ) > 608800);
 		return parent::getContent('overviewTabContent');
 	}
+
+	/**
+	 * showRestApiInfo.
+	 */
 	public function showRestApiInfo() {
 		$dismiss = (int) FrameWpf::_()->getModule('options')->get('dismiss_wpf-rest-api');
 		if ($dismiss) {
@@ -42,13 +50,14 @@ class OverviewViewWpf extends ViewWpf {
 		$this->assign( 'message',
 			'<b>' . esc_html__('We have detected that you are using REST API to update products.', 'woo-product-filter') . '</b><br/><br/>' .
 			esc_html__('To correctly interact with this functionality, you need to change the plugin settings.', 'woo-product-filter') . '<br/><br/>' .
-			esc_html__('Please activate the "Disable automatic calculation of index tables after editing products" and "Disable automatic calculation of index tables after product stock changes" options', 'woo-product-filter') . 
+			esc_html__('Please activate the "Disable automatic calculation of index tables after editing products" and "Disable automatic calculation of index tables after product stock changes" options', 'woo-product-filter') .
 			' <a href="' . esc_url(FrameWpf::_()->getModule('options')->getTabUrl('settings')) . '">' . esc_html__('in the general plugin settings', 'woo-product-filter') . '</a>, ' . esc_html__('and set "Start indexing on schedule" at a time convenient for you.', 'woo-product-filter') . '<br/><br/>' .
-			esc_html__('Configure these options for you?', 'woo-product-filter') . 
+			esc_html__('Configure these options for you?', 'woo-product-filter') .
 			' <a href="#" class="button button-primary button-approve">' . esc_html__('Yes', 'woo-product-filter') . '</a>' .
 			' <a href="#" class="button button-dismiss">' . esc_html__('No, thanks', 'woo-product-filter') . '</a>'
 		);
 		$this->assign('msgSlug', 'wpf-rest-api');
 		HtmlWpf::echoEscapedHtml($this->getContent('showAdminInfo'));
 	}
+
 }

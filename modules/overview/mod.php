@@ -10,9 +10,19 @@
 defined( 'ABSPATH' ) || exit;
 
 class OverviewWpf extends ModuleWpf {
+
+	/**
+	 * init.
+	 *
+	 * @version 2.8.6
+	 */
 	public function init() {
 		DispatcherWpf::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
 	}
+
+	/**
+	 * addAdminTab.
+	 */
 	public function addAdminTab( $tabs ) {
 		if (!FrameWpf::_()->isWCLicense()) {
 			$tabs['overview'] = array(
@@ -21,10 +31,19 @@ class OverviewWpf extends ModuleWpf {
 		}
 		return $tabs;
 	}
+
+	/**
+	 * getOverviewTabContent.
+	 */
 	public function getOverviewTabContent() {
 		return $this->getView()->getOverviewTabContent();
 	}
+
+	/**
+	 * showAdminInfo.
+	 */
 	public function showAdminInfo() {
 		return $this->getView()->showAdminInfo();
 	}
+
 }
