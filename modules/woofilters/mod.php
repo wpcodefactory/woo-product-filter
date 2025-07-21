@@ -38,6 +38,11 @@ class WoofiltersWpf extends ModuleWpf {
 	public $clausesByParam               = array();
 	public $fields                       = array();
 
+	/**
+	 * init.
+	 *
+	 * @version 2.8.6
+	 */
 	public function init() {
 		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
@@ -61,7 +66,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		FrameWpf::_()->addScript( 'jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
 
-		add_action( 'woocommerce_product_query', array( $this, 'loadProductsFilter' ) );
+		add_action( 'woocommerce_product_query', array( $this, 'loadProductsFilter' ), 999 );
 		
 		// for Woocommerce Blocks: Product Collection
 		add_filter( 'query_loop_block_query_vars', array( $this, 'addFilterToWoocommerceBlocksAgrs' ), 999, 3 ); 
