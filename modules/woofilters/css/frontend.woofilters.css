@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Frontend Woofilters CSS
+ *
+ * @version 2.8.6
+ *
+ * @author  woobewoo
+ */
+
 .wpfFilterWrapper label {
 	margin: 0;
 }
@@ -429,4 +437,15 @@ ul ul.wpfHideAllParent {
 }
 .rtl .wpfFilterWrapper i, .rtl .wpfFilterWrapper svg {
     float: left;
+}
+.wpfSrOnly {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
 }
