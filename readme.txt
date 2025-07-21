@@ -153,6 +153,7 @@ You may help us translate the plugin into your language and get the PRO version 
 
 = 2.8.6 - 21/07/2025 =
 * Fix - Fixed pagination URLs.
+* Fix - Fixed shortcode filter.
 * Dev - Go PRO tab - License prices updated.
 * Dev - "Reward points and loyalty plugin from WBW" admin message removed.
 * WC tested up to: 10.0.

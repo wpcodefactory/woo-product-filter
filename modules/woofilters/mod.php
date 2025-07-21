@@ -1739,6 +1739,11 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 	}
 
+	/**
+	 * loadShortcodeProductsFilter.
+	 *
+	 * @version 2.8.6
+	 */
 	public function loadShortcodeProductsFilter( $args, $attributes = array(), $type = '' ) {
 		$hash         = md5( serialize( $args ) . serialize( $attributes ) );
 		$isOtherClass = false;
@@ -1813,6 +1818,9 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 
 			$args['wpf_query'] = 1;
+			if (!empty($args['post_type']) && is_string($args['post_type']) && ('product' == $args['post_type'])) {
+				$args['post_type'] = array( 'product' );
+			}
 
 			$this->shortcodeWCQuery[ $filterKey ] = $args;
 
