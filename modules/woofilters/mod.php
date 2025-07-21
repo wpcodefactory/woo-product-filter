@@ -485,6 +485,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$taxQuery = $query->get( 'tax_query' );
 				if ( empty( $taxQuery['wpf_tax'] ) ) {
 					$this->loadProductsFilter( $query );
+					$forced = true;
 				}
 				if ( ReqWpf::getVar('wpf_count', 'get') ) {
 					$query->set('posts_per_page', (int) ReqWpf::getVar('wpf_count', 'get'));
@@ -495,20 +496,23 @@ class WoofiltersWpf extends ModuleWpf {
 			$taxQuery = $query->get( 'tax_query' );
 			if ( empty( $taxQuery['wpf_tax'] ) ) {
 				$this->loadProductsFilter( $query );
+				$forced = true;
 			}       
 		}
 
-		if ( $this->isProductQuery($query->get('post_type')) && $this->isFiltered(false) && empty($query->query_vars['wpf_query']) ) {
-			if ( ! empty($this->mainWCQueryFiltered) ) {
-				foreach ( $this->mainWCQueryFiltered as $key => $value ) {
-					if ( ! in_array($key, array('paged', 'posts_per_page', 'post_type')) ) {
-						$query->set($key, $value);
+		if ( ! $forced && $this->isProductQuery($query->get('post_type')) && $this->isFiltered(false) && empty($query->query_vars['wpf_query']) ) {
+			if (!empty($query->query_vars['posts_per_page']) && $query->query_vars['posts_per_page'] > 0) {
+				if ( ! empty($this->mainWCQueryFiltered) ) {
+					foreach ( $this->mainWCQueryFiltered as $key => $value ) {
+						if ( ! in_array($key, array('paged', 'posts_per_page', 'post_type')) ) {
+							$query->set($key, $value);
+						}
 					}
+				
+					$query->set('wpf_query', 1);
+				} else {
+					$this->loadProductsFilter($query);
 				}
-			
-				$query->set('wpf_query', 1);
-			} else {
-				$this->loadProductsFilter($query);
 			}
 		}
 		if ($query->is_main_query() && $this->isProductQuery($query->get('post_type')) && $this->isFiltered(false) && !empty($query->get('post__in'))) {
