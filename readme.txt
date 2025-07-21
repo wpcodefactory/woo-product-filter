@@ -156,6 +156,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Fix - Fixed shortcode filter.
 * Fix - Fixed `forceProductFilter()`.
 * Fix - WooCommerce product query priority increased.
+* Dev - Added redirect parameter to category links.
 * Dev - Go PRO tab - License prices updated.
 * Dev - "Reward points and loyalty plugin from WBW" admin message removed.
 * WC tested up to: 10.0.

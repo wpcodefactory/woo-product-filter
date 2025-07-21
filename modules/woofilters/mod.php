@@ -324,6 +324,7 @@ class WoofiltersWpf extends ModuleWpf {
 			foreach ( $newParams as $key => $value ) {
 				$newParams[$key] = stripcslashes($value);
 			}
+
 			$scheme    = ( isset($urlParts['scheme']) ? $urlParts['scheme'] : '' );
 			$baseUrl   = ( empty($scheme) ? '' : $scheme . '://' ) .
 				( isset($urlParts['host']) ? $urlParts['host'] : '' ) .
@@ -753,6 +754,26 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 		}
 
+		return false;
+	}
+
+	/**
+	 * existsWpfParams.
+	 *
+	 * @version 2.8.6
+	 * @since   2.8.6
+	 */
+	public function existsWpfParams( $get = false ) {
+		if (!is_array($get)) {
+			$get = ReqWpf::get( 'get' );
+		}
+		if (is_array($get)) {
+			foreach ( $get as $key => $val ) {
+				if ( ( 'orderby' === $key || strpos( $key, 'wpf_' ) === 0 || strpos( $key, 'product_tag' ) === 0 || strpos( $key, 'pr_' ) === 0 ) ) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -1510,14 +1531,21 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * setSubcategoriesLink.
+	 *
+	 * @version 2.8.6
+	 */
 	public function setSubcategoriesLink( $link ) {
 		$curUrl = isset($_SERVER['REQUEST_URI']) ? parse_url( esc_url_raw( $_SERVER['REQUEST_URI'] ) ) : array();
 		$catUrl = parse_url($link);
-		if ( ! empty($curUrl['query']) ) {
-			$link .= ( empty($catUrl['query']) ? '?' : '&' ) . $curUrl['query'];
+		if (!empty($curUrl['query'])) {
+			$link .= ( empty($catUrl['query']) ? '?' : '&' ) . $curUrl['query'] . ( $this->existsWpfParams() ? '&redirect=1' : '' );
 		}
 		return $link;
 	}
+
 	public function maybeShowProductSubcategories( $loop_html, $categoryPageId ) {
 		$display_type = woocommerce_get_loop_display_mode();
 		if ( 'subcategories' === $display_type || 'both' === $display_type ) {
