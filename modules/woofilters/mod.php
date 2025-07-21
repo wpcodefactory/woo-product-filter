@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - WoofiltersWpf Class
+ *
+ * @version 2.8.6
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
 
 class WoofiltersWpf extends ModuleWpf {
 	public $defaultWCQuery               = null;
@@ -282,6 +291,11 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 	}
 
+	/**
+	 * addElementorParamsToPagenationLinks.
+	 *
+	 * @version 2.8.6
+	 */
 	public function addElementorParamsToPagenationLinks( $widget_content ) {
 		$pattern = '/<a\s+[^>]*class=["\'][^"\']*page-numbers[^"\']*["\'][^>]*href=["\']([^"\']+)["\'][^>]*>/i';
 		
@@ -302,6 +316,9 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 
 			$newParams = array_merge($existingParams, $get);
+			foreach ( $newParams as $key => $value ) {
+				$newParams[$key] = stripcslashes($value);
+			}
 			$scheme    = ( isset($urlParts['scheme']) ? $urlParts['scheme'] : '' );
 			$baseUrl   = ( empty($scheme) ? '' : $scheme . '://' ) .
 				( isset($urlParts['host']) ? $urlParts['host'] : '' ) .
