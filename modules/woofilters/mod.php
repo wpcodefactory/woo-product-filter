@@ -67,12 +67,12 @@ class WoofiltersWpf extends ModuleWpf {
 		FrameWpf::_()->addScript( 'jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
 
 		add_action( 'woocommerce_product_query', array( $this, 'loadProductsFilter' ), 999 );
-		
+
 		// for Woocommerce Blocks: Product Collection
-		add_filter( 'query_loop_block_query_vars', array( $this, 'addFilterToWoocommerceBlocksAgrs' ), 999, 3 ); 
+		add_filter( 'query_loop_block_query_vars', array( $this, 'addFilterToWoocommerceBlocksAgrs' ), 999, 3 );
 
 		add_action( 'woocommerce_shortcode_products_query', array( $this, 'loadShortcodeProductsFilter' ), 999, 3 );
-		
+
 		//for Beaver Builder block Posts
 		add_filter( 'fl_builder_loop_query_args', function ( $args ) {
 			if ( ! empty($args['fl_builder_loop']) && ! empty($args['post_type']) && ( ( is_array($args['post_type']) && in_array('product', $args['post_type']) ) || ( 'product' == $args['post_type'] ) ) ) {
@@ -85,7 +85,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$this->loadProductsFilter( $q );
 				if ( '' !== $this->mainWCQueryFiltered ) {
 					$q = new WP_Query($this->mainWCQueryFiltered);
-				} 
+				}
 			}
 			return $q;
 		}, 999, 2);
@@ -134,7 +134,7 @@ class WoofiltersWpf extends ModuleWpf {
 		add_action( 'woocommerce_is_filtered', array( $this, 'isFiltered' ) );
 		add_action( 'shortcode_atts_products', array( $this, 'shortcodeAttsProducts' ), 999, 3 );
 		$this->setFilterClauses();
-		
+
 		if ( is_plugin_active( 'divi-bodycommerce/divi-bodyshop-woocommerce.php' ) ) {
 			add_filter( 'db_archive_module_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
 		}
@@ -177,15 +177,15 @@ class WoofiltersWpf extends ModuleWpf {
 
 		//Qi Addons For Elementor
 		add_filter( 'qi_addons_for_elementor_filter_query_params', array( $this, 'replaceArgsIfBuilderGridUsed') );
-		
+
 		//Divi Plus
 		add_filter('dipl_woo_products_args', array( $this, 'addFilterAgrsToQuery'));
-		
+
 		add_filter( 'pre_do_shortcode_tag', array( $this, 'getOtherShortcodeAttr' ), 10, 3 );
-		
+
 		$actions = array('woo_product_pagination', 'woo_product_pagination_product', 'get_woo_products', 'uael_get_products');
 		if ( in_array(ReqWpf::getVar('action', 'post'), $actions) && ReqWpf::getVar('with_wpf_filter', 'post') ) {
-			parse_str(ReqWpf::getVar('with_wpf_filter', 'post'), $addParams); 
+			parse_str(ReqWpf::getVar('with_wpf_filter', 'post'), $addParams);
 			if ( is_array($addParams) ) {
 				foreach ( $addParams as $k => $v ) {
 					ReqWpf::setVar($k, urldecode($v), 'get');
@@ -194,7 +194,7 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 		// Theme Elford + Advanced Layout Build (Product Slider + Product Grid)
 		add_filter( 'avia_product_slide_query', array($this, 'loadShortcodeProductsFilter'), 20, 1 );
-		
+
 		// Theme Bricks + Bricks Builder
 		add_filter( 'bricks/posts/query_vars', array($this, 'loadShortcodeProductsFilter'), 20, 1 );
 
@@ -209,7 +209,7 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 		return $args;
 	}
-	
+
 	public function addFilterAgrsToQuery( $args ) {
 		$data   = ReqWpf::get( 'post' );
 		$params = array();
@@ -236,7 +236,7 @@ class WoofiltersWpf extends ModuleWpf {
 			'post__in'    => array_merge( array( 0 ), $ids ),
 			'aws_post_in' => array_merge( array( 0 ), $ids ),
 		) ) );
-		
+
 		$this->loadProductsFilter( $q );
 		if ( ! empty($this->mainWCQueryFiltered) ) {
 			unset($this->mainWCQueryFiltered['s']);
@@ -252,21 +252,21 @@ class WoofiltersWpf extends ModuleWpf {
 		} else {
 			$args = $this->mainWCQuery;
 		}
-		
+
 		if ( ! ReqWpf::getVar('wpf_count') ) {
 			$args['posts_per_page'] = count($ids);
 		}
-		
+
 		$filterLoop = new WP_Query( $args );
 		$ids        = $filterLoop->posts;
-		
+
 		add_filter('wpf_addFilterExistsItemsArgs', function ( $arg ) {
 			if ( isset($arg['aws_post_in']) ) {
 				$arg['post__in'] = $arg['aws_post_in'];
 			}
 			return $arg;
 		}, 99999999 );
-		
+
 		return $ids;
 	}
 
@@ -278,7 +278,7 @@ class WoofiltersWpf extends ModuleWpf {
 		$exclude = array('section', 'column', 'social-icons', 'shortcode', 'heading', 'text-editor', 'icon-list', 'image', 'navigation-menu', 'hfe-cart', 'site-logo', 'icon');
 		if ( ! in_array($widgetName, $exclude) && ( '' !== $this->mainWCQueryFiltered || $this->isFiltered(false) ) ) {
 			// besa-site-logo: for compatibiliry with Besa Theme
-			if ( ( $paged > 0 && 'popularity' != $orderby && 'shop-standard' != $widgetName ) 
+			if ( ( $paged > 0 && 'popularity' != $orderby && 'shop-standard' != $widgetName )
 				|| ( in_array($widgetName, array('archive-posts', 'besa-site-logo')) && get_query_var( 'wpf_query' ) == 1 ) ) {
 				if ( '' !== $this->mainWCQueryFiltered ) {
 					$this->mainWCQueryFiltered['paged'] = $paged;
@@ -303,11 +303,11 @@ class WoofiltersWpf extends ModuleWpf {
 	 */
 	public function addElementorParamsToPagenationLinks( $widget_content ) {
 		$pattern = '/<a\s+[^>]*class=["\'][^"\']*page-numbers[^"\']*["\'][^>]*href=["\']([^"\']+)["\'][^>]*>/i';
-		
-		return preg_replace_callback($pattern, function ( $matches ) {            
-			$originalUrl = $matches[1];            
-			$urlParts    = parse_url(html_entity_decode($originalUrl));            
-		   
+
+		return preg_replace_callback($pattern, function ( $matches ) {
+			$originalUrl = $matches[1];
+			$urlParts    = parse_url(html_entity_decode($originalUrl));
+
 			$existingParams = array();
 			if ( isset($urlParts['query']) ) {
 				parse_str($urlParts['query'], $existingParams);
@@ -332,8 +332,8 @@ class WoofiltersWpf extends ModuleWpf {
 			$newUrl    = $baseUrl . '?' . http_build_query($newParams);
 			return str_replace($originalUrl, $newUrl, $matches[0]);
 		}, $widget_content);
-	}   
-	
+	}
+
 	public function setNewWPQuery( $q, $args ) {
 		$q = new WP_Query($args);
 	}
@@ -364,7 +364,7 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 			if ( ReqWpf::getVar('action', 'post') == 'divi_filter_loadmore_ajax_handler' && ReqWpf::getVar('with_wpf_filter', 'post') ) {
 				if ( isset( $query->query_vars['post_type'] ) && 'product' == $query->query_vars['post_type'] ) {
-					parse_str(ReqWpf::getVar('with_wpf_filter', 'post'), $addParams); 
+					parse_str(ReqWpf::getVar('with_wpf_filter', 'post'), $addParams);
 					if ( is_array($addParams) ) {
 						foreach ( $addParams as $k => $v ) {
 							ReqWpf::setVar($k, urldecode($v), 'get');
@@ -400,7 +400,7 @@ class WoofiltersWpf extends ModuleWpf {
 					$found   = ( ( isset( $backtrace[5]['class'] ) && 'Automattic\WooCommerce\Blocks\BlockTypes\AbstractProductGrid' === $backtrace[5]['class'] ) || ( isset( $backtrace[7]['class'] ) && in_array( $backtrace[7]['class'], $classes, true ) ) )
 						? true
 						: false;
-					
+
 					if ( $found ) {
 						if ( isset( $backtrace[7]['class'] ) && in_array( $backtrace[7]['class'], $classNF, true ) ) {
 							$needFiltered = true;
@@ -427,7 +427,7 @@ class WoofiltersWpf extends ModuleWpf {
 							$needFiltered = true;
 						}
 					}
-					 
+
 					if ( ! $found ) {
 						$theme = wp_get_theme();
 						if ( $theme instanceof WP_Theme ) {
@@ -468,7 +468,7 @@ class WoofiltersWpf extends ModuleWpf {
 							$query->query_vars = $this->mainWCQueryFiltered;
 							if ( $needFiltered ) {
 								$query->set('no_found_rows', false);
-							}                       
+							}
 						} elseif ( '' !== $this->mainWCQuery && ! $needFiltered ) {
 							if ( $changePerPage ) {
 								$this->mainWCQuery['posts_per_page'] = $query->get('posts_per_page');
@@ -490,7 +490,7 @@ class WoofiltersWpf extends ModuleWpf {
 				}
 				if ( ReqWpf::getVar('wpf_count', 'get') ) {
 					$query->set('posts_per_page', (int) ReqWpf::getVar('wpf_count', 'get'));
-				}           
+				}
 			}
 		}
 		if ( ! $forced && $query->is_search() && $query->is_main_query() && get_query_var('s', false) && $this->isFiltered(false) ) {
@@ -498,7 +498,7 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( empty( $taxQuery['wpf_tax'] ) ) {
 				$this->loadProductsFilter( $query );
 				$forced = true;
-			}       
+			}
 		}
 
 		if ( ! $forced && $this->isProductQuery($query->get('post_type')) && $this->isFiltered(false) && empty($query->query_vars['wpf_query']) ) {
@@ -509,7 +509,7 @@ class WoofiltersWpf extends ModuleWpf {
 							$query->set($key, $value);
 						}
 					}
-				
+
 					$query->set('wpf_query', 1);
 				} else {
 					$this->loadProductsFilter($query);
@@ -525,7 +525,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		return $query;
 	}
-	
+
 	public function replaceArgsIfBuilderGridUsed( $args ) {
 
 		$paged = empty($args['paged']) ? 0 : $args['paged'];
@@ -557,11 +557,11 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( ReqWpf::getVar('dgwt_wcas') == 1 ) {
 			return $args;
 		}
-		
+
 		$paged = empty($args['paged']) ? 0 : $args['paged'];
 		$flag  = empty($args['post_cards_query']) ? false : $args['post_cards_query'];
 		$ret   = isset($args['return']) ? $args['return'] : false;
-		
+
 		if ( $flag && ! empty($args['taxonomy']) ) {
 			return $args;
 		}
@@ -584,8 +584,8 @@ class WoofiltersWpf extends ModuleWpf {
 		$tempArgs = array();
 		$params   = array(
 			'paged',
-			'posts_per_page',            
-			'nopaging', 
+			'posts_per_page',
+			'nopaging',
 			'jet_smart_filters',
 			'jet_use_current_query',
 		);
@@ -601,9 +601,9 @@ class WoofiltersWpf extends ModuleWpf {
 		} elseif ( isset($this->mainWCQuery) && ! empty($this->mainWCQuery) ) {
 			$args = $this->mainWCQuery;
 		}
-		
-		foreach ( $tempArgs as $key => $value ) {           
-			$args[$key] = $tempArgs[$key];           
+
+		foreach ( $tempArgs as $key => $value ) {
+			$args[$key] = $tempArgs[$key];
 		}
 		return $args;
 	}
@@ -999,7 +999,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$vendor = ReqWpf::getVar( 'vendors' );
 			if ( empty($vendor) ) {
 				$vendor = $data['vendors'];
-			} 
+			}
 			//$userObj = get_user_by( 'slug', ReqWpf::getVar( 'vendors' ) );
 			$userObj = get_user_by( 'slug', $vendor );
 			if ( isset( $userObj->ID ) ) {
@@ -1112,7 +1112,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		$isPreselect = ( 'preselect' == $mode || ReqWpf::getVar('wpf_preselects') == '1' );
 		$isSlugs     = ( 'url' == $mode && ! $isPreselect );
-		
+
 		// custom tahonomy attr block
 		if ( ! empty( $taxQuery ) ) {
 			foreach ( $taxQuery as $i => $tax ) {
@@ -1355,7 +1355,7 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 		}
 		$this->defaultWCQuery = $q->query_vars;
-		
+
 		$metaQuery = $q->get( 'meta_query' );
 		$taxQuery  = $q->get( 'tax_query' );
 		if ( ! is_array( $taxQuery ) ) {
@@ -1385,7 +1385,7 @@ class WoofiltersWpf extends ModuleWpf {
 		$this->mainWCQuery = $q->query_vars;
 
 		$isMultiLogicOr = false;
-		$filters        = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();       
+		$filters        = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 
 		$isUseCategoryFiltration = false;
 		$categoryPageId          = null;
@@ -1397,19 +1397,19 @@ class WoofiltersWpf extends ModuleWpf {
 				$isMultiLogicOr = true;
 				break;
 			}
-		   
+
 			if ( $this->getFilterSetting($filtersSettings['settings'], 'use_category_filtration') ) {
 				$isUseCategoryFiltration = true;
 				if ( is_null($categoryPageId) ) {
-					$categoryPageId = ReqWpf::getVar( 'wpf_filter_cat_' . $key );  
-				}          
+					$categoryPageId = ReqWpf::getVar( 'wpf_filter_cat_' . $key );
+				}
 			}
 		}
 
 		if ( $isMultiLogicOr ) {
 			ReqWpf::setVar( 'wpf_light', $q->query_vars, 'session' );
 		}
-		
+
 		if ( DispatcherWpf::applyFilters('notFilterMainWCQuery', false) ) {
 			return;
 		}
@@ -1429,7 +1429,7 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( ReqWpf::getVar( 'wpf_order' ) ) {
 			add_filter( 'posts_clauses', array( $this, 'addClausesTitleOrder' ) );
 		}
-		
+
 		$orderby = ReqWpf::getVar( 'orderby' );
 		if ( is_null($orderby) || empty($orderby) ) {
 			if ( isset($args['wpf_default']) && ! empty($args['wpf_default']['pr_sortby']) ) {
@@ -1491,15 +1491,15 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 
 		$q = DispatcherWpf::applyFilters( 'loadProductsFilterPro', $q );
-		
+
 		if ( $this->mainWCQuery !== $q->query_vars ) {
 			$this->mainWCQueryFiltered = $q->query_vars;
 		}
 		// removes hooks that could potentially override filter settings
 		remove_all_filters( 'wpv_action_apply_archive_query_settings' );
 
-	  
-		// allow show subcategories only if nothing is selected        
+
+		// allow show subcategories only if nothing is selected
 		if ( $this->isFiltered( false ) ) {
 			remove_filter( 'woocommerce_product_loop_start', 'woocommerce_maybe_show_product_subcategories' );
 			//compatibility with Product Table for WooCommerce by CodeAstrology (WooproductTable)
@@ -1509,7 +1509,7 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 
 		if ( $isUseCategoryFiltration ) {
-			if ( is_null($categoryPageId) && is_product_category() ) {                
+			if ( is_null($categoryPageId) && is_product_category() ) {
 				$categoryPageId = get_queried_object_id();
 			}
 			if ( ! is_null($categoryPageId) && $this->isFiltered( false ) ) {
@@ -1519,7 +1519,7 @@ class WoofiltersWpf extends ModuleWpf {
 				add_filter('woocommerce_product_loop_start', function ( $args ) use ( $categoryPageId ) {
 					return $this->maybeShowProductSubcategories($args, $categoryPageId);
 				});
-			}     
+			}
 		}
 	}
 	public function needSubcategoriesDisplay( $categoryPageId ) {
@@ -1586,7 +1586,7 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( empty( $params ) ) {
 			$params = ReqWpf::get( 'get' );
 		}
-		
+
 
 		if ( ! empty( $exludeParam ) && isset( $params[ $exludeParam ] ) ) {
 			unset( $params[ $exludeParam ] );
@@ -1631,7 +1631,7 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( function_exists('wcpbc_the_zone') && wcpbc_the_zone() ) {
 			if ( strpos($args['join'], ' wpf_price_wcpbc ') === false ) {
 				$key           = '_' . wcpbc_the_zone()->get_id() . '_price';
-				$args['join'] .= 
+				$args['join'] .=
 					' LEFT JOIN ' . $wpdb->postmeta . ' as wpf_price ON (wpf_price.post_id=' . $wpdb->posts . ".ID AND wpf_price.meta_key='_price')" .
 					' LEFT JOIN ' . $wpdb->postmeta . ' as wpf_price_wcpbc ON (wpf_price_wcpbc.post_id=' . $wpdb->posts . ".ID AND wpf_price_wcpbc.meta_key='" . $key . "')";
 			}
@@ -1645,7 +1645,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$func            = ( FrameWpf::_()->getModule('options')->get('use_max_price') == 1 ? 'max' : 'min' );
 				$args['join']   .= ' LEFT JOIN (SELECT wpf_t.product_id, ' . $func . '(wpf_t.val_dec) as wpf_price FROM ' . $metaDataTable . ' as wpf_t WHERE wpf_t.key_id=' . $metaKeyId . ' GROUP BY wpf_t.product_id) as wpf_price_order ON (wpf_price_order.product_id=' . $wpdb->posts . '.ID)';
 				$args['orderby'] = ' wpf_price_order.wpf_price ASC, ' . $wpdb->posts . '.ID ';
-			
+
 			} else {
 				$args['join']   .= ' LEFT JOIN ' . $wpdb->postmeta . ' as wpf_price_order ON (wpf_price_order.post_id=' . $wpdb->posts . ".ID AND wpf_price_order.meta_key='_price')";
 				$args['orderby'] = ' CAST(wpf_price_order.meta_value AS DECIMAL(20,3)) ASC, ' . $wpdb->posts . '.ID ';
@@ -1661,7 +1661,7 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( function_exists('wcpbc_the_zone') && wcpbc_the_zone() ) {
 			if ( strpos($args['join'], ' wpf_price_wcpbc ') === false ) {
 				$key           = '_' . wcpbc_the_zone()->get_id() . '_price';
-				$args['join'] .= 
+				$args['join'] .=
 					' LEFT JOIN ' . $wpdb->postmeta . ' as wpf_price ON (wpf_price.post_id=' . $wpdb->posts . ".ID AND wpf_price.meta_key='_price')" .
 					' LEFT JOIN ' . $wpdb->postmeta . ' as wpf_price_wcpbc ON (wpf_price_wcpbc.post_id=' . $wpdb->posts . ".ID AND wpf_price_wcpbc.meta_key='" . $key . "')";
 			}
@@ -1771,7 +1771,7 @@ class WoofiltersWpf extends ModuleWpf {
 	public function loadProductsFilterForProductGrid( $q ) {
 		$action = ReqWpf::getVar('action');
 		$ignore = array('woocommerce_load_variations', 'woocommerce_do_ajax_product_export', 'phone-orders-for-woocommerce');
-				
+
 		if ( $this->isProductQuery($q->get( 'post_type' )) && ( is_null($action) || empty($action) || ! in_array($action, $ignore ) ) ) {
 			global $paged;
 			remove_filter( 'pre_get_posts', array( $this, 'loadProductsFilterForProductGrid' ), 999 );
@@ -1824,7 +1824,7 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 
 			$this->addPreselectedParams();
-			
+
 			if ( ReqWpf::getVar( 'all_products_filtering' ) && ( ( '-' != $filterKey ) || ! empty($attributes['wpf-compatibility']) ) ) {
 				$exclude = array( 'paged', 'posts_per_page', 'post_type', 'wc_query', 'orderby', 'order', 'fields' );
 				foreach ( $args as $queryVarKey => $queryVarValue ) {
@@ -1851,7 +1851,7 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( ! isset( $preselects['pr_onsale'] ) && isset( $attributes['on_sale'] ) && 'true' === $attributes['on_sale'] ) {
 				$preselects['pr_onsale'] = 1;
 			}
-			
+
 			$fields    = $this->addCustomFieldsQuery( $preselects, $mode );
 			$metaQuery = $this->addCustomMetaQuery( $metaQuery, $preselects, $mode );
 			$taxQuery  = $this->addCustomTaxQuery( $taxQuery, $preselects, $mode );
@@ -1933,7 +1933,7 @@ class WoofiltersWpf extends ModuleWpf {
 							add_filter('posts_clauses', array($this, 'addRandOrder'), 99999 );
 							break;
 					}
-				}           
+				}
 			}
 			$args                         = DispatcherWpf::applyFilters( 'loadShortcodeProductsFilterPro', $args );
 			self::$loadShortcode[ $hash ] = $args;
@@ -2062,7 +2062,7 @@ class WoofiltersWpf extends ModuleWpf {
 										$sql     = implode( '', $havingTemp[ $taxonomy ] ) ;
 										$having .= $sql;
 										$this->clausesByParam['variation']['conditions'][ $taxonomy ]['having'][] = $sql;
-									}                               
+									}
 								}
 							}
 						}
@@ -2114,12 +2114,12 @@ class WoofiltersWpf extends ModuleWpf {
 					$displayVariation = isset( $filterSettings['display_product_variations'] ) ? $filterSettings['display_product_variations'] : false;
 					$isGroupBy        = $displayVariation || ! empty( $clauses['having'] );
 
-					$sql = 'SELECT ' . ( $isGroupBy ? '' : 'DISTINCT' ) . ' p.post_parent as id' . 
+					$sql = 'SELECT ' . ( $isGroupBy ? '' : 'DISTINCT' ) . ' p.post_parent as id' .
 						( $displayVariation ? ', min(p.id) as var_id, count(DISTINCT p.id) as var_cnt' : '' ) .
 						' FROM `' . $wpdb->posts . '` AS p';
 
 					$this->clausesByParam['variation']['base_request'][1] = $sql;
-					
+
 					if ( $displayVariation && isset($options['display_one_price']) && '1' === $options['display_one_price']['value'] ) {
 						$metaKeyId = $this->getMetaKeyId( '_price' );
 						if ( $metaKeyId ) {
@@ -2129,15 +2129,15 @@ class WoofiltersWpf extends ModuleWpf {
 						} else {
 							$selectOnePrice = ', 0 as var_price, 0 as var_cnt_price';
 						}
-						$sql                                       = str_replace(' FROM ', $selectOnePrice . ' FROM ', $sql); 
+						$sql                                       = str_replace(' FROM ', $selectOnePrice . ' FROM ', $sql);
 						$this->clausesByParam['display_one_price'] = 1;
 					}
-					
+
 					$query = $sql . $clauses['join'];
 
 					$sql = " WHERE p.post_type='product_variation'";
 					$this->clausesByParam['variation']['base_request'][2] = $sql;
-					
+
 					$query .= $sql;
 					$this->clausesByParam['variation']['base_request'][3] = '';
 
@@ -2170,7 +2170,7 @@ class WoofiltersWpf extends ModuleWpf {
 								$this->addFilterClauses( $clauses, false );
 							}
 						}
-					}               
+					}
 				}
 			}
 		}
@@ -2336,7 +2336,7 @@ class WoofiltersWpf extends ModuleWpf {
 					} elseif ( is_shop() ) {
 						$mode = 2; // shop mode if not PRO
 					}
-				}           
+				}
 			}
 			$this->renderModes[ $id ] = $mode;
 		}
@@ -2464,7 +2464,7 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( empty( $taxQuery ) || ! is_array( $taxQuery ) ) {
 			return $taxQuery;
 		}
-		
+
 		//for leer tax_query change OR-relation to AND
 		if ( ! empty($taxQuery['relation']) && 'OR' == $taxQuery['relation'] ) {
 			$isLeer  = true;
@@ -2584,7 +2584,7 @@ class WoofiltersWpf extends ModuleWpf {
 		} elseif ( function_exists( 'wmc_get_price' ) ) {
 			$price = wmc_get_price( $raw_price );
 		} else {
-			
+
 			$price = apply_filters( 'raw_woocommerce_price', $raw_price );
 
 			// some plugin uses a different hook, use it if the standard one did not change the price
@@ -2647,12 +2647,12 @@ class WoofiltersWpf extends ModuleWpf {
 			$metaQuery['compare'] = 'BETWEEN';
 			$metaQuery['value']   = array( $minPrice / $rate, $maxPrice / $rate );
 		}
-		
+
 		if ( function_exists('wcpbc_the_zone') && wcpbc_the_zone() ) {
 			global $wpdb;
 			$key = '_' . wcpbc_the_zone()->get_id() . '_price';
-			
-			$value   = $metaQuery['compare'] . 
+
+			$value   = $metaQuery['compare'] .
 				( is_array($metaQuery['value']) ? " '" . $metaQuery['value'][0] . "' AND '" . $metaQuery['value'][1] . "'" : "'" . $metaQuery['value'] . "'" );
 			$clauses = array(
 				'join'  => array(
@@ -2672,16 +2672,16 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( $metaKeyId ) {
 				global $wpdb;
 				$metaDataTable = DbWpf::getTableName( 'meta_data' );
-				$value         = $metaQuery['compare'] . 
+				$value         = $metaQuery['compare'] .
 					( is_array($metaQuery['value']) ? " '" . $metaQuery['value'][0] . "' AND '" . $metaQuery['value'][1] . "'" : "'" . $metaQuery['value'] . "'" );
-			
+
 				$clauses = array(
 					'join'  => array(' INNER JOIN ' . $metaDataTable . ' as wpf_price_table ON (wpf_price_table.key_id=' . $metaKeyId . ' AND wpf_price_table.product_id=' . $wpdb->posts . '.ID)'),
 					'where' => array(' AND wpf_price_table.val_dec ' . $value),
 				);
 				$this->addFilterClauses( $clauses, false );
 				return array();
-			} 
+			}
 		}
 		if ( class_exists('WooCommerceB2B') && FrameWpf::_()->getModule('options')->getModel()->get('use_wcb2b_prices') == 1 ) {
 			$user   = wp_get_current_user();
@@ -2692,7 +2692,7 @@ class WoofiltersWpf extends ModuleWpf {
 					$metaKeyId = $this->getMetaKeyId('wcb2b_product_group_prices');
 					if ( $metaKeyId ) {
 						global $wpdb;
-						$value   = $metaQuery['compare'] . 
+						$value   = $metaQuery['compare'] .
 							( is_array($metaQuery['value']) ? " '" . $metaQuery['value'][0] . "' AND '" . $metaQuery['value'][1] . "'" : "'" . $metaQuery['value'] . "'" );
 						$clauses = array(
 							'join'  => array(
@@ -2705,10 +2705,10 @@ class WoofiltersWpf extends ModuleWpf {
 						return array();
 					}
 				}
-			} 
+			}
 		}
 		add_filter( 'posts_where', array( $this, 'controlDecimalType' ), 9999, 2 );
-		
+
 		return array( 'price_filter' => $metaQuery );
 	}
 
@@ -2855,7 +2855,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		return $args;
 	}
-	
+
 	public function addChildrenAttributeTerms( $parents ) {
 		$aFlat = array();
 		foreach ( $parents as $id => $term ) {
@@ -2925,7 +2925,7 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 
 			$taxonomy = '';
-			
+
 			switch ( $filter['id'] ) {
 				case 'wpfCategory':
 					$taxonomy = 'product_cat';
@@ -2950,7 +2950,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 						if ( $showAllSliderAttributes ) {
 							$other[] = $filter['id'];
-						}                   
+						}
 					}
 
 					break;
@@ -3011,8 +3011,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 					if ( ! empty( $filter['settings']['f_show_count_parent_with_children'] ) ) {
 						$forCountWithChildren[] = $taxonomy;
-					}               
-				}           
+					}
+				}
 			}
 
 			++$key;
@@ -3020,7 +3020,7 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 
 		$getNames = array();
-		
+
 		$checkGetNames = $this->getFilterSetting( $filterSettings, 'check_get_names', '0' );
 		if ( ! $checkGetNames ) {
 			// delete from get_names if more then one block with same taxonomy
@@ -3088,8 +3088,8 @@ class WoofiltersWpf extends ModuleWpf {
 						}
 
 						break;
-				}           
-			}       
+				}
+			}
 		}
 
 		foreach ( $other as $index => $taxonomy ) {
@@ -3098,7 +3098,7 @@ class WoofiltersWpf extends ModuleWpf {
 				case 'wpfRating':
 					$blocks[ $taxonomy ][] = 'pr_rating';
 					break;
-			}       
+			}
 		}
 
 		if ( ! empty( $blocks ) ) {
@@ -3113,10 +3113,10 @@ class WoofiltersWpf extends ModuleWpf {
 						if ( isset( $matches[0] ) ) {
 							$getNames[ $taxanomy ] = $param;
 							continue 3;
-						}                   
-					}               
-				}           
-			}       
+						}
+					}
+				}
+			}
 		}
 
 		return $getNames;
@@ -3134,7 +3134,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 			foreach ( $this->clausesByParam['not_for_temporary_table'] as $sqlPart ) {
 				$sql = str_replace( $sqlPart, '', $sql );
-			}       
+			}
 		}
 
 		$sql      = str_replace( 'SQL_CALC_FOUND_ROWS', '', $sql );
@@ -3147,7 +3147,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 			if ( $limitPos ) {
 				$sql = substr( $sql, 0, $limitPos );
-			}       
+			}
 		}
 		$needPrimaryKey = DbWpf::get("SHOW SESSION variables like 'sql_require_primary_key'");
 		if ( ! empty($needPrimaryKey) && isset($needPrimaryKey[0]['Value']) && 'ON' == $needPrimaryKey[0]['Value'] ) {
@@ -3181,17 +3181,17 @@ class WoofiltersWpf extends ModuleWpf {
 
 						if ( $tax_1['taxonomy'] === $taxonomy ) {
 							unset( $argsTemp['tax_query'][ $index_1 ] );
-						}                   
+						}
 					} elseif ( is_array( $argsTemp['tax_query'][ $index_1 ] ) ) {
 
 						foreach ( $argsTemp['tax_query'][ $index_1 ] as $index_2 => $tax_2 ) {
 
 							if ( isset( $tax_2['taxonomy'] ) && $tax_2['taxonomy'] === $taxonomy ) {
 								unset( $argsTemp['tax_query'][ $index_1 ][ $index_2 ] );
-							}                       
-						}                   
-					}               
-				}           
+							}
+						}
+					}
+				}
 			}
 
 			$calc[ $param ]                           = $argsTemp;
@@ -3213,7 +3213,7 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( isset( $urlQuery[ $param ] ) ) {
 				$calc[ $param ]                           = $this->getQueryVars( $args, array(), array( $param => $urlQuery[ $param ] ) );
 				$calc[ $param ]['wpf_get_names_taxonomy'] = $taxonomy;
-			}       
+			}
 		}
 
 
@@ -3259,15 +3259,15 @@ class WoofiltersWpf extends ModuleWpf {
 
 				if ( isset( $lightFromSession ) ) {
 					$calc['full'] = $lightFromSession;
-				}           
+				}
 			}
 
 			if ( $isGetNames ) {
 				$calc = array_merge( $calc, $this->addToArgsForLogicAnd( $taxonomies['get_names'], $calc['full'], $urlQuery ) );
-			}       
+			}
 		} elseif ( $isGetNames ) {
 
-				$calc = array_merge( $calc, $this->removeFromArgsForLogicOr( $taxonomies['get_names'], $calc['full'] ) );       
+				$calc = array_merge( $calc, $this->removeFromArgsForLogicOr( $taxonomies['get_names'], $calc['full'] ) );
 		}
 
 		$result    = array( 'exists' => array() );
@@ -3311,7 +3311,7 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( is_plugin_active( 'search-everything/search-everything.php' ) ) {
 				remove_all_filters( 'posts_search' );
 			} elseif ( is_plugin_active( 'custom-woocommerce-enhancements/custom-woocommerce-enhancements.php' ) ) {
-				if ( isset($args['s']) && '' === $args['s'] ) {                    
+				if ( isset($args['s']) && '' === $args['s'] ) {
 					remove_filter( 'posts_search', 'custom_exact_word_search' );
 				}
 			}
@@ -3328,7 +3328,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$args['meta_key'] = '';
 			}
 			$isModeStandart = in_array( $mode, array( 'full', 'light' ), true );
-			
+
 			$args = DispatcherWpf::applyFilters( 'addExistFilterArgs', $args );
 
 			if ( ! empty( $this->clauses ) && ( ( ! $multiLogicOr && ! $isModeStandart ) || ( $multiLogicOr && $isModeStandart ) ) ) {
@@ -3339,7 +3339,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$this->isLightMode = false;
 			$listTable         = '';
 			$havePosts         = $filterLoop->have_posts();
-			
+
 			$onlyHaveFound = ! empty($currentSettings['only_have_found']);
 
 			if ( $havePosts && ! $onlyHaveFound ) {
@@ -3359,7 +3359,7 @@ class WoofiltersWpf extends ModuleWpf {
 								if ( isset( $conditions['join'] ) ) {
 									$query .= implode( '', $conditions['join'] );
 								}
-							}                       
+							}
 						}
 
 						$query .= $this->clausesByParam['variation']['base_request'][2];
@@ -3372,8 +3372,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 								if ( isset( $conditions['where'] ) ) {
 									$where .= ' AND ' . implode( ' AND ', $conditions['where'] );
-								}                           
-							}                       
+								}
+							}
 						}
 
 						if ( '' !== $where ) {
@@ -3395,9 +3395,9 @@ class WoofiltersWpf extends ModuleWpf {
 									}
 
 									$query .= implode( '', $conditions['having'] );
-								}                           
-							}                       
-						}                   
+								}
+							}
+						}
 					}
 
 					if ( $isModeStandart && $multiLogicOr ) {
@@ -3418,30 +3418,30 @@ class WoofiltersWpf extends ModuleWpf {
 				}
 
 				if ( ! empty( $listTable ) ) {
-					
+
 					if ( ( isset( $args['product_cat'] ) || ( $ajax && $prodCatId ) ) && $this->getFilterSetting( $currentSettings, 'display_only_descendants_category', false ) ) {
 						if ( $ajax && $prodCatId ) {
 							$term = get_term_by( 'id', $prodCatId, 'product_cat' );
 						} else {
 							$term = get_term_by( 'slug', $args['product_cat'], 'product_cat' );
 						}
-						
+
 						if ( $term ) {
 							if ( $this->getFilterSetting($currentSettings, 'display_only_children_category', false) ) {
 								$param['only_children_category'] = get_terms(array(
 									'taxonomy'   => 'product_cat',
 									'parent'     => $term->term_id,
 									'hide_empty' => false,
-									'fields'     => 'ids', 
+									'fields'     => 'ids',
 								));
 							} else {
 								$param['only_children_category'] = get_term_children($term->term_id, 'product_cat');
 							}
-							
+
 							if ( is_array($param['only_children_category']) && ! empty($param['only_children_category']) ) {
 								$param['only_children_category'] = UtilsWpf::controlNumericValues($param['only_children_category'], '');
 							}
-						}                   
+						}
 					}
 					list( $existTerms, $calcCategories ) = $this->getTerms( $listTable, $param );
 				}
@@ -3464,7 +3464,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 						if ( isset( $result['exists'][ $currentTax ] ) ) {
 							$result['exists'][ $currentTax ] = array_fill_keys( array_flip( $result['exists'][ $currentTax ] ), 0 );
-						}                   
+						}
 					}
 					break;
 			}
@@ -3752,7 +3752,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		global $wpdb;
 		$sql = array();
-		
+
 		$stockJoin = '';
 		if ( $param['isInStockOnly'] ) {
 			$metaKeyId = $this->getMetaKeyId('_stock_status');
@@ -3768,7 +3768,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$addSqls['main']['withCount']    = $param['withCount'];
 			$addSqls['main']['fields']       = ( $param['withCount'] ? '' : 'DISTINCT ' ) . 'tr.term_taxonomy_id, tt.term_id, tt.taxonomy, tt.parent' . ( $param['withCount'] ? ', COUNT(*) as cnt' : '' );
 			$addSqls['main']['taxonomyList'] = implode( "', '", $taxonomyList );
-			
+
 			if ( $byVariations ) {
 				$attrTaxonomyList = array();
 				$case             = '';
@@ -3794,7 +3794,7 @@ class WoofiltersWpf extends ModuleWpf {
 						' INNER JOIN #__posts as p_vars on (p_vars.post_parent=wpf_temp.id)' .
 						' INNER JOIN @__meta_data as md_attr ON (md_attr.product_id=p_vars.ID AND md_attr.key_id IN (' . implode(',', $attrTaxonomyList) . '))' .
 						' INNER JOIN @__meta_values as md_vals ON (md_vals.id=md_attr.val_id)' .
-						' INNER JOIN @__meta_keys as md_keys ON (md_keys.id=md_attr.key_id)' . 
+						' INNER JOIN @__meta_keys as md_keys ON (md_keys.id=md_attr.key_id)' .
 						str_replace('wpf_temp.', 'p_vars.', $stockJoin);
 					$listVariationAttributes = $this->createTemporaryTable($this->tempFilterTable . '_var_attrs', $query);
 
@@ -3846,16 +3846,16 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( $byVariations ) {
 				$sql[ $key ] .= ' INNER JOIN ' . $wpdb->terms . ' ttt ON (ttt.term_id=tt.term_id) ' . $typeJoin;
 			}
-				
+
 			$sql[ $key ] .= ' WHERE tt.taxonomy IN (\'' . $addSql['taxonomyList'] . '\')';
-			
+
 			if ( $byVariations ) {
-				$sql[ $key ] .= ' AND (md_type.val_id!=' . $variableMetaId . 
+				$sql[ $key ] .= ' AND (md_type.val_id!=' . $variableMetaId .
 					' OR tt.taxonomy NOT IN (\'' . implode("','", array_keys($attrTaxonomyList)) . '\')' .
-					' OR EXISTS(SELECT 1 FROM ' . $listVariationAttributes . ' as p_childs' . 
+					' OR EXISTS(SELECT 1 FROM ' . $listVariationAttributes . ' as p_childs' .
 					' WHERE p_childs.id=wpf_temp.id and p_childs.taxonomy=tt.taxonomy and p_childs.value=ttt.slug LIMIT 1))';
 			}
-			
+
 			if ( $addSql['withCount'] ) {
 				$sql[ $key ] .= ' GROUP BY tr.term_taxonomy_id';
 			}
@@ -3905,7 +3905,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 				continue;
 			}
-			
+
 			if ( $isCat && ! empty( $param['onlyCategories'] ) ) {
 				$found = true;
 				foreach ( $param['onlyCategories'] as $catIds ) {
@@ -3924,10 +3924,10 @@ class WoofiltersWpf extends ModuleWpf {
 
 			$parent = ( isset( $term['parent'] ) ) ? (int) $term['parent'] : 0;
 			if ( $isCat && $param['isCalcCategory'] && $param['calcCategory'] === $parent ) {
-				
+
 				$calcCategories[ $termId ] = $cnt;
 			}
-			
+
 			if ( 0 !== $parent ) {
 				if ( isset($isHierarchicalTaxonomy) && ! key_exists($name, $isHierarchicalTaxonomy) ) {
 					$isHierarchicalTaxonomy[$name] = $termProducts;
@@ -3974,9 +3974,9 @@ class WoofiltersWpf extends ModuleWpf {
 					}
 					$termIds[] = $termId;
 
-					$sqlTemp                            = "SELECT count(DISTINCT tr.`object_id`) FROM {$listTable} AS wpf_temp 
-    					INNER JOIN {$wpdb->term_relationships} AS tr ON (tr.`object_id`=wpf_temp.`ID`) 
-					    INNER JOIN {$wpdb->term_taxonomy} AS wtf ON tr.`term_taxonomy_id` = wtf.`term_taxonomy_id`    
+					$sqlTemp                            = "SELECT count(DISTINCT tr.`object_id`) FROM {$listTable} AS wpf_temp
+    					INNER JOIN {$wpdb->term_relationships} AS tr ON (tr.`object_id`=wpf_temp.`ID`)
+					    INNER JOIN {$wpdb->term_taxonomy} AS wtf ON tr.`term_taxonomy_id` = wtf.`term_taxonomy_id`
 						WHERE wtf.`term_id` IN (" . implode( ',', $termIds ) . ')';
 					$cnt                                = intval( DbWpf::get( $sqlTemp, 'one' ) );
 					$existTerms[ $taxonomy ][ $termId ] = $cnt;
@@ -4011,24 +4011,24 @@ class WoofiltersWpf extends ModuleWpf {
 				}
 			}
 		}
-		
+
 		foreach ( $isHierarchicalTaxonomy as $name => $terms ) {
-			$matchingKeys = ( ! empty($urlQuery) ) 
-				? preg_grep('/^wpf_filter_' . preg_quote($name, '/') . '_\d+$/', array_keys($urlQuery)) 
-				: array(); 
+			$matchingKeys = ( ! empty($urlQuery) )
+				? preg_grep('/^wpf_filter_' . preg_quote($name, '/') . '_\d+$/', array_keys($urlQuery))
+				: array();
 
 			$termChildren = array();
 			$rootTermIds  = array();
-		
+
 			foreach ( $terms as $term ) {
 				$termId   = (int) $term['term_id'];
 				$parentId = (int) $term['parent'];
-		
+
 				if ( ! isset($termChildren[$parentId]) ) {
 					$termChildren[$parentId] = array();
 				}
 				$termChildren[$parentId][] = $termId;
-		
+
 				if ( 0 === $parentId ) {
 					$rootTermIds[] = $termId;
 				}
@@ -4037,7 +4037,7 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( ! empty($matchingKeys) ) {
 				$maxIndex = 0;
 				$maxKey   = reset($matchingKeys);
-		
+
 				foreach ( $matchingKeys as $key ) {
 					preg_match('/^wpf_filter_' . preg_quote($name, '/') . '_(\d+)$/', $key, $matches);
 					if ( isset($matches[1]) && (int) $matches[1] > $maxIndex ) {
@@ -4045,7 +4045,7 @@ class WoofiltersWpf extends ModuleWpf {
 						$maxKey   = $key;
 					}
 				}
-		
+
 				if ( ! empty($maxKey) ) {
 					$allowed = array();
 					$term    = get_term_by('slug', $urlQuery[$maxKey], $name);
@@ -4055,28 +4055,28 @@ class WoofiltersWpf extends ModuleWpf {
 						$allowed[]   = $term_id;
 						$descendants = $this->getDescendantIds($terms, $term_id);
 						$ancestors   = get_ancestors($term_id, $name, 'taxonomy');
-		
+
 						$siblings = array();
 						foreach ( $terms as $t ) {
 							if ( (int) $t['parent'] === $parent_id ) {
 								$siblings[] = (int) $t['term_id'];
 							}
 						}
-		
+
 						$allowed = array_merge($allowed, $descendants, $ancestors, $siblings);
 						$allowed = array_unique($allowed);
-					
-						$hierarchicalByLevel = array();                        
-					
+
+						$hierarchicalByLevel = array();
+
 						foreach ( $terms as $t ) {
 							$term_id = (int) $t['term_id'];
 							if ( in_array( $term_id, $allowed, true) ) {
 								$level    = 0;
 								$parentId = (int) $t['parent'];
-					
+
 								while ( 0 !== $parentId ) {
 									++$level;
-							
+
 									$found = false;
 									foreach ( $terms as $pt ) {
 										if ( (int) $pt['term_id'] === $parentId ) {
@@ -4085,33 +4085,33 @@ class WoofiltersWpf extends ModuleWpf {
 											break;
 										}
 									}
-									
+
 									if ( ! $found ) {
 										break;
 									}
 								}
-								
+
 								if ( ! isset($hierarchicalByLevel[$level]) ) {
 									$hierarchicalByLevel[$level] = array();
 								}
 								$hierarchicalByLevel[$level][$term_id] = $existTerms[$name][$term_id];
 							}
 						}
-						
+
 						ksort($hierarchicalByLevel);
-						
+
 						if ( ! empty($hierarchicalByLevel) ) {
 							$existTerms[$name . '_hierarchical'] = $hierarchicalByLevel;
 						}
-		
+
 						if ( ! empty($existTerms[$name]) ) {
 							$existTerms[$name] = array_intersect_key($existTerms[$name], array_flip($allowed));
 						}
 					}
 				}
 			} elseif ( ! empty($existTerms[$name]) ) {
-				$existTerms[$name] = array_intersect_key($existTerms[$name], array_flip($rootTermIds));                    
-					
+				$existTerms[$name] = array_intersect_key($existTerms[$name], array_flip($rootTermIds));
+
 				$maxLevel = 0;
 				$cache = array();
 				foreach ( $terms as $term ) {
@@ -4142,10 +4142,10 @@ class WoofiltersWpf extends ModuleWpf {
 					$cache[$firstParent] = $level;
 					$maxLevel = max($maxLevel, $level);
 				}
-					
+
 				$hierarchicalByLevel = array();
 				for ( $i = 0; $i <= $maxLevel; $i++ ) {
-					$hierarchicalByLevel[$i] = array();                        
+					$hierarchicalByLevel[$i] = array();
 					if ( 0 === $i ) {
 						foreach ( $rootTermIds as $termId ) {
 							if ( isset($existTerms[$name][$termId]) ) {
@@ -4154,13 +4154,13 @@ class WoofiltersWpf extends ModuleWpf {
 						}
 					}
 				}
-					
+
 				$existTerms[$name . '_hierarchical'] = $hierarchicalByLevel;
 			}
 		}
-		
+
 		return $existTerms;
-	}  
+	}
 
 	public function getDescendantIds( array $terms, $parentId ) {
 		$descendants = array();
@@ -4193,7 +4193,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$result['existsUsers']               = array();
 		}
 		$listTable = $param['listTable'];
-		
+
 		$mode = $param['calcMode'];
 		$need = ( 'full' === $mode && ! key_exists('light', $param['calcVars']) ) || 'light' === $mode;
 
@@ -4287,14 +4287,14 @@ class WoofiltersWpf extends ModuleWpf {
 
 													if ( strpos( $name, $prefix ) === 0 ) {
 														$name = str_replace( $prefix, '', $name );
-													}                                               
+													}
 												}
 
 												if ( isset( $existsTerms[ $name ] ) ) {
 													$result['exists'][ $name ] = $existsTerms[ $name ];
-												}                                           
-											}                                       
-										}                                   
+												}
+											}
+										}
 									}
 								}
 							}
@@ -4560,7 +4560,7 @@ class WoofiltersWpf extends ModuleWpf {
 					}
 				}
 			}
-			
+
 			return $original;
 		}
 
@@ -4620,7 +4620,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		$i       = 0;
 		$clauses = array( 'join' => array(), 'where' => array() );
-		
+
 		if ( empty($params['searchLogic']) ) {
 			foreach ( $values as $val ) {
 				++$i;
@@ -4673,7 +4673,7 @@ class WoofiltersWpf extends ModuleWpf {
 						}
 					}
 				}
-			}       
+			}
 		} elseif ( isset( $this->clausesByParam[ $mode ] ) ) {
 
 			foreach ( $this->clausesByParam[ $mode ] as $key => $clausesRemove ) {
