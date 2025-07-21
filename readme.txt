@@ -151,8 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
-= 2.8.6 - 20/07/2025 =
+= 2.8.6 - 21/07/2025 =
 * Dev - Go PRO tab - License prices updated.
+* Dev - "Reward points and loyalty plugin from WBW" admin message removed.
 * WC tested up to: 10.0.
 
 = 2.8.5 - 11/07/2025 =

@@ -1,9 +1,16 @@
 <?php
+/**
+ * Product Filter by WBW - OverviewWpf Class
+ *
+ * @version 2.8.6
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class OverviewWpf extends ModuleWpf {
 	public function init() {
-		if ( is_admin() ) {
-			add_action( 'admin_notices', array( $this, 'showAdminInfo' ) );
-		}
 		DispatcherWpf::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
 	}
 	public function addAdminTab( $tabs ) {
