@@ -26,7 +26,11 @@ class OverviewWpf extends ModuleWpf {
 	public function addAdminTab( $tabs ) {
 		if (!FrameWpf::_()->isWCLicense()) {
 			$tabs['overview'] = array(
-				'label' => esc_html__('Overview', 'woo-product-filter'), 'callback' => array($this, 'getOverviewTabContent'), 'fa_icon' => 'fa-info-circle', 'sort_order' => 5, 'is_main' => true,
+				'label'      => esc_html__('Overview', 'woo-product-filter'),
+				'callback'   => array($this, 'getOverviewTabContent'),
+				'fa_icon'    => 'fa-info-circle',
+				'sort_order' => 5,
+				'is_main'    => true,
 			);
 		}
 		return $tabs;
