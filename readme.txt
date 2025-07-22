@@ -153,6 +153,7 @@ You may help us translate the plugin into your language and get the PRO version 
 
 = 2.8.7 - 22/07/2025 =
 * Fix - Prevent possible "Critical Uncaught TypeError: array_merge(): Argument #2 must be of type array, WP_Error given" error.
+* Dev - Go PRO tab - License prices updated.
 
 = 2.8.6 - 21/07/2025 =
 * Fix - Fixed pagination URLs.
