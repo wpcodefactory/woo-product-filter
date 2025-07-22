@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 2.8.6
+ * @version 2.8.7
  *
  * @author  woobewoo
  */
@@ -2195,6 +2195,11 @@ class WoofiltersWpf extends ModuleWpf {
 		return $this->wcAttributes;
 	}
 
+	/**
+	 * getRenderMode.
+	 *
+	 * @version 2.8.7
+	 */
 	public function getRenderMode( $id, $settings, $isWidget = true ) {
 		if ( ! isset( $this->renderModes[ $id ] ) || empty( $this->renderModes[ $id ] ) ) {
 			if ( isset( $settings['settings'] ) ) {
@@ -2238,7 +2243,7 @@ class WoofiltersWpf extends ModuleWpf {
 					if ( $displayChildCat ) {
 						$catChild = array();
 						foreach ( $cats as $cat ) {
-							$catChild = array_merge( $catChild, get_term_children( $cat, 'product_cat' ) );
+							$catChild = array_merge( $catChild, $this->get_term_children_array( $cat, 'product_cat' ) );
 						}
 						$cats = array_merge( $cats, $catChild );
 					}
@@ -2259,7 +2264,7 @@ class WoofiltersWpf extends ModuleWpf {
 					if ( $displayChildBrand ) {
 						$brandChild = array();
 						foreach ( $brands as $brand ) {
-							$brandChild = array_merge( $brandChild, get_term_children( $brand, 'pwb-brand' ) );
+							$brandChild = array_merge( $brandChild, $this->get_term_children_array( $brand, 'pwb-brand' ) );
 						}
 						$brands = array_merge( $brands, $brandChild );
 					}
@@ -3715,6 +3720,8 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks
 	 *
+	 * @version 2.8.7
+	 *
 	 * @param $filterLoop
 	 * @param $param
 	 *
@@ -3966,7 +3973,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 				foreach ( $terms as $termId => $cnt ) {
 					if ( $calcWithChildren ) {
-						$termIds = get_term_children( $termId, $names[ $taxonomy ] );
+						$termIds = $this->get_term_children_array( $termId, $names[ $taxonomy ] );
 					} elseif ( isset( $childs[ $termId ] ) && ( $allCalc || isset( $calcCategories[ $termId ] ) ) ) {
 							$termIds = $childs[ $termId ];
 					} else {
@@ -4713,4 +4720,16 @@ class WoofiltersWpf extends ModuleWpf {
 		);
 		return DispatcherWpf::applyFilters('getDefaultSettings', $defaults);
 	}
+
+	/**
+	 * get_term_children_array.
+	 *
+	 * @version 2.8.7
+	 * @since   2.8.7
+	 */
+	function get_term_children_array( $term_id, $taxonomy ) {
+		$children = get_term_children( $term_id, $taxonomy );
+		return ( ! is_wp_error( $children ) ? $children : array() );
+	}
+
 }
