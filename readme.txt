@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.8
-Stable tag: 2.8.6
+Stable tag: 2.8.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -152,7 +152,7 @@ You may help us translate the plugin into your language and get the PRO version 
 == Changelog ==
 
 = 2.8.7 - 22/07/2025 =
-* Fix - Prevent possible "Critical Uncaught TypeError: array_merge(): Argument #2 must be of type array, WP_Error given" error.
+* Fix - Prevent possible `TypeError`.
 * Dev - Go PRO tab - License prices updated.
 
 = 2.8.6 - 21/07/2025 =
