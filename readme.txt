@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 2.8.8 - 23/07/2025 =
+* Fix - Fixed "YITH Request a Quote for WooCommerce" plugin compatibility issue.
+
 = 2.8.7 - 22/07/2025 =
 * Fix - Prevent possible `TypeError`.
 * Dev - Go PRO tab - License prices updated.
