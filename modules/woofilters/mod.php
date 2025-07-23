@@ -2848,14 +2848,11 @@ class WoofiltersWpf extends ModuleWpf {
 	 * @version 2.8.8
 	 */
 	public function YITH_hide_add_to_cart_loop( $link, $product ) {
-
 		if ( wp_doing_ajax() ) {
-
-			if ( get_option( 'ywraq_hide_add_to_cart' ) == 'yes' && function_exists( 'YITH_YWRAQ_Frontend' ) ) {
+			if ( 'yes' === get_option( 'ywraq_hide_add_to_cart' ) && function_exists( 'YITH_YWRAQ_Frontend' ) ) {
 				return YITH_YWRAQ_Frontend()->hide_add_to_cart_loop( $link, $product );
 			}
 		}
-
 		return $link;
 	}
 
