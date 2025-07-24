@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.8
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,7 @@ present the filters in various formats to suit your storefront's design and user
 Enable instant results without page reloads for a faster shopping  with AJAX live search. AJAX search provides instant filtering results without the need to reload the page. This feature can be configured to activate immediately after a user selects their desired filter options and clicks the filter button, making product searches faster and more intuitive.
 
 **[Elementor Integration](https://woobewoo.com/documentation/elementor-compatibility/ "Elementor Compatibility")**
-WooCommerce Product Filter compatible with Ellementor. Seamlessly create and customize filters using Elementor’s interface.
+WooCommerce Product Filter compatible with Elementor. Seamlessly create and customize filters using Elementor’s interface.
 All features of the WooCommerce Product Filter by WBW are accessible within the Elementor tab, providing a streamlined workflow for page building.
 
 To help you get started, there's a comprehensive video tutorial available that guides you through the process of setting up the WooCommerce Product Filter by WBW, ensuring you can make the most of its features to improve your online store's functionality and user experience.
@@ -151,7 +151,7 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
-= 2.8.8 - 23/07/2025 =
+= 2.8.8 - 24/07/2025 =
 * Fix - Fixed "YITH Request a Quote for WooCommerce" plugin compatibility issue.
 
 = 2.8.7 - 22/07/2025 =

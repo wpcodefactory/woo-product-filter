@@ -3,7 +3,7 @@
  * Plugin Name: Product Filter by WBW
  * Plugin URI: https://woobewoo.com/product/woocommerce-filter/
  * Description: Filter products in your store in most efficient way
- * Version: 2.8.8-dev-20250723-2151
+ * Version: 2.8.8
  * Author: woobewoo
  * Author URI: https://woobewoo.com/
  * Requires at least: 3.4.0
@@ -33,6 +33,7 @@ add_action( 'before_woocommerce_init', function () {
  * Connect all required core classes.
  */
 if ( trueRequestWpf() ) {
+
 	importClassWpf( 'DbWpf' );
 	importClassWpf( 'InstallerWpf' );
 	importClassWpf( 'BaseObjectWpf' );
@@ -45,6 +46,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'FieldWpf' );
 	importClassWpf( 'TableWpf' );
 	importClassWpf( 'FrameWpf' );
+
 	/**
 	 * Deprecated classes
 	 *
@@ -62,15 +64,18 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'ModInstallerWpf' );
 	importClassWpf( 'InstallerDbUpdaterWpf' );
 	importClassWpf( 'DateWpf' );
+
 	/**
 	 * Check plugin version - maybe we need to update database, and check global errors in request
 	 */
 	InstallerWpf::update();
 	ErrorsWpf::init();
+
 	/**
 	 * Start application
 	 */
 	FrameWpf::_()->parseRoute();
 	FrameWpf::_()->init();
 	FrameWpf::_()->exec();
+
 }
