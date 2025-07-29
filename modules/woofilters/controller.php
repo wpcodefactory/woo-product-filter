@@ -1,4 +1,12 @@
 <?php
+/**
+ * Product Filter by WBW - WoofiltersControllerWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class WoofiltersControllerWpf extends ControllerWpf {
 
 	protected $_code = 'woofilters';
@@ -37,7 +45,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 					FrameWpf::_()->getModule('meta')->calcNeededMetaValues();
 				}
 			}
-			
+
 			$html = FrameWpf::_()->getModule('woofilters')->getView()->renderHtml($data);
 
 			$html .= '<script type="text/javascript">window.wpfFrontendPage.init();' . ( $isPro ? 'window.wpfFrontendPage.eventsFrontendPro();' : '' ) . '</script>';
@@ -65,7 +73,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		if ( ! current_user_can('manage_options') ) {
 			wp_die();
 		}
-		
+
 		$res = new ResponseWpf();
 		$id  = $this->getModel('woofilters')->save(ReqWpf::get('post'));
 		if ( false != $id ) {
@@ -102,7 +110,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		if ( ! current_user_can('manage_options') ) {
 			wp_die();
 		}
-		
+
 		$res = new ResponseWpf();
 		$id  = $this->getModel('woofilters')->save(ReqWpf::get('post'));
 		if ( false != $id ) {
@@ -135,12 +143,12 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$onlyStatistics              = isset($params['only_statistics']);
 		$onlyFilterRecount           = $onlyStatistics || isset($params['only_recound']);
 		$synchroFilterId             = ! empty($params['synchro_filter_id']) ? $params['synchro_filter_id'] : '';
-				
+
 		if ( $onlyStatistics ) {
 			$filterSettings['only_have_found'] = true;
 			$filterSettings['filter_recount']  = 0;
 		}
-		
+
 		foreach ( $filtersDataBackend as $key => $filteringSettings ) {
 			if ( 'wpfCategory' == $filteringSettings['id'] ) {
 				$filterOrder = array_search($filteringSettings['uniqId'], array_column($generalSettings, 'uniqId'));
@@ -178,12 +186,12 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				$args['s'] = $urlQuery['s'];
 			}
 		}
-		
+
 		if ( isset($urlQuery['product_view']) ) {
 			$_GET['product_view']     = $urlQuery['product_view'];
 			$_REQUEST['product_view'] = $urlQuery['product_view'];
 		}
-		
+
 		$cacheArgs       = $args;
 		$categoryHtml    = '';
 		$productsHtml    = '';
@@ -273,7 +281,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$filteringVariations      = isset($filterSettings['filtering_by_variations']) ? $filterSettings['filtering_by_variations'] : false;
 		$displayProductVariations = $filteringVariations && isset($filterSettings['display_product_variations']) ? $filterSettings['display_product_variations'] : false;
 		$wpfFId                   = ! empty($filterSettings['wpf_fid']) ? $filterSettings['wpf_fid'] : '';
-		
+
 		if ( $removeActions ) {
 			remove_all_filters('posts_orderby');
 			remove_all_filters('pre_get_posts');
@@ -282,7 +290,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				remove_all_filters('posts_clauses');
 			}
 		}
-		
+
 		$module     = $this->getModule();
 		$taxonomies = $module->getFilterTaxonomies($generalSettings, ! is_null($calcParentCategory), $filterSettings, true, $urlQuery);
 		if ( ! $recount ) {
@@ -299,7 +307,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			DispatcherWpf::doAction('saveStatistics', $isFound);
 			return $res->ajaxExec();
 		}
-		
+
 		if ( false !== $filterItems ) {
 			$openOneByOne                = isset($filterSettings['open_one_by_one']) ? $filterSettings['open_one_by_one'] : 0;
 			$displayOnlyChildrenCategory = isset($filterSettings['display_only_children_category']) ? $filterSettings['display_only_children_category'] : 0;
@@ -339,7 +347,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 			$loopFoundPost = 0;
 			if ( $showProducts || empty($categoryHtml) ) {
-				
+
 				//get products
 				if ( FrameWpf::_()->proVersionCompare('1.4.8') ) {
 					//$loop = new WP_Query($module->addBeforeFiltersFrontendArgs($args, $filterSettings));
@@ -507,7 +515,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$res->addData('prices', $prices);
 		$res->addData('jscript', $jscript);
 		$res->addData('fid', $wpfFId);
-		
+
 		if ( isset($optionsHtml) ) {
 			$res->addData('optionsHtml', $optionsHtml);
 		}
@@ -517,35 +525,35 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 	public function getOptionsHtml( &$exists, $generalSettings ) {
 		$optionsHtml = array();
-		
+
 		foreach ( $exists as $key => $value ) {
 			if ( substr($key, -13) === '_hierarchical' ) {
-				$taxonomy = substr($key, 0, -13);                 
-				
+				$taxonomy = substr($key, 0, -13);
+
 				$allTermIds = array();
-								
+
 				foreach ( $value as $levelTerms ) {
 					$allTermIds = array_merge($allTermIds, array_keys($levelTerms));
 				}
-								
+
 				if ( ! empty($allTermIds) ) {
 					$terms = get_terms(array(
 						'taxonomy'   => $taxonomy,
 						'include'    => $allTermIds,
 						'hide_empty' => false,
 					));
-										
+
 					$termsById = array();
 					if ( ! is_wp_error($terms) && ! empty($terms) ) {
 						foreach ( $terms as $term ) {
 							$termsById[$term->term_id] = $term;
 						}
-					}                    
-			   
+					}
+
 					foreach ( $value as $level => $levelTerms ) {
 						if ( ! isset($optionsHtml[$level]) ) {
-							$text                = esc_html__( isset( $generalSettings[$level]['settings']['f_dropdown_first_option_text']) 
-							? $generalSettings[$level]['settings']['f_dropdown_first_option_text'] 
+							$text                = esc_html__( isset( $generalSettings[$level]['settings']['f_dropdown_first_option_text'])
+							? $generalSettings[$level]['settings']['f_dropdown_first_option_text']
 							: 'Select all', 'woo-product-filter');
 							$optionsHtml[$level] = '<option value="" data-slug="">' . $text . '</option>';
 						}
@@ -555,7 +563,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 								$term     = $termsById[$termId];
 								$termName = esc_attr($term->name);
 								$termSlug = esc_attr($term->slug);
-								
+
 								$optionsHtml[$level] .= '<option data-term-name="' . $termName . '" ' .
 									'value="' . $termId . '" ' .
 									'data-term-slug="' . $termSlug . '" ' .
@@ -567,11 +575,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 						}
 					}
 				}
-				
-				unset($exists[$key]); 
+
+				unset($exists[$key]);
 			}
 		}
-		
+
 		return $optionsHtml;
 	}
 
@@ -716,7 +724,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				'settings' => $woocommerceSettings['woocommercefSortBy'],
 			);
 		}
-		
+
 		$temp = array();
 		foreach ( $filtersDataBackend as $setting ) {
 			if ( ! empty($setting['settings']) ) {
@@ -725,12 +733,12 @@ class WoofiltersControllerWpf extends ControllerWpf {
 					$args['meta_query'][] = $metaQuery;
 					continue;
 				}
-				
+
 				switch ( $setting['id'] ) {
 					case 'wpfPrice':
 						$priceStr = $setting['settings'][0];
 						$priceVal = explode(',', $priceStr);
-						
+
 						if ( $priceVal[0] >= 0 && $priceVal[1] >= 0 ) {
 							$temp['wpfPrice']['wpf_min_price'] = $priceVal[0];
 							$temp['wpfPrice']['wpf_max_price'] = $priceVal[1];

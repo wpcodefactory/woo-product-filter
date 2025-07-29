@@ -1,5 +1,13 @@
 <?php
-class WoofiltersModelWpf extends ModelWpf {	
+/**
+ * Product Filter by WBW - WoofiltersModelWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+class WoofiltersModelWpf extends ModelWpf {
 	public function __construct() {
 		$this->_setTbl('filters');
 	}
@@ -153,11 +161,11 @@ class WoofiltersModelWpf extends ModelWpf {
 
 	public function getSortByFilterLabels ( $params = [] ) {
 		$labels = $this->getFilterLabels('SortBy');
-		
+
 		if ( $params ) {
 			$newLabels = [];
 			$field = 'f_options[]';
-			
+
 			foreach ( $params as $key=>$value ) {
 				if ('wpfSortBy' == $value->id && isset($value->settings) && !empty($value->settings->{$field})) {
 					foreach ( explode(',', $value->settings->{$field}) as $_key=>$_value ) {
@@ -168,7 +176,7 @@ class WoofiltersModelWpf extends ModelWpf {
 					break;
 				}
 			}
-			
+
 			if ($newLabels) {
 				if (count($newLabels) != count($labels) ) {
 					$diff = array_diff($labels, $newLabels);
@@ -179,7 +187,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				return $newLabels;
 			}
 		}
-		
+
 		return $labels;
 	}
 
@@ -277,7 +285,7 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 
 		$settings                             = isset($data['settings']) ? $data['settings'] : array();
-		
+
 		$data['settings']['css_editor']       = isset($settings['css_editor']) ? base64_encode($settings['css_editor']) : '';
 		$data['settings']['js_editor']        = isset($settings['js_editor']) ? base64_encode($settings['js_editor']) : '';
 		$data['settings']['filters']['order'] = isset($settings['filters']) && isset($settings['filters']['order']) ? stripslashes($settings['filters']['order']) : '';
@@ -300,7 +308,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	}
 
 	/**
-	 * WPML string translation 
+	 * WPML string translation
 	 */
 	private function translateStrings( $data_settings ) {
 		$filters_arr = json_decode($data_settings['filters']['order'], true);
@@ -380,7 +388,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				}
 			}
 		}
-		
+
 		$metaKeys = DispatcherWpf::applyFilters('addCustomMetaKeys', $metaKeys, $filters);
 		foreach ($metaKeys as $k => $key) {
 			$metaKeys[$k] = strtolower($key);
@@ -401,7 +409,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				$this->addWhere(array('id' => $id));
 			}
 			$data = $this->setSelectFields('meta_keys')->addWhere("meta_keys is null OR meta_keys!=''")->getFromTbl(array('return' => 'col'));
-			
+
 			foreach ($data as $str) {
 				if (is_null($str)) {
 					$deep = true;
@@ -430,6 +438,6 @@ class WoofiltersModelWpf extends ModelWpf {
 				}
 			}
 		}
-		return $keys;	
+		return $keys;
 	}
 }
