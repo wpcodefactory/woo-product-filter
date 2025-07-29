@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 2.8.8
+ * @version 2.9.0
  *
  * @author  woobewoo
  */
@@ -299,7 +299,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * addElementorParamsToPagenationLinks.
 	 *
-	 * @version 2.8.6
+	 * @version 2.9.0
 	 */
 	public function addElementorParamsToPagenationLinks( $widget_content ) {
 		$pattern = '/<a\s+[^>]*class=["\'][^"\']*page-numbers[^"\']*["\'][^>]*href=["\']([^"\']+)["\'][^>]*>/i';
@@ -322,7 +322,11 @@ class WoofiltersWpf extends ModuleWpf {
 
 			$newParams = array_merge($existingParams, $get);
 			foreach ( $newParams as $key => $value ) {
-				$newParams[$key] = stripcslashes($value);
+				$newParams[$key] = (
+					is_array($value) ?
+					array_map('stripcslashes', $value) :
+					stripcslashes($value)
+				);
 			}
 
 			$scheme    = ( isset($urlParts['scheme']) ? $urlParts['scheme'] : '' );
