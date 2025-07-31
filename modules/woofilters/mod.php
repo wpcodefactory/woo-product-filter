@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 2.9.0
+ * @version 2.9.1
  *
  * @author  woobewoo
  */
@@ -345,9 +345,19 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * forceProductFilter.
 	 *
-	 * @version 2.8.6
+	 * @version 2.9.1
 	 */
 	public function forceProductFilter( $query ) {
+
+		$uri = (
+			empty( $_SERVER['REQUEST_URI'] ) ?
+			'' :
+			sanitize_text_field( $_SERVER['REQUEST_URI'] )
+		);
+		if ( false !== strpos( $uri, 'wp-json/wc-analytics/' ) ) {
+			return $query;
+		}
+
 		$existFilter = false;
 		$blocksApi   = false;
 		if ( ! empty( $this->renderModes ) ) {
@@ -359,7 +369,6 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 		}
 		if ( ! $existFilter ) {
-			$uri       = empty($_SERVER['REQUEST_URI']) ? '' : sanitize_text_field($_SERVER['REQUEST_URI']);
 			$blocksApi = strpos( $uri, 'wp-json/wc/store/') && strpos( $uri, '/products?');
 		}
 		if ( ! $existFilter ) {

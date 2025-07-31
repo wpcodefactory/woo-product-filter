@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 2.9.1 - 31/07/2025 =
+* Fix - WooCommerce Analytics issue fixed (`forceProductFilter()`).
+
 = 2.9.0 - 29/07/2025 =
 * Fix - Elementor pagination URLs - `stripcslashes()` - Array issue fixed.
 
