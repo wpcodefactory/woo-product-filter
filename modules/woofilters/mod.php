@@ -292,7 +292,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		$exclude = array('section', 'column', 'social-icons', 'shortcode', 'heading', 'text-editor', 'icon-list', 'image', 'navigation-menu', 'hfe-cart', 'site-logo', 'icon');
 		if ( ! in_array($widgetName, $exclude) && ( '' !== $this->mainWCQueryFiltered || $this->isFiltered(false) ) ) {
-			// besa-site-logo: for compatibiliry with Besa Theme
+			// besa-site-logo: for compatibility with Besa Theme
 			if ( ( $paged > 0 && 'popularity' != $orderby && 'shop-standard' != $widgetName )
 				|| ( in_array($widgetName, array('archive-posts', 'besa-site-logo')) && get_query_var( 'wpf_query' ) == 1 ) ) {
 				if ( '' !== $this->mainWCQueryFiltered ) {
@@ -1091,7 +1091,6 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( empty($vendor) ) {
 				$vendor = $data['vendors'];
 			}
-			//$userObj = get_user_by( 'slug', ReqWpf::getVar( 'vendors' ) );
 			$userObj = get_user_by( 'slug', $vendor );
 			if ( isset( $userObj->ID ) ) {
 				$fields['author'] = $userObj->ID;
@@ -1210,7 +1209,7 @@ class WoofiltersWpf extends ModuleWpf {
 		$isPreselect = ( 'preselect' == $mode || ReqWpf::getVar('wpf_preselects') == '1' );
 		$isSlugs     = ( 'url' == $mode && ! $isPreselect );
 
-		// custom tahonomy attr block
+		// custom taxonomy attr block
 		if ( ! empty( $taxQuery ) ) {
 			foreach ( $taxQuery as $i => $tax ) {
 				if ( is_array( $tax ) && isset( $tax['field'] ) && 'slug' == $tax['field'] ) {
@@ -1611,7 +1610,7 @@ class WoofiltersWpf extends ModuleWpf {
 		// allow show subcategories only if nothing is selected
 		if ( $this->isFiltered( false ) ) {
 			remove_filter( 'woocommerce_product_loop_start', 'woocommerce_maybe_show_product_subcategories' );
-			//compatibility with Product Table for WooCommerce by CodeAstrology (WooproductTable)
+			// compatibility with Product Table for WooCommerce by CodeAstrology (WooproductTable)
 			if ( ! empty($q->get('wpt_query_type')) ) {
 				$q->set('suppress_filters', 0);
 			}
@@ -1761,9 +1760,7 @@ class WoofiltersWpf extends ModuleWpf {
 		} else {
 			$metaKeyId = $this->getMetaKeyId( '_price' );
 			if ( $metaKeyId ) {
-				$metaDataTable = DbWpf::getTableName( 'meta_data' );
-				//$args['join']   .= ' LEFT JOIN ' . $metaDataTable . ' AS wpf_price_order ON (wpf_price_order.product_id=' . $wpdb->posts . '.ID AND wpf_price_order.key_id=' . $metaKeyId . ')';
-				//$args['orderby'] = ' wpf_price_order.val_dec ASC, wpf_price_order.product_id ';
+				$metaDataTable   = DbWpf::getTableName( 'meta_data' );
 				$func            = ( FrameWpf::_()->getModule('options')->get('use_max_price') == 1 ? 'max' : 'min' );
 				$args['join']   .= ' LEFT JOIN (SELECT wpf_t.product_id, ' . $func . '(wpf_t.val_dec) as wpf_price FROM ' . $metaDataTable . ' as wpf_t WHERE wpf_t.key_id=' . $metaKeyId . ' GROUP BY wpf_t.product_id) as wpf_price_order ON (wpf_price_order.product_id=' . $wpdb->posts . '.ID)';
 				$args['orderby'] = ' wpf_price_order.wpf_price ASC, ' . $wpdb->posts . '.ID ';
@@ -2658,7 +2655,7 @@ class WoofiltersWpf extends ModuleWpf {
 			return $taxQuery;
 		}
 
-		//for leer tax_query change OR-relation to AND
+		// for leer tax_query change OR-relation to AND
 		if ( ! empty($taxQuery['relation']) && 'OR' == $taxQuery['relation'] ) {
 			$isLeer  = true;
 			$exclude = array('relation', 'wpf_tax');
@@ -2768,7 +2765,7 @@ class WoofiltersWpf extends ModuleWpf {
 			'label'      => esc_html__( 'Show All Filters', 'woo-product-filter' ),
 			'callback'   => array( $this, 'getTabContent' ),
 			'fa_icon'    => 'fa-list',
-			'sort_order' => 20, //'is_main' => true,
+			'sort_order' => 20,
 		);
 
 		return $tabs;
@@ -3728,7 +3725,6 @@ class WoofiltersWpf extends ModuleWpf {
 					break;
 			}
 			if ( ! $onlyHaveFound ) {
-				//if ( ( 'full' === $mode && ! key_exists( 'light', $calc ) ) || 'light' === $mode ) {
 				if ( 'full' === $mode || 'light' === $mode ) {
 					$param  = array_merge( $param, array(
 						'listTable'  => $listTable,
@@ -3915,9 +3911,9 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( class_exists( 'Iconic_WSSV_Query' ) ) {
 			$args = $this->Iconic_Wssv_Query_Args( $args );
 		}
-		//Integration with AJAX Search for WooCommerce
 
 		/**
+		 * Integration with AJAX Search for WooCommerce.
 		 * Plugin URL: https://wordpress.org/plugins/ajax-search-for-woocommerce/
 		 * Author: Damian Góra
 		 */
@@ -4047,7 +4043,6 @@ class WoofiltersWpf extends ModuleWpf {
 					}
 				}
 				if ( ! empty($attrTaxonomyList) ) {
-					//$query = 'SELECT wpf_temp.id, p_vars.id as child, md_vals.value, (CASE ' . $case . " ELSE '' END) as taxonomy" .
 					$query                   = "SELECT wpf_temp.id, p_vars.id as child, md_vals.value, REPLACE(md_keys.meta_key, 'attribute_', '') as taxonomy" .
 						' FROM ' . $listTable . ' as wpf_temp' .
 						' INNER JOIN #__posts as p_vars on (p_vars.post_parent=wpf_temp.id)' .
