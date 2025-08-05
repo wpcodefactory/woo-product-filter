@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 2.9.1
+ * @version 2.9.2
  *
  * @author  woobewoo
  */
@@ -1332,6 +1332,11 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 	}
 
+	/**
+	 * loadProductsFilter.
+	 *
+	 * @version 2.9.2
+	 */
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
 
@@ -1524,9 +1529,9 @@ class WoofiltersWpf extends ModuleWpf {
 
 		if ( $isUseCategoryFiltration ) {
 			if ( is_null($categoryPageId) && is_product_category() ) {
-				$categoryPageId = get_queried_object_id();
+				$categoryPageId = $this->maybe_get_queried_object_id();
 			}
-			if ( ! is_null($categoryPageId) && $this->isFiltered( false ) ) {
+			if ( $categoryPageId && $this->isFiltered( false ) ) {
 				if ( $this->needSubcategoriesDisplay($categoryPageId) ) {
 					wc_set_loop_prop('is_filtered', false);
 				}
@@ -2219,7 +2224,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getRenderMode.
 	 *
-	 * @version 2.8.7
+	 * @version 2.9.2
 	 */
 	public function getRenderMode( $id, $settings, $isWidget = true ) {
 		if ( ! isset( $this->renderModes[ $id ] ) || empty( $this->renderModes[ $id ] ) ) {
@@ -2269,8 +2274,8 @@ class WoofiltersWpf extends ModuleWpf {
 						$cats = array_merge( $cats, $catChild );
 					}
 
-					$parent_id = get_queried_object_id();
-					if ( in_array( $parent_id, $cats ) ) {
+					$parent_id = $this->maybe_get_queried_object_id();
+					if ( $parent_id && in_array( $parent_id, $cats ) ) {
 						$displayCategory = true;
 					}
 				} elseif ( 'custom_pwb' === $displayOnPage ) {
@@ -2290,8 +2295,8 @@ class WoofiltersWpf extends ModuleWpf {
 						$brands = array_merge( $brands, $brandChild );
 					}
 
-					$parent_id = get_queried_object_id();
-					if ( in_array( $parent_id, $brands ) ) {
+					$parent_id = $this->maybe_get_queried_object_id();
+					if ( $parent_id && in_array( $parent_id, $brands ) ) {
 						$displayBrand = true;
 					}
 				} elseif ( is_shop() || is_product_category() || is_product_tag() || is_customize_preview() ) {
@@ -2387,6 +2392,11 @@ class WoofiltersWpf extends ModuleWpf {
 		return isset( $GLOBALS['woocommerce_loop'], $GLOBALS['woocommerce_loop'][ $prop ] ) ? $GLOBALS['woocommerce_loop'][ $prop ] : '';
 	}
 
+	/**
+	 * getDisplayMode.
+	 *
+	 * @version 2.9.2
+	 */
 	public function getDisplayMode() {
 		if ( is_null( $this->displayMode ) ) {
 			$mode = '';
@@ -2398,9 +2408,9 @@ class WoofiltersWpf extends ModuleWpf {
 				if ( is_shop() ) {
 					$display_type = get_option( 'woocommerce_shop_page_display', '' );
 				} elseif ( is_product_category() ) {
-					$parent_id    = get_queried_object_id();
-					$display_type = get_term_meta( $parent_id, 'display_type', true );
-					$display_type = '' === $display_type ? get_option( 'woocommerce_category_archive_display', '' ) : $display_type;
+					$parent_id    = $this->maybe_get_queried_object_id();
+					$display_type = ( $parent_id ? get_term_meta( $parent_id, 'display_type', true ) : '' );
+					$display_type = ( '' === $display_type ? get_option( 'woocommerce_category_archive_display', '' ) : $display_type );
 				}
 
 				if ( ( ! is_shop() || 'subcategories' !== $display_type ) && 1 < $this->wpf_get_loop_prop( 'current_page' ) ) {
@@ -4743,6 +4753,17 @@ class WoofiltersWpf extends ModuleWpf {
 	function get_term_children_array( $term_id, $taxonomy ) {
 		$children = get_term_children( $term_id, $taxonomy );
 		return ( ! is_wp_error( $children ) ? $children : array() );
+	}
+
+	/**
+	 * maybe_get_queried_object_id.
+	 *
+	 * @version 2.9.2
+	 * @since   2.9.2
+	 */
+	function maybe_get_queried_object_id() {
+		global $wp_query;
+		return ( $wp_query ? $wp_query->get_queried_object_id() : 0 );
 	}
 
 }

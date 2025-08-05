@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 2.9.2 - 05/08/2025 =
+* Fix - Prevent possible `get_queried_object_id()` error.
+
 = 2.9.1 - 31/07/2025 =
 * Fix - WooCommerce Analytics issue fixed (`forceProductFilter()`).
 
