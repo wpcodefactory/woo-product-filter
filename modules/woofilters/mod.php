@@ -3084,7 +3084,7 @@ class WoofiltersWpf extends ModuleWpf {
 	}
 
 	/**
-	 * Add plugin compatibility wp_query filtering results args
+	 * Add plugin compatibility wp_query filtering results args.
 	 *
 	 * @link https://iconicwp.com/products/woocommerce-show-single-variations
 	 *
@@ -4743,7 +4743,7 @@ class WoofiltersWpf extends ModuleWpf {
 	}
 
 	/**
-	 * Exclude parent terms from term list.
+	 * Exclude child terms from term list.
 	 *
 	 * @param array $termList
 	 * @param string $taxonomy
@@ -4754,7 +4754,7 @@ class WoofiltersWpf extends ModuleWpf {
 		foreach ( $termList as $key => $termId ) {
 			$children = get_term_children( $termId, $taxonomy );
 			if ( is_array( $children ) ) {
-				// remove all parent termsId from main parent list
+				// remove all child termsId from main list
 				foreach ( $children as $childId ) {
 					if ( array_search( $childId, $termList ) !== false ) {
 						$keyParent = array_search( $childId, $termList );
