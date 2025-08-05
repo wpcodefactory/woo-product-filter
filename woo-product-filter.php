@@ -48,7 +48,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'FrameWpf' );
 
 	/**
-	 * Deprecated classes
+	 * Deprecated classes.
 	 *
 	 * @deprecated since version 1.0.1
 	 */
@@ -66,13 +66,13 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'DateWpf' );
 
 	/**
-	 * Check plugin version - maybe we need to update database, and check global errors in request
+	 * Check plugin version - maybe we need to update database, and check global errors in request.
 	 */
 	InstallerWpf::update();
 	ErrorsWpf::init();
 
 	/**
-	 * Start application
+	 * Start application.
 	 */
 	FrameWpf::_()->parseRoute();
 	FrameWpf::_()->init();
