@@ -86,19 +86,19 @@ class TemplatesWpf extends ModuleWpf {
 
 		$ajaxurl = admin_url('admin-ajax.php');
 		$jsData = array(
-			'siteUrl'					=> WPF_SITE_URL,
-			'imgPath'					=> WPF_IMG_PATH,
-			'cssPath'					=> WPF_CSS_PATH,
-			'loader'					=> WPF_LOADER_IMG,
-			'close'						=> WPF_IMG_PATH . 'cross.gif',
-			'ajaxurl'					=> $ajaxurl,
-			'options'					=> FrameWpf::_()->getModule('options')->getAllowedPublicOptions(),
-			'WPF_CODE'					=> WPF_CODE,
-			'jsPath'					=> WPF_JS_PATH,
+			'siteUrl'  => WPF_SITE_URL,
+			'imgPath'  => WPF_IMG_PATH,
+			'cssPath'  => WPF_CSS_PATH,
+			'loader'   => WPF_LOADER_IMG,
+			'close'    => WPF_IMG_PATH . 'cross.gif',
+			'ajaxurl'  => $ajaxurl,
+			'options'  => FrameWpf::_()->getModule('options')->getAllowedPublicOptions(),
+			'WPF_CODE' => WPF_CODE,
+			'jsPath'   => WPF_JS_PATH,
 		);
 		if (is_admin()) {
-			$jsData['isPro'] = FrameWpf::_()->getModule('promo')->isPro();
-			$jsData['mainLink'] = FrameWpf::_()->getModule('promo')->getMainLink();
+			$jsData['isPro']       = FrameWpf::_()->getModule('promo')->isPro();
+			$jsData['mainLink']    = FrameWpf::_()->getModule('promo')->getMainLink();
 			$jsData['isWCLicense'] = FrameWpf::_()->isWCLicense();
 		}
 		$jsData = DispatcherWpf::applyFilters('jsInitVariables', $jsData);
@@ -131,12 +131,12 @@ class TemplatesWpf extends ModuleWpf {
 
 	public function loadCoreCss( $isElementorEditor = false ) {
 		$this->_styles = array(
-			'styleWpf'			=> array('path' => WPF_CSS_PATH . 'style.css', 'for' => 'admin'),
-			'woobewoo-uiWpf'	=> array('path' => WPF_CSS_PATH . 'woobewoo-ui' . ( FrameWpf::_()->isWCLicense() ? '-wc' : '' ) . '.css', 'for' => 'admin'),
-			'dashicons'			=> array('for' => 'admin'),
-			'bootstrap-alerts'	=> array('path' => WPF_CSS_PATH . 'bootstrap-alerts.css', 'for' => 'admin'),
-			'icheck'			=> array('path' => WPF_CSS_PATH . 'jquery.icheck.css', 'for' => 'admin'),
-			'wp-color-picker'	=> array('for' => 'admin'),
+			'styleWpf'         => array('path' => WPF_CSS_PATH . 'style.css', 'for' => 'admin'),
+			'woobewoo-uiWpf'   => array('path' => WPF_CSS_PATH . 'woobewoo-ui' . ( FrameWpf::_()->isWCLicense() ? '-wc' : '' ) . '.css', 'for' => 'admin'),
+			'dashicons'        => array('for' => 'admin'),
+			'bootstrap-alerts' => array('path' => WPF_CSS_PATH . 'bootstrap-alerts.css', 'for' => 'admin'),
+			'icheck'           => array('path' => WPF_CSS_PATH . 'jquery.icheck.css', 'for' => 'admin'),
+			'wp-color-picker'  => array('for' => 'admin'),
 		);
 		foreach ($this->_styles as $s => $sInfo) {
 			if ($isElementorEditor) {
