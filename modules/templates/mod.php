@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
+ * @version 2.9.3
+ *
  * @author  woobewoo
  */
 
@@ -78,11 +80,20 @@ class TemplatesWpf extends ModuleWpf {
 		FrameWpf::_()->addScript('wp-color-picker');
 	}
 
+	/**
+	 * loadCoreJs.
+	 *
+	 * @version 2.9.3
+	 */
 	public function loadCoreJs() {
 		FrameWpf::_()->addScript('jquery');
 
 		FrameWpf::_()->addScript('commonWpf', WPF_JS_PATH . 'common.js', array('jquery'));
 		FrameWpf::_()->addScript('coreWpf', WPF_JS_PATH . 'core.js', array('jquery'));
+
+		if ( 1 == FrameWpf::_()->getModule('options')->getModel()->get('price_thousands_sep') ) {
+			FrameWpf::_()->addScript('WpfPriceThousandsSep', WPF_JS_PATH . 'price-thousands-sep.js', array('jquery'));
+		}
 
 		$ajaxurl = admin_url('admin-ajax.php');
 		$jsData = array(

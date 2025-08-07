@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - MetaWpf Class
  *
+ * @version 2.9.3
+ *
  * @author  woobewoo
  */
 
@@ -49,6 +51,11 @@ class MetaWpf extends ModuleWpf {
 		return $steps;
 	}
 
+	/**
+	 * addOptions.
+	 *
+	 * @version 2.9.3
+	 */
 	public function addOptions( $options ) {
 		$opts = array_merge(array(
 			'start_indexing' => array(
@@ -97,6 +104,12 @@ class MetaWpf extends ModuleWpf {
 				'html'         => 'checkboxHiddenVal',
 				'def'          => '0',
 				'add_sub_opts' => array( $this, 'getSettingsOptimizingSchedule' ),
+			),
+			'price_thousands_sep' => array(
+				'label'        => esc_html__( 'Price thousands separator', 'woo-product-filter' ),
+				'desc'         => esc_html__( 'Add thousands separator to the min/max prices in the Price filter', 'woo-product-filter' ),
+				'html'         => 'checkboxHiddenVal',
+				'def'          => '0',
 			),
 		), $options['general']['opts']);
 
