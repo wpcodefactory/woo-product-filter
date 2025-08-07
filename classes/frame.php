@@ -1,30 +1,38 @@
 <?php
+/**
+ * Product Filter by WBW - FrameWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class FrameWpf {
 
-	private $_modules = array();
-	private $_tables = array();
-	private $_allModules = array();
+	private $_modules            = array();
+	private $_tables             = array();
+	private $_allModules         = array();
 	/**
 	 * Uses to know if we are on one of the plugin pages
 	 */
-	private $_inPlugin = false;
+	private $_inPlugin           = false;
 	/**
 	 * Array to hold all scripts and add them in one time in addScripts method
 	 */
-	private $_scripts = array();
+	private $_scripts            = array();
 	private $_scriptsInitialized = false;
-	private $_styles = array();
-	private $_stylesInitialized = false;
-	private $_useFootAssets = false;
+	private $_styles             = array();
+	private $_stylesInitialized  = false;
+	private $_useFootAssets      = false;
 
-	private $_scriptsVars = array();
-	private $_mod = '';
-	private $_action = '';
-	private $_proVersion = null;
+	private $_scriptsVars        = array();
+	private $_mod                = '';
+	private $_action             = '';
+	private $_proVersion         = null;
 	/**
 	 * Object with result of executing non-ajax module request
 	 */
-	private $_res = null;
+	private $_res                = null;
 
 	public function __construct() {
 		$this->_res = toeCreateObjWpf('response', array());
@@ -99,7 +107,6 @@ class FrameWpf {
 				if (is_dir($moduleLocationDir . $code)) {
 					$this->_allModules[$m['code']] = 1;
 					if ((bool) $m['active']) {
-						//importClassWpf($code . strFirstUpWpf(WPF_CODE), $moduleLocationDir . $code . DS . 'mod.php');
 						if (!class_exists($code . strFirstUpWpf(WPF_CODE))) {
 							if (file_exists($moduleLocationDir . $code . DS . 'mod.php')) {
 								require $moduleLocationDir . $code . DS . 'mod.php';
@@ -200,7 +207,7 @@ class FrameWpf {
 	}
 
 	/**
-	 * Check permissions for action in controller by $code and made corresponding action
+	 * Check permissions for action in controller by $code and made corresponding action.
 	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
@@ -215,7 +222,7 @@ class FrameWpf {
 	}
 
 	/**
-	 * Check permissions for action in controller by $code
+	 * Check permissions for action in controller by $code.
 	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
@@ -227,7 +234,7 @@ class FrameWpf {
 		$action = strtolower($action);
 		if ($mod) {
 			$permissions = $mod->getController()->getPermissions();
-			if (!empty($permissions)) {  // Special permissions
+			if (!empty($permissions)) { // Special permissions
 				if (isset($permissions[WPF_METHODS]) && !empty($permissions[WPF_METHODS])) {
 					foreach ($permissions[WPF_METHODS] as $method => $permissions) {   // Make case-insensitive
 						$permissions[WPF_METHODS][strtolower($method)] = $permissions;
@@ -249,7 +256,7 @@ class FrameWpf {
 					}
 					foreach ($permissions[WPF_USERLEVELS] as $userlevel => $methods) {
 						if (is_array($methods)) {
-							$lowerMethods = array_map('strtolower', $methods);          // Make case-insensitive
+							$lowerMethods = array_map('strtolower', $methods);           // Make case-insensitive
 							if (in_array($action, $lowerMethods)) {                      // Permission for this method exists
 								if ($currentUserPosition != $userlevel) {
 									$res = false;
@@ -257,7 +264,7 @@ class FrameWpf {
 								break;
 							}
 						} else {
-							$lowerMethod = strtolower($methods);            // Make case-insensitive
+							$lowerMethod = strtolower($methods);             // Make case-insensitive
 							if ($lowerMethod == $action) {                   // Permission for this method exists
 								if ($currentUserPosition != $userlevel) {
 									$res = false;
@@ -357,7 +364,6 @@ class FrameWpf {
 	}
 
 	protected function _extractTable( $tableName, $tablesDir = WPF_TABLES_DIR ) {
-		//importClassWpf('noClassNameHere', $tablesDir . $tableName . '.php');
 		if (!class_exists('noClassNameHere')) {
 			if (file_exists($tablesDir . $tableName . '.php')) {
 				require $tablesDir . $tableName . '.php';
@@ -367,7 +373,7 @@ class FrameWpf {
 	}
 
 	/**
-	 * Public alias for _extractTables method
+	 * Public alias for _extractTables method.
 	 *
 	 * @see _extractTables
 	 */
@@ -386,7 +392,7 @@ class FrameWpf {
 	}
 
 	/**
-	 * Return table by name
+	 * Return table by name.
 	 *
 	 * @param string $tableName table name in database
 	 * @return object table
@@ -433,7 +439,7 @@ class FrameWpf {
 	}
 
 	/**
-	 * Push data to script array to use it all in addScripts method
+	 * Push data to script array to use it all in addScripts method.
 	 *
 	 * @see wp_enqueue_script definition
 	 */
@@ -457,7 +463,7 @@ class FrameWpf {
 	}
 
 	/**
-	 * Add all scripts from _scripts array to wordpress
+	 * Add all scripts from _scripts array to wordpress.
 	 */
 	public function addScripts() {
 		if (!empty($this->_scripts)) {
@@ -525,10 +531,10 @@ class FrameWpf {
 		} else {
 			$this->_styles[] = array(
 				'handle' => $handle,
-				'src' => $src,
-				'deps' => $deps,
-				'ver' => $ver,
-				'media' => $media,
+				'src'    => $src,
+				'deps'   => $deps,
+				'ver'    => $ver,
+				'media'  => $media,
 			);
 		}
 	}
