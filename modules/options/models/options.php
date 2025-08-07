@@ -8,21 +8,25 @@
 defined( 'ABSPATH' ) || exit;
 
 class OptionsModelWpf extends ModelWpf {
-	private $_values = array();
+
+	private $_values       = array();
 	private $_valuesLoaded = false;
 
 	public function get( $optKey ) {
 		$this->_loadOptValues();
 		return isset($this->_values[ $optKey ]) ? $this->_values[ $optKey ]['value'] : false;
 	}
+
 	public function getChanged( $optKey ) {
 		$this->_loadOptValues();
 		return isset($this->_values[ $optKey ]) ? $this->_values[ $optKey ]['changed_on'] : false;
 	}
+
 	public function isEmpty( $optKey ) {
 		$value = $this->get($optKey);
 		return ( false === $value );
 	}
+
 	public function save( $optKey, $val, $ignoreDbUpdate = false ) {
 		$this->_loadOptValues();
 		if (!isset($this->_values[ $optKey ]) || $this->_values[ $optKey ]['value'] != $val) {
@@ -36,12 +40,14 @@ class OptionsModelWpf extends ModelWpf {
 			}
 		}
 	}
+
 	public function getAll() {
 		$this->_loadOptValues();
 		return $this->_values;
 	}
+
 	/**
-	 * Pass throught refferer - to not lose memory for copy of same opts array
+	 * Pass through referer - to not lose memory for copy of same opts array.
 	 */
 	public function fillInValues( &$options ) {
 		$this->_loadOptValues();
@@ -49,11 +55,11 @@ class OptionsModelWpf extends ModelWpf {
 			foreach ($cData['opts'] as $optKey => $optData) {
 				$value = 0;
 				$changedOn = 0;
-				// Retrive value from saved options
+				// Retrieve value from saved options
 				if (isset($this->_values[ $optKey ])) {
 					$value = $this->_values[ $optKey ]['value'];
 					$changedOn = isset($this->_values[ $optKey ]['changed_on']) ? $this->_values[ $optKey ]['changed_on'] : '';
-				} elseif (isset($optData['def'])) {	// If there were no saved data - set it as default
+				} elseif (isset($optData['def'])) { // If there were no saved data - set it as default
 					$value = $optData['def'];
 				}
 				$options[ $cKey ]['opts'][ $optKey ]['value'] = $value;
@@ -64,6 +70,7 @@ class OptionsModelWpf extends ModelWpf {
 			}
 		}
 	}
+
 	public function saveGroup( $d = array() ) {
 		if (isset($d['opt_values']) && is_array($d['opt_values']) && !empty($d['opt_values'])) {
 			DispatcherWpf::doAction('beforeSaveOpts', $d);
@@ -94,9 +101,11 @@ class OptionsModelWpf extends ModelWpf {
 		}
 		return false;
 	}
+
 	private function _updateOptsInDb() {
 		update_option(WPF_CODE . '_opts_data', $this->_values);
 	}
+
 	private function _loadOptValues() {
 		if (!$this->_valuesLoaded) {
 			$this->_values = get_option(WPF_CODE . '_opts_data');
@@ -106,4 +115,5 @@ class OptionsModelWpf extends ModelWpf {
 			$this->_valuesLoaded = true;
 		}
 	}
+
 }
