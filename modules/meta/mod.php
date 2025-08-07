@@ -8,8 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 class MetaWpf extends ModuleWpf {
-	private $calculated = false;
-	public static $wpfPreviousProductId = -1;
+
+	private $calculated                    = false;
+	public static $wpfPreviousProductId    = -1;
 	public static $wpfPreviousProductIdAcf = -1;
 
 	public function init() {
@@ -25,13 +26,16 @@ class MetaWpf extends ModuleWpf {
 
 		add_filter('woocommerce_product_csv_importer_steps', array($this, 'recalcAfterImporting'));
 	}
+
 	public function isGlobalCalcRunning() {
 		return FrameWpf::_()->getModule('options')->getModel()->get('start_indexing') == 2;
 	}
+
 	public function isDisabledAutoindexing() {
 		$param = FrameWpf::_()->getModule('options')->getModel()->get('disable_autoindexing');
 		return false === $param ? 0 : ( (int) $param );
 	}
+
 	public function isDisabledAutoindexingBySS() {
 		$param = FrameWpf::_()->getModule('options')->getModel()->get('disable_autoindexing_by_ss');
 		return false === $param ? 0 : ( (int) $param );
@@ -99,6 +103,7 @@ class MetaWpf extends ModuleWpf {
 		$options['general']['opts'] = $opts;
 		return $options;
 	}
+
 	public function getSettingsOptimizingSchedule( $options ) {
 		return $this->getSettingsIndexingSchedule( $options, '_optimizing' );
 	}
@@ -165,6 +170,7 @@ class MetaWpf extends ModuleWpf {
 			}
 		}
 	}
+
 	public function recalcProductMetaValuesAcf( $productId ) {
 		if ( ! $this->isDisabledAutoindexing() ) {
 			if (self::$wpfPreviousProductIdAcf !== $productId) {
@@ -192,7 +198,6 @@ class MetaWpf extends ModuleWpf {
 		}
 	}
 
-
 	public function recalcMetaIndexingShedule() {
 		$daySelect = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_day' );
 
@@ -214,6 +219,7 @@ class MetaWpf extends ModuleWpf {
 		$this->getModel()->recalcMetaValues();
 
 	}
+
 	public function recalcMetaOptimizingShedule() {
 		$daySelect = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_day_optimizing' );
 		if ( '0' !== $daySelect && gmdate( 'N' ) !== $daySelect ) {
@@ -226,6 +232,5 @@ class MetaWpf extends ModuleWpf {
 		}
 		$this->getModel()->optimizeMetaTables();
 	}
-
 
 }
