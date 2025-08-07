@@ -1,4 +1,12 @@
 <?php
+/**
+ * Product Filter by WBW - MetaModelWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class MetaModelWpf extends ModelWpf {
 	private $maxTextLength = 150;
 	private $maxKeyLength  = 32;

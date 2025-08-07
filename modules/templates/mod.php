@@ -1,4 +1,12 @@
 <?php
+/**
+ * Product Filter by WBW - TemplatesWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class TemplatesWpf extends ModuleWpf {
 	protected $_styles = array();
 	private $_cdnUrl = '';

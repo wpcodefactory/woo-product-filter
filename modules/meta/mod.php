@@ -1,4 +1,11 @@
 <?php
+/**
+ * Product Filter by WBW - MetaWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
 
 class MetaWpf extends ModuleWpf {
 	private $calculated = false;

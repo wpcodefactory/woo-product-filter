@@ -1,4 +1,12 @@
 <?php
+/**
+ * Product Filter by WBW - OptionsModelWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class OptionsModelWpf extends ModelWpf {
 	private $_values = array();
 	private $_valuesLoaded = false;
