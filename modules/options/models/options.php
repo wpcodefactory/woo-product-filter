@@ -2,7 +2,7 @@
 class OptionsModelWpf extends ModelWpf {
 	private $_values = array();
 	private $_valuesLoaded = false;
-	
+
 	public function get( $optKey ) {
 		$this->_loadOptValues();
 		return isset($this->_values[ $optKey ]) ? $this->_values[ $optKey ]['value'] : false;

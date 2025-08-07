@@ -95,7 +95,7 @@ class FrameWpf {
 								require $moduleLocationDir . $code . DS . 'mod.php';
 							}
 						}
-							
+
 						$moduleClass = toeGetClassNameWpf($code);
 						if (class_exists($moduleClass)) {
 							$this->_modules[$code] = new $moduleClass($m);
@@ -148,7 +148,7 @@ class FrameWpf {
 	}
 
 	public function pluginRow( $plugin_file, $plugin_data, $status ) {
-		if ( !version_compare($plugin_data['Version'], WPF_PRO_REQUIRES, '>=') ) { 
+		if ( !version_compare($plugin_data['Version'], WPF_PRO_REQUIRES, '>=') ) {
 			$colspan = version_compare($GLOBALS['wp_version'], '5.5', '<') ? 3 : 4;
 			$active = is_plugin_active($plugin_file) ? ' active' : '';
 			?>
@@ -170,7 +170,7 @@ class FrameWpf {
 				<td colspan="<?php echo esc_attr($colspan); ?>" class="plugin-update colspanchange">
 					<div class="update-message notice inline notice-error notice-alt">
 						<p>
-						<?php 
+						<?php
 							/* translators: 1: plugin name 2: plugin version */
 							echo sprintf(esc_html__('Current version of Free (Base) plugin %1$s requires version of WBW Product Filter PRO plugin at least %2$s.', 'woo-product-filter'), esc_html__('Product Filter by WBW', 'woo-product-filter'), esc_html(WPF_PRO_REQUIRES));
 						?>
