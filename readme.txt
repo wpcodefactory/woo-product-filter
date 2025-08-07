@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.8
-Stable tag: 2.9.2
+Stable tag: 2.9.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,6 +153,7 @@ You may help us translate the plugin into your language and get the PRO version 
 
 = 2.9.3 - 07/08/2025 =
 * Dev - Settings - "Price thousands separator" option added (defaults to `no`).
+* Dev - Coding standards improved.
 
 = 2.9.2 - 05/08/2025 =
 * Fix - Prevent possible `get_queried_object_id()` error.
