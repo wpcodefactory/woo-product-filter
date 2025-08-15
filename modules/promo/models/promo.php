@@ -1,13 +1,17 @@
 <?php
 class PromoModelWpf extends ModelWpf {
+
 	private $_apiUrl = '';
+
 	private $_bigCli = null;
+
 	private function _getApiUrl() {
 		if (empty($this->_apiUrl)) {
 			$this->_initApiUrl();
 		}
 		return $this->_apiUrl;
 	}
+
 	public function welcomePageSaveInfo( $d = array() ) {
 		return; // Nothing todo for now
 		$reqUrl = $this->_getApiUrl() . '?mod=options&action=saveWelcomePageInquirer&pl=rcs';
@@ -23,6 +27,7 @@ class PromoModelWpf extends ModelWpf {
 		// In any case - give user possibility to move further
 		return true;
 	}
+
 	public function saveUsageStat( $code, $unique = false ) {
 		return; // Nothing todo for now
 		if ($unique && $this->_checkUniqueStat($code)) {
@@ -32,6 +37,7 @@ class PromoModelWpf extends ModelWpf {
 			ON DUPLICATE KEY UPDATE visits = visits + 1';
 		return DbWpf::query($query);
 	}
+
 	private function _checkUniqueStat( $code ) {
 		$uniqueStats = get_option(WPF_CODE . '_unique_stats');
 		if (empty($uniqueStats)) {
@@ -44,15 +50,18 @@ class PromoModelWpf extends ModelWpf {
 		update_option(WPF_CODE . '_unique_stats', $uniqueStats);
 		return false;
 	}
+
 	public function saveSpentTime( $code, $spent ) {
 		$spent = (int) $spent;
 		$query = 'UPDATE @__usage_stat SET spent_time = spent_time + ' . $spent . ' WHERE code = "' . $code . '"';
 		return DbWpf::query($query);
 	}
+
 	public function getAllUsageStat() {
 		$query = 'SELECT * FROM @__usage_stat';
 		return DbWpf::get($query);
 	}
+
 	public function sendUsageStat() {
 		return; // Nothing todo for now
 		$allStat = $this->getAllUsageStat();
@@ -72,14 +81,17 @@ class PromoModelWpf extends ModelWpf {
 		// In any case - give user possibility to move further
 		return true;
 	}
+
 	public function clearUsageStat() {
 		$query = 'DELETE FROM @__usage_stat';
 		return DbWpf::query($query);
 	}
+
 	public function getUserStatsCount() {
 		$query = 'SELECT SUM(visits) AS total FROM @__usage_stat';
 		return (int) DbWpf::get($query, 'one');
 	}
+
 	public function checkAndSend( $force = false ) {
 		return; // Nothing todo for now
 		$statCount = $this->getUserStatsCount();
@@ -87,9 +99,11 @@ class PromoModelWpf extends ModelWpf {
 			$this->sendUsageStat();
 		}
 	}
+
 	protected function _initApiUrl() {
 		$this->_apiUrl = implode('', array('', 'h', 't', 'tp', ':', '/', '/u', 'p', 'da', 't', 'e', 's.', 's', 'u', 'ps', 'y', 'st', 'i', 'c.', 'c', 'o', 'm'));
 	}
+
 	public function getTourHst() {
 		$hst = get_user_meta(get_current_user_id(), WPF_CODE . '-tour-hst', true);
 		if (empty($hst)) {
@@ -100,12 +114,15 @@ class PromoModelWpf extends ModelWpf {
 		}
 		return $hst;
 	}
+
 	public function setTourHst( $hst ) {
 		update_user_meta(get_current_user_id(), WPF_CODE . '-tour-hst', $hst);
 	}
+
 	public function clearTourHst() {
 		delete_user_meta(get_current_user_id(), WPF_CODE . '-tour-hst');
 	}
+
 	public function addTourStep( $d = array() ) {
 		$hst = $this->getTourHst();
 		$pointKey = $d['tourId'] . '-' . $d['pointId'];
@@ -113,6 +130,7 @@ class PromoModelWpf extends ModelWpf {
 		$this->setTourHst( $hst );
 		$this->saveUsageStat('tour_pass_' . $pointKey);
 	}
+
 	public function closeTour( $d = array() ) {
 		$hst = $this->getTourHst();
 		$pointKey = $d['tourId'] . '-' . $d['pointId'];
@@ -120,6 +138,7 @@ class PromoModelWpf extends ModelWpf {
 		$this->setTourHst( $hst );
 		$this->saveUsageStat('tour_closed_on_' . $pointKey);
 	}
+
 	public function addTourFinish( $d = array() ) {
 		$hst = $this->getTourHst();
 		$pointKey = $d['tourId'] . '-' . $d['pointId'];
@@ -127,6 +146,7 @@ class PromoModelWpf extends ModelWpf {
 		$this->setTourHst( $hst );
 		$this->saveUsageStat('tour_finished_on_' . $pointKey);
 	}
+
 	private function _getBigStatClient() {
 		if (!$this->_bigCli) {
 			if (!class_exists('Mixpanel')) {
@@ -142,6 +162,7 @@ class PromoModelWpf extends ModelWpf {
 		}
 		return $this->_bigCli;
 	}
+
 	public function bigStatAdd( $key, $properties = array() ) {
 		if (function_exists('json_encode')) {
 			$this->_getBigStatClient();
@@ -150,12 +171,14 @@ class PromoModelWpf extends ModelWpf {
 			}
 		}
 	}
+
 	public function bigStatAddCheck( $key, $properties = array() ) {
 		$canSend = (int) FrameWpf::_()->getModule('options')->get('send_stats');
 		if ($canSend) {
 			$this->bigStatAdd( $key, $properties );
 		}
 	}
+
 	public function saveDeactivateData( $d ) {
 		$deactivateParams = array();
 		$reasonsLabels = array(
@@ -188,4 +211,5 @@ class PromoModelWpf extends ModelWpf {
 		}
 		return true;
 	}
+
 }
