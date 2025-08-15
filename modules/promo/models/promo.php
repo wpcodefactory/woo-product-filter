@@ -1,4 +1,12 @@
 <?php
+/**
+ * Product Filter by WBW - PromoModelWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class PromoModelWpf extends ModelWpf {
 
 	private $_apiUrl = '';
@@ -18,10 +26,10 @@ class PromoModelWpf extends ModelWpf {
 		$d['where_find_us'] = (int) 5; // Hardcode for now
 		wp_remote_post($reqUrl, array(
 			'body' => array(
-				'site_url' => get_bloginfo('wpurl'),
-				'site_name' => get_bloginfo('name'),
+				'site_url'      => get_bloginfo('wpurl'),
+				'site_name'     => get_bloginfo('name'),
 				'where_find_us' => $d['where_find_us'],
-				'plugin_code' => WPF_CODE,
+				'plugin_code'   => WPF_CODE,
 			)
 		));
 		// In any case - give user possibility to move further
@@ -71,10 +79,10 @@ class PromoModelWpf extends ModelWpf {
 		$reqUrl = $this->_getApiUrl() . '?mod=options&action=saveUsageStat&pl=rcs';
 		$res = wp_remote_post($reqUrl, array(
 			'body' => array(
-				'site_url' => get_bloginfo('wpurl'),
-				'site_name' => get_bloginfo('name'),
+				'site_url'    => get_bloginfo('wpurl'),
+				'site_name'   => get_bloginfo('name'),
 				'plugin_code' => WPF_CODE,
-				'all_stat' => $allStat
+				'all_stat'    => $allStat,
 			)
 		));
 		$this->clearUsageStat();
@@ -182,11 +190,11 @@ class PromoModelWpf extends ModelWpf {
 	public function saveDeactivateData( $d ) {
 		$deactivateParams = array();
 		$reasonsLabels = array(
-			'not_working' => esc_attr__( 'Not working', 'woo-product-filter' ),
+			'not_working'  => esc_attr__( 'Not working', 'woo-product-filter' ),
 			'found_better' => esc_attr__( 'Found better', 'woo-product-filter' ),
-			'not_need' => esc_attr__( 'Not need', 'woo-product-filter' ),
-			'temporary' => esc_attr__( 'Temporary', 'woo-product-filter' ),
-			'other' => esc_attr__( 'Other', 'woo-product-filter' ),
+			'not_need'     => esc_attr__( 'Not need', 'woo-product-filter' ),
+			'temporary'    => esc_attr__( 'Temporary', 'woo-product-filter' ),
+			'other'        => esc_attr__( 'Other', 'woo-product-filter' ),
 		);
 		$deactivateParams['Reason'] = isset($d['deactivate_reason']) && $d['deactivate_reason'] ? $reasonsLabels[ $d['deactivate_reason'] ] : esc_attr__( 'No reason', 'woo-product-filter' );
 		if (isset($d['deactivate_reason']) && $d['deactivate_reason']) {
@@ -205,8 +213,8 @@ class PromoModelWpf extends ModelWpf {
 			$usedTime = time() - $startUsage;
 			$this->bigStatAdd('Used Time', array(
 				'Seconds' => $usedTime,
-				'Hours' => round($usedTime / 60 / 60),
-				'Days' => round($usedTime / 60 / 60 / 24)
+				'Hours'   => round($usedTime / 60 / 60),
+				'Days'    => round($usedTime / 60 / 60 / 24),
 			));
 		}
 		return true;
