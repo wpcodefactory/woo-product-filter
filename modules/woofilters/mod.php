@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 2.9.2
+ * @version 2.9.4
  *
  * @author  woobewoo
  */
@@ -1424,7 +1424,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadProductsFilter.
 	 *
-	 * @version 2.9.2
+	 * @version 2.9.4
 	 */
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
@@ -1618,7 +1618,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		if ( $isUseCategoryFiltration ) {
 			if ( is_null($categoryPageId) && is_product_category() ) {
-				$categoryPageId = $this->maybe_get_queried_object_id();
+				$categoryPageId = $this->maybeGetQueriedObjectID();
 			}
 			if ( $categoryPageId && $this->isFiltered( false ) ) {
 				if ( $this->needSubcategoriesDisplay($categoryPageId) ) {
@@ -2363,7 +2363,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getRenderMode.
 	 *
-	 * @version 2.9.2
+	 * @version 2.9.4
 	 */
 	public function getRenderMode( $id, $settings, $isWidget = true ) {
 		if ( ! isset( $this->renderModes[ $id ] ) || empty( $this->renderModes[ $id ] ) ) {
@@ -2408,12 +2408,12 @@ class WoofiltersWpf extends ModuleWpf {
 					if ( $displayChildCat ) {
 						$catChild = array();
 						foreach ( $cats as $cat ) {
-							$catChild = array_merge( $catChild, $this->get_term_children_array( $cat, 'product_cat' ) );
+							$catChild = array_merge( $catChild, $this->getTermChildrenArray( $cat, 'product_cat' ) );
 						}
 						$cats = array_merge( $cats, $catChild );
 					}
 
-					$parent_id = $this->maybe_get_queried_object_id();
+					$parent_id = $this->maybeGetQueriedObjectID();
 					if ( $parent_id && in_array( $parent_id, $cats ) ) {
 						$displayCategory = true;
 					}
@@ -2429,12 +2429,12 @@ class WoofiltersWpf extends ModuleWpf {
 					if ( $displayChildBrand ) {
 						$brandChild = array();
 						foreach ( $brands as $brand ) {
-							$brandChild = array_merge( $brandChild, $this->get_term_children_array( $brand, 'pwb-brand' ) );
+							$brandChild = array_merge( $brandChild, $this->getTermChildrenArray( $brand, 'pwb-brand' ) );
 						}
 						$brands = array_merge( $brands, $brandChild );
 					}
 
-					$parent_id = $this->maybe_get_queried_object_id();
+					$parent_id = $this->maybeGetQueriedObjectID();
 					if ( $parent_id && in_array( $parent_id, $brands ) ) {
 						$displayBrand = true;
 					}
@@ -2540,7 +2540,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getDisplayMode.
 	 *
-	 * @version 2.9.2
+	 * @version 2.9.4
 	 */
 	public function getDisplayMode() {
 		if ( is_null( $this->displayMode ) ) {
@@ -2553,7 +2553,7 @@ class WoofiltersWpf extends ModuleWpf {
 				if ( is_shop() ) {
 					$display_type = get_option( 'woocommerce_shop_page_display', '' );
 				} elseif ( is_product_category() ) {
-					$parent_id    = $this->maybe_get_queried_object_id();
+					$parent_id    = $this->maybeGetQueriedObjectID();
 					$display_type = ( $parent_id ? get_term_meta( $parent_id, 'display_type', true ) : '' );
 					$display_type = ( '' === $display_type ? get_option( 'woocommerce_category_archive_display', '' ) : $display_type );
 				}
@@ -3968,7 +3968,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 2.8.7
+	 * @version 2.9.4
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4211,7 +4211,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 				foreach ( $terms as $termId => $cnt ) {
 					if ( $calcWithChildren ) {
-						$termIds = $this->get_term_children_array( $termId, $names[ $taxonomy ] );
+						$termIds = $this->getTermChildrenArray( $termId, $names[ $taxonomy ] );
 					} elseif ( isset( $childs[ $termId ] ) && ( $allCalc || isset( $calcCategories[ $termId ] ) ) ) {
 							$termIds = $childs[ $termId ];
 					} else {
@@ -5017,23 +5017,23 @@ class WoofiltersWpf extends ModuleWpf {
 	}
 
 	/**
-	 * get_term_children_array.
+	 * getTermChildrenArray.
 	 *
-	 * @version 2.8.7
+	 * @version 2.9.4
 	 * @since   2.8.7
 	 */
-	function get_term_children_array( $term_id, $taxonomy ) {
+	function getTermChildrenArray( $term_id, $taxonomy ) {
 		$children = get_term_children( $term_id, $taxonomy );
 		return ( ! is_wp_error( $children ) ? $children : array() );
 	}
 
 	/**
-	 * maybe_get_queried_object_id.
+	 * maybeGetQueriedObjectID.
 	 *
-	 * @version 2.9.2
+	 * @version 2.9.4
 	 * @since   2.9.2
 	 */
-	function maybe_get_queried_object_id() {
+	function maybeGetQueriedObjectID() {
 		global $wp_query;
 		return ( $wp_query ? $wp_query->get_queried_object_id() : 0 );
 	}
