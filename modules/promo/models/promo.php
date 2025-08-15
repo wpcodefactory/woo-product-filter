@@ -11,7 +11,7 @@ class PromoModelWpf extends ModelWpf {
 	public function welcomePageSaveInfo( $d = array() ) {
 		return; // Nothing todo for now
 		$reqUrl = $this->_getApiUrl() . '?mod=options&action=saveWelcomePageInquirer&pl=rcs';
-		$d['where_find_us'] = (int) 5;	// Hardcode for now
+		$d['where_find_us'] = (int) 5; // Hardcode for now
 		wp_remote_post($reqUrl, array(
 			'body' => array(
 				'site_url' => get_bloginfo('wpurl'),
@@ -20,7 +20,7 @@ class PromoModelWpf extends ModelWpf {
 				'plugin_code' => WPF_CODE,
 			)
 		));
-		// In any case - give user posibility to move futher
+		// In any case - give user possibility to move further
 		return true;
 	}
 	public function saveUsageStat( $code, $unique = false ) {
@@ -69,7 +69,7 @@ class PromoModelWpf extends ModelWpf {
 			)
 		));
 		$this->clearUsageStat();
-		// In any case - give user posibility to move futher
+		// In any case - give user possibility to move further
 		return true;
 	}
 	public function clearUsageStat() {
@@ -181,8 +181,8 @@ class PromoModelWpf extends ModelWpf {
 		if ($startUsage) {
 			$usedTime = time() - $startUsage;
 			$this->bigStatAdd('Used Time', array(
-				'Seconds' => $usedTime, 
-				'Hours' => round($usedTime / 60 / 60), 
+				'Seconds' => $usedTime,
+				'Hours' => round($usedTime / 60 / 60),
 				'Days' => round($usedTime / 60 / 60 / 24)
 			));
 		}
