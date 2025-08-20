@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 2.9.4
+ * @version 2.9.5
  *
  * @author  woobewoo
  */
@@ -576,8 +576,16 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * replaceArgsIfBuilderUsed.
+	 *
+	 * @version 2.9.5
 	 */
 	public function replaceArgsIfBuilderUsed( $args ) {
+
+		// Manual ignore
+		if ( ! empty( $args['wbw_woo_product_filter_ignore'] ) ) {
+			return $args;
+		}
+
 		// For Woocommerce Lookup table regeneration
 		if ( ! empty($args['return']) && ! empty($args['limit']) && ( 'ids' == $args['return'] ) && ( 1 == $args['limit'] ) ) {
 			return $args;
