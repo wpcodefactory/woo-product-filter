@@ -152,7 +152,7 @@ You may help us translate the plugin into your language and get the PRO version 
 == Changelog ==
 
 = 2.9.5 - 20/08/2025 =
-* Dev - Developers - `wbw_woo_product_filter_ignore` filter added.
+* Dev - Developers - `replaceArgsIfBuilderUsed()` - `wbw_woo_product_filter_ignore` argument added (e.g., for the `woocommerce_product_object_query_args` filter).
 
 = 2.9.4 - 15/08/2025 =
 * Dev - Coding standards improved.
