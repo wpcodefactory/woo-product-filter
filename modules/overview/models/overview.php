@@ -36,10 +36,10 @@ class OverviewModelWpf extends ModelWpf {
 			return false;
 		}
 		$resData = $this->_req('subscribe', array(
-			'url' => WPF_SITE_URL,
+			'url'         => WPF_SITE_URL,
 			'plugin_code' => 'woofilters',
-			'email' => $email,
-			'data' => $this->getPluginData()
+			'email'       => $email,
+			'data'        => $this->getPluginData(),
 		));
 		if ($resData) {
 			update_option('_subscribe_' . WPF_CODE, time());
@@ -53,10 +53,10 @@ class OverviewModelWpf extends ModelWpf {
 	 * contactus.
 	 */
 	public function contactus( $params ) {
-		$email = empty($params['email']) ? '' : $params['email'];
-		$uname = empty($params['name']) ? '' : $params['name'];
+		$email   = empty($params['email']) ? '' : $params['email'];
+		$uname   = empty($params['name']) ? '' : $params['name'];
 		$subject = empty($params['subject']) ? '' : $params['subject'];
-		$desc = empty($params['desc']) ? '' : $params['desc'];
+		$desc    = empty($params['desc']) ? '' : $params['desc'];
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			$this->pushError(esc_html__('Invalid email format', 'woo-product-filter'));
 			return false;
@@ -66,14 +66,14 @@ class OverviewModelWpf extends ModelWpf {
 			return false;
 		}
 		$resData = $this->_req('contactus', array(
-			'url' => WPF_SITE_URL,
+			'url'         => WPF_SITE_URL,
 			'plugin_code' => 'woofilters',
-			'email' => $email,
-			'data' => array_merge(array(
+			'email'       => $email,
+			'data'        => array_merge(array(
 				'user_name' => $uname,
-				'subject' => $subject,
-				'desc' => $desc,
-			), $this->getPluginData())
+				'subject'   => $subject,
+				'desc'      => $desc,
+			), $this->getPluginData()),
 		));
 
 		return false;
@@ -100,13 +100,13 @@ class OverviewModelWpf extends ModelWpf {
 		}
 
 		$resData = $this->_req('rating', array(
-			'url' => WPF_SITE_URL,
+			'url'         => WPF_SITE_URL,
 			'plugin_code' => 'woofilters',
-			'email' => $email,
-			'data' => array_merge(array(
-				'rate' => $rate,
-				'problem' => $problem
-			), $this->getPluginData())
+			'email'       => $email,
+			'data'        => array_merge(array(
+				'rate'    => $rate,
+				'problem' => $problem,
+			), $this->getPluginData()),
 		));
 		if ($resData) {
 			update_option('_rating_' . WPF_CODE, time());
@@ -142,10 +142,10 @@ class OverviewModelWpf extends ModelWpf {
 	 */
 	public function getPluginData() {
 		return array(
-			'license_type' => FrameWpf::_()->getModule('options')->get('license_type'),
+			'license_type'  => FrameWpf::_()->getModule('options')->get('license_type'),
 			'license_email' => FrameWpf::_()->getModule('options')->get('license_email'),
-			'license_key' => FrameWpf::_()->getModule('options')->get('license_key'),
-			'license_name' => FrameWpf::_()->getModule('options')->get('license_name')
+			'license_key'   => FrameWpf::_()->getModule('options')->get('license_key'),
+			'license_name'  => FrameWpf::_()->getModule('options')->get('license_name'),
 		);
 	}
 
@@ -166,13 +166,13 @@ class OverviewModelWpf extends ModelWpf {
 		add_filter('http_api_curl', array($this, 'overviewHttpRequestTimeout'), 100, 1);
 
 		$data = array_merge($data, array(
-			'mod' => 'feedback',
-			'pl' => 'lms',
+			'mod'    => 'feedback',
+			'pl'     => 'lms',
 			'action' => $action,
 		));
 
 		$response = wp_remote_post($this->_apiUrl, array(
-			'body' => $data,
+			'body'    => $data,
 			'timeout' => 30,
 		));
 
