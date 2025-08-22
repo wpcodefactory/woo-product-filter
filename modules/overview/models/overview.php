@@ -23,7 +23,7 @@ class OverviewModelWpf extends ModelWpf {
 			update_option('_subscribe_' . WPF_CODE, time());
 			return true;
 		}
-		
+
 		return false;
 	}
 	public function contactus( $params ) {
@@ -49,7 +49,7 @@ class OverviewModelWpf extends ModelWpf {
 				'desc' => $desc,
 			), $this->getPluginData())
 		));
-		
+
 		return false;
 	}
 	public function rating( $params ) {
@@ -82,10 +82,10 @@ class OverviewModelWpf extends ModelWpf {
 			update_option('_rating_' . WPF_CODE, time());
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public function getFirstOverview() {
 		return (int) get_option('_overview_' . WPF_CODE);
 	}
@@ -103,15 +103,15 @@ class OverviewModelWpf extends ModelWpf {
 			'license_name' => FrameWpf::_()->getModule('options')->get('license_name')
 		);
 	}
-	
+
 	public function overviewHttpRequestTimeout( $handle ) {
 		curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 30 );
 		curl_setopt( $handle, CURLOPT_TIMEOUT, 30 );
 	}
-	
+
 	private function _req( $action, $data = array() ) {
 		add_filter('http_api_curl', array($this, 'overviewHttpRequestTimeout'), 100, 1);
-		
+
 		$data = array_merge($data, array(
 			'mod' => 'feedback',
 			'pl' => 'lms',
