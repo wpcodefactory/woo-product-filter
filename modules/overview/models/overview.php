@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - OverviewModelWpf Class
  *
+ * @version 2.9.6
+ *
  * @author  woobewoo
  */
 
@@ -157,6 +159,8 @@ class OverviewModelWpf extends ModelWpf {
 
 	/**
 	 * _req.
+	 *
+	 * @version 2.9.6
 	 */
 	private function _req( $action, $data = array() ) {
 		add_filter('http_api_curl', array($this, 'overviewHttpRequestTimeout'), 100, 1);
@@ -182,7 +186,7 @@ class OverviewModelWpf extends ModelWpf {
 					$this->pushError($resArr['errors']);
 				}
 			} else {
-				$this->pushError(esc_html__('There was a problem with sending request to our autentification server. Please try latter.', 'woo-product-filter'));
+				$this->pushError(esc_html__('There was a problem with sending request to our authentication server. Please try latter.', 'woo-product-filter'));
 			}
 		} else {
 			$this->pushError( $response->get_error_message() );
