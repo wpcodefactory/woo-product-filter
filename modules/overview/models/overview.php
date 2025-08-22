@@ -1,12 +1,23 @@
 <?php
+/**
+ * Product Filter by WBW - OverviewModelWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class OverviewModelWpf extends ModelWpf {
+
 	private $_apiUrl = '';
+
 	public function __construct() {
 		$this->_initApiUrl();
 		if (!$this->getFirstOverview()) {
 			update_option('_overview_' . WPF_CODE, time());
 		}
 	}
+
 	public function subscribe( $params ) {
 		$email = empty($params['email']) ? '' : $params['email'];
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -26,6 +37,7 @@ class OverviewModelWpf extends ModelWpf {
 
 		return false;
 	}
+
 	public function contactus( $params ) {
 		$email = empty($params['email']) ? '' : $params['email'];
 		$uname = empty($params['name']) ? '' : $params['name'];
@@ -52,6 +64,7 @@ class OverviewModelWpf extends ModelWpf {
 
 		return false;
 	}
+
 	public function rating( $params ) {
 		$rate = empty($params['rate']) ? 0 : $params['rate'];
 		if (5 == $rate) {
@@ -89,12 +102,15 @@ class OverviewModelWpf extends ModelWpf {
 	public function getFirstOverview() {
 		return (int) get_option('_overview_' . WPF_CODE);
 	}
+
 	public function isSubscribe() {
 		return (int) get_option('_subscribe_' . WPF_CODE);
 	}
+
 	public function isRating() {
 		return (int) get_option('_rating_' . WPF_CODE);
 	}
+
 	public function getPluginData() {
 		return array(
 			'license_type' => FrameWpf::_()->getModule('options')->get('license_type'),
@@ -140,9 +156,11 @@ class OverviewModelWpf extends ModelWpf {
 		}
 		return false;
 	}
+
 	private function _initApiUrl() {
 		if (empty($this->_apiUrl)) {
 			$this->_apiUrl = 'https://' . WPF_WP_PLUGIN_URL . '/';
 		}
 	}
+
 }
