@@ -9,8 +9,14 @@ defined( 'ABSPATH' ) || exit;
 
 class OverviewModelWpf extends ModelWpf {
 
+	/**
+	 * _apiUrl.
+	 */
 	private $_apiUrl = '';
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->_initApiUrl();
 		if (!$this->getFirstOverview()) {
@@ -18,6 +24,9 @@ class OverviewModelWpf extends ModelWpf {
 		}
 	}
 
+	/**
+	 * subscribe.
+	 */
 	public function subscribe( $params ) {
 		$email = empty($params['email']) ? '' : $params['email'];
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -38,6 +47,9 @@ class OverviewModelWpf extends ModelWpf {
 		return false;
 	}
 
+	/**
+	 * contactus.
+	 */
 	public function contactus( $params ) {
 		$email = empty($params['email']) ? '' : $params['email'];
 		$uname = empty($params['name']) ? '' : $params['name'];
@@ -65,6 +77,9 @@ class OverviewModelWpf extends ModelWpf {
 		return false;
 	}
 
+	/**
+	 * rating.
+	 */
 	public function rating( $params ) {
 		$rate = empty($params['rate']) ? 0 : $params['rate'];
 		if (5 == $rate) {
@@ -99,18 +114,30 @@ class OverviewModelWpf extends ModelWpf {
 		return false;
 	}
 
+	/**
+	 * getFirstOverview.
+	 */
 	public function getFirstOverview() {
 		return (int) get_option('_overview_' . WPF_CODE);
 	}
 
+	/**
+	 * isSubscribe.
+	 */
 	public function isSubscribe() {
 		return (int) get_option('_subscribe_' . WPF_CODE);
 	}
 
+	/**
+	 * isRating.
+	 */
 	public function isRating() {
 		return (int) get_option('_rating_' . WPF_CODE);
 	}
 
+	/**
+	 * getPluginData.
+	 */
 	public function getPluginData() {
 		return array(
 			'license_type' => FrameWpf::_()->getModule('options')->get('license_type'),
@@ -120,11 +147,17 @@ class OverviewModelWpf extends ModelWpf {
 		);
 	}
 
+	/**
+	 * overviewHttpRequestTimeout.
+	 */
 	public function overviewHttpRequestTimeout( $handle ) {
 		curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 30 );
 		curl_setopt( $handle, CURLOPT_TIMEOUT, 30 );
 	}
 
+	/**
+	 * _req.
+	 */
 	private function _req( $action, $data = array() ) {
 		add_filter('http_api_curl', array($this, 'overviewHttpRequestTimeout'), 100, 1);
 
@@ -157,6 +190,9 @@ class OverviewModelWpf extends ModelWpf {
 		return false;
 	}
 
+	/**
+	 * _initApiUrl.
+	 */
 	private function _initApiUrl() {
 		if (empty($this->_apiUrl)) {
 			$this->_apiUrl = 'https://' . WPF_WP_PLUGIN_URL . '/';
