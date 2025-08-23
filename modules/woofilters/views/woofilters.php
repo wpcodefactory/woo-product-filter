@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 2.8.6
+ * @version 2.9.7
  *
  * @author  woobewoo
  */
@@ -474,6 +474,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		self::$isLeerFilter = $leer;
 	}
 
+	/**
+	 * generateFiltersHtml.
+	 *
+	 * @version 2.9.7
+	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$customCss = '';
 		if ( ! empty($filterSettings['settings']['css_editor']) ) {
@@ -623,7 +628,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html = DispatcherWpf::applyFilters('addHtmlBeforeFilter', $html, $settings, $viewId);
 
 		if ( ( 'top' === $buttonsPosition || 'both' === $buttonsPosition ) && ( $showFilteringButton || $showCleanButton ) ) {
-			$html .= '<div class="wpfFilterButtons">';
+			$html .= '<div class="wpfFilterButtons wpfFilterButtonsTop">';
 
 			if ( $showFilteringButton ) {
 				$html .= '<button class="wpfFilterButton wpfButton">' . __($filterButtonWord, 'woo-product-filter') . '</button>';
@@ -721,7 +726,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 
 		if ( ( 'bottom' === $buttonsPosition || 'both' === $buttonsPosition ) && ( $showFilteringButton || $showCleanButton ) ) {
-			$html .= '<div class="wpfFilterButtons">';
+			$html .= '<div class="wpfFilterButtons wpfFilterButtonsBottom">';
 
 			if ( $showFilteringButton ) {
 				$html .= '<button class="wpfFilterButton wpfButton">' . esc_html__($filterButtonWord, 'woo-product-filter') . '</button>';
