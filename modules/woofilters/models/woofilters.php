@@ -11,10 +11,18 @@ defined( 'ABSPATH' ) || exit;
 
 class WoofiltersModelWpf extends ModelWpf {
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->_setTbl('filters');
 	}
 
+	/**
+	 * getAllFilters.
+	 *
+	 * @version 2.9.7
+	 */
 	public function getAllFilters() {
 		$filterTypes = array(
 			'wpfPrice' => array(
@@ -165,6 +173,9 @@ class WoofiltersModelWpf extends ModelWpf {
 		return DispatcherWpf::applyFilters('addFilterTypes', $filterTypes);
 	}
 
+	/**
+	 * getSortByFilterLabels.
+	 */
 	public function getSortByFilterLabels ( $params = [] ) {
 		$labels = $this->getFilterLabels('SortBy');
 
@@ -197,6 +208,9 @@ class WoofiltersModelWpf extends ModelWpf {
 		return $labels;
 	}
 
+	/**
+	 * getFilterLabels.
+	 */
 	public function getFilterLabels( $filter ) {
 		switch ($filter) {
 			case 'SortBy':
@@ -247,6 +261,9 @@ class WoofiltersModelWpf extends ModelWpf {
 		return $labels;
 	}
 
+	/**
+	 * save.
+	 */
 	public function save( $data = array() ) {
 
 		$id = isset($data['id']) ? $data['id'] : false;
@@ -285,6 +302,9 @@ class WoofiltersModelWpf extends ModelWpf {
 		return false;
 	}
 
+	/**
+	 * _dataSave.
+	 */
 	protected function _dataSave( $data, $update = false ) {
 		$esettings = isset($data['esettings']) ? UtilsWpf::jsonDecode(stripslashes($data['esettings'])) : array();
 		if (!empty($esettings)) {
@@ -383,6 +403,9 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 	}
 
+	/**
+	 * getDataFilterMetaKeys.
+	 */
 	public function getDataFilterMetaKeys( $filters, $save = true ) {
 		$filters = UtilsWpf::jsonDecode($filters);
 		$metaKeys = array();
@@ -409,6 +432,9 @@ class WoofiltersModelWpf extends ModelWpf {
 		return $metaKeys;
 	}
 
+	/**
+	 * getFiltersMetaKeys.
+	 */
 	public function getFiltersMetaKeys( $id = 0, $deep = false ) {
 		$keys = array();
 		if (!$deep) {
