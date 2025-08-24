@@ -31,7 +31,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
-				'group'        => 'wpfPriceRange'
+				'group'        => 'wpfPriceRange',
 			),
 			'wpfPriceRange' => array(
 				'name'         => esc_html__('Price range', 'woo-product-filter'),
@@ -42,7 +42,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				'group'        => 'wpfPrice'
 			),
 			'wpfSortBy' => array(
-				'name' => esc_html__('Sort by', 'woo-product-filter'),
+				'name'         => esc_html__('Sort by', 'woo-product-filter'),
 				'slug'         => esc_attr__('sort by', 'woo-product-filter'),
 				'enabled'      => true,
 				'unique'       => true,
@@ -54,7 +54,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				'enabled'      => true,
 				'unique'       => false,
 				'content_type' => 'taxonomy',
-				'filtername'   => 'wpf_filter_cat'
+				'filtername'   => 'wpf_filter_cat',
 			),
 			'wpfTags' => array(
 				'name'         => esc_html__('Product tags', 'woo-product-filter'),
@@ -62,7 +62,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				'enabled'      => true,
 				'unique'       => false,
 				'content_type' => 'taxonomy',
-				'filtername'   => 'product_tag'
+				'filtername'   => 'product_tag',
 			),
 			'wpfAttribute' => array(
 				'name'         => esc_html__('Attribute', 'woo-product-filter'),
@@ -123,7 +123,7 @@ class WoofiltersModelWpf extends ModelWpf {
 		);
 
 		/**
-		 * Plugin compatibility
+		 * Plugin compatibility.
 		 *
 		 * @link https://wordpress.org/plugins/perfect-woocommerce-brands
 		 */
@@ -138,7 +138,7 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 
 		/**
-		 * Plugin compatibility
+		 * Plugin compatibility and native WC `product_brand` taxonomy.
 		 *
 		 * @version 2.9.7
 		 *
@@ -156,7 +156,7 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 
 		/**
-		 * Plugin compatibility
+		 * Plugin compatibility.
 		 *
 		 * @link https://wordpress.org/plugins/wc-vendors/
 		 */
@@ -215,18 +215,18 @@ class WoofiltersModelWpf extends ModelWpf {
 		switch ($filter) {
 			case 'SortBy':
 				$labels = array(
-					'default' => esc_html__('Default', 'woo-product-filter'),
+					'default'    => esc_html__('Default', 'woo-product-filter'),
 					'popularity' => esc_html__('Popularity', 'woo-product-filter'),
-					'rating' => esc_html__('Rating', 'woo-product-filter'),
-					'date' => esc_html__('Newness', 'woo-product-filter'),
-					'date-asc' => esc_html__('Oldest first', 'woo-product-filter'),
-					'price' => esc_html__('Price: low to high', 'woo-product-filter'),
+					'rating'     => esc_html__('Rating', 'woo-product-filter'),
+					'date'       => esc_html__('Newness', 'woo-product-filter'),
+					'date-asc'   => esc_html__('Oldest first', 'woo-product-filter'),
+					'price'      => esc_html__('Price: low to high', 'woo-product-filter'),
 					'price-desc' => esc_html__('Price: high to low', 'woo-product-filter'),
-					'rand' => esc_html__('Random', 'woo-product-filter'),
-					'title' => esc_html__('Name A to Z', 'woo-product-filter'),
+					'rand'       => esc_html__('Random', 'woo-product-filter'),
+					'title'      => esc_html__('Name A to Z', 'woo-product-filter'),
 					'title-desc' => esc_html__('Name Z to A', 'woo-product-filter'),
-					'sku' => esc_html__('SKU ascending', 'woo-product-filter'),
-					'sku-desc' => esc_html__('SKU descending', 'woo-product-filter'),
+					'sku'        => esc_html__('SKU ascending', 'woo-product-filter'),
+					'sku-desc'   => esc_html__('SKU descending', 'woo-product-filter'),
 					);
 				$custom = apply_filters('woocommerce_catalog_orderby', array());
 				if (!empty($custom)) {
@@ -235,8 +235,8 @@ class WoofiltersModelWpf extends ModelWpf {
 				break;
 			case 'InStock':
 				$labels = array(
-					'instock' => esc_html__('In Stock', 'woo-product-filter'),
-					'outofstock' => esc_html__('Out of Stock', 'woo-product-filter'),
+					'instock'     => esc_html__('In Stock', 'woo-product-filter'),
+					'outofstock'  => esc_html__('Out of Stock', 'woo-product-filter'),
 					'onbackorder' => esc_html__('On Backorder', 'woo-product-filter'),
 					);
 				break;
@@ -268,9 +268,9 @@ class WoofiltersModelWpf extends ModelWpf {
 
 		$id = isset($data['id']) ? $data['id'] : false;
 
-		$title = !empty($data['title']) ? $data['title'] : gmdate('Y-m-d-h-i-s');
+		$title         = !empty($data['title']) ? $data['title'] : gmdate('Y-m-d-h-i-s');
 		$data['title'] = $title;
-		$duplicateId = isset($data['duplicateId']) ? $data['duplicateId'] : false;
+		$duplicateId   = isset($data['duplicateId']) ? $data['duplicateId'] : false;
 		//already created filter
 		if ( !empty($id) && !empty($title) ) {
 			$data['id'] = (string) $id;
@@ -335,7 +335,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	}
 
 	/**
-	 * WPML string translation
+	 * WPML string translation.
 	 */
 	private function translateStrings( $data_settings ) {
 		$filters_arr = json_decode($data_settings['filters']['order'], true);
