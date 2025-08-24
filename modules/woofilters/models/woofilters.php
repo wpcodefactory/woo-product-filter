@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 class WoofiltersModelWpf extends ModelWpf {
+
 	public function __construct() {
 		$this->_setTbl('filters');
 	}
@@ -283,6 +284,7 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 		return false;
 	}
+
 	protected function _dataSave( $data, $update = false ) {
 		$esettings = isset($data['esettings']) ? UtilsWpf::jsonDecode(stripslashes($data['esettings'])) : array();
 		if (!empty($esettings)) {
@@ -445,4 +447,5 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 		return $keys;
 	}
+
 }
