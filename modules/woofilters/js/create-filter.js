@@ -198,6 +198,7 @@
 				$dialog.dialog('open');
 			}, 500);
 		}
+
 		function showDuplicateDialog(){
 			setTimeout(function() {
 				$dialog2.dialog('open');
