@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Create Filter JS
+ *
+ * @version 2.9.7
+ *
+ * @author  woobewoo
+ */
+
 (function($) {
 "use strict";
 	$(document).ready(function () {
@@ -83,7 +91,7 @@
         if( jQuery('#wpfDuplicateDialog').length ) {
 			var $createBtn = jQuery('.create-table'),
 				$error = jQuery('#formError'),
-				$input = jQuery('#addDialog_title'),
+				$inputDuplicate = jQuery('#addDialog_titleDuplicate'),
 				$list = jQuery('#addDialog_list'),
 				$inputDuplicateId = jQuery('#addDialog_duplicateid'),
 				$dialog2 = jQuery('#wpfDuplicateDialog').dialog({
@@ -121,7 +129,7 @@
 								data: {
 									mod: 'woofilters',
 									action: 'save',
-									title: $input.val(),
+									title: $inputDuplicate.val(),
 									duplicateId: jQuery('#addDialog_duplicateid').val(),
 									settings: settings,
 									wpfNonce: window.wpfNonce
@@ -148,7 +156,7 @@
 					}
 				});
 
-			$input.on('focus', function () {
+			$inputDuplicate.on('focus', function () {
 				$error.fadeOut();
 			});
 

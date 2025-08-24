@@ -1,3 +1,16 @@
+<?php
+/**
+ * Product Filter by WBW - Options Admin Page
+ *
+ * @version 2.9.7
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+?>
+
 <style type="text/css">
 .woobewoo-main {
 	display:none;
@@ -82,7 +95,7 @@
 				<form id="tableForm">
 					<div class="wpfPopupBlock">
 						<label class="wpfPopupLabel"><?php esc_html_e('Filter name', 'woo-product-filter'); ?></label>
-						<input id="addDialog_title" class="woobewoo-text woobewoo-width-full" type="text"/>
+						<input id="addDialog_titleDuplicate" class="woobewoo-text woobewoo-width-full" type="text"/>
 					</div>
 					<input type="hidden" id="addDialog_duplicateid" class="woobewoo-text woobewoo-width-full"/>
 				</form>
