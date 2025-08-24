@@ -245,7 +245,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$viewId = $id . '_' . mt_rand(0, 999999);
 
 		switch ( $mode ) {
-			case 1: //categoty page
+			case 1: //category page
 				$catObj = get_queried_object();
 				$html   = $this->generateFiltersHtml($settings, $viewId, $catObj->term_id);
 				break;
@@ -678,7 +678,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 
 		$blockHeight = $this->getFilterSetting($settingsOriginal['settings'], 'filter_block_height', false, true);
-		//$blockStyle  = 'visibility:hidden; width:' . $blockWidth . '; float:left; ' . ( $blockHeight ? 'height:' . $blockHeight . 'px;overflow: hidden;' : '' );
 		$showImmediately = $this->getFilterSetting($settingsOriginal['settings'], 'show_filter_immediately') == '1';
 		$blockStyle      =
 			( $showImmediately ? '' : 'visibility:hidden;' ) . 'width:' . $blockWidth . ';' .
@@ -2815,7 +2814,7 @@ class WoofiltersViewWpf extends ViewWpf {
 							$args['orderby'] = ! empty($argsIn['orderby']) ? $argsIn['orderby'] : 'name';
 						}
 
-						// recurse to get the direct decendants of "this" term
+						// recurse to get the direct descendants of "this" term
 						$term->children = $this->getTaxonomyHierarchy( $taxonomy, $args, false );
 					}
 				}
@@ -3387,7 +3386,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	}
 
 	/**
-	 * Get filter settings with mobile breakpoint value
+	 * Get filter settings with mobile breakpoint value.
 	 *
 	 * @param array $settings
 	 *
@@ -3470,7 +3469,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	public function getChildrenOfIncludedCategories( $taxonomy, $categoryIds ) {
 		$output = array();
 		foreach ( $categoryIds as $categoryId ) {
-			$terms = get_term_children($categoryId, $taxonomy); //this function is more faster
+			$terms = get_term_children($categoryId, $taxonomy); //this function is faster
 			if ( ! empty($terms) ) {
 				$output = array_merge($output, $terms);
 			}
