@@ -241,8 +241,15 @@ class FrameWpf {
 					}
 					if (array_key_exists($action, $permissions[WPF_METHODS])) {        // Permission for this method exists
 						$currentUserPosition = self::_()->getModule('user')->getCurrentUserPosition();
-						if ( ( is_array($permissions[ WPF_METHODS ][ $action ] ) && !in_array($currentUserPosition, $permissions[ WPF_METHODS ][ $action ]) )
-							|| ( !is_array($permissions[ WPF_METHODS ][ $action ]) && $permissions[WPF_METHODS][$action] != $currentUserPosition )
+						if (
+							(
+								is_array($permissions[ WPF_METHODS ][ $action ] ) &&
+								!in_array($currentUserPosition, $permissions[ WPF_METHODS ][ $action ])
+							) ||
+							(
+								!is_array($permissions[ WPF_METHODS ][ $action ]) &&
+								$permissions[WPF_METHODS][$action] != $currentUserPosition
+							)
 						) {
 							$res = false;
 						}
@@ -582,7 +589,12 @@ class FrameWpf {
 	 */
 	public function isAdminPlugOptsPage() {
 		$page = ReqWpf::getVar('page');
-		if (is_admin() && !empty($page) && is_string($page) && strpos($page, self::_()->getModule('adminmenu')->getMainSlug()) !== false) {
+		if (
+			is_admin() &&
+			!empty($page) &&
+			is_string($page) &&
+			strpos($page, self::_()->getModule('adminmenu')->getMainSlug()) !== false
+		) {
 			return true;
 		}
 		return false;
