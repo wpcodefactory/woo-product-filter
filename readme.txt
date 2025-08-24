@@ -151,6 +151,12 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 2.9.7 - 24/08/2025 =
+* Fix - Create filter - Empty title fixed.
+* Fix - `WoofiltersModelWpf` - `product_brand` - `filtername` added.
+* Dev - `generateFiltersHtml()` - `wpfFilterButtons` - HTML classes (top and bottom) added.
+* Dev - Coding standards improved.
+
 = 2.9.6 - 22/08/2025 =
 * Fix - Text typo fixed.
 * Dev - Coding standards improved.
