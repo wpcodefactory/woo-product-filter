@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
+ * @version 2.9.7
+ *
  * @author  woobewoo
  */
 
@@ -129,6 +131,8 @@ class WoofiltersModelWpf extends ModelWpf {
 		/**
 		 * Plugin compatibility
 		 *
+		 * @version 2.9.7
+		 *
 		 * @link https://woocommerce.com/products/brands
 		 */
 		if (taxonomy_exists('product_brand')) {
@@ -138,6 +142,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				'enabled'      => false,
 				'unique'       => true,
 				'content_type' => 'taxonomy',
+				'filtername'   => 'product_brand',
 			);
 		}
 
