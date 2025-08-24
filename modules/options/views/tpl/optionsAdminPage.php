@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 			<nav class="woobewoo-navigation woobewoo-sticky <?php DispatcherWpf::doAction('adminMainNavClassAdd'); ?>">
 				<ul>
 					<?php foreach ($this->tabs as $tabKey => $t) { ?>
-						<?php 
+						<?php
 						if (isset($t['hidden']) && $t['hidden']) {
 							continue;
 						}
@@ -109,4 +109,4 @@ defined( 'ABSPATH' ) || exit;
 		<div>Loading...<i class="fa fa-spinner fa-spin"></i></div>
 	</div>
 </div>
-<?php DispatcherWpf::doAction('afterWoobewooWrap'); ?>
+<?php DispatcherWpf::doAction('afterWoobewooWrap');

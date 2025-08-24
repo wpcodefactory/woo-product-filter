@@ -86,9 +86,9 @@
 			$createBtn.on('click', function () {
 				$dialog.dialog('open');
 			});
-        }
+		}
 
-        if( jQuery('#wpfDuplicateDialog').length ) {
+		if( jQuery('#wpfDuplicateDialog').length ) {
 			var $createBtn = jQuery('.create-table'),
 				$error = jQuery('#formError'),
 				$inputDuplicate = jQuery('#addDialog_titleDuplicate'),
@@ -197,8 +197,8 @@
 			setTimeout(function() {
 				$dialog.dialog('open');
 			}, 500);
-        }
-        function showDuplicateDialog(){
+		}
+		function showDuplicateDialog(){
 			setTimeout(function() {
 				$dialog2.dialog('open');
 			}, 500);
