@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Options Pro Tab Content
  *
- * @version 2.8.7
+ * @version 2.9.7
  *
  * @author  woobewoo
  */
@@ -156,7 +156,7 @@ $urlPath = 'https://woobewoo.com/product/woocommerce-filter';
 					<div class="wpf-gopro-title">
 						<?php esc_html_e('One Site', 'woo-product-filter'); ?>
 					</div>
-					<div class="wpf-gopro-price">$199.00</div>
+					<div class="wpf-gopro-price">$147.00</div>
 					<div class="wpf-gopro-desc">
 						<?php esc_html_e('Single site', 'woo-product-filter'); ?>
 					</div>
