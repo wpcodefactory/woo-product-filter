@@ -151,6 +151,10 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 2.9.8 - 29/09/2025 =
+* Fix - Security - Unauthenticated SQL Injection vulnerability fixed.
+* WC tested up to: 10.2.
+
 = 2.9.7 - 06/09/2025 =
 * Fix - Create filter - Empty title fixed.
 * Fix - `WoofiltersModelWpf` - `product_brand` - `filtername` added.

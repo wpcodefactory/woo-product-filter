@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 2.9.5
+ * @version 2.9.8
  *
  * @author  woobewoo
  */
@@ -2119,6 +2119,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * addBeforeFiltersFrontendArgs.
+	 *
+	 * @version 2.9.8
 	 */
 	public function addBeforeFiltersFrontendArgs( $args, $filterSettings = array(), $urlQuery = array() ) {
 
@@ -2217,7 +2219,7 @@ class WoofiltersWpf extends ModuleWpf {
 											}
 										}
 										if ( ! empty( $termIds ) ) {
-											$whereNot .= ( empty( $whereNot ) ? '' : $whAnd ) . $wpdb->posts . '.ID NOT IN (SELECT object_id FROM `wp_term_relationships` WHERE term_taxonomy_id IN (' . implode( ',', $termIds ) . '))';
+											$whereNot .= ( empty( $whereNot ) ? '' : $whAnd ) . $wpdb->posts . '.ID NOT IN (SELECT object_id FROM `wp_term_relationships` WHERE term_taxonomy_id IN (' . implode( ',', array_map( 'intval', $termIds ) ) . '))';
 										}
 										unset( $tax_query[ $k ] );
 									}
