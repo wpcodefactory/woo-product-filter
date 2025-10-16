@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 3.0.0 - 16/10/2025 =
+* Fix - Go PRO tab - Bundle links fixed.
+
 = 2.9.9 - 10/10/2025 =
 * Dev - Added new option "Discourage search engines from indexing".
 
