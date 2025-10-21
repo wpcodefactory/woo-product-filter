@@ -152,7 +152,9 @@ You may help us translate the plugin into your language and get the PRO version 
 == Changelog ==
 
 = 3.0.1 - 21/10/2025 =
+* Fix - Security - "Missing Authorization to Unauthenticated Settings Update" vulnerability fixed.
 * Fix - Text typo fixed.
+* Dev - Coding standards improved.
 
 = 3.0.0 - 17/10/2025 =
 * Fix - Go PRO tab - Product links fixed.
@@ -161,7 +163,7 @@ You may help us translate the plugin into your language and get the PRO version 
 * Dev - Added new option "Discourage search engines from indexing".
 
 = 2.9.8 - 30/09/2025 =
-* Fix - Security - Unauthenticated SQL Injection vulnerability fixed.
+* Fix - Security - "Unauthenticated SQL Injection" vulnerability fixed.
 * WC tested up to: 10.2.
 
 = 2.9.7 - 06/09/2025 =
