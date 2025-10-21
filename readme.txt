@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 3.0.1 - 21/10/2025 =
+* Fix - Text typo fixed.
+
 = 3.0.0 - 17/10/2025 =
 * Fix - Go PRO tab - Product links fixed.
 
