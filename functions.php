@@ -1,6 +1,14 @@
 <?php
 /**
- * Set first leter in a string as UPPERCASE
+ * Product Filter by WBW - Functions
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Set first letter in a string as UPPERCASE
  *
  * @param string $str string to modify
  * @return string string with first Uppercase letter
@@ -10,6 +18,7 @@ if (!function_exists('strFirstUpWpf')) {
 		return strtoupper(substr($str, 0, 1)) . strtolower(substr($str, 1, strlen($str)));
 	}
 }
+
 /**
  * Deprecated - class must be created
  */
@@ -22,6 +31,7 @@ if (!function_exists('dateToTimestampWpf')) {
 		return mktime(0, 0, 0, $a[1], $a[0], $a[2]);
 	}
 }
+
 /**
  * Generate random string name
  *
@@ -50,6 +60,7 @@ if (!function_exists('setDefaultParamsWpf')) {
 		return $params;
 	}
 }
+
 if (!function_exists('importClassWpf')) {
 	function importClassWpf( $class, $path = '' ) {
 		if (!class_exists($class)) {
@@ -67,10 +78,11 @@ if (!function_exists('importClassWpf')) {
 		return false;
 	}
 }
+
 /**
  * Check if class name exist with prefix or not
  *
- * @param strin $class preferred class name
+ * @param string $class preferred class name
  * @return string existing class name
  */
 if (!function_exists('toeGetClassNameWpf')) {
@@ -86,6 +98,7 @@ if (!function_exists('toeGetClassNameWpf')) {
 		return $className;
 	}
 }
+
 /**
  * Create object of specified class
  *
@@ -111,6 +124,7 @@ if (!function_exists('toeCreateObjWpf')) {
 		return $obj;
 	}
 }
+
 /**
  * Redirect user to specified location. Be advised that it should redirect even if headers alredy sent.
  *
@@ -126,6 +140,7 @@ if (!function_exists('redirectWpf')) {
 		exit();
 	}
 }
+
 if (!function_exists('jsonEncodeUTFnormalWpf')) {
 	function jsonEncodeUTFnormalWpf( $value ) {
 		if (is_int($value)) {
@@ -174,6 +189,7 @@ if (!function_exists('jsonEncodeUTFnormalWpf')) {
 		}
 	}
 }
+
 /**
  * Prepares the params values to store into db
  *
@@ -209,6 +225,7 @@ if (!function_exists('prepareParamsWpf')) {
 		return $d;
 	}
 }
+
 if (!function_exists('prepareFieldCodeWpf')) {
 	function prepareFieldCodeWpf( $string ) {
 		$string = preg_replace('/[^a-zA-Z0-9\s]/', ' ', $string);
@@ -223,6 +240,7 @@ if (!function_exists('prepareFieldCodeWpf')) {
 		return $code;
 	}
 }
+
 /**
  * Recursive implode of array
  *
@@ -251,6 +269,7 @@ if (!function_exists('recImplodeWpf')) {
 		return $res;
 	}
 }
+
 /**
  * Twig require this function, but it is present not on all servers
  */
@@ -259,6 +278,7 @@ if (!function_exists('hash')) {
 		return md5($data);
 	}
 }
+
 if (!function_exists('ctype_alpha')) {
 	function ctype_alpha( $text ) {
 		return (bool) preg_match('/[^\pL]+/', $text);
@@ -282,6 +302,7 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 		return $request;
 	}
 }
+
 add_action('admin_notices', 'woofilterInstallBaseMsg');
 if (!function_exists('woofilterInstallBaseMsg')) {
 	function woofilterInstallBaseMsg() {
@@ -308,6 +329,7 @@ if (!function_exists('woofilterInstallBaseMsg')) {
 		}
 	}
 }
+
 add_action( 'admin_init', 'woofilterProDeactivate' );
 if (!function_exists('woofilterProDeactivate')) {
 	function woofilterProDeactivate() {

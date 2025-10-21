@@ -1,3 +1,9 @@
+/**
+ * Product Filter by WBW - Admin Notice Dismiss JS
+ *
+ * @author  woobewoo
+ */
+
 "use strict";
 jQuery(document).ready(function(){
 	jQuery(document).on('click', '.wpf-notice-dismis .notice-dismiss', function(){

@@ -58,7 +58,11 @@ class OverviewControllerWpf extends ControllerWpf {
 	public function dismissNotice() {
 		$res = new ResponseWpf();
 		$slug = ReqWpf::getVar('slug');
-		if (!empty($slug) && !is_null($slug) && current_user_can('manage_woocommerce')) {
+		if (
+			!empty($slug) &&
+			!is_null($slug) &&
+			current_user_can('manage_woocommerce')
+		) {
 			FrameWpf::_()->getModule('options')->getModel()->save('dismiss_' . $slug, 1);
 		}
 		$res->ajaxExec();
@@ -72,7 +76,10 @@ class OverviewControllerWpf extends ControllerWpf {
 	public function approveNotice() {
 		$res = new ResponseWpf();
 		$slug = ReqWpf::getVar('slug');
-		if ('wpf-rest-api' == $slug && current_user_can('manage_woocommerce')) {
+		if (
+			'wpf-rest-api' == $slug &&
+			current_user_can('manage_woocommerce')
+		) {
 			$opts = array('opt_values' => array(
 					'disable_autoindexing' => 1,
 					'disable_autoindexing_by_ss' => 1

@@ -1,3 +1,9 @@
+/**
+ * Product Filter by WBW - Admin Options JS
+ *
+ * @author  woobewoo
+ */
+
 "use strict";
 var wpfAdminFormChanged = [];
 window.onbeforeunload = function(){
