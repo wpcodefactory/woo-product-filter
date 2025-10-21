@@ -129,9 +129,9 @@ if (!function_exists('redirectWpf')) {
 if (!function_exists('jsonEncodeUTFnormalWpf')) {
 	function jsonEncodeUTFnormalWpf( $value ) {
 		if (is_int($value)) {
-			return (string) $value;   
+			return (string) $value;
 		} elseif (is_string($value)) {
-			$value = str_replace(array('\\', '/', '"', "\r", "\n", "\b", "\f", "\t"), 
+			$value = str_replace(array('\\', '/', '"', "\r", "\n", "\b", "\f", "\t"),
 								 array('\\\\', '\/', '\"', '\r', '\n', '\b', '\f', '\t'), $value);
 			$convmap = array(0x80, 0xFFFF, 0, 0xFFFF);
 			$result = '';
@@ -139,9 +139,9 @@ if (!function_exists('jsonEncodeUTFnormalWpf')) {
 				$mb_char = substr($value, $i, 1);
 				$result = $mb_char . $result;
 			}
-			return '"' . $result . '"';                
+			return '"' . $result . '"';
 		} elseif (is_float($value)) {
-			return str_replace(',', '.', $value);         
+			return str_replace(',', '.', $value);
 		} elseif (is_null($value)) {
 			return 'null';
 		} elseif (is_bool($value)) {
@@ -163,20 +163,20 @@ if (!function_exists('jsonEncodeUTFnormalWpf')) {
 		$result = array();
 		if ($with_keys) {
 			foreach ($value as $key => $v) {
-				$result[] = jsonEncodeUTFnormalWpf((string) $key) . ':' . jsonEncodeUTFnormalWpf($v);    
+				$result[] = jsonEncodeUTFnormalWpf((string) $key) . ':' . jsonEncodeUTFnormalWpf($v);
 			}
-			return '{' . implode(',', $result) . '}';                
+			return '{' . implode(',', $result) . '}';
 		} else {
 			foreach ($value as $key => $v) {
-				$result[] = jsonEncodeUTFnormalWpf($v);    
+				$result[] = jsonEncodeUTFnormalWpf($v);
 			}
 			return '[' . implode(',', $result) . ']';
 		}
-	} 
+	}
 }
 /**
  * Prepares the params values to store into db
- * 
+ *
  * @param array $d $_POST array
  * @return array
  */
@@ -210,7 +210,7 @@ if (!function_exists('prepareParamsWpf')) {
 	}
 }
 if (!function_exists('prepareFieldCodeWpf')) {
-	function prepareFieldCodeWpf( $string ) {   
+	function prepareFieldCodeWpf( $string ) {
 		$string = preg_replace('/[^a-zA-Z0-9\s]/', ' ', $string);
 		$string = preg_replace('/\s+/', ' ', $string);
 		$string = preg_replace('/ /', '', $string);
@@ -317,7 +317,7 @@ if (!function_exists('woofilterProDeactivate')) {
 			if (is_plugin_active($proPlugin)) {
 				$pluginData = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
 				$isProActive = FrameWpf::_()->moduleActive('access');
-				if ( !version_compare($pluginData['Version'], WPF_PRO_REQUIRES, '>=') ) { 
+				if ( !version_compare($pluginData['Version'], WPF_PRO_REQUIRES, '>=') ) {
 					//deactivate_plugins($proPlugin);
 					if ($isProActive) {
 						call_user_func_array(array('ModInstallerWpf', 'deactivate'), array(array('license')));
