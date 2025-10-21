@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Set first letter in a string as UPPERCASE
+ * Set first letter in a string as UPPERCASE.
  *
  * @param string $str string to modify
  * @return string string with first Uppercase letter
@@ -20,7 +20,7 @@ if (!function_exists('strFirstUpWpf')) {
 }
 
 /**
- * Deprecated - class must be created
+ * Deprecated - class must be created.
  */
 if (!function_exists('dateToTimestampWpf')) {
 	function dateToTimestampWpf( $date ) {
@@ -33,7 +33,7 @@ if (!function_exists('dateToTimestampWpf')) {
 }
 
 /**
- * Generate random string name
+ * Generate random string name.
  *
  * @param int $lenFrom min len
  * @param int $lenTo max len
@@ -52,6 +52,9 @@ if (!function_exists('getRandNameWpf')) {
 	}
 }
 
+/**
+ * setDefaultParamsWpf.
+ */
 if (!function_exists('setDefaultParamsWpf')) {
 	function setDefaultParamsWpf( $params, $default ) {
 		foreach ($default as $k => $v) {
@@ -61,6 +64,9 @@ if (!function_exists('setDefaultParamsWpf')) {
 	}
 }
 
+/**
+ * importClassWpf.
+ */
 if (!function_exists('importClassWpf')) {
 	function importClassWpf( $class, $path = '' ) {
 		if (!class_exists($class)) {
@@ -80,7 +86,7 @@ if (!function_exists('importClassWpf')) {
 }
 
 /**
- * Check if class name exist with prefix or not
+ * Check if class name exist with prefix or not.
  *
  * @param string $class preferred class name
  * @return string existing class name
@@ -100,7 +106,7 @@ if (!function_exists('toeGetClassNameWpf')) {
 }
 
 /**
- * Create object of specified class
+ * Create object of specified class.
  *
  * @param string $class class that you want to create
  * @param array $params array of arguments for class __construct function
@@ -126,7 +132,7 @@ if (!function_exists('toeCreateObjWpf')) {
 }
 
 /**
- * Redirect user to specified location. Be advised that it should redirect even if headers alredy sent.
+ * Redirect user to specified location. Be advised that it should redirect even if headers already sent.
  *
  * @param string $url where page must be redirected
  */
@@ -141,6 +147,9 @@ if (!function_exists('redirectWpf')) {
 	}
 }
 
+/**
+ * jsonEncodeUTFnormalWpf.
+ */
 if (!function_exists('jsonEncodeUTFnormalWpf')) {
 	function jsonEncodeUTFnormalWpf( $value ) {
 		if (is_int($value)) {
@@ -191,7 +200,7 @@ if (!function_exists('jsonEncodeUTFnormalWpf')) {
 }
 
 /**
- * Prepares the params values to store into db
+ * Prepares the params values to store into db.
  *
  * @param array $d $_POST array
  * @return array
@@ -226,6 +235,9 @@ if (!function_exists('prepareParamsWpf')) {
 	}
 }
 
+/**
+ * prepareFieldCodeWpf.
+ */
 if (!function_exists('prepareFieldCodeWpf')) {
 	function prepareFieldCodeWpf( $string ) {
 		$string = preg_replace('/[^a-zA-Z0-9\s]/', ' ', $string);
@@ -242,7 +254,7 @@ if (!function_exists('prepareFieldCodeWpf')) {
 }
 
 /**
- * Recursive implode of array
+ * Recursive implode of array.
  *
  * @param string $glue imploder
  * @param array $array array to implode
@@ -271,7 +283,7 @@ if (!function_exists('recImplodeWpf')) {
 }
 
 /**
- * Twig require this function, but it is present not on all servers
+ * Twig require this function, but it is present not on all servers.
  */
 if (!function_exists('hash')) {
 	function hash( $method, $data ) {
@@ -279,12 +291,18 @@ if (!function_exists('hash')) {
 	}
 }
 
+/**
+ * ctype_alpha.
+ */
 if (!function_exists('ctype_alpha')) {
 	function ctype_alpha( $text ) {
 		return (bool) preg_match('/[^\pL]+/', $text);
 	}
 }
 
+/**
+ * trueRequestWpf.
+ */
 if ( ! function_exists( 'trueRequestWpf' ) ) {
 	function trueRequestWpf() {
 		$request = true;
@@ -303,6 +321,9 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 	}
 }
 
+/**
+ * woofilterInstallBaseMsg.
+ */
 add_action('admin_notices', 'woofilterInstallBaseMsg');
 if (!function_exists('woofilterInstallBaseMsg')) {
 	function woofilterInstallBaseMsg() {
@@ -330,6 +351,9 @@ if (!function_exists('woofilterInstallBaseMsg')) {
 	}
 }
 
+/**
+ * woofilterProDeactivate.
+ */
 add_action( 'admin_init', 'woofilterProDeactivate' );
 if (!function_exists('woofilterProDeactivate')) {
 	function woofilterProDeactivate() {
@@ -352,6 +376,9 @@ if (!function_exists('woofilterProDeactivate')) {
 	}
 }
 
+/**
+ * wpf_translate_string.
+ */
 if (!function_exists('wpf_translate_string')) {
 	function wpf_translate_string( $value, $name = '', $context = 'woo-product-filter' ) {
 		if (function_exists('icl_register_string')) {
