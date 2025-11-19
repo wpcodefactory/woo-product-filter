@@ -152,6 +152,7 @@ You may help us translate the plugin into your language and get the PRO version 
 == Changelog ==
 
 = 3.0.2 - 19/11/2025 =
+* Dev - Settings - "WooCommerce product query action priority" option added.
 * WC tested up to: 10.3.
 
 = 3.0.1 - 22/10/2025 =

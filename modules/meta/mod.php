@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - MetaWpf Class
  *
- * @version 2.9.9
+ * @version 3.0.2
  *
  * @author  woobewoo
  */
@@ -72,7 +72,7 @@ class MetaWpf extends ModuleWpf {
 	/**
 	 * addOptions.
 	 *
-	 * @version 2.9.9
+	 * @version 3.0.2
 	 */
 	public function addOptions( $options ) {
 		$opts = array_merge(array(
@@ -86,16 +86,16 @@ class MetaWpf extends ModuleWpf {
 				'add_sub_opts' => '<div class="woobewoo-check-group"><input type="checkbox" id="wpfStartIndexingCron"><label class="woobewoo-group-label">' . esc_html__( 'run in background ', 'woo-product-filter' ) . '</label></div>',
 			),
 			'disable_autoindexing' => array(
-				'label' => esc_html__( 'Disable automatic calculation of index tables after editing products.', 'woo-product-filter' ),
-				'desc'  => esc_html__( 'This can be useful if you add products only through imports. Then after importing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
-				'html'  => 'checkboxHiddenVal',
-				'def'   => '0',
+				'label'        => esc_html__( 'Disable automatic calculation of index tables after editing products.', 'woo-product-filter' ),
+				'desc'         => esc_html__( 'This can be useful if you add products only through imports. Then after importing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
+				'html'         => 'checkboxHiddenVal',
+				'def'          => '0',
 			),
 			'disable_autoindexing_by_ss' => array(
-				'label' => esc_html__( 'Disable automatic calculation of index tables after product stock changes.', 'woo-product-filter' ),
-				'desc'  => esc_html__( 'This can be useful when changing inventory status in bulk. Then after changing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
-				'html'  => 'checkboxHiddenVal',
-				'def'   => '0',
+				'label'        => esc_html__( 'Disable automatic calculation of index tables after product stock changes.', 'woo-product-filter' ),
+				'desc'         => esc_html__( 'This can be useful when changing inventory status in bulk. Then after changing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
+				'html'         => 'checkboxHiddenVal',
+				'def'          => '0',
 			),
 			'indexing_schedule' => array(
 				'label'        => esc_html__( 'Start indexing on a schedule', 'woo-product-filter' ),
@@ -105,16 +105,16 @@ class MetaWpf extends ModuleWpf {
 				'add_sub_opts' => array( $this, 'getSettingsIndexingSchedule' ),
 			),
 			'logging' => array(
-				'label' => esc_html__('Logging', 'woo-product-filter'),
-				'desc'  => esc_html__('Save debug messages to the WooCommerce SystemStatus Log', 'woo-product-filter'),
-				'html'  => 'checkboxHiddenVal',
-				'def'   => '0',
+				'label'        => esc_html__('Logging', 'woo-product-filter'),
+				'desc'         => esc_html__('Save debug messages to the WooCommerce SystemStatus Log', 'woo-product-filter'),
+				'html'         => 'checkboxHiddenVal',
+				'def'          => '0',
 			),
 			'start_optimization' => array(
-				'label' => esc_html__('Start index tables optimization', 'woo-product-filter'),
-				'desc'  => esc_html__('Sometimes index tables take up more space than they should, and product filtering takes longer than they should. Start optimizing your index tables to defragment them and rebuild your data in the most efficient way.', 'woo-product-filter'),
-				'html'  => 'startOptimizingButton',
-				'def'   => '',
+				'label'        => esc_html__('Start index tables optimization', 'woo-product-filter'),
+				'desc'         => esc_html__('Sometimes index tables take up more space than they should, and product filtering takes longer than they should. Start optimizing your index tables to defragment them and rebuild your data in the most efficient way.', 'woo-product-filter'),
+				'html'         => 'startOptimizingButton',
+				'def'          => '',
 			),
 			'optimizing_schedule' => array(
 				'label'        => esc_html__( 'Start optimization on a schedule', 'woo-product-filter' ),
@@ -134,6 +134,12 @@ class MetaWpf extends ModuleWpf {
 				'desc'         => esc_html__( 'Discourages search engines from indexing pages that include URL parameters created by the product filter.', 'woo-product-filter' ),
 				'html'         => 'checkboxHiddenVal',
 				'def'          => '0',
+			),
+			'load_products_filter_wc_product_query_priority' => array(
+				'label'        => esc_html__( 'WooCommerce product query action priority', 'woo-product-filter'),
+				'desc'         => esc_html__( 'Leave blank for the default value.', 'woo-product-filter' ),
+				'html'         => 'input',
+				'def'          => '',
 			),
 		), $options['general']['opts']);
 
