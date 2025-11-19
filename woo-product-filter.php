@@ -10,7 +10,7 @@
  * Text Domain: woo-product-filter
  * Domain Path: /languages
  * WC requires at least: 3.4.1
- * WC tested up to: 10.2
+ * WC tested up to: 10.3
  * Requires Plugins: woocommerce
  **/
 
