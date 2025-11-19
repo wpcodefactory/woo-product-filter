@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.0.2
+ * @version 2.9.9
  *
  * @author  woobewoo
  */
@@ -45,7 +45,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.0.2
+	 * @version 2.9.9
 	 */
 	public function init() {
 		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
@@ -70,8 +70,7 @@ class WoofiltersWpf extends ModuleWpf {
 
 		FrameWpf::_()->addScript( 'jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
 
-		$loadProductsFilterWCProductQueryPriority = DispatcherWpf::applyFilters('loadProductsFilterWCProductQueryPriority', 999);
-		add_action( 'woocommerce_product_query', array( $this, 'loadProductsFilter' ), $loadProductsFilterWCProductQueryPriority );
+		add_action( 'woocommerce_product_query', array( $this, 'loadProductsFilter' ), 999 );
 
 		// for Woocommerce Blocks: Product Collection
 		add_filter( 'query_loop_block_query_vars', array( $this, 'addFilterToWoocommerceBlocksAgrs' ), 999, 3 );
