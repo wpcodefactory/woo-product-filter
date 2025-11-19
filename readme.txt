@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 3.0.2 - 19/11/2025 =
+* Dev - Developers - `wpf_loadProductsFilterWCProductQueryPriority` filter added.
+
 = 3.0.1 - 22/10/2025 =
 * Fix - Security - "Missing Authorization to Unauthenticated Settings Update" vulnerability fixed.
 * Fix - Text typo fixed.
