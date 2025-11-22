@@ -217,7 +217,7 @@ class FrameWpf {
 		if ($this->havePermissions($code, $action)) {
 			return true;
 		} else {
-			exit(esc_html_e('You have no permissions to view this page', 'woo-product-filter'));
+			exit(esc_html__('You have no permissions to view this page', 'woo-product-filter'));
 		}
 	}
 
