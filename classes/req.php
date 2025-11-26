@@ -26,7 +26,7 @@ class ReqWpf {
 	}
 
 	/**
-	 * Function getVar
+	 * Function getVar.
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
@@ -105,7 +105,7 @@ class ReqWpf {
 
 
 	/**
-	 * Getting similar parameters when redirecting to set filter values
+	 * Getting similar parameters when redirecting to set filter values.
 	 *
 	 * @param string $part part of parameter
 	 * @return string
