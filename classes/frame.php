@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - FrameWpf Class
  *
+ * @version 3.0.4
+ *
  * @author  woobewoo
  */
 
@@ -208,6 +210,8 @@ class FrameWpf {
 
 	/**
 	 * Check permissions for action in controller by $code and made corresponding action.
+	 *
+	 * @version 3.0.4
 	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked

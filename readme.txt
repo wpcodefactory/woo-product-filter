@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 3.0.4 - 27/11/2025 =
+* Fix - `FrameWpf::checkPermissions()` - `exit()` function fixed.
+
 = 3.0.3 - 26/11/2025 =
 * Dev - Coding standards improved.
 
