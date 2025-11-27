@@ -644,7 +644,12 @@ class FrameWpf {
 	}
 
 	public function isWCLicense() {
-		return $this->moduleExists('license') && $this->getModule('license') && isset($this->getModule('license')->isWooLicense) && $this->getModule('license')->isWooLicense;
+		return (
+			$this->moduleExists('license') &&
+			$this->getModule('license') &&
+			isset($this->getModule('license')->isWooLicense) &&
+			$this->getModule('license')->isWooLicense
+		);
 	}
 
 }
