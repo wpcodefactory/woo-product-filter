@@ -152,7 +152,7 @@ You may help us translate the plugin into your language and get the PRO version 
 == Changelog ==
 
 = 3.0.4 - 28/11/2025 =
-* Fix - `FrameWpf::checkPermissions()` - `exit()` function fixed.
+* Fix - Check permissions - `exit` function fixed.
 * Fix - Breadcrumbs - "Edit" breadcrumb fixed.
 
 = 3.0.3 - 26/11/2025 =
