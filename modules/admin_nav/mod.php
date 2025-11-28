@@ -1,5 +1,21 @@
 <?php
+/**
+ * Product Filter by WBW - Admin_NavWpf Class
+ *
+ * @version 3.0.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class Admin_NavWpf extends ModuleWpf {
+
+	/**
+	 * getBreadcrumbsList.
+	 *
+	 * @version 3.0.4
+	 */
 	public function getBreadcrumbsList() {
 		$res = array(
 			array('label' => WPF_WP_PLUGIN_NAME, 'url' => FrameWpf::_()->getModule('adminmenu')->getMainLink()),
@@ -17,7 +33,7 @@ class Admin_NavWpf extends ModuleWpf {
 						$res[] = array('label' => $tabs[ $addForBread ]['label'], 'url' => $tabs[ $addForBread ]['url']);
 					}
 				}
-				if ('comparison_edit' == $activeTab) {
+				if ('comparison_edit' == $activeTab || 'woofilters_edit' == $activeTab) {
 					$id = (int) ReqWpf::getVar('id', 'get');
 					if ($id) {
 						$tabs[ $activeTab ]['url'] .= '&id=' . $id;
@@ -35,4 +51,5 @@ class Admin_NavWpf extends ModuleWpf {
 		}
 		return $res;
 	}
+
 }
