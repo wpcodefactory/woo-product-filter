@@ -16,12 +16,12 @@ class FrameWpf {
 	private $_allModules         = array();
 
 	/**
-	 * Uses to know if we are on one of the plugin pages
+	 * Uses to know if we are on one of the plugin pages.
 	 */
 	private $_inPlugin           = false;
 
 	/**
-	 * Array to hold all scripts and add them in one time in addScripts method
+	 * Array to hold all scripts and add them in one time in addScripts method.
 	 */
 	private $_scripts            = array();
 	private $_scriptsInitialized = false;
@@ -35,7 +35,7 @@ class FrameWpf {
 	private $_proVersion         = null;
 
 	/**
-	 * Object with result of executing non-ajax module request
+	 * Object with result of executing non-ajax module request.
 	 */
 	private $_res                = null;
 
@@ -649,7 +649,6 @@ class FrameWpf {
 		$this->_stylesInitialized = true;
 	}
 
-	//Very interesting thing going here.............
 	/**
 	 * loadPlugins.
 	 */
