@@ -1,7 +1,27 @@
 <?php
+/**
+ * Product Filter by WBW - BaseObjectWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 abstract class BaseObjectWpf {
+
+	/**
+	 * _internalErrors.
+	 */
 	protected $_internalErrors = array();
+
+	/**
+	 * _haveErrors.
+	 */
 	protected $_haveErrors = false;
+
+	/**
+	 * pushError.
+	 */
 	public function pushError( $error, $key = '' ) {
 		if (is_array($error)) {
 			$this->_internalErrors = array_merge ($this->_internalErrors, $error);
@@ -12,15 +32,23 @@ abstract class BaseObjectWpf {
 		}
 		$this->_haveErrors = true;
 	}
+
+	/**
+	 * getErrors.
+	 */
 	public function getErrors() {
 		return $this->_internalErrors;
 	}
+
+	/**
+	 * haveErrors.
+	 */
 	public function haveErrors() {
 		return $this->_haveErrors;
 	}
 
 	/**
-	 * Get settings in specific filter in filter block
+	 * Get settings in specific filter in filter block.
 	 *
 	 * @param array $settings
 	 * @param string $name
@@ -38,7 +66,15 @@ abstract class BaseObjectWpf {
 		}
 
 		if ( empty( $settings[ $name ] ) ) {
-			return ( $leer && ( '' === $settings[ $name ] ) ? '' : ( $zero && ( '0' === $settings[ $name ] ) ? '0' : $default ) );
+			return (
+				$leer && ( '' === $settings[ $name ] ) ?
+				'' :
+				(
+					$zero && ( '0' === $settings[ $name ] ) ?
+					'0' :
+					$default
+				)
+			);
 		}
 
 		$value = $settings[ $name ];
@@ -58,4 +94,5 @@ abstract class BaseObjectWpf {
 
 		return $value;
 	}
+
 }
