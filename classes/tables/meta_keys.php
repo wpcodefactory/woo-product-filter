@@ -14,7 +14,7 @@ class TableMeta_KeysWpf extends TableWpf {
 	 */
 	public function __construct() {
 		$this->_table = '@__meta_keys';
-		$this->_id = 'id';
+		$this->_id    = 'id';
 		$this->_alias = 'wpf_meta_keys';
 		$this->_addField('id', 'text', 'int')
 			 ->_addField('meta_mode', 'text', 'int')

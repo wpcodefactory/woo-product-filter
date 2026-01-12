@@ -14,7 +14,7 @@ class TableMeta_DataWpf extends TableWpf {
 	 */
 	public function __construct() {
 		$this->_table = '@__meta_data';
-		$this->_id = 'id';
+		$this->_id    = 'id';
 		$this->_alias = 'wpf_meta_data';
 		$this->_addField('id', 'text', 'int')
 			 ->_addField('product_id', 'text', 'int')
