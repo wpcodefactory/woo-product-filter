@@ -1,5 +1,17 @@
 <?php
+/**
+ * Product Filter by WBW - TableFiltersWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class TableFiltersWpf extends TableWpf {
+
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->_table = '@__filters';
 		$this->_id = 'id';
@@ -9,4 +21,5 @@ class TableFiltersWpf extends TableWpf {
 			 ->_addField('setting_data', 'text', 'text')
 			 ->_addField('meta_keys', 'text', 'text');
 	}
+
 }

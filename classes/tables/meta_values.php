@@ -1,5 +1,17 @@
 <?php
+/**
+ * Product Filter by WBW - TableMeta_ValuesWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class TableMeta_ValuesWpf extends TableWpf {
+
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->_table = '@__meta_values';
 		$this->_id = 'id';
@@ -13,4 +25,5 @@ class TableMeta_ValuesWpf extends TableWpf {
 			 ->_addField('product_cnt', 'text', 'int')
 			 ->_addField('variation_cnt', 'text', 'int');
 	}
+
 }
