@@ -119,6 +119,10 @@ class TemplatesWpf extends ModuleWpf {
 			FrameWpf::_()->addScript('WpfPriceThousandsSep', WPF_JS_PATH . 'price-thousands-sep.js', array('jquery'));
 		}
 
+		if ( 1 == FrameWpf::_()->getModule('options')->getModel()->get('browser_compatibility') ) {
+			FrameWpf::_()->addScript('WpfBrowserCompatibility', WPF_JS_PATH . 'browser-compatibility.js', array('jquery'));
+		}	
+
 		$ajaxurl = admin_url('admin-ajax.php');
 		$jsData = array(
 			'siteUrl'  => WPF_SITE_URL,
