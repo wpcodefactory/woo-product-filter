@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - OptionsWpf Class
+ *
+ * @version 3.0.8
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class OptionsWpf extends ModuleWpf {
 	private $_tabs = array();
 	private $_options = array();
@@ -140,6 +150,12 @@ class OptionsWpf extends ModuleWpf {
 		}
 		return $rolesListForSelect;
 	}
+
+	/**
+	 * getAll.
+	 *
+	 * @version 3.0.8
+	 */
 	public function getAll() {
 		if (empty($this->_options)) {
 			$defSendmailPath = @ini_get('sendmail_path');
@@ -206,10 +222,10 @@ class OptionsWpf extends ModuleWpf {
 							'html'  => 'checkboxHiddenVal',
 						),
 						'browser_compatibility' => array(
-							'label' => esc_html__('Browser Compatibility', 'woo-product-filter'),
-							'desc' => esc_html__('This option improves compatibility with certain browsers (e.g. Safari). Enable it if you notice unexpected behavior.', 'woo-product-filter'),
-							'def' => '0',
-							'html' => 'checkboxHiddenVal',
+							'label' => esc_html__('Browser compatibility', 'woo-product-filter'),
+							'desc'  => esc_html__('This option improves compatibility with certain browsers (e.g. Safari). Enable it if you notice unexpected behavior.', 'woo-product-filter'),
+							'def'   => '0',
+							'html'  => 'checkboxHiddenVal',
 						),
 					),
 				),

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 2.9.3
+ * @version 3.0.8
  *
  * @author  woobewoo
  */
@@ -107,7 +107,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * loadCoreJs.
 	 *
-	 * @version 2.9.3
+	 * @version 3.0.8
 	 */
 	public function loadCoreJs() {
 		FrameWpf::_()->addScript('jquery');
@@ -121,7 +121,7 @@ class TemplatesWpf extends ModuleWpf {
 
 		if ( 1 == FrameWpf::_()->getModule('options')->getModel()->get('browser_compatibility') ) {
 			FrameWpf::_()->addScript('WpfBrowserCompatibility', WPF_JS_PATH . 'browser-compatibility.js', array('jquery'));
-		}	
+		}
 
 		$ajaxurl = admin_url('admin-ajax.php');
 		$jsData = array(

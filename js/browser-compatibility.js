@@ -7,24 +7,24 @@
  * @author  woobewoo
  */
 
-
-
 (function () {
-    const float = document.querySelector('.wpfFloatingWrapper');
-    if (!float) return;
+	const float = document.querySelector('.wpfFloatingWrapper');
+	if (!float) {
+		return;
+	}
 
-    function hideFloat() {
-        float.style.display = 'none';
-    }
+	function hideFloat() {
+		float.style.display = 'none';
+	}
 
-    document.addEventListener('click', function (e) {
-        if (
-            e.target.closest('.wpfFilterButton') ||
-            e.target.closest('.wpfClearButton')
-        ) {
-            hideFloat();
-        }
-    });
+	document.addEventListener('click', function (e) {
+		if (
+			e.target.closest('.wpfFilterButton') ||
+			e.target.closest('.wpfClearButton')
+		) {
+			hideFloat();
+		}
+	});
 
-    window.addEventListener('beforeunload', hideFloat);
+	window.addEventListener('beforeunload', hideFloat);
 })();

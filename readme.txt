@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 3.0.8 - 23/01/2026 =
+* Dev - Settings - "Browser compatibility" option added (defaults to `no`).
+
 = 3.0.7 - 12/01/2026 =
 * Dev - Coding standards improved.
 
