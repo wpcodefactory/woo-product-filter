@@ -294,7 +294,7 @@ class OptionsWpf extends ModuleWpf {
 						),
 						'index_group_bundle' => array(
 							'label' => esc_html__( 'Indexing stockstatus for Grouped+Bundle Products', 'woo-product-filter' ),
-							'desc'  => esc_html__( 'If you have groupped products and have bundle products in them and you go to properly index the stockstatus of these groupped products, then enable this option. Attention: enable this option only if it is really necessary, as it can significantly slow down the indexing process.', 'woo-product-filter' ),
+							'desc'  => esc_html__( 'If you have grouped products and have bundle products in them and you go to properly index the stockstatus of these grouped products, then enable this option. Attention: enable this option only if it is really necessary, as it can significantly slow down the indexing process.', 'woo-product-filter' ),
 							'def'   => '0',
 							'html'  => 'checkboxHiddenVal',
 						),
