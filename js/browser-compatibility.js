@@ -8,13 +8,13 @@
  */
 
 (function () {
-	const float = document.querySelector('.wpfFloatingWrapper');
-	if (!float) {
+	const floatingWrapper = document.querySelector('.wpfFloatingWrapper');
+	if (!floatingWrapper) {
 		return;
 	}
 
 	function hideFloat() {
-		float.style.display = 'none';
+		floatingWrapper.style.display = 'none';
 	}
 
 	document.addEventListener('click', function (e) {
