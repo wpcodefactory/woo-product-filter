@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.9
-Stable tag: 3.0.8
+Stable tag: 3.0.9-dev
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,9 @@ If none of this advice helps you, contact us via [support form on our website](h
 You may help us translate the plugin into your language and get the PRO version of the plugin for free as soon as it is released. If this method seems to be too complicated, please send us a request and we will let you know as soon as the WBW Filter plugin will be available in your localization.
 
 == Changelog ==
+
+= 3.0.9-dev - 24/01/2026 =
+* Dev - Settings - Change the settings option name from “Browser compatibility” to “Floating mode browser compatibility”.
 
 = 3.0.8 - 23/01/2026 =
 * Dev - Settings - "Browser compatibility" option added (defaults to `no`).
