@@ -299,7 +299,7 @@ class OptionsWpf extends ModuleWpf {
 							'html'  => 'checkboxHiddenVal',
 						),
 						'browser_compatibility' => array(
-							'label' => esc_html__('Browser compatibility', 'woo-product-filter'),
+							'label' => esc_html__('Floating mode browser compatibility', 'woo-product-filter'),
 							'desc'  => esc_html__('This option improves compatibility with certain browsers (e.g. Safari). Enable it if you notice unexpected behavior.', 'woo-product-filter'),
 							'def'   => '0',
 							'html'  => 'checkboxHiddenVal',
