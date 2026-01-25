@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsWpf Class
  *
- * @version 3.0.8
+ * @version 3.0.9
  *
  * @author  woobewoo
  */
@@ -238,7 +238,7 @@ class OptionsWpf extends ModuleWpf {
 	/**
 	 * getAll.
 	 *
-	 * @version 3.0.8
+	 * @version 3.0.9
 	 */
 	public function getAll() {
 		if (empty($this->_options)) {

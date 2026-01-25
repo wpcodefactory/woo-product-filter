@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.9
-Stable tag: 3.0.9-dev
+Stable tag: 3.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -151,7 +151,7 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
-= 3.0.9-dev - 24/01/2026 =
+= 3.0.9 - 24/01/2026 =
 * Dev - Settings - Change the settings option name from “Browser compatibility” to “Floating mode browser compatibility”.
 
 = 3.0.8 - 23/01/2026 =
