@@ -151,6 +151,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 3.1.0 - 04/02/2026 =
+* Dev - Settings - Change the settings option name from “Browser compatibility” to “Floating mode browser compatibility”.
+
 = 3.0.9 - 24/01/2026 =
 * Dev - Settings - Change the settings option name from “Browser compatibility” to “Floating mode browser compatibility”.
 
