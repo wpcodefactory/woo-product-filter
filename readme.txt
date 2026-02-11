@@ -1,4 +1,4 @@
-=== Product Filter by WBW ===
+=== Product Filter for WooCommerce by WBW ===
 Contributors: woobewoo
 Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
@@ -150,8 +150,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
-= 3.1.0 - 06/02/2026 =
+= 3.1.0 - 11/02/2026 =
 * Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
+* Readme.txt - Rename plugin from "Product Filter by WBW" to "Product Filter for WooCommerce by WBW".
 
 = 3.0.9 - 05/02/2026 =
 * Dev - Settings - Change the settings option name from "Browser compatibility" to "Floating mode browser compatibility".
@@ -185,8 +186,5 @@ You may help us translate the plugin into your language and get the PRO version 
 * Fix - Security - "Missing Authorization to Unauthenticated Settings Update" vulnerability fixed.
 * Fix - Text typo fixed.
 * Dev - Coding standards improved.
-
-= 3.0.0 - 17/10/2025 =
-* Fix - Go PRO tab - Product links fixed.
 
 [See changelog for all versions](https://plugins.svn.wordpress.org/woo-product-filter/trunk/changelog.txt).
