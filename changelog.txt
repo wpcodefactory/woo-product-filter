@@ -1,7 +1,8 @@
 == Changelog ==
 
-= 3.1.0 - 06/02/2026 =
+= 3.1.0 - 11/02/2026 =
 * Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
+* Readme.txt - Rename plugin from "Product Filter by WBW" to "Product Filter for WooCommerce by WBW".
 
 = 3.0.9 - 05/02/2026 =
 * Dev - Settings - Change the settings option name from "Browser compatibility" to "Floating mode browser compatibility".
