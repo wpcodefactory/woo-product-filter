@@ -150,6 +150,9 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
+= 3.1.1 - 14/02/2026 =
+* Dev – Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
+
 = 3.1.0 - 12/02/2026 =
 * Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
 * Readme.txt - Rename plugin from "Product Filter by WBW" to "Product Filter for WooCommerce by WBW".
