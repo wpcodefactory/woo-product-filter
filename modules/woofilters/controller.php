@@ -250,7 +250,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				$is_filter_category_selected = true;
 			}
 		}
-
+		
 		if ( ! isset($parts['query']) || '' === $parts['query'] || 'wpf_fbv=1' === $parts['query'] || $is_filter_category_selected ) {
 			if ( $shopPageId == $currentPageId && ! $is_filter_category_selected ) {
 				$pageDisplay = get_option( 'woocommerce_shop_page_display', '' );
@@ -782,20 +782,14 @@ class WoofiltersControllerWpf extends ControllerWpf {
 								$args['order']   = 'ASC';
 								break;
 							case 'price':
-								remove_all_filters('woocommerce_get_catalog_ordering_args');
-								$WC_Query = new WC_Query();
-								$vars     = $WC_Query->get_catalog_ordering_args('price');
-								if ( is_array($vars) ) {
-									$args = array_merge($args, $vars);
-								}
+								$args['orderby'] = 'meta_value_num';
+								$args['order'] = 'ASC';
+								$args['meta_key'] = '_price';
 								break;
 							case 'price-desc':
-								remove_all_filters('woocommerce_get_catalog_ordering_args');
-								$WC_Query = new WC_Query();
-								$vars     = $WC_Query->get_catalog_ordering_args('price', 'DESC');
-								if ( is_array($vars) ) {
-									$args = array_merge($args, $vars);
-								}
+								$args['orderby'] = 'meta_value_num';
+								$args['order'] = 'DESC';
+								$args['meta_key'] = '_price';
 								break;
 							case 'popularity':
 								$args['orderby']  = 'meta_value_num';
