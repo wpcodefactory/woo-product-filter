@@ -786,13 +786,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 								$args['order']   = 'ASC';
 								break;
 							case 'price':
-								$args['orderby'] = 'meta_value_num';
-								$args['order'] = 'ASC';
+								$args['orderby']  = 'meta_value_num';
+								$args['order']    = 'ASC';
 								$args['meta_key'] = '_price';
 								break;
 							case 'price-desc':
-								$args['orderby'] = 'meta_value_num';
-								$args['order'] = 'DESC';
+								$args['orderby']  = 'meta_value_num';
+								$args['order']    = 'DESC';
 								$args['meta_key'] = '_price';
 								break;
 							case 'popularity':
