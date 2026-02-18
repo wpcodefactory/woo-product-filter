@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.9
-Stable tag: 3.1.0
+Stable tag: 3.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,7 +150,7 @@ You may help us translate the plugin into your language and get the PRO version 
 
 == Changelog ==
 
-= 3.1.1 - 14/02/2026 =
+= 3.1.1 - 18/02/2026 =
 * Dev – Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
 
 = 3.1.0 - 12/02/2026 =

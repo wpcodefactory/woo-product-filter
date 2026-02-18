@@ -1,6 +1,6 @@
 == Changelog ==
 
-= 3.1.1 - 14/02/2026 =
+= 3.1.1 - 18/02/2026 =
 * Dev – Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
 
 = 3.1.0 - 12/02/2026 =
