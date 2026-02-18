@@ -252,7 +252,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				$is_filter_category_selected = true;
 			}
 		}
-		
+
 		if ( ! isset($parts['query']) || '' === $parts['query'] || 'wpf_fbv=1' === $parts['query'] || $is_filter_category_selected ) {
 			if ( $shopPageId == $currentPageId && ! $is_filter_category_selected ) {
 				$pageDisplay = get_option( 'woocommerce_shop_page_display', '' );
