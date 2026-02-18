@@ -586,21 +586,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * Clone orderby new wp_query parametr.
-	 *
-	 * @deprecated 1.3.4
-	 * @deprecated No longer used by internal code and not recommended.
-	 *
-	 * @param array $args
-	 *
-	 * @return array
+	 * getTaxonomyTerms.
 	 */
-	/*public function order_by_popularity_post_clauses_clone( $args ) {
-		global $wpdb;
-		$args['orderby'] = "$wpdb->postmeta.meta_value+0 DESC, $wpdb->posts.post_date DESC";
-		return $args;
-	}*/
-
 	public function getTaxonomyTerms() {
 
 		$res   = new ResponseWpf();
@@ -617,12 +604,12 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * Creat args for WP_Query
+	 * Create args for WP_Query.
 	 *
 	 * @version 3.1.1
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
-	 * @param array $queryvars Query fiiltering variables
+	 * @param array $queryvars Query filtering variables
 	 * @param array $filterSettings Some filter block settings
 	 * @param array $generalSettings Filters arranged with filtering order with all filter settings
 	 * @param array $woocommerceSettings If we do not have own filtering result we must take it from woocommerce if they are set
