@@ -85,33 +85,32 @@
 	color: #03a9f4;
 }
 #wpfFiltersEditForm .tabs-wrapper{
-	padding: 24px;
-	padding-bottom: 0;
+	padding: 15px 32px 0 20px;
     float: left;
     border-bottom: 1px solid #d8dfe3;
     width: 100%;
 }
 #wpfFiltersEditForm .row {
 	flex-wrap: nowrap;
-	/* display: block; */
+	display: block;
 }
 #row-tab-settings .tabs-wrapper{
 	padding-top: 20px;
 }
 .wpfMainTabsContainer {
-	/* padding: 0 15px; */
+	padding: 0 15px;
 }
 
 .wpfFiltersTabContents {
-	/* background-color: #f8fafb; */
-	/* padding: 15px 15px 15px 0 !important; */
+	background-color: #f8fafb;
+	padding: 15px 15px 15px 0 !important;
 }
 .wpfFiltersBlockPreview {
 	background-color: #ffffff;
 	border: 1px solid #d8dfe3;
 	border-top: none;
 	padding: 15px;
-	/* margin: 0 -15px; */
+	margin: 0 -15px;
 	/*overflow: auto;*/
 	overflow: visible;
 	visibility: hidden;
@@ -578,7 +577,7 @@ input.wpfSmallInput{
 	font-size: 14px;
 	font-weight: 700;
 	color: #0074a2;
-	/* border-bottom: 1px dashed #0074a2; */
+	border-bottom: 1px dashed #0074a2;
 	line-height: 18px;
 }
 .woobewoo-input-group .wpfProLabel {

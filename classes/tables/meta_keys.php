@@ -1,8 +1,20 @@
 <?php
+/**
+ * Product Filter by WBW - TableMeta_KeysWpf Class
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class TableMeta_KeysWpf extends TableWpf {
+
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->_table = '@__meta_keys';
-		$this->_id = 'id';
+		$this->_id    = 'id';
 		$this->_alias = 'wpf_meta_keys';
 		$this->_addField('id', 'text', 'int')
 			 ->_addField('meta_mode', 'text', 'int')
@@ -17,4 +29,5 @@ class TableMeta_KeysWpf extends TableWpf {
 			 ->_addField('locked', 'text', 'text')
 			 ->_addField('calculated', 'text', 'text');
 	}
+
 }
