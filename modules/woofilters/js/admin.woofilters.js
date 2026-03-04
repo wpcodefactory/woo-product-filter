@@ -9,7 +9,7 @@
 	function AdminPage() {
 		this.$obj = this;
 		this.$allowMultipleFilters = ['wpfAttribute', 'wpfBrand', 'wpfCustomMeta'];
-		this.$multiSelectFields = ['f_mlist[]', 'f_cglist[][]', 'f_search_by_attributes_list[]', 'f_additional_attributes_list[]'];
+		this.$multiSelectFields = ['f_mlist[]','f_exclude_terms[]', 'f_cglist[][]', 'f_search_by_attributes_list[]', 'f_additional_attributes_list[]'];
 		this.$noOptionsFilters = [''];
 		this.filtersSettings = [];
 		return this.$obj;
@@ -281,7 +281,43 @@
 			return false;
 
 		});
+//category name change
+jQuery(document).on('click', '.wpfEditCategory', function (e) {
+    e.preventDefault();
+	  const li     = jQuery(this).closest('.editablecat');
+    const termId = li.data('term-id');
+    const nameEl = li.find('.wpfFilterTaxNameWrapper').first();
 
+    if (!nameEl.length) return;
+
+    const current = nameEl.text().trim();
+    const updated = prompt(wpfI18n.edit_category_label, current);
+
+    if (!updated || updated === current) return;
+
+    nameEl.text(updated);
+
+    nameEl.text(updated);
+	   jQuery.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            mod: 'woofilters',
+			pl: 'wpf',
+            action: 'saveCategoryLabel',
+            reqType: 'ajax',
+           wpfNonce: window.wpfNonce,
+            term_id: termId,
+            label: updated
+        },
+        success(res) {
+            if (res.success) {
+                li.find('.wpfFilterTaxNameWrapper').text(res.data.label);
+            }
+        }
+    });
+});
+//category name change
 		jQuery('body').off('click', '#buttonDelete').on('click', '#buttonDelete', function (e) {
 			e.preventDefault();
 			var deleteForm = confirm("Are you sure you want to delete filter?");
@@ -578,12 +614,14 @@
 			}
 		});
 
-		jQuery('#wpfFiltersEditForm select[name="f_mlist[]"]').off('chosen:updated').on('chosen:updated',function() {
+		jQuery('#wpfFiltersEditForm select[name="f_mlist[]"],#wpfFiltersEditForm select[name="f_exclude_terms[]"]').off('chosen:updated').on('chosen:updated',function() {
+   
 			if(! jQuery(this).closest(".wpfFiltersBlockPreview").length ) {
 				_this.getPreviewAjax();
+       
 			}
 		});
-
+   
 		jQuery("body").off("change", '#wpfFiltersEditForm [name="f_hide_taxonomy"]').on("change", '#wpfFiltersEditForm [name="f_hide_taxonomy"]', function(e) {
 			var mList = jQuery(this).closest('table').find('select[name="f_mlist[]"]'),
 				parentCats = mList.data('parents');
@@ -605,22 +643,42 @@
 				variants = jQuery('#wpfChooseFiltersBlock [data-option]').addClass('wpfHidden');
 			variants.filter('[data-option="'+option.attr('data-available')+'"]').removeClass('wpfHidden');
 		});
-
-		function resetEnabledFilters() {
-			var filterSelect = jQuery('#wpfChooseFilters'),
-				filtersBlock = jQuery('.wpfFiltersBlock');
-			filterSelect.find('option').each(function(){
-				var option = jQuery(this),
-					data = 'add';
+    jQuery('#wpfChooseFilters option').each(function () {
+      var $opt = jQuery(this);
+      if (!$opt.data('original-text')) {
+        $opt.data('original-text', $opt.text());
+      }
+    });
+	//option text change when added
+	function resetEnabledFilters() {
+	var filterSelect = jQuery('#wpfChooseFilters'),
+	filtersBlock = jQuery('.wpfFiltersBlock');
+// get translated text from HTML attribute
+    var ADDED_TEXT = filterSelect.data('added-text')? ' (' + filterSelect.data('added-text') + ')' : '';
+	filterSelect.find('option').each(function(){
+	var option = jQuery(this),
+	data = 'add',
+	 originalText = option.data('original-text');
+     // reset text first
+        option.text(originalText);
+        if(filtersBlock.find('.wpfFilter[data-filter="'+option.attr('value')+'"]').length){
+        option.text(originalText + " ("+ADDED_TEXT+")");
+        option.attr("data-added", "1");
+        }
 				if (option.attr('data-enabled') != '1') data = 'pro';
 				else if (option.attr('data-unique') == 1) {
-					if(filtersBlock.find('.wpfFilter[data-filter="'+option.attr('value')+'"]').length) data = 'uniq';
+					if(filtersBlock.find('.wpfFilter[data-filter="'+option.attr('value')+'"]').length)
+            data = 'uniq';
 					else {
 						var group = option.attr('data-group');
 						if(group && group.length && filtersBlock.find('.wpfFilter[data-filter="'+group+'"]').length) data = 'group';
 					}
 				}
 				option.attr('data-available', data);
+         // cleanup flag if not added
+        if (data !== "uniq") {
+          option.removeAttr("data-added");
+        }
 			});
 			var firstEnabled = filterSelect.find('[data-available="add"]');
 			if(firstEnabled.length) firstEnabled.first().prop('selected', true);
@@ -637,7 +695,7 @@
 				}
 			});
 		}
-
+//option text change when added
 		jQuery('#wpfAddFilterButton').off('click').on('click', function(e){
 			e.preventDefault();
 			var option = jQuery('#wpfChooseFilters option:selected');
@@ -960,7 +1018,12 @@
 					}
 
 				} else if (elm.type === 'select-multiple') {
+      
 					if (_this.$multiSelectFields.includes(elm.name)) {
+               // backward compatibility
+            if (elm.name === 'f_exclude_terms[]' && !settings[elm.name] && settings['f_exclude_terms']) {
+              settings[elm.name] = settings['f_exclude_terms'];
+            }
 						if (settings[name]) {
 							var selectedArr = settings[name].split(',');
 							jQuery.each(selectedArr, function (i, e) {
@@ -1018,7 +1081,7 @@
 		_this.filterIterator++;
 
 		blockTemplate.trigger('changeTooltips');
-		blockTemplate.find('select[name="f_mlist[]"]').chosen({ width:"95%" });
+		blockTemplate.find('select[name="f_mlist[]"],select[name="f_exclude_terms[]').chosen({ width:"95%" });
 
 		blockTemplate.find('input,select').trigger('wpf-change');
 
@@ -1179,7 +1242,7 @@
 									break;
 							}
 						} else {
-							var exclude = typeof items['f_exclude_terms'] != 'undefined' ? items['f_exclude_terms'] : '';
+							var exclude = typeof items['f_exclude_terms[]'] != 'undefined' ? items['f_exclude_terms[]'] : '';
 							if(exclude.length) {
 								preValue = filterName + '=!' + exclude;
 							}

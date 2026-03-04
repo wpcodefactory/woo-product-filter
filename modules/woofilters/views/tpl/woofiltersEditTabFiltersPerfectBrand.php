@@ -1,5 +1,5 @@
 <?php
-	ViewWpf::display('woofiltersEditTabCommonTitle');
+ViewWpf::display('woofiltersEditTabCommonTitle');
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -8,25 +8,25 @@
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
-				HtmlWpf::selectbox('f_frontend_type', array(
-					'options' => array(
-						'list' => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
-						'dropdown' => esc_attr__( 'Dropdown (single select)', 'woo-product-filter' ),
-						'mul_dropdown' => esc_attr__( 'Multiple Dropdown', 'woo-product-filter' ),
-						'multi' => esc_attr__( 'Checkbox list (multiple select)', 'woo-product-filter' ) . $labelPro,
-						'buttons' => esc_attr__( 'Buttons', 'woo-product-filter' ) . $labelPro,
-						'text' => esc_attr__( 'Text', 'woo-product-filter' ) . $labelPro
-					),
-					'attrs' => 'class="woobewoo-flat-input"'
-				));
-				?>
+			<?php
+			HtmlWpf::selectbox('f_frontend_type', array(
+				'options' => array(
+					'list' => esc_attr__('Radiobuttons list (single select)', 'woo-product-filter'),
+					'dropdown' => esc_attr__('Dropdown (single select)', 'woo-product-filter'),
+					'mul_dropdown' => esc_attr__('Multiple Dropdown', 'woo-product-filter'),
+					'multi' => esc_attr__('Checkbox list (multiple select)', 'woo-product-filter') . $labelPro,
+					'buttons' => esc_attr__('Buttons', 'woo-product-filter') . $labelPro,
+					'text' => esc_attr__('Text', 'woo-product-filter') . $labelPro
+				),
+				'attrs' => 'class="woobewoo-flat-input"'
+			));
+			?>
 		</div>
 	</div>
 </div>
 <?php
 if ($isPro) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect');
+	DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersMultiSelect');
 }
 ?>
 <div class="row-settings-block">
@@ -65,12 +65,12 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
-				HtmlWpf::text('f_dropdown_first_option_text', array(
-					'placeholder' => esc_attr__('Select all', 'woo-product-filter'),
-					'attrs' => 'class="woobewoo-flat-input"'
-				));
-				?>
+			<?php
+			HtmlWpf::text('f_dropdown_first_option_text', array(
+				'placeholder' => esc_attr__('Select all', 'woo-product-filter'),
+				'attrs' => 'class="woobewoo-flat-input"'
+			));
+			?>
 		</div>
 	</div>
 </div>
@@ -81,28 +81,28 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
-				HtmlWpf::selectbox('f_sort_by', array(
-					'options' => array(
-						'asc' => esc_attr__( 'ASC', 'woo-product-filter' ),
-						'desc' => esc_attr__( 'DESC', 'woo-product-filter' ),
-						'default' => esc_attr__( 'Default', 'woo-product-filter' ) . $labelPro
-					),
-					'attrs' => 'class="woobewoo-flat-input' . ( $isPro ? '' : ' wpfWithProAd' ) . '"'
-				));
-				?>
+			<?php
+			HtmlWpf::selectbox('f_sort_by', array(
+				'options' => array(
+					'asc' => esc_attr__('ASC', 'woo-product-filter'),
+					'desc' => esc_attr__('DESC', 'woo-product-filter'),
+					'default' => esc_attr__('Default', 'woo-product-filter') . $labelPro
+				),
+				'attrs' => 'class="woobewoo-flat-input' . ($isPro ? '' : ' wpfWithProAd') . '"'
+			));
+			?>
 		</div>
 		<?php
 		if ($isPro) {
 			DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersSortAsNumbers');
 		} else {
-			?>
-		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
-			<div class="settings-block-label col-xs-8 col-sm-6" >
-				<?php esc_html_e('Sort as numbers', 'woo-product-filter'); ?>
-				<span class="wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+		?>
+			<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
+				<div class="settings-block-label col-xs-8 col-sm-6">
+					<?php esc_html_e('Sort as numbers', 'woo-product-filter'); ?>
+					<?php require WPF_COMMON . 'pro-label.php'; ?>
+				</div>
 			</div>
-		</div>
 		<?php } ?>
 	</div>
 </div>
@@ -164,18 +164,18 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full">
-			<?php 
-				HtmlWpf::selectlist('f_mlist', array(
-					'options' => $brandDisplay,
-					'data-parents' => json_encode($parentBrands, JSON_HEX_QUOT | JSON_HEX_TAG)
-				));
-				?>
+			<?php
+			HtmlWpf::selectlist('f_mlist', array(
+				'options' => $brandDisplay,
+				'data-parents' => json_encode($parentBrands, JSON_HEX_QUOT | JSON_HEX_TAG)
+			));
+			?>
 		</div>
 		<div class="settings-value settings-w100">
 			<div class="settings-value-label">
-				<?php esc_html_e( 'Include children', 'woo-product-filter' ); ?>
+				<?php esc_html_e('Include children', 'woo-product-filter'); ?>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_mlist_with_children', array() ); ?>
+			<?php HtmlWpf::checkboxToggle('f_mlist_with_children', array()); ?>
 		</div>
 	</div>
 </div>
@@ -208,7 +208,12 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::text('f_exclude_terms', array('attrs' => 'class="woobewoo-flat-input"')); ?>
+			<?php //HtmlWpf::text('f_exclude_terms', array('attrs' => 'class="woobewoo-flat-input"')); 
+			HtmlWpf::selectlist('f_exclude_terms', array(
+				'options' => $brandDisplay,
+				'data-parents' => json_encode($parentBrands, JSON_HEX_QUOT | JSON_HEX_TAG)
+			));
+			?>
 		</div>
 	</div>
 </div>
@@ -258,12 +263,12 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w50">
-			<?php 
-				HtmlWpf::selectbox('f_layout', array(
-					'options' => array('ver' => esc_attr__('Vertical', 'woo-product-filter'), 'hor' => esc_attr__('Horizontal', 'woo-product-filter')),
-					'attrs' => 'class="woobewoo-flat-input"'
-				));
-				?>
+			<?php
+			HtmlWpf::selectbox('f_layout', array(
+				'options' => array('ver' => esc_attr__('Vertical', 'woo-product-filter'), 'hor' => esc_attr__('Horizontal', 'woo-product-filter')),
+				'attrs' => 'class="woobewoo-flat-input"'
+			));
+			?>
 		</div>
 		<div class="settings-value settings-w50" data-select="f_layout" data-select-value="ver">
 			<div class="settings-value-label">
@@ -280,26 +285,26 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::text('f_max_height', array('value'=>'200', 'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"')); ?> px
+			<?php HtmlWpf::text('f_max_height', array('value' => '200', 'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"')); ?> px
 		</div>
 	</div>
 </div>
 <?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersPerfectBrandDescription' );
+if ($isPro) {
+	DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersPerfectBrandDescription');
 } else {
-	?>
+?>
 	<div class="row-settings-block">
 		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Display brand description', 'woo-product-filter' ); ?>
+			<?php esc_html_e('Display brand description', 'woo-product-filter'); ?>
 			<i class="fa fa-question woobewoo-tooltip no-tooltip"
-			   title="<?php echo esc_attr__( 'Display brand description before product list', 'woo-product-filter' ); ?>"></i>
+				title="<?php echo esc_attr__('Display brand description before product list', 'woo-product-filter'); ?>"></i>
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+				<?php require WPF_COMMON . 'pro-label.php'; ?>
 			</div>
 		</div>
 	</div>
-	<?php
+<?php
 }

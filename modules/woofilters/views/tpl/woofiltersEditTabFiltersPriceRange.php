@@ -84,7 +84,7 @@ if ($isPro) {
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr(__('Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 		</div>
 		<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+			<?php require WPF_COMMON . 'pro-label.php'; ?>
 		</div>
 	</div>
 	<div class="row-settings-block wpfTypeSwitchable" data-type="list">
@@ -93,7 +93,7 @@ if ($isPro) {
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr(__('Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 		</div>
 		<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+			<?php require WPF_COMMON . 'pro-label.php'; ?>
 		</div>
 	</div>
 	<div class="row-settings-block" data-value="decimals">
@@ -102,7 +102,7 @@ if ($isPro) {
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr(__('This sets the number of decimal points shown in displayed prices.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 		</div>
 		<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+			<?php require WPF_COMMON . 'pro-label.php'; ?>
 		</div>
 	</div>
 	<div class="row-settings-block">
@@ -111,7 +111,7 @@ if ($isPro) {
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
 		</div>
 		<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+			<?php require WPF_COMMON . 'pro-label.php'; ?>
 		</div>
 	</div>
 <?php } ?>

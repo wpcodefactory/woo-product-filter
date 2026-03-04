@@ -1,20 +1,8 @@
 <?php
-/**
- * Product Filter by WBW - TableMeta_DataWpf Class
- *
- * @author  woobewoo
- */
-
-defined( 'ABSPATH' ) || exit;
-
 class TableMeta_DataWpf extends TableWpf {
-
-	/**
-	 * Constructor.
-	 */
 	public function __construct() {
 		$this->_table = '@__meta_data';
-		$this->_id    = 'id';
+		$this->_id = 'id';
 		$this->_alias = 'wpf_meta_data';
 		$this->_addField('id', 'text', 'int')
 			 ->_addField('product_id', 'text', 'int')
@@ -25,5 +13,4 @@ class TableMeta_DataWpf extends TableWpf {
 			 ->_addField('val_id', 'text', 'int')
 			 ->_addField('updated', 'text', 'text');
 	}
-
 }
