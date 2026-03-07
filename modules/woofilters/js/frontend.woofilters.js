@@ -3672,7 +3672,7 @@ function removeQString(key, $wooPage, $filterWrapper) {
         const oldValue = getParameterByName(key, searchUrl);
         const newUrlValue = new URL(urlValue);
         newUrlValue.searchParams.delete(key, oldValue);
-		urlValue = newUrlValue.toString();
+		urlValue = newUrlValue.toString().replace(/\+/g, '%20');
 		if($wooPage){
 			urlValue = urlValue.replace(curUrl.href,'');
 		}
