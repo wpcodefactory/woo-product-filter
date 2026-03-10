@@ -3669,9 +3669,9 @@ function removeQString(key, $wooPage, $filterWrapper) {
 		var urlValue=curUrl.href + searchUrl;
 	}
 	if(key!="") {
-        const oldValue = getParameterByName(key, searchUrl);
-        const newUrlValue = new URL(urlValue);
-        newUrlValue.searchParams.delete(key, oldValue);
+		const oldValue = getParameterByName(key, searchUrl);
+		const newUrlValue = new URL(urlValue);
+		newUrlValue.searchParams.delete(key, oldValue);
 		urlValue = newUrlValue.toString().replace(/\+/g, '%20');
 		if($wooPage){
 			urlValue = urlValue.replace(curUrl.href,'');
