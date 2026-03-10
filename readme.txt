@@ -154,6 +154,7 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.2 - 10/03/2026 =
+* Dev - Admin settings titles updated.
 * Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
 
 = 3.1.1 - 18/02/2026 =
