@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 3.1.2 - 10/03/2026 =
+* Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
+
 = 3.1.1 - 18/02/2026 =
 * Dev – Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
 

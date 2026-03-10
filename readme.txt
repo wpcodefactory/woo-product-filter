@@ -148,7 +148,13 @@ If none of this advice helps you, contact us via [support form on our website](h
 = WooCommerce Product Filter plugin is not available in my language. What shall I do? =
 You may help us translate the plugin into your language and get the PRO version of the plugin for free as soon as it is released. If this method seems to be too complicated, please send us a request and we will let you know as soon as the WBW Filter plugin will be available in your localization.
 
+= Where do I report security bugs found in this plugin? =
+Please report security bugs found in the source code of the plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fbdb8-8978-4dfd-b6cd-a768233271db). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Changelog ==
+
+= 3.1.2 - 10/03/2026 =
+* Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
 
 = 3.1.1 - 18/02/2026 =
 * Dev – Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
