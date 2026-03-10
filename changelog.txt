@@ -1,6 +1,8 @@
 == Changelog ==
 
 = 3.1.2 - 10/03/2026 =
+* Fix - Searching query filter reset bug.
+* Fix - Space replacement with `+` sign in search query.
 * Dev - Admin settings titles updated.
 * Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
 

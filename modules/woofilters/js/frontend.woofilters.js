@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 2.8.6
+ * @version 3.1.2
  *
  * @author  woobewoo
  */
@@ -1170,6 +1170,11 @@
 		app.wpfNewUrl = app.wpfOldUrl;
 	});
 
+    /**
+     * filtering.
+     *
+     * @version 3.1.2
+     */
 	WpfFrontendPage.prototype.filtering = (function ($filterWrapper, clearAll, redirectLink, onlyRecalcFilter) {
 		var _thisObj = this.$obj;
 		_thisObj.chageRangeFieldWidth();
@@ -3651,7 +3656,11 @@ function removePagenum(url) {
     });
 }
 
-//Function used to remove querystring
+/**
+ * removeQString.
+ *
+ * @version 3.1.2
+ */
 function removeQString(key, $wooPage, $filterWrapper) {
 	removePageQString();
 	//Get query string value
