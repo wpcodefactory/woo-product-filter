@@ -3657,7 +3657,7 @@ function removePagenum(url) {
 }
 
 /**
- * removeQString.
+ * Removes querystring.
  *
  * @version 3.1.2
  */
