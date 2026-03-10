@@ -1170,11 +1170,11 @@
 		app.wpfNewUrl = app.wpfOldUrl;
 	});
 
-    /**
-     * filtering.
-     *
-     * @version 3.1.2
-     */
+	/**
+	 * filtering.
+	 *
+	 * @version 3.1.2
+	 */
 	WpfFrontendPage.prototype.filtering = (function ($filterWrapper, clearAll, redirectLink, onlyRecalcFilter) {
 		var _thisObj = this.$obj;
 		_thisObj.chageRangeFieldWidth();
@@ -3657,7 +3657,7 @@ function removePagenum(url) {
 }
 
 /**
- * removeQString.
+ * Removes querystring.
  *
  * @version 3.1.2
  */

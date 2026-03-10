@@ -160,7 +160,7 @@ Please report security bugs found in the source code of the plugin through the [
 * Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
 
 = 3.1.1 - 18/02/2026 =
-* Dev – Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
+* Dev - Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
 
 = 3.1.0 - 12/02/2026 =
 * Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
