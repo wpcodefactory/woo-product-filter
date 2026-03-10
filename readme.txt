@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.9
-Stable tag: 3.1.1
+Stable tag: 3.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -154,6 +154,8 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.2 - 10/03/2026 =
+* Fix - Searching query filter reset bug.
+* Fix - Space replacement with `+` sign in search query.
 * Dev - Admin settings titles updated.
 * Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
 
