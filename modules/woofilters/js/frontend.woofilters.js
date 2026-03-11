@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 2.8.6
+ * @version 3.1.2
  *
  * @author  woobewoo
  */
@@ -4056,7 +4056,11 @@ function removePagenum(url) {
     });
 }
 
-//Function used to remove querystring
+/**
+ * Removes querystring.
+ *
+ * @version 3.1.2
+ */
 function removeQString(key, $wooPage, $filterWrapper) {
 	removePageQString();
 	//Get query string value

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsWpf Class
  *
- * @version 3.0.9
+ * @version 3.1.2
  *
  * @author  woobewoo
  */
@@ -238,7 +238,7 @@ class OptionsWpf extends ModuleWpf {
 	/**
 	 * getAll.
 	 *
-	 * @version 3.0.9
+	 * @version 3.1.2
 	 */
 	public function getAll() {
 		if (empty($this->_options)) {
@@ -263,7 +263,7 @@ class OptionsWpf extends ModuleWpf {
 							'html'  => 'input',
 						),
 						'move_sidebar' => array(
-							'label' => esc_html__('Move Sidebar To Top For Mobile', 'woo-product-filter'),
+							'label' => esc_html__('Move sidebar to top for mobile', 'woo-product-filter'),
 							'desc'  => esc_html__('Turn on if you want the sidebar to appear above content on mobile devices. Some themes do not have blocks required for this option.', 'woo-product-filter'),
 							'def'   => '0',
 							'html'  => 'checkboxHiddenVal',
@@ -293,7 +293,7 @@ class OptionsWpf extends ModuleWpf {
 							'html'  => 'checkboxHiddenVal',
 						),
 						'index_group_bundle' => array(
-							'label' => esc_html__( 'Indexing stockstatus for Grouped+Bundle Products', 'woo-product-filter' ),
+							'label' => esc_html__( 'Indexing stockstatus for grouped+bundle products', 'woo-product-filter' ),
 							'desc'  => esc_html__( 'If you have grouped products and have bundle products in them and you go to properly index the stockstatus of these grouped products, then enable this option. Attention: enable this option only if it is really necessary, as it can significantly slow down the indexing process.', 'woo-product-filter' ),
 							'def'   => '0',
 							'html'  => 'checkboxHiddenVal',

@@ -1,7 +1,13 @@
 == Changelog ==
 
+= 3.1.2 - 10/03/2026 =
+* Fix - Searching query filter reset bug.
+* Fix - Space replacement with `+` sign in search query.
+* Dev - Admin settings titles updated.
+* Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
+
 = 3.1.1 - 18/02/2026 =
-* Dev – Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
+* Dev - Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
 
 = 3.1.0 - 12/02/2026 =
 * Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
@@ -691,7 +697,7 @@
 * Fixed posts_per_page value when using shortcodes
 * Optimized JS and CSS loading
 * Moved "wcag" option to the free version
-* Added compatibility with UAEL Woo–Products widget and EAEL Groduct grid widget
+* Added compatibility with UAEL Woo-Products widget and EAEL Groduct grid widget
 * Added compatibility with Elementor Pack Pro WC Products widget
 * Add option "open filters one by one" for step by step filer
 * Fixed default sorting date

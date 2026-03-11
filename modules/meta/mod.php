@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - MetaWpf Class
  *
- * @version 3.0.2
+ * @version 3.1.2
  *
  * @author  woobewoo
  */
@@ -72,7 +72,7 @@ class MetaWpf extends ModuleWpf {
 	/**
 	 * addOptions.
 	 *
-	 * @version 3.0.2
+	 * @version 3.1.2
 	 */
 	public function addOptions( $options ) {
 		$opts = array_merge(array(
@@ -86,13 +86,13 @@ class MetaWpf extends ModuleWpf {
 				'add_sub_opts' => '<div class="woobewoo-check-group"><input type="checkbox" id="wpfStartIndexingCron"><label class="woobewoo-group-label">' . esc_html__( 'run in background ', 'woo-product-filter' ) . '</label></div>',
 			),
 			'disable_autoindexing' => array(
-				'label'        => esc_html__( 'Disable automatic calculation of index tables after editing products.', 'woo-product-filter' ),
+				'label'        => esc_html__( 'Disable automatic calculation of index tables after editing products', 'woo-product-filter' ),
 				'desc'         => esc_html__( 'This can be useful if you add products only through imports. Then after importing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
 				'html'         => 'checkboxHiddenVal',
 				'def'          => '0',
 			),
 			'disable_autoindexing_by_ss' => array(
-				'label'        => esc_html__( 'Disable automatic calculation of index tables after product stock changes.', 'woo-product-filter' ),
+				'label'        => esc_html__( 'Disable automatic calculation of index tables after product stock changes', 'woo-product-filter' ),
 				'desc'         => esc_html__( 'This can be useful when changing inventory status in bulk. Then after changing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
 				'html'         => 'checkboxHiddenVal',
 				'def'          => '0',
