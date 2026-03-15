@@ -1,4 +1,10 @@
 <?php
+/**
+ * MetaControllerWpf
+ *
+ * @version 3.1.3
+ */
+
 class MetaControllerWpf extends ControllerWpf {
 
 	protected $_code = 'meta';
@@ -45,5 +51,20 @@ class MetaControllerWpf extends ControllerWpf {
 			$res->pushError($this->getModel()->getErrors());
 		}
 		return $res->ajaxExec();
+	}
+
+	/**
+	 * @return array[][]
+	 *
+	 * @version 3.1.3
+	 */
+	public function getPermissions() {
+		return array(
+			WPF_USERLEVELS => array(
+				WPF_ADMIN => array(
+					'doMetaIndexingFree', 'doMetaIndexing', 'doMetaOptimizing',
+				)
+			),
+		);
 	}
 }
