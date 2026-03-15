@@ -1166,6 +1166,9 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				'save' => array(
 					WPF_ADMIN
 				),
+				'drawFilterAjax' => array(
+					WPF_ADMIN
+				),
 				'filtersFrontend' => array(
 					WPF_GUEST,
 					WPF_ADMIN,
