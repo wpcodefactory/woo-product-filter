@@ -1166,6 +1166,12 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				'save' => array(
 					WPF_ADMIN
 				),
+				'removeGroup' => array(
+					WPF_ADMIN
+				),
+				'deleteByID' => array(
+					WPF_ADMIN
+				),
 				'drawFilterAjax' => array(
 					WPF_ADMIN
 				),
