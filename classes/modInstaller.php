@@ -10,7 +10,8 @@ class ModInstallerWpf {
 	 * @return bool true - if install success, else - false
 	 */
 	public static function install( $module, $path ) {
-		$exPlugDest = explode('plugins', $path);
+		$plugin_dir = basename( untrailingslashit( WP_PLUGIN_DIR ) );
+		$exPlugDest = explode( $plugin_dir, $path );
 		if (!empty($exPlugDest[1])) {
 			$module['ex_plug_dir'] = str_replace(DS, '', $exPlugDest[1]);
 		}
@@ -99,7 +100,7 @@ class ModInstallerWpf {
 		if ( ( empty( $plug ) || is_array($plug) ) && !empty(self::$extPlugName) ) {
 			$plug = self::$extPlugName;
 		}
-			
+
 		if ( empty( $plug ) ) {
 			$plug = ReqWpf::getVar( 'checked' );
 			if ( isset( $plug[0] ) ) {
@@ -247,7 +248,7 @@ class ModInstallerWpf {
 				}
 			}
 		}
-	} 
+	}
 	/**
 	 * Display all errors for module installer, must be used ONLY if You realy need it
 	 */
