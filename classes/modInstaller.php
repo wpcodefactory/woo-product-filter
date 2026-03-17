@@ -1,4 +1,12 @@
 <?php
+/**
+ * Class ModInstallerWpf
+ *
+ * Handles the installation, activation, deactivation, and management of modules for the plugin.
+ *
+ * @version 3.1.3
+ */
+
 class ModInstallerWpf {
 	private static $_current = array();
 	private static $extPlugName = '';
@@ -8,6 +16,8 @@ class ModInstallerWpf {
 	 * @param string $module new ModuleWpf data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
 	 * @return bool true - if install success, else - false
+	 *
+	 * @version 3.1.3
 	 */
 	public static function install( $module, $path ) {
 		$plugin_dir = basename( untrailingslashit( WP_PLUGIN_DIR ) );
