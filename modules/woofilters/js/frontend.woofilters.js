@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.1.2
+ * @version 3.1.3
  *
  * @author  woobewoo
  */
@@ -1173,7 +1173,7 @@
     /**
      * filtering.
      *
-     * @version 3.1.2
+     * @version 3.1.3
      */
 	WpfFrontendPage.prototype.filtering = (function ($filterWrapper, clearAll, redirectLink, onlyRecalcFilter) {
 		var _thisObj = this.$obj;
@@ -1466,6 +1466,9 @@
 						var requestData =_thisObj.getAjaxRequestData($filtersDataBackend, $queryVars, $filterSettings, $generalSettings, $shortcodeAttr, $woocommerceSettings);
 						wpfDoActionsAfterLoad(_thisObj.filteringId, -1, requestData);
 					}
+                    if (_thisObj.isSafari || navigator.userAgent.match(/firefox|fxios/i)) location.reload(true);
+                    else location.reload();
+                    return;
 				}
 
 				_thisObj.currentFilterBackend = $filtersDataBackend;
