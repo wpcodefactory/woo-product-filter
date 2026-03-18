@@ -153,6 +153,10 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 3.1.3 - 18/03/2026 =
+* Dev - Custom `plugins` directory compatibility added.
+* WC tested up to: 10.6.
+
 = 3.1.2 - 10/03/2026 =
 * Fix - Searching query filter reset bug.
 * Fix - Space replacement with `+` sign in search query.
