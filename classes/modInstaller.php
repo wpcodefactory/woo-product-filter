@@ -1,4 +1,12 @@
 <?php
+/**
+ * Class ModInstallerWpf
+ *
+ * Handles the installation, activation, deactivation, and management of modules for the plugin.
+ *
+ * @version 3.1.3
+ */
+
 class ModInstallerWpf {
 	private static $_current = array();
 	private static $extPlugName = '';
@@ -8,9 +16,12 @@ class ModInstallerWpf {
 	 * @param string $module new ModuleWpf data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
 	 * @return bool true - if install success, else - false
+	 *
+	 * @version 3.1.3
 	 */
 	public static function install( $module, $path ) {
-		$exPlugDest = explode('plugins', $path);
+		$plugin_dir = basename( untrailingslashit( WP_PLUGIN_DIR ) );
+		$exPlugDest = explode( $plugin_dir, $path );
 		if (!empty($exPlugDest[1])) {
 			$module['ex_plug_dir'] = str_replace(DS, '', $exPlugDest[1]);
 		}
@@ -99,7 +110,7 @@ class ModInstallerWpf {
 		if ( ( empty( $plug ) || is_array($plug) ) && !empty(self::$extPlugName) ) {
 			$plug = self::$extPlugName;
 		}
-			
+
 		if ( empty( $plug ) ) {
 			$plug = ReqWpf::getVar( 'checked' );
 			if ( isset( $plug[0] ) ) {
@@ -247,7 +258,7 @@ class ModInstallerWpf {
 				}
 			}
 		}
-	} 
+	}
 	/**
 	 * Display all errors for module installer, must be used ONLY if You realy need it
 	 */
