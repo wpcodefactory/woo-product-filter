@@ -154,6 +154,7 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.3 - 18/03/2026 =
+* Fix - Not working if the AJAX option is disabled.
 * Dev - Custom `plugins` directory compatibility added.
 * WC tested up to: 10.6.
 
