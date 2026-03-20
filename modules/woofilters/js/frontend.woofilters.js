@@ -874,6 +874,14 @@
 			}, 100);
 		});
 
+		// Keyboard accessibility for filter titles
+		jQuery('body').off('keydown', '.wpfFilterWrapper .wpfFilterTitle').on('keydown', '.wpfFilterWrapper .wpfFilterTitle', function (e) {
+			if (e.which === 13 || e.which === 32) { // Enter or Space key
+				e.preventDefault();
+				jQuery(this).trigger('click');
+			}
+		});
+
 		jQuery('body').off('click', '.wpfFilterWrapper .wpfBlockClear').on('click', '.wpfFilterWrapper .wpfBlockClear',  function(){
 			var parent = jQuery(this).closest(".wpfFilterWrapper"),
 				parentAttr = parent.attr("data-filter-type");
@@ -1127,6 +1135,8 @@
 			toggle.removeClass(icons.minusIcon);
 			toggle.addClass(icons.plusIcon);
 			content.addClass('wpfBlockAnimated');
+			// Update aria-expanded attribute
+			toggle.closest('.wpfFilterTitle').attr('aria-expanded', 'false');
 			if (typeof isTimeout !== 'undefined' && isTimeout) {
 				setTimeout(function () {
 					if (content.hasClass('wpfBlockAnimated')) content.addClass('wpfHide');
@@ -1142,6 +1152,8 @@
 			toggle.removeClass(icons.plusIcon);
 			toggle.addClass(icons.minusIcon);
 			content.removeClass('wpfHide');
+			// Update aria-expanded attribute
+			toggle.closest('.wpfFilterTitle').attr('aria-expanded', 'true');
 			if (typeof isTimeout !== 'undefined' && isTimeout) {
 				setTimeout(function () {
 					if (!content.hasClass('wpfHide')) content.removeClass('wpfBlockAnimated');

@@ -882,8 +882,12 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html = '';
 		if ( $title ) {
 			$icon  = $this->generateIconCloseOpenTitleHtml( $filter, $filterSettings, $showTitle );
-			$html .= '<div class="wpfFilterTitle" ' . $titleMobileBreakpointData . '><' . $headerTag . ' class="wfpTitle';
-			$html .= ( (int) $this->getFilterSetting($filterSettings['settings'], 'hide_filter_icon', 0) ? ' wfpClickable' : '' );
+			$isClickable = (int) $this->getFilterSetting($filterSettings['settings'], 'hide_filter_icon', 0);
+			$ariaExpanded = 'yes_close' === $showTitle ? 'false' : 'true';
+			$tabindex = $isClickable ? ' tabindex="0"' : '';
+			$ariaAttrs = $isClickable ? ' aria-expanded="' . $ariaExpanded . '" role="button"' : '';
+			$html .= '<div class="wpfFilterTitle"' . $titleMobileBreakpointData . $tabindex . $ariaAttrs . '><' . $headerTag . ' class="wfpTitle';
+			$html .= ( $isClickable ? ' wfpClickable' : '' );
 			$html .= '">';
 			$html .= esc_html__($title, 'woo-product-filter');
 			$html .= '</' . $headerTag . '>';
