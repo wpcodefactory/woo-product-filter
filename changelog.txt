@@ -1,8 +1,9 @@
 == Changelog ==
 
-= 3.1.3 - 19/03/2026 =
-* Fix - Not working if the AJAX option is disabled.
+= 3.1.3 - 20/03/2026 =
 * Fix - Security - SQL injection vulnerability fixed.
+* Fix - Security - Missing authorization vulnerability fixed.
+* Fix - Not working if the AJAX option is disabled.
 * Dev - Custom `plugins` directory compatibility added.
 * WC tested up to: 10.6.
 
