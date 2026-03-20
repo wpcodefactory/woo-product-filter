@@ -266,20 +266,21 @@ class FrameWpf {
 		if ($this->havePermissions($code, $action)) {
 			return true;
 		} else {
-			wp_send_json_error([
-                    'message' => esc_html__( 'You have no permissions to view this page', 'woo-product-filter' )
-            ], 403);
+			wp_send_json_error(
+				array( 'message' => esc_html__( 'You have no permissions to view this page', 'woo-product-filter' ) ),
+				403
+			);
 		}
 	}
 
 	/**
 	 * Check permissions for action in controller by $code.
 	 *
+	 * @version 3.1.3
+	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
 	 * @return bool true if ok, else - false
-     *
-     * @version 3.1.3
 	 */
 	public function havePermissions( $code, $action ) {
 		$res = false;
@@ -296,8 +297,10 @@ class FrameWpf {
 						$currentUserPosition = self::_()->getModule('user')->getCurrentUserPosition();
 						if (
 							is_array($permissions[ WPF_METHODS ][ $action ] ) &&
-							( in_array($currentUserPosition, $permissions[ WPF_METHODS ][ $action ]) ||
-							  $permissions[WPF_METHODS][$action] === $currentUserPosition )
+							(
+								in_array($currentUserPosition, $permissions[ WPF_METHODS ][ $action ]) ||
+								$permissions[WPF_METHODS][$action] === $currentUserPosition
+							)
 						) {
 							$res = true;
 						}
@@ -405,15 +408,15 @@ class FrameWpf {
 
 	/**
 	 * _doExec.
-     *
-     * @version 3.1.3
+	 *
+	 * @version 3.1.3
 	 */
 	protected function _doExec() {
 		$mod = $this->getModule($this->_mod);
 		if ($mod && $this->checkPermissions($this->_mod, $this->_action)) {
 			switch (ReqWpf::getVar('reqType')) {
 				case 'ajax':
-					add_action('wp_ajax_'        . $this->_action, array($mod->getController(), $this->_action));
+					add_action('wp_ajax_' . $this->_action, array($mod->getController(), $this->_action));
 					$noprivActions = array( 'filtersFrontend', 'getTaxonomyTerms' );
 					if ( in_array( $this->_action, $noprivActions ) ) {
 						add_action('wp_ajax_nopriv_' . $this->_action, array($mod->getController(), $this->_action));

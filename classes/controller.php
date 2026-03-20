@@ -1,9 +1,13 @@
 <?php
 /**
- * ControllerWpf
+ * Product Filter by WBW - ControllerWpf Class
  *
  * @version 3.1.3
+ *
+ * @author  woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
 
 abstract class ControllerWpf {
 	protected $_models = array();
@@ -64,7 +68,7 @@ abstract class ControllerWpf {
 			//if (importWpf($parentModule->getModDir() . 'models' . DS . $name . '.php')) {
 			$className = toeGetClassNameWpf($name . 'Model');
 		}
-		
+
 		if ($className) {
 			$model = new $className();
 			$model->setCode( $this->getCode() );
@@ -83,7 +87,7 @@ abstract class ControllerWpf {
 			//if (importWpf($parentModule->getModDir() . 'views' . DS . $name . '.php')) {
 			$className = toeGetClassNameWpf($name . 'View');
 		}
-		
+
 		if ($className) {
 			$view = new $className();
 			$view->setCode( $this->getCode() );
@@ -104,12 +108,10 @@ abstract class ControllerWpf {
 	/**
 	 * Magic method: __call
 	 *
-	 * @param $name
-	 * @param $arguments
-	 *
 	 * @version 3.1.3
 	 *
-	 * @return false
+	 * @param $name
+	 * @param $arguments
 	 */
 	public function __call( $name, $arguments ) {
 		$blockedMethods = array( 'delete', 'clear', 'removeGroup' );
@@ -238,7 +240,7 @@ abstract class ControllerWpf {
 		if (!current_user_can('manage_options')) {
 			wp_die();
 		}
-	
+
 		$res = new ResponseWpf();
 		if ($this->getModel()->removeGroup(ReqWpf::getVar('listIds', 'post'))) {
 			$res->addMessage(esc_html__('Done', 'woo-product-filter'));

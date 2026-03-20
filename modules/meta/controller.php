@@ -1,14 +1,18 @@
 <?php
 /**
- * MetaControllerWpf
+ * Product Filter by WBW - MetaControllerWpf Class
  *
  * @version 3.1.3
+ *
+ * @author  woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
 
 class MetaControllerWpf extends ControllerWpf {
 
 	protected $_code = 'meta';
-	
+
 	public function doMetaIndexingFree() {
 		return $this->doMetaIndexing(false);
 	}
@@ -54,9 +58,12 @@ class MetaControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * @return array[][]
+	 * getPermissions.
 	 *
 	 * @version 3.1.3
+	 * @since   3.1.3
+	 *
+	 * @return array
 	 */
 	public function getPermissions() {
 		return array(
