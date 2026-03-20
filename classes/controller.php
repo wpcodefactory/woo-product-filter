@@ -1,4 +1,10 @@
 <?php
+/**
+ * ControllerWpf
+ *
+ * @version 3.1.3
+ */
+
 abstract class ControllerWpf {
 	protected $_models = array();
 	protected $_views = array();
@@ -94,7 +100,23 @@ abstract class ControllerWpf {
 			$view->display();
 		}
 	}
+
+	/**
+	 * Magic method: __call
+	 *
+	 * @param $name
+	 * @param $arguments
+	 *
+	 * @version 3.1.3
+	 *
+	 * @return false
+	 */
 	public function __call( $name, $arguments ) {
+		$blockedMethods = array( 'delete', 'clear', 'removeGroup' );
+		if ( in_array( $name, $blockedMethods, true ) ) {
+			return false;
+		}
+
 		$model = $this->getModel();
 		if (method_exists($model, $name)) {
 			return $model->$name($arguments[0]);

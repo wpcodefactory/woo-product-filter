@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.0.2
+ * @version 3.1.3
  *
  * @author  woobewoo
  */
@@ -4012,7 +4012,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 2.9.4
+	 * @version 3.1.3
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4066,7 +4066,9 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( ! empty( $taxonomyList ) ) {
 			$addSqls['main']['withCount']    = $param['withCount'];
 			$addSqls['main']['fields']       = ( $param['withCount'] ? '' : 'DISTINCT ' ) . 'tr.term_taxonomy_id, tt.term_id, tt.taxonomy, tt.parent' . ( $param['withCount'] ? ', COUNT(*) as cnt' : '' );
-			$addSqls['main']['taxonomyList'] = implode( "', '", $taxonomyList );
+
+			$taxonomyListFormatter           = implode( ',', array_fill( 0, count( $taxonomyList ), '%s' ) );
+			$addSqls['main']['taxonomyList'] = $wpdb->prepare( $taxonomyListFormatter, ...$taxonomyList );
 
 			if ( $byVariations ) {
 				$attrTaxonomyList = array();
@@ -4137,7 +4139,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$sql[ $key ] .= ' INNER JOIN ' . $wpdb->terms . ' ttt ON (ttt.term_id=tt.term_id) ' . $typeJoin;
 			}
 
-			$sql[ $key ] .= ' WHERE tt.taxonomy IN (\'' . $addSql['taxonomyList'] . '\')';
+			$sql[ $key ] .= ' WHERE tt.taxonomy IN ( ' . $addSql['taxonomyList'] . ' )';
 
 			if ( $byVariations ) {
 				$sql[ $key ] .= ' AND (md_type.val_id!=' . $variableMetaId .
