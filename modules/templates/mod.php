@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 3.0.8
+ * @version 3.1.3
  *
  * @author  woobewoo
  */
