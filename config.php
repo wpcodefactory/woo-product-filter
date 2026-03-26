@@ -101,3 +101,4 @@ define('WPF_WP_PLUGIN_URL', 'woobewoo.com');
 define('WPF_SHORTCODE', 'wpf-filters');
 define('WPF_SHORTCODE_PRODUCTS', 'wpf-products');
 define('WPF_SHORTCODE_SELECTED_FILTERS', 'wpf-selected-filters');
+define('WPF_COMMON', plugin_dir_path(__FILE__) . 'modules/templates/common-part/');
