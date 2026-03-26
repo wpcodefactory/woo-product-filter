@@ -1,17 +1,15 @@
 <?php
-
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 3.1.3
+ * @version 3.0.8
  *
  * @author  woobewoo
  */
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
-class TemplatesWpf extends ModuleWpf
-{
+class TemplatesWpf extends ModuleWpf {
 
 	/**
 	 * Properties.
@@ -22,8 +20,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * Constructor.
 	 */
-	public function __construct($d)
-	{
+	public function __construct( $d ) {
 		parent::__construct($d);
 		$this->getCdnUrl(); // Init CDN URL
 	}
@@ -31,18 +28,17 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * getCdnUrl.
 	 */
-	public function getCdnUrl()
-	{
+	public function getCdnUrl() {
 		if (empty($this->_cdnUrl)) {
 			if ((int) FrameWpf::_()->getModule('options')->get('use_local_cdn')) {
-				$uploadsDir = wp_upload_dir(null, false);
+				$uploadsDir = wp_upload_dir( null, false );
 				$this->_cdnUrl = $uploadsDir['baseurl'] . '/' . WPF_CODE . '/';
 				if (UriWpf::isHttps()) {
 					$this->_cdnUrl = str_replace('http://', 'https://', $this->_cdnUrl);
 				}
 				DispatcherWpf::addFilter('externalCdnUrl', array($this, 'modifyExternalToLocalCdn'));
 			} else {
-				$this->_cdnUrl = (UriWpf::isHttps() ? 'https' : 'http') . '://woobewoo-14700.kxcdn.com/';
+				$this->_cdnUrl = ( UriWpf::isHttps() ? 'https' : 'http' ) . '://woobewoo-14700.kxcdn.com/';
 			}
 		}
 		return $this->_cdnUrl;
@@ -51,21 +47,18 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * modifyExternalToLocalCdn.
 	 */
-	public function modifyExternalToLocalCdn($url)
-	{
+	public function modifyExternalToLocalCdn( $url ) {
 		$url = str_replace(
 			array('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css'),
 			array(FrameWpf::_()->getModule('templates')->getModPath() . 'css'),
-			$url
-		);
+			$url);
 		return $url;
 	}
 
 	/**
 	 * init.
 	 */
-	public function init()
-	{
+	public function init() {
 		if (is_admin()) {
 			$isAdminPlugOptsPage = FrameWpf::_()->isAdminPlugOptsPage();
 			if ($isAdminPlugOptsPage) {
@@ -86,8 +79,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * connectAdditionalAdminAssets.
 	 */
-	public function connectAdditionalAdminAssets()
-	{
+	public function connectAdditionalAdminAssets() {
 		if (is_rtl()) {
 			FrameWpf::_()->addStyle('styleWpf-rtl', WPF_CSS_PATH . 'style-rtl.css');
 		}
@@ -96,8 +88,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadMediaScripts.
 	 */
-	public function loadMediaScripts()
-	{
+	public function loadMediaScripts() {
 		if (function_exists('wp_enqueue_media')) {
 			wp_enqueue_media();
 		}
@@ -106,8 +97,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadAdminCoreJs.
 	 */
-	public function loadAdminCoreJs()
-	{
+	public function loadAdminCoreJs() {
 		FrameWpf::_()->addScript('jquery-ui-dialog');
 		FrameWpf::_()->addScript('jquery-ui-slider');
 		FrameWpf::_()->addScript('icheck', WPF_JS_PATH . 'icheck.min.js', array('wp-i18n', 'jquery-ui-widget', 'iris'));
@@ -117,20 +107,19 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadCoreJs.
 	 *
-	 * @version 3.1.3
+	 * @version 3.0.8
 	 */
-	public function loadCoreJs()
-	{
+	public function loadCoreJs() {
 		FrameWpf::_()->addScript('jquery');
 
 		FrameWpf::_()->addScript('commonWpf', WPF_JS_PATH . 'common.js', array('jquery'));
 		FrameWpf::_()->addScript('coreWpf', WPF_JS_PATH . 'core.js', array('jquery'));
 
-		if (1 == FrameWpf::_()->getModule('options')->getModel()->get('price_thousands_sep')) {
+		if ( 1 == FrameWpf::_()->getModule('options')->getModel()->get('price_thousands_sep') ) {
 			FrameWpf::_()->addScript('WpfPriceThousandsSep', WPF_JS_PATH . 'price-thousands-sep.js', array('jquery'));
 		}
 
-		if (1 == FrameWpf::_()->getModule('options')->getModel()->get('browser_compatibility')) {
+		if ( 1 == FrameWpf::_()->getModule('options')->getModel()->get('browser_compatibility') ) {
 			FrameWpf::_()->addScript('WpfBrowserCompatibility', WPF_JS_PATH . 'browser-compatibility.js', array('jquery'));
 		}
 
@@ -159,8 +148,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadTooltipster.
 	 */
-	public function loadTooltipster()
-	{
+	public function loadTooltipster() {
 		FrameWpf::_()->addScript('tooltipster', FrameWpf::_()->getModule('templates')->getModPath() . 'lib/tooltipster/jquery.tooltipster.min.js');
 		FrameWpf::_()->addStyle('tooltipster', FrameWpf::_()->getModule('templates')->getModPath() . 'lib/tooltipster/tooltipster.css');
 	}
@@ -168,16 +156,14 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadSlimscroll.
 	 */
-	public function loadSlimscroll()
-	{
+	public function loadSlimscroll() {
 		FrameWpf::_()->addScript('jquery.slimscroll', WPF_JS_PATH . 'slimscroll.min.js');
 	}
 
 	/**
 	 * loadCodemirror.
 	 */
-	public function loadCodemirror()
-	{
+	public function loadCodemirror() {
 		$modPath = FrameWpf::_()->getModule('templates')->getModPath();
 		FrameWpf::_()->addStyle('wpfCodemirror', $modPath . 'lib/codemirror/codemirror.css');
 		FrameWpf::_()->addStyle('codemirror-addon-hint', $modPath . 'lib/codemirror/addon/hint/show-hint.css');
@@ -194,11 +180,10 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadCoreCss.
 	 */
-	public function loadCoreCss($isElementorEditor = false)
-	{
+	public function loadCoreCss( $isElementorEditor = false ) {
 		$this->_styles = array(
 			'styleWpf'         => array('path' => WPF_CSS_PATH . 'style.css', 'for' => 'admin'),
-			'woobewoo-uiWpf'   => array('path' => WPF_CSS_PATH . 'woobewoo-ui' . (FrameWpf::_()->isWCLicense() ? '-wc' : '') . '.css', 'for' => 'admin'),
+			'woobewoo-uiWpf'   => array('path' => WPF_CSS_PATH . 'woobewoo-ui' . ( FrameWpf::_()->isWCLicense() ? '-wc' : '' ) . '.css', 'for' => 'admin'),
 			'dashicons'        => array('for' => 'admin'),
 			'bootstrap-alerts' => array('path' => WPF_CSS_PATH . 'bootstrap-alerts.css', 'for' => 'admin'),
 			'icheck'           => array('path' => WPF_CSS_PATH . 'jquery.icheck.css', 'for' => 'admin'),
@@ -225,8 +210,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadJqueryUi.
 	 */
-	public function loadJqueryUi($slider = true)
-	{
+	public function loadJqueryUi( $slider = true ) {
 		FrameWpf::_()->addStyle('jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css');
 		FrameWpf::_()->addStyle('jquery-ui.structure', WPF_CSS_PATH . 'jquery-ui.structure.min.css');
 		FrameWpf::_()->addStyle('jquery-ui.theme', WPF_CSS_PATH . 'jquery-ui.theme.min.css');
@@ -238,8 +222,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadJqGrid.
 	 */
-	public function loadJqGrid()
-	{
+	public function loadJqGrid() {
 		static $loaded = false;
 		if (!$loaded) {
 			$this->loadJqueryUi();
@@ -258,16 +241,14 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadFontAwesome.
 	 */
-	public function loadFontAwesome()
-	{
+	public function loadFontAwesome() {
 		FrameWpf::_()->addStyle('font-awesomeWpf', FrameWpf::_()->getModule('templates')->getModPath() . 'css/font-awesome.min.css');
 	}
 
 	/**
 	 * loadChosenSelects.
 	 */
-	public function loadChosenSelects()
-	{
+	public function loadChosenSelects() {
 		FrameWpf::_()->addStyle('jquery.chosen', FrameWpf::_()->getModule('templates')->getModPath() . 'lib/chosen/chosen.min.css');
 		FrameWpf::_()->addScript('jquery.chosen', FrameWpf::_()->getModule('templates')->getModPath() . 'lib/chosen/chosen.jquery.min.js');
 	}
@@ -275,16 +256,14 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadDatePicker.
 	 */
-	public function loadDatePicker()
-	{
+	public function loadDatePicker() {
 		FrameWpf::_()->addScript('jquery-ui-datepicker');
 	}
 
 	/**
 	 * loadJqplot.
 	 */
-	public function loadJqplot()
-	{
+	public function loadJqplot() {
 		static $loaded = false;
 		if (!$loaded) {
 			$jqplotDir = FrameWpf::_()->getModule('templates')->getModPath() . 'lib/jqplot/';
@@ -309,8 +288,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadSortable.
 	 */
-	public function loadSortable()
-	{
+	public function loadSortable() {
 		static $loaded = false;
 		if (!$loaded) {
 			FrameWpf::_()->addScript('jquery-ui-core');
@@ -326,8 +304,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadMagicAnims.
 	 */
-	public function loadMagicAnims()
-	{
+	public function loadMagicAnims() {
 		static $loaded = false;
 		if (!$loaded) {
 			FrameWpf::_()->addStyle('magic.anim', FrameWpf::_()->getModule('templates')->getModPath() . 'css/magic.min.css');
@@ -338,8 +315,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadCssAnims.
 	 */
-	public function loadCssAnims()
-	{
+	public function loadCssAnims() {
 		static $loaded = false;
 		if (!$loaded) {
 			FrameWpf::_()->addStyle('animate.styles', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css');
@@ -350,8 +326,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadBootstrapSimple.
 	 */
-	public function loadBootstrapSimple()
-	{
+	public function loadBootstrapSimple() {
 		static $loaded = false;
 		if (!$loaded) {
 			FrameWpf::_()->addStyle('bootstrap-simple', WPF_CSS_PATH . 'bootstrap-simple.css');
@@ -362,8 +337,7 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadBootstrap.
 	 */
-	public function loadBootstrap()
-	{
+	public function loadBootstrap() {
 		static $loaded = false;
 		if (!$loaded) {
 			FrameWpf::_()->addStyle('bootstrap.min', WPF_CSS_PATH . 'bootstrap.min.css');
@@ -374,20 +348,18 @@ class TemplatesWpf extends ModuleWpf
 	/**
 	 * loadGoogleFont.
 	 */
-	public function loadGoogleFont($font)
-	{
+	public function loadGoogleFont( $font ) {
 		static $loaded = array();
-		if (!isset($loaded[$font])) {
+		if (!isset($loaded[ $font ])) {
 			FrameWpf::_()->addStyle('google.font.' . str_replace(array(' '), '-', $font), 'https://fonts.googleapis.com/css?family=' . urlencode($font));
-			$loaded[$font] = 1;
+			$loaded[ $font ] = 1;
 		}
 	}
 
 	/**
 	 * loadBxSlider.
 	 */
-	public function loadBxSlider()
-	{
+	public function loadBxSlider() {
 		static $loaded = false;
 		if (!$loaded) {
 			FrameWpf::_()->addStyle('bx-slider', WPF_JS_PATH . 'bx-slider/jquery.bxslider.css');
@@ -395,4 +367,5 @@ class TemplatesWpf extends ModuleWpf
 			$loaded = true;
 		}
 	}
+
 }

@@ -1,4 +1,4 @@
-<section class="woobewoo-bar">
+<section class="woobewoo-bar topBtnsArea">
 	<ul class="woobewoo-bar-controls">
 		<li title="<?php echo esc_attr__('Save all options', 'woo-product-filter'); ?>">
 			<button class="button button-primary" id="wpfSettingsSaveBtn" data-toolbar-button>
@@ -12,7 +12,6 @@
 		</li>
 	</ul>
 	<div class="woobewoo-clear"></div>
-	<hr />
 </section>
 <section>
 	<form id="wpfSettingsForm" class="wpfInputsWithDescrForm">
