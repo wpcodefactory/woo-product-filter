@@ -7,7 +7,7 @@
 			<div class="woobewoo-group-label">
 				<?php esc_html_e('Select filters to add', 'woo-product-filter'); ?>
 			</div>
-			<select id="wpfChooseFilters">
+			<select id="wpfChooseFilters" data-added-text="<?php esc_html_e('Added to filter', 'woo-product-filter'); ?>">
 				<?php
 				foreach ($filtersList as $filter => $data) {
 					echo '<option value="' . esc_attr($filter) .

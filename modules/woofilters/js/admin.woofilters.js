@@ -605,22 +605,41 @@
 				variants = jQuery('#wpfChooseFiltersBlock [data-option]').addClass('wpfHidden');
 			variants.filter('[data-option="'+option.attr('data-available')+'"]').removeClass('wpfHidden');
 		});
-
+   jQuery('#wpfChooseFilters option').each(function () {
+      var $opt = jQuery(this);
+      if (!$opt.data('original-text')) {
+        $opt.data('original-text', $opt.text());
+      }
+    });
 		function resetEnabledFilters() {
-			var filterSelect = jQuery('#wpfChooseFilters'),
-				filtersBlock = jQuery('.wpfFiltersBlock');
-			filterSelect.find('option').each(function(){
-				var option = jQuery(this),
-					data = 'add';
+	var filterSelect = jQuery('#wpfChooseFilters'),
+	filtersBlock = jQuery('.wpfFiltersBlock');
+// get translated text from HTML attribute
+    var ADDED_TEXT = filterSelect.data('added-text')? ' (' + filterSelect.data('added-text') + ')' : '';
+	filterSelect.find('option').each(function(){
+	var option = jQuery(this),
+	data = 'add',
+	 originalText = option.data('original-text');
+     // reset text first
+        option.text(originalText);
+        if(filtersBlock.find('.wpfFilter[data-filter="'+option.attr('value')+'"]').length){
+        option.text(originalText + " ("+ADDED_TEXT+")");
+        option.attr("data-added", "1");
+        }
 				if (option.attr('data-enabled') != '1') data = 'pro';
 				else if (option.attr('data-unique') == 1) {
-					if(filtersBlock.find('.wpfFilter[data-filter="'+option.attr('value')+'"]').length) data = 'uniq';
+					if(filtersBlock.find('.wpfFilter[data-filter="'+option.attr('value')+'"]').length)
+            data = 'uniq';
 					else {
 						var group = option.attr('data-group');
 						if(group && group.length && filtersBlock.find('.wpfFilter[data-filter="'+group+'"]').length) data = 'group';
 					}
 				}
 				option.attr('data-available', data);
+         // cleanup flag if not added
+        if (data !== "uniq") {
+          option.removeAttr("data-added");
+        }
 			});
 			var firstEnabled = filterSelect.find('[data-available="add"]');
 			if(firstEnabled.length) firstEnabled.first().prop('selected', true);
