@@ -7,6 +7,7 @@
 			<div class="woobewoo-group-label">
 				<?php esc_html_e('Select filters to add', 'woo-product-filter'); ?>
 			</div>
+			<div class="d-flex w-100">
 			<select id="wpfChooseFilters" data-added-text="<?php esc_html_e('Added to filter', 'woo-product-filter'); ?>">
 				<?php
 				foreach ($filtersList as $filter => $data) {
@@ -24,7 +25,11 @@
 			</select>
 			<button id="wpfAddFilterButton" data-option='add' class="button button-small">
 				<span><?php esc_html_e('Add', 'woo-product-filter'); ?></span>
+					<svg class="ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M7.33341 13.25L3.83341 9.74999L2.66675 10.9167L7.33341 15.5833L17.3334 5.58332L16.1667 4.41666L7.33341 13.25Z" fill="white" />
+					</svg>
 			</button>
+			</div>
 			<span data-option='pro' class="wpfProLabel wpfHidden"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 			<span data-option='uniq' class="wpfProLabel wpfHidden"><?php esc_html_e('Already in the list', 'woo-product-filter'); ?></span>
 			<span data-option='group' class="wpfProLabel wpfHidden">
