@@ -9,7 +9,7 @@
 /**
  * Main function.
  *
- * @version 2.8.6
+ * @version 3.1.3
  */
 (function ($, app) {
 	"use strict";
@@ -17,8 +17,23 @@
 	/**
 	 * WpfFrontendPage.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.3
 	 */
+	function wpfIsAjaxPaginationEnabled() {
+	var wrapper = jQuery('.wpfMainWrapper').first();
+		if (!wrapper.length) return false;
+
+		var raw = wrapper.attr('data-filter-settings');
+		try {
+			var settings = JSON.parse(raw);
+		} catch (e) {
+			return false;
+		}
+
+		return !!(settings.settings && 
+              (parseInt(settings.settings.ajax_pagination, 10) === 1 || 
+               parseInt(settings.settings.slug_format, 10) === 1));
+	}
 	function WpfFrontendPage() {
 		this.$obj = this;
 		this.noWoo = this.$obj.checkNoWooPage();
@@ -887,7 +902,49 @@
 			_thisObj.filtering(parent.closest('.wpfMainWrapper'));
 			return false;
 		});
+//ajax pagination
+jQuery('body').off('click', '.woocommerce-pagination a.page-numbers').on('click', '.woocommerce-pagination a.page-numbers', function (e) {
+		var wrapper = jQuery('.wpfMainWrapper').first();
+			// 1️⃣ If NoWooPage exists → let its handler handle it
+			if (wrapper.hasClass('wpfNoWooPage')) {
+				return;
+			}
+			// 2️⃣ If ajax pagination disabled → allow normal Woo pagination
+			if (!wpfIsAjaxPaginationEnabled()) {
+				return;
+			}
+			// 3️⃣ Otherwise → AJAX pagination
+			e.preventDefault();
+			var _this = jQuery(this),
+				paginationWrapper = _this.closest('.woocommerce-pagination'),
+				currentNumber = paginationWrapper.find('.current').text();
+			if(!_this.hasClass('next') && !_this.hasClass('prev') ){
+				var number = _this.text();
+			}else if(_this.hasClass('next')){
+				var number = parseInt(currentNumber) + 1;
+			}else if(_this.hasClass('prev')){
+				var number = (parseInt(currentNumber) - 1) < 1 ? parseInt(currentNumber) - 1 : 1;
+			}
+			var wrapper = jQuery('.wpfMainWrapper').first(),
+				$queryVars = wrapper.attr('data-settings');
+			try{
+				var settings = JSON.parse($queryVars);
+			}catch(e){
+				var settings = false;
+			}
+			if(settings){
+				settings.paged = number;
+				settings.pagination = 1;
+				wrapper.attr('data-settings', JSON.stringify(settings) );
+			}
+			_thisObj.setCurrentLocation();
 
+			// todo: testing for two+ filters on page
+			_thisObj.filtering( jQuery('.wpfMainWrapper') );
+			_thisObj.setPagination(0);
+		});
+
+//ajax pagination
 		jQuery('body').off('wpffiltering').on('wpffiltering', function () {
 			_thisObj.setPagination(1);
 			_thisObj.setCurrentLocation();

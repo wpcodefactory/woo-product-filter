@@ -352,6 +352,23 @@
 				</div>
 			</div>
 		</div>
+			<div class="row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<div class="settings-value-label">
+					<?php esc_html_e('Ajax Pagination', 'woo-product-filter'); ?>
+				</div>
+
+			</div>
+			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
+				<div class="settings-value settings-w100">
+					<?php
+					HtmlWpf::checkboxToggle('settings[ajax_pagination]', array(
+						'checked' => (isset($this->settings['settings']['ajax_pagination']) ? (int) $this->settings['settings']['ajax_pagination'] : '')
+					));
+					?>
+				</div>
+			</div>
+		</div>
 		<?php
 			$settingValue = ( isset($this->settings['settings']['enable_ajax']) ? (int) $this->settings['settings']['enable_ajax'] : 1 );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
