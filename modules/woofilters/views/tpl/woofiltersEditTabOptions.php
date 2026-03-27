@@ -369,6 +369,24 @@
 				</div>
 			</div>
 		</div>
+				<div class="row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<div class="settings-value-label">
+					<?php esc_html_e('Filter Page By Slug', 'woo-product-filter'); ?>
+					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('If you enable this please save permalink.', 'woo-product-filter') . ' <a href="' . esc_url(admin_url('options-permalink.php')) . '" class="wupsales-wc-hidden" target="_blank">' . __('Save Permalinks', 'woo-product-filter') . '</a>'); ?>"></i>
+				</div>
+
+			</div>
+			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
+				<div class="settings-value settings-w100">
+					<?php
+					HtmlWpf::checkboxToggle('settings[slug_format]', array(
+						'checked' => (isset($this->settings['settings']['slug_format']) ? (int) $this->settings['settings']['slug_format'] : '')
+					));
+					?>
+				</div>
+			</div>
+		</div>
 		<?php
 			$settingValue = ( isset($this->settings['settings']['enable_ajax']) ? (int) $this->settings['settings']['enable_ajax'] : 1 );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';

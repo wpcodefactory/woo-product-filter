@@ -519,7 +519,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$clearButtonWord        = ( $showCleanButton && ! empty($filterSettings['settings']['show_clean_button_word']) ) ? $filterSettings['settings']['show_clean_button_word'] : 'Clear' ;
 		$enableAjax             = ( ! empty($filterSettings['settings']['enable_ajax']) ) ? $filterSettings['settings']['enable_ajax'] : 0 ;
 		$forceShowCurrentFilter = ( isset($filterSettings['settings']['force_show_current']) ) ? $filterSettings['settings']['force_show_current'] : 0 ;
-
+		$filterSettings['settings']['shop_base_url'] = get_permalink(get_option('woocommerce_shop_page_id'));
 		global $wp_query;
 
 		$postPerPage = function_exists( 'wc_get_default_products_per_row' )
