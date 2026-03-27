@@ -823,10 +823,10 @@ class WoofiltersViewWpf extends ViewWpf {
 				$this->getFilterSetting($filter['settings'], 'f_enable_title');
 		}
 
-		if ( 'yes_open' === $showTitle ) {
+		if ('yes_open' === $showTitle) {
 			$iconClass = DispatcherWpf::applyFilters('getIconHtml', 'fa-minus', 'title_icons', $filterSettings);
-			$icon      = '<i class="fa ' . $iconClass . ' wpfTitleToggle"></i>';
-		} elseif ( 'yes_close' === $showTitle ) {
+			$icon = '';
+		} elseif ('yes_close' === $showTitle) {
 			$iconClass = DispatcherWpf::applyFilters('getIconHtml', 'fa-plus', 'title_icons', $filterSettings);
 			$icon      = '<i class="fa ' . $iconClass . ' wpfTitleToggle"></i>';
 		} else {
