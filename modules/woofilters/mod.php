@@ -48,6 +48,55 @@ class WoofiltersWpf extends ModuleWpf {
 	 * @version 3.0.2
 	 */
 	public function init() {
+
+	// ============================================================
+		// FIX — Thrive Themes editor/preview hang fix (PHP side)
+		//
+		// PROBLEM:
+		//   When the user clicks "Exit without saving" in the Thrive
+		//   template editor, Thrive loads a preview page with URL:
+		//     /product-category/fans/?tvet=68001&_preview=true
+		//   WPF has no knowledge this is a Thrive editor context, so
+		//   it runs loadProductsFilter() and all its heavy database
+		//   queries on that page — causing a 3-4 minute hang before
+		//   the editor can close.
+		//
+		//   Confirmed via live debugging:
+		//     - WPF deactivated  → exit is instant
+		//     - WPF activated    → exit takes 3-4 minutes
+		//     - The pending request is always:
+		//       /product-category/fans/?tvet=68001&_preview=true
+		//
+		// SOLUTION:
+		//   Detect Thrive editor/preview URLs by checking for the
+		//   URL parameters Thrive always appends:
+		//     - 'tvet'     : Thrive editor template ID
+		//     - 'tcbf'     : Thrive content builder flag
+		//     - '_preview' : Thrive preview mode (the hanging URL)
+		//   If any of these are present, skip all WPF product query
+		//   hooks entirely — shortcodes and admin tabs still register
+		//   normally, only the heavy filter hooks are skipped.
+		//
+		// NOTE:
+		//   This mirrors the same detection pattern WooBeWoo already
+		//   uses in admin-options.js and browser-compatibility.js via
+		//   wpfIsThriveEditor() — we apply the same logic in PHP here.
+		// ============================================================
+		$isThriveContext = (
+			isset( $_GET['tvet'] )     ||
+			isset( $_GET['tcbf'] )     ||
+			isset( $_GET['_preview'] )
+		);
+
+		if ( $isThriveContext ) {
+			// Register shortcodes only — skip all heavy product query hooks
+			add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
+			add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
+			add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
+			return;
+		}
+		// ============================================================
+
 		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
 		add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
