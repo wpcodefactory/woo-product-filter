@@ -3,7 +3,7 @@ $isPro = $this->is_pro;
 $labelPro = '';
 if (!$isPro) {
 	$adPath = $this->getModule()->getModPath() . 'img/ad/';
-	$labelPro = ' Pro';
+	$labelPro = ' - Pro feature';
 }
 $isWCLicense = FrameWpf::_()->isWCLicense();
 
@@ -139,9 +139,6 @@ if (taxonomy_exists('pwb-brand')) {
 								</li>
 							</ul>
 							<span id="wpfFilterTitleEditMsg"></span>
-						</div>
-						<div class="col-md-3 no-l-padding hidden-sm hidden-xs">
-							<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12 wpfMainTabsContainer">
