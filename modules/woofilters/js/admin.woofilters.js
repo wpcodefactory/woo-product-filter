@@ -281,7 +281,38 @@
 			return false;
 
 		});
-
+//category name change
+jQuery(document).on('click', '.wpfEditCategory', function (e) {
+    e.preventDefault();
+	  const li     = jQuery(this).closest('.editablecat');
+    const termId = li.data('term-id');
+    const nameEl = li.find('.wpfFilterTaxNameWrapper').first();
+    if (!nameEl.length) return;
+    const current = nameEl.text().trim();
+    const updated = prompt(wpfI18n.edit_category_label, current);
+    if (!updated || updated === current) return;
+    nameEl.text(updated);
+    nameEl.text(updated);
+	   jQuery.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            mod: 'woofilters',
+						pl: 'wpf',
+            action: 'saveCategoryLabel',
+            reqType: 'ajax',
+           wpfNonce: window.wpfNonce,
+            term_id: termId,
+            label: updated
+        },
+        success(res) {
+            if (res.success) {
+                li.find('.wpfFilterTaxNameWrapper').text(res.data.label);
+            }
+        }
+    });
+});
+//category name change
 		jQuery('body').off('click', '#buttonDelete').on('click', '#buttonDelete', function (e) {
 			e.preventDefault();
 			var deleteForm = confirm("Are you sure you want to delete filter?");

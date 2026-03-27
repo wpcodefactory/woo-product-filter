@@ -50,7 +50,13 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 			FrameWpf::_()->addStyle('admin.filters', $modPath . 'css/admin.woofilters.css');
 			FrameWpf::_()->addStyle('frontend.multiselect', $modPath . 'css/frontend.multiselect.css');
 			FrameWpf::_()->addScript('frontend.multiselect', $modPath . 'js/frontend.multiselect.js');
-			
+			FrameWpf::_()->addJSVar( 'admin.filters', 'wpfI18n', array(
+                            'edit_category_label' => esc_html__(
+                                'Enter custom category name',
+                                'woo-product-filter'
+                            )
+                        )
+                    );
 			if ( $isPro ) {
 				$modPathPRO = FrameWpf::_()->getModule('woofilterpro')->getModPath();
 				$modDirPRO = FrameWpf::_()->getModule('woofilterpro')->getModDir();

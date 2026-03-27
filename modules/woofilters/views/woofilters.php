@@ -145,7 +145,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		FrameWpf::_()->addJSVar('wp-color-picker', 'wpColorPickerL10n', array());
 		FrameWpf::_()->addScript('adminCreateTableWpf', $modPath . 'js/create-filter.js', array(), false, true);
 		FrameWpf::_()->addJSVar('admin.filters', 'url', admin_url('admin-ajax.php'));
-
+		FrameWpf::_()->addJSVar(
+			'admin.filters','wpfI18n',array('edit_category_label' => esc_html__(
+					'Enter custom category name',
+					'woo-product-filter'
+				),));
 		FrameWpf::_()->addStyle('admin.filters', $modPath . 'css/admin.woofilters' . $addWC . '.css');
 
 		$this->addCommonAssets($modPath);
@@ -3082,8 +3086,9 @@ class WoofiltersViewWpf extends ViewWpf {
 					}
 
 					$hidePageCategoryClass = ( $filterItem->term_id === $currentCategoryId ) ? ' class="hidePageCategory"' : '';
-
-					$html .= '<li data-term-id="' . $filterItem->term_id . '" data-parent="' . $filterItem->parent . '" data-term-slug="' . urldecode($filterItem->slug) . '"' . $addAttrs . $hidePageCategoryClass . '>';
+					$isBackend = is_admin() || (defined('WPF_ADMIN_PREVIEW') && WPF_ADMIN_PREVIEW);
+					$customLabels = get_option('wpf_category_custom_labels', []);
+					$html .= '<li class="editablecat" data-term-id="' . $filterItem->term_id . '" data-parent="' . $filterItem->parent . '" data-term-slug="' . urldecode($filterItem->slug) . '"' . $addAttrs . $hidePageCategoryClass . '>';
 					$html .= "<{$tagWrapper}" . ' class="wpfLiLabel">';
 
 					$checked = '';
@@ -3107,11 +3112,19 @@ class WoofiltersViewWpf extends ViewWpf {
 						$img = wp_get_attachment_image($thumbnail_id, $imgSize, false, array('alt' => $displayName));
 						$img = '<div class="wpfFilterTaxImgWrapper">' . $img . '</div>';
 					}
-
+					if (isset($customLabels[$termId]) && isset($filterItem->taxonomy) && $filterItem->taxonomy == 'product_cat') {
+						$displayName = $customLabels[$termId];
+					}
 					$displayName = '<' . $titleTag . ' class="wpfFilterTaxNameWrapper">' . $displayName . '</' . $titleTag . '>';
 
 					$html .= '<span class="wpfValue">' . $img . $displayName . '</span>';
-
+					if ($isBackend && isset($filterItem->taxonomy) && $filterItem->taxonomy === 'product_cat') {
+											$html .= '<span class="wpfEditCategory"
+											data-term-id="' . esc_attr($termId) . '"
+											title="' . esc_attr__('Edit category name', 'woo-product-filter') . '">
+											✏️
+										</span>';
+										}
 					if ( $showCount ) {
 						$count = isset($filterItem->count) ? $filterItem->count : '';
 						if ( ! $allProductsFiltering ) {

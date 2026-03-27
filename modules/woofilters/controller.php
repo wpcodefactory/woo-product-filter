@@ -97,7 +97,27 @@ class WoofiltersControllerWpf extends ControllerWpf
 		}
 		return $res->ajaxExec();
 	}
+	public function saveCategoryLabel()
+	{
+		// 🔐 Security
+		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		if (! current_user_can('manage_options')) {
+			wp_die();
+		}
+		$term_id = isset($_POST['term_id']) ? absint($_POST['term_id']) : 0;
+		$label   = isset($_POST['label']) ? sanitize_text_field($_POST['label']) : '';
+		if (! $term_id || $label === '') {
+			wp_send_json_error(__('Invalid data', 'woo-product-filter'));
+		}
+		$map = get_option('wpf_category_custom_labels', array());
+		$map[$term_id] = $label;
+		update_option('wpf_category_custom_labels', $map, false);
 
+		wp_send_json_success(array(
+			'term_id' => $term_id,
+			'label'   => $label,
+		));
+	}
 	public function deleteByID()
 	{
 		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
@@ -1191,6 +1211,9 @@ class WoofiltersControllerWpf extends ControllerWpf
 					WPF_ADMIN
 				),
 				'deleteByID' => array(
+					WPF_ADMIN
+				),
+				'saveCategoryLabel' => array(
 					WPF_ADMIN
 				),
 				'drawFilterAjax' => array(
