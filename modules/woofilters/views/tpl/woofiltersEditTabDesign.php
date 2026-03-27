@@ -179,7 +179,7 @@
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php 
 						HtmlWpf::checkboxToggle('settings[disable_plugin_styles]', array(
-							'checked' => ( isset($this->settings['settings']['disable_plugin_styles']) ? (int) $this->settings['settings']['disable_plugin_styles'] : '' )
+							'checked' => ( isset($this->settings['settings']['disable_plugin_styles']) ? (int) $this->settings['settings']['disable_plugin_styles'] : 1 )
 						));
 						?>
 				</div>
