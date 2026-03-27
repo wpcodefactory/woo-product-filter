@@ -8,10 +8,10 @@
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php 
-				HtmlWpf::selectbox('f_frontend_type', array(
-					'options' => array('dropdown' => esc_attr__( 'Dropdown', 'woo-product-filter' ), 'list' => esc_attr__( 'Checkboxes', 'woo-product-filter' ), 'switch' => esc_attr__( 'Toggle Switch', 'woo-product-filter' ) . $labelPro),
-					'attrs' => 'class="woobewoo-flat-input"'
-				));
+			HtmlWpf::selectbox('f_frontend_type', array(
+						'options' => array('list' => esc_attr__('Checkboxes', 'woo-product-filter'), 'dropdown' => esc_attr__('Dropdown', 'woo-product-filter'), 'switch' => esc_attr__('Toggle Switch', 'woo-product-filter') . $labelPro),
+						'attrs' => 'class="woobewoo-flat-input"'
+					));
 				?>
 		</div>
 	</div>
