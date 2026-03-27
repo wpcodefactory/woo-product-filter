@@ -859,7 +859,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $html;
 	}
 
-	public function generateFilterHeaderHtml( $filter, $filterSettings, $noActive = true ) {
+	public function generateFilterHeaderHtml( $filter, $filterSettings, $noActive = true,$customFieldLabel = '' ) {
 
 		$showTitle = $this->getFilterSetting( $filter['settings'], 'f_enable_title' . ( UtilsWpf::isMobile() ? '_mobile' : '' ) );
 		if ( ! $noActive && 'yes_close' === $showTitle ) {
@@ -889,7 +889,11 @@ class WoofiltersViewWpf extends ViewWpf {
 			$html .= '<div class="wpfFilterTitle" ' . $titleMobileBreakpointData . '><' . $headerTag . ' class="wfpTitle';
 			$html .= ( (int) $this->getFilterSetting($filterSettings['settings'], 'hide_filter_icon', 0) ? ' wfpClickable' : '' );
 			$html .= '">';
-			$html .= esc_html__($title, 'woo-product-filter');
+			if ($customFieldLabel) {
+				$html .= esc_html__($customFieldLabel, 'woo-product-filter');
+			} else {
+				$html .= esc_html__($title, 'woo-product-filter');
+			}
 			$html .= '</' . $headerTag . '>';
 			$html .= $icon;
 		}
@@ -2216,7 +2220,106 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		return $html;
 	}
+	/**
+	 * generateCustomFieldFilterHtml.
+	 *
+	 * @version 3.1.3
+	 */
+	public function generateCustomFieldFilterHtml($filter, $filterSettings, $blockStyle, $key = 1, $viewId = '')
+	{
+		$filterName = 'custom_field';
+		//print_r($filter);
+		// Fetch custom field filter options (checkbox/radio) for the 'product' post type
+		$CustomOptions = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getCustomFieldFilterOptions('product');
+		$settings = $this->getFilterSetting($filter, 'settings', array());
+		$options  = $this->getFilterSetting($settings, 'f_options[]', '');
+		$options  = explode(',', $options);  // Convert string to array
 
+		$frontendTypes = array('checkbox', 'radio');
+
+		$html = '';
+		// Create an array to hold the headers we've already processed
+		$processedHeaders = [];
+
+		// Loop through enabled options and generate corresponding HTML for each
+		foreach ($options as $enabledOption) {
+			// Check if this option exists in custom field options
+			if (isset($CustomOptions[$enabledOption])) {
+
+				$field = $CustomOptions[$enabledOption];
+				$name = 'pc_' . $field['name'];
+				$fieldLabel = esc_html($field['label']);
+				$fieldValues = $field['value'];
+				$fieldType = $field['type'];
+				$htmlOpt = '';
+				$defSelected = $this->getFilterUrlData($name);
+
+				// IMPORTANT: key must match data-get-attribute
+				$selectedArrval = [];
+				$selectedArrLower = [];
+				if (!empty($defSelected)) {
+					$selectedArr = is_array($defSelected) ? $defSelected : explode('|', (string)$defSelected);
+					$selectedArrval = array_map('trim', $selectedArr);
+					$selectedArrLower = array_map('strtolower', $selectedArrval);
+				}
+				// Prepare the HTML for checkboxes or radio buttons based on field type
+				if ($fieldType === 'checkbox') {
+					foreach ($fieldValues as $value) {
+						$term_id   = (string) $value;
+						$term_slug = sanitize_title($value);
+
+						$checked = (in_array($term_slug, $selectedArrLower, true) || in_array($term_id, $selectedArrval, true)) ? ' checked="checked"' : '';
+
+						$htmlOpt .= '
+						<label class="encoderCheckbox" data-term-id="' . esc_attr($term_id) . '" data-term-slug="' . esc_attr($term_slug) . '">
+							<input type="checkbox" name="' . esc_attr($name) . '[]" value="' . esc_attr($term_id) . '"' . $checked . ' />
+							<span>' . esc_html($value) . '</span>
+						</label>';
+					}
+				}
+
+				if ($fieldType === 'radio') {
+					foreach ($fieldValues as $value) {
+						$term_id   = (string) $value;
+						$term_slug = sanitize_title($value);
+
+						$checked = (in_array($term_slug, $selectedArrLower, true) || in_array($term_id, $selectedArrval, true)) ? ' checked="checked"' : '';
+
+						$htmlOpt .= '
+						<label class="encoderRadio" data-term-id="' . esc_attr($term_id) . '" data-term-slug="' . esc_attr($term_slug) . '">
+							<input type="radio" name="' . esc_attr($name) . '" value="' . esc_attr($term_id) . '"' . $checked . ' />
+							<span>' . esc_html($value) . '</span>
+						</label>';
+					}
+				}
+
+				$noActive = $defSelected ? '' : 'wpfNotActive';
+				$html .= '<div class="wpfFilterWrapper ' . $noActive . '"'
+					. $this->setFitlerId()
+					. ' data-filter-type="wpfCustomField"'
+					. ' data-get-attribute="' . esc_attr($name) . '"'
+					. ' data-display-type="' . esc_attr($fieldType) . '"'
+					. $this->setCommonFitlerDataAttr($filter, $name, $fieldType, $field['name'])
+					. $filter['blockAttributes']
+					. '>';
+
+				// Add filter header (if any)
+				$html .= $this->generateFilterHeaderHtml($filter, $filterSettings, $noActive, $fieldLabel);
+
+				$html .= $this->generateDescriptionHtml($filter);
+
+				// Append the dynamically generated options (checkboxes/radio buttons)
+				$html .= $htmlOpt;
+				$html .= '</div>';
+				$html .= '</div>';  // End wpfFilterWrapper
+			}
+		}
+
+		// Generate final HTML for the filter
+
+
+		return $html;
+	}
 	/**
 	 * generateInStockFilterHtml.
 	 *

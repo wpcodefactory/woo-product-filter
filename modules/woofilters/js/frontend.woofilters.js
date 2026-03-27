@@ -1865,6 +1865,26 @@ jQuery('body').off('click', '.woocommerce-pagination a.page-numbers').on('click'
 							_thisObj.QStringWork(name, '', noWooPage, filterWrapper, 'remove');
 						}
 						break;
+						case 'wpfCustomField':
+						var name  = $filtersDataFrontend[i]['name'];
+						var delim = $filtersDataFrontend[i]['delim'] || '|';
+						// Your custom field stores frontend settings as: settings[name] = "A|B"
+						// (not as settings.settings = ["A","B"])
+						var settingsObj = $filtersDataFrontend[i]['settings'] || {};
+						var cfValues = (typeof settingsObj.settings !== 'undefined')
+								? settingsObj.settings
+								: settingsObj[name];
+
+						if (Array.isArray(cfValues)) {
+								cfValues = cfValues.join(delim);
+						}
+
+						if (typeof cfValues === 'string' && cfValues.length > 0) {
+								_thisObj.QStringWork(name, cfValues, noWooPage, filterWrapper, 'change');
+						} else {
+								_thisObj.QStringWork(name, '', noWooPage, filterWrapper, 'remove');
+						}
+						break;
 					case 'wpfAttribute':
 						var product_taxonomy = $filtersDataFrontend[i]['settings']['taxonomy'],
 							product_attr = $filtersDataFrontend[i]['settings']['settings'],
@@ -2866,7 +2886,56 @@ jQuery('body').off('click', '.woocommerce-pagination a.page-numbers').on('click'
 
 		return optionsArray;
 	});
+//custom field
+WpfFrontendPage.prototype.getCustomFieldFilterOptions = (function ($filter) {
+    var optionsArray = [],
+        frontendOptions = {},
+        options = [],
+        statistics = [],
+        filterType = $filter.attr('data-display-type') || $filter.data('display-type'),
+        getParams = $filter.attr('data-get-attribute'),
+        selectedOptions = {'is_one': (filterType === 'radio'), 'list': []},
+        i = 0;
+    if (!getParams) {
+        optionsArray['backend']  = [];
+        optionsArray['frontend'] = {};
+        optionsArray['selected'] = selectedOptions;
+        optionsArray['stats']    = [];
+        return optionsArray;
+    }
+    if (filterType === 'radio') {
+        var $sel = $filter.find('input[type="radio"]:checked');
+        if ($sel.length) {
+            var value = $sel.val();
+            var label = $sel.closest('label').text().trim();
+            options.push(value);
+						var logic = $filter.attr('data-query-logic') || 'or';
+						var joinDelim = (logic === 'and') ? ',' : '|';
+						frontendOptions[getParams] = options.join(joinDelim);
+            selectedOptions['list'] = [label];
+            statistics = [label];
+        }
+    } else { // checkbox
+        $filter.find('input[type="checkbox"]:checked').each(function () {
+            var value = jQuery(this).val();
+            var label = jQuery(this).closest('label').text().trim();
 
+            options.push(value);
+            selectedOptions['list'].push(label);
+            statistics.push(label);
+        });
+
+        if (options.length) {
+            frontendOptions[getParams] = options.join('|'); // ✅ key=Red|Green (correct)
+        }
+    }
+    optionsArray['backend']  = options;
+    optionsArray['frontend'] = frontendOptions;
+    optionsArray['selected'] = selectedOptions;
+    optionsArray['stats']    = statistics;
+    return optionsArray;
+});
+//customfield
 	WpfFrontendPage.prototype.getCategoryFilterOptions = (function ($filter) {
 		var _thisObj = this.$obj,
 			optionsArray = [],

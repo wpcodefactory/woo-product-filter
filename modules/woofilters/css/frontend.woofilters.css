@@ -366,9 +366,6 @@
     width: 100%;
     box-sizing: border-box;
 }
-.wpfFilterContent ul input[type="checkbox"] {
-    appearance: auto !important;
-}
 .wpfBlockAnimated {
 	overflow: hidden;
     max-height: 1000px;

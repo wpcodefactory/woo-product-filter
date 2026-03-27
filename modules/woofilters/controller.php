@@ -991,6 +991,54 @@ class WoofiltersControllerWpf extends ControllerWpf
 							}
 						}
 						break;
+						case 'wpfCustomField':
+						$customfield = $setting['settings'] ?? [];
+						$name        = $setting['name'] ?? '';
+						$meta_key    = substr($name, 3);
+
+						if (empty($meta_key) || empty($customfield)) {
+							break;
+						}
+						$CustomOptions = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getCustomFieldFilterOptions('product');
+						// Ensure $customfield is always an array
+						if (!is_array($customfield)) {
+							$customfield = strpos($customfield, '|') !== false
+								? explode('|', $customfield)
+								: [$customfield];
+						}
+						// Clean and filter empty values
+						$values = array_map('trim', $customfield);
+						$values = array_filter($values);
+
+						if (empty($values)) {
+							break;
+						}
+						$clauses = [];
+						foreach ($values as $single_value) {
+							$normalized = ucwords(strtolower($single_value));
+							// Quote it → matches 's:5:"Green";' format in serialized array
+							if ($fieldtype === 'checkbox') {
+								$search = '"' . $normalized . '"';
+							} else {
+								$search = $normalized;
+							}
+							$clauses[] = [
+								'key'     => $meta_key,
+								'value'   => $search,
+								'compare' => 'LIKE',
+							];
+						}
+						if (!empty($clauses)) {
+							if (count($clauses) === 1) {
+								$args['meta_query'][] = $clauses[0];
+							} else {
+								// Multiple selections → OR logic (any match)
+								// If plugin ever sends "logic":"and", you can change to 'AND' here
+								$clauses['relation'] = 'OR';
+								$args['meta_query'][] = $clauses;
+							}
+						}
+						break;
 					case 'wpfBrand':
 						$brandsIdStr = $setting['settings'];
 						if ($brandsIdStr) {
