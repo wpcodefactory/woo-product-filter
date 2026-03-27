@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 2.9.7
+ * @version 3.1.3
  *
  * @author  woobewoo
  */
@@ -1277,11 +1277,21 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 		return $tax;
 	}
+	private function getExcludeTerms($settings)
+	{
 
+		if (!empty($settings['f_exclude_terms[]'])) {
+			return $settings['f_exclude_terms[]'];
+		}
+		if (!empty($settings['f_exclude_terms'])) {
+			return $settings['f_exclude_terms'];
+		}
+		return false;
+	}
 	/**
 	 * generateCategoryFilterHtml.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.3
 	 */
 	public function generateCategoryFilterHtml( $filter, $filterSettings, $blockStyle, $prodCatId = false, $key = 1, $viewId = '' ) {
 		$settings                = $this->getFilterSetting($filter, 'settings', array());
@@ -1289,7 +1299,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$hidden_categories       = isset($settings['f_hidden_categories']) ? $settings['f_hidden_categories'] : false;
 		$includeCategoryId       = ( ! empty($settings['f_mlist[]']) ) ? explode(',', $settings['f_mlist[]']) : false;
 		$includeCategoryChildren = $this->getFilterSetting($settings, 'f_mlist_with_children', false);
-		$excludeIds              = ! empty($settings['f_exclude_terms']) ? $settings['f_exclude_terms'] : false;
+		$excludeIds = $this->getExcludeTerms($settings);
 		$frontendTypes           = array('list', 'dropdown');
 		$type                    = $hidden_categories ? 'list' : $this->getFilterSetting($settings, 'f_frontend_type', 'list', false, DispatcherWpf::applyFilters('getFrontendFilterTypes', $frontendTypes, $filter['id']));
 		$isHierarchical          = ! empty($settings['f_show_hierarchical']) ? true : false;
@@ -1596,7 +1606,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$isHierarchical       = $this->getFilterSetting($settings, 'f_show_hierarchical', false);
 		$frontendTypes        = array('list', 'dropdown', 'mul_dropdown');
 		$type                 = $hiddenBrands ? 'list' : $this->getFilterSetting($settings, 'f_frontend_type', 'list', false, DispatcherWpf::applyFilters('getFrontendFilterTypes', $frontendTypes, $filter['id']));
-		$excludeIds           = ! empty($settings['f_exclude_terms']) ? $settings['f_exclude_terms'] : false;
+		$excludeIds           = $this->getExcludeTerms($settings);
 		$hideChild            = ! empty($settings['f_hide_taxonomy']) ? true : false;
 		$isIncludeChildren    = $this->findTaxonomyIncludeChildrenStatus($hideChild, false, $type);
 		$hideEmpty            = $this->getFilterSetting($settings, 'f_hide_empty', false);
@@ -1781,7 +1791,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$hidden_tags     = isset($filter['settings']['f_hidden_tags']) ? $filter['settings']['f_hidden_tags'] : false;
 		$includeTagsId   = ! empty($filter['settings']['f_mlist[]']) ? explode(',', $filter['settings']['f_mlist[]']) : false;
-		$excludeIds      = ! empty($filter['settings']['f_exclude_terms']) ? $filter['settings']['f_exclude_terms'] : false;
+		$excludeIds      = $this->getExcludeTerms($filter['settings']);
 		$hideEmpty       = $this->getFilterSetting($settings, 'f_hide_empty', false);
 		$hideEmptyActive = $hideEmpty && $this->getFilterSetting($settings, 'f_hide_empty_active', false);
 
@@ -2400,7 +2410,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$includeAttsId   = ( ! empty($settings['f_mlist[]']) ) ? explode(',', $settings['f_mlist[]']) : false;
 		$attrId          = $this->getFilterSetting($settings, 'f_list', 0, true);
-		$excludeIds      = $this->getFilterSetting($settings, 'f_exclude_terms', false);
+		$excludeIds      = $this->getExcludeTerms($settings);
 		$hideEmpty       = $this->getFilterSetting($settings, 'f_hide_empty', false);
 		$hideEmptyActive = $hideEmpty && $this->getFilterSetting($settings, 'f_hide_empty_active', false);
 		$hideBySingle    = $hideEmpty && $this->getFilterSetting($settings, 'f_hide_by_single', false);

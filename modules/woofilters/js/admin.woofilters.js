@@ -9,7 +9,7 @@
 	function AdminPage() {
 		this.$obj = this;
 		this.$allowMultipleFilters = ['wpfAttribute', 'wpfBrand', 'wpfCustomMeta'];
-		this.$multiSelectFields = ['f_mlist[]', 'f_cglist[][]', 'f_search_by_attributes_list[]', 'f_additional_attributes_list[]'];
+		this.$multiSelectFields = ['f_mlist[]', 'f_exclude_terms[]', 'f_cglist[][]', 'f_search_by_attributes_list[]', 'f_additional_attributes_list[]'];
 		this.$noOptionsFilters = [''];
 		this.filtersSettings = [];
 		return this.$obj;
@@ -578,7 +578,7 @@
 			}
 		});
 
-		jQuery('#wpfFiltersEditForm select[name="f_mlist[]"]').off('chosen:updated').on('chosen:updated',function() {
+		jQuery('#wpfFiltersEditForm select[name="f_mlist[]"],#wpfFiltersEditForm select[name="f_exclude_terms[]"]').off('chosen:updated').on('chosen:updated',function() {
 			if(! jQuery(this).closest(".wpfFiltersBlockPreview").length ) {
 				_this.getPreviewAjax();
 			}
@@ -980,6 +980,9 @@
 
 				} else if (elm.type === 'select-multiple') {
 					if (_this.$multiSelectFields.includes(elm.name)) {
+						 if (elm.name === 'f_exclude_terms[]' && !settings[elm.name] && settings['f_exclude_terms']) {
+              settings[elm.name] = settings['f_exclude_terms'];
+            }
 						if (settings[name]) {
 							var selectedArr = settings[name].split(',');
 							jQuery.each(selectedArr, function (i, e) {
@@ -1037,7 +1040,7 @@
 		_this.filterIterator++;
 
 		blockTemplate.trigger('changeTooltips');
-		blockTemplate.find('select[name="f_mlist[]"]').chosen({ width:"95%" });
+		blockTemplate.find('select[name="f_mlist[]"],select[name="f_exclude_terms[]').chosen({ width:"95%" });
 
 		blockTemplate.find('input,select').trigger('wpf-change');
 
@@ -1198,7 +1201,7 @@
 									break;
 							}
 						} else {
-							var exclude = typeof items['f_exclude_terms'] != 'undefined' ? items['f_exclude_terms'] : '';
+							var exclude = typeof items['f_exclude_terms[]'] != 'undefined' ? items['f_exclude_terms[]'] : '';
 							if(exclude.length) {
 								preValue = filterName + '=!' + exclude;
 							}
