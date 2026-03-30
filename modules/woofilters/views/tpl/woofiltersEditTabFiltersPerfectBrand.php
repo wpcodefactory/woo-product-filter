@@ -208,7 +208,11 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::text('f_exclude_terms', array('attrs' => 'class="woobewoo-flat-input"')); ?>
+			<?php HtmlWpf::selectlist('f_exclude_terms', array(
+				'options' => $brandDisplay,
+				'data-parents' => json_encode($parentBrands, JSON_HEX_QUOT | JSON_HEX_TAG)
+			));
+			?>
 		</div>
 	</div>
 </div>

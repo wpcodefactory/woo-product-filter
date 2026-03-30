@@ -1,5 +1,18 @@
 == Changelog ==
-
+=3.1.3 - 27/03/026
+Encoderit-merge=
+* Feature - Block component created for page create so that admin can select filtering.
+* Feature - Stock status default checkbox selected.
+* Feature - Exclude ID option added as a dropdown.
+* Dev - Admin dashboard design completely revamped.
+* Feature - Category edit option now available from plugin settings.
+* Feature - AJAX pagination implemented.
+* Feature - Title collapse option made optional.
+* Dev - "Pro" text changed to indicate "Pro Feature".
+* Feature - Default theme design option now auto-selected.
+* Feature - During filter creation, filter options gray out and display "Added to Filter" text once selected.
+* Feature - Slug-wise filtering option now enabled from settings.
+* Dev - Radio and checkbox design and icons updated.
 = 3.1.3 - 20/03/2026 =
 * Fix - Security - SQL injection vulnerability fixed.
 * Fix - Security - Missing authorization vulnerability fixed.

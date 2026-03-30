@@ -236,7 +236,8 @@ endif;
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::text('f_exclude_terms', array('attrs' => 'class="woobewoo-flat-input"')); ?>
+		<?php HtmlWpf::selectlist('f_exclude_terms', array('options' => $tagsDisplay
+			)); ?>
 		</div>
 	</div>
 </div>

@@ -9,7 +9,7 @@
 .woobewoo-plugin {
     width: 100%;
 	font-size: 13px;
-    background-color: #eceff1;
+    background-color: #F4F5F5;
     font-family: Arial,sans-serif;
     color: #506971;
 }
@@ -51,7 +51,6 @@
 .woobewoo-navigation ul {
     padding: 0;
     margin: 0;
-	display: inline-flex;
 }
 .woobewoo-navigation ul li {
     text-align: center;
@@ -91,7 +90,6 @@
 .woobewoo-bar {
     min-height: 50px;
     padding: 10px;
-    background-color: #fff;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -197,7 +195,6 @@ ul.woobewoo-bar-controls > li.separator {
 
 /*Breadcrumbs*/
 .woobewoo-breadcrumbs {
-    background-color: #f8fafb;
     padding: 7px 15px;
     line-height: 26px;
 }

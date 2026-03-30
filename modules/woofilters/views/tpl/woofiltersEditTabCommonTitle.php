@@ -9,10 +9,14 @@
 				<?php esc_html_e('desktop', 'woo-product-filter'); ?>
 			</div>
 			<?php 
-				HtmlWpf::selectbox('f_enable_title', array(
-					'options' => array( 'no' => esc_attr__( 'No', 'woo-product-filter'), 'yes_close' => esc_attr__( 'Yes, show as close', 'woo-product-filter'), 'yes_open' => esc_attr__( 'Yes, show as opened', 'woo-product-filter') ),
-					'attrs' => 'class="woobewoo-flat-input"'
-				));
+			HtmlWpf::selectbox('f_enable_title', array(
+				'options' => array(
+					'yes_open' => esc_attr__('Yes, show as opened', 'woo-product-filter'),
+					'no' => esc_attr__('No', 'woo-product-filter'),
+					'yes_close' => esc_attr__('Yes, show as close', 'woo-product-filter')
+				),
+				'attrs' => 'class="woobewoo-flat-input"'
+			));
 				?>
 		</div>
 		<div class="settings-value settings-w100">
