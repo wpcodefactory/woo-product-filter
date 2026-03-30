@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - Overview Tab Content
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 $modPath = $this->getModule()->getModPath();
 ?>
 <section>
@@ -106,7 +116,7 @@ $modPath = $this->getModule()->getModPath();
 						<div class="wpf-overview-block-body">
 							<!-- <div class="wpf-overview-block"> -->
 							<!-- <div class="wpf-overview-body-title">
-										<? //php esc_html_e('Contact Us', 'woo-product-filter'); 
+										<? //php esc_html_e('Contact Us', 'woo-product-filter');
 										?>
 									</div> -->
 							<div class="wpf-overview-body-text">

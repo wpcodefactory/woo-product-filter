@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersControllerWpf Class
  *
- * @version 3.1.3
+ * @version 3.1.4
  *
  * @author  woobewoo
  */
@@ -12,6 +12,13 @@ defined( 'ABSPATH' ) || exit;
 class WoofiltersControllerWpf extends ControllerWpf {
 
 	protected $_code = 'woofilters';
+
+	/**
+	 * Init.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
 	public function init() {
 		parent::init();
 		// Add rewrite rules for slug-based filters
@@ -28,6 +35,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			add_action('parse_request', array($this, 'handleSlugFiltersTemplateRedirect'), 1);
 		}
 	}
+
+	/**
+	 * resolveTaxonomyFromSlugKey.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
 	private function resolveTaxonomyFromSlugKey($key) {
 		// Product categories
 		if (strpos($key, 'wpf_filter_cat_') === 0) {
@@ -45,6 +59,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * handleSlugFiltersTemplateRedirect.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
 	public function handleSlugFiltersTemplateRedirect($wp) {
 		if (is_admin()) {
 			return;
@@ -150,10 +171,23 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		}
 	}
 
+	/**
+	 * _getShopPageSlug.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
 	public function _getShopPageSlug() {
 		$shop_page_id = get_option('woocommerce_shop_page_id');
 		return get_post_field('post_name', $shop_page_id);
 	}
+
+	/**
+	 * addRewriteRules.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
 	public function addRewriteRules() {
 
 		$slug = $this->_getShopPageSlug();
@@ -161,11 +195,18 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		// Flush rules once manually via Settings > Permalinks
 		flush_rewrite_rules();
 	}
-		public function addQueryVars($vars)
-	{
+
+	/**
+	 * addQueryVars.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
+	public function addQueryVars($vars) {
 		$vars[] = 'wbw_custom_filters';
 		return $vars;
 	}
+
 	protected function _prepareTextLikeSearch( $val ) {
 		$query = '(title LIKE "%' . $val . '%"';
 		if ( is_numeric($val) ) {
@@ -243,8 +284,14 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		}
 		return $res->ajaxExec();
 	}
-	public function saveCategoryLabel()
-	{
+
+	/**
+	 * saveCategoryLabel.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
+	public function saveCategoryLabel() {
 		// 🔐 Security
 		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
 		if (! current_user_can('manage_options')) {
@@ -264,6 +311,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			'label'   => $label,
 		));
 	}
+
 	public function deleteByID() {
 		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
 		if ( ! current_user_can('manage_options') ) {
@@ -779,7 +827,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.1.1
+	 * @version 3.1.4
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables
@@ -1131,7 +1179,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 							}
 						}
 						break;
-						case 'wpfCustomField':
+					case 'wpfCustomField':
 						$customfield = $setting['settings'] ?? [];
 						$name        = $setting['name'] ?? '';
 						$meta_key    = substr($name, 3);
@@ -1376,7 +1424,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * getPermissions.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.4
 	 * @since   3.1.3
 	 *
 	 * @return array

@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Admin WooFilters List JS
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
 "use strict";
 jQuery(document).ready(function(){
 	// Fallback for case if library was not loaded
@@ -109,10 +117,10 @@ jQuery(document).ready(function(){
 		if (jQuery(this).is(':checked')) {
 			jQuery('#wpfTableRemoveGroupBtn,#wpfTableExportBtn').removeAttr('disabled');
 			grid.jqGrid('resetSelection');
-    		var ids = grid.getDataIDs();
-    		for (var i=0, il=ids.length; i < il; i++) {
-        		grid.jqGrid('setSelection',ids[i], true);
-    		}
+			var ids = grid.getDataIDs();
+			for (var i=0, il=ids.length; i < il; i++) {
+				grid.jqGrid('setSelection',ids[i], true);
+			}
 		} else {
 			jQuery('#wpfTableRemoveGroupBtn,#wpfTableExportBtn').attr('disabled', 'disabled');
 			grid.jqGrid('resetSelection');
@@ -154,7 +162,7 @@ jQuery(document).ready(function(){
 	});
 	jQuery('#wpfTableExportBtn').on('click', function(e){
 		e.preventDefault();
-		
+
 		var selectedRowIds = jQuery('#wpfTableTbl').jqGrid('getGridParam', 'selarrrow'),
 			listIds = [];
 		for(var i in selectedRowIds) {
@@ -177,7 +185,7 @@ jQuery(document).ready(function(){
 						link.href = window.URL.createObjectURL(blob);
 						link.download = fileName;
 						link.click();
-						
+
 						jQuery('#wpfTableTbl').trigger( 'reloadGrid' );
 						link.remove();
 					}
@@ -244,7 +252,7 @@ jQuery(document).ready(function(){
 	});
 	// *******  import filters END  *******
 	wpfInitCustomCheckRadio('#'+ tblId+ '_cb');
-	
+
 	// *******  enable/disable statistics  *******
 	var $statEForm = jQuery('#wpfStatsEForm'),
 		$statDForm = jQuery('#wpfStatsDForm'),
@@ -283,7 +291,7 @@ jQuery(document).ready(function(){
 			if (WPF_DATA.isWCLicense) jQuery(this).closest('.ui-dialog').find('.ui-dialog-buttonset button').addClass('button button-primary');
 		}
 	});
-				
+
 	tableObj.on('click', '.wpf-statistics', function(e){
 		e.preventDefault();
 		var $this = jQuery(this),

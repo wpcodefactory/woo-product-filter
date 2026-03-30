@@ -1,4 +1,15 @@
 <?php
+/**
+ * Product Filter by WBW - Edit Tab Filters Custom Field
+ *
+ * @version 3.1.4
+ * @since   3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 ViewWpf::display('woofiltersEditTabCommonTitle');
 ?>
 <div class="row-settings-block">

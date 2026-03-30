@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - Overview Feedback
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 $isSubscribe = $this->getModule()->getModel()->isSubscribe();
 $isRating = $this->getModule()->getModel()->isRating();
 if (!$isSubscribe || !$isRating) {

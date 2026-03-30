@@ -1,3 +1,15 @@
+<?php
+/**
+ * Product Filter by WBW - Options Settings Tab Content
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+?>
 <section class="woobewoo-bar topBtnsArea">
 	<ul class="woobewoo-bar-controls">
 		<li title="<?php echo esc_attr__('Save all options', 'woo-product-filter'); ?>">

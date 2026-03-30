@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - Config
  *
+ * @version 3.1.4
+ *
  * @author  woobewoo
  */
 
@@ -62,7 +64,7 @@ define('WPF_CURRENT', 'current');
 define('WPF_EOL', "\n");
 
 define('WPF_PLUGIN_INSTALLED', true);
-define('WPF_VERSION', '3.1.3');
+define('WPF_VERSION', '3.1.4');
 define('WPF_PRO_REQUIRES', '2.0.0');
 define('WPF_USER', 'user');
 
@@ -97,6 +99,8 @@ define('WPF_WP_PLUGIN_URL', 'woobewoo.com');
 
 /**
  * Custom defined for plugin.
+ *
+ * @version 3.1.4
  */
 define('WPF_SHORTCODE', 'wpf-filters');
 define('WPF_SHORTCODE_PRODUCTS', 'wpf-products');

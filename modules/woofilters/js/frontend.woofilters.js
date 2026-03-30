@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.1.3
+ * @version 3.1.4
  *
  * @author  woobewoo
  */
@@ -9,18 +9,18 @@
 /**
  * Main function.
  *
- * @version 3.1.3
+ * @version 3.1.4
  */
 (function ($, app) {
 	"use strict";
 
 	/**
-	 * WpfFrontendPage.
+	 * wpfIsAjaxPaginationEnabled.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.4
 	 */
 	function wpfIsAjaxPaginationEnabled() {
-	var wrapper = jQuery('.wpfMainWrapper').first();
+		var wrapper = jQuery('.wpfMainWrapper').first();
 		if (!wrapper.length) return false;
 
 		var raw = wrapper.attr('data-filter-settings');
@@ -30,22 +30,22 @@
 			return false;
 		}
 
-		return !!(settings.settings && 
-              (parseInt(settings.settings.ajax_pagination, 10) === 1 || 
-               parseInt(settings.settings.slug_format, 10) === 1));
+		return !!(settings.settings &&
+			(parseInt(settings.settings.ajax_pagination, 10) === 1 ||
+			parseInt(settings.settings.slug_format, 10) === 1));
 	}
 	function WpfFrontendPage() {
 		this.$obj = this;
 		this.noWoo = this.$obj.checkNoWooPage();
 		var slugFormatEnable;
 		if (!window.wpfAdminPage){
-		var $fgeneralSettings = this.getFilterMainSettings(jQuery('.wpfMainWrapper'));
-		if (typeof $fgeneralSettings.settings.slug_format !== 'undefined') {
-						slugFormatEnable = $fgeneralSettings.settings.slug_format;
-				} else {
-						// Set default value if not found
-						slugFormatEnable = '';  // Set your default value here
-				}
+			var $fgeneralSettings = this.getFilterMainSettings(jQuery('.wpfMainWrapper'));
+			if (typeof $fgeneralSettings.settings.slug_format !== 'undefined') {
+				slugFormatEnable = $fgeneralSettings.settings.slug_format;
+			} else {
+				// Set default value if not found
+				slugFormatEnable = '';  // Set your default value here
+			}
 		}
 		this.slugFormat = slugFormatEnable;
 		this.readyFuncs = ['.berocket_load_more_preload', 'woocommerce-product-bundle-hide', 'show_variation', 'woo_variation_swatches_pro_init', '.variations_form', 'yith_infs_start', 'flatsome_infinite_scroll','.dipl_woo_products_pagination_wrapper', 'divi_filter_loadmore_ajax_handler'];
@@ -92,10 +92,10 @@
 			}, 100);
 		}
 		var slugFormat=_thisObj.slugFormat;
-		if(slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0")	{
-		if($('.wpfFilterButton').length >0 && !window.wpfAdminPage){
-		applyFilter(_thisObj,$('.wpfFilterButton'));
-		}
+		if(slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0") {
+			if($('.wpfFilterButton').length >0 && !window.wpfAdminPage){
+				applyFilter(_thisObj,$('.wpfFilterButton'));
+			}
 		}
 	});
 	WpfFrontendPage.prototype.moveFloatingElements = (function () {
@@ -442,73 +442,73 @@
 			$filterWrapper.attr('data-hide-url', decodeURI(curUrl));
 		}
 	});
-//slug generation
-//New: Convert original param string to slug segments (use slugs for values)
-WpfFrontendPage.prototype.convertParamsToSegments = function(paramString) {
-    var segments = [];
-    var exclude = ['wpf_count', 'wpf_fbv'];
+	// slug generation
+	// New: Convert original param string to slug segments (use slugs for values)
+	WpfFrontendPage.prototype.convertParamsToSegments = function(paramString) {
+		var segments = [];
+		var exclude = ['wpf_count', 'wpf_fbv'];
 
-    if (!paramString) return segments;
+		if (!paramString) return segments;
 
-    // helper to safely use values in CSS attribute selectors
-    function escAttr(v) {
-        v = String(v);
-        if (window.CSS && CSS.escape) return CSS.escape(v);
-        // fallback escape (good enough for attr selectors)
-        return v.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
-    }
+		// helper to safely use values in CSS attribute selectors
+		function escAttr(v) {
+			v = String(v);
+			if (window.CSS && CSS.escape) return CSS.escape(v);
+			// fallback escape (good enough for attr selectors)
+			return v.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+		}
 
-    paramString = paramString.replace(/^[?&]/, '');
-    var pairs = paramString.split('&');
+		paramString = paramString.replace(/^[?&]/, '');
+		var pairs = paramString.split('&');
 
-    pairs.forEach(function(pair) {
-        var parts = pair.split('=');
-        var key = parts[0];
-        var val = parts.slice(1).join('='); // keep '=' inside values safe
+		pairs.forEach(function(pair) {
+			var parts = pair.split('=');
+			var key = parts[0];
+			var val = parts.slice(1).join('='); // keep '=' inside values safe
 
-        if (!key || !val || exclude.indexOf(key) !== -1) return;
+			if (!key || !val || exclude.indexOf(key) !== -1) return;
 
-        var decodedKey = decodeURIComponent(key);
-        var delim = getDelimiterForFilter(decodedKey);
+			var decodedKey = decodeURIComponent(key);
+			var delim = getDelimiterForFilter(decodedKey);
 
-        // decode full value first (important!)
-        var decodedVal = decodeURIComponent(val.replace(/\+/g, ' '));
+			// decode full value first (important!)
+			var decodedVal = decodeURIComponent(val.replace(/\+/g, ' '));
 
-        var slugs = decodedVal.split(delim)
-            .map(s => s.trim())
-            .filter(Boolean)
-            .map(function(idRaw) {
-                var id = idRaw; // already decoded
-                var $wrap = jQuery('.wpfFilterWrapper[data-get-attribute="' + escAttr(decodedKey) + '"]');
+			var slugs = decodedVal.split(delim)
+				.map(s => s.trim())
+				.filter(Boolean)
+				.map(function(idRaw) {
+					var id = idRaw; // already decoded
+					var $wrap = jQuery('.wpfFilterWrapper[data-get-attribute="' + escAttr(decodedKey) + '"]');
 
-                // Try LI mapping (checkbox/radio)
-                var $li = $wrap.find('li[data-term-id="' + escAttr(id) + '"]');
-                if ($li.length) return ($li.attr('data-term-slug') || id);
+					// Try LI mapping (checkbox/radio)
+					var $li = $wrap.find('li[data-term-id="' + escAttr(id) + '"]');
+					if ($li.length) return ($li.attr('data-term-slug') || id);
 
-                // Fallback: try option mapping (dropdown)
-                var $opt = $wrap.find('option[value="' + escAttr(id) + '"]');
-                if ($opt.length) return ($opt.attr('data-term-slug') || $opt.data('term-slug') || id);
+					// Fallback: try option mapping (dropdown)
+					var $opt = $wrap.find('option[value="' + escAttr(id) + '"]');
+					if ($opt.length) return ($opt.attr('data-term-slug') || $opt.data('term-slug') || id);
 
-                return id;
-            });
+					return id;
+				});
 
-        if (slugs.length) {
-            segments.push(decodedKey);
-            segments.push(slugs.join(delim));
-        }
-    });
+			if (slugs.length) {
+				segments.push(decodedKey);
+				segments.push(slugs.join(delim));
+			}
+		});
 
-    return segments;
-};
-// New: Convert slug segments back to param string (slugs → IDs)
-function getDelimiterForFilter(key) {
-    var $filter = jQuery('.wpfFilterWrapper[data-get-attribute="' + key + '"]');
-    if (!$filter.length) return ','; // safe fallback
+		return segments;
+	};
+	// New: Convert slug segments back to param string (slugs → IDs)
+	function getDelimiterForFilter(key) {
+		var $filter = jQuery('.wpfFilterWrapper[data-get-attribute="' + key + '"]');
+		if (!$filter.length) return ','; // safe fallback
 
-    var logic = $filter.attr('data-query-logic') || 'or'; // default most filters to OR
-    return (logic === 'and') ? ',' : '|';
-}
-WpfFrontendPage.prototype.eventChangeFilter = (function (e) {
+		var logic = $filter.attr('data-query-logic') || 'or'; // default most filters to OR
+		return (logic === 'and') ? ',' : '|';
+	}
+	WpfFrontendPage.prototype.eventChangeFilter = (function (e) {
 		var _thisObj = this.$obj,
 			_this = jQuery(e.target),
 			mainWrapper = _this.closest('.wpfMainWrapper'),
@@ -984,9 +984,9 @@ WpfFrontendPage.prototype.eventChangeFilter = (function (e) {
 			_thisObj.filtering(parent.closest('.wpfMainWrapper'));
 			return false;
 		});
-//ajax pagination
-jQuery('body').off('click', '.woocommerce-pagination a.page-numbers').on('click', '.woocommerce-pagination a.page-numbers', function (e) {
-		var wrapper = jQuery('.wpfMainWrapper').first();
+		//ajax pagination
+		jQuery('body').off('click', '.woocommerce-pagination a.page-numbers').on('click', '.woocommerce-pagination a.page-numbers', function (e) {
+			var wrapper = jQuery('.wpfMainWrapper').first();
 			// 1️⃣ If NoWooPage exists → let its handler handle it
 			if (wrapper.hasClass('wpfNoWooPage')) {
 				return;
@@ -1026,7 +1026,7 @@ jQuery('body').off('click', '.woocommerce-pagination a.page-numbers').on('click'
 			_thisObj.setPagination(0);
 		});
 
-//ajax pagination
+		//ajax pagination
 		jQuery('body').off('wpffiltering').on('wpffiltering', function () {
 			_thisObj.setPagination(1);
 			_thisObj.setCurrentLocation();
@@ -1308,48 +1308,48 @@ jQuery('body').off('click', '.woocommerce-pagination a.page-numbers').on('click'
 		app.wpfOldUrl = window.location.href;
 		app.wpfNewUrl = app.wpfOldUrl;
 	});
-//prepare url param
-WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
-    // Step 1: Create a URL object to easily parse the current URL
-    var finalUrl = new URL(currentUrl);
-    console.log('Current URL:', finalUrl.href); // Debugging current URL
+	//prepare url param
+	WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
+		// Step 1: Create a URL object to easily parse the current URL
+		var finalUrl = new URL(currentUrl);
+		console.log('Current URL:', finalUrl.href); // Debugging current URL
 
-    // Step 2: Extract the path segments (e.g., /wbw/wpf_filter_cat_0/hoodies)
-    var pathSegments = finalUrl.pathname.split('/').filter(Boolean); // Remove empty segments
-    console.log('Path Segments:', pathSegments); // Debugging path segments
+		// Step 2: Extract the path segments (e.g., /wbw/wpf_filter_cat_0/hoodies)
+		var pathSegments = finalUrl.pathname.split('/').filter(Boolean); // Remove empty segments
+		console.log('Path Segments:', pathSegments); // Debugging path segments
 
-    // Step 3: Initialize URLSearchParams to handle query parameters
-    var urlParams = new URLSearchParams(finalUrl.search);
-    console.log('Initial Search Params:', urlParams.toString()); // Debugging initial search params
+		// Step 3: Initialize URLSearchParams to handle query parameters
+		var urlParams = new URLSearchParams(finalUrl.search);
+		console.log('Initial Search Params:', urlParams.toString()); // Debugging initial search params
 
-    // Step 4: Process the path segments and convert them into query parameters
-    for (var i = 0; i < pathSegments.length; i++) {
-        var segment = pathSegments[i];
+		// Step 4: Process the path segments and convert them into query parameters
+		for (var i = 0; i < pathSegments.length; i++) {
+			var segment = pathSegments[i];
 
-        // Check if the segment is a filter key (e.g., wpf_filter_cat_0, pr_stock, etc.)
-        if (segment.indexOf('wpf_filter_') === 0) {
-            var filterKey = segment; // e.g., 'wpf_filter_cat_0'
-            var filterValue = pathSegments[i + 1]; // e.g., 'hoodies'
+			// Check if the segment is a filter key (e.g., wpf_filter_cat_0, pr_stock, etc.)
+			if (segment.indexOf('wpf_filter_') === 0) {
+				var filterKey = segment; // e.g., 'wpf_filter_cat_0'
+				var filterValue = pathSegments[i + 1]; // e.g., 'hoodies'
 
-            console.log('Found Filter:', filterKey, 'with value:', filterValue);
+				console.log('Found Filter:', filterKey, 'with value:', filterValue);
 
-            // You may need to resolve the term ID here based on the slug (e.g., 'hoodies' -> 34)
-            // For now, we'll use the value directly, but you can integrate a lookup if needed
+				// You may need to resolve the term ID here based on the slug (e.g., 'hoodies' -> 34)
+				// For now, we'll use the value directly, but you can integrate a lookup if needed
 
-            // Add the filter to the query parameters
-            urlParams.set(filterKey, filterValue); // Map the filterKey to filterValue
-        }
-    }
+				// Add the filter to the query parameters
+				urlParams.set(filterKey, filterValue); // Map the filterKey to filterValue
+			}
+		}
 
-    // Step 5: Rebuild the URL with the updated parameters
-    finalUrl.search = urlParams.toString();  // Set the new query string
-    console.log('Updated Search Params:', finalUrl.search); // Debugging updated search params
+		// Step 5: Rebuild the URL with the updated parameters
+		finalUrl.search = urlParams.toString();  // Set the new query string
+		console.log('Updated Search Params:', finalUrl.search); // Debugging updated search params
 
-    // Step 6: Return the final URL with updated query parameters
-    return finalUrl.toString();  // Return the full URL with updated parameters
-};
+		// Step 6: Return the final URL with updated query parameters
+		return finalUrl.toString();  // Return the full URL with updated parameters
+	};
 
-//prepare url param
+	//prepare url param
 	/**
 	 * filtering.
 	 *
@@ -1622,22 +1622,20 @@ WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
 			}
 			var redirect = (typeof $filterWrapper.data('redirect-page-url') !== 'undefined'),
 				$needUrl = $filterSettings['open_one_by_one'] == '1' && $filterSettings['obo_only_children'] == '1';
-		//slug generation
+			//slug generation
 			if (history.pushState && app.wpfNewUrl != window.wpfOldUrl && ((!redirect && !redirectTerm) || $needUrl)) {
 				var slugFormat=_thisObj.slugFormat;
 				var finalUrl = app.wpfNewUrl;
 				if (slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0") {
-					var currentUrl=window.location.href; 
+					var currentUrl=window.location.href;
 					var prepareurl=WpfFrontendPage.prototype.prepareUrlParams(currentUrl);
 					//alert(prepareurl);alert(window.wpfNewUrl);
 					 var search = window.wpfNewUrl ? new URL(window.wpfNewUrl).search : window.location.search;
 					var segments = _thisObj.convertParamsToSegments(search);
 					finalUrl = $generalSettings.settings.shop_base_url+'wbw/' + segments.join('/');
-					
+
 					if (segments.length === 0) finalUrl = $generalSettings.settings.shop_base_url;
 				}
-			//	alert(finalUrl)
-			//console.log(finalUrl);console.log('yes');
 				history.pushState({state: 1, rand: Math.random(), wpf: true}, '', finalUrl);
 				app.wpfOldUrl = finalUrl;
 				_thisObj.changeSlugByUrl();
@@ -2001,24 +1999,24 @@ WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
 							_thisObj.QStringWork(name, '', noWooPage, filterWrapper, 'remove');
 						}
 						break;
-						case 'wpfCustomField':
+					case 'wpfCustomField':
 						var name  = $filtersDataFrontend[i]['name'];
 						var delim = $filtersDataFrontend[i]['delim'] || '|';
 						// Your custom field stores frontend settings as: settings[name] = "A|B"
 						// (not as settings.settings = ["A","B"])
 						var settingsObj = $filtersDataFrontend[i]['settings'] || {};
 						var cfValues = (typeof settingsObj.settings !== 'undefined')
-								? settingsObj.settings
-								: settingsObj[name];
+							? settingsObj.settings
+							: settingsObj[name];
 
 						if (Array.isArray(cfValues)) {
-								cfValues = cfValues.join(delim);
+							cfValues = cfValues.join(delim);
 						}
 
 						if (typeof cfValues === 'string' && cfValues.length > 0) {
-								_thisObj.QStringWork(name, cfValues, noWooPage, filterWrapper, 'change');
+							_thisObj.QStringWork(name, cfValues, noWooPage, filterWrapper, 'change');
 						} else {
-								_thisObj.QStringWork(name, '', noWooPage, filterWrapper, 'remove');
+							_thisObj.QStringWork(name, '', noWooPage, filterWrapper, 'remove');
 						}
 						break;
 					case 'wpfAttribute':
@@ -2654,22 +2652,6 @@ WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
 		}
 	});
 
-	/*WpfFrontendPage.prototype.runReadyList = (function(){
-		if (window.readyList && window.readyList.length) {
-
-			jQuery(window.readyList).each(function(i, el) {
-				var strFunc = el['a'][0].toString();
-				if (strFunc.indexOf('WpfFrontendPage') == -1 && strFunc.indexOf('.ajaxComplete(') == -1) {
-					try {
-						window.originalReadyMethod.apply(el['c'], el['a']);
-					} catch(e) {
-						console.log(e);
-					}
-				}
-			});
-		}
-	});*/
-
 	WpfFrontendPage.prototype.enableFiltersLoader = (function(idWrapper, productListElem){
 		var preview = jQuery('#' + idWrapper + ' .wpfPreviewLoader').first().clone().removeClass('wpfHidden');
 		productListElem.html(preview);
@@ -2683,8 +2665,8 @@ WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
 	WpfFrontendPage.prototype.getUrlParamsChangeFiltersValues = (function(){
 		var _thisObj = this.$obj,
 			noWooPage = _thisObj.noWoo;
-			var $generalSettings = _thisObj.getFilterMainSettings(jQuery('.wpfMainWrapper'));
-    var slugFormat=_thisObj.slugFormat;
+		var $generalSettings = _thisObj.getFilterMainSettings(jQuery('.wpfMainWrapper'));
+		var slugFormat=_thisObj.slugFormat;
 		// Check if 'slug_format' exists and is valid
 		if(noWooPage || slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0"){
 			var curUrl = jQuery('.wpfMainWrapper').first().attr('data-hide-url');
@@ -3025,56 +3007,56 @@ WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
 
 		return optionsArray;
 	});
-//custom field
-WpfFrontendPage.prototype.getCustomFieldFilterOptions = (function ($filter) {
-    var optionsArray = [],
-        frontendOptions = {},
-        options = [],
-        statistics = [],
-        filterType = $filter.attr('data-display-type') || $filter.data('display-type'),
-        getParams = $filter.attr('data-get-attribute'),
-        selectedOptions = {'is_one': (filterType === 'radio'), 'list': []},
-        i = 0;
-    if (!getParams) {
-        optionsArray['backend']  = [];
-        optionsArray['frontend'] = {};
-        optionsArray['selected'] = selectedOptions;
-        optionsArray['stats']    = [];
-        return optionsArray;
-    }
-    if (filterType === 'radio') {
-        var $sel = $filter.find('input[type="radio"]:checked');
-        if ($sel.length) {
-            var value = $sel.val();
-            var label = $sel.closest('label').text().trim();
-            options.push(value);
-						var logic = $filter.attr('data-query-logic') || 'or';
-						var joinDelim = (logic === 'and') ? ',' : '|';
-						frontendOptions[getParams] = options.join(joinDelim);
-            selectedOptions['list'] = [label];
-            statistics = [label];
-        }
-    } else { // checkbox
-        $filter.find('input[type="checkbox"]:checked').each(function () {
-            var value = jQuery(this).val();
-            var label = jQuery(this).closest('label').text().trim();
+	//custom field
+	WpfFrontendPage.prototype.getCustomFieldFilterOptions = (function ($filter) {
+		var optionsArray = [],
+			frontendOptions = {},
+			options = [],
+			statistics = [],
+			filterType = $filter.attr('data-display-type') || $filter.data('display-type'),
+			getParams = $filter.attr('data-get-attribute'),
+			selectedOptions = {'is_one': (filterType === 'radio'), 'list': []},
+			i = 0;
+		if (!getParams) {
+			optionsArray['backend']  = [];
+			optionsArray['frontend'] = {};
+			optionsArray['selected'] = selectedOptions;
+			optionsArray['stats']    = [];
+			return optionsArray;
+		}
+		if (filterType === 'radio') {
+			var $sel = $filter.find('input[type="radio"]:checked');
+			if ($sel.length) {
+				var value = $sel.val();
+				var label = $sel.closest('label').text().trim();
+				options.push(value);
+				var logic = $filter.attr('data-query-logic') || 'or';
+				var joinDelim = (logic === 'and') ? ',' : '|';
+				frontendOptions[getParams] = options.join(joinDelim);
+				selectedOptions['list'] = [label];
+				statistics = [label];
+			}
+		} else { // checkbox
+			$filter.find('input[type="checkbox"]:checked').each(function () {
+				var value = jQuery(this).val();
+				var label = jQuery(this).closest('label').text().trim();
 
-            options.push(value);
-            selectedOptions['list'].push(label);
-            statistics.push(label);
-        });
+				options.push(value);
+				selectedOptions['list'].push(label);
+				statistics.push(label);
+			});
 
-        if (options.length) {
-            frontendOptions[getParams] = options.join('|'); // ✅ key=Red|Green (correct)
-        }
-    }
-    optionsArray['backend']  = options;
-    optionsArray['frontend'] = frontendOptions;
-    optionsArray['selected'] = selectedOptions;
-    optionsArray['stats']    = statistics;
-    return optionsArray;
-});
-//customfield
+			if (options.length) {
+				frontendOptions[getParams] = options.join('|'); // ✅ key=Red|Green (correct)
+			}
+		}
+		optionsArray['backend']  = options;
+		optionsArray['frontend'] = frontendOptions;
+		optionsArray['selected'] = selectedOptions;
+		optionsArray['stats']    = statistics;
+		return optionsArray;
+	});
+	//customfield
 	WpfFrontendPage.prototype.getCategoryFilterOptions = (function ($filter) {
 		var _thisObj = this.$obj,
 			optionsArray = [],
@@ -3863,7 +3845,7 @@ function changeUrl(filterSlug, filterValue, $wooPage, $filterWrapper) {
 	removePageQString();
 	//Get query string filterValue
 	$wooPage = (typeof $wooPage != 'undefined' ? $wooPage: false);
-	
+
 	var curUrl = getCurrentUrlPartsWpf();
 	if(!$wooPage){
 		var searchUrl = decodeURIComponent(curUrl.search);
@@ -3875,10 +3857,10 @@ function changeUrl(filterSlug, filterValue, $wooPage, $filterWrapper) {
 		}
 	}
 
-// New: Check if slug format enabled
-    var wrapper = $filterWrapper.closest('.wpfMainWrapper');
-   
-    var urlValue;
+	// New: Check if slug format enabled
+	var wrapper = $filterWrapper.closest('.wpfMainWrapper');
+
+	var urlValue;
 	if (searchUrl.indexOf("redirect")!==-1) {
 		searchUrl = '';
 	}
@@ -3904,8 +3886,7 @@ function changeUrl(filterSlug, filterValue, $wooPage, $filterWrapper) {
 		//history.pushState function is used to add history state.
 		//It takes three parameters: a state object, a title (which is currently ignored), and (optionally) a URL.
 	}
-	
-	
+
 	if(!$wooPage){
 		window.wpfNewUrl = encodeURI(urlValue).indexOf('%25') === -1 ? encodeURI(urlValue) : urlValue;
 	}

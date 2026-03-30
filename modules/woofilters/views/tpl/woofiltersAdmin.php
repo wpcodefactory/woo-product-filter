@@ -1,3 +1,15 @@
+<?php
+/**
+ * Product Filter by WBW - Woofilters Admin
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+?>
 <section>
 	<div class="woobewoo-item woobewoo-panel d-flex flex-column">
 		<div class="topBtnsArea d-flex items-center justify-end">
@@ -31,33 +43,33 @@
 					DispatcherWpf::doAction('addAdminButtonsPro');
 				} else {
 				?>
-					<li title="<?php echo esc_attr(__('Import tables', 'woo-product-filter')); ?>">
-						<a class="relative filterExportImportBtn" href="<?php echo esc_url($this->proLink); ?>" target="_blank">
-							<span>
-								<?php esc_html_e('Import', 'woo-product-filter'); ?>
-							</span>
-							<svg class="ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M15 12.5V15H5.00004V12.5H3.33337V15C3.33337 15.9167 4.08337 16.6667 5.00004 16.6667H15C15.9167 16.6667 16.6667 15.9167 16.6667 15V12.5H15ZM14.1667 9.16666L12.9917 7.99166L10.8334 10.1417V3.33333H9.16671V10.1417L7.00837 7.99166L5.83337 9.16666L10 13.3333L14.1667 9.16666Z" fill="currentColor" />
-							</svg>
-							<span class="pro_label">
-								PRO
-							</span>
-						</a>
-					</li>
-					<li title="<?php echo esc_attr(__('Export selected', 'woo-product-filter')); ?>">
-						<a class="relative filterExportImportBtn export" href="<?php echo esc_url($this->proLink); ?>" target="_blank">
-							<span>
-								<?php esc_html_e('Export', 'woo-product-filter'); ?>
-							</span>
-							<svg class="ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M4.16663 3.33333H15.8333V4.99999H4.16663V3.33333ZM4.16663 11.6667H7.49996V16.6667H12.5V11.6667H15.8333L9.99996 5.83333L4.16663 11.6667ZM10.8333 9.99999V15H9.16663V9.99999H8.19163L9.99996 8.19166L11.8083 9.99999H10.8333Z" fill="currentColor" />
-							</svg>
-							<span class="pro_label">
-								PRO
-							</span>
-						</a>
-					</li>
-				<?php }	?>
+				<li title="<?php echo esc_attr(__('Import tables', 'woo-product-filter')); ?>">
+					<a class="relative filterExportImportBtn" href="<?php echo esc_url($this->proLink); ?>" target="_blank">
+						<span>
+							<?php esc_html_e('Import', 'woo-product-filter'); ?>
+						</span>
+						<svg class="ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M15 12.5V15H5.00004V12.5H3.33337V15C3.33337 15.9167 4.08337 16.6667 5.00004 16.6667H15C15.9167 16.6667 16.6667 15.9167 16.6667 15V12.5H15ZM14.1667 9.16666L12.9917 7.99166L10.8334 10.1417V3.33333H9.16671V10.1417L7.00837 7.99166L5.83337 9.16666L10 13.3333L14.1667 9.16666Z" fill="currentColor" />
+						</svg>
+						<span class="pro_label">
+							PRO
+						</span>
+					</a>
+				</li>
+				<li title="<?php echo esc_attr(__('Export selected', 'woo-product-filter')); ?>">
+					<a class="relative filterExportImportBtn export" href="<?php echo esc_url($this->proLink); ?>" target="_blank">
+						<span>
+							<?php esc_html_e('Export', 'woo-product-filter'); ?>
+						</span>
+						<svg class="ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M4.16663 3.33333H15.8333V4.99999H4.16663V3.33333ZM4.16663 11.6667H7.49996V16.6667H12.5V11.6667H15.8333L9.99996 5.83333L4.16663 11.6667ZM10.8333 9.99999V15H9.16663V9.99999H8.19163L9.99996 8.19166L11.8083 9.99999H10.8333Z" fill="currentColor" />
+						</svg>
+						<span class="pro_label">
+							PRO
+						</span>
+					</a>
+				</li>
+				<?php } ?>
 			</ul>
 		</div>
 		<div id="containerWrapper">

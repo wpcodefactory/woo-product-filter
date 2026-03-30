@@ -153,6 +153,20 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 3.1.4 - 30/03/2026
+* Dev - Block component created for page create so that admin can select filtering.
+* Dev - Stock status default checkbox selected.
+* Dev - Exclude ID option added as a dropdown.
+* Dev - Admin dashboard design completely revamped.
+* Dev - Category edit option now available from plugin settings.
+* Dev - AJAX pagination implemented.
+* Dev - Title collapse option made optional.
+* Dev - "Pro" text changed to indicate "Pro Feature".
+* Dev - Default theme design option now auto-selected.
+* Dev - During filter creation, filter options gray out and display "Added to Filter" text once selected.
+* Dev - Slug-wise filtering option now enabled from settings.
+* Dev - Radio and checkbox design and icons updated.
+
 = 3.1.3 - 20/03/2026 =
 * Fix - Security - SQL injection vulnerability fixed.
 * Fix - Security - Missing authorization vulnerability fixed.

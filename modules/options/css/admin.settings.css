@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Admin Settings CSS
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
 @media screen and (max-width: 768px) {
 	#wpfSettingsForm .form-table th,
 	#wpfSettingsForm .form-table td{

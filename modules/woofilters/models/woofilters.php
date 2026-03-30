@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
- * @version 3.1.3
+ * @version 3.1.4
  *
  * @author  woobewoo
  */
@@ -21,7 +21,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 2.9.7
+	 * @version 3.1.4
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
@@ -121,7 +121,7 @@ class WoofiltersModelWpf extends ModelWpf {
 				'content_type' => '',
 			),
 			'wpfCustomField' => array(
-				'name'         => esc_html__('Custom Field(Allow ACF plugin)', 'woo-product-filter'),
+				'name'         => esc_html__('Custom Field (Allow ACF plugin)', 'woo-product-filter'),
 				'slug'         => esc_attr__('custom_field', 'woo-product-filter'),
 				'enabled'      => true,
 				'unique'       => true,
@@ -179,9 +179,14 @@ class WoofiltersModelWpf extends ModelWpf {
 
 		return DispatcherWpf::applyFilters('addFilterTypes', $filterTypes);
 	}
-	// Function to get ACF custom fields or empty array if ACF is not installed
-	public function getCustomFieldFilterOptions($post_type)
-	{
+
+	/**
+	 * Function to get ACF custom fields or empty array if ACF is not installed.
+	 *
+	 * @version 3.1.4
+	 * @since   3.1.4
+	 */
+	public function getCustomFieldFilterOptions($post_type) {
 		// Check if ACF is installed
 		if (class_exists('ACF')) {
 			$result = array();
@@ -205,28 +210,28 @@ class WoofiltersModelWpf extends ModelWpf {
 					$field_values = isset($field['choices']) ? $field['choices'] : [];
 					if ($field['type'] === 'radio') {
 						// If it's a radio field, we'll store the value(s) as an array
-						$result[$field['name']] = [
-							'value' => array_keys($field_values),  // Returns selected values as an array
-							'type' => 'radio',
-							'name' => $field['name'],
-							'label' => $field['label']       // Using the first label as the label
-						];
+						$result[$field['name']] = array(
+							'value' => array_keys($field_values), // Returns selected values as an array
+							'type'  => 'radio',
+							'name'  => $field['name'],
+							'label' => $field['label'] // Using the first label as the label
+						);
 					}
 					// For checkbox fields, we'll store the selected values as an array
 					if ($field['type'] === 'checkbox') {
 						// For checkbox fields, we store all selected values and their labels
-						$result[$field['name']] = [
-							'value' => array_keys($field_values),  // Collect all selected checkbox values as an array
-							'type' => 'checkbox',
-							'name' => $field['name'],
-							'label' => $field['label']       // Using the first checkbox label for simplicity
-						];
+						$result[$field['name']] = array(
+							'value' => array_keys($field_values), // Collect all selected checkbox values as an array
+							'type'  => 'checkbox',
+							'name'  => $field['name'],
+							'label' => $field['label'] // Using the first checkbox label for simplicity
+						);
 					}
 				}
 			}
 			return $result;
 		}
-		return [];  // If ACF is not installed, return an empty array
+		return array(); // If ACF is not installed, return an empty array
 	}
 
 	/**

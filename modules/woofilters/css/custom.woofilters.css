@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Custom Woofilters CSS
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
 .wpfFilterWrapper label{
 	font-weight: normal;
 }
@@ -113,46 +121,46 @@ input[type="checkbox"],
 input[type="radio"],
 .wpfFilterWrapper input[type="checkbox"],
 .wpfFilterWrapper input[type="radio"] {
-  width: 18px;
-  min-width: 18px;
-  height: 18px;
-  border: 1px solid #e0e0e0;
-  background-color: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  vertical-align: top;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  -webkit-print-color-adjust: exact;
-  color-adjust: exact;
-  print-color-adjust: exact;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  cursor: pointer;
-  margin-right: 0.3rem;
+	width: 18px;
+	min-width: 18px;
+	height: 18px;
+	border: 1px solid #e0e0e0;
+	background-color: transparent;
+	border-radius: 0;
+	box-shadow: none;
+	vertical-align: top;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-print-color-adjust: exact;
+	color-adjust: exact;
+	print-color-adjust: exact;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	cursor: pointer;
+	margin-right: 0.3rem;
 }
 .wpfFilterWrapper input[type="radio"] {
-  border-radius: 50%;
+	border-radius: 50%;
 }
 .wpfFilterWrapper input[type="radio"]:checked,
 .wpfFilterWrapper input[type="checkbox"]:checked {
-  background-color: #303030 !important;
-  border-color: #303030 !important;
+	background-color: #303030 !important;
+	border-color: #303030 !important;
 }
 .wpfFilterWrapper input[type="checkbox"]:checked {
-  --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
-  background-image: var(--bs-form-check-bg-image);
+	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+	background-image: var(--bs-form-check-bg-image);
 }
 .wpfFilterWrapper input[type="radio"]:checked {
-  background-size: 10px;
-  --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='%23fff'%3e%3cpath d='M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z'/%3e%3c/svg%3e");
-  background-image: var(--bs-form-check-bg-image);
+	background-size: 10px;
+	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='%23fff'%3e%3cpath d='M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z'/%3e%3c/svg%3e");
+	background-image: var(--bs-form-check-bg-image);
 }
 .wpfFilterWrapper input[type="radio"]::before,
 .wpfFilterWrapper input[type="checkbox"]::before {
-  display: none !important;
+	display: none !important;
 }
 
 .wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckbox input[type=checkbox]:checked:before {
@@ -186,18 +194,10 @@ input[type="radio"],
 }
 .wpfFilterWrapper .ms-options input[type=checkbox]:checked:before {
 	content: "";
-	/*margin:0px;*/
-	/*font-size: 8px !important;*/
-	/*color:rgb(68, 68, 68);*/
-	/*outline:0;*/
-	/*transform: none;*/
-	/*background: url(../../../img/tick.png) !important;*/
-	/*background-size: 100% 100% !important;*/
-	/*left: 0;*/
 }
 .wpfFilterWrapper input[type="radio"]:checked, .wpfFilterWrapper input[type="checkbox"]:checked{
-    background-color: #303030 !important;
-    border-color: #303030 !important;
+	background-color: #303030 !important;
+	border-color: #303030 !important;
 }
 .wpfFilterWrapper .ms-options input[type=checkbox]:checked {
 	outline:0;

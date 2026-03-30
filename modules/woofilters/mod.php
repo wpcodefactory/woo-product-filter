@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.1.3
+ * @version 3.1.4
  *
  * @author  woobewoo
  */
@@ -1149,6 +1149,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * addCustomMetaQuery.
+	 *
+	 * @version 3.1.4
 	 */
 	public function addCustomMetaQuery( $metaQuery, $data, $mode ) {
 		if ( ! is_array( $metaQuery ) ) {

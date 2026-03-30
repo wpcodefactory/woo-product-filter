@@ -1,14 +1,13 @@
 <?php
-
 /**
  * Product Filter by WBW - Options Admin Page
  *
- * @version 3.1.3
+ * @version 3.1.4
  *
  * @author  woobewoo
  */
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
 ?>
 

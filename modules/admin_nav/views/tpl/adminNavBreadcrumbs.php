@@ -1,5 +1,15 @@
 <?php
-	$countBreadcrumbs = count($this->breadcrumbsList);
+/**
+ * Product Filter by WBW - Admin Nav Breadcrumbs
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$countBreadcrumbs = count($this->breadcrumbsList);
 ?>
 <?php if ($countBreadcrumbs > 0): ?>
 	<h2 class="woobewoo-last-breadcrumb">
