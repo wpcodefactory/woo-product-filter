@@ -1,0 +1,498 @@
+/**
+ * Product Filter by WBW - Encoder Custom CSS
+ *
+ * @version 3.1.4
+ * @since   3.1.4
+ *
+ * @author  woobewoo
+ */
+
+:root {
+	--white: #ffffff;
+	--black: #000000;
+	--theme-dark: #2c2c2c;
+	--color-f4f5f5: #f4f5f5;
+	--primary-color: #2d6fff;
+	--pro-color: #e1c065;
+}
+.btn {
+	padding: 5px 12px;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: none;
+	outline: none;
+	cursor: pointer;
+	min-height: 44px;
+}
+.btn > *:not(:last-child) {
+	margin-right: 8px;
+}
+.btn,
+.btn * {
+	color: var(--white);
+}
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+.row > * {
+	max-width: 100%;
+}
+.row::before,
+.row::after {
+	display: none !important;
+}
+.btn-primary {
+	background-color: var(--primary-color);
+}
+.inline-block,
+.d-inline-block {
+	display: inline-block;
+}
+.d-flex {
+	display: flex;
+}
+.flex-column {
+	flex-direction: column;
+}
+.w-100 {
+	width: 100%;
+}
+.max-w-100 {
+	max-width: 100%;
+}
+.max-w-100-i {
+	max-width: 100% !important;
+}
+.flex_auto {
+	flex: 0 0 auto;
+}
+.items-stretch {
+	align-items: stretch;
+}
+.items-center {
+	align-items: center;
+}
+.justify-between {
+	justify-content: space-between;
+}
+.justify-end {
+	justify-content: end;
+}
+.ms-auto {
+	margin-left: auto;
+}
+.relative {
+	position: relative;
+}
+.p-0 {
+	padding: 0;
+}
+.p-24 {
+	padding: 24px;
+}
+.py-24 {
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+.p-0-i {
+	padding: 0 !important;
+}
+.m-0 {
+	margin: 0;
+}
+.m-0-i {
+	margin: 0 !important;
+}
+.mt-0 {
+	margin-top: 0;
+}
+.mb-2 {
+	margin-bottom: 0.5rem;
+}
+.mb-3 {
+	margin-bottom: 1rem;
+}
+.mb-24 {
+	margin-bottom: 24px;
+}
+.me-3 {
+	margin-right: 1rem;
+}
+.ms-2 {
+	margin-left: 0.5rem;
+}
+.ms-3 {
+	margin-left: 1rem;
+}
+.title_23 {
+	font-size: 23px;
+}
+.font-semibold {
+	font-weight: 600;
+}
+#mainContainer .woobewoo-navigation {
+	padding-top: 24px;
+	padding-left: 24px;
+	margin-right: 0;
+	min-width: 124px;
+	background-color: var(--white);
+	z-index: 10;
+}
+#mainContainer .woobewoo-navigation::after {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+	width: 1px;
+	background-color: #dbdce1;
+	content: "";
+	z-index: -1;
+}
+#mainContainer .woobewoo_logo {
+	margin-bottom: 30px;
+}
+#mainContainer .wpf-gopro {
+	background-color: transparent;
+}
+#mainContainer nav li:not(:last-child) {
+	margin-bottom: 16px;
+}
+#mainContainer nav .menuItem i,
+#mainContainer nav .menuItem {
+	color: var(--theme-dark);
+}
+#mainContainer nav .menuItem {
+	padding: 16px;
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	outline: none;
+	border: none;
+	box-shadow: none;
+}
+#mainContainer nav .active .menuItem {
+	background-color: var(--color-f4f5f5);
+}
+
+#containerWrapper .wpfFilterWrapper .wpfCheckbox label {
+	width: 100% !important;
+	display: flex !important;
+}
+.wpfRadio input[type="radio"] {
+	--bs-form-check-bg: var(--bs-body-bg);
+	flex-shrink: 0 !important;
+
+	vertical-align: top !important;
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	appearance: none !important;
+	background-color: var(--bs-form-check-bg);
+	background-image: var(--bs-form-check-bg-image);
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+	background-size: contain !important;
+	-webkit-print-color-adjust: exact !important;
+	color-adjust: exact !important;
+	print-color-adjust: exact !important;
+	border-radius: 50%;
+}
+.wpfRadio input::before {
+	display: none !important;
+}
+.wpfRadio input[type="radio"]:checked {
+	background-color: #0d6efd;
+	border-color: #0d6efd;
+}
+.wpfRadio input[type="radio"]:checked {
+	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+}
+.wpfFilterContent .wpfLiLabel {
+	display: flex;
+	align-items: center;
+}
+.wpfFilterContent .wpfLiLabel .wpfFilterTaxNameWrapper,
+.wpfFilterContent .wpfLiLabel .wpfValue {
+	padding-left: 0 !important;
+}
+.wpfFiltersTabContents,
+.wpfFiltersTabContents .settings-value div:not([class]),
+.wpfFiltersTabContents .chosen-container {
+	max-width: 100% !important;
+}
+.wpfFiltersTabContents .settings-value div:not([class]),
+.wpfFiltersTabContents .chosen-container ul,
+.wpfFiltersTabContents .chosen-container ul li,
+.wpfFiltersTabContents .chosen-container,
+.wpfFiltersTabContents input:not([type="radio"]):not([type="checkbox"]),
+.wpfFiltersTabContents .settings-value,
+.wpfFiltersTabContents select {
+	width: 100% !important;
+}
+.wpfFiltersTabContents .settings-value {
+	position: relative;
+}
+.wpfFiltersTabContents .wpfMoveWrap {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-top: 0;
+}
+.wpfFilterOptions .settings-block-values .settings-value:last-child {
+	margin-right: 0;
+}
+.proLabel {
+	background-color: var(--pro-color);
+	border-radius: 7px;
+	padding: 6px;
+	min-height: 28px;
+	display: flex;
+	align-items: center;
+	width: max-content;
+}
+.proLabel > *:not(:last-child) {
+	margin-right: 4px;
+}
+.woobewoo-tooltip {
+	border: 0 !important;
+	outline: none !important;
+	height: 18px !important;
+	width: 18px !important;
+	background: transparent !important;
+	background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M8.00016%201.33331C4.32016%201.33331%201.3335%204.31998%201.3335%207.99998C1.3335%2011.68%204.32016%2014.6666%208.00016%2014.6666C11.6802%2014.6666%2014.6668%2011.68%2014.6668%207.99998C14.6668%204.31998%2011.6802%201.33331%208.00016%201.33331ZM8.66683%2012.6666H7.3335V11.3333H8.66683V12.6666ZM10.0468%207.49998L9.44683%208.11331C8.96683%208.59998%208.66683%208.99998%208.66683%209.99998H7.3335V9.66665C7.3335%208.93331%207.6335%208.26665%208.1135%207.77998L8.94016%206.93998C9.18683%206.69998%209.3335%206.36665%209.3335%205.99998C9.3335%205.26665%208.7335%204.66665%208.00016%204.66665C7.26683%204.66665%206.66683%205.26665%206.66683%205.99998H5.3335C5.3335%204.52665%206.52683%203.33331%208.00016%203.33331C9.4735%203.33331%2010.6668%204.52665%2010.6668%205.99998C10.6668%206.58665%2010.4268%207.11998%2010.0468%207.49998Z%22%20fill%3D%22%23636977%22%2F%3E%3C%2Fsvg%3E") !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	background-size: 18px !important;
+	padding: 0 !important;
+	cursor: pointer;
+}
+.woobewoo-tooltip::before {
+	display: none;
+}
+.wpfNamePadding #wpfFilterTitleShell {
+	min-height: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+#tabsContainer .button {
+	display: flex !important;
+	align-items: center !important;
+	background-color: transparent !important;
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
+	padding: 12px 24px !important;
+	border-radius: 0 !important;
+	border-top-left-radius: 15px !important;
+	border-top-right-radius: 15px !important;
+	border: 1px solid transparent !important;
+	border-bottom: 0 !important;
+	color: #636977 !important;
+	max-width: max-content;
+	min-height: 48px;
+	margin-bottom: 0;
+}
+#tabsContainer {
+	border-bottom: 0 !important;
+	position: relative;
+	z-index: 10;
+}
+#tabsContainer::after {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 1px;
+	content: "";
+	bottom: 0;
+	background-color: #dbdce1;
+	width: 100%;
+	z-index: -1;
+}
+#tabsContainer .button.current {
+	border-color: #dbdce1 !important;
+	color: #121315 !important;
+	background-color: var(--white) !important;
+}
+#tabsContainer .button > *:not(:last-child) {
+	margin-right: 8px !important;
+}
+.filterSection {
+	padding: 0 !important;
+}
+.selectFiltersMain {
+	display: flex;
+	flex-wrap: wrap;
+}
+.selectFiltersMain .sdkfjsjLeft {
+	width: calc(100% - 300px);
+	margin-right: 24px;
+}
+.selectFiltersMain .sdkfjsjRight {
+	width: 276px;
+}
+#wpfFiltersEditForm .tabs-wrapper {
+	float: unset !important;
+}
+.mainContainer_dsfsdf {
+	background-color: var(--white);
+}
+.sdkfjsjLeft .sub-tab-content .row-settings-block {
+	padding-bottom: 15px;
+	border-bottom: 1px solid #f9fafa;
+}
+.topBtnsArea {
+	position: absolute;
+	top: 24px;
+	right: 24px;
+	z-index: 9;
+}
+.filterExportImportBtn {
+	display: flex;
+	align-items: center;
+	min-height: 44px;
+	font-size: 14px;
+	background-color: #dbdce1;
+	color: #636977 !important;
+	border-radius: 12px;
+	padding: 5px 16px;
+	cursor: pointer;
+	transition: 0.4s;
+}
+.filterExportImportBtn.export {
+	background-color: #636977;
+	color: #f9fafa !important;
+}
+.filterExportImportBtn .pro_label {
+	background-color: #d8ad35;
+	padding: 3px 10px;
+	border-radius: 8px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--black);
+	right: 8px;
+	position: absolute;
+	top: -12px;
+}
+.searchIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.searchContainer {
+	max-width: 240px;
+	width: 100%;
+}
+.searchContainer input {
+	padding-left: 40px !important;
+}
+#wpfTableTblNav_center,
+#wpfTableTblNav_right {
+	padding: 24px;
+}
+
+/* Radio and checkbox design */
+.encoderRadio,
+.encoderCheckbox {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.5rem !important;
+	margin-right: 0 !important;
+	width: 100%;
+}
+input[type="radio"],
+input[type="checkbox"],
+.encoderRadio input,
+.encoderCheckbox input {
+	outline: none !important;
+	width: 18px;
+	min-width: 18px;
+	height: 18px;
+	border: 1px solid #e0e0e0 !important;
+	background-color: transparent;
+	border-radius: 0;
+	box-shadow: none;
+	vertical-align: top;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-print-color-adjust: exact;
+	color-adjust: exact;
+	print-color-adjust: exact;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	cursor: pointer;
+	margin-right: 0.5rem;
+}
+input[type="radio"],
+.encoderRadio input {
+	border-radius: 50%;
+}
+input[type="radio"]:checked,
+input[type="checkbox"]:checked,
+.encoderRadio input:checked,
+.encoderCheckbox input:checked {
+	background-color: #303030 !important;
+	border-color: #303030 !important;
+}
+input[type="checkbox"]:checked,
+.encoderCheckbox input:checked {
+	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+	background-image: var(--bs-form-check-bg-image);
+}
+input[type="radio"]:checked,
+.encoderRadio input:checked {
+	background-size: 10px;
+	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='%23fff'%3e%3cpath d='M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z'/%3e%3c/svg%3e");
+	background-image: var(--bs-form-check-bg-image);
+}
+input[type="radio"]::before,
+input[type="checkbox"]::before,
+.encoderRadio input::before,
+.encoderCheckbox input::before {
+	display: none !important;
+}
+.encoderRadio span,
+.encoderCheckbox span {
+	display: inline-block;
+}
+.s-notify {
+	z-index: 9999999;
+}
+@media screen and (max-width: 1300px) {
+	.sdkfjsjLeft .sub-tab-content {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+@media screen and (max-width: 1200px) {
+	.selectFiltersMain .sdkfjsjLeft {
+		width: 100%;
+		margin-right: 0;
+		margin-bottom: 24px;
+	}
+	.selectFiltersMain .sdkfjsjRight {
+		width: 100%;
+	}
+	.sdkfjsjLeft .row-settings-block {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+@media screen and (min-width: 1023px) {
+	#mainContainer .woobewoo_logo {
+		margin-bottom: 44px;
+	}
+}

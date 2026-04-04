@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.9
-Stable tag: 3.1.2
+Stable tag: 3.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -152,6 +152,27 @@ You may help us translate the plugin into your language and get the PRO version 
 Please report security bugs found in the source code of the plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fbdb8-8978-4dfd-b6cd-a768233271db). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Changelog ==
+
+= 3.1.4 - 30/03/2026
+* Dev - Block component created for page create so that admin can select filtering.
+* Dev - Stock status default checkbox selected.
+* Dev - Exclude ID option added as a dropdown.
+* Dev - Admin dashboard design completely revamped.
+* Dev - Category edit option now available from plugin settings.
+* Dev - AJAX pagination implemented.
+* Dev - Title collapse option made optional.
+* Dev - "Pro" text changed to indicate "Pro Feature".
+* Dev - Default theme design option now auto-selected.
+* Dev - During filter creation, filter options gray out and display "Added to Filter" text once selected.
+* Dev - Slug-wise filtering option now enabled from settings.
+* Dev - Radio and checkbox design and icons updated.
+
+= 3.1.3 - 20/03/2026 =
+* Fix - Security - SQL injection vulnerability fixed.
+* Fix - Security - Missing authorization vulnerability fixed.
+* Fix - Not working if the AJAX option is disabled.
+* Dev - Custom `plugins` directory compatibility added.
+* WC tested up to: 10.6.
 
 = 3.1.2 - 10/03/2026 =
 * Fix - Searching query filter reset bug.

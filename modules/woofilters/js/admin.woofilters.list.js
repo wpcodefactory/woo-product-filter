@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Admin WooFilters List JS
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
 "use strict";
 jQuery(document).ready(function(){
 	// Fallback for case if library was not loaded
@@ -15,7 +23,8 @@ jQuery(document).ready(function(){
 		colModel:[
 			{name: 'id', index: 'id', searchoptions: {sopt: ['eq']}, width: '50', align: 'center'},
 			{name: 'title', index: 'title', searchoptions: {sopt: ['eq']}, align: 'center'},
-			{name: 'shortcode', index: 'shortcode', searchoptions: {sopt: ['eq']}, align: 'center', sortable:false}
+			{name: 'shortcode', index: 'shortcode', searchoptions: {sopt: ['eq']}, align: 'center', sortable:false},
+			{name: 'actions', index: 'actions', searchoptions: {sopt: ['eq']}, align: 'center', sortable:false}
 		],
 		postData: {
 			search: {
@@ -90,15 +99,9 @@ jQuery(document).ready(function(){
 			wpfCheckUpdate(tableObj.find('input[type=checkbox].cbox')); // what it does?
 		}
 	});
-	jQuery('#'+ tblId+ 'NavShell').append( jQuery('#'+ tblId+ 'Nav') );
 	jQuery('#'+ tblId+ 'Nav').find('.ui-pg-selbox').insertAfter( jQuery('#'+ tblId+ 'Nav').find('.ui-paging-info') );
 	jQuery('#'+ tblId+ 'Nav').find('.ui-pg-table td:first').remove();
 	// Make navigation tabs to be with our additional buttons - in one row
-	jQuery('#'+ tblId+ 'Nav_center').prepend( jQuery('#'+ tblId+ 'NavBtnsShell') ).css({
-		'width': '80%'
-	,	'white-space': 'normal'
-	,	'padding-top': '8px'
-	});
 	jQuery('#'+ tblId+ 'SearchTxt').keyup(function(){
 		var searchVal = jQuery.trim( jQuery(this).val() );
 		if( true ) {
@@ -114,10 +117,10 @@ jQuery(document).ready(function(){
 		if (jQuery(this).is(':checked')) {
 			jQuery('#wpfTableRemoveGroupBtn,#wpfTableExportBtn').removeAttr('disabled');
 			grid.jqGrid('resetSelection');
-    		var ids = grid.getDataIDs();
-    		for (var i=0, il=ids.length; i < il; i++) {
-        		grid.jqGrid('setSelection',ids[i], true);
-    		}
+			var ids = grid.getDataIDs();
+			for (var i=0, il=ids.length; i < il; i++) {
+				grid.jqGrid('setSelection',ids[i], true);
+			}
 		} else {
 			jQuery('#wpfTableRemoveGroupBtn,#wpfTableExportBtn').attr('disabled', 'disabled');
 			grid.jqGrid('resetSelection');
@@ -159,7 +162,7 @@ jQuery(document).ready(function(){
 	});
 	jQuery('#wpfTableExportBtn').on('click', function(e){
 		e.preventDefault();
-		
+
 		var selectedRowIds = jQuery('#wpfTableTbl').jqGrid('getGridParam', 'selarrrow'),
 			listIds = [];
 		for(var i in selectedRowIds) {
@@ -182,7 +185,7 @@ jQuery(document).ready(function(){
 						link.href = window.URL.createObjectURL(blob);
 						link.download = fileName;
 						link.click();
-						
+
 						jQuery('#wpfTableTbl').trigger( 'reloadGrid' );
 						link.remove();
 					}
@@ -249,7 +252,7 @@ jQuery(document).ready(function(){
 	});
 	// *******  import filters END  *******
 	wpfInitCustomCheckRadio('#'+ tblId+ '_cb');
-	
+
 	// *******  enable/disable statistics  *******
 	var $statEForm = jQuery('#wpfStatsEForm'),
 		$statDForm = jQuery('#wpfStatsDForm'),
@@ -288,7 +291,7 @@ jQuery(document).ready(function(){
 			if (WPF_DATA.isWCLicense) jQuery(this).closest('.ui-dialog').find('.ui-dialog-buttonset button').addClass('button button-primary');
 		}
 	});
-				
+
 	tableObj.on('click', '.wpf-statistics', function(e){
 		e.preventDefault();
 		var $this = jQuery(this),

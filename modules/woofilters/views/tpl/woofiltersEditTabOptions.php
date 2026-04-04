@@ -1,5 +1,15 @@
-<?php 
-	$defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
+<?php
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Options
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 ?>
 <div class="row row-tab" id="row-tab-options">
 	<div class="sub-tab woobewoo-input-group col-xs-12">
@@ -29,7 +39,7 @@
 						'category'    => esc_attr__( 'Product Category', 'woo-product-filter' ),
 						'tag'         => esc_attr__( 'Product Tag', 'woo-product-filter' ),
 						'product'     => esc_attr__( 'Product Page', 'woo-product-filter' ),
-						'both'        => esc_attr__( 'All Woocommerce Pages', 'woo-product-filter' ),
+						'both'        => esc_attr__( 'All WooCommerce Pages', 'woo-product-filter' ),
 						'all_pages'   => esc_attr__( 'All pages', 'woo-product-filter' ) . $labelPro,
 						'specific'    => esc_attr__( 'Specific pages', 'woo-product-filter' ) . $labelPro,
 						'custom_cats' => esc_attr__( 'Specific Category', 'woo-product-filter' ) . $labelPro
@@ -105,7 +115,7 @@
 					endif;
 					?>
 				</div>
-				
+
 				<?php $classHidden = 'custom_pwb' != $displayOnPage ? 'wpfHidden' : ''; ?>
 				<div class="settings-value settings-w100 <?php echo esc_attr($classHidden); ?>" data-select="settings[display_on_page]" data-select-value="custom_pwb">
 					<?php
@@ -250,7 +260,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[desctop_mobile_breakpoint_switcher]', array(
 							'checked' => ( isset($this->settings['settings']['desctop_mobile_breakpoint_switcher']) ? (int) $this->settings['settings']['desctop_mobile_breakpoint_switcher'] : '' )
 						));
@@ -277,7 +287,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[hide_without_products]', array(
 							'checked' => ( isset($this->settings['settings']['hide_without_products']) ? (int) $this->settings['settings']['hide_without_products'] : '' )
 						));
@@ -292,7 +302,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[show_filter_immediately]', array(
 							'checked' => ( isset($this->settings['settings']['show_filter_immediately']) ? (int) $this->settings['settings']['show_filter_immediately'] : '' )
 						));
@@ -307,7 +317,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[initialise_immediately]', array(
 							'checked' => ( isset($this->settings['settings']['initialise_immediately']) ? (int) $this->settings['settings']['initialise_immediately'] : '' )
 						));
@@ -349,6 +359,39 @@
 							'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"'
 						));
 						?>
+				</div>
+			</div>
+		</div>
+		<div class="row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<div class="settings-value-label">
+					<?php esc_html_e('Ajax Pagination', 'woo-product-filter'); ?>
+				</div>
+			</div>
+			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
+				<div class="settings-value settings-w100">
+					<?php
+					HtmlWpf::checkboxToggle('settings[ajax_pagination]', array(
+						'checked' => (isset($this->settings['settings']['ajax_pagination']) ? (int) $this->settings['settings']['ajax_pagination'] : '')
+					));
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<div class="settings-value-label">
+					<?php esc_html_e('Filter Page By Slug', 'woo-product-filter'); ?>
+					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('If you enable this please save permalink.', 'woo-product-filter') . ' <a href="' . esc_url(admin_url('options-permalink.php')) . '" class="wupsales-wc-hidden" target="_blank">' . __('Save Permalinks', 'woo-product-filter') . '</a>'); ?>"></i>
+				</div>
+			</div>
+			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
+				<div class="settings-value settings-w100">
+					<?php
+					HtmlWpf::checkboxToggle('settings[slug_format]', array(
+						'checked' => (isset($this->settings['settings']['slug_format']) ? (int) $this->settings['settings']['slug_format'] : '')
+					));
+					?>
 				</div>
 			</div>
 		</div>
@@ -436,7 +479,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[force_theme_templates]', array(
 							'checked' => $settingValue
 						));
@@ -545,14 +588,14 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[show_clean_button]', array(
 							'checked' => $settingValue
 						));
 						?>
 				</div>
 				<div class="settings-value settings-w100 <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[show_clean_button]">
-					<?php 
+					<?php
 						HtmlWpf::text('settings[show_clean_button_word]', array(
 							'value' => ( isset($this->settings['settings']['show_clean_button_word']) ? $this->settings['settings']['show_clean_button_word'] : esc_attr__('Clear', 'woo-product-filter') ),
 							'attrs' => 'class="woobewoo-flat-input"'
@@ -576,7 +619,7 @@
 			</div>
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::selectbox('settings[main_buttons_position]', array(
 							'options' => array(
 								'top' => __('Top', 'woo-product-filter'),
@@ -611,10 +654,10 @@
 			</div>
 		</div>
 
-		<?php 
+		<?php
 		if ($isPro) {
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabOptionsButtons', $this->settings);
-		} else { 
+		} else {
 			?>
 			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
@@ -671,14 +714,14 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[show_clean_block]', array(
 							'checked' => $settingValue
 						));
 						?>
 				</div>
 				<div class="settings-value settings-w100 <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[show_clean_block]">
-					<?php 
+					<?php
 						HtmlWpf::text('settings[show_clean_block_word]', array(
 							'value' => ( isset($this->settings['settings']['show_clean_block_word']) ? $this->settings['settings']['show_clean_block_word'] : esc_attr__('Clear', 'woo-product-filter') ),
 							'attrs' => 'class="woobewoo-flat-input"'
@@ -694,7 +737,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[filter_recount]', array(
 							'checked' => ( isset($this->settings['settings']['filter_recount']) ? (int) $this->settings['settings']['filter_recount'] : '' )
 						));
@@ -738,7 +781,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[filter_null_disabled]', array(
 							'checked' => ( isset($this->settings['settings']['filter_null_disabled']) ? (int) $this->settings['settings']['filter_null_disabled'] : '' )
 						));
@@ -753,7 +796,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[sort_by_title]', array(
 							'checked' => ( isset($this->settings['settings']['sort_by_title']) ? (int) $this->settings['settings']['sort_by_title'] : '' )
 						));
@@ -768,7 +811,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[checked_items_top]', array(
 							'checked' => ( isset($this->settings['settings']['checked_items_top']) ? (int) $this->settings['settings']['checked_items_top'] : '' )
 						));
@@ -783,7 +826,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[checked_items_bold]', array(
 							'checked' => ( isset($this->settings['settings']['checked_items_bold']) ? (int) $this->settings['settings']['checked_items_bold'] : '' )
 						));
@@ -799,7 +842,7 @@
 			</div>
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
-					<?php 
+					<?php
 						HtmlWpf::text('settings[text_no_products]', array(
 							'value' => ( isset($this->settings['settings']['text_no_products']) ? $this->settings['settings']['text_no_products'] : __('No products found', 'woo-product-filter') ),
 							'attrs' => 'class="woobewoo-flat-input"'
@@ -808,7 +851,7 @@
 				</div>
 			</div>
 		</div>
-		<?php 
+		<?php
 		if (FrameWpf::_()->proVersionCompare('1.4.8')) {
 			$settingValue = ( isset($this->settings['settings']['filtering_by_variations']) ? (int) $this->settings['settings']['filtering_by_variations'] : 1 );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
@@ -848,13 +891,13 @@
 							));
 							?>
 					</div>
-					
+
 						<div class="settings-value settings-w100 <?php echo esc_attr($hiddenStyle); ?>"  data-parent="settings[filtering_by_variations]">
 							<div class="settings-value-label">
 								<?php esc_html_e('Display Variations Instead Of Variable Product', 'woo-product-filter'); ?>
 								<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('After filtration by attributes will be displayed product variation instead of main variable product', 'woo-product-filter'); ?>"></i>
 							</div>
-							
+
 							<?php
 							if ( $isPro ) :
 								HtmlWpf::checkboxToggle( 'settings[display_product_variations]', array(
@@ -869,11 +912,11 @@
 						</div>
 				</div>
 			</div>
-			<?php 
+			<?php
 		}
 		if ($isPro) {
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabOptionsContent', $this->settings, $this->filter['id']);
-		} else { 
+		} else {
 			?>
 			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
@@ -928,7 +971,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[hide_filter_icon]', array(
 							'checked' => ( isset($this->settings['settings']['hide_filter_icon']) ? (int) $this->settings['settings']['hide_filter_icon'] : 1 )
 						));
@@ -942,7 +985,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[use_title_as_slug]', array(
 							'checked' => ( isset($this->settings['settings']['use_title_as_slug']) ? (int) $this->settings['settings']['use_title_as_slug'] : 0 )
 						));
@@ -965,10 +1008,10 @@
 				</div>
 			</div>
 		</div>
-        <?php
-        $settingValue = $this->getFilterSetting($this->settings['settings'], 'display_only_descendants_category', 0);
-        $hiddenStyle = $settingValue ? '' : 'wpfHidden';
-        ?>
+		<?php
+		$settingValue = $this->getFilterSetting($this->settings['settings'], 'display_only_descendants_category', 0);
+		$hiddenStyle = $settingValue ? '' : 'wpfHidden';
+		?>
 		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Display Only Descendants Of Current Category', 'woo-product-filter'); ?>
@@ -982,17 +1025,17 @@
 					));
 					?>
 				</div>
-                	<div class="settings-value settings-w100 <?php echo esc_attr($hiddenStyle); ?>"
-                        data-parent="settings[display_only_descendants_category]">
-                        <div class="settings-value-label">
-                            <?php esc_html_e('Display Only Children Of Current Category', 'woo-product-filter'); ?>
-                        </div>
-                        <?php
-                        HtmlWpf::checkboxToggle('settings[display_only_children_category]', array(
-                            'checked' => $this->getFilterSetting($this->settings['settings'], 'display_only_children_category', 0)
-                        ));
-                        ?>
-                    </div>
+				<div class="settings-value settings-w100 <?php echo esc_attr($hiddenStyle); ?>"
+					data-parent="settings[display_only_descendants_category]">
+					<div class="settings-value-label">
+						<?php esc_html_e('Display Only Children Of Current Category', 'woo-product-filter'); ?>
+					</div>
+					<?php
+					HtmlWpf::checkboxToggle('settings[display_only_children_category]', array(
+						'checked' => $this->getFilterSetting($this->settings['settings'], 'display_only_children_category', 0)
+					));
+					?>
+				</div>
 			</div>
 		</div>
 		<div class="row row-settings-block">
@@ -1106,14 +1149,14 @@
 					<div class="button button-mini chooseLoaderIcon"><?php esc_html_e('Choose Icon', 'woo-product-filter'); ?></div>
 				</div>
 				<div class="settings-value settings-w50">
-					<?php 
+					<?php
 					HtmlWpf::colorpicker('settings[filter_loader_icon_color]', array(
 						'value' => ( isset($this->settings['settings']['filter_loader_icon_color']) ? $this->settings['settings']['filter_loader_icon_color'] : '#000000' ),
 						'attrs' => 'data-loader-settings="1"'
 					));
 					?>
 				</div>
-				<?php 
+				<?php
 				if ($isPro) {
 					DispatcherWpf::doAction('addEditTabDesign', 'partEditTabOptionsLoader', $this->settings);
 				}
@@ -1122,7 +1165,7 @@
 				<div class="settings-value wpfIconPreview">
 					<?php HtmlWpf::echoEscapedHtml($htmlPreview); ?>
 				</div>
-				<?php 
+				<?php
 					HtmlWpf::hidden('settings[filter_loader_icon_name]', array(
 						'value' => ( isset($this->settings['settings']['filter_loader_icon_name']) ? $this->settings['settings']['filter_loader_icon_name'] : 'default' ),
 						'attrs' => ' data-loader-settings="1"'
@@ -1147,7 +1190,7 @@
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[enable_overlay]', array(
 							'checked' => $settingValue,
 							'attrs' => ' data-loader-settings="1"'
@@ -1155,7 +1198,7 @@
 						?>
 				</div>
 				<div class="settings-value <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[enable_overlay]">
-					<?php 
+					<?php
 						HtmlWpf::colorpicker('settings[overlay_background]', array(
 							'value' => ( isset($this->settings['settings']['overlay_background']) ? $this->settings['settings']['overlay_background'] : 'black' ),
 							'attrs' => 'data-loader-settings="1"',
@@ -1167,7 +1210,7 @@
 					<div class="settings-value-label woobewoo-width100">
 						<?php esc_html_e('loader Icon', 'woo-product-filter'); ?>
 					</div>
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[enable_overlay_icon]', array(
 							'checked' => ( isset($this->settings['settings']['enable_overlay_icon']) ? (int) $this->settings['settings']['enable_overlay_icon'] : '' ),
 							'attrs' => 'data-loader-settings="1"'
@@ -1179,7 +1222,7 @@
 					<div class="settings-value-label woobewoo-width100">
 						<?php esc_html_e('loader Word', 'woo-product-filter'); ?>
 					</div>
-					<?php 
+					<?php
 						HtmlWpf::checkboxToggle('settings[enable_overlay_word]', array(
 							'checked' => $settingWordValue,
 							'attrs' => 'data-loader-settings="1"'
@@ -1187,7 +1230,7 @@
 						?>
 				</div>
 				<div class="settings-value <?php echo esc_attr($hiddenWordStyle); ?>" data-parent="settings[enable_overlay_word]">
-					<?php 
+					<?php
 						HtmlWpf::text('settings[overlay_word]', array(
 							'value' => ( isset($this->settings['settings']['overlay_word']) ? $this->settings['settings']['overlay_word'] : 'WooBeWoo' ),
 							'attrs' => 'data-loader-settings="1" class="woobewoo-flat-input"'
@@ -1216,24 +1259,24 @@
 	<div class="wpfLoaderIconTemplate wpfHidden">
 		<?php
 			$loaderSkins = array(
-				'timer' => 1, //number means count of div necessary to display loader
-				'ball-beat' => 3,
-				'ball-circus' => 5,
-				'ball-atom' => 4,
+				'timer'                             => 1, //number means count of div necessary to display loader
+				'ball-beat'                         => 3,
+				'ball-circus'                       => 5,
+				'ball-atom'                         => 4,
 				'ball-spin-clockwise-fade-rotating' => 8,
-				'line-scale' => 5,
-				'ball-climbing-dot' => 4,
-				'square-jelly-box' => 2,
-				'ball-rotate' => 1,
-				'ball-clip-rotate-multiple' => 2,
-				'cube-transition' => 2,
-				'square-loader' => 1,
-				'ball-8bits' => 16,
-				'ball-newton-cradle' => 4,
-				'ball-pulse-rise' => 5,
-				'triangle-skew-spin' => 1,
-				'fire' => 3,
-				'ball-zig-zag-deflect' => 2
+				'line-scale'                        => 5,
+				'ball-climbing-dot'                 => 4,
+				'square-jelly-box'                  => 2,
+				'ball-rotate'                       => 1,
+				'ball-clip-rotate-multiple'         => 2,
+				'cube-transition'                   => 2,
+				'square-loader'                     => 1,
+				'ball-8bits'                        => 16,
+				'ball-newton-cradle'                => 4,
+				'ball-pulse-rise'                   => 5,
+				'triangle-skew-spin'                => 1,
+				'fire'                              => 3,
+				'ball-zig-zag-deflect'              => 2,
 			);
 			?>
 		<div class="items items-list">
@@ -1264,7 +1307,7 @@
 						</div>
 						<div class="item-title"><?php echo esc_html($name); ?></div>
 					</div>
-			<?php }	?>
+			<?php } ?>
 		</div>
 	</div>
 </div>

@@ -1,5 +1,15 @@
 <?php
-	ViewWpf::display('woofiltersEditTabCommonTitle');
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters Tags
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+ViewWpf::display('woofiltersEditTabCommonTitle');
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -8,7 +18,7 @@
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_frontend_type', array(
 					'options' => array(
 						'list' => esc_attr__( 'Checkbox list', 'woo-product-filter' ),
@@ -134,12 +144,12 @@ endif;
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_sort_by', array(
 					'options' => array(
-						'asc' => esc_attr__( 'ASC', 'woo-product-filter' ),
-						'desc' => esc_attr__( 'DESC', 'woo-product-filter' ),
-						'default' => esc_attr__( 'Default', 'woo-product-filter' )
+						'asc'     => esc_attr__( 'ASC', 'woo-product-filter' ),
+						'desc'    => esc_attr__( 'DESC', 'woo-product-filter' ),
+						'default' => esc_attr__( 'Default', 'woo-product-filter' ),
 					),
 					'attrs' => 'class="woobewoo-flat-input"'
 				));
@@ -208,7 +218,7 @@ endif;
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full wpf-multi-select">
-			<?php 
+			<?php
 			if (!empty($tagsDisplay)) {
 				HtmlWpf::selectlist('f_mlist', array('options' => $tagsDisplay,));
 			} else {
@@ -236,7 +246,7 @@ endif;
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::text('f_exclude_terms', array('attrs' => 'class="woobewoo-flat-input"')); ?>
+		<?php HtmlWpf::selectlist('f_exclude_terms', array('options' => $tagsDisplay)); ?>
 		</div>
 	</div>
 </div>
@@ -246,7 +256,7 @@ endif;
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_query_logic', array(
 					'options' => array(
 						'and' => esc_attr__( 'And', 'woo-product-filter' ),
@@ -294,7 +304,7 @@ endif;
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_layout', array(
 					'options' => array('ver' => esc_attr__('Vertical', 'woo-product-filter'), 'hor' => esc_attr__('Horizontal', 'woo-product-filter')),
 					'attrs' => 'class="woobewoo-flat-input"'

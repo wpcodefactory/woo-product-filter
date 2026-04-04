@@ -1,5 +1,15 @@
 <?php
-	$filtersList = $this->getModel()->getAllFilters();
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$filtersList = $this->getModel()->getAllFilters();
 ?>
 <div class="row row-tab active" id="row-tab-filters">
 	<div class="col-xs-12 row-settings-block">
@@ -7,28 +17,33 @@
 			<div class="woobewoo-group-label">
 				<?php esc_html_e('Select filters to add', 'woo-product-filter'); ?>
 			</div>
-			<select id="wpfChooseFilters">
-				<?php
-				foreach ($filtersList as $filter => $data) {
-					echo '<option value="' . esc_attr($filter) .
-							'" data-enabled="' . esc_attr((int) $data['enabled']) .
-							'" data-unique-id="' . esc_attr(uniqid('wpf_')) .
-							'" data-unique="' . esc_attr((int) $data['unique']) .
-							'" data-filtername="' . esc_attr($this->getFilterSetting($data, 'filtername', '')) .
-							'" data-group="' . esc_attr($this->getFilterSetting($data, 'group', '')) .
-							'">' .
-								esc_html($data['name']) .
-						'</option>';
-				}
-				?>
-			</select>
-			<button id="wpfAddFilterButton" data-option='add' class="button button-small">
-				<span><?php esc_html_e('Add', 'woo-product-filter'); ?></span>
-			</button>
+			<div class="d-flex w-100">
+				<select id="wpfChooseFilters" data-added-text="<?php esc_html_e('Added to filter', 'woo-product-filter'); ?>">
+					<?php
+					foreach ($filtersList as $filter => $data) {
+						echo '<option value="' . esc_attr($filter) .
+								'" data-enabled="' . esc_attr((int) $data['enabled']) .
+								'" data-unique-id="' . esc_attr(uniqid('wpf_')) .
+								'" data-unique="' . esc_attr((int) $data['unique']) .
+								'" data-filtername="' . esc_attr($this->getFilterSetting($data, 'filtername', '')) .
+								'" data-group="' . esc_attr($this->getFilterSetting($data, 'group', '')) .
+								'">' .
+									esc_html($data['name']) .
+							'</option>';
+					}
+					?>
+				</select>
+				<button id="wpfAddFilterButton" data-option='add' class="button button-small">
+					<span><?php esc_html_e('Add', 'woo-product-filter'); ?></span>
+						<svg class="ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M7.33341 13.25L3.83341 9.74999L2.66675 10.9167L7.33341 15.5833L17.3334 5.58332L16.1667 4.41666L7.33341 13.25Z" fill="white" />
+						</svg>
+				</button>
+			</div>
 			<span data-option='pro' class="wpfProLabel wpfHidden"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 			<span data-option='uniq' class="wpfProLabel wpfHidden"><?php esc_html_e('Already in the list', 'woo-product-filter'); ?></span>
 			<span data-option='group' class="wpfProLabel wpfHidden">
-			<?php 
+			<?php
 			echo esc_html__('Оnly one of', 'woo-product-filter') . ' <span class="light">' . esc_html($filtersList['wpfPrice']['name']) .
 				'</span>/<span class="light">' . esc_html($filtersList['wpfPriceRange']['name']) . '</span> ' .	esc_html__('is available', 'woo-product-filter');
 			?>
@@ -93,8 +108,8 @@
 			</div>
 		</br>
 			<div>
-				<?php 
-					esc_html_e('Do not leave empty fields. Enter `i` if you want the value to be calculated automatically (for From field this will be the minimum price, for field To - the maximum price', 'woo-product-filter'); 
+				<?php
+					esc_html_e('Do not leave empty fields. Enter `i` if you want the value to be calculated automatically (for From field this will be the minimum price, for field To - the maximum price', 'woo-product-filter');
 				?>
 			</div>
 		</div>
@@ -106,7 +121,7 @@
 				<a href="#" class="wpfDelete"><i class="fa fa-fw fa-times"></i></a>
 				<a href="#" class="wpfToggle"><i class="fa fa-chevron-down"></i></a>
 				<div class="wpfFilterFrontDescOpt">
-					<?php 
+					<?php
 						HtmlWpf::text('f_description', array(
 							'placeholder' => esc_attr__('Description', 'woo-product-filter'),
 						));
@@ -123,14 +138,14 @@
 			<div class="wpfOptions wpfHidden"></div>
 		</div>
 		<div class="wpfOptionsTemplate wpfHidden">
-			<?php 
-			foreach ($filtersList as $filter => $data) { 
+			<?php
+			foreach ($filtersList as $filter => $data) {
 				if (!$data['enabled']) {
 					continue;
 				}
 				?>
 			<div class="wpfFilterOptions" data-filter="<?php echo esc_attr($filter); ?>">
-				<?php 
+				<?php
 				HtmlWpf::hidden('f_name', array('value' => $data['name']));
 				include_once 'woofiltersEditTabFilters' . substr($filter, 3) . '.php';
 				?>

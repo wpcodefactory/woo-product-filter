@@ -1,15 +1,19 @@
 <?php
-	$modPath = $this->getModule()->getModPath();
+/**
+ * Product Filter by WBW - Overview Tab Content
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$modPath = $this->getModule()->getModPath();
 ?>
-<section class="woobewoo-bar">
-	<div class="wpf-overview-title">
-		<?php esc_html_e('Welcome to WBW Product Filter', 'woo-product-filter'); ?>
-	</div>
-	<div class="woobewoo-clear"></div>
-</section>
 <section>
 	<div class="woobewoo-item woobewoo-panel wpf-overview-panel">
-		<div class="wpf-overview-block">
+		<div class="wpf-overview-block w-100 max-w-100-i">
 			<div class="wpf-overview-block-header">
 				<div class="wpf-overview-header-title">
 					<?php esc_html_e('Need help?', 'woo-product-filter'); ?>
@@ -20,7 +24,7 @@
 			</div>
 			<div class="wpf-overview-block-body">
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-md-4 mb-3 mb-md-0">
 						<div class="wpf-overview-img wpf-overview-img-dc">
 							<div class="wpf-overview-body-title">
 								<a href="https://woobewoo.com/docs/woocommerce-filter-documentation/" target="_blank">
@@ -66,7 +70,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-md-4 mb-3 mb-md-0">
 						<div class="wpf-overview-img wpf-overview-img-wp">
 							<div class="wpf-overview-body-title">
 								<a href="https://wordpress.org/plugins/woo-product-filter/" target="_blank">
@@ -79,6 +83,8 @@
 								</a>
 							</div>
 						</div>
+					</div>
+					<div class="col-md-4">
 						<div class="wpf-overview-img wpf-overview-img-ct">
 							<div class="wpf-overview-body-title">
 								<a href="https://woobewoo.com/custom-web-development-services/" target="_blank">
@@ -92,39 +98,73 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-5">
-						<div class="wpf-overview-block">
-							<div class="wpf-overview-body-title">
-								<?php esc_html_e('Contact Us', 'woo-product-filter'); ?>
-							</div>
-							<div class="wpf-overview-body-text">
-								<input type="text" class="wpf-overview-input wpf-field-fullwidth" name="wpf-name" value="" placeholder="<?php esc_html_e('Name', 'woo-product-filter'); ?>">
-								<input type="text" class="wpf-overview-input wpf-field-fullwidth" name="wpf-email" data-error="<?php esc_html_e('Enter your Email', 'woo-product-filter'); ?>" value="" placeholder="<?php esc_html_e('Email', 'woo-product-filter'); ?>">
-								<input type="text" class="wpf-overview-input wpf-field-fullwidth" name="wpf-subject" value="" placeholder="<?php esc_html_e('Subject', 'woo-product-filter'); ?>">
-								<textarea class="wpf-overview-textarea wpf-field-fullwidth" name="wpf-desc" value="" data-error="<?php esc_html_e('Enter description', 'woo-product-filter'); ?>" placeholder="<?php esc_html_e('Description', 'woo-product-filter'); ?>"></textarea>
-								<button id="wpfContactSubmit" class="wpf-overview-button wpf-overview-submit button wpf-overview-center">
-									<?php esc_html_e('SEND', 'woo-product-filter'); ?>
-								</button>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
-		<?php include_once 'overviewFeedback.php'; ?>
-		
-		<div class="wpf-overview-block">
-			<div class="wpf-overview-block-header">
-				<div class="wpf-overview-header-title">
-					<?php esc_html_e('More plugins by WBW', 'woo-product-filter'); ?>
+		<div class="m-0">
+			<div class="row">
+				<div class="col-md-6 flex_auto">
+					<div class="wpf-overview-block max-w-100-i">
+						<div class="wpf-overview-block-header">
+							<div class="wpf-overview-header-title">
+								<?php esc_html_e('Contact Us', 'woo-product-filter'); ?>
+							</div>
+							<div class="wpf-overview-header-desc">
+								<?php esc_html_e('You\'ll find instant answers to almost any question by searching our documentation. And if you still need help, please contact us directly', 'woo-product-filter'); ?>
+							</div>
+						</div>
+						<div class="wpf-overview-block-body">
+							<!-- <div class="wpf-overview-block"> -->
+							<!-- <div class="wpf-overview-body-title">
+										<? //php esc_html_e('Contact Us', 'woo-product-filter');
+										?>
+									</div> -->
+							<div class="wpf-overview-body-text">
+								<label for="wpf-name">Name</label>
+								<input type="text" class="wpf-overview-input wpf-field-fullwidth" name="wpf-name" id="wpf-name" value="" placeholder="<?php esc_html_e('Name', 'woo-product-filter'); ?>">
+
+								<label for="wpf-email">Email address</label>
+								<input type="text" class="wpf-overview-input wpf-field-fullwidth" name="wpf-email" id="wpf-email" data-error="<?php esc_html_e('Enter your Email', 'woo-product-filter'); ?>" value="" placeholder="<?php esc_html_e('Email', 'woo-product-filter'); ?>">
+
+								<label for="wpf-subject">Subject</label>
+								<input type="text" class="wpf-overview-input wpf-field-fullwidth" name="wpf-subject" id="wpf-subject" value="" placeholder="<?php esc_html_e('Subject', 'woo-product-filter'); ?>">
+
+								<label for="wpf-desc">Message</label>
+								<textarea class="wpf-overview-textarea wpf-field-fullwidth" name="wpf-desc" id="wpf-desc" value="" data-error="<?php esc_html_e('Enter description', 'woo-product-filter'); ?>" placeholder="<?php esc_html_e('Description', 'woo-product-filter'); ?>"></textarea>
+								<button id="wpfContactSubmit" class="wpf-overview-button wpf-overview-submit button wpf-overview-center">
+									<?php esc_html_e('Send message', 'woo-product-filter'); ?>
+								</button>
+							</div>
+							<!-- </div> -->
+						</div>
+					</div>
 				</div>
-				<div class="wpf-overview-header-desc">
-					<?php esc_html_e('WBW it’s the Ready-made NoCode WooCommerce store solutions from top WordPress developers', 'woo-product-filter'); ?>
+				<div class="col-md-6 flex_auto">
+					<?php include_once 'overviewFeedback.php'; ?>
+				</div>
+			</div>
+		</div>
+
+		<div class="wpf-overview-block w-100 max-w-100-i">
+			<div class="wpf-overview-flex-custom wpf-overview-block-header">
+				<div class="">
+					<div class="wpf-overview-header-title">
+						<?php esc_html_e('More plugins by WBW', 'woo-product-filter'); ?>
+					</div>
+					<div class="wpf-overview-header-desc">
+						<?php esc_html_e('WBW it’s the Ready-made NoCode WooCommerce store solutions from top WordPress developers', 'woo-product-filter'); ?>
+					</div>
+				</div>
+
+				<div class="wpf-overview-explore-all-plugins">
+					<a href="https://woobewoo.com/" target="_blank">
+						<?php esc_html_e('Explore All Plugins →', 'woo-product-filter'); ?>
+					</a>
 				</div>
 			</div>
 			<div class="wpf-overview-block-body">
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-md-6">
 						<div class="wpf-overview-img wpf-overview-img-pt">
 							<div class="wpf-overview-body-title">
 								<a href="https://woobewoo.com/plugins/table-woocommerce-plugin/" target="_blank">
@@ -138,7 +178,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-md-6">
 						<div class="wpf-overview-img wpf-overview-img-cr">
 							<div class="wpf-overview-body-title">
 								<a href="https://woobewoo.com/plugins/woo-currency/" target="_blank">
@@ -152,11 +192,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="wpf-overview-center">
-					<a class="wpf-overview-button button" href="https://woobewoo.com/" target="_blank">
-						<?php esc_html_e('MORE', 'woo-product-filter'); ?>
-					</a>
 				</div>
 			</div>
 		</div>

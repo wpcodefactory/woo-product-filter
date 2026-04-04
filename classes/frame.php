@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - FrameWpf Class
  *
- * @version 3.0.4
+ * @version 3.1.3
  *
  * @author  woobewoo
  */
@@ -256,7 +256,7 @@ class FrameWpf {
 	/**
 	 * Check permissions for action in controller by $code and made corresponding action.
 	 *
-	 * @version 3.0.4
+	 * @version 3.1.3
 	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
@@ -266,41 +266,43 @@ class FrameWpf {
 		if ($this->havePermissions($code, $action)) {
 			return true;
 		} else {
-			exit(esc_html__('You have no permissions to view this page', 'woo-product-filter'));
+			wp_send_json_error(
+				array( 'message' => esc_html__( 'You have no permissions to view this page', 'woo-product-filter' ) ),
+				403
+			);
 		}
 	}
 
 	/**
 	 * Check permissions for action in controller by $code.
 	 *
+	 * @version 3.1.3
+	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
 	 * @return bool true if ok, else - false
 	 */
 	public function havePermissions( $code, $action ) {
-		$res = true;
+		$res = false;
 		$mod = $this->getModule($code);
 		$action = strtolower($action);
 		if ($mod) {
 			$permissions = $mod->getController()->getPermissions();
 			if (!empty($permissions)) { // Special permissions
 				if (isset($permissions[WPF_METHODS]) && !empty($permissions[WPF_METHODS])) {
-					foreach ($permissions[WPF_METHODS] as $method => $permissions) {   // Make case-insensitive
-						$permissions[WPF_METHODS][strtolower($method)] = $permissions;
+					foreach ($permissions[WPF_METHODS] as $method => $permission) {   // Make case-insensitive
+						$permissions[WPF_METHODS][strtolower($method)] = $permission;
 					}
 					if (array_key_exists($action, $permissions[WPF_METHODS])) {        // Permission for this method exists
 						$currentUserPosition = self::_()->getModule('user')->getCurrentUserPosition();
 						if (
+							is_array($permissions[ WPF_METHODS ][ $action ] ) &&
 							(
-								is_array($permissions[ WPF_METHODS ][ $action ] ) &&
-								!in_array($currentUserPosition, $permissions[ WPF_METHODS ][ $action ])
-							) ||
-							(
-								!is_array($permissions[ WPF_METHODS ][ $action ]) &&
-								$permissions[WPF_METHODS][$action] != $currentUserPosition
+								in_array($currentUserPosition, $permissions[ WPF_METHODS ][ $action ]) ||
+								$permissions[WPF_METHODS][$action] === $currentUserPosition
 							)
 						) {
-							$res = false;
+							$res = true;
 						}
 					}
 				}
@@ -314,16 +316,16 @@ class FrameWpf {
 						if (is_array($methods)) {
 							$lowerMethods = array_map('strtolower', $methods);           // Make case-insensitive
 							if (in_array($action, $lowerMethods)) {                      // Permission for this method exists
-								if ($currentUserPosition != $userlevel) {
-									$res = false;
+								if ($currentUserPosition === $userlevel) {
+									$res = true;
 								}
 								break;
 							}
 						} else {
 							$lowerMethod = strtolower($methods);             // Make case-insensitive
 							if ($lowerMethod == $action) {                   // Permission for this method exists
-								if ($currentUserPosition != $userlevel) {
-									$res = false;
+								if ($currentUserPosition === $userlevel) {
+									$res = true;
 								}
 								break;
 							}
@@ -406,14 +408,19 @@ class FrameWpf {
 
 	/**
 	 * _doExec.
+	 *
+	 * @version 3.1.3
 	 */
 	protected function _doExec() {
 		$mod = $this->getModule($this->_mod);
 		if ($mod && $this->checkPermissions($this->_mod, $this->_action)) {
 			switch (ReqWpf::getVar('reqType')) {
 				case 'ajax':
-					add_action('wp_ajax_'        . $this->_action, array($mod->getController(), $this->_action));
-					add_action('wp_ajax_nopriv_' . $this->_action, array($mod->getController(), $this->_action));
+					add_action('wp_ajax_' . $this->_action, array($mod->getController(), $this->_action));
+					$noprivActions = array( 'filtersFrontend', 'getTaxonomyTerms' );
+					if ( in_array( $this->_action, $noprivActions ) ) {
+						add_action('wp_ajax_nopriv_' . $this->_action, array($mod->getController(), $this->_action));
+					}
 					break;
 				default:
 					$this->_res = $mod->exec($this->_action);

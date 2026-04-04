@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Admin Settings CSS
+ *
+ * @version 3.1.4
+ *
+ * @author  woobewoo
+ */
+
 @media screen and (max-width: 768px) {
 	#wpfSettingsForm .form-table th,
 	#wpfSettingsForm .form-table td{
@@ -8,7 +16,7 @@
 	}
 }
 .woobewoo-container.woobewoo-gopro {
-	background-color: #f8fafb;
+	background-color: #f4f5f5;
 }
 .wpf-gopro {
 	background-image: url("img/30.png");

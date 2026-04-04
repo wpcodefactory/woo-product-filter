@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.0.2
+ * @version 3.1.4
  *
  * @author  woobewoo
  */
@@ -1198,6 +1198,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * addCustomMetaQuery.
+	 *
+	 * @version 3.1.4
 	 */
 	public function addCustomMetaQuery( $metaQuery, $data, $mode ) {
 		if ( ! is_array( $metaQuery ) ) {
@@ -1215,6 +1217,50 @@ class WoofiltersWpf extends ModuleWpf {
 			$metaQuery = array_merge( $metaQuery, $price );
 			remove_filter( 'posts_clauses', array( WC()->query, 'price_filter_post_clauses' ), 10, 2 );
 		}
+		//meta query custom field
+		foreach ($data as $key => $value) {
+			if (strpos($key, 'pc_') !== 0) {
+				continue;
+			}
+			$meta_key = substr($key, 3);
+			if (empty($value)) {
+				continue;
+			}
+			// Split by | and clean values
+			$values = array_map('trim', explode('|', $value));
+			$values = array_filter($values); // remove empty
+
+			if (empty($values)) {
+				continue;
+			}
+			$CustomOptions = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getCustomFieldFilterOptions('product');
+			$clauses = [];
+			$fieldtype = $CustomOptions[$meta_key]['type'] ?? '';
+			foreach ($values as $single_value) {
+				// Wrap in double quotes — matches how ACF / serialized strings are stored
+				// MySQL LIKE is case-insensitive in most WP environments (utf8mb4_unicode_ci)
+				if ($fieldtype == 'checkbox') {
+					$search = '"' . $single_value . '"';
+				} else {
+					$search =  $single_value;
+				}
+				$clauses[] = [
+					'key'     => $meta_key,
+					'value'   => $search,
+					'compare' => 'LIKE',
+				];
+			}
+			if (!empty($clauses)) {
+				if (count($clauses) === 1) {
+					$metaQuery[] = $clauses[0];
+				} else {
+					// Multiple values → match ANY of them (OR)
+					$clauses['relation'] = 'OR';
+					$metaQuery[] = $clauses;
+				}
+			}
+		}
+		//meta query custom field
 		if ( ! empty( $data['pr_onsale'] ) && ReqWpf::getVar( 'dgwt_wcas' ) ) {
 			$metaQuery[] = array(
 				'key'     => '_sale_price',
@@ -4061,7 +4107,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 2.9.4
+	 * @version 3.1.3
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4115,7 +4161,9 @@ class WoofiltersWpf extends ModuleWpf {
 		if ( ! empty( $taxonomyList ) ) {
 			$addSqls['main']['withCount']    = $param['withCount'];
 			$addSqls['main']['fields']       = ( $param['withCount'] ? '' : 'DISTINCT ' ) . 'tr.term_taxonomy_id, tt.term_id, tt.taxonomy, tt.parent' . ( $param['withCount'] ? ', COUNT(*) as cnt' : '' );
-			$addSqls['main']['taxonomyList'] = implode( "', '", $taxonomyList );
+
+			$taxonomyListFormatter           = implode( ',', array_fill( 0, count( $taxonomyList ), '%s' ) );
+			$addSqls['main']['taxonomyList'] = $wpdb->prepare( $taxonomyListFormatter, ...$taxonomyList );
 
 			if ( $byVariations ) {
 				$attrTaxonomyList = array();
@@ -4186,7 +4234,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$sql[ $key ] .= ' INNER JOIN ' . $wpdb->terms . ' ttt ON (ttt.term_id=tt.term_id) ' . $typeJoin;
 			}
 
-			$sql[ $key ] .= ' WHERE tt.taxonomy IN (\'' . $addSql['taxonomyList'] . '\')';
+			$sql[ $key ] .= ' WHERE tt.taxonomy IN ( ' . $addSql['taxonomyList'] . ' )';
 
 			if ( $byVariations ) {
 				$sql[ $key ] .= ' AND (md_type.val_id!=' . $variableMetaId .

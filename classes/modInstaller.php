@@ -1,16 +1,40 @@
 <?php
+/**
+ * Product Filter by WBW - ModInstallerWpf Class
+ *
+ * Handles the installation, activation, deactivation, and management of modules for the plugin.
+ *
+ * @version 3.1.3
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class ModInstallerWpf {
-	private static $_current = array();
-	private static $extPlugName = '';
+
 	/**
-	 * Install new ModuleWpf into plugin
+	 * _current.
+	 */
+	private static $_current = array();
+
+	/**
+	 * extPlugName.
+	 */
+	private static $extPlugName = '';
+
+	/**
+	 * Install new ModuleWpf into plugin.
+	 *
+	 * @version 3.1.3
 	 *
 	 * @param string $module new ModuleWpf data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
 	 * @return bool true - if install success, else - false
 	 */
 	public static function install( $module, $path ) {
-		$exPlugDest = explode('plugins', $path);
+		$plugin_dir = basename( untrailingslashit( WP_PLUGIN_DIR ) );
+		$exPlugDest = explode( $plugin_dir, $path );
 		if (!empty($exPlugDest[1])) {
 			$module['ex_plug_dir'] = str_replace(DS, '', $exPlugDest[1]);
 		}
@@ -21,7 +45,7 @@ class ModInstallerWpf {
 				if (empty($module['ex_plug_dir'])) {
 					$filesMoved = self::moveFiles($module['code'], $path);
 				} else {
-					$filesMoved = true;     //Those modules doesn't need to move their files
+					$filesMoved = true; // Those modules doesn't need to move their files
 				}
 				if ($filesMoved) {
 					if (FrameWpf::_()->getTable('modules')->exists($module['code'], 'code')) {
@@ -45,6 +69,10 @@ class ModInstallerWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * _runModuleInstall.
+	 */
 	protected static function _runModuleInstall( $module, $action = 'install' ) {
 		$moduleLocationDir = WPF_MODULES_DIR;
 		if (!empty($module['ex_plug_dir'])) {
@@ -52,7 +80,6 @@ class ModInstallerWpf {
 		}
 		if (is_dir($moduleLocationDir . $module['code'])) {
 			if (!class_exists($module['code'] . strFirstUpWpf(WPF_CODE))) {
-				//importClassWpf($module['code'] . strFirstUpWpf(WPF_CODE), $moduleLocationDir . $module['code'] . DS . 'mod.php');
 				if (file_exists($moduleLocationDir . $module['code'] . DS . 'mod.php')) {
 					require $moduleLocationDir . $module['code'] . DS . 'mod.php';
 				}
@@ -64,8 +91,9 @@ class ModInstallerWpf {
 			}
 		}
 	}
+
 	/**
-	 * Check whether is or no module in given path
+	 * Check whether is or no module in given path.
 	 *
 	 * @param string $path path to the module
 	 * @return bool true if it is module, else - false
@@ -73,8 +101,9 @@ class ModInstallerWpf {
 	public static function isModule( $path ) {
 		return true;
 	}
+
 	/**
-	 * Move files to plugin modules directory
+	 * Move files to plugin modules directory.
 	 *
 	 * @param string $code code for module
 	 * @param string $path path from what module will be moved
@@ -93,13 +122,17 @@ class ModInstallerWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * _getPluginLocations.
+	 */
 	private static function _getPluginLocations() {
 		$locations = array();
 		$plug = ReqWpf::getVar('plugin');
 		if ( ( empty( $plug ) || is_array($plug) ) && !empty(self::$extPlugName) ) {
 			$plug = self::$extPlugName;
 		}
-			
+
 		if ( empty( $plug ) ) {
 			$plug = ReqWpf::getVar( 'checked' );
 			if ( isset( $plug[0] ) ) {
@@ -119,7 +152,7 @@ class ModInstallerWpf {
 	}
 
 	/**
-	 * Try to parse xml file with module data
+	 * Try to parse xml file with module data.
 	 *
 	 * @param string $xmlPath
 	 *
@@ -155,8 +188,9 @@ class ModInstallerWpf {
 		}
 		return $modDataArr;
 	}
+
 	/**
-	 * Check whether modules is installed or not, if not and must be activated - install it
+	 * Check whether modules is installed or not, if not and must be activated - install it.
 	 *
 	 * @param array $codes array with modules data to store in database
 	 * @param string $path path to plugin file where modules is stored (__FILE__ for example)
@@ -174,10 +208,10 @@ class ModInstallerWpf {
 		$modules = self::_getModulesFromXml($locations['xmlPath']);
 		foreach ($modules as $modDataArr) {
 			if (!empty($modDataArr)) {
-				//If module Exists - just activate it, we can't check this using FrameWpf::moduleExists because this will not work for multy-site WP
+				// If module Exists - just activate it, we can't check this using FrameWpf::moduleExists because this will not work for multi-site WP
 				if (FrameWpf::_()->getTable('modules')->exists($modDataArr['code'], 'code')) {
 					self::activate($modDataArr);
-					//  if not - install it
+					// if not - install it
 				} else {
 					$m = '';
 					if (!self::install($modDataArr, $locations['plugDir'])) {
@@ -195,14 +229,16 @@ class ModInstallerWpf {
 		update_option(WPF_CODE . '_full_installed', 1);
 		return true;
 	}
+
 	/**
-	 * Public alias for _getCheckRegPlugs()
-	 * We will run this each time plugin start to check modules activation messages
+	 * Public alias for _getCheckRegPlugs().
+	 * We will run this each time plugin start to check modules activation messages.
 	 */
 	public static function checkActivationMessages() {
 	}
+
 	/**
-	 * Deactivate module after deactivating external plugin
+	 * Deactivate module after deactivating external plugin.
 	 */
 	public static function deactivate( $exclude = array() ) {
 		$locations = self::_getPluginLocations();
@@ -212,7 +248,7 @@ class ModInstallerWpf {
 		}
 
 		foreach ($modules as $modDataArr) {
-			if (FrameWpf::_()->moduleActive($modDataArr['code']) && !in_array($modDataArr['code'], $exclude)) { //If module is active - then deacivate it
+			if (FrameWpf::_()->moduleActive($modDataArr['code']) && !in_array($modDataArr['code'], $exclude)) { // If module is active - then deactivate it
 				if (FrameWpf::_()->getModule('options')->getModel('modules')->put(array(
 					'id' => FrameWpf::_()->getModule($modDataArr['code'])->getID(),
 					'active' => 0,
@@ -228,11 +264,15 @@ class ModInstallerWpf {
 		}
 		return true;
 	}
+
+	/**
+	 * activate.
+	 */
 	public static function activate( $modDataArr ) {
 		$locations = self::_getPluginLocations();
 		$modules = self::_getModulesFromXml($locations['xmlPath']);
 		foreach ($modules as $modDataArr) {
-			if (!FrameWpf::_()->moduleActive($modDataArr['code'])) { //If module is not active - then acivate it
+			if (!FrameWpf::_()->moduleActive($modDataArr['code'])) { // If module is not active - then activate it
 				if (FrameWpf::_()->getModule('options')->getModel('modules')->put(array(
 					'code' => $modDataArr['code'],
 					'active' => 1,
@@ -247,9 +287,10 @@ class ModInstallerWpf {
 				}
 			}
 		}
-	} 
+	}
+
 	/**
-	 * Display all errors for module installer, must be used ONLY if You realy need it
+	 * Display all errors for module installer, must be used ONLY if You really need it.
 	 */
 	public static function displayErrors( $exit = true ) {
 		$errors = ErrorsWpf::get(ErrorsWpf::MOD_INSTALL);
@@ -260,6 +301,10 @@ class ModInstallerWpf {
 			exit();
 		}
 	}
+
+	/**
+	 * uninstall.
+	 */
 	public static function uninstall() {
 		$isPro = false;
 		$locations = self::_getPluginLocations();
@@ -278,9 +323,17 @@ class ModInstallerWpf {
 			self::uninstallLicense();
 		}
 	}
+
+	/**
+	 * uninstallLicense.
+	 */
 	public static function uninstallLicense() {
 		FrameWpf::_()->getModule('options')->getModel()->save('license_save_name', '');
 	}
+
+	/**
+	 * _uninstallTables.
+	 */
 	protected static function _uninstallTables( $module ) {
 		if (is_dir(WPF_MODULES_DIR . $module['code'] . DS . 'tables')) {
 			$tableFiles = UtilsWpf::getFilesList(WPF_MODULES_DIR . $module['code'] . DS . 'tables');
@@ -294,8 +347,12 @@ class ModInstallerWpf {
 			}
 		}
 	}
+
+	/**
+	 * _installTables.
+	 */
 	public static function _installTables( $module, $action = 'install' ) {
-		$modDir = empty($module['ex_plug_dir']) ? WPF_MODULES_DIR . $module['code'] . DS : UtilsWpf::getPluginDir($module['ex_plug_dir']) . $module['code'] . DS; 
+		$modDir = empty($module['ex_plug_dir']) ? WPF_MODULES_DIR . $module['code'] . DS : UtilsWpf::getPluginDir($module['ex_plug_dir']) . $module['code'] . DS;
 		if (is_dir($modDir . 'tables')) {
 			$tableFiles = UtilsWpf::getFilesList($modDir . 'tables');
 			if (!empty($tableFiles)) {

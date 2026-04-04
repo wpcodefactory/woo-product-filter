@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Create Filter JS
  *
- * @version 2.9.7
+ * @version 3.1.4
  *
  * @author  woobewoo
  */
@@ -214,4 +214,50 @@
 		})
 
 	});
+	//gray out past filters when creating new filter
+	document.addEventListener('DOMContentLoaded', function () {
+		// Select the input field and the filter list
+		const filterInput = document.querySelector('#addDialog_title');
+		const filterCheckboxes = document.querySelectorAll('#addDialog_list input[type="checkbox"]');
+		const filterLabels = document.querySelectorAll('#addDialog_list label');
+
+		// Function to toggle checkbox and label states
+		function toggleCheckboxState() {
+			// Check if the filter name field has content
+			const inputValue = filterInput.value.trim();
+
+			if (inputValue === "") {
+				// If input is empty, disable the checkboxes and labels (gray out)
+				filterCheckboxes.forEach(function (checkbox) {
+					checkbox.disabled = true; // Disable checkboxes
+					checkbox.style.opacity = 0.5; // Gray out checkboxes
+					checkbox.style.pointerEvents = 'none'; // Disable pointer events
+				});
+
+				filterLabels.forEach(function (label) {
+					label.style.color = '#999'; // Gray out labels
+					label.style.pointerEvents = 'none'; // Disable pointer events on labels
+				});
+			} else {
+				// If input has content, enable the checkboxes and labels
+				filterCheckboxes.forEach(function (checkbox) {
+					checkbox.disabled = false; // Enable checkboxes
+					checkbox.style.opacity = 1; // Restore opacity
+					checkbox.style.pointerEvents = 'auto'; // Enable pointer events
+				});
+
+				filterLabels.forEach(function (label) {
+					label.style.color = '#333'; // Restore normal label color
+					label.style.pointerEvents = 'auto'; // Enable pointer events on labels
+				});
+			}
+		}
+
+		// Listen for changes in the input field and call the toggleCheckboxState function
+		filterInput.addEventListener('input', toggleCheckboxState);
+
+		// Initialize on page load in case the input field has content already
+		toggleCheckboxState();
+	});
+
 })(jQuery);

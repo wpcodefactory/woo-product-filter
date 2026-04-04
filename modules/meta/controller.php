@@ -1,8 +1,18 @@
 <?php
+/**
+ * Product Filter by WBW - MetaControllerWpf Class
+ *
+ * @version 3.1.3
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class MetaControllerWpf extends ControllerWpf {
 
 	protected $_code = 'meta';
-	
+
 	public function doMetaIndexingFree() {
 		return $this->doMetaIndexing(false);
 	}
@@ -45,5 +55,23 @@ class MetaControllerWpf extends ControllerWpf {
 			$res->pushError($this->getModel()->getErrors());
 		}
 		return $res->ajaxExec();
+	}
+
+	/**
+	 * getPermissions.
+	 *
+	 * @version 3.1.3
+	 * @since   3.1.3
+	 *
+	 * @return array
+	 */
+	public function getPermissions() {
+		return array(
+			WPF_USERLEVELS => array(
+				WPF_ADMIN => array(
+					'doMetaIndexingFree', 'doMetaIndexing', 'doMetaOptimizing',
+				)
+			),
+		);
 	}
 }
