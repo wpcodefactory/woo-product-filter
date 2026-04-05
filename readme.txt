@@ -154,6 +154,8 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.4 - 30/03/2026
+* Fix - Thrive editor hangs on the preview exit.
+* Improved - WCAG keyboard accessibility.
 * Dev - Block component created for page create so that admin can select filtering.
 * Dev - Stock status default checkbox selected.
 * Dev - Exclude ID option added as a dropdown.

@@ -45,7 +45,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.0.2
+	 * @version 3.1.4
 	 */
 	public function init() {
 

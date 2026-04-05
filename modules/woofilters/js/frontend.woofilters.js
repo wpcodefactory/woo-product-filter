@@ -9,6 +9,7 @@
  * Detect Thrive editor context
  *
  * @version 3.1.4
+ * @since   3.1.4
  */
 function wpfIsThriveEditor() {
   var href = window.location.href;
@@ -22,7 +23,7 @@ function wpfIsThriveEditor() {
  */
 (function ($, app) {
   'use strict';
-  
+
   /**
    * wpfIsAjaxPaginationEnabled.
    *
