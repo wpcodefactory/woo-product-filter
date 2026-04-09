@@ -1,12 +1,14 @@
-.woobewoo-wrap{
+/**
+ * Product Filter by WBW - Style RTL CSS
+ *
+ * @version 3.1.7
+ *
+ * @author  woobewoo
+ */
+
+.woobewoo-wrap {
 	margin-right: -20px;
 	margin-left: 0;
-}
-.woobewoo-plugin .woobewoo-content .woobewoo-navigation {
-	left: 0;
-}
-.woobewoo-plugin .woobewoo-content .woobewoo-navigation.woobewoo-sticky-active {
-	left: 6px;
 }
 #woobewoo-breadcrumbs {
 	left: 0;
@@ -21,7 +23,7 @@
 	float: right;
 }
 .woobewoo-plugin .wpfCopyTextCode,
-#wpfPopupEditors textarea, 
+#wpfPopupEditors textarea,
 #wpfPopupEditors .CodeMirror {
 	direction: ltr;
 }
@@ -30,8 +32,8 @@
 	left: 9999px;
 }
 .woobewoo-plugin select {
-    background: #fff url(images/down.png) no-repeat left 5px top 55% !important;
-    padding-left: 24px !important;
+	background: #fff url(images/down.png) no-repeat left 5px top 55% !important;
+	padding-left: 24px !important;
 }
 #wpfFiltersEditForm .chosen-container-multi {
 	max-width: 100% !important;
@@ -47,14 +49,14 @@
 	border-right: #d8dfe3 solid 1px !important;
 }
 .wpfRightLabel {
-    margin-right: 5px;
-    margin-left: 0;
+	margin-right: 5px;
+	margin-left: 0;
 }
 .settings-value-label {
 	margin-left: 5px;
 }
 .wpfFilterWrapper i, .wpfFilterWrapper svg{
-    float: left !important;
+	float: left !important;
 }
 .wpfSingleInputSearch button, .wpfSearchWrapper button {
 	left: 0 !important;
@@ -67,4 +69,3 @@
 	padding-left: 0;
 	padding-right: 10px;
 }
-

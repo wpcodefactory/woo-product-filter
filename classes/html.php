@@ -1,7 +1,25 @@
 <?php
+/**
+ * Product Filter by WBW - HtmlWpf Class
+ *
+ * @version 3.1.5
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class HtmlWpf {
 	public static $categoriesOptions = array();
 	public static $productsOptions = array();
+
+	/**
+	 * echoEscapedHtml.
+	 *
+	 * @param $html
+	 *
+	 * @return void
+	 */
 	public static function echoEscapedHtml( $html ) {
 		remove_all_filters( 'esc_html');
 		add_filter('esc_html', array('HtmlWpf', 'skipHtmlEscape'), 99, 2);
@@ -128,7 +146,7 @@ class HtmlWpf {
 		}
 		$id = ( empty($params['id']) ? self::nameToClassId($name) . mt_rand(9, 9999) : $params['id'] );
 		$params['attrs'] = 'id="' . esc_attr($id) . '" class="toggle" ' . ( isset($params['attrs']) ? $params['attrs'] . ' ' : '' ) . $params['checked'];
-		
+
 		self::input($name, $params);
 		echo '<label for="' . esc_attr($id) . '" class="toggle"></label>';
 	}
