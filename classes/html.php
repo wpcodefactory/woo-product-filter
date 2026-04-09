@@ -1,7 +1,23 @@
 <?php
+/**
+ * Product Filter by WBW - html Class
+ *
+ * @version 3.1.5
+ *
+ * @author  woobewoo
+ */
+
 class HtmlWpf {
 	public static $categoriesOptions = array();
 	public static $productsOptions = array();
+
+	/**
+	 * echoEscapedHtml.
+	 *
+	 * @param $html
+	 *
+	 * @return void
+	 */
 	public static function echoEscapedHtml( $html ) {
 		remove_all_filters( 'esc_html');
 		add_filter('esc_html', array('HtmlWpf', 'skipHtmlEscape'), 99, 2);
