@@ -9,7 +9,8 @@
 /**
  * Detect Thrive editor context
  *
- * @version 3.1.4
+ * @version 3.1.7
+ * @since 3.1.7
  */
 //fix/thrive-editor-hang-wcag-keyboard-accessibility
 function wpfIsThriveEditor() {
