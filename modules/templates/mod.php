@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 3.1.4
+ * @version 3.1.7
  *
  * @author  woobewoo
  */
@@ -180,7 +180,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * loadCoreCss.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function loadCoreCss( $isElementorEditor = false ) {
 		$this->_styles = array(

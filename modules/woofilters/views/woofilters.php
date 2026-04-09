@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.1.4
+ * @version 3.1.7
  *
  * @author  woobewoo
  */
@@ -128,7 +128,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * getEditTabContent.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function getEditTabContent( $idIn ) {
 
@@ -486,7 +486,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$customCss = '';
@@ -826,7 +826,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateIconCloseOpenTitleHtml.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function generateIconCloseOpenTitleHtml( $filter, $filterSettings, $showTitle ) {
 		if ( empty($filter['settings']) || empty($filterSettings['settings']['hide_filter_icon']) ) {
@@ -874,7 +874,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateFilterHeaderHtml.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function generateFilterHeaderHtml( $filter, $filterSettings, $noActive = true,$customFieldLabel = '' ) {
 
@@ -1310,8 +1310,8 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * getExcludeTerms.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	private function getExcludeTerms($settings) {
 		if (!empty($settings['f_exclude_terms[]'])) {
@@ -1326,7 +1326,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateCategoryFilterHtml.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function generateCategoryFilterHtml( $filter, $filterSettings, $blockStyle, $prodCatId = false, $key = 1, $viewId = '' ) {
 		$settings                = $this->getFilterSetting($filter, 'settings', array());
@@ -1622,7 +1622,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Generate custom taxonomy filter for a specific plugin.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 *
 	 * @link https://wordpress.org/plugins/perfect-woocommerce-brands/
 	 *
@@ -1820,7 +1820,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateTagsFilterHtml.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function generateTagsFilterHtml( $filter, $filterSettings, $blockStyle, $key = 0, $viewId = '' ) {
 		$settings = $this->getFilterSetting($filter, 'settings', array());
@@ -2253,8 +2253,8 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateCustomFieldFilterHtml.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function generateCustomFieldFilterHtml($filter, $filterSettings, $blockStyle, $key = 1, $viewId = '') {
 		$filterName = 'custom_field';
@@ -2534,7 +2534,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateAttributeFilterHtml.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function generateAttributeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings                              = $this->getFilterSetting($filter, 'settings', array());
@@ -3062,7 +3062,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateTaxonomyOptionsHtml.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	private function generateTaxonomyOptionsHtml( $filterItemList, $selectedElem, $filter = false, $excludeIds = false, $pre = '', $layout = 0, $includeIds = false, $showedTerms = false, $countsTerms = false, $itemLevel = 0, $currentCategoryId = 0 ) {
 		$html     = '';

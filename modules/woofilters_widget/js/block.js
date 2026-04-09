@@ -1,8 +1,8 @@
 /**
  * Product Filter by WBW - Block JS
  *
- * @version 3.1.4
- * @since   3.1.4
+ * @version 3.1.7
+ * @since   3.1.7
  *
  * @author  woobewoo
  */

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
- * @version 3.1.4
+ * @version 3.1.7
  *
  * @author  woobewoo
  */
@@ -21,7 +21,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
@@ -183,8 +183,8 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * Function to get ACF custom fields or empty array if ACF is not installed.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function getCustomFieldFilterOptions($post_type) {
 		// Check if ACF is installed

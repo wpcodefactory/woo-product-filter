@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.1.4
+ * @version 3.1.7
  *
  * @author  woobewoo
  */
@@ -21,7 +21,7 @@ function wpfIsThriveEditor() {
 /**
  * Main function.
  *
- * @version 3.1.4
+ * @version 3.1.7
  */
 (function ($, app) {
 	"use strict";
@@ -29,7 +29,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * wpfIsAjaxPaginationEnabled.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 */
 	function wpfIsAjaxPaginationEnabled() {
 		var wrapper = jQuery('.wpfMainWrapper').first();

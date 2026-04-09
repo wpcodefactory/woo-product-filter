@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.9
-Stable tag: 3.1.4
+Stable tag: 3.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,7 +153,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.4 - 30/03/2026
+= 3.1.7 - 09/04/2026 =
 * Dev - Block component created for page create so that admin can select filtering.
 * Dev - Stock status default checkbox selected.
 * Dev - Exclude ID option added as a dropdown.
@@ -166,6 +166,12 @@ Please report security bugs found in the source code of the plugin through the [
 * Dev - During filter creation, filter options gray out and display "Added to Filter" text once selected.
 * Dev - Slug-wise filtering option now enabled from settings.
 * Dev - Radio and checkbox design and icons updated.
+
+= 3.1.6 - 09/04/2026 =
+* Fix - Reverted to v3.1.3 due to stability issues introduced in v3.1.4.
+
+= 3.1.5 - 09/04/2026 =
+* Dev - Coding standards improved.
 
 = 3.1.3 - 20/03/2026 =
 * Fix - Security - SQL injection vulnerability fixed.

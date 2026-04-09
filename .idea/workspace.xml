@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="346159ef-c2af-4445-bf3a-837d0cadd68a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="334HUD0g5MhaEQQdPuJgHRUg5zO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/laragon/www/dev/wp-content/plugins/woo-product-filter",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="346159ef-c2af-4445-bf3a-837d0cadd68a" name="Changes" comment="" />
+      <created>1758569439810</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758569439810</updated>
+      <workItem from="1758569442199" duration="636000" />
+      <workItem from="1758663249303" duration="3567000" />
+      <workItem from="1758733761864" duration="952000" />
+      <workItem from="1758830205154" duration="3447000" />
+      <workItem from="1759349245193" duration="27000" />
+      <workItem from="1759962446579" duration="1147000" />
+      <workItem from="1760032750710" duration="8454000" />
+      <workItem from="1760121610492" duration="23000" />
+      <workItem from="1760132718375" duration="1309000" />
+      <workItem from="1760294186143" duration="2438000" />
+      <workItem from="1760384874978" duration="615000" />
+      <workItem from="1760724189014" duration="1806000" />
+      <workItem from="1761329541689" duration="4265000" />
+      <workItem from="1761583591531" duration="1359000" />
+      <workItem from="1761676584368" duration="1189000" />
+      <workItem from="1761941780615" duration="1473000" />
+      <workItem from="1762381335447" duration="562000" />
+      <workItem from="1762382159895" duration="1499000" />
+      <workItem from="1763057863122" duration="1915000" />
+      <workItem from="1763150772041" duration="2412000" />
+      <workItem from="1764098819990" duration="17000" />
+      <workItem from="1764104612686" duration="3145000" />
+      <workItem from="1764352734885" duration="1139000" />
+      <workItem from="1764791970178" duration="732000" />
+      <workItem from="1764794126875" duration="7000" />
+      <workItem from="1764803318375" duration="3145000" />
+      <workItem from="1764883062042" duration="4370000" />
+      <workItem from="1765391800265" duration="42000" />
+      <workItem from="1765405912796" duration="3276000" />
+      <workItem from="1765481234975" duration="1295000" />
+      <workItem from="1768488419421" duration="1882000" />
+      <workItem from="1770238165371" duration="2945000" />
+      <workItem from="1772459808620" duration="5053000" />
+      <workItem from="1772563107036" duration="3000" />
+      <workItem from="1772662406555" duration="1159000" />
+      <workItem from="1773267247512" duration="45000" />
+      <workItem from="1773677884655" duration="2800000" />
+      <workItem from="1774281949449" duration="1814000" />
+      <workItem from="1774286966708" duration="996000" />
+      <workItem from="1774549216773" duration="658000" />
+      <workItem from="1774881555032" duration="2185000" />
+      <workItem from="1775677704376" duration="11000" />
+      <workItem from="1775749381267" duration="4701000" />
+      <workItem from="1775759753427" duration="2000" />
+      <workItem from="1775762666802" duration="2885000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersControllerWpf Class
  *
- * @version 3.1.4
+ * @version 3.1.7
  *
  * @author  woobewoo
  */
@@ -16,8 +16,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * Init.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function init() {
 		parent::init();
@@ -39,8 +39,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * resolveTaxonomyFromSlugKey.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	private function resolveTaxonomyFromSlugKey($key) {
 		// Product categories
@@ -63,8 +63,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * handleSlugFiltersTemplateRedirect.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function handleSlugFiltersTemplateRedirect($wp) {
 		if (is_admin()) {
@@ -174,8 +174,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * _getShopPageSlug.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function _getShopPageSlug() {
 		$shop_page_id = get_option('woocommerce_shop_page_id');
@@ -185,8 +185,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * addRewriteRules.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function addRewriteRules() {
 
@@ -199,8 +199,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * addQueryVars.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function addQueryVars($vars) {
 		$vars[] = 'wbw_custom_filters';
@@ -288,8 +288,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * saveCategoryLabel.
 	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
+	 * @version 3.1.7
+	 * @since   3.1.7
 	 */
 	public function saveCategoryLabel() {
 		// 🔐 Security
@@ -827,7 +827,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables
@@ -1424,7 +1424,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * getPermissions.
 	 *
-	 * @version 3.1.4
+	 * @version 3.1.7
 	 * @since   3.1.3
 	 *
 	 * @return array
