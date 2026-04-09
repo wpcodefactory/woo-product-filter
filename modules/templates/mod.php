@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 3.1.4
+ * @version 3.0.8
  *
  * @author  woobewoo
  */
@@ -179,8 +179,6 @@ class TemplatesWpf extends ModuleWpf {
 
 	/**
 	 * loadCoreCss.
-	 *
-	 * @version 3.1.4
 	 */
 	public function loadCoreCss( $isElementorEditor = false ) {
 		$this->_styles = array(
@@ -190,11 +188,6 @@ class TemplatesWpf extends ModuleWpf {
 			'bootstrap-alerts' => array('path' => WPF_CSS_PATH . 'bootstrap-alerts.css', 'for' => 'admin'),
 			'icheck'           => array('path' => WPF_CSS_PATH . 'jquery.icheck.css', 'for' => 'admin'),
 			'wp-color-picker'  => array('for' => 'admin'),
-			'adminUiBeautify' => array('path' => WPF_CSS_PATH . 'admin.woofilters.beautify.design.css', 'for' => 'admin'),
-			'customGlobalWpf'  => array(
-				'path' => WPF_CSS_PATH . 'encoder-custom.css',
-				'for'  => ''
-			),
 		);
 		foreach ($this->_styles as $s => $sInfo) {
 			if ($isElementorEditor) {

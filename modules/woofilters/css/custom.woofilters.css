@@ -1,11 +1,3 @@
-/**
- * Product Filter by WBW - Custom Woofilters CSS
- *
- * @version 3.1.4
- *
- * @author  woobewoo
- */
-
 .wpfFilterWrapper label{
 	font-weight: normal;
 }
@@ -88,6 +80,7 @@
 .wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckboxHier input:checked{
 	background-color: gray;
 }
+
 .wpfFilterWrapper input[type=number]::-webkit-inner-spin-button,
 .wpfFilterWrapper input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
@@ -117,50 +110,24 @@
 	margin: 0 5px 0 5px;
 	text-decoration: none;
 }
-input[type="checkbox"],
-input[type="radio"],
-.wpfFilterWrapper input[type="checkbox"],
-.wpfFilterWrapper input[type="radio"] {
-	width: 18px;
+.wpfFilterWrapper input[type=checkbox], .wpfFilterWrapper input[type=radio] {
+	border: 1px solid #b4b9be;
+	background: #fff;
+	color: #555;
+	height: 18px !important;
+	margin: -4px 4px 0 0;
+	outline: 0;
+	padding: 0!important;
+	text-align: center;
+	vertical-align: middle;
+	width: 18px !important;
 	min-width: 18px;
-	height: 18px;
-	border: 1px solid #e0e0e0;
-	background-color: transparent;
-	border-radius: 0;
-	box-shadow: none;
-	vertical-align: top;
 	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	-webkit-print-color-adjust: exact;
-	color-adjust: exact;
-	print-color-adjust: exact;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	cursor: pointer;
-	margin-right: 0.3rem;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	transition: .05s border-color ease-in-out;
 }
-.wpfFilterWrapper input[type="radio"] {
-	border-radius: 50%;
-}
-.wpfFilterWrapper input[type="radio"]:checked,
-.wpfFilterWrapper input[type="checkbox"]:checked {
-	background-color: #303030 !important;
-	border-color: #303030 !important;
-}
-.wpfFilterWrapper input[type="checkbox"]:checked {
-	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
-	background-image: var(--bs-form-check-bg-image);
-}
-.wpfFilterWrapper input[type="radio"]:checked {
-	background-size: 10px;
-	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='%23fff'%3e%3cpath d='M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z'/%3e%3c/svg%3e");
-	background-image: var(--bs-form-check-bg-image);
-}
-.wpfFilterWrapper input[type="radio"]::before,
-.wpfFilterWrapper input[type="checkbox"]::before {
-	display: none !important;
+.wpfFilterWrapper input[type=checkbox] {
+	border-radius: 0;
 }
 
 .wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckbox input[type=checkbox]:checked:before {
@@ -194,13 +161,37 @@ input[type="radio"],
 }
 .wpfFilterWrapper .ms-options input[type=checkbox]:checked:before {
 	content: "";
-}
-.wpfFilterWrapper input[type="radio"]:checked, .wpfFilterWrapper input[type="checkbox"]:checked{
-	background-color: #303030 !important;
-	border-color: #303030 !important;
+	/*margin:0px;*/
+	/*font-size: 8px !important;*/
+	/*color:rgb(68, 68, 68);*/
+	/*outline:0;*/
+	/*transform: none;*/
+	/*background: url(../../../img/tick.png) !important;*/
+	/*background-size: 100% 100% !important;*/
+	/*left: 0;*/
 }
 .wpfFilterWrapper .ms-options input[type=checkbox]:checked {
 	outline:0;
+}
+.wpfFilterWrapper .wpfCheckbox label {
+	width: 16px !important;
+	height: 16px !important;
+}
+.wpfFilterWrapper .wpfCheckbox label::before{
+	display: table-cell !important;
+	position: absolute !important;
+	text-align: center !important;
+	vertical-align: middle !important;
+	transform: inherit !important;
+	left: 0px !important;
+	top: 0px !important;
+	margin: 0px !important;
+	height: 100% !important;
+	width: 100% !important;
+	font-size: 8px !important;
+	background-color: rgb(255, 255, 255) !important;
+	border: 1px solid rgb(204, 204, 204) !important;
+	color: rgb(68, 68, 68) !important;
 }
 .wpfFilterWrapper .wpfCheckbox label::after {
 	height: 3.5px !important;
@@ -211,6 +202,10 @@ input[type="radio"],
 	-webkit-transform: translate(-50%,-50%) !important;
 	-moz-transform: translate(-50%,-50%) !important;
 	-o-transform: translate(-50%,-50%) !important;
+}
+.wpfFilterWrapper .wpfCheckbox input[type="checkbox"] {
+	opacity: 0;
+	display:none !important;
 }
 .wpfFilterWrapper .wpfCheckbox label {
 	position: relative !important;
@@ -241,7 +236,6 @@ input[type="radio"],
 	border-radius: 50% !important;
 	width: 16px;
 	height:16px;
-	display:none!important;
 }
 .wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfMulti label:before {
 	border-radius: 0 !important;

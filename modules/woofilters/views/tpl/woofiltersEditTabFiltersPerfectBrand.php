@@ -1,15 +1,5 @@
 <?php
-/**
- * Product Filter by WBW - Woofilters Edit Tab Filters Perfect Brand
- *
- * @version 3.1.4
- *
- * @author  woobewoo
- */
-
-defined( 'ABSPATH' ) || exit;
-
-ViewWpf::display('woofiltersEditTabCommonTitle');
+	ViewWpf::display('woofiltersEditTabCommonTitle');
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -18,15 +8,15 @@ ViewWpf::display('woofiltersEditTabCommonTitle');
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php
+			<?php 
 				HtmlWpf::selectbox('f_frontend_type', array(
 					'options' => array(
-						'list'         => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
-						'dropdown'     => esc_attr__( 'Dropdown (single select)', 'woo-product-filter' ),
+						'list' => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
+						'dropdown' => esc_attr__( 'Dropdown (single select)', 'woo-product-filter' ),
 						'mul_dropdown' => esc_attr__( 'Multiple Dropdown', 'woo-product-filter' ),
-						'multi'        => esc_attr__( 'Checkbox list (multiple select)', 'woo-product-filter' ) . $labelPro,
-						'buttons'      => esc_attr__( 'Buttons', 'woo-product-filter' ) . $labelPro,
-						'text'         => esc_attr__( 'Text', 'woo-product-filter' ) . $labelPro,
+						'multi' => esc_attr__( 'Checkbox list (multiple select)', 'woo-product-filter' ) . $labelPro,
+						'buttons' => esc_attr__( 'Buttons', 'woo-product-filter' ) . $labelPro,
+						'text' => esc_attr__( 'Text', 'woo-product-filter' ) . $labelPro
 					),
 					'attrs' => 'class="woobewoo-flat-input"'
 				));
@@ -75,10 +65,10 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php
+			<?php 
 				HtmlWpf::text('f_dropdown_first_option_text', array(
 					'placeholder' => esc_attr__('Select all', 'woo-product-filter'),
-					'attrs'       => 'class="woobewoo-flat-input"',
+					'attrs' => 'class="woobewoo-flat-input"'
 				));
 				?>
 		</div>
@@ -91,12 +81,12 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php
+			<?php 
 				HtmlWpf::selectbox('f_sort_by', array(
 					'options' => array(
-						'asc'     => esc_attr__( 'ASC', 'woo-product-filter' ),
-						'desc'    => esc_attr__( 'DESC', 'woo-product-filter' ),
-						'default' => esc_attr__( 'Default', 'woo-product-filter' ) . $labelPro,
+						'asc' => esc_attr__( 'ASC', 'woo-product-filter' ),
+						'desc' => esc_attr__( 'DESC', 'woo-product-filter' ),
+						'default' => esc_attr__( 'Default', 'woo-product-filter' ) . $labelPro
 					),
 					'attrs' => 'class="woobewoo-flat-input' . ( $isPro ? '' : ' wpfWithProAd' ) . '"'
 				));
@@ -174,7 +164,7 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full">
-			<?php
+			<?php 
 				HtmlWpf::selectlist('f_mlist', array(
 					'options' => $brandDisplay,
 					'data-parents' => json_encode($parentBrands, JSON_HEX_QUOT | JSON_HEX_TAG)
@@ -218,11 +208,7 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::selectlist('f_exclude_terms', array(
-				'options'      => $brandDisplay,
-				'data-parents' => json_encode($parentBrands, JSON_HEX_QUOT | JSON_HEX_TAG),
-			));
-			?>
+			<?php HtmlWpf::text('f_exclude_terms', array('attrs' => 'class="woobewoo-flat-input"')); ?>
 		</div>
 	</div>
 </div>
@@ -272,7 +258,7 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w50">
-			<?php
+			<?php 
 				HtmlWpf::selectbox('f_layout', array(
 					'options' => array('ver' => esc_attr__('Vertical', 'woo-product-filter'), 'hor' => esc_attr__('Horizontal', 'woo-product-filter')),
 					'attrs' => 'class="woobewoo-flat-input"'

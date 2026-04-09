@@ -1,22 +1,35 @@
-<?php
-/**
- * Product Filter by WBW - Overview Feedback
- *
- * @version 3.1.4
- *
- * @author  woobewoo
- */
-
-defined( 'ABSPATH' ) || exit;
-
+<?php 
 $isSubscribe = $this->getModule()->getModel()->isSubscribe();
 $isRating = $this->getModule()->getModel()->isRating();
 if (!$isSubscribe || !$isRating) {
-?>
-	<div class="wpf-overview-block-row">
+	?>
+	<div class="row wpf-overview-block-row">
+		<?php if (!$isSubscribe) { ?>
+			<div class="col-sm-<?php echo $isRating ? 12 : 6; ?>">
+				<div class="wpf-overview-block">
+					<div class="wpf-overview-block-header">
+						<div class="wpf-overview-header-title">
+							<?php esc_html_e('Subscribe Now', 'woo-product-filter'); ?>
+						</div>
+						<div class="wpf-overview-header-desc">
+							<?php esc_html_e('Stay up to date with the latest news, life hacks, and new features from WBW. Participate in surveys to help us enhance our plugins and make them even better for you.', 'woo-product-filter'); ?>
+						</div>
+					</div>
+					<div class="wpf-overview-block-body">
+						<div class="wpf-overview-center">
+							<input type="text" class="wpf-overview-input" name="wpf-name" value="" placeholder="<?php esc_html_e('Name', 'woo-product-filter'); ?>">
+							<input type="text" class="wpf-overview-input" name="wpf-email" value="" data-error="<?php esc_html_e('Enter your Email', 'woo-product-filter'); ?>" placeholder="<?php esc_html_e('Email', 'woo-product-filter'); ?>">
+							<button id="wpfSubscribeSubmit" class="wpf-overview-button wpf-overview-submit button" href="https://woobewoo.com/" target="_blank">
+								<?php esc_html_e('SUBSCRIBE', 'woo-product-filter'); ?>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 		<?php if (!$isRating) { ?>
-			<div class="w-100">
-				<div class="wpf-overview-block max-w-100-i">
+			<div class="col-sm-<?php echo $isSubscribe ? 12 : 6; ?>">
+				<div class="wpf-overview-block">
 					<div class="wpf-overview-block-header">
 						<div class="wpf-overview-header-title">
 							<?php esc_html_e('Rate the plugin', 'woo-product-filter'); ?>
@@ -33,21 +46,11 @@ if (!$isSubscribe || !$isRating) {
 								<input type="radio" name="wpfStarInput" class="wpfStarInput" id="wpfLineStar3" value="3">
 								<input type="radio" name="wpfStarInput" class="wpfStarInput" id="wpfLineStar4" value="4">
 								<input type="radio" name="wpfStarInput" class="wpfStarInput" id="wpfLineStar5" value="5">
-								<label class="wpfStarItem active" for="wpfLineStar1"><svg class="wpfRatingStar">
-										<use xlink:href="#wpfStar"></use>
-									</svg></label>
-								<label class="wpfStarItem active" for="wpfLineStar2"><svg class="wpfRatingStar">
-										<use xlink:href="#wpfStar"></use>
-									</svg></label>
-								<label class="wpfStarItem active" for="wpfLineStar3"><svg class="wpfRatingStar">
-										<use xlink:href="#wpfStar"></use>
-									</svg></label>
-								<label class="wpfStarItem active" for="wpfLineStar4"><svg class="wpfRatingStar">
-										<use xlink:href="#wpfStar"></use>
-									</svg></label>
-								<label class="wpfStarItem active" for="wpfLineStar5"><svg class="wpfRatingStar">
-										<use xlink:href="#wpfStar"></use>
-									</svg></label>
+								<label class="wpfStarItem active" for="wpfLineStar1"><svg class="wpfRatingStar"><use xlink:href="#wpfStar"></use></svg></label>
+								<label class="wpfStarItem active" for="wpfLineStar2"><svg class="wpfRatingStar"><use xlink:href="#wpfStar"></use></svg></label>
+								<label class="wpfStarItem active" for="wpfLineStar3"><svg class="wpfRatingStar"><use xlink:href="#wpfStar"></use></svg></label>
+								<label class="wpfStarItem active" for="wpfLineStar4"><svg class="wpfRatingStar"><use xlink:href="#wpfStar"></use></svg></label>
+								<label class="wpfStarItem active" for="wpfLineStar5"><svg class="wpfRatingStar"><use xlink:href="#wpfStar"></use></svg></label>
 							</div>
 						</div>
 						<svg class="wpfStarDefault" xmlns="http://www.w3.org/2000/svg">
@@ -66,33 +69,6 @@ if (!$isSubscribe || !$isRating) {
 									<?php esc_html_e('SEND', 'woo-product-filter'); ?>
 								</button>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php } ?>
-
-		<?php if (!$isSubscribe) { ?>
-			<div class="w-100">
-				<div class="wpf-overview-block max-w-100-i">
-					<div class="wpf-overview-block-header">
-						<div class="wpf-overview-header-title">
-							<?php esc_html_e('Subscribe Now', 'woo-product-filter'); ?>
-						</div>
-						<div class="wpf-overview-header-desc">
-							<?php esc_html_e('Stay up to date with the latest news, life hacks, and new features from WBW. Participate in surveys to help us enhance our plugins and make them even better for you.', 'woo-product-filter'); ?>
-						</div>
-					</div>
-					<div class="wpf-overview-block-body">
-						<div class="wpf-overview-body-text">
-							<label for="subscribe-name">Name</label>
-							<input type="text" class="wpf-overview-input" name="wpf-name" id="subscribe-name" value="" placeholder="<?php esc_html_e('Name', 'woo-product-filter'); ?>">
-
-							<label for="subscribe-email">Email address</label>
-							<input type="text" class="wpf-overview-input" name="wpf-email" id="subscribe-email" value="" data-error="<?php esc_html_e('Enter your Email', 'woo-product-filter'); ?>" placeholder="<?php esc_html_e('Email', 'woo-product-filter'); ?>">
-							<button id="wpfSubscribeSubmit" class="wpf-overview-button wpf-overview-submit button" href="https://woobewoo.com/" target="_blank">
-								<?php esc_html_e('Send message', 'woo-product-filter'); ?>
-							</button>
 						</div>
 					</div>
 				</div>

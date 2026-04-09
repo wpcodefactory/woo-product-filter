@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
- * @version 3.1.4
+ * @version 2.9.7
  *
  * @author  woobewoo
  */
@@ -21,7 +21,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 3.1.4
+	 * @version 2.9.7
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
@@ -120,13 +120,6 @@ class WoofiltersModelWpf extends ModelWpf {
 				'unique'       => false,
 				'content_type' => '',
 			),
-			'wpfCustomField' => array(
-				'name'         => esc_html__('Custom Field (Allow ACF plugin)', 'woo-product-filter'),
-				'slug'         => esc_attr__('custom_field', 'woo-product-filter'),
-				'enabled'      => true,
-				'unique'       => true,
-				'content_type' => 'meta',
-			),
 		);
 
 		/**
@@ -178,60 +171,6 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 
 		return DispatcherWpf::applyFilters('addFilterTypes', $filterTypes);
-	}
-
-	/**
-	 * Function to get ACF custom fields or empty array if ACF is not installed.
-	 *
-	 * @version 3.1.4
-	 * @since   3.1.4
-	 */
-	public function getCustomFieldFilterOptions($post_type) {
-		// Check if ACF is installed
-		if (class_exists('ACF')) {
-			$result = array();
-			// 1. Get all field groups assigned to this post type
-			$field_groups = acf_get_field_groups(array('post_type' => $post_type));
-			if (! $field_groups) {
-				return $result; // No groups → empty
-			}
-			foreach ($field_groups as $group) {
-				// 2. Get all fields in this group
-				$fields = acf_get_fields($group['key']); // or $group['ID']
-
-				if (! $fields) {
-					continue;
-				}
-				foreach ($fields as $field) {
-					// Skip if no name (rare, but safety)
-					if (empty($field['name']) || !in_array($field['type'], ['radio', 'checkbox'])) {
-						continue;
-					}
-					$field_values = isset($field['choices']) ? $field['choices'] : [];
-					if ($field['type'] === 'radio') {
-						// If it's a radio field, we'll store the value(s) as an array
-						$result[$field['name']] = array(
-							'value' => array_keys($field_values), // Returns selected values as an array
-							'type'  => 'radio',
-							'name'  => $field['name'],
-							'label' => $field['label'] // Using the first label as the label
-						);
-					}
-					// For checkbox fields, we'll store the selected values as an array
-					if ($field['type'] === 'checkbox') {
-						// For checkbox fields, we store all selected values and their labels
-						$result[$field['name']] = array(
-							'value' => array_keys($field_values), // Collect all selected checkbox values as an array
-							'type'  => 'checkbox',
-							'name'  => $field['name'],
-							'label' => $field['label'] // Using the first checkbox label for simplicity
-						);
-					}
-				}
-			}
-			return $result;
-		}
-		return array(); // If ACF is not installed, return an empty array
 	}
 
 	/**

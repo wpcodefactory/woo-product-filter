@@ -1,15 +1,3 @@
-<?php
-/**
- * Product Filter by WBW - Edit Tab Design
- *
- * @version 3.1.4
- *
- * @author  woobewoo
- */
-
-defined( 'ABSPATH' ) || exit;
-
-?>
 <div class="row row-tab" id="row-tab-design">
 	<div class="sub-tab woobewoo-input-group col-xs-12">
 		<a href="#sub-tab-design-general" class="button"><?php esc_html_e('General', 'woo-product-filter'); ?></a>
@@ -149,7 +137,7 @@ defined( 'ABSPATH' ) || exit;
 					HtmlWpf::textarea('settings[css_editor]', array(
 						'value' => ( isset($this->settings['settings']['css_editor']) ? stripslashes(base64_decode($this->settings['settings']['css_editor'])) : '' ),
 						'auto_width' => true
-					));
+					)); 
 					?>
 			</div>
 		</div>
@@ -159,7 +147,7 @@ defined( 'ABSPATH' ) || exit;
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('Custom JS', 'woo-product-filter'); ?>"></i>
 			</div>
 			<div class="settings-block-values settings-w100 col-xs-12 col-sm-9">
-				<?php
+				<?php 
 					HtmlWpf::textarea('settings[js_editor]', array(
 						'value' => ( isset($this->settings['settings']['js_editor']) ? stripslashes(base64_decode($this->settings['settings']['js_editor'])) : '' ),
 						'auto_width' => true
@@ -174,7 +162,7 @@ defined( 'ABSPATH' ) || exit;
 			</div>
 			<div class="settings-block-values col-xs-8 col-sm-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
-					<?php
+					<?php 
 						HtmlWpf::checkboxToggle('settings[disable_fontawesome_loading]', array(
 							'checked' => ( isset($this->settings['settings']['disable_fontawesome_loading']) ? (int) $this->settings['settings']['disable_fontawesome_loading'] : '' )
 						));
@@ -189,9 +177,9 @@ defined( 'ABSPATH' ) || exit;
 			</div>
 			<div class="settings-block-values col-xs-8 col-sm-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
-					<?php
+					<?php 
 						HtmlWpf::checkboxToggle('settings[disable_plugin_styles]', array(
-							'checked' => ( isset($this->settings['settings']['disable_plugin_styles']) ? (int) $this->settings['settings']['disable_plugin_styles'] : 1 )
+							'checked' => ( isset($this->settings['settings']['disable_plugin_styles']) ? (int) $this->settings['settings']['disable_plugin_styles'] : '' )
 						));
 						?>
 				</div>
@@ -202,10 +190,10 @@ defined( 'ABSPATH' ) || exit;
 		<div class="settings-block-title">
 			<?php esc_html_e('Blocks Styling', 'woo-product-filter'); ?>
 		</div>
-		<?php
+		<?php 
 		if ($isPro) {
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignBlocks', $this->settings);
-		} else {
+		} else { 
 			?>
 			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
@@ -222,10 +210,10 @@ defined( 'ABSPATH' ) || exit;
 		<div class="settings-block-title">
 			<?php esc_html_e('Titles Styling', 'woo-product-filter'); ?>
 		</div>
-		<?php
+		<?php 
 		if ($isPro) {
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignTitles', $this->settings);
-		} else {
+		} else { 
 			?>
 			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
@@ -242,10 +230,10 @@ defined( 'ABSPATH' ) || exit;
 		<div class="settings-block-title">
 			<?php esc_html_e('Buttons Styling', 'woo-product-filter'); ?>
 		</div>
-		<?php
+		<?php 
 		if ($isPro) {
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignButtons', $this->settings);
-		} else {
+		} else { 
 			?>
 			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
@@ -262,10 +250,10 @@ defined( 'ABSPATH' ) || exit;
 		<div class="settings-block-title">
 			<?php esc_html_e('Floating Modе Options', 'woo-product-filter'); ?>
 		</div>
-		<?php
+		<?php 
 		if ($isPro) {
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignFloating', $this->settings, $this->filter['id']);
-		} else {
+		} else { 
 			?>
 			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
