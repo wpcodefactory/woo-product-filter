@@ -300,7 +300,6 @@
 			const updated = prompt(wpfI18n.edit_category_label, current);
 			if (!updated || updated === current) return;
 			nameEl.text(updated);
-			nameEl.text(updated);
 			jQuery.ajax({
 				url: url,
 				type: 'POST',
@@ -1078,7 +1077,7 @@
 		_this.filterIterator++;
 
 		blockTemplate.trigger('changeTooltips');
-		blockTemplate.find('select[name="f_mlist[]"],select[name="f_exclude_terms[]').chosen({ width:"95%" });
+		blockTemplate.find('select[name="f_mlist[]"],select[name="f_exclude_terms[]"]').chosen({ width:"95%" });
 
 		blockTemplate.find('input,select').trigger('wpf-change');
 

@@ -79,6 +79,13 @@ class WoofiltersWpf extends ModuleWpf {
 		// for Woocommerce Blocks: Product Collection
 		add_filter( 'query_loop_block_query_vars', array( $this, 'addFilterToWoocommerceBlocksAgrs' ), 999, 3 );
 
+		add_action( 'init', array( $this, 'registerWpfSlugFormatRewrites' ), 10 );
+		add_filter( 'query_vars', array( $this, 'addWpfSlugFormatQueryVars' ) );
+		add_action( 'parse_request', array( $this, 'maybeParseWpfSlugFormatRequest' ), 1 );
+		if ( is_admin() ) {
+			add_action( 'admin_init', array( $this, 'wpfMaybeBootstrapSlugFormatRewriteOption' ), 20 );
+		}
+
 		add_action( 'woocommerce_shortcode_products_query', array( $this, 'loadShortcodeProductsFilter' ), 999, 3 );
 
 		// for Beaver Builder block Posts
@@ -5129,5 +5136,53 @@ class WoofiltersWpf extends ModuleWpf {
 		global $wp_query;
 		return ( $wp_query ? $wp_query->get_queried_object_id() : 0 );
 	}
+	protected function isWpfSlugFormatRewriteActive() {
+		return (bool) (int) get_option( 'wpf_slug_format_rewrite_active', 0 );
+	}
 
+	public function registerWpfSlugFormatRewrites() {
+		if ( ! $this->isWpfSlugFormatRewriteActive() ) {
+			return;
+		}
+		$shop_page_id = (int) get_option( 'woocommerce_shop_page_id' );
+		if ( $shop_page_id <= 0 ) {
+			return;
+		}
+		$slug = get_post_field( 'post_name', $shop_page_id );
+		if ( ! is_string( $slug ) || '' === $slug ) {
+			return;
+		}
+		$escaped = preg_quote( $slug, '/' );
+		add_rewrite_rule(
+			'^' . $escaped . '/wbw/(.+?)/?$',
+			'index.php?pagename=' . $slug . '&wbw_custom_filters=$matches[1]',
+			'top'
+		);
+	}
+
+	public function addWpfSlugFormatQueryVars( $vars ) {
+		if ( ! $this->isWpfSlugFormatRewriteActive() ) {
+			return $vars;
+		}
+		$vars[] = 'wbw_custom_filters';
+		return $vars;
+	}
+
+	public function maybeParseWpfSlugFormatRequest( $wp ) {
+		if ( is_admin() || ! $this->isWpfSlugFormatRewriteActive() ) {
+			return;
+		}
+		if ( ! $wp instanceof WP || empty( $wp->query_vars['wbw_custom_filters'] ) ) {
+			return;
+		}
+		$this->getController()->handleSlugFiltersTemplateRedirect( $wp );
+	}
+
+	public function wpfMaybeBootstrapSlugFormatRewriteOption() {
+		if ( get_option( 'wpf_slug_format_rewrite_option_bootstrapped', '' ) === '1' ) {
+			return;
+		}
+		$this->getModel( 'woofilters' )->syncSlugFormatRewriteSiteOption();
+		update_option( 'wpf_slug_format_rewrite_option_bootstrapped', '1', true );
+	}
 }

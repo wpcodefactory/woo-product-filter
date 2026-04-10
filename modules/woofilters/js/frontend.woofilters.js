@@ -1001,11 +1001,13 @@
 				paginationWrapper = _this.closest('.woocommerce-pagination'),
 				currentNumber = paginationWrapper.find('.current').text();
 			if(!_this.hasClass('next') && !_this.hasClass('prev') ){
-				var number = _this.text();
+				var number = parseInt(_this.text(), 10) || 1;
 			}else if(_this.hasClass('next')){
-				var number = parseInt(currentNumber) + 1;
+					var current = parseInt(currentNumber, 10) || 1;
+					var number = current + 1;
 			}else if(_this.hasClass('prev')){
-				var number = (parseInt(currentNumber) - 1) < 1 ? parseInt(currentNumber) - 1 : 1;
+					var current = parseInt(currentNumber, 10) || 1;
+					var number = Math.max(current - 1, 1);
 			}
 			var wrapper = jQuery('.wpfMainWrapper').first(),
 				$queryVars = wrapper.attr('data-settings');
@@ -1041,11 +1043,13 @@
 				paginationWrapper = _this.closest('.woocommerce-pagination'),
 				currentNumber = paginationWrapper.find('.current').text();
 			if(!_this.hasClass('next') && !_this.hasClass('prev') ){
-				var number = _this.text();
+				var number = parseInt(_this.text(), 10) || 1;
 			}else if(_this.hasClass('next')){
-				var number = parseInt(currentNumber) + 1;
+				var current = parseInt(currentNumber, 10) || 1;
+				var number = current + 1;
 			}else if(_this.hasClass('prev')){
-				var number = (parseInt(currentNumber) - 1) < 1 ? parseInt(currentNumber) - 1 : 1;
+				var current = parseInt(currentNumber, 10) || 1;
+				var number = Math.max(current - 1, 1);
 			}
 			var wrapper = jQuery('.wpfMainWrapper').first(),
 				$queryVars = wrapper.attr('data-settings');
@@ -1312,16 +1316,10 @@
 	WpfFrontendPage.prototype.prepareUrlParams = function(currentUrl) {
 		// Step 1: Create a URL object to easily parse the current URL
 		var finalUrl = new URL(currentUrl);
-		console.log('Current URL:', finalUrl.href); // Debugging current URL
-
 		// Step 2: Extract the path segments (e.g., /wbw/wpf_filter_cat_0/hoodies)
 		var pathSegments = finalUrl.pathname.split('/').filter(Boolean); // Remove empty segments
-		console.log('Path Segments:', pathSegments); // Debugging path segments
-
 		// Step 3: Initialize URLSearchParams to handle query parameters
 		var urlParams = new URLSearchParams(finalUrl.search);
-		console.log('Initial Search Params:', urlParams.toString()); // Debugging initial search params
-
 		// Step 4: Process the path segments and convert them into query parameters
 		for (var i = 0; i < pathSegments.length; i++) {
 			var segment = pathSegments[i];
@@ -1330,9 +1328,6 @@
 			if (segment.indexOf('wpf_filter_') === 0) {
 				var filterKey = segment; // e.g., 'wpf_filter_cat_0'
 				var filterValue = pathSegments[i + 1]; // e.g., 'hoodies'
-
-				console.log('Found Filter:', filterKey, 'with value:', filterValue);
-
 				// You may need to resolve the term ID here based on the slug (e.g., 'hoodies' -> 34)
 				// For now, we'll use the value directly, but you can integrate a lookup if needed
 
@@ -1343,8 +1338,6 @@
 
 		// Step 5: Rebuild the URL with the updated parameters
 		finalUrl.search = urlParams.toString();  // Set the new query string
-		console.log('Updated Search Params:', finalUrl.search); // Debugging updated search params
-
 		// Step 6: Return the final URL with updated query parameters
 		return finalUrl.toString();  // Return the full URL with updated parameters
 	};
@@ -1624,22 +1617,20 @@
 				$needUrl = $filterSettings['open_one_by_one'] == '1' && $filterSettings['obo_only_children'] == '1';
 			//slug generation
 			if (history.pushState && app.wpfNewUrl != window.wpfOldUrl && ((!redirect && !redirectTerm) || $needUrl)) {
-				var slugFormat=_thisObj.slugFormat;
-				var finalUrl = app.wpfNewUrl;
-				if (slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0") {
-					var currentUrl=window.location.href;
-					var prepareurl=WpfFrontendPage.prototype.prepareUrlParams(currentUrl);
-					//alert(prepareurl);alert(window.wpfNewUrl);
-					 var search = window.wpfNewUrl ? new URL(window.wpfNewUrl).search : window.location.search;
-					var segments = _thisObj.convertParamsToSegments(search);
-					finalUrl = $generalSettings.settings.shop_base_url+'wbw/' + segments.join('/');
-
-					if (segments.length === 0) finalUrl = $generalSettings.settings.shop_base_url;
+							var slugFormat=_thisObj.slugFormat;
+							var newUrl = app.wpfNewUrl.indexOf('pr_search_') > 0 ? app.wpfNewUrl.replace('+', '%2b') : app.wpfNewUrl;
+							var finalUrl = newUrl;
+							if (slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0") {
+								var search = newUrl ? new URL(newUrl).search : window.location.search;
+								var segments = _thisObj.convertParamsToSegments(search);
+								finalUrl = $generalSettings.settings.shop_base_url + 'wbw/' + segments.join('/');
+								if (segments.length === 0) finalUrl = $generalSettings.settings.shop_base_url;
+							}
+							history.pushState({state: 1, rand: Math.random(), wpf: true}, '', finalUrl);
+							app.wpfOldUrl = app.wpfNewUrl;
+							_thisObj.changeSlugByUrl();
 				}
-				history.pushState({state: 1, rand: Math.random(), wpf: true}, '', finalUrl);
-				app.wpfOldUrl = finalUrl;
-				_thisObj.changeSlugByUrl();
-			}
+	
 			//slug generation
 			if (redirectTerm || (redirect && _thisObj.filterClick)) {
 				let queryString = app.wpfNewUrl.split('?')[1] || '';

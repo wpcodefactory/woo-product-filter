@@ -21,19 +21,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	 */
 	public function init() {
 		parent::init();
-		// Add rewrite rules for slug-based filters
-		add_action('init', array($this, 'addRewriteRules'));
-		add_filter('query_vars', array($this, 'addQueryVars'));
-		// 🔑 SLUG → GET happens BEFORE query
-		$slugFormatEnabled = false;
-		$currentUrl = $_SERVER['REQUEST_URI'];  // Get the current URL
-		// Assuming the shop page slug is '/shop' (you can dynamically fetch this)
-		$shopSlug = $this->_getShopPageSlug();  // Fetch shop page slug dynamically
-		$searchString = $shopSlug . '/wbw';
-		// If the URL contains the '/wbw' part after the shop slug, enable the slug format
-		if (strpos($currentUrl, $searchString) !== false) {
-			add_action('parse_request', array($this, 'handleSlugFiltersTemplateRedirect'), 1);
-		}
 	}
 
 	/**
@@ -189,11 +176,16 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	 * @since   3.1.7
 	 */
 	public function addRewriteRules() {
-
-		$slug = $this->_getShopPageSlug();
-		add_rewrite_rule('^' . $slug . '/wbw/(.+?)/?$',  'index.php?pagename=' . $slug . '&wbw_custom_filters=$matches[1]', 'top');
-		// Flush rules once manually via Settings > Permalinks
-		flush_rewrite_rules();
+		$shop_page_id = (int) get_option('woocommerce_shop_page_id');
+		if ($shop_page_id <= 0) {
+			return;
+		}
+		$slug = get_post_field('post_name', $shop_page_id);
+		if (! is_string($slug) || '' === $slug) {
+			return;
+		}
+		$escaped = preg_quote($slug, '/');
+		add_rewrite_rule('^' . $escaped . '/wbw/(.+?)/?$', 'index.php?pagename=' . $slug . '&wbw_custom_filters=$matches[1]', 'top');
 	}
 
 	/**
@@ -219,8 +211,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		foreach ( $data as $key => $row ) {
 			$id        = $row['id'];
 			$shortcode = '[' . WPF_SHORTCODE . ' id=' . $id . ']';
-			$titleUrl  = '<a href="' . esc_url($this->getModule()->getEditLink( $id )) . '">' . esc_html($row['title']) . ' <i class="fa fa-fw fa-pencil"></i></a> <a data-filter-id="' . $id . '" class="wpfDuplicateFilter" href="" title="' . esc_attr__('Duplicate filter', 'woo-product-filter') . '"><i class="fa fa-fw fa-clone"></i></a>';
-
+			$titleUrl  = '<a href="' . esc_url($this->getModule()->getEditLink($id)) . '">' . esc_html($row['title']) . '</a>';
+			$data[$key]['actions'] = '<a href="' . esc_url($this->getModule()->getEditLink($id)) . '"> <i class="fa fa-fw fa-pencil"></i></a> <a data-filter-id="' . $id . '" class="wpfDuplicateFilter" href="" title="' . esc_attr__('Duplicate filter', 'woo-product-filter') . '"><i class="fa fa-fw fa-clone"></i></a>';
 			$data[$key]['shortcode'] = $shortcode;
 			$data[$key]['title']     = DispatcherWpf::applyFilters('prepareFilterListTitle', $titleUrl, $row);
 		}
@@ -1179,54 +1171,58 @@ class WoofiltersControllerWpf extends ControllerWpf {
 							}
 						}
 						break;
-					case 'wpfCustomField':
-						$customfield = $setting['settings'] ?? [];
-						$name        = $setting['name'] ?? '';
-						$meta_key    = substr($name, 3);
+						case 'wpfCustomField':
+							$customfield = $setting['settings'] ?? [];
+							$name        = $setting['name'] ?? '';
+							$meta_key    = substr($name, 3);
 
-						if (empty($meta_key) || empty($customfield)) {
-							break;
-						}
-						$CustomOptions = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getCustomFieldFilterOptions('product');
-						// Ensure $customfield is always an array
-						if (!is_array($customfield)) {
-							$customfield = strpos($customfield, '|') !== false
-								? explode('|', $customfield)
-								: [$customfield];
-						}
-						// Clean and filter empty values
-						$values = array_map('trim', $customfield);
-						$values = array_filter($values);
+							if (empty($meta_key) || empty($customfield)) {
+								break;
+							}
 
-						if (empty($values)) {
+							$customOptions = FrameWpf::_()
+								->getModule('woofilters')
+								->getModel('woofilters')
+								->getCustomFieldFilterOptions('product');
+
+							$fieldtype = isset($customOptions[$meta_key]['type']) ? $customOptions[$meta_key]['type'] : '';
+
+							if (!is_array($customfield)) {
+								$customfield = strpos($customfield, '|') !== false
+									? explode('|', $customfield)
+									: array($customfield);
+							}
+
+							$values = array_filter(array_map('trim', $customfield));
+							if (empty($values)) {
+								break;
+							}
+
+							$clauses = array();
+							foreach ($values as $single_value) {
+								$normalized = trim($single_value);
+
+								// Checkbox values are commonly stored serialized.
+								$search = ('checkbox' === $fieldtype)
+									? '"' . $normalized . '"'
+									: $normalized;
+
+								$clauses[] = array(
+									'key'     => $meta_key,
+									'value'   => $search,
+									'compare' => 'LIKE',
+								);
+							}
+
+							if (!empty($clauses)) {
+								if (count($clauses) === 1) {
+									$args['meta_query'][] = $clauses[0];
+								} else {
+									$clauses['relation'] = 'OR';
+									$args['meta_query'][] = $clauses;
+								}
+							}
 							break;
-						}
-						$clauses = [];
-						foreach ($values as $single_value) {
-							$normalized = ucwords(strtolower($single_value));
-							// Quote it → matches 's:5:"Green";' format in serialized array
-							if ($fieldtype === 'checkbox') {
-								$search = '"' . $normalized . '"';
-							} else {
-								$search = $normalized;
-							}
-							$clauses[] = [
-								'key'     => $meta_key,
-								'value'   => $search,
-								'compare' => 'LIKE',
-							];
-						}
-						if (!empty($clauses)) {
-							if (count($clauses) === 1) {
-								$args['meta_query'][] = $clauses[0];
-							} else {
-								// Multiple selections → OR logic (any match)
-								// If plugin ever sends "logic":"and", you can change to 'AND' here
-								$clauses['relation'] = 'OR';
-								$args['meta_query'][] = $clauses;
-							}
-						}
-						break;
 					case 'wpfBrand':
 						$brandsIdStr = $setting['settings'];
 						if ( $brandsIdStr ) {
