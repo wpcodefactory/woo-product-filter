@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 3.1.7 - 10/04/2026 =
+* Dev -Fixed global css and js issue and critical issues
+
 = 3.1.7 - 09/04/2026 =
 * Dev - Block component created for page create so that admin can select filtering.
 * Dev - Stock status default checkbox selected.

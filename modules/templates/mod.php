@@ -191,10 +191,6 @@ class TemplatesWpf extends ModuleWpf {
 			'icheck'           => array('path' => WPF_CSS_PATH . 'jquery.icheck.css', 'for' => 'admin'),
 			'wp-color-picker'  => array('for' => 'admin'),
 			'adminUiBeautify' => array('path' => WPF_CSS_PATH . 'admin.woofilters.beautify.design.css', 'for' => 'admin'),
-			'customGlobalWpf'  => array(
-				'path' => WPF_CSS_PATH . 'encoder-custom.css',
-				'for'  => ''
-			),
 		);
 		foreach ($this->_styles as $s => $sInfo) {
 			if ($isElementorEditor) {

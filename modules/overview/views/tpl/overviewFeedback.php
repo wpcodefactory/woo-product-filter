@@ -15,8 +15,8 @@ if (!$isSubscribe || !$isRating) {
 ?>
 	<div class="wpf-overview-block-row">
 		<?php if (!$isRating) { ?>
-			<div class="w-100">
-				<div class="wpf-overview-block max-w-100-i">
+			<div class="woobewoo-wdt-100">
+				<div class="wpf-overview-block woobewoo-max-width-100-i">
 					<div class="wpf-overview-block-header">
 						<div class="wpf-overview-header-title">
 							<?php esc_html_e('Rate the plugin', 'woo-product-filter'); ?>
@@ -73,8 +73,8 @@ if (!$isSubscribe || !$isRating) {
 		<?php } ?>
 
 		<?php if (!$isSubscribe) { ?>
-			<div class="w-100">
-				<div class="wpf-overview-block max-w-100-i">
+			<div class="woobewoo-wdt-100">
+				<div class="wpf-overview-block woobewoo-max-width-100-i">
 					<div class="wpf-overview-block-header">
 						<div class="wpf-overview-header-title">
 							<?php esc_html_e('Subscribe Now', 'woo-product-filter'); ?>

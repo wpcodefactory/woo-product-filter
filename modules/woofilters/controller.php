@@ -594,10 +594,10 @@ class WoofiltersControllerWpf extends ControllerWpf {
 					endwhile;
 					$productsHtml = ob_get_clean();
 					if ( empty($productsHtml) ) {
-						$productsHtml = __($filterSettings['text_no_products'], 'woo-product-filter');
+						$productsHtml = '  <div class="no-products-found">' . __($filterSettings['text_no_products'], 'woo-product-filter') . '</div>';
 					}
 				} else {
-					$productsHtml = __($filterSettings['text_no_products'], 'woo-product-filter');
+					$productsHtml = '  <div class="no-products-found">' . __($filterSettings['text_no_products'], 'woo-product-filter') . '</div>';
 				}
 			}
 

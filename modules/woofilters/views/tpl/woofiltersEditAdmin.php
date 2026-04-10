@@ -49,7 +49,7 @@ if (taxonomy_exists('pwb-brand')) {
 		<div class="woobewoo-item woobewoo-panel">
 			<div id="containerWrapper">
 				<form id="wpfFiltersEditForm" data-table-id="<?php echo esc_attr($this->filter['id']); ?>" data-href="<?php echo esc_attr($this->link); ?>">
-					<div class="topBtnsArea wpfMainBtnsShell">
+			<div class="topBtnsArea wpfMainBtnsShell">
 						<ul class="wpfSub control-buttons">
 							<li>
 								<button id="buttonSave" class="button<?php echo $isWCLicense ? ' button-primary' : ''; ?>">
@@ -63,10 +63,10 @@ if (taxonomy_exists('pwb-brand')) {
 							</li>
 						</ul>
 					</div>
-					<div class="wpfCopyTextCodeSelectionShell">
-						<div class="row">
-							<div class="col-md-4 wpfNamePadding d-flex flex-column">
-								<label class="inline-block" for="">
+						<div class="wpfCopyTextCodeSelectionShell">
+						<div class="woobewoo_row">
+							<div class="col-md-4 wpfNamePadding woobewoo-d-flex woobewoo-flex-column">
+								<label class="woobewoo-inline-block" for="">
 									<?php echo esc_html__('Filter name', 'woo-product-filter'); ?>
 								</label>
 								<span id="wpfFilterTitleShell" title="<?php echo esc_attr__('Click to edit', 'woo-product-filter'); ?>">
@@ -82,14 +82,14 @@ if (taxonomy_exists('pwb-brand')) {
 									<i class="fa fa-fw fa-pencil"></i>
 								</span>
 							</div>
-							<div class="col-md-4 wpfShortcodeAdm flex-column">
-								<label for="" class="d-flex items-center">
+							<div class="col-md-4 wpfShortcodeAdm woobewoo-flex-column">
+								<label for="" class="woobewoo-d-flex woobewoo-items-center">
 									<span>
 										<?php echo esc_html__('Filter', 'woo-product-filter'); ?>
 									</span>
 									<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Using short code display the filter and products in the desired place of the template.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/how-to-add-woocommerce-product-filter-to-shop/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 								</label>
-								<select name="shortcode_example" id="wpfCopyTextCodeExamples" class="woobewoo-flat-input w-100 max-w-100-i">
+								<select name="shortcode_example" id="wpfCopyTextCodeExamples" class="woobewoo-flat-input woobewoo-wdt-100 woobewoo-max-width-100-i">
 									<option value="shortcode"><?php echo esc_html__('Filter Shortcode', 'woo-product-filter'); ?></option>
 									<option value="phpcode"><?php echo esc_html__('Filter PHP code', 'woo-product-filter'); ?></option>
 									<option value="shortcode_product"><?php echo esc_html__('Product Shortcode', 'woo-product-filter'); ?></option>
@@ -98,8 +98,8 @@ if (taxonomy_exists('pwb-brand')) {
 							</div>
 							<?php $fid = isset($this->filter['id']) ? $this->filter['id'] : ''; ?>
 							<?php if ($fid) { ?>
-								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode shortcode flex-column">
-									<label class="inline-block" for="">
+								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode shortcode woobewoo-flex-column">
+									<label class="woobewoo-inline-block" for="">
 										<?php echo esc_html__('Shortcode', 'woo-product-filter'); ?>
 									</label>
 									<?php
@@ -110,7 +110,7 @@ if (taxonomy_exists('pwb-brand')) {
 									));
 									?>
 								</div>
-								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode phpcode wpfHidden flex-column">
+								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode phpcode wpfHidden woobewoo-flex-column">
 									<?php
 									HtmlWpf::text('', array(
 										'value' => "<?php echo do_shortcode('[" . WPF_SHORTCODE . " id=$fid]') ?>",
@@ -119,7 +119,7 @@ if (taxonomy_exists('pwb-brand')) {
 									));
 									?>
 								</div>
-								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode shortcode_product wpfHidden flex-column">
+								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode shortcode_product wpfHidden woobewoo-flex-column">
 									<?php
 									HtmlWpf::text('', array(
 										'value' => '[' . WPF_SHORTCODE_PRODUCTS . ']',
@@ -128,7 +128,7 @@ if (taxonomy_exists('pwb-brand')) {
 									));
 									?>
 								</div>
-								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode phpcode_product wpfHidden flex-column">
+								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode phpcode_product wpfHidden woobewoo-flex-column">
 									<?php
 									HtmlWpf::text('', array(
 										'value' => "<?php echo do_shortcode('[" . WPF_SHORTCODE_PRODUCTS . "]') ?>",
@@ -141,9 +141,9 @@ if (taxonomy_exists('pwb-brand')) {
 							<div class="clear"></div>
 						</div>
 					</div>
-					<div class="">
-						<div class="no-md-r-padding w-100">
-							<div id="tabsContainer" class="d-flex wpfSub tabs-wrapper wpfMainTabs">
+						<div class="">
+						<div class="no-md-r-padding woobewoo-wdt-100">
+							<div id="tabsContainer" class="woobewoo-d-flex wpfSub tabs-wrapper wpfMainTabs">
 								<a href="#row-tab-filters"
 									class="current button wpfFilters">
 									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,19 +190,20 @@ if (taxonomy_exists('pwb-brand')) {
 							<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
 						</div> -->
 					</div>
-					<div class="wpfMainTabsContainer mainContainer_dsfsdf d-flex selectFiltersMain p-24">
-						<div class="sdkfjsjLeft wpfFiltersTabContents p-0-i">
-							<?php //All templates in the same folder now. This is simplest way to include all. ?>
-							<?php include_once 'woofiltersEditTabFilters.php'; ?>
-							<?php include_once 'woofiltersEditTabOptions.php'; ?>
-							<?php include_once 'woofiltersEditTabDesign.php'; ?>
-						</div>
-						<div class="col-md-3">
-							<div class="hidden-lg hidden-md">
-								<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
+					<div class="wpfMainTabsContainer mainContainer_dsfsdf woobewoo-d-flex selectFiltersMain woobewoo-p-24">
+							<div class="sdkfjsjLeft wpfFiltersTabContents woobewoo-p-0-i">
+								<?php //All templates in the same folder now. This is simplest way to include all. ?>
+								<?php include_once 'woofiltersEditTabFilters.php'; ?>
+								<?php include_once 'woofiltersEditTabOptions.php'; ?>
+								<?php include_once 'woofiltersEditTabDesign.php'; ?>
 							</div>
-							<div class="wpfFiltersBlockPreview"></div>
-						</div>
+							<div class="col-md-3 sdkfjsjRight">
+								<div class="hidden-lg hidden-md">
+									<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
+								</div>
+								<div class="wpfFiltersBlockPreview"></div>
+							</div>
+					
 					</div>
 
 					<?php
