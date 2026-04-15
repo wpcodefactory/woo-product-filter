@@ -7,19 +7,6 @@
  */
 
 /**
- * Detect Thrive editor context
- *
- * @version 3.1.7
- * @since 3.1.7
- */
-//fix/thrive-editor-hang-wcag-keyboard-accessibility
-function wpfIsThriveEditor() {
-  var href = window.location.href;
-  return href.includes('tve=') || href.includes('tvet=') || href.includes('_preview') || href.includes('tcbf=') || href.includes('thrive');
-}
-//fix/thrive-editor-hang-wcag-keyboard-accessibility
-
-/**
  * Main function.
  *
  * @version 3.1.7
@@ -78,10 +65,7 @@ function wpfIsThriveEditor() {
 		_thisObj.setCurrentLocation();
 		_thisObj.filterLoadTypes = [];
 		_thisObj.defaultProductSelector = 'ul.products';
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
-		_thisObj.isAdminPreview = jQuery('#wpfFiltersEditForm').length > 0 || (typeof isElementorPreview != 'undefined' && isElementorPreview == 1) ||
-      wpfIsThriveEditor();
-	  //fix/thrive-editor-hang-wcag-keyboard-accessibility
+		_thisObj.isAdminPreview = jQuery('#wpfFiltersEditForm').length > 0 || (typeof isElementorPreview != 'undefined' && isElementorPreview == 1);
 		_thisObj.moveFloatingElements();
 		_thisObj.checkForceFilters();
 		_thisObj.eventsPriceFilter();
@@ -99,14 +83,6 @@ function wpfIsThriveEditor() {
 		jQuery('.wpfMainWrapper').each(function() {
 			_thisObj.markCheckboxSelected(jQuery(this), true);
 		});
-
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
-		setTimeout(function () {
-			jQuery('.wpfFilterContent.wpfHide, .wpfFilterContent.wpfBlockAnimated').each(function () {
-				jQuery(this).find('input, select, a, button, [tabindex]').attr('tabindex', '-1');
-			});
-		}, 600);
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 
 		if (_thisObj.isAdminPreview) {
 			_thisObj.hideFiltersLoader();
@@ -631,8 +607,7 @@ function wpfIsThriveEditor() {
 			});
 		}
 		//for woocommerce-blocks (All products and others)
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
-		if ((typeof window.wpfFetchHookCreated == 'undefined' || window.wpfFetchHookCreated != 1) && !wpfIsThriveEditor()) {
+		if (typeof window.wpfFetchHookCreated == 'undefined' || window.wpfFetchHookCreated != 1) {
 			window.fetch = new Proxy(window.fetch, {
 				apply(fetch, that, args) {
 					var url = args.length ? args[0] : '';
@@ -680,11 +655,6 @@ function wpfIsThriveEditor() {
 		//for themes with ajax-paginations, ajax-ordering
 		jQuery(document).ajaxComplete(function(event, xhr, options) {
 			setTimeout(function() {
-				//fix/thrive-editor-hang-wcag-keyboard-accessibility
-				if (wpfIsThriveEditor()) {
-					return;
-				}
-				//fix/thrive-editor-hang-wcag-keyboard-accessibility
 				if (jQuery('.wpfLoaderLayout:visible').length) {
 					window.wpfFrontendPage.init();
 					if (typeof(window.wpfFrontendPage.eventsFrontendPro) == 'function') {
@@ -993,28 +963,13 @@ function wpfIsThriveEditor() {
 					if (settings.settings.hide_filter_icon !== '0') {
 						if (icons.collapsed) {
 							_thisObj.openFilterToggle(toggle, content, true, icons);
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
-							_this.attr('aria-expanded', 'true');
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
 						} else {
 							_thisObj.closeFilterToggle(toggle, content, true, icons);
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
-							_this.attr('aria-expanded', 'false');
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
 						}
 					}
 				}
 			}, 100);
 		});
-
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
-		jQuery('body').off('keydown', '.wpfFilterWrapper .wpfFilterTitle').on('keydown', '.wpfFilterWrapper .wpfFilterTitle', function (e) {
-			if (e.which === 13 || e.which === 32) {
-				e.preventDefault();
-				jQuery(this).trigger('click');
-			}
-		});
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 
 		jQuery('body').off('click', '.wpfFilterWrapper .wpfBlockClear').on('click', '.wpfFilterWrapper .wpfBlockClear',  function(){
 			var parent = jQuery(this).closest(".wpfFilterWrapper"),
@@ -1313,12 +1268,7 @@ function wpfIsThriveEditor() {
 			content.addClass('wpfBlockAnimated');
 			if (typeof isTimeout !== 'undefined' && isTimeout) {
 				setTimeout(function () {
-					if (content.hasClass('wpfBlockAnimated')) {
-						content.addClass('wpfHide');
-            //fix/thrive-editor-hang-wcag-keyboard-accessibility
-						content.find('input, select, a, button').attr('tabindex', '-1');
-            //fix/thrive-editor-hang-wcag-keyboard-accessibility
-					}
+					if (content.hasClass('wpfBlockAnimated')) content.addClass('wpfHide');
 				}, 10);
 			} else {
 				if (content.hasClass('wpfBlockAnimated')) content.addClass('wpfHide');
@@ -1331,9 +1281,6 @@ function wpfIsThriveEditor() {
 			toggle.removeClass(icons.plusIcon);
 			toggle.addClass(icons.minusIcon);
 			content.removeClass('wpfHide');
-			//fix/thrive-editor-hang-wcag-keyboard-accessibility
-			content.find('input, select, a, button').removeAttr('tabindex');
-			//fix/thrive-editor-hang-wcag-keyboard-accessibility
 			if (typeof isTimeout !== 'undefined' && isTimeout) {
 				setTimeout(function () {
 					if (!content.hasClass('wpfHide')) content.removeClass('wpfBlockAnimated');

@@ -180,10 +180,6 @@ input[type="radio"],
 .wpfFilterWrapper .wpfFilterTitle {
 	cursor: pointer;
 }
-.wpfFilterWrapper .wpfFilterTitle:focus {
-	outline: 2px solid #007cba;
-	outline-offset: 2px;
-}
 .wpfFilterWrapper .ms-options input[type=checkbox]:checked:before, input[type=radio]:checked:before {
 	float: left;
 	display: inline-block;
