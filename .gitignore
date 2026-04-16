@@ -4,3 +4,4 @@ node_modules/
 package-lock.json
 .vscode/sftp.json
 .DS_Store
+.vscode
