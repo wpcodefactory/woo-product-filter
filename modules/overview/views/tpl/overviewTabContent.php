@@ -13,7 +13,7 @@ $modPath = $this->getModule()->getModPath();
 ?>
 <section>
 	<div class="woobewoo-item woobewoo-panel wpf-overview-panel">
-		<div class="wpf-overview-block w-100 max-w-100-i">
+		<div class="wpf-overview-block woobewoo-wdt-100 woobewoo-max-width-100-i">
 			<div class="wpf-overview-block-header">
 				<div class="wpf-overview-header-title">
 					<?php esc_html_e('Need help?', 'woo-product-filter'); ?>
@@ -23,8 +23,8 @@ $modPath = $this->getModule()->getModPath();
 				</div>
 			</div>
 			<div class="wpf-overview-block-body">
-				<div class="row">
-					<div class="col-md-4 mb-3 mb-md-0">
+				<div class="woobewoo_row">
+					<div class="col-md-4 woobewoo-mb-3 mb-md-0">
 						<div class="wpf-overview-img wpf-overview-img-dc">
 							<div class="wpf-overview-body-title">
 								<a href="https://woobewoo.com/docs/woocommerce-filter-documentation/" target="_blank">
@@ -70,7 +70,7 @@ $modPath = $this->getModule()->getModPath();
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-4 mb-3 mb-md-0">
+					<div class="col-md-4 woobewoo-mb-3 mb-md-0">
 						<div class="wpf-overview-img wpf-overview-img-wp">
 							<div class="wpf-overview-body-title">
 								<a href="https://wordpress.org/plugins/woo-product-filter/" target="_blank">
@@ -101,10 +101,10 @@ $modPath = $this->getModule()->getModPath();
 				</div>
 			</div>
 		</div>
-		<div class="m-0">
-			<div class="row">
-				<div class="col-md-6 flex_auto">
-					<div class="wpf-overview-block max-w-100-i">
+		<div class="woobewoo-m-0">
+			<div class="woobewoo_row">
+				<div class="col-md-6 woobewoo-flex_auto">
+					<div class="wpf-overview-block woobewoo-max-width-100-i">
 						<div class="wpf-overview-block-header">
 							<div class="wpf-overview-header-title">
 								<?php esc_html_e('Contact Us', 'woo-product-filter'); ?>
@@ -114,11 +114,6 @@ $modPath = $this->getModule()->getModPath();
 							</div>
 						</div>
 						<div class="wpf-overview-block-body">
-							<!-- <div class="wpf-overview-block"> -->
-							<!-- <div class="wpf-overview-body-title">
-										<? //php esc_html_e('Contact Us', 'woo-product-filter');
-										?>
-									</div> -->
 							<div class="wpf-overview-body-text">
 								<label for="wpf-name">Name</label>
 								<input type="text" class="wpf-overview-input wpf-field-fullwidth" name="wpf-name" id="wpf-name" value="" placeholder="<?php esc_html_e('Name', 'woo-product-filter'); ?>">
@@ -139,13 +134,13 @@ $modPath = $this->getModule()->getModPath();
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 flex_auto">
+				<div class="col-md-6 woobewoo-flex_auto">
 					<?php include_once 'overviewFeedback.php'; ?>
 				</div>
 			</div>
 		</div>
 
-		<div class="wpf-overview-block w-100 max-w-100-i">
+		<div class="wpf-overview-block woobewoo-wdt-100 woobewoo-max-width-100-i">
 			<div class="wpf-overview-flex-custom wpf-overview-block-header">
 				<div class="">
 					<div class="wpf-overview-header-title">
@@ -163,7 +158,7 @@ $modPath = $this->getModule()->getModPath();
 				</div>
 			</div>
 			<div class="wpf-overview-block-body">
-				<div class="row">
+				<div class="woobewoo_row">
 					<div class="col-md-6">
 						<div class="wpf-overview-img wpf-overview-img-pt">
 							<div class="wpf-overview-body-title">

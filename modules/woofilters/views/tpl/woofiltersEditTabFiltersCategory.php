@@ -45,7 +45,7 @@ else :
 			<?php esc_html_e( 'Select default id', 'woo-product-filter' ); ?>
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Selects the default filter value by id', 'woo-product-filter' ); ?>"></i>
 		</div>
-		<div class="settings-value col-xs-8 col-sm-9">
+		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 			<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 		</div>
 	</div>
@@ -55,7 +55,7 @@ else :
 			<i class="fa fa-question woobewoo-tooltip no-tooltip"
 			   title="<?php echo esc_attr__( 'Allow only one item from the list to be selected at a time', 'woo-product-filter' ); ?>"></i>
 		</div>
-		<div class="settings-value col-xs-8 col-sm-9">
+		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 			<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 		</div>
 	</div>
@@ -63,7 +63,7 @@ else :
 		<div class="settings-block-label col-xs-4 col-sm-3">
 			<?php esc_html_e( 'Hide checkboxes', 'woo-product-filter' ); ?>
 		</div>
-		<div class="settings-value col-xs-8 col-sm-9">
+		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 			<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 		</div>
 	</div>

@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 			<div class="wpf-gopro-text active"><?php esc_html_e('Lifetime', 'woo-product-filter'); ?></div>
 		</div>
 	</div>
-	<div class="row wpf-gopro-block-row wpf-gopro-hidden">
+	<div class="woobewoo_row wpf-gopro-block-row wpf-gopro-hidden">
 		<div class="col-md-4">
 			<div class="wpf-gopro-block">
 				<div class="wpf-gopro-block-header">
@@ -96,7 +96,7 @@ defined( 'ABSPATH' ) || exit;
 			</div>
 		</div>
 	</div>
-	<div class="row wpf-gopro-block-row">
+	<div class="woobewoo_row wpf-gopro-block-row">
 		<div class="col-md-4">
 			<div class="wpf-gopro-block">
 				<div class="wpf-gopro-block-header">
@@ -186,7 +186,7 @@ defined( 'ABSPATH' ) || exit;
 			<div class="wpf-gopro-text active"><?php esc_html_e('Lifetime', 'woo-product-filter'); ?></div>
 		</div>
 	</div>
-	<div class="row wpf-gopro-block-row wpf-gopro-hidden">
+	<div class="woobewoo_row wpf-gopro-block-row wpf-gopro-hidden">
 		<div class="col-md-4">
 			<div class="wpf-gopro-block">
 				<div class="wpf-gopro-block-header">
@@ -272,7 +272,7 @@ defined( 'ABSPATH' ) || exit;
 			</div>
 		</div>
 	</div>
-	<div class="row wpf-gopro-block-row">
+	<div class="woobewoo_row wpf-gopro-block-row">
 		<div class="col-md-4">
 			<div class="wpf-gopro-block">
 				<div class="wpf-gopro-block-header">

@@ -117,8 +117,6 @@
 	margin: 0 5px 0 5px;
 	text-decoration: none;
 }
-input[type="checkbox"],
-input[type="radio"],
 .wpfFilterWrapper input[type="checkbox"],
 .wpfFilterWrapper input[type="radio"] {
 	width: 18px;
@@ -180,7 +178,8 @@ input[type="radio"],
 .wpfFilterWrapper .wpfFilterTitle {
 	cursor: pointer;
 }
-.wpfFilterWrapper .ms-options input[type=checkbox]:checked:before, input[type=radio]:checked:before {
+.wpfMainWrapper .wpfFilterWrapper .ms-options input[type=checkbox]:checked:before,
+.wpfMainWrapper .wpfFilterWrapper .ms-options input[type=radio]:checked:before {
 	float: left;
 	display: inline-block;
 	vertical-align: middle;

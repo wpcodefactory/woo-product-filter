@@ -11,13 +11,13 @@ defined( 'ABSPATH' ) || exit;
 
 $filtersList = $this->getModel()->getAllFilters();
 ?>
-<div class="row row-tab active" id="row-tab-filters">
+<div class="woobewoo_row row-tab active" id="row-tab-filters">
 	<div class="col-xs-12 row-settings-block">
 		<div class="woobewoo-input-group" id="wpfChooseFiltersBlock" data-no-preview="1">
 			<div class="woobewoo-group-label">
 				<?php esc_html_e('Select filters to add', 'woo-product-filter'); ?>
 			</div>
-			<div class="d-flex w-100">
+			<div class="woobewoo-d-flex woobewoo-wdt-100">
 				<select id="wpfChooseFilters" data-added-text="<?php esc_html_e('Added to filter', 'woo-product-filter'); ?>">
 					<?php
 					foreach ($filtersList as $filter => $data) {
@@ -35,7 +35,7 @@ $filtersList = $this->getModel()->getAllFilters();
 				</select>
 				<button id="wpfAddFilterButton" data-option='add' class="button button-small">
 					<span><?php esc_html_e('Add', 'woo-product-filter'); ?></span>
-						<svg class="ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<svg class="woobewoo-ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M7.33341 13.25L3.83341 9.74999L2.66675 10.9167L7.33341 15.5833L17.3334 5.58332L16.1667 4.41666L7.33341 13.25Z" fill="white" />
 						</svg>
 				</button>

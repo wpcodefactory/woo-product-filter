@@ -321,7 +321,25 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 		return $labels;
 	}
-
+	public function syncSlugFormatRewriteSiteOption() {
+		$prev = (int) get_option('wpf_slug_format_rewrite_active', 0);
+		$enabled = 0;
+		$rows = $this->setSelectFields('setting_data')->getFromTbl();
+		foreach ((array) $rows as $row) {
+			if (empty($row['setting_data'])) {
+				continue;
+			}
+			$decoded = @unserialize($row['setting_data']);
+			if (is_array($decoded) && !empty($decoded['settings']['slug_format'])) {
+				$enabled = 1;
+				break;
+			}
+		}
+		update_option('wpf_slug_format_rewrite_active', $enabled, false);
+		if ((int) $prev !== (int) $enabled) {
+			flush_rewrite_rules(false);
+		}
+	}
 	/**
 	 * save.
 	 */
