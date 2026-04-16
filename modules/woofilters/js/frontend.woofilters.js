@@ -1003,11 +1003,11 @@
 			if(!_this.hasClass('next') && !_this.hasClass('prev') ){
 				var number = parseInt(_this.text(), 10) || 1;
 			}else if(_this.hasClass('next')){
-					var current = parseInt(currentNumber, 10) || 1;
-					var number = current + 1;
+				var current = parseInt(currentNumber, 10) || 1;
+				var number = current + 1;
 			}else if(_this.hasClass('prev')){
-					var current = parseInt(currentNumber, 10) || 1;
-					var number = Math.max(current - 1, 1);
+				var current = parseInt(currentNumber, 10) || 1;
+				var number = Math.max(current - 1, 1);
 			}
 			var wrapper = jQuery('.wpfMainWrapper').first(),
 				$queryVars = wrapper.attr('data-settings');
@@ -1617,20 +1617,19 @@
 				$needUrl = $filterSettings['open_one_by_one'] == '1' && $filterSettings['obo_only_children'] == '1';
 			//slug generation
 			if (history.pushState && app.wpfNewUrl != window.wpfOldUrl && ((!redirect && !redirectTerm) || $needUrl)) {
-							var slugFormat=_thisObj.slugFormat;
-							var newUrl = app.wpfNewUrl.indexOf('pr_search_') > 0 ? app.wpfNewUrl.replace('+', '%2b') : app.wpfNewUrl;
-							var finalUrl = newUrl;
-							if (slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0") {
-								var search = newUrl ? new URL(newUrl).search : window.location.search;
-								var segments = _thisObj.convertParamsToSegments(search);
-								finalUrl = $generalSettings.settings.shop_base_url + 'wbw/' + segments.join('/');
-								if (segments.length === 0) finalUrl = $generalSettings.settings.shop_base_url;
-							}
-							history.pushState({state: 1, rand: Math.random(), wpf: true}, '', finalUrl);
-							app.wpfOldUrl = app.wpfNewUrl;
-							_thisObj.changeSlugByUrl();
+				var slugFormat=_thisObj.slugFormat;
+				var newUrl = app.wpfNewUrl.indexOf('pr_search_') > 0 ? app.wpfNewUrl.replace('+', '%2b') : app.wpfNewUrl;
+				var finalUrl = newUrl;
+				if (slugFormat !== "" && slugFormat !== 0 && slugFormat && slugFormat !== "0") {
+					var search = newUrl ? new URL(newUrl).search : window.location.search;
+					var segments = _thisObj.convertParamsToSegments(search);
+					finalUrl = $generalSettings.settings.shop_base_url + 'wbw/' + segments.join('/');
+					if (segments.length === 0) finalUrl = $generalSettings.settings.shop_base_url;
 				}
-	
+				history.pushState({state: 1, rand: Math.random(), wpf: true}, '', finalUrl);
+				app.wpfOldUrl = app.wpfNewUrl;
+				_thisObj.changeSlugByUrl();
+			}
 			//slug generation
 			if (redirectTerm || (redirect && _thisObj.filterClick)) {
 				let queryString = app.wpfNewUrl.split('?')[1] || '';

@@ -45,7 +45,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.0.2
+	 * @version 3.1.7
 	 */
 	public function init() {
 		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
@@ -5136,10 +5136,23 @@ class WoofiltersWpf extends ModuleWpf {
 		global $wp_query;
 		return ( $wp_query ? $wp_query->get_queried_object_id() : 0 );
 	}
+
+	/**
+	 * isWpfSlugFormatRewriteActive.
+	 *
+	 * @version 3.1.7
+	 * @since   3.1.7
+	 */
 	protected function isWpfSlugFormatRewriteActive() {
 		return (bool) (int) get_option( 'wpf_slug_format_rewrite_active', 0 );
 	}
 
+	/**
+	 * registerWpfSlugFormatRewrites.
+	 *
+	 * @version 3.1.7
+	 * @since   3.1.7
+	 */
 	public function registerWpfSlugFormatRewrites() {
 		if ( ! $this->isWpfSlugFormatRewriteActive() ) {
 			return;
@@ -5160,6 +5173,12 @@ class WoofiltersWpf extends ModuleWpf {
 		);
 	}
 
+	/**
+	 * addWpfSlugFormatQueryVars.
+	 *
+	 * @version 3.1.7
+	 * @since   3.1.7
+	 */
 	public function addWpfSlugFormatQueryVars( $vars ) {
 		if ( ! $this->isWpfSlugFormatRewriteActive() ) {
 			return $vars;
@@ -5168,6 +5187,12 @@ class WoofiltersWpf extends ModuleWpf {
 		return $vars;
 	}
 
+	/**
+	 * maybeParseWpfSlugFormatRequest.
+	 *
+	 * @version 3.1.7
+	 * @since   3.1.7
+	 */
 	public function maybeParseWpfSlugFormatRequest( $wp ) {
 		if ( is_admin() || ! $this->isWpfSlugFormatRewriteActive() ) {
 			return;
@@ -5178,8 +5203,14 @@ class WoofiltersWpf extends ModuleWpf {
 		$this->getController()->handleSlugFiltersTemplateRedirect( $wp );
 	}
 
+	/**
+	 * wpfMaybeBootstrapSlugFormatRewriteOption.
+	 *
+	 * @version 3.1.7
+	 * @since   3.1.7
+	 */
 	public function wpfMaybeBootstrapSlugFormatRewriteOption() {
-		if ( get_option( 'wpf_slug_format_rewrite_option_bootstrapped', '' ) === '1' ) {
+		if ( '1' === get_option( 'wpf_slug_format_rewrite_option_bootstrapped', '' ) ) {
 			return;
 		}
 		$this->getModel( 'woofilters' )->syncSlugFormatRewriteSiteOption();

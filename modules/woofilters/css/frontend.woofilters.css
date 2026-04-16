@@ -288,7 +288,7 @@
 	display:none !important;
 }
 .wpfFilterWrapper ul li::before {
-  display:none !important;
+	display:none !important;
 }
 .wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
 	width: auto !important;
@@ -298,9 +298,9 @@
 	margin-left: 0px !important;
 }
 .rtl .wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
-  padding-right: 0px !important;
-  padding-left: 10px !important;
-  margin-right: 0px !important;
+	padding-right: 0px !important;
+	padding-left: 10px !important;
+	margin-right: 0px !important;
 }
 .wpfFilterWrapper label, .wpfFilterWrapper select, .wpfPriceFilterRange, .wpfFilterWrapper .ui-slider-handle {
 	cursor:pointer !important;
@@ -335,7 +335,7 @@
 }
 
 .wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckbox input {
-  position: relative;
+	position: relative;
 }
 .wpfFilterWrapper .irs-line {
 	overflow: initial;
@@ -1421,7 +1421,7 @@ select.woobewoo-flat-input {
 	}
 }
 
-/* custom css ===================================================================================== */
+/* Custom CSS */
 :root {
 	--white: #ffffff;
 	--black: #000000;
@@ -1449,8 +1449,8 @@ select.woobewoo-flat-input {
 	color: var(--white);
 }
 .woobewoo_row {
-  margin-left: -15px;
-  margin-right: -15px;
+	margin-left: -15px;
+	margin-right: -15px;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -1524,20 +1524,20 @@ select.woobewoo-flat-input {
 	margin: 0 !important;
 }
 .woobewoo-mb-3 {
-    margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 .woobewoo-ms-2 {
 	margin-left: 0.5rem;
 }
 .wpfFilterVerScroll .editablecat ul {
-  margin-top: 6px;
+	margin-top: 6px;
 }
 .title_23 {
 	font-size: 23px;
 }
 #row-tab-filters #wpfChooseFiltersBlock .wpfProLabel:not(.wpfHidden) {
-  margin-top: 5px;
-  margin-left: 0;
+	margin-top: 5px;
+	margin-left: 0;
 }
 .no-products-found{
 	min-height: 150px;

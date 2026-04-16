@@ -321,10 +321,17 @@ class WoofiltersModelWpf extends ModelWpf {
 		}
 		return $labels;
 	}
+
+	/**
+	 * syncSlugFormatRewriteSiteOption.
+	 *
+	 * @version 3.1.7
+	 * @since   3.1.7
+	 */
 	public function syncSlugFormatRewriteSiteOption() {
-		$prev = (int) get_option('wpf_slug_format_rewrite_active', 0);
 		$enabled = 0;
-		$rows = $this->setSelectFields('setting_data')->getFromTbl();
+		$prev    = (int) get_option('wpf_slug_format_rewrite_active', 0);
+		$rows    = $this->setSelectFields('setting_data')->getFromTbl();
 		foreach ((array) $rows as $row) {
 			if (empty($row['setting_data'])) {
 				continue;
@@ -340,6 +347,7 @@ class WoofiltersModelWpf extends ModelWpf {
 			flush_rewrite_rules(false);
 		}
 	}
+
 	/**
 	 * save.
 	 */

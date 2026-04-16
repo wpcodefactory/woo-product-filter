@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Elementor Options
+ *
+ * @version 3.1.7
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 $isPro = FrameWpf::_()->isPro();
 $labelPro = '';
 if (!$isPro) {

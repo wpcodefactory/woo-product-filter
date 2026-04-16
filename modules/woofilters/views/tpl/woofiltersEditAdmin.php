@@ -49,7 +49,7 @@ if (taxonomy_exists('pwb-brand')) {
 		<div class="woobewoo-item woobewoo-panel">
 			<div id="containerWrapper">
 				<form id="wpfFiltersEditForm" data-table-id="<?php echo esc_attr($this->filter['id']); ?>" data-href="<?php echo esc_attr($this->link); ?>">
-			<div class="topBtnsArea wpfMainBtnsShell">
+					<div class="topBtnsArea wpfMainBtnsShell">
 						<ul class="wpfSub control-buttons">
 							<li>
 								<button id="buttonSave" class="button<?php echo $isWCLicense ? ' button-primary' : ''; ?>">
@@ -63,7 +63,7 @@ if (taxonomy_exists('pwb-brand')) {
 							</li>
 						</ul>
 					</div>
-						<div class="wpfCopyTextCodeSelectionShell">
+					<div class="wpfCopyTextCodeSelectionShell">
 						<div class="woobewoo_row">
 							<div class="col-md-4 wpfNamePadding woobewoo-d-flex woobewoo-flex-column">
 								<label class="woobewoo-inline-block" for="">
@@ -141,7 +141,7 @@ if (taxonomy_exists('pwb-brand')) {
 							<div class="clear"></div>
 						</div>
 					</div>
-						<div class="">
+					<div class="">
 						<div class="no-md-r-padding woobewoo-wdt-100">
 							<div id="tabsContainer" class="woobewoo-d-flex wpfSub tabs-wrapper wpfMainTabs">
 								<a href="#row-tab-filters"
@@ -191,19 +191,18 @@ if (taxonomy_exists('pwb-brand')) {
 						</div> -->
 					</div>
 					<div class="wpfMainTabsContainer mainContainer_dsfsdf woobewoo-d-flex selectFiltersMain woobewoo-p-24">
-							<div class="sdkfjsjLeft wpfFiltersTabContents woobewoo-p-0-i">
-								<?php //All templates in the same folder now. This is simplest way to include all. ?>
-								<?php include_once 'woofiltersEditTabFilters.php'; ?>
-								<?php include_once 'woofiltersEditTabOptions.php'; ?>
-								<?php include_once 'woofiltersEditTabDesign.php'; ?>
+						<div class="sdkfjsjLeft wpfFiltersTabContents woobewoo-p-0-i">
+							<?php //All templates in the same folder now. This is simplest way to include all. ?>
+							<?php include_once 'woofiltersEditTabFilters.php'; ?>
+							<?php include_once 'woofiltersEditTabOptions.php'; ?>
+							<?php include_once 'woofiltersEditTabDesign.php'; ?>
+						</div>
+						<div class="col-md-3 sdkfjsjRight">
+							<div class="hidden-lg hidden-md">
+								<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
 							</div>
-							<div class="col-md-3 sdkfjsjRight">
-								<div class="hidden-lg hidden-md">
-									<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
-								</div>
-								<div class="wpfFiltersBlockPreview"></div>
-							</div>
-					
+							<div class="wpfFiltersBlockPreview"></div>
+						</div>
 					</div>
 
 					<?php

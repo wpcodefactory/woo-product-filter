@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Elementor Filters
+ *
+ * @version 3.1.7
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 $isPro = FrameWpf::_()->isPro();
 $labelPro = '';
 if (!$isPro) {
@@ -76,8 +86,8 @@ $formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getMo
 			'value' => ''
 		));
 		?>
-		
-		
+
+
 		<?php HtmlWpf::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
 		<?php HtmlWpf::hidden( 'action', array( 'value' => 'save' ) ); ?>
 		<?php HtmlWpf::hidden( 'id', array( 'value' => '' ) ); ?>

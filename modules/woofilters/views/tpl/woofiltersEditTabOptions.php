@@ -348,8 +348,8 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 		</div>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
-				<?php esc_html_e('Set Number Of Products Per woobewoo_row', 'woo-product-filter'); ?>
-				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Set number of products per woobewoo_row. This number will only be shown after filter is applied!', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
+				<?php esc_html_e('Set Number Of Products Per Row', 'woo-product-filter'); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Set number of products per row. This number will only be shown after filter is applied!', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 			</div>
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
@@ -402,7 +402,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Enable Ajax', 'woo-product-filter'); ?>
-				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('This option enables Ajax search. Product filtering and displaying results in a bwoobewoo_rowser will be run in the background without full page reload.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/enable-ajax/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('This option enables Ajax search. Product filtering and displaying results in a browser will be run in the background without full page reload.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/enable-ajax/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
 				<div class="settings-value settings-w100">

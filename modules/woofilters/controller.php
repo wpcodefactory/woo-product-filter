@@ -170,25 +170,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * addRewriteRules.
-	 *
-	 * @version 3.1.7
-	 * @since   3.1.7
-	 */
-	public function addRewriteRules() {
-		$shop_page_id = (int) get_option('woocommerce_shop_page_id');
-		if ($shop_page_id <= 0) {
-			return;
-		}
-		$slug = get_post_field('post_name', $shop_page_id);
-		if (! is_string($slug) || '' === $slug) {
-			return;
-		}
-		$escaped = preg_quote($slug, '/');
-		add_rewrite_rule('^' . $escaped . '/wbw/(.+?)/?$', 'index.php?pagename=' . $slug . '&wbw_custom_filters=$matches[1]', 'top');
-	}
-
-	/**
 	 * addQueryVars.
 	 *
 	 * @version 3.1.7
@@ -207,11 +188,18 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$query .= ')';
 		return $query;
 	}
+
+	/**
+	 * _prepareListForTbl.
+	 *
+	 * @version 3.1.7
+	 */
 	public function _prepareListForTbl( $data ) {
 		foreach ( $data as $key => $row ) {
 			$id        = $row['id'];
 			$shortcode = '[' . WPF_SHORTCODE . ' id=' . $id . ']';
 			$titleUrl  = '<a href="' . esc_url($this->getModule()->getEditLink($id)) . '">' . esc_html($row['title']) . '</a>';
+
 			$data[$key]['actions'] = '<a href="' . esc_url($this->getModule()->getEditLink($id)) . '"> <i class="fa fa-fw fa-pencil"></i></a> <a data-filter-id="' . $id . '" class="wpfDuplicateFilter" href="" title="' . esc_attr__('Duplicate filter', 'woo-product-filter') . '"><i class="fa fa-fw fa-clone"></i></a>';
 			$data[$key]['shortcode'] = $shortcode;
 			$data[$key]['title']     = DispatcherWpf::applyFilters('prepareFilterListTitle', $titleUrl, $row);
@@ -341,6 +329,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		return $res->ajaxExec();
 	}
 
+	/**
+	 * filtersFrontend.
+	 *
+	 * @version 3.1.7
+	 */
 	public function filtersFrontend() {
 		$res = new ResponseWpf();
 
@@ -586,10 +579,10 @@ class WoofiltersControllerWpf extends ControllerWpf {
 					endwhile;
 					$productsHtml = ob_get_clean();
 					if ( empty($productsHtml) ) {
-						$productsHtml = '  <div class="no-products-found">' . __($filterSettings['text_no_products'], 'woo-product-filter') . '</div>';
+						$productsHtml = ' <div class="no-products-found">' . $filterSettings['text_no_products'] . '</div>';
 					}
 				} else {
-					$productsHtml = '  <div class="no-products-found">' . __($filterSettings['text_no_products'], 'woo-product-filter') . '</div>';
+					$productsHtml = ' <div class="no-products-found">' . $filterSettings['text_no_products'] . '</div>';
 				}
 			}
 
@@ -1171,58 +1164,58 @@ class WoofiltersControllerWpf extends ControllerWpf {
 							}
 						}
 						break;
-						case 'wpfCustomField':
-							$customfield = $setting['settings'] ?? [];
-							$name        = $setting['name'] ?? '';
-							$meta_key    = substr($name, 3);
+					case 'wpfCustomField':
+						$customfield = $setting['settings'] ?? [];
+						$name        = $setting['name'] ?? '';
+						$meta_key    = substr($name, 3);
 
-							if (empty($meta_key) || empty($customfield)) {
-								break;
-							}
-
-							$customOptions = FrameWpf::_()
-								->getModule('woofilters')
-								->getModel('woofilters')
-								->getCustomFieldFilterOptions('product');
-
-							$fieldtype = isset($customOptions[$meta_key]['type']) ? $customOptions[$meta_key]['type'] : '';
-
-							if (!is_array($customfield)) {
-								$customfield = strpos($customfield, '|') !== false
-									? explode('|', $customfield)
-									: array($customfield);
-							}
-
-							$values = array_filter(array_map('trim', $customfield));
-							if (empty($values)) {
-								break;
-							}
-
-							$clauses = array();
-							foreach ($values as $single_value) {
-								$normalized = trim($single_value);
-
-								// Checkbox values are commonly stored serialized.
-								$search = ('checkbox' === $fieldtype)
-									? '"' . $normalized . '"'
-									: $normalized;
-
-								$clauses[] = array(
-									'key'     => $meta_key,
-									'value'   => $search,
-									'compare' => 'LIKE',
-								);
-							}
-
-							if (!empty($clauses)) {
-								if (count($clauses) === 1) {
-									$args['meta_query'][] = $clauses[0];
-								} else {
-									$clauses['relation'] = 'OR';
-									$args['meta_query'][] = $clauses;
-								}
-							}
+						if (empty($meta_key) || empty($customfield)) {
 							break;
+						}
+
+						$customOptions = FrameWpf::_()
+							->getModule('woofilters')
+							->getModel('woofilters')
+							->getCustomFieldFilterOptions('product');
+
+						$fieldtype = $customOptions[$meta_key]['type'] ?? '';
+
+						if (!is_array($customfield)) {
+							$customfield = strpos($customfield, '|') !== false
+								? explode('|', $customfield)
+								: array($customfield);
+						}
+
+						$values = array_filter(array_map('trim', $customfield));
+						if (empty($values)) {
+							break;
+						}
+
+						$clauses = array();
+						foreach ($values as $single_value) {
+							$normalized = trim($single_value);
+
+							// Checkbox values are commonly stored serialized.
+							$search = ('checkbox' === $fieldtype)
+								? '"' . $normalized . '"'
+								: $normalized;
+
+							$clauses[] = array(
+								'key'     => $meta_key,
+								'value'   => $search,
+								'compare' => 'LIKE',
+							);
+						}
+
+						if (!empty($clauses)) {
+							if (count($clauses) === 1) {
+								$args['meta_query'][] = $clauses[0];
+							} else {
+								$clauses['relation'] = 'OR';
+								$args['meta_query'][] = $clauses;
+							}
+						}
+						break;
 					case 'wpfBrand':
 						$brandsIdStr = $setting['settings'];
 						if ( $brandsIdStr ) {
