@@ -5210,10 +5210,46 @@ class WoofiltersWpf extends ModuleWpf {
 	 * @since   3.1.7
 	 */
 	public function wpfMaybeBootstrapSlugFormatRewriteOption() {
-		if ( '1' === get_option( 'wpf_slug_format_rewrite_option_bootstrapped', '' ) ) {
-			return;
+		$flush_needed = false;
+		if ( '1' == get_option( 'wpf_slug_format_rewrite_flush_needed' ) ) {
+			$flush_needed = true;
+			delete_option( 'wpf_slug_format_rewrite_flush_needed' );
 		}
-		$this->getModel( 'woofilters' )->syncSlugFormatRewriteSiteOption();
-		update_option( 'wpf_slug_format_rewrite_option_bootstrapped', '1', true );
+
+		if ( '1' !== get_option( 'wpf_slug_format_rewrite_option_bootstrapped', '' ) ) {
+			$this->getModel( 'woofilters' )->syncSlugFormatRewriteSiteOption();
+			update_option( 'wpf_slug_format_rewrite_option_bootstrapped', '1', true );
+			$flush_needed = true;
+		}
+
+		// Recover if another plugin flushed rules while our plugin was inactive.
+		if ( $flush_needed || ( $this->isWpfSlugFormatRewriteActive() && ! $this->hasWpfSlugRewriteRule() ) ) {
+			flush_rewrite_rules( false );
+		}
+	}
+
+	/**
+	 * hasWpfSlugRewriteRule.
+	 *
+	 * @version 3.1.7
+	 * @since   3.1.7
+	 */
+	protected function hasWpfSlugRewriteRule() {
+		$shop_page_id = (int) get_option( 'woocommerce_shop_page_id' );
+		if ( $shop_page_id <= 0 ) {
+			return false;
+		}
+		$slug = get_post_field( 'post_name', $shop_page_id );
+		if ( ! is_string( $slug ) || '' === $slug ) {
+			return false;
+		}
+
+		$rules = get_option( 'rewrite_rules', array() );
+		if ( ! is_array( $rules ) ) {
+			return false;
+		}
+
+		$pattern = '^' . preg_quote( $slug, '/' ) . '/wbw/(.+?)/?$';
+		return isset( $rules[ $pattern ] );
 	}
 }

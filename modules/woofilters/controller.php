@@ -87,14 +87,15 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$value = rawurldecode($value);
 			$value = str_replace('+', ' ', $value);
 
-			// 2) Detect delimiter for multi-select: "|", "," or ";"
+			// 2) Detect delimiter for multi-select: "~", "|", "," or ";"
 			$delim = null;
-			foreach (array('|', ',', ';') as $d) {
+			foreach (array('~', '|', ',', ';') as $d) {
 				if (false !== strpos($value, $d)) {
 					$delim = $d;
 					break;
 				}
 			}
+			$normalizedDelim = ( '~' === $delim ) ? '|' : $delim;
 			$parts = $delim
 				? array_filter(array_map('trim', explode($delim, $value)))
 				: array(trim($value));
@@ -123,14 +124,18 @@ class WoofiltersControllerWpf extends ControllerWpf {
 					continue;
 				}
 				// Rebuild value as ID list with the same delimiter (or single ID)
-				$value = $delim ? implode($delim, $ids) : (string) $ids[0];
+				$value = $normalizedDelim ? implode($normalizedDelim, $ids) : (string) $ids[0];
 
 				// For main category filter also set helper query var for shop page logic
 				if (0 === strpos($key, 'wpf_filter_cat_') || 'product_cat' === $key) {
 					set_query_var('product_category_id', (int) $ids[0]);
 				}
 			}
-			// else: non-tax filters (pr_stock, custom fields, etc.) keep decoded slugs as-is
+			// Normalize "~" path delimiter back to internal "|" delimiter.
+			if (! $taxonomy && $normalizedDelim && $delim && $normalizedDelim !== $delim) {
+				$value = implode($normalizedDelim, $parts);
+			}
+			// else: non-tax filters (pr_stock, custom fields, etc.) keep decoded values as-is
 
 			// 4) Push into request/query vars so the plugin works as if they were GET params
 			$_GET[$key]           = $value;

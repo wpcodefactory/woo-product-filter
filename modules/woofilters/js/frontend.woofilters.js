@@ -470,7 +470,7 @@
 
 			var decodedKey = decodeURIComponent(key);
 			var delim = getDelimiterForFilter(decodedKey);
-
+			var pathDelim = ('|' === delim) ? '~' : delim;
 			// decode full value first (important!)
 			var decodedVal = decodeURIComponent(val.replace(/\+/g, ' '));
 
@@ -494,7 +494,7 @@
 
 			if (slugs.length) {
 				segments.push(decodedKey);
-				segments.push(slugs.join(delim));
+				segments.push(slugs.join(pathDelim));
 			}
 		});
 

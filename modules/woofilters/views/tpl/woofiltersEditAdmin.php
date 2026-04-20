@@ -190,14 +190,14 @@ if (taxonomy_exists('pwb-brand')) {
 							<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
 						</div> -->
 					</div>
-					<div class="wpfMainTabsContainer mainContainer_dsfsdf woobewoo-d-flex selectFiltersMain woobewoo-p-24">
-						<div class="sdkfjsjLeft wpfFiltersTabContents woobewoo-p-0-i">
+					<div class="wpfMainTabsContainer woobewooFiltersParentContainer woobewoo-d-flex selectFiltersMain woobewoo-p-24">
+						<div class="woobewooFiltersMainLeftCol wpfFiltersTabContents woobewoo-p-0-i">
 							<?php //All templates in the same folder now. This is simplest way to include all. ?>
 							<?php include_once 'woofiltersEditTabFilters.php'; ?>
 							<?php include_once 'woofiltersEditTabOptions.php'; ?>
 							<?php include_once 'woofiltersEditTabDesign.php'; ?>
 						</div>
-						<div class="col-md-3 sdkfjsjRight">
+						<div class="col-md-3 woobewooFiltersMainRightCol">
 							<div class="hidden-lg hidden-md">
 								<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
 							</div>

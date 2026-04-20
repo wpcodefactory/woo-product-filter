@@ -2296,7 +2296,7 @@ class WoofiltersViewWpf extends ViewWpf {
 						$checked = (in_array($term_slug, $selectedArrLower, true) || in_array($term_id, $selectedArrval, true)) ? ' checked="checked"' : '';
 
 						$htmlOpt .= '
-						<label class="encoderCheckbox" data-term-id="' . esc_attr($term_id) . '" data-term-slug="' . esc_attr($term_slug) . '">
+						<label class="woobewooCheckbox" data-term-id="' . esc_attr($term_id) . '" data-term-slug="' . esc_attr($term_slug) . '">
 							<input type="checkbox" name="' . esc_attr($name) . '[]" value="' . esc_attr($term_id) . '"' . $checked . ' />
 							<span>' . esc_html($value) . '</span>
 						</label>';
@@ -2311,7 +2311,7 @@ class WoofiltersViewWpf extends ViewWpf {
 						$checked = (in_array($term_slug, $selectedArrLower, true) || in_array($term_id, $selectedArrval, true)) ? ' checked="checked"' : '';
 
 						$htmlOpt .= '
-						<label class="encoderRadio" data-term-id="' . esc_attr($term_id) . '" data-term-slug="' . esc_attr($term_slug) . '">
+						<label class="woobewooRadio" data-term-id="' . esc_attr($term_id) . '" data-term-slug="' . esc_attr($term_slug) . '">
 							<input type="radio" name="' . esc_attr($name) . '" value="' . esc_attr($term_id) . '"' . $checked . ' />
 							<span>' . esc_html($value) . '</span>
 						</label>';

@@ -331,17 +331,21 @@ class UtilsWpf {
 		if (WPF_TEST_MODE) {
 			add_action('activated_plugin', array(FrameWpf::_(), 'savePluginActivationErrors'));
 		}
+		// Re-run slug rewrite bootstrap logic after each activation.
+		delete_option( 'wpf_slug_format_rewrite_option_bootstrapped' );
 		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
 			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::init();
+					flush_rewrite_rules(false);
 				} 
 			}
 			restore_current_blog();
 			return;
 		} else {
 			InstallerWpf::init();
+			flush_rewrite_rules(false);
 		}
 	}
 
@@ -372,12 +376,16 @@ class UtilsWpf {
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::deactivate();
+					delete_option( 'wpf_slug_format_rewrite_flush_needed' );
+					delete_option( 'rewrite_rules' );
 				} 
 			}
 			restore_current_blog();
 			return;
 		} else {
 			InstallerWpf::deactivate();
+			delete_option( 'wpf_slug_format_rewrite_flush_needed' );
+			delete_option( 'rewrite_rules' );
 		}
 	}
 	public static function isWritable( $filename ) {
