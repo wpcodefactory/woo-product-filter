@@ -454,7 +454,6 @@
 	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='%23fff'%3e%3cpath d='M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z'/%3e%3c/svg%3e");
 	background-image: var(--bs-form-check-bg-image);
 }
-
 #wpfAddDialog input[type="radio"]::before,
 #wpfAddDialog input[type="checkbox"]::before,
 .wpfMainWrapper input[type="radio"]::before,

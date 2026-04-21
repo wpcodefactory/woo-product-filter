@@ -4319,8 +4319,8 @@ class WoofiltersWpf extends ModuleWpf {
 					$termIds[] = $termId;
 
 					$sqlTemp                            = "SELECT count(DISTINCT tr.`object_id`) FROM {$listTable} AS wpf_temp
-    					INNER JOIN {$wpdb->term_relationships} AS tr ON (tr.`object_id`=wpf_temp.`ID`)
-					    INNER JOIN {$wpdb->term_taxonomy} AS wtf ON tr.`term_taxonomy_id` = wtf.`term_taxonomy_id`
+						INNER JOIN {$wpdb->term_relationships} AS tr ON (tr.`object_id`=wpf_temp.`ID`)
+						INNER JOIN {$wpdb->term_taxonomy} AS wtf ON tr.`term_taxonomy_id` = wtf.`term_taxonomy_id`
 						WHERE wtf.`term_id` IN (" . implode( ',', $termIds ) . ')';
 					$cnt                                = intval( DbWpf::get( $sqlTemp, 'one' ) );
 					$existTerms[ $taxonomy ][ $termId ] = $cnt;

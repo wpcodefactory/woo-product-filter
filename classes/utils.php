@@ -1,8 +1,26 @@
 <?php
+/**
+ * Product Filter by WBW - UtilsWpf Class
+ *
+ * @version 3.1.7
+ *
+ * @author  woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class UtilsWpf {
+
+	/**
+	 * jsonEncode.
+	 */
 	public static function jsonEncode( $arr ) {
 		return ( is_array($arr) || is_object($arr) ) ? jsonEncodeUTFnormalWpf($arr) : jsonEncodeUTFnormalWpf(array());
 	}
+
+	/**
+	 * jsonDecode.
+	 */
 	public static function jsonDecode( $str ) {
 		if (is_array($str)) {
 			return $str;
@@ -12,12 +30,24 @@ class UtilsWpf {
 		}
 		return empty($str) ? array() : json_decode($str, true);
 	}
+
+	/**
+	 * unserialize.
+	 */
 	public static function unserialize( $data ) {
 		return unserialize($data);
 	}
+
+	/**
+	 * serialize.
+	 */
 	public static function serialize( $data ) {
 		return serialize($data);
 	}
+
+	/**
+	 * createDir.
+	 */
 	public static function createDir( $path, $params = array('chmod' => null, 'httpProtect' => false) ) {
 		if (@mkdir($path)) {
 			if (!is_null($params['chmod'])) {
@@ -30,6 +60,10 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * httpProtectDir.
+	 */
 	public static function httpProtectDir( $path ) {
 		$content = 'DENY FROM ALL';
 		if (strrpos($path, DS) != strlen($path)) {
@@ -40,11 +74,12 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
 	/**
-	 * Copy all files from one directory ($source) to another ($destination)
+	 * Copy all files from one directory ($source) to another ($destination).
 	 *
-	 * @param string $source path to source directory
-	 * @params string $destination path to destination directory
+	 * @param string $source      Path to source directory.
+	 * @param string $destination Path to destination directory.
 	 */
 	public static function copyDirectories( $source, $destination ) {
 		if (is_dir($source)) {
@@ -54,7 +89,7 @@ class UtilsWpf {
 				if ( ( '.' == $readdirectory ) || ( '..' == $readdirectory ) ) {
 					continue;
 				}
-				$PathDir = $source . '/' . $readdirectory; 
+				$PathDir = $source . '/' . $readdirectory;
 				if (is_dir($PathDir)) {
 					self::copyDirectories( $PathDir, $destination . '/' . $readdirectory );
 					continue;
@@ -66,6 +101,10 @@ class UtilsWpf {
 			copy( $source, $destination );
 		}
 	}
+
+	/**
+	 * getIP.
+	 */
 	public static function getIP() {
 		$res = '';
 		if (!isset($_SERVER['HTTP_CLIENT_IP']) || empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -85,12 +124,12 @@ class UtilsWpf {
 		} else {
 			$res = sanitize_text_field($_SERVER['HTTP_CLIENT_IP']);
 		}
-		
+
 		return $res;
 	}
-	
+
 	/**
-	 * Parse xml file into simpleXML object
+	 * Parse xml file into simpleXML object.
 	 *
 	 * @param string $path path to xml file
 	 * @return mixed object SimpleXMLElement if success, else - false
@@ -101,10 +140,11 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
 	/**
-	 * Check if the element exists in array
+	 * Check if the element exists in array.
 	 *
-	 * @param array $param 
+	 * @param array $param
 	 */
 	public static function xmlAttrToStr( $param, $element ) {
 		if (isset($param[$element])) {
@@ -114,6 +154,10 @@ class UtilsWpf {
 			return '';
 		}
 	}
+
+	/**
+	 * xmlNodeAttrsToArr.
+	 */
 	public static function xmlNodeAttrsToArr( $node ) {
 		$arr = array();
 		foreach ($node->attributes() as $a => $b) {
@@ -121,9 +165,17 @@ class UtilsWpf {
 		}
 		return $arr;
 	}
+
+	/**
+	 * deleteFile.
+	 */
 	public static function deleteFile( $str ) {
 		return @unlink($str);
 	}
+
+	/**
+	 * deleteDir.
+	 */
 	public static function deleteDir( $str ) {
 		if (is_file($str)) {
 			return self::deleteFile($str);
@@ -135,8 +187,9 @@ class UtilsWpf {
 			return @rmdir($str);
 		}
 	}
+
 	/**
-	 * Retrives list of directories ()
+	 * Retrieves list of directories ().
 	 */
 	public static function getDirList( $path ) {
 		$res = array();
@@ -154,8 +207,9 @@ class UtilsWpf {
 		}
 		return $res;
 	}
+
 	/**
-	 * Retrives list of files
+	 * Retrieves list of files.
 	 */
 	public static function getFilesList( $path ) {
 		$files = array();
@@ -169,8 +223,9 @@ class UtilsWpf {
 		}
 		return $files;
 	}
+
 	/**
-	 * Check if $var is object or something another in future
+	 * Check if $var is object or something another in future.
 	 */
 	public static function is( $var, $what = '' ) {
 		if (!is_object($var)) {
@@ -181,8 +236,9 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
 	/**
-	 * Make replacement in $text, where it will be find all keys with prefix ":" and replace it with corresponding value
+	 * Make replacement in $text, where it will be find all keys with prefix ":" and replace it with corresponding value.
 	 *
 	 * @see email_templatesModel::renderContent()
 	 * @see checkoutView::getSuccessPage()
@@ -196,8 +252,9 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
 	/**
-	 * Retrive full directory of plugin
+	 * Retrieve full directory of plugin.
 	 *
 	 * @param string $name - plugin name
 	 * @return string full path in file system to plugin directory
@@ -205,6 +262,10 @@ class UtilsWpf {
 	public static function getPluginDir( $name = '' ) {
 		return WP_PLUGIN_DIR . DS . $name . DS;
 	}
+
+	/**
+	 * getPluginPath.
+	 */
 	public static function getPluginPath( $name = '' ) {
 		$path = plugins_url($name) . '/';
 		if (substr($path, 0, 4) != 'http') {
@@ -216,15 +277,31 @@ class UtilsWpf {
 		}
 		return $path;
 	}
+
+	/**
+	 * getExtModDir.
+	 */
 	public static function getExtModDir( $plugName ) {
 		return self::getPluginDir($plugName);
 	}
+
+	/**
+	 * getExtModPath.
+	 */
 	public static function getExtModPath( $plugName ) {
 		return self::getPluginPath($plugName);
 	}
+
+	/**
+	 * getCurrentWPThemePath.
+	 */
 	public static function getCurrentWPThemePath() {
 		return get_template_directory_uri();
 	}
+
+	/**
+	 * isThisCommercialEdition.
+	 */
 	public static function isThisCommercialEdition() {
 		foreach (FrameWpf::_()->getModules() as $m) {
 			if (is_object($m) && $m->isExternal()) {
@@ -233,20 +310,29 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * checkNum.
+	 */
 	public static function checkNum( $val, $default = 0 ) {
 		if (!empty($val) && is_numeric($val)) {
 			return $val;
 		}
 		return $default;
 	}
+
+	/**
+	 * checkString.
+	 */
 	public static function checkString( $val, $default = '' ) {
 		if (!empty($val) && is_string($val)) {
 			return $val;
 		}
 		return $default;
 	}
+
 	/**
-	 * Retrives extension of file
+	 * Retrieves extension of file.
 	 *
 	 * @param string $path - path to a file
 	 * @return string - file extension
@@ -254,6 +340,10 @@ class UtilsWpf {
 	public static function getFileExt( $path ) {
 		return strtolower( pathinfo($path, PATHINFO_EXTENSION) );
 	}
+
+	/**
+	 * getRandStr.
+	 */
 	public static function getRandStr( $length = 10, $allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', $params = array() ) {
 		$result = '';
 		$allowedCharsLen = strlen($allowedChars);
@@ -266,16 +356,18 @@ class UtilsWpf {
 
 		return $result;
 	}
+
 	/**
-	 * Get current host location
+	 * Get current host location.
 	 *
 	 * @return string host string
 	 */
 	public static function getHost() {
 		return empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field($_SERVER['HTTP_HOST']);
 	}
+
 	/**
-	 * Check if device is mobile
+	 * Check if device is mobile.
 	 *
 	 * @return bool true if user are watching this site from mobile device
 	 */
@@ -289,8 +381,9 @@ class UtilsWpf {
 		$mobileDetect = new Mobile_Detect();
 		return $mobileDetect->isMobile();
 	}
+
 	/**
-	 * Check if device is tablet
+	 * Check if device is tablet.
 	 *
 	 * @return bool true if user are watching this site from tablet device
 	 */
@@ -304,14 +397,26 @@ class UtilsWpf {
 		$mobileDetect = new Mobile_Detect();
 		return $mobileDetect->isTablet();
 	}
+
+	/**
+	 * getUploadsDir.
+	 */
 	public static function getUploadsDir() {
 		$uploadDir = wp_upload_dir();
 		return $uploadDir['basedir'];
 	}
+
+	/**
+	 * getUploadsPath.
+	 */
 	public static function getUploadsPath() {
 		$uploadDir = wp_upload_dir();
 		return $uploadDir['baseurl'];
 	}
+
+	/**
+	 * arrToCss.
+	 */
 	public static function arrToCss( $data ) {
 		$res = '';
 		if (!empty($data)) {
@@ -321,9 +426,12 @@ class UtilsWpf {
 		}
 		return $res;
 	}
+
 	/**
-	 * Activate all CSP Plugins
-	 * 
+	 * Activate all CSP Plugins.
+	 *
+	 * @version 3.1.7
+	 *
 	 * @return NULL Check if it's site or multisite and activate.
 	 */
 	public static function activatePlugin( $networkwide ) {
@@ -331,15 +439,14 @@ class UtilsWpf {
 		if (WPF_TEST_MODE) {
 			add_action('activated_plugin', array(FrameWpf::_(), 'savePluginActivationErrors'));
 		}
-		// Re-run slug rewrite bootstrap logic after each activation.
-		delete_option( 'wpf_slug_format_rewrite_option_bootstrapped' );
+		delete_option( 'wpf_slug_format_rewrite_option_bootstrapped' ); // Re-run slug rewrite bootstrap logic after each activation.
 		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
 			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::init();
 					flush_rewrite_rules(false);
-				} 
+				}
 			}
 			restore_current_blog();
 			return;
@@ -350,9 +457,9 @@ class UtilsWpf {
 	}
 
 	/**
-	 * Delete All CSP Plugins
-	 * 
-	 * @return NULL Check if it's site or multisite and decativate it.
+	 * Delete all CSP Plugins.
+	 *
+	 * @return NULL Check if it's site or multisite and deactivate it.
 	 */
 	public static function deletePlugin() {
 		global $wpdb;
@@ -361,7 +468,7 @@ class UtilsWpf {
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::delete();
-				} 
+				}
 			}
 			restore_current_blog();
 			return;
@@ -369,6 +476,12 @@ class UtilsWpf {
 			InstallerWpf::delete();
 		}
 	}
+
+	/**
+	 * deactivatePlugin.
+	 *
+	 * @version 3.1.7
+	 */
 	public static function deactivatePlugin( $networkwide ) {
 		global $wpdb;
 		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
@@ -378,7 +491,7 @@ class UtilsWpf {
 					InstallerWpf::deactivate();
 					delete_option( 'wpf_slug_format_rewrite_flush_needed' );
 					delete_option( 'rewrite_rules' );
-				} 
+				}
 			}
 			restore_current_blog();
 			return;
@@ -388,20 +501,38 @@ class UtilsWpf {
 			delete_option( 'rewrite_rules' );
 		}
 	}
+
+	/**
+	 * isWritable.
+	 */
 	public static function isWritable( $filename ) {
 		return is_writable($filename);
 	}
-	
+
+	/**
+	 * isReadable.
+	 */
 	public static function isReadable( $filename ) {
 		return is_readable($filename);
 	}
-	
+
+	/**
+	 * fileExists.
+	 */
 	public static function fileExists( $filename ) {
 		return file_exists($filename);
 	}
+
+	/**
+	 * isPluginsPage.
+	 */
 	public static function isPluginsPage() {
 		return ( basename(ReqWpf::getVar('SCRIPT_NAME', 'server')) === 'plugins.php' );
 	}
+
+	/**
+	 * isSessionStarted.
+	 */
 	public static function isSessionStarted() {
 		if (version_compare(PHP_VERSION, '5.4.0') >= 0 && function_exists('session_status')) {
 			return !( session_status() == PHP_SESSION_NONE );
@@ -409,6 +540,10 @@ class UtilsWpf {
 			return !( session_id() == '' );
 		}
 	}
+
+	/**
+	 * generateBgStyle.
+	 */
 	public static function generateBgStyle( $data ) {
 		$stageBgStyles = array();
 		$stageBgStyle = '';
@@ -442,8 +577,9 @@ class UtilsWpf {
 		}
 		return $stageBgStyle;
 	}
+
 	/**
-	 * Parse worwpfess post/page/custom post type content for images and return it's IDs if there are images
+	 * Parse wordpress post/page/custom post type content for images and return it's IDs if there are images.
 	 *
 	 * @param string $content Post/page/custom post type content
 	 * @return array List of images IDs from content
@@ -456,8 +592,9 @@ class UtilsWpf {
 		}
 		return $res;
 	}
+
 	/**
-	 * Retrive file path in file system from provided URL, it should be in wp-content/uploads
+	 * Retrieve file path in file system from provided URL, it should be in wp-content/uploads.
 	 *
 	 * @param string $url File url path, should be in wp-content/uploads
 	 * @return string Path in file system to file
@@ -467,8 +604,9 @@ class UtilsWpf {
 		$uploadsDir = self::getUploadsDir();
 		return str_replace($uploadsPath, $uploadsDir, $url);
 	}
+
 	/**
-	 * Retrive file URL from provided file system path, it should be in wp-content/uploads
+	 * Retrieve file URL from provided file system path, it should be in wp-content/uploads.
 	 *
 	 * @param string $path File path, should be in wp-content/uploads
 	 * @return string URL to file
@@ -478,16 +616,24 @@ class UtilsWpf {
 		$uploadsDir = self::getUploadsDir();
 		return str_replace($uploadsDir, $uploadsPath, $path);
 	}
+
+	/**
+	 * getUserBrowserString.
+	 */
 	public static function getUserBrowserString() {
 		return isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field($_SERVER['HTTP_USER_AGENT']) : false;
 	}
+
+	/**
+	 * getBrowser.
+	 */
 	public static function getBrowser() {
 		$u_agent = self::getUserBrowserString();
 		$bname = 'Unknown';
 		$platform = 'Unknown';
 		$version = '';
 		$pattern = '';
-		
+
 		if ($u_agent) {
 			//First get the platform?
 			if (preg_match('/linux/i', $u_agent)) {
@@ -497,7 +643,7 @@ class UtilsWpf {
 			} elseif (preg_match('/windows|win32/i', $u_agent)) {
 				$platform = 'windows';
 			}
-			// Next get the name of the useragent yes seperately and for good reason
+			// Next get the name of the useragent yes separately and for good reason
 			if ( ( preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent) ) || ( strpos($u_agent, 'Trident/7.0; rv:11.0') !== false ) ) {
 				$bname = 'Internet Explorer';
 				$ub = 'MSIE';
@@ -550,21 +696,41 @@ class UtilsWpf {
 			'pattern'    => $pattern,
 		);
 	}
+
+	/**
+	 * getBrowsersList.
+	 */
 	public static function getBrowsersList() {
 		return array('Unknown', 'Internet Explorer', 'Mozilla Firefox', 'Google Chrome', 'Apple Safari', 'Opera', 'Netscape');
 	}
+
+	/**
+	 * getLangCode2Letter.
+	 */
 	public static function getLangCode2Letter() {
 		$langCode = self::getLangCode();
 		return strlen($langCode) > 2 ? substr($langCode, 0, 2) : $langCode;
 	}
+
+	/**
+	 * getLangCode.
+	 */
 	public static function getLangCode() {
 		return get_locale();
 	}
+
+	/**
+	 * getBrowserLangCode.
+	 */
 	public static function getBrowserLangCode() {
 		return isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && !empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])
 			? strtolower(substr(sanitize_text_field($_SERVER['HTTP_ACCEPT_LANGUAGE']), 0, 2))
 			: self::getLangCode2Letter();
 	}
+
+	/**
+	 * getTimeRange.
+	 */
 	public static function getTimeRange() {
 		$time = array();
 		$hours = range(1, 11);
@@ -585,6 +751,10 @@ class UtilsWpf {
 		}
 		return array_combine($time, $time);
 	}
+
+	/**
+	 * getSearchEnginesList.
+	 */
 	public static function getSearchEnginesList() {
 		return array(
 			'google.com' => array('label' => 'Google'),
@@ -597,6 +767,10 @@ class UtilsWpf {
 			'munax.com' => array('label' => 'Munax'),
 		);
 	}
+
+	/**
+	 * getSocialList.
+	 */
 	public static function getSocialList() {
 		return array(
 			'facebook.com' => array('label' => 'Facebook'),
@@ -610,10 +784,18 @@ class UtilsWpf {
 			'google.com' => array('label' => 'Google'),
 		);
 	}
+
+	/**
+	 * getReferalUrl.
+	 */
 	public static function getReferalUrl() {
 		// Simple for now
 		return ReqWpf::getVar('HTTP_REFERER', 'server');
 	}
+
+	/**
+	 * getReferalHost.
+	 */
 	public static function getReferalHost() {
 		$refUrl = self::getReferalUrl();
 		if (!empty($refUrl)) {
@@ -624,6 +806,10 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * getCurrentUserRole.
+	 */
 	public static function getCurrentUserRole() {
 		$roles = self::getCurrentUserRoleList();
 		if ($roles) {
@@ -633,6 +819,10 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * getCurrentUserRoleList.
+	 */
 	public static function getCurrentUserRoleList() {
 		global $current_user, $wpdb;
 		if ($current_user) {
@@ -643,9 +833,17 @@ class UtilsWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * getAllUserRoles.
+	 */
 	public static function getAllUserRoles() {
 		return get_editable_roles();
 	}
+
+	/**
+	 * getAllUserRolesList.
+	 */
 	public static function getAllUserRolesList() {
 		$res = array();
 		$roles = self::getAllUserRoles();
@@ -656,10 +854,18 @@ class UtilsWpf {
 		}
 		return $res;
 	}
+
+	/**
+	 * rgbToArray.
+	 */
 	public static function rgbToArray( $rgb ) {
 		$rgb = array_map('trim', explode(',', trim(str_replace(array('rgb', 'a', '(', ')'), '', $rgb))));
 		return $rgb;
 	}
+
+	/**
+	 * hexToRgb.
+	 */
 	public static function hexToRgb( $hex ) {
 		if (strpos($hex, 'rgb') !== false) { // Maybe it's already in rgb format - just return it as array
 			return self::rgbToArray($hex);
@@ -678,10 +884,18 @@ class UtilsWpf {
 		$rgb = array($r, $g, $b);
 		return $rgb; // returns an array with the rgb values
 	}
+
+	/**
+	 * hexToRgbaStr.
+	 */
 	public static function hexToRgbaStr( $hex, $alpha = 1 ) {
 		$rgbArr = self::hexToRgb($hex);
 		return 'rgba(' . implode(',', $rgbArr) . ',' . $alpha . ')';
 	}
+
+	/**
+	 * controlNumericValues.
+	 */
 	public static function controlNumericValues( $values, $field ) {
 		foreach ($values as $k => $val) {
 			$values[$k] = ( 'dec' == $field ? (float) $val : (int) $val );
