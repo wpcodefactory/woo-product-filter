@@ -9,12 +9,12 @@
 
 /* Custom CSS start */
 :root {
-	--white: #ffffff;
-	--black: #000000;
-	--theme-dark: #2c2c2c;
-	--color-f4f5f5: #f4f5f5;
-	--primary-color: #2d6fff;
-	--pro-color: #e1c065;
+	--woobewoo-white: #ffffff;
+	--woobewoo-black: #000000;
+	--woobewoo-theme-dark: #2c2c2c;
+	--woobewoo-color-f4f5f5: #f4f5f5;
+	--woobewoo-primary-color: #2d6fff;
+	--woobewoo-pro-color: #e1c065;
 }
 .woobewoo-btn {
 	padding: 5px 12px;
@@ -32,7 +32,7 @@
 }
 .woobewoo-btn,
 .woobewoo-btn * {
-	color: var(--white);
+	color: var(--woobewoo-white);
 }
 .woobewoo_row {
 	margin-left: -15px;
@@ -48,7 +48,7 @@
 	display: none !important;
 }
 .woobewoo-btn-primary {
-	background-color: var(--primary-color);
+	background-color: var(--woobewoo-primary-color);
 }
 .woobewoo-inline-block,
 .woobewoo-d-inline-block {
@@ -127,7 +127,7 @@
 	padding-left: 24px;
 	margin-right: 0;
 	min-width: 124px;
-	background-color: var(--white);
+	background-color: var(--woobewoo-white);
 	z-index: 10;
 }
 #mainContainer .woobewoo-navigation::after {
@@ -152,7 +152,7 @@
 }
 #mainContainer nav .menuItem i,
 #mainContainer nav .menuItem {
-	color: var(--theme-dark);
+	color: var(--woobewoo-theme-dark);
 }
 #mainContainer nav .menuItem {
 	padding: 16px;
@@ -163,7 +163,7 @@
 	box-shadow: none;
 }
 #mainContainer nav .active .menuItem {
-	background-color: var(--color-f4f5f5);
+	background-color: var(--woobewoo-color-f4f5f5);
 }
 
 #containerWrapper .wpfFilterWrapper .wpfCheckbox label {
@@ -233,8 +233,8 @@
 .wpfFilterOptions .settings-block-values .settings-value:last-child {
 	margin-right: 0;
 }
-.proLabel {
-	background-color: var(--pro-color);
+.woobewoo_proLabel {
+	background-color: var(--woobewoo-pro-color);
 	border-radius: 7px;
 	padding: 6px;
 	min-height: 28px;
@@ -242,7 +242,7 @@
 	align-items: center;
 	width: max-content;
 }
-.proLabel > *:not(:last-child) {
+.woobewoo_proLabel > *:not(:last-child) {
 	margin-right: 4px;
 }
 .woobewoo-tooltip {
@@ -304,7 +304,7 @@
 #tabsContainer .button.current {
 	border-color: #dbdce1 !important;
 	color: #121315 !important;
-	background-color: var(--white) !important;
+	background-color: var(--woobewoo-white) !important;
 }
 #tabsContainer .button > *:not(:last-child) {
 	margin-right: 8px !important;
@@ -316,20 +316,20 @@
 	display: flex;
 	flex-wrap: wrap;
 }
-.selectFiltersMain .sdkfjsjLeft {
+.selectFiltersMain .woobewooFiltersMainLeftCol {
 	width: calc(100% - 300px);
 	margin-right: 24px;
 }
-.selectFiltersMain .sdkfjsjRight {
+.selectFiltersMain .woobewooFiltersMainRightCol {
 	width: 276px;
 }
 #wpfFiltersEditForm .tabs-wrapper {
 	float: unset !important;
 }
-.mainContainer_dsfsdf {
-	background-color: var(--white);
+.woobewooFiltersParentContainer {
+	background-color: var(--woobewoo-white);
 }
-.sdkfjsjLeft .sub-tab-content .row-settings-block {
+.woobewooFiltersMainLeftCol .sub-tab-content .row-settings-block {
 	padding-bottom: 15px;
 	border-bottom: 1px solid #f9fafa;
 }
@@ -365,7 +365,7 @@
 	justify-content: center;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--black);
+	color: var(--woobewoo-black);
 	right: 8px;
 	position: absolute;
 	top: -12px;
@@ -392,18 +392,20 @@
 }
 
 /* Radio and checkbox design */
-.encoderRadio,
-.encoderCheckbox {
+.woobewooRadio,
+.woobewooCheckbox {
 	display: flex;
 	align-items: center;
 	margin-bottom: 0.5rem !important;
 	margin-right: 0 !important;
 	width: 100%;
 }
-input[type="radio"],
-input[type="checkbox"],
-.encoderRadio input,
-.encoderCheckbox input {
+#wpfAddDialog input[type="radio"],
+#wpfAddDialog input[type="checkbox"],
+.wpfMainWrapper input[type="radio"],
+.wpfMainWrapper input[type="checkbox"],
+.woobewooRadio input,
+.woobewooCheckbox input {
 	outline: none !important;
 	width: 18px;
 	min-width: 18px;
@@ -425,57 +427,65 @@ input[type="checkbox"],
 	cursor: pointer;
 	margin-right: 0.5rem;
 }
-input[type="radio"],
-.encoderRadio input {
+#wpfAddDialog input[type="radio"],
+.wpfMainWrapper input[type="radio"],
+.woobewooRadio input {
 	border-radius: 50%;
 }
-input[type="radio"]:checked,
-input[type="checkbox"]:checked,
-.encoderRadio input:checked,
-.encoderCheckbox input:checked {
+#wpfAddDialog input[type="radio"]:checked,
+#wpfAddDialog input[type="checkbox"]:checked,
+.wpfMainWrapper input[type="radio"]:checked,
+.wpfMainWrapper input[type="checkbox"]:checked,
+.woobewooRadio input:checked,
+.woobewooCheckbox input:checked {
 	background-color: #303030 !important;
 	border-color: #303030 !important;
 }
-input[type="checkbox"]:checked,
-.encoderCheckbox input:checked {
+#wpfAddDialog input[type="checkbox"]:checked,
+.wpfMainWrapper input[type="checkbox"]:checked,
+.woobewooCheckbox input:checked {
 	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
 	background-image: var(--bs-form-check-bg-image);
 }
-input[type="radio"]:checked,
-.encoderRadio input:checked {
+#wpfAddDialog input[type="radio"]:checked,
+.wpfMainWrapper input[type="radio"]:checked,
+.woobewooRadio input:checked {
 	background-size: 10px;
 	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='%23fff'%3e%3cpath d='M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z'/%3e%3c/svg%3e");
 	background-image: var(--bs-form-check-bg-image);
 }
-input[type="radio"]::before,
-input[type="checkbox"]::before,
-.encoderRadio input::before,
-.encoderCheckbox input::before {
+
+#wpfAddDialog input[type="radio"]::before,
+#wpfAddDialog input[type="checkbox"]::before,
+.wpfMainWrapper input[type="radio"]::before,
+.wpfMainWrapper input[type="checkbox"]::before,
+.woobewooRadio input::before,
+.woobewooCheckbox input::before {
 	display: none !important;
 }
-.encoderRadio span,
-.encoderCheckbox span {
+.woobewooRadio span,
+.woobewooCheckbox span {
 	display: inline-block;
 }
 .s-notify {
 	z-index: 9999999;
 }
 @media screen and (max-width: 1300px) {
-	.sdkfjsjLeft .sub-tab-content {
+	.woobewooFiltersMainLeftCol .sub-tab-content {
 		padding-left: 0;
 		padding-right: 0;
 	}
 }
 @media screen and (max-width: 1200px) {
-	.selectFiltersMain .sdkfjsjLeft {
+	.selectFiltersMain .woobewooFiltersMainLeftCol {
 		width: 100%;
 		margin-right: 0;
 		margin-bottom: 24px;
 	}
-	.selectFiltersMain .sdkfjsjRight {
+	.selectFiltersMain .woobewooFiltersMainRightCol {
 		width: 100%;
 	}
-	.sdkfjsjLeft .row-settings-block {
+	.woobewooFiltersMainLeftCol .row-settings-block {
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -752,7 +762,7 @@ input[type="checkbox"]::before,
 .woobewoo-tbl-pagination-shell .ui-pg-table td:last-of-type {
 	padding-right: 0 !important;
 }
-#containerWrapper hr {
+.woobewoo-item #containerWrapper hr {
 	border-top: 0 !important;
 }
 
@@ -1080,7 +1090,7 @@ input[type="checkbox"]::before,
 #wpfFiltersEditForm .wpfSub.tabs-wrapper li a.button:focus {
 	background-color: #ffffff !important;
 }
-#wpfFiltersEditForm .wpfMainTabsContainer .row {
+#wpfFiltersEditForm .wpfMainTabsContainer .woobewoo_row {
 	background: #ffffff !important;
 }
 .woobewoo-plugin .button,
@@ -1208,7 +1218,7 @@ select.woobewoo-flat-input {
 	display: flex;
 	border-radius: 16px;
 }
-.wpfFiltersTabContents .row {
+.wpfFiltersTabContents .woobewoo_row {
 	margin-left: 0;
 	margin-right: 0;
 }
@@ -1318,7 +1328,7 @@ select.woobewoo-flat-input {
 	padding: 24px !important;
 	background: #ffffff;
 }
-.wpf-overview-block-body .row {
+.wpf-overview-block-body .woobewoo_row {
 	margin-left: 0px;
 	margin-right: 0px;
 }
