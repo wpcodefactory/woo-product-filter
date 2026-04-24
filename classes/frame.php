@@ -391,13 +391,15 @@ class FrameWpf {
 
 	/**
 	 * _execModules.
+     *
+     * @version 3.1.8
 	 */
 	protected function _execModules() {
 		if ($this->_mod) {
 			// If module exist and is active
 			$mod = $this->getModule($this->_mod);
 			if ($mod && !empty($this->_action)) {
-				if ($this->_execOnlyAfterWpInit()) {
+				if (!$this->_execOnlyAfterWpInit()) {
 					add_action('init', array($this, 'execAfterWpInit'));
 				} else {
 					$this->_doExec();
