@@ -4179,7 +4179,8 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 			$addSqls['color']['withCount']    = false;
 			$addSqls['color']['fields']       = 'tt.term_id, tt.taxonomy, wpf_temp.ID';
-			$addSqls['color']['taxonomyList'] = implode( "', '", $taxonomyList );
+			//fix: missing opening/closing quotes in SQL IN() clause for color taxonomy list
+			$addSqls['color']['taxonomyList'] = "'" . implode( "', '", $taxonomyList ) . "'";
 		}
 
 		foreach ( $addSqls as $key => $addSql ) {
