@@ -4192,7 +4192,9 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 			$addSqls['color']['withCount']    = false;
 			$addSqls['color']['fields']       = 'tt.term_id, tt.taxonomy, wpf_temp.ID';
-			$addSqls['color']['taxonomyList'] = implode( "', '", $taxonomyList );
+			//fix/thrive-editor-hang-wcag-keyboard-accessibility
+			$addSqls['color']['taxonomyList'] = "'" . implode( "', '", $taxonomyList ) . "'";
+			//fix/thrive-editor-hang-wcag-keyboard-accessibility
 		}
 
 		foreach ( $addSqls as $key => $addSql ) {
