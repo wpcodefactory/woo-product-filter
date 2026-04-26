@@ -1488,10 +1488,12 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$htmlOpt = '';
 
-		if ( $defSelected && ! $hideEmptyActive ) {
+		//fix/thrive-editor-hang-wcag-keyboard-accessibility
+		if ( $defSelected && ! $hideEmptyActive && ! $hideEmpty ) {
 			$showedTerms = $allTerms;
 			$showFilter  = true;
 		}
+		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 
 		if ( in_array($type, $frontendTypes) || $isMulti ) {
 			self::$leer = true;

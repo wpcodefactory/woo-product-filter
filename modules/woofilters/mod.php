@@ -43,11 +43,24 @@ class WoofiltersWpf extends ModuleWpf {
 	public $fields                       = array();
 
 	/**
-	 * init.
-	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	public function init() {
+		//fix/thrive-editor-hang-wcag-keyboard-accessibility
+		$isThriveContext = (
+			isset( $_GET['tvet'] )     ||
+			isset( $_GET['tcbf'] )     ||
+			isset( $_GET['_preview'] )
+		);
+
+		if ( $isThriveContext ) {
+			// Register shortcodes only — skip all heavy product query hooks
+			add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
+			add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
+			add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
+			return;
+		}
+		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
 		add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
@@ -4179,7 +4192,9 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 			$addSqls['color']['withCount']    = false;
 			$addSqls['color']['fields']       = 'tt.term_id, tt.taxonomy, wpf_temp.ID';
-			$addSqls['color']['taxonomyList'] = implode( "', '", $taxonomyList );
+			//fix: missing opening/closing quotes in SQL IN() clause for color taxonomy list
+			$addSqls['color']['taxonomyList'] = "'" . implode( "', '", $taxonomyList ) . "'";
+			//fix: missing opening/closing quotes in SQL IN() clause for color taxonomy list
 		}
 
 		foreach ( $addSqls as $key => $addSql ) {
