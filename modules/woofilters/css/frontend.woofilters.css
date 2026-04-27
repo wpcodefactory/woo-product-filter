@@ -314,6 +314,9 @@
 	padding-inline-start: 0;
 	padding-left: 0px;
 	padding-bottom: 1px;
+	gap: 5px;
+    display: flex;
+    flex-direction: column;
 }
 .wpfFilterLayoutVer, .wpfFilterLayoutHor {
 	display: -ms-flexbox;
