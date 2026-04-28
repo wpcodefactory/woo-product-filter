@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 ?>
-<div class="woobewoo_row row-tab" id="row-tab-options">
+<div class="row row-tab" id="row-tab-options">
 	<div class="sub-tab woobewoo-input-group col-xs-12">
 		<a href="#sub-tab-options-main" class="button"><?php esc_html_e('Main', 'woo-product-filter'); ?></a>
 		<a href="#sub-tab-options-buttons" class="button disabled"><?php esc_html_e('Buttons', 'woo-product-filter'); ?></a>
@@ -26,7 +26,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 		$displayOnPage = ( isset($this->settings['settings']['display_on_page']) ? $this->settings['settings']['display_on_page'] : 'both' );
 		$classHidden   = 'specific' != $displayOnPage ? 'wpfHidden' : '';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Display On Pages', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose page for filter.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/display-only-on-page-wpf/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -159,7 +159,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			</div>
 		</div>
 
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Display On Pages Apply For Shortcode', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'By default, the filter added by the shortcode is displayed everywhere. This option allows you to restrict the display to only those selected in "Display on pages"', 'woo-product-filter' ) ); ?>"></i>
@@ -180,7 +180,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabOptionsMain', $this->settings);
 		else :
 			?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Redirect After Filter Selection', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('You can select one of the available pages to redirect to it after selecting a filter', 'woo-product-filter')); ?>"></i>
@@ -190,7 +190,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			</div>
 		</div>
 
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Open Filters One By One', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Only when a selection is made in the current filter show the next one', 'woo-product-filter')); ?>"></i>
@@ -201,7 +201,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 		</div>
 
 
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Floating mode', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('The filter will be located in a popup', 'woo-product-filter')); ?>"></i>
@@ -213,7 +213,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 
 		<?php endif; ?>
 
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Display Filter On', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose where display filter.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -234,7 +234,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Force Show Only Current Filter On Page', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Remove other woofilters on page except current filter.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -253,7 +253,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['desctop_mobile_breakpoint_switcher']) ? (int) $this->settings['settings']['desctop_mobile_breakpoint_switcher'] : '' );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3 pr-0">
 				<?php esc_html_e('Set Mobile/Desktop Breakpoint', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Set breakpoint for all options that depend on a mobile/desktop view. "Show title label", "Display filter on" etc.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -280,7 +280,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Hide Filter On Shop Pages Without Products', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Hide filter on shop and categories pages that displays only categories or subcategories without products.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -295,7 +295,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Show filter before initialisation', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('By default, the filter will be hidden behind the loader when the page loads until it is fully initialised. Enable this option if you want the filter to be displayed immediately. Please note that before initialisation some parts of the filter may not look the same and some functionality may not work.', 'woo-product-filter') ); ?>"></i>
@@ -310,7 +310,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Initialise filter immediately', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('By default, when loading a page, the filter waits for all page content to load before initialising. Enable this option if you want the filter to initialise immediately. Note that this option is experimental and may cause js-script errors, especially if you use script optimisation or minimisation plugins.', 'woo-product-filter') ); ?>"></i>
@@ -325,7 +325,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Set Number Of Displayed Products', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="
@@ -346,7 +346,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Set Number Of Products Per Row', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Set number of products per row. This number will only be shown after filter is applied!', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -362,7 +362,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<div class="settings-value-label">
 					<?php esc_html_e('Ajax Pagination', 'woo-product-filter'); ?>
@@ -378,7 +378,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<div class="settings-value-label">
 					<?php esc_html_e('Filter Page By Slug', 'woo-product-filter'); ?>
@@ -399,7 +399,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['enable_ajax']) ? (int) $this->settings['settings']['enable_ajax'] : 1 );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Enable Ajax', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('This option enables Ajax search. Product filtering and displaying results in a browser will be run in the background without full page reload.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/enable-ajax/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -436,7 +436,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[enable_ajax]">
+		<div class="row row-settings-block <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[enable_ajax]">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Product List / Loader Selector', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Custom selector for loading a loader and updating the product list. The default product selector is `ul.products`. If the Filter after ajax filtering does not find the product block and cannot replace it with the filtered list of products, the page will reload. In this case, you need to specify the product block selector in this setting.', 'woo-product-filter')); ?>"></i>
@@ -453,7 +453,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			</div>
 		</div>
 
-		<div class="woobewoo_row row-settings-block <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[enable_ajax]">
+		<div class="row row-settings-block <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[enable_ajax]">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Product Container Selector', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('If there are several product shortcodes on the page, you can add a container selector that will limit the effect of this filter only inside it.', 'woo-product-filter')); ?>"></i>
@@ -472,7 +472,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 <?php
 	$settingValue = $this->getFilterSetting( $this->settings['settings'], 'force_theme_templates', $defaults['force_theme_templates'], false, false, true, true );
 ?>
-		<div class="woobewoo_row row-settings-block <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[enable_ajax]">
+		<div class="row row-settings-block <?php echo esc_attr($hiddenStyle); ?>" data-parent="settings[enable_ajax]">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Force Theme Templates', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('If after ajax filtering there are differences in the styles of the list of products, pagination or count-block, then enable this option. Important: for correct operation, we recommend filling the Product container selector option.', 'woo-product-filter')); ?>"></i>
@@ -509,7 +509,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block <?php echo esc_attr( $hiddenStyle ); ?>" data-parent="settings[enable_ajax]">
+		<div class="row row-settings-block <?php echo esc_attr( $hiddenStyle ); ?>" data-parent="settings[enable_ajax]">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Don\'t Use Shortcode Settings', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'Do not use shortcut settings on standard WooCommers pages', 'woo-product-filter' ); ?>"></i>
@@ -535,7 +535,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['show_filtering_button']) ? (int) $this->settings['settings']['show_filtering_button'] : 1 );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block wpfTypeSwitchable">
+		<div class="row row-settings-block wpfTypeSwitchable">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Filter Activation Type', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('If "Filtering button" option was selected, the "Filter" button appears at the page. It allows users to set all necessary filter parameters before starting the filtering. If "Auto filtering" option was selected, filtering starts as soon as filter elements change and the data reloads automatically.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/button-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -581,7 +581,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['show_clean_button']) ? (int) $this->settings['settings']['show_clean_button'] : '' );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Show Clear All Button', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('If this option is enabled, the "Clear" button appears at the page. All filter presets will be removed after pressing the button.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/button-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -612,7 +612,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3 pr-0">
 				<?php esc_html_e('Select Filter Buttons Position', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Select the position of filter buttons on the page.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/button-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -633,7 +633,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3 pr-0">
 				<?php esc_html_e('Select Filter Buttons Order', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Change the order of filter buttons on the page.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/button-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -659,7 +659,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabOptionsButtons', $this->settings);
 		} else {
 			?>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e('Display Hide Filters Button', 'woo-product-filter'); ?>
 				</div>
@@ -677,7 +677,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['all_products_filtering']) ? (int) $this->settings['settings']['all_products_filtering'] : '' );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Always Filtering By All Products', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Search for a filtering results among all shop products on any shop pages.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -707,7 +707,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['show_clean_block']) ? (int) $this->settings['settings']['show_clean_block'] : '' );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Show Clear Block', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('If this option is enabled, the "< clear" links appears at the page next to the filter block titles. The presets of this filter block will be deleted after clicking on the link.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -730,7 +730,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Recount Products By Selected Filter', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Automatically recount product by selected filters (If product category loading slowly - Disable this function).', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -749,7 +749,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['filter_recount_price']) ? (int) $this->settings['settings']['filter_recount_price'] : '' );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Recount Min/Max Price By Selected Filter', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Automatically change min/max price by selected filters (If product category loading slowly - Disable this function).', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -774,7 +774,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Show Parameters Without Products As Disabled', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Automatically disabled parameters without products. Works only when options Show count and Always display all... are enabled.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -789,7 +789,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Sort By Title After Filtering', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('This option disables any other sorting on the page.', 'woo-product-filter'); ?>"></i>
@@ -804,7 +804,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Checked Items To The Top', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Lets checked terms will be on the top.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -820,7 +820,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			</div>
 		</div>
 
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Checked Items In Bold', 'woo-product-filter'); ?>
 			</div>
@@ -835,7 +835,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			</div>
 		</div>
 
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Set No Products Found Text', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Input "no products found" text for category.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -856,7 +856,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$settingValue = ( isset($this->settings['settings']['filtering_by_variations']) ? (int) $this->settings['settings']['filtering_by_variations'] : 1 );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 			?>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
 					<?php esc_html_e('Filtering By Variations Attributes', 'woo-product-filter'); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('After filtration will be display products with variations, what have filtered attributes', 'woo-product-filter'); ?>"></i>
@@ -918,7 +918,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabOptionsContent', $this->settings, $this->filter['id']);
 		} else {
 			?>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e('Display "Show More"', 'woo-product-filter'); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('For long vertical lists, "Show more" will be displayed.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -927,7 +927,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 				</div>
 			</div>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e('Display Selected Parameters Of Filters', 'woo-product-filter'); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr('<div class="woobewoo-tooltips-wrapper"><div class="woobewoo-tooltips-text">' . __('Selected parameters will be displayed in the top/bottom of the filter .', 'woo-product-filter') . '</div><img src="' . esc_url($this->getModule()->getModPath() . 'img/display_selected_parameters_of_filters.png') . '" height="193"></div>'); ?>"></i>
@@ -936,7 +936,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 				</div>
 			</div>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e('Autoscroll To Products After Filtering', 'woo-product-filter'); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('After filtration will be scroll to products block') ); ?>"></i>
@@ -945,7 +945,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 				</div>
 			</div>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e( 'If One Filter Block Is Open, Other Blocks Are Closed', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'When you click on the block open icon, all other open blocks will be automatically closed', 'woo-product-filter' ) . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
@@ -954,7 +954,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 				</div>
 			</div>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e('Show Category Slugs In URL Instead Of IDs ', 'woo-product-filter'); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Turn on only when necessary. Please note that "slug" should only contain lowercase Latin letters, numbers and hyphens.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -964,7 +964,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		<?php } ?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Hide Filter By Title Click', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Be careful when deactivate it with filter titles shown as close, In such case users do not see filter content.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -979,7 +979,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Use Filter Titles As Slugs For The Filter Clear Buttons', 'woo-product-filter'); ?>
 			</div>
@@ -993,7 +993,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Filtering Of Categories List', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Filtering of categories list on filter process.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -1012,7 +1012,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 		$settingValue = $this->getFilterSetting($this->settings['settings'], 'display_only_descendants_category', 0);
 		$hiddenStyle = $settingValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Display Only Descendants Of Current Category', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('On the category page, display only the child elements of the current category', 'woo-product-filter') ); ?>"></i>
@@ -1038,7 +1038,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Apply Parameters From The Address Bar To Display Filter Items', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e('ATTENTION!!! This option can greatly slow down page loading if you have a lot of products.', 'woo-product-filter'); ?>"></i>
@@ -1053,7 +1053,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Multiblock Taxonomy Logic', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Warning! Option uses php sessions! Filter products by different filter blocks of categories / tags / attributes by logic and / or.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -1070,7 +1070,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Enable third-party prefilter', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Allows third-party plugins that do not use WooCommerce shortcodes to filter products (required, for example, to work Product Grid Widget with categories preselection from Essential Addons for Elementor).', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
@@ -1090,7 +1090,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Filter Loader', 'woo-product-filter' ); ?>
 		</div>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Enable Filter Icon On Load', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Enable filter icon while filtering results are loading.', 'woo-product-filter' ) . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/loader-options/') . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
@@ -1138,7 +1138,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$htmlPreview .= '</div>';
 		}
 		?>
-		<div class="woobewoo_row row-settings-block wpfLoader">
+		<div class="row row-settings-block wpfLoader">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Filter Loader Icon', 'woo-product-filter'); ?>
 				<sup class="wpfProOption"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></sup>
@@ -1183,7 +1183,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			$hiddenStyle      = $settingValue ? '' : 'wpfHidden';
 			$hiddenWordStyle  = $settingValue && $settingWordValue ? '' : 'wpfHidden';
 		?>
-		<div class="woobewoo_row row-settings-block">
+		<div class="row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e('Enable Overlay', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('Enable overlay.', 'woo-product-filter'); ?>"></i>
@@ -1245,7 +1245,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabOptionsLoaderBottom', $this->settings, $this->filter['id']);
 		} else {
 			?>
-			<div class="woobewoo_row row-settings-block">
+			<div class="row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e('Do not remove products while loading', 'woo-product-filter'); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e('To prevent products container from collapsing during ajax.', 'woo-product-filter'); ?>"></i>

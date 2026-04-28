@@ -64,7 +64,7 @@ if (taxonomy_exists('pwb-brand')) {
 						</ul>
 					</div>
 					<div class="wpfCopyTextCodeSelectionShell">
-						<div class="woobewoo_row">
+						<div class="row">
 							<div class="col-md-4 wpfNamePadding woobewoo-d-flex woobewoo-flex-column">
 								<label class="woobewoo-inline-block" for="">
 									<?php echo esc_html__('Filter name', 'woo-product-filter'); ?>

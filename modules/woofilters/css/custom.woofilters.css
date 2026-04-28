@@ -257,3 +257,6 @@
 	line-height: inherit;
 	font-weight: inherit;
 }
+.wpfFilterWrapper .wpfCheckbox input[type="checkbox"]:focus + label::before {
+	outline: none !important;
+}

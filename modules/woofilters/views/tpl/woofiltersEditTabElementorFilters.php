@@ -51,7 +51,7 @@ $formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getMo
 
 <div class="woobewoo-plugin" id="containerWrapperElementor">
 	<form id="wpfFiltersEditForm" data-href="<?php echo esc_attr($formLink); ?>">
-		<div class="woobewoo_row">
+		<div class="row">
 			<div class="col-md-12">
 				<div class="woobewoo-input-group" id="wpfChooseFiltersBlock" data-no-preview="1">
 					<div class="woobewoo-group-label">
@@ -66,7 +66,7 @@ $formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getMo
 			</div>
 		</div>
 		<div class="wpfMainTabsContainer">
-			<div class="woobewoo_row">
+			<div class="row">
 				<div class="col-md-12 wpfFiltersTabContents">
 					<?php include_once 'woofiltersEditTabFilters.php'; ?>
 				</div>

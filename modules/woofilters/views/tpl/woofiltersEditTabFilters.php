@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 $filtersList = $this->getModel()->getAllFilters();
 ?>
-<div class="woobewoo_row row-tab active" id="row-tab-filters">
+<div class="row row-tab active" id="row-tab-filters">
 	<div class="col-xs-12 row-settings-block">
 		<div class="woobewoo-input-group" id="wpfChooseFiltersBlock" data-no-preview="1">
 			<div class="woobewoo-group-label">

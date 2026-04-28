@@ -13,9 +13,9 @@ $isSubscribe = $this->getModule()->getModel()->isSubscribe();
 $isRating = $this->getModule()->getModel()->isRating();
 if (!$isSubscribe || !$isRating) {
 ?>
-	<div class="wpf-overview-block-row">
+	<div class="row wpf-overview-block-row">
 		<?php if (!$isRating) { ?>
-			<div class="woobewoo-wdt-100">
+			<div class="col-sm-12">
 				<div class="wpf-overview-block woobewoo-max-width-100-i">
 					<div class="wpf-overview-block-header">
 						<div class="wpf-overview-header-title">
@@ -73,7 +73,7 @@ if (!$isSubscribe || !$isRating) {
 		<?php } ?>
 
 		<?php if (!$isSubscribe) { ?>
-			<div class="woobewoo-wdt-100">
+			<div class="col-sm-12">
 				<div class="wpf-overview-block woobewoo-max-width-100-i">
 					<div class="wpf-overview-block-header">
 						<div class="wpf-overview-header-title">

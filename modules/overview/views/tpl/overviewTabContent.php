@@ -23,7 +23,7 @@ $modPath = $this->getModule()->getModPath();
 				</div>
 			</div>
 			<div class="wpf-overview-block-body">
-				<div class="woobewoo_row">
+				<div class="row">
 					<div class="col-md-4 woobewoo-mb-3 mb-md-0">
 						<div class="wpf-overview-img wpf-overview-img-dc">
 							<div class="wpf-overview-body-title">
@@ -102,7 +102,7 @@ $modPath = $this->getModule()->getModPath();
 			</div>
 		</div>
 		<div class="woobewoo-m-0">
-			<div class="woobewoo_row">
+			<div class="row">
 				<div class="col-md-6 woobewoo-flex_auto">
 					<div class="wpf-overview-block woobewoo-max-width-100-i">
 						<div class="wpf-overview-block-header">
@@ -158,7 +158,7 @@ $modPath = $this->getModule()->getModPath();
 				</div>
 			</div>
 			<div class="wpf-overview-block-body">
-				<div class="woobewoo_row">
+				<div class="row">
 					<div class="col-md-6">
 						<div class="wpf-overview-img wpf-overview-img-pt">
 							<div class="wpf-overview-body-title">
