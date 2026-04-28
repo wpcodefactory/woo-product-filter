@@ -154,6 +154,10 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$_GET['wpf_fbv']           = 1;
 			$_REQUEST['wpf_fbv']       = 1;
 			$wp->query_vars['wpf_fbv'] = 1;
+			$wp->query_vars['post_type'] = 'product';
+			$wp->query_vars['wc_query'] = 'product_query';
+			unset($wp->query_vars['pagename']);
+			 $wp->query_vars['wpf_query'] = 1; // Plugin filter flag
 
 			if ($totalSelected > 0) {
 				$_GET['wpf_count']           = (string) $totalSelected;
