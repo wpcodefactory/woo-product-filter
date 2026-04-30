@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
  * @author  woobewoo
  */
@@ -4065,7 +4065,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.8
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4179,7 +4179,6 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 			$addSqls['color']['withCount']    = false;
 			$addSqls['color']['fields']       = 'tt.term_id, tt.taxonomy, wpf_temp.ID';
-			//fix: missing opening/closing quotes in SQL IN() clause for color taxonomy list
 			$addSqls['color']['taxonomyList'] = "'" . implode( "', '", $taxonomyList ) . "'";
 		}
 
