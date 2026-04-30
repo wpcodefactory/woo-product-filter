@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
  * @author  woobewoo
  */
@@ -1322,7 +1322,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateCategoryFilterHtml.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	public function generateCategoryFilterHtml( $filter, $filterSettings, $blockStyle, $prodCatId = false, $key = 1, $viewId = '' ) {
 		$settings                = $this->getFilterSetting($filter, 'settings', array());
@@ -1488,12 +1488,10 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$htmlOpt = '';
 
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 		if ( $defSelected && ! $hideEmptyActive && ! $hideEmpty ) {
 			$showedTerms = $allTerms;
 			$showFilter  = true;
 		}
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 
 		if ( in_array($type, $frontendTypes) || $isMulti ) {
 			self::$leer = true;
@@ -3640,6 +3638,8 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Get pagination base structure.
 	 *
+	 * @version 3.1.8
+	 *
 	 * @return array
 	 */
 	public function getPaginationBase() {
@@ -3648,7 +3648,6 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		global $post;
 		if ( ! empty($post->post_content) ) {
-			//Fix: Added support for all WooCommerce product shortcodes to fix AJAX pagination.
 			$wcShortcodes = array(
 				'products',
 				'recent_products',
@@ -3657,8 +3656,8 @@ class WoofiltersViewWpf extends ViewWpf {
 				'top_rated_products',
 				'featured_products',
 			);
-			foreach ( $wcShortcodes as $sc ) {
-				if ( has_shortcode( $post->post_content, $sc ) ) {
+			foreach ( $wcShortcodes as $shortcode ) {
+				if ( has_shortcode( $post->post_content, $shortcode ) ) {
 					$isShortcode = true;
 					break;
 				}

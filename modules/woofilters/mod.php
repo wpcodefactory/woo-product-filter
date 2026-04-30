@@ -43,28 +43,26 @@ class WoofiltersWpf extends ModuleWpf {
 	public $fields                       = array();
 
 	/**
+	 * init.
+	 *
 	 * @version 3.1.8
 	 */
 	public function init() {
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
-		$isThriveContext = (
-			isset( $_GET['tvet'] )     ||
-			isset( $_GET['tcbf'] )     ||
-			isset( $_GET['_preview'] )
-		);
-
-		if ( $isThriveContext ) {
-			// Register shortcodes only — skip all heavy product query hooks
-			add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
-			add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
-			add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
-			return;
-		}
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
-		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
 		add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
 		add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
+
+		$isThriveContext = (
+			isset( $_GET['tvet'] ) ||
+			isset( $_GET['tcbf'] ) ||
+			isset( $_GET['_preview'] )
+		);
+		if ( $isThriveContext ) {
+			// Register shortcodes only — skip all heavy product query hooks
+			return;
+		}
+
+		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 
 		if ( is_admin() ) {
 			add_action( 'admin_notices', array( $this, 'showAdminErrors' ) );

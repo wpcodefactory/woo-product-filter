@@ -1,27 +1,32 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
  * @author  woobewoo
  */
 
 /**
- * Detect Thrive editor context
+ * Detect Thrive editor context.
  *
  * @version 3.1.8
+ * @since   3.1.8
  */
-//fix/thrive-editor-hang-wcag-keyboard-accessibility
 function wpfIsThriveEditor() {
-  var href = window.location.href;
-  return href.includes('tve=') || href.includes('tvet=') || href.includes('_preview') || href.includes('tcbf=') || href.includes('thrive');
+	var href = window.location.href;
+	return (
+		href.includes('tve=') ||
+		href.includes('tvet=') ||
+		href.includes('_preview') ||
+		href.includes('tcbf=') ||
+		href.includes('thrive')
+	);
 }
-//fix/thrive-editor-hang-wcag-keyboard-accessibil
 
 /**
  * Main function.
  *
- * @version 3.1.7
+ * @version 3.1.8
  */
 (function ($, app) {
 	"use strict";
@@ -67,6 +72,11 @@ function wpfIsThriveEditor() {
 		return this.$obj;
 	}
 
+	/**
+	 * WpfFrontendPage.prototype.init.
+	 *
+	 * @version 3.1.8
+	 */
 	WpfFrontendPage.prototype.init = (function () {
 		var _thisObj = this.$obj;
 		app.wpfNewUrl = '';
@@ -77,10 +87,7 @@ function wpfIsThriveEditor() {
 		_thisObj.setCurrentLocation();
 		_thisObj.filterLoadTypes = [];
 		_thisObj.defaultProductSelector = 'ul.products';
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
-		_thisObj.isAdminPreview = jQuery('#wpfFiltersEditForm').length > 0 || (typeof isElementorPreview != 'undefined' && isElementorPreview == 1) ||
-      	wpfIsThriveEditor();
-	  	//fix/thrive-editor-hang-wcag-keyboard-accessibility
+		_thisObj.isAdminPreview = jQuery('#wpfFiltersEditForm').length > 0 || (typeof isElementorPreview != 'undefined' && isElementorPreview == 1) || wpfIsThriveEditor();
 		_thisObj.moveFloatingElements();
 		_thisObj.checkForceFilters();
 		_thisObj.eventsPriceFilter();
@@ -99,13 +106,11 @@ function wpfIsThriveEditor() {
 			_thisObj.markCheckboxSelected(jQuery(this), true);
 		});
 
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 		setTimeout(function () {
 			jQuery('.wpfFilterContent.wpfHide, .wpfFilterContent.wpfBlockAnimated').each(function () {
 				jQuery(this).find('input, select, a, button, [tabindex]').attr('tabindex', '-1');
 			});
 		}, 600);
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 
 		if (_thisObj.isAdminPreview) {
 			_thisObj.hideFiltersLoader();
@@ -576,7 +581,11 @@ function wpfIsThriveEditor() {
 		}
 	});
 
-
+	/**
+	 * WpfFrontendPage.prototype.eventsFrontend.
+	 *
+	 * @version 3.1.8
+	 */
 	WpfFrontendPage.prototype.eventsFrontend = (function () {
 		var _thisObj = this.$obj,
 			searchParams = jQuery.toQueryParams(window.location.search);
@@ -630,7 +639,6 @@ function wpfIsThriveEditor() {
 			});
 		}
 		//for woocommerce-blocks (All products and others)
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 		if ((typeof window.wpfFetchHookCreated == 'undefined' || window.wpfFetchHookCreated != 1) && !wpfIsThriveEditor()) {
 			window.fetch = new Proxy(window.fetch, {
 				apply(fetch, that, args) {
@@ -679,11 +687,9 @@ function wpfIsThriveEditor() {
 		//for themes with ajax-paginations, ajax-ordering
 		jQuery(document).ajaxComplete(function(event, xhr, options) {
 			setTimeout(function() {
-				//fix/thrive-editor-hang-wcag-keyboard-accessibility
 				if (wpfIsThriveEditor()) {
 					return;
 				}
-				//fix/thrive-editor-hang-wcag-keyboard-accessibility
 				if (jQuery('.wpfLoaderLayout:visible').length) {
 					window.wpfFrontendPage.init();
 					if (typeof(window.wpfFrontendPage.eventsFrontendPro) == 'function') {
@@ -992,28 +998,22 @@ function wpfIsThriveEditor() {
 					if (settings.settings.hide_filter_icon !== '0') {
 						if (icons.collapsed) {
 							_thisObj.openFilterToggle(toggle, content, true, icons);
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
 							_this.attr('aria-expanded', 'true');
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
 						} else {
 							_thisObj.closeFilterToggle(toggle, content, true, icons);
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
 							_this.attr('aria-expanded', 'false');
-							//fix/thrive-editor-hang-wcag-keyboard-accessibility
 						}
 					}
 				}
 			}, 100);
 		});
 
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 		jQuery('body').off('keydown', '.wpfFilterWrapper .wpfFilterTitle').on('keydown', '.wpfFilterWrapper .wpfFilterTitle', function (e) {
 			if (e.which === 13 || e.which === 32) {
 				e.preventDefault();
 				jQuery(this).trigger('click');
 			}
 		});
-		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 
 		jQuery('body').off('click', '.wpfFilterWrapper .wpfBlockClear').on('click', '.wpfFilterWrapper .wpfBlockClear',  function(){
 			var parent = jQuery(this).closest(".wpfFilterWrapper"),
@@ -1309,6 +1309,11 @@ function wpfIsThriveEditor() {
 		}, sPause);
 	});
 
+	/**
+	 * WpfFrontendPage.prototype.closeFilterToggle.
+	 *
+	 * @version 3.1.8
+	 */
 	WpfFrontendPage.prototype.closeFilterToggle = (function (toggle, content, isTimeout, icons) {
 		if (toggle.hasClass(icons.minusIcon)) {
 			toggle.removeClass(icons.minusIcon);
@@ -1318,9 +1323,7 @@ function wpfIsThriveEditor() {
 				setTimeout(function () {
 					if (content.hasClass('wpfBlockAnimated')) {
 						content.addClass('wpfHide');
-						//fix/thrive-editor-hang-wcag-keyboard-accessibility
 						content.find('input, select, a, button').attr('tabindex', '-1');
-            			//fix/thrive-editor-hang-wcag-keyboard-accessibility
 					}
 				}, 10);
 			} else {
@@ -1329,14 +1332,17 @@ function wpfIsThriveEditor() {
 		}
 	});
 
+	/**
+	 * WpfFrontendPage.prototype.closeFilterToggle.
+	 *
+	 * @version 3.1.8
+	 */
 	WpfFrontendPage.prototype.openFilterToggle = (function (toggle, content, isTimeout, icons) {
 		if (toggle.hasClass(icons.plusIcon)) {
 			toggle.removeClass(icons.plusIcon);
 			toggle.addClass(icons.minusIcon);
 			content.removeClass('wpfHide');
-			//fix/thrive-editor-hang-wcag-keyboard-accessibility
 			content.find('input, select, a, button').removeAttr('tabindex');
-			//fix/thrive-editor-hang-wcag-keyboard-accessibility
 			if (typeof isTimeout !== 'undefined' && isTimeout) {
 				setTimeout(function () {
 					if (!content.hasClass('wpfHide')) content.removeClass('wpfBlockAnimated');
