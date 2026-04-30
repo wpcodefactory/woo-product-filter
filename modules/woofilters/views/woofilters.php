@@ -1488,10 +1488,12 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$htmlOpt = '';
 
-		if ( $defSelected && ! $hideEmptyActive ) {
+		//fix/thrive-editor-hang-wcag-keyboard-accessibility
+		if ( $defSelected && ! $hideEmptyActive && ! $hideEmpty ) {
 			$showedTerms = $allTerms;
 			$showFilter  = true;
 		}
+		//fix/thrive-editor-hang-wcag-keyboard-accessibility
 
 		if ( in_array($type, $frontendTypes) || $isMulti ) {
 			self::$leer = true;
@@ -3646,7 +3648,21 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		global $post;
 		if ( ! empty($post->post_content) ) {
-			$isShortcode = has_shortcode( $post->post_content, 'products' );
+			//Fix: Added support for all WooCommerce product shortcodes to fix AJAX pagination.
+			$wcShortcodes = array(
+				'products',
+				'recent_products',
+				'sale_products',
+				'best_selling_products',
+				'top_rated_products',
+				'featured_products',
+			);
+			foreach ( $wcShortcodes as $sc ) {
+				if ( has_shortcode( $post->post_content, $sc ) ) {
+					$isShortcode = true;
+					break;
+				}
+			}
 		}
 
 		/**
