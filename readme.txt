@@ -153,6 +153,9 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 3.1.8 - 30/04/2026 =
+* Fix - Missing opening/closing quotes in SQL `IN()` clause for color taxonomy list.
+
 = 3.1.7 - 22/04/2026 =
 * Dev - Block component created for page create so that admin can select filtering.
 * Dev - Stock status default checkbox selected.
