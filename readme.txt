@@ -157,6 +157,7 @@ Please report security bugs found in the source code of the plugin through the [
 * Fix - Missing opening/closing quotes in SQL `IN()` clause for color taxonomy list.
 * Fix - Thrive editor.
 * Fix - Added support for all WooCommerce product shortcodes to fix AJAX pagination.
+* Dev - Coding standards improved.
 
 = 3.1.7 - 22/04/2026 =
 * Dev - Block component created for page create so that admin can select filtering.
