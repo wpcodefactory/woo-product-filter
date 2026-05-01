@@ -1203,7 +1203,7 @@ select.woobewoo-flat-input {
 	font-weight: 400 !important;
 	padding: 0 !important;
 	white-space: normal !important;
-	max-width: 200px;
+	width:100%;
 	text-transform: capitalize !important;
 }
 .wpfFiltersBlockPreview {
@@ -1409,18 +1409,6 @@ select.woobewoo-flat-input {
 	fill: rgb(255 255 255);
 	stroke: #000000;
 }
-/* Gray out checkboxes initially */
-/* Initially gray out the checkboxes and labels */
-#addDialog_list input[type="checkbox"]:not(:checked) {
-		opacity: 0.5;
-		pointer-events: none; /* Prevent interaction with disabled checkboxes */
-}
-
-#addDialog_list label {
-		color: #999; /* Gray color for labels */
-		pointer-events: none; /* Prevent interaction with disabled labels */
-}
-
 /* Enable the checkboxes and labels when text is entered */
 #addDialog_title:valid + .wpfPopupBlock + .wpfPopupBlock #addDialog_list input[type="checkbox"]:not(:checked),
 #addDialog_title:valid + .wpfPopupBlock + .wpfPopupBlock label {
@@ -1436,6 +1424,7 @@ select.woobewoo-flat-input {
 #addDialog_list label {
 		color: #333; /* Dark color for labels when enabled */
 }
+
 @media (max-width: 768px) {
 	.wpf-overview-flex-custom {
 		flex-direction: column;

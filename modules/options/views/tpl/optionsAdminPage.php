@@ -90,11 +90,13 @@ defined( 'ABSPATH' ) || exit;
 						</label>
 						<ul class="wpfPopupList" id="addDialog_list">
 							<?php
+							$k=1;
 							foreach ($filtersList as $filter => $data) {
 								if ('wpfPriceRange' != $filter) {
+									$k++;
 									echo '<li><input type="checkbox" data-unique-id="' . esc_attr(uniqid('wpf_')) .
 										'" data-value="' . esc_attr($filter) .
-										'"><label>' . esc_html($data['name']) .
+										'" id="wpf_'.$k.'"><label for="wpf_'.$k.'">' . esc_html($data['name']) .
 										'</label></li>';
 								}
 							}
