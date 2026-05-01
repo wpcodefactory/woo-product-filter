@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
  * @author  woobewoo
  */
@@ -954,6 +954,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $titleMobileBreakpointData;
 	}
 
+	/**
+	 * generatePriceFilterHtml.
+	 *
+	 * @version 3.1.8
+	 */
 	public function generatePriceFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		// Find min and max price in current result set.
 
@@ -969,7 +974,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, '') .
 
 				' data-price-skin="default' .
@@ -1096,6 +1101,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return array('is_ver' => $isVertical, 'cnt' => $cnt, 'class' => $addClass);
 	}
 
+	/**
+	 * generatePriceRangeFilterHtml.
+	 *
+	 * @version 3.1.8
+	 */
 	public function generatePriceRangeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings  = $this->getFilterSetting($filter, 'settings', array());
 		$layout    = $this->getFilterLayout($settings, $filterSettings);
@@ -1154,7 +1164,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . ( empty($defaultRange) ? '' : ' wpfPreselected' ) . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, 'wpf_min_price,wpf_max_price,tax', $filter['settings']['f_frontend_type']) .
 
 				' data-radio="' . ( 'list' == $type ? '1' : '0' ) . '"' .
@@ -1187,7 +1197,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateSortByFilterHtml.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.8
 	 */
 	public function generateSortByFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$optionsAll = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'SortBy' );
@@ -1225,7 +1235,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, 'orderby', '') .
 				' data-radio="' . ( 'radio' === $type ? '1' : '0' ) . '"' .
 				' data-display-type="' . $type . '"' .
@@ -1322,7 +1332,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateCategoryFilterHtml.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	public function generateCategoryFilterHtml( $filter, $filterSettings, $blockStyle, $prodCatId = false, $key = 1, $viewId = '' ) {
 		$settings                = $this->getFilterSetting($filter, 'settings', array());
@@ -1488,7 +1498,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$htmlOpt = '';
 
-		if ( $defSelected && ! $hideEmptyActive ) {
+		if ( $defSelected && ! $hideEmptyActive && ! $hideEmpty ) {
 			$showedTerms = $allTerms;
 			$showFilter  = true;
 		}
@@ -1548,7 +1558,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . $showCount . $preselected . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $type) .
 
 				' data-radio="' . ( 'list' === $type ? '1' : '0' ) .
@@ -1618,7 +1628,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Generate custom taxonomy filter for a specific plugin.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 *
 	 * @link https://wordpress.org/plugins/perfect-woocommerce-brands/
 	 *
@@ -1782,7 +1792,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html         =
 			'<div class="wpfFilterWrapper ' . $noActive . $showCount . $preselected . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $type) .
 
 				' data-radio="' . ( 'list' === $type ? '1' : '0' ) .
@@ -1816,7 +1826,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateTagsFilterHtml.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	public function generateTagsFilterHtml( $filter, $filterSettings, $blockStyle, $key = 0, $viewId = '' ) {
 		$settings = $this->getFilterSetting($filter, 'settings', array());
@@ -1969,7 +1979,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html      =
 			'<div class="wpfFilterWrapper ' . $noActive . $showCount . $preselected . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $type) .
 
 				' data-query-logic="' . $logic . $notValues .
@@ -1994,6 +2004,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $html;
 	}
 
+	/**
+	 * generateAuthorFilterHtml.
+	 *
+	 * @version 3.1.8
+	 */
 	public function generateAuthorFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings = $this->getFilterSetting($filter, 'settings', array());
 		$labels   = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getFilterLabels('Author');
@@ -2087,7 +2102,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $type) .
 
 				$filter['blockAttributes'] .
@@ -2112,6 +2127,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $html;
 	}
 
+	/**
+	 * generateFeaturedFilterHtml.
+	 *
+	 * @version 3.1.8
+	 */
 	public function generateFeaturedFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_featured';
 		$settings   = $this->getFilterSetting($filter, 'settings', array());
@@ -2161,7 +2181,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html     =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $filter['settings']['f_frontend_type']) .
 
 				$filter['blockAttributes'] .
@@ -2178,6 +2198,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $html;
 	}
 
+	/**
+	 * generateOnSaleFilterHtml.
+	 *
+	 * @version 3.1.8
+	 */
 	public function generateOnSaleFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_onsale';
 		$settings   = $this->getFilterSetting($filter, 'settings', array());
@@ -2231,7 +2256,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $filter['settings']['f_frontend_type']) .
 			'>';
 
@@ -2249,7 +2274,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateCustomFieldFilterHtml.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 * @since   3.1.7
 	 */
 	public function generateCustomFieldFilterHtml($filter, $filterSettings, $blockStyle, $key = 1, $viewId = '') {
@@ -2312,7 +2337,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 				$noActive = $defSelected ? '' : 'wpfNotActive';
 				$html .= '<div class="wpfFilterWrapper ' . $noActive . '"'
-					. $this->setFitlerId()
+					. $this->setFilterId()
 					. ' data-filter-type="wpfCustomField"'
 					. ' data-get-attribute="' . esc_attr($name) . '"'
 					. ' data-display-type="' . esc_attr($fieldType) . '"'
@@ -2340,7 +2365,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateInStockFilterHtml.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.8
 	 */
 	public function generateInStockFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$optionsAll = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getFilterLabels('InStock');
@@ -2407,7 +2432,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html     =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, 'pr_stock', $filter['settings']['f_frontend_type']) .
 
 				$filter['blockAttributes'] .
@@ -2425,7 +2450,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateRatingFilterHtml.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.8
 	 */
 	public function generateRatingFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName     = 'pr_rating';
@@ -2500,7 +2525,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $type) .
 
 				$filter['blockAttributes'] .
@@ -2522,7 +2547,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateAttributeFilterHtml.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	public function generateAttributeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings                              = $this->getFilterSetting($filter, 'settings', array());
@@ -2721,7 +2746,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . $showCount . $preselected . '"' .
 
-				$this->setFitlerId() .
+				$this->setFilterId() .
 				$this->setCommonFitlerDataAttr($filter, $filterName, $type, esc_attr($filterNameSlug)) .
 
 				' data-query-logic="' . $logicSlug . $notValues .
@@ -3630,6 +3655,8 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Get pagination base structure.
 	 *
+	 * @version 3.1.8
+	 *
 	 * @return array
 	 */
 	public function getPaginationBase() {
@@ -3638,7 +3665,20 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		global $post;
 		if ( ! empty($post->post_content) ) {
-			$isShortcode = has_shortcode( $post->post_content, 'products' );
+			$wcShortcodes = array(
+				'products',
+				'recent_products',
+				'sale_products',
+				'best_selling_products',
+				'top_rated_products',
+				'featured_products',
+			);
+			foreach ( $wcShortcodes as $shortcode ) {
+				if ( has_shortcode( $post->post_content, $shortcode ) ) {
+					$isShortcode = true;
+					break;
+				}
+			}
 		}
 
 		/**
@@ -3692,8 +3732,10 @@ class WoofiltersViewWpf extends ViewWpf {
 
 	/**
 	 * Set filter id.
+	 *
+	 * @version 3.1.8
 	 */
-	public function setFitlerId() {
+	public function setFilterId() {
 		return ' id="' . self::$blockId . '" data-order-key="' . self::$filterOrderKey . '" ';
 	}
 

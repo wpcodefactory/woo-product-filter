@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
  * @author  woobewoo
  */
@@ -45,13 +45,24 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	public function init() {
-		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
 		add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
 		add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
+
+		$isThriveContext = (
+			isset( $_GET['tvet'] ) ||
+			isset( $_GET['tcbf'] ) ||
+			isset( $_GET['_preview'] )
+		);
+		if ( $isThriveContext ) {
+			// Register shortcodes only — skip all heavy product query hooks
+			return;
+		}
+
+		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 
 		if ( is_admin() ) {
 			add_action( 'admin_notices', array( $this, 'showAdminErrors' ) );
@@ -4065,7 +4076,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.8
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4179,7 +4190,7 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 			$addSqls['color']['withCount']    = false;
 			$addSqls['color']['fields']       = 'tt.term_id, tt.taxonomy, wpf_temp.ID';
-			$addSqls['color']['taxonomyList'] = implode( "', '", $taxonomyList );
+			$addSqls['color']['taxonomyList'] = "'" . implode( "', '", $taxonomyList ) . "'";
 		}
 
 		foreach ( $addSqls as $key => $addSql ) {
