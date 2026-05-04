@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - FrameWpf Class
  *
- * @version 3.1.3
+ * @version 3.1.8
  *
  * @author  woobewoo
  */
@@ -409,7 +409,7 @@ class FrameWpf {
 	/**
 	 * _doExec.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.8
 	 */
 	protected function _doExec() {
 		$mod = $this->getModule($this->_mod);

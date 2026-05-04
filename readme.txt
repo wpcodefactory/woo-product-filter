@@ -154,6 +154,7 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.8 - 04/05/2026 =
+* Fix - Fixed "save statistics" permission error.
 * Fix - Resolved SQL `IN()` clause issue caused by missing quotes in color taxonomy list.
 * Fix - Fixed Thrive Editor loading issue.
 * Fix - Added support for all WooCommerce product shortcodes to resolve AJAX pagination issues.
