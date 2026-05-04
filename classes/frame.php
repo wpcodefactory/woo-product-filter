@@ -417,7 +417,7 @@ class FrameWpf {
 			switch (ReqWpf::getVar('reqType')) {
 				case 'ajax':
 					add_action('wp_ajax_' . $this->_action, array($mod->getController(), $this->_action));
-					$noprivActions = array( 'filtersFrontend', 'getTaxonomyTerms' );
+					$noprivActions = array( 'filtersFrontend', 'getTaxonomyTerms', 'saveStatistics' );
 					if ( in_array( $this->_action, $noprivActions ) ) {
 						add_action('wp_ajax_nopriv_' . $this->_action, array($mod->getController(), $this->_action));
 					}
