@@ -373,9 +373,9 @@ class FrameWpf {
 		if ($mod) {
 			$permissions = $mod->getController()->getPermissions();
 			if (!empty($permissions)) {  // Special permissions
-				if (isset($permissions[WPF_METHODS]) && !empty($permissions[WPF_METHODS])) {
-					foreach ($permissions[WPF_METHODS] as $method => $permissions) {   // Make case-insensitive
-						$permissions[WPF_METHODS][strtolower($method)] = $permissions;
+				if ( !empty($permissions[WPF_METHODS]) ) {
+					foreach ($permissions[WPF_METHODS] as $method => $permissionValue) {
+						$permissions[WPF_METHODS][strtolower($method)] = $permissionValue;
 					}
 					if (array_key_exists($action, $permissions[WPF_METHODS])) {        // Permission for this method exists
 						$res = true;

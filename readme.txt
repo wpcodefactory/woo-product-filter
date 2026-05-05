@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
 Tested up to: 6.9
-Stable tag: 3.1.7
+Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,7 +153,8 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.8 - 04/05/2026 =
+= 3.1.8 - 05/05/2026 =
+* Fix - multi-site permission bug.
 * Fix - Fixed "save statistics" permission error.
 * Fix - Resolved SQL `IN()` clause issue caused by missing quotes in color taxonomy list.
 * Fix - Fixed Thrive Editor loading issue.
