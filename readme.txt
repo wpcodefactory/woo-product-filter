@@ -153,8 +153,14 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.8 - 24/04/2026 =
+= 3.1.8 - 05/05/2026 =
 * Fix - multi-site permission bug.
+* Fix - Fixed "save statistics" permission error.
+* Fix - Resolved SQL `IN()` clause issue caused by missing quotes in color taxonomy list.
+* Fix - Fixed Thrive Editor loading issue.
+* Fix - Added support for all WooCommerce product shortcodes to resolve AJAX pagination issues.
+* Dev - Added keyboard accessibility support for filters.
+* Dev - Improved coding standards and code cleaned up.
 
 = 3.1.7 - 22/04/2026 =
 * Dev - Block component created for page create so that admin can select filtering.
