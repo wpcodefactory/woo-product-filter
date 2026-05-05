@@ -373,9 +373,9 @@ class FrameWpf {
 		if ($mod) {
 			$permissions = $mod->getController()->getPermissions();
 			if (!empty($permissions)) {  // Special permissions
-				if (isset($permissions[WPF_METHODS]) && !empty($permissions[WPF_METHODS])) {
-					foreach ($permissions[WPF_METHODS] as $method => $permissions) {   // Make case-insensitive
-						$permissions[WPF_METHODS][strtolower($method)] = $permissions;
+				if ( !empty($permissions[WPF_METHODS]) ) {
+					foreach ($permissions[WPF_METHODS] as $method => $permissionValue) {
+						$permissions[WPF_METHODS][strtolower($method)] = $permissionValue;
 					}
 					if (array_key_exists($action, $permissions[WPF_METHODS])) {        // Permission for this method exists
 						$res = true;
@@ -391,15 +391,13 @@ class FrameWpf {
 
 	/**
 	 * _execModules.
-     *
-     * @version 3.1.8
 	 */
 	protected function _execModules() {
 		if ($this->_mod) {
 			// If module exist and is active
 			$mod = $this->getModule($this->_mod);
 			if ($mod && !empty($this->_action)) {
-				if (!$this->_execOnlyAfterWpInit()) {
+				if ($this->_execOnlyAfterWpInit()) {
 					add_action('init', array($this, 'execAfterWpInit'));
 				} else {
 					$this->_doExec();
