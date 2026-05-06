@@ -365,6 +365,8 @@ class FrameWpf {
 
 	/**
 	 * Check if method for module require some special permission. We can detect users permissions only after wp init action was done.
+	 *
+	 * @version 3.1.8
 	 */
 	protected function _execOnlyAfterWpInit() {
 		$res = false;
@@ -372,12 +374,12 @@ class FrameWpf {
 		$action = strtolower( $this->_action );
 		if ($mod) {
 			$permissions = $mod->getController()->getPermissions();
-			if (!empty($permissions)) {  // Special permissions
-				if ( !empty($permissions[WPF_METHODS]) ) {
-					foreach ($permissions[WPF_METHODS] as $method => $permissionValue) {
+			if (!empty($permissions)) { // Special permissions
+				if (!empty($permissions[WPF_METHODS])) {
+					foreach ($permissions[WPF_METHODS] as $method => $permissionValue) { // Make case-insensitive
 						$permissions[WPF_METHODS][strtolower($method)] = $permissionValue;
 					}
-					if (array_key_exists($action, $permissions[WPF_METHODS])) {        // Permission for this method exists
+					if (array_key_exists($action, $permissions[WPF_METHODS])) { // Permission for this method exists
 						$res = true;
 					}
 				}
