@@ -1,5 +1,5 @@
 idea
-.idea/*
+.idea/
 node_modules/
 package-lock.json
 .vscode/sftp.json
