@@ -1,4 +1,10 @@
 <?php
+/**
+ * Product Filter by WBW - Meta_ValuesModelWpf Class
+ *
+ * @version 3.1.8
+ */
+
 class Meta_ValuesModelWpf extends ModelWpf {
 	private $keyValueIds = array();
 
@@ -24,7 +30,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		$maxKeySize = $metaModel->maxKeySize;
 		$select = 'id,value';
 		$where = array('key_id' => $keyId);
-		$uniq = array(); 
+		$uniq = array();
 		for ($k = $maxKeySize; $k >= 2; $k--) {
 			$key = 'key' . $k;
 			if (empty($keys[$key])) {
@@ -37,7 +43,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 
 		$data = $this->setSelectFields($select)->addWhere($where)->getFromTbl();
 		$values = array();
-	
+
 		foreach ($data as $fields) {
 			$key = $fields['value'];
 			foreach ($uniq as $k) {
@@ -53,7 +59,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return $values;
 	}
 
-	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {	
+	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {
 		$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
 		$maxKeySize = $metaModel->maxKeySize;
 		$where = array('key_id' => $keyId);
@@ -74,7 +80,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 
 	public function getMetaValueTerms( $keyId, $keys = array()) {
 		$cntField = ( empty($keys['fbv']) ? 'product_cnt' : 'variation_cnt' );
-		
+
 		if ( !isset($keys['field']) || ( 'id' == $keys['field'] ) ) {
 			$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
 			$maxKeySize = $metaModel->maxKeySize;
@@ -93,7 +99,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 			if (!empty($keys['include']) && is_array($keys['include'])) {
 				$this->addWhere('id IN (' . implode(',', UtilsWpf::controlNumericValues($keys['include'], 'id')) . ')');
 			}
-			if (isset($keys['order'])) { 
+			if (isset($keys['order'])) {
 				$this->setOrderBy('value');
 				if ( 'desc' == $keys['order'] ) {
 					$this->setSortOrder('DESC');
@@ -110,7 +116,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 			$data  = DbWpf::get( $query );
 		}
 		$terms = array();
-	
+
 		foreach ($data as $fields) {
 			$term = new stdClass();
 			$term->term_id = $fields['id'];
@@ -131,11 +137,11 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		if (!isset($this->keyValueIds[$key])) {
 			$id = $this->insert(array_merge($keys, array('key_id' => $keyId, 'value' => $value)));
 			if ($id) {
-				$this->keyValueIds[$key] = $id;		
+				$this->keyValueIds[$key] = $id;
 			} else {
 				return false;
 			}
-			
+
 		}
 		return $this->keyValueIds[$key];
 	}
@@ -148,6 +154,18 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return $id ? $id : 0;
 	}
 
+	/**
+	 * getMetaValueIds.
+	 *
+	 * @version 3.1.8
+	 *
+	 * @param $keyId
+	 * @param $values
+	 * @param $like
+	 * @param $keys
+	 *
+	 * @return int[]
+	 */
 	public function getMetaValueIds( $keyId, $values, $like = '', $keys = array() ) {
 
 		if (is_array($values) && !empty($values)) {
@@ -156,6 +174,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 				if ( false === strpos( $value, '%' ) ) {
 					$value = strtolower( rawurlencode( $value ) );
 				}
+				$value = DbWpf::escape( $value );
 			}
 
 			$valueStr = implode( "','", $values );
@@ -177,14 +196,14 @@ class Meta_ValuesModelWpf extends ModelWpf {
 	}
 
 	public function recalcValuesCount( $keyIds = array() ) {
-		
+
 		$query = 'UPDATE `@__meta_values` as v SET ' .
 			' product_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var!=1 LIMIT 1),1,0),
 			  variation_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var=1 LIMIT 1),1,0) ';
 		if (!empty($keyIds)) {
 			$query .= ' WHERE v.key_id IN (' . implode(',', $keyIds) . ')';
 		}
-		if (!DbWpf::query($query)) { 
+		if (!DbWpf::query($query)) {
 			$this->pushError(DbWpf::getError());
 			return false;
 		}
@@ -198,7 +217,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		if (!DbWpf::query($query)) {
 			$this->pushError(DbWpf::getError());
 			return false;
-		} 
+		}
 		if (!DbWpf::query('DELETE FROM `@__meta_values`' . $where)) {
 			$this->pushError(DbWpf::getError());
 			return false;
@@ -212,7 +231,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		if (!DbWpf::query($query)) {
 			$this->pushError(DbWpf::getError());
 			return false;
-		} 
+		}
 		return true;
 	}
 
