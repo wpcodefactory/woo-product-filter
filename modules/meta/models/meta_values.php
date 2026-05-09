@@ -5,6 +5,8 @@
  * @version 3.1.8
  */
 
+defined( 'ABSPATH' ) || exit;
+
 class Meta_ValuesModelWpf extends ModelWpf {
 	private $keyValueIds = array();
 
