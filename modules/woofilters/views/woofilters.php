@@ -828,7 +828,6 @@ class WoofiltersViewWpf extends ViewWpf {
 	 *
 	 * @version 3.1.8
 	 */
-	// fix/collapse-toggle-icon-and-filtered-page-results
 	public function generateIconCloseOpenTitleHtml( $filter, $filterSettings, $showTitle ) {
 		// Filter settings না থাকলে icon render করার দরকার নেই
 		if ( empty($filter['settings']) ) {

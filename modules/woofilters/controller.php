@@ -868,7 +868,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 		$isAllProductsFiltering = $filterSettings['all_products_filtering'] && $filtersDataBackend;
 
-		//fix/collapse-toggle-icon-and-filtered-page-results
 		$hasCategoryFilter = false;
 		foreach ( $filtersDataBackend as $filteringSettings ) {
 			if ( 'wpfCategory' === $filteringSettings['id'] && ! empty( $filteringSettings['settings'] ) ) {
@@ -878,7 +877,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		}
 
 		if ( ! $isAllProductsFiltering ) {
-			// fix/collapse-toggle-icon-and-filtered-page-results
 			if ( ! $hasCategoryFilter && ( isset($queryvars['product_category_id']) || $asDefaultCats ) && ! $queryvars['product_tag'] && ! $queryvars['product_brand'] && ! $queryvars['pwb-brand'] ) {
 				$args['tax_query'][] = array(
 					'taxonomy'         => 'product_cat',
