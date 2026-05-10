@@ -1387,7 +1387,28 @@ class WoofiltersWpf extends ModuleWpf {
 							'include_children' => true,
 						);
 					}
-				} elseif ( ( strpos( $key, 'product_brand' ) === 0 || ( strpos( $key, 'wpf_filter_brand' ) === 0 && ! taxonomy_exists( 'pa_' . preg_replace( '/_\d+$/', '', str_replace( 'wpf_filter_', '', $key ) ) ) ) ) && taxonomy_exists('product_brand') && !is_admin() ) {
+				} elseif (
+					(
+						strpos( $key, 'product_brand' ) === 0 ||
+						(
+							strpos( $key, 'wpf_filter_brand' ) === 0 &&
+							! taxonomy_exists(
+								'pa_' .
+								preg_replace(
+									'/_\d+$/',
+									'',
+									str_replace(
+										'wpf_filter_',
+										'',
+										$key
+									)
+								)
+							)
+						)
+					) &&
+					taxonomy_exists('product_brand') &&
+					!is_admin()
+				) {
 					if ( ! empty( $param ) ) {
 						$idsOr      = explode( ',', $param );
 						$idsAnd     = explode( '|', $param );
