@@ -22,8 +22,8 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		FrameWpf::_()->getTable('meta_values')->setEscape(true);
 		$this->setIndexes(array(
 			'uniq_key' => 'UNIQUE INDEX `uniq_key` (`key_id`, `key2`, `key3`, `key4`, `value`)',
-			'i_key'	=> 'INDEX `i_key` (key_id, value(10))'
-			));
+			'i_key'    => 'INDEX `i_key` (key_id, value(10))'
+		));
 	}
 
 	/**
@@ -45,22 +45,22 @@ class Meta_ValuesModelWpf extends ModelWpf {
 	 */
 	public function getKeyValueIds( $keyId, $keys = array(), $reverse = false ) {
 		$this->addIndexes();
-		$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
+		$metaModel  = FrameWpf::_()->getModule('meta')->getModel('meta');
 		$maxKeySize = $metaModel->maxKeySize;
-		$select = 'id,value';
-		$where = array('key_id' => $keyId);
-		$uniq = array();
+		$select     = 'id,value';
+		$where      = array('key_id' => $keyId);
+		$uniq       = array();
 		for ($k = $maxKeySize; $k >= 2; $k--) {
 			$key = 'key' . $k;
 			if (empty($keys[$key])) {
 				$select .= ',' . $key;
-				$uniq[] = $key;
+				$uniq[]  = $key;
 			} else {
 				$where[$key] = $metaModel->getCutKeyValue($keys[$key]);
 			}
 		}
 
-		$data = $this->setSelectFields($select)->addWhere($where)->getFromTbl();
+		$data   = $this->setSelectFields($select)->addWhere($where)->getFromTbl();
 		$values = array();
 
 		foreach ($data as $fields) {
@@ -82,9 +82,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 	 * getFieldValuesList.
 	 */
 	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {
-		$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
+		$metaModel  = FrameWpf::_()->getModule('meta')->getModel('meta');
 		$maxKeySize = $metaModel->maxKeySize;
-		$where = array('key_id' => $keyId);
+		$where      = array('key_id' => $keyId);
 		for ($k = $maxKeySize; $k >= 2; $k--) {
 			$key = 'key' . $k;
 			if (!empty($keys[$key])) {
@@ -107,10 +107,10 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		$cntField = ( empty($keys['fbv']) ? 'product_cnt' : 'variation_cnt' );
 
 		if ( !isset($keys['field']) || ( 'id' == $keys['field'] ) ) {
-			$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
+			$metaModel  = FrameWpf::_()->getModule('meta')->getModel('meta');
 			$maxKeySize = $metaModel->maxKeySize;
-			$select = 'id,value,' . $cntField . ' as cnt';
-			$where = array('key_id' => $keyId);
+			$select     = 'id,value,' . $cntField . ' as cnt';
+			$where      = array('key_id' => $keyId);
 			for ($k = $maxKeySize; $k >= 2; $k--) {
 				$key = 'key' . $k;
 				if (!empty($keys[$key])) {
@@ -143,7 +143,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		$terms = array();
 
 		foreach ($data as $fields) {
-			$term = new stdClass();
+			$term          = new stdClass();
 			$term->term_id = $fields['id'];
 			$term->name    = $fields['value'];
 			$term->slug    = $fields['id'];
@@ -158,7 +158,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 	 */
 	public function insertValueId( $keyId, $keys, $value ) {
 		$value = trim($value);
-		$key = implode('|', $keys) . '|' . $value;
+		$key   = implode('|', $keys) . '|' . $value;
 		if (!isset($this->keyValueIds[$key])) {
 			$id = $this->insert(array_merge($keys, array('key_id' => $keyId, 'value' => $value)));
 			if ($id) {
