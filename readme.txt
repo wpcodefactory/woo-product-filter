@@ -155,6 +155,8 @@ Please report security bugs found in the source code of the plugin through the [
 
 = 3.1.8 - 10/05/2026 =
 * Fix - Security - Fixed SQL injection vulnerability.
+* Fix - Fixed collapse toggle icon rendering.
+* Fix - Fixed filtered page results issue.
 * Fix - Fixed brand attribute filter detection bug.
 * Fix - Fixed multi-site permission bug.
 * Fix - Fixed "save statistics" permission error.
