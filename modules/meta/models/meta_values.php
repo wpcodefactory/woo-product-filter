@@ -1,43 +1,68 @@
 <?php
+/**
+ * Product Filter by WBW - Meta_ValuesModelWpf Class
+ *
+ * @version 3.1.8
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class Meta_ValuesModelWpf extends ModelWpf {
+
+	/**
+	 * keyValueIds.
+	 */
 	private $keyValueIds = array();
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->_setTbl('meta_values');
 		FrameWpf::_()->getTable('meta_values')->setEscape(true);
 		$this->setIndexes(array(
 			'uniq_key' => 'UNIQUE INDEX `uniq_key` (`key_id`, `key2`, `key3`, `key4`, `value`)',
-			'i_key'	=> 'INDEX `i_key` (key_id, value(10))'
-			));
+			'i_key'    => 'INDEX `i_key` (key_id, value(10))'
+		));
 	}
 
+	/**
+	 * selectMetaValues.
+	 */
 	public function selectMetaValues( $keyId ) {
 		$this->keyValueIds = $this->getKeyValueIds($keyId);
 	}
+
+	/**
+	 * resetMetaValues.
+	 */
 	public function resetMetaValues() {
 		$this->keyValueIds = array();
 	}
 
+	/**
+	 * getKeyValueIds.
+	 */
 	public function getKeyValueIds( $keyId, $keys = array(), $reverse = false ) {
 		$this->addIndexes();
-		$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
+		$metaModel  = FrameWpf::_()->getModule('meta')->getModel('meta');
 		$maxKeySize = $metaModel->maxKeySize;
-		$select = 'id,value';
-		$where = array('key_id' => $keyId);
-		$uniq = array(); 
+		$select     = 'id,value';
+		$where      = array('key_id' => $keyId);
+		$uniq       = array();
 		for ($k = $maxKeySize; $k >= 2; $k--) {
 			$key = 'key' . $k;
 			if (empty($keys[$key])) {
 				$select .= ',' . $key;
-				$uniq[] = $key;
+				$uniq[]  = $key;
 			} else {
 				$where[$key] = $metaModel->getCutKeyValue($keys[$key]);
 			}
 		}
 
-		$data = $this->setSelectFields($select)->addWhere($where)->getFromTbl();
+		$data   = $this->setSelectFields($select)->addWhere($where)->getFromTbl();
 		$values = array();
-	
+
 		foreach ($data as $fields) {
 			$key = $fields['value'];
 			foreach ($uniq as $k) {
@@ -53,10 +78,13 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return $values;
 	}
 
-	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {	
-		$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
+	/**
+	 * getFieldValuesList.
+	 */
+	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {
+		$metaModel  = FrameWpf::_()->getModule('meta')->getModel('meta');
 		$maxKeySize = $metaModel->maxKeySize;
-		$where = array('key_id' => $keyId);
+		$where      = array('key_id' => $keyId);
 		for ($k = $maxKeySize; $k >= 2; $k--) {
 			$key = 'key' . $k;
 			if (!empty($keys[$key])) {
@@ -72,14 +100,17 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return empty($list) ? array() : $list;
 	}
 
+	/**
+	 * getMetaValueTerms.
+	 */
 	public function getMetaValueTerms( $keyId, $keys = array()) {
 		$cntField = ( empty($keys['fbv']) ? 'product_cnt' : 'variation_cnt' );
-		
+
 		if ( !isset($keys['field']) || ( 'id' == $keys['field'] ) ) {
-			$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
+			$metaModel  = FrameWpf::_()->getModule('meta')->getModel('meta');
 			$maxKeySize = $metaModel->maxKeySize;
-			$select = 'id,value,' . $cntField . ' as cnt';
-			$where = array('key_id' => $keyId);
+			$select     = 'id,value,' . $cntField . ' as cnt';
+			$where      = array('key_id' => $keyId);
 			for ($k = $maxKeySize; $k >= 2; $k--) {
 				$key = 'key' . $k;
 				if (!empty($keys[$key])) {
@@ -93,7 +124,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 			if (!empty($keys['include']) && is_array($keys['include'])) {
 				$this->addWhere('id IN (' . implode(',', UtilsWpf::controlNumericValues($keys['include'], 'id')) . ')');
 			}
-			if (isset($keys['order'])) { 
+			if (isset($keys['order'])) {
 				$this->setOrderBy('value');
 				if ( 'desc' == $keys['order'] ) {
 					$this->setSortOrder('DESC');
@@ -110,9 +141,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 			$data  = DbWpf::get( $query );
 		}
 		$terms = array();
-	
+
 		foreach ($data as $fields) {
-			$term = new stdClass();
+			$term          = new stdClass();
 			$term->term_id = $fields['id'];
 			$term->name    = $fields['value'];
 			$term->slug    = $fields['id'];
@@ -122,24 +153,27 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return empty($terms) ? array() : $terms;
 	}
 
+	/**
+	 * insertValueId.
+	 */
 	public function insertValueId( $keyId, $keys, $value ) {
-		/*if (empty($value) && '' === $value) {
-			return false;
-		}*/
 		$value = trim($value);
-		$key = implode('|', $keys) . '|' . $value;
+		$key   = implode('|', $keys) . '|' . $value;
 		if (!isset($this->keyValueIds[$key])) {
 			$id = $this->insert(array_merge($keys, array('key_id' => $keyId, 'value' => $value)));
 			if ($id) {
-				$this->keyValueIds[$key] = $id;		
+				$this->keyValueIds[$key] = $id;
 			} else {
 				return false;
 			}
-			
+
 		}
 		return $this->keyValueIds[$key];
 	}
 
+	/**
+	 * getMetaValueId.
+	 */
 	public function getMetaValueId( $keyId, $value, $keys = array() ) {
 		if (!empty($keys)) {
 			$this->addWhere($keys);
@@ -148,6 +182,18 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return $id ? $id : 0;
 	}
 
+	/**
+	 * getMetaValueIds.
+	 *
+	 * @version 3.1.8
+	 *
+	 * @param $keyId
+	 * @param $values
+	 * @param $like
+	 * @param $keys
+	 *
+	 * @return int[]
+	 */
 	public function getMetaValueIds( $keyId, $values, $like = '', $keys = array() ) {
 
 		if (is_array($values) && !empty($values)) {
@@ -156,6 +202,7 @@ class Meta_ValuesModelWpf extends ModelWpf {
 				if ( false === strpos( $value, '%' ) ) {
 					$value = strtolower( rawurlencode( $value ) );
 				}
+				$value = DbWpf::escape( $value );
 			}
 
 			$valueStr = implode( "','", $values );
@@ -176,15 +223,18 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return empty($ids) ? array(0) : $ids;
 	}
 
+	/**
+	 * recalcValuesCount.
+	 */
 	public function recalcValuesCount( $keyIds = array() ) {
-		
+
 		$query = 'UPDATE `@__meta_values` as v SET ' .
 			' product_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var!=1 LIMIT 1),1,0),
 			  variation_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var=1 LIMIT 1),1,0) ';
 		if (!empty($keyIds)) {
 			$query .= ' WHERE v.key_id IN (' . implode(',', $keyIds) . ')';
 		}
-		if (!DbWpf::query($query)) { 
+		if (!DbWpf::query($query)) {
 			$this->pushError(DbWpf::getError());
 			return false;
 		}
@@ -192,13 +242,16 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * backupOldValues.
+	 */
 	public function backupOldValues( $keyIds ) {
 		$where = ' WHERE key_id' . ( count($keyIds) ? ' IN (' . implode(',', $keyIds) . ')' : '=' . $keyIds[0] );
 		$query = 'INSERT IGNORE INTO `@__meta_values_bk` SELECT id, key_id, key2, key3, key4, value FROM `@__meta_values`' . $where;
 		if (!DbWpf::query($query)) {
 			$this->pushError(DbWpf::getError());
 			return false;
-		} 
+		}
 		if (!DbWpf::query('DELETE FROM `@__meta_values`' . $where)) {
 			$this->pushError(DbWpf::getError());
 			return false;
@@ -206,14 +259,16 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * restoreOldValues.
+	 */
 	public function restoreOldValues( $keyIds ) {
 		$where = ' WHERE key_id' . ( count($keyIds) ? ' IN (' . implode(',', $keyIds) . ')' : '=' . $keyIds[0] );
 		$query = 'INSERT IGNORE INTO `@__meta_values` SELECT id, key_id, key2, key3, key4, value, 0, 0 FROM `@__meta_values_bk`' . $where;
 		if (!DbWpf::query($query)) {
 			$this->pushError(DbWpf::getError());
 			return false;
-		} 
+		}
 		return true;
 	}
-
 }
