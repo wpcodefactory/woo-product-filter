@@ -154,6 +154,7 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.8 - 10/05/2026 =
+* Fix - Fixed brand attribute filter detection bug.
 * Fix - Security - Fixed SQL injection vulnerability.
 * Fix - Fixed multi-site permission bug.
 * Fix - Fixed "save statistics" permission error.
