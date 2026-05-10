@@ -1447,27 +1447,27 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		return array(
 			WPF_METHODS => array(
 				'getListForTbl' => array(
-					WPF_ADMIN
+					WPF_ADMIN,
 				),
 				'save' => array(
-					WPF_ADMIN
+					WPF_ADMIN,
 				),
 				'removeGroup' => array(
-					WPF_ADMIN
+					WPF_ADMIN,
 				),
 				'deleteByID' => array(
-					WPF_ADMIN
+					WPF_ADMIN,
 				),
 				'saveCategoryLabel' => array(
-					WPF_ADMIN
+					WPF_ADMIN,
 				),
 				'drawFilterAjax' => array(
-					WPF_ADMIN
+					WPF_ADMIN,
 				),
 				'filtersFrontend' => array(
 					WPF_GUEST,
 					WPF_ADMIN,
-					WPF_LOGGED
+					WPF_LOGGED,
 				),
 			),
 		);

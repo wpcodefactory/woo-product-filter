@@ -3821,5 +3821,4 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		return $dropdownLabel;
 	}
-
 }
