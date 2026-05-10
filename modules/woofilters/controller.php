@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersControllerWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
  * @author  woobewoo
  */
@@ -817,7 +817,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables

@@ -826,7 +826,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateIconCloseOpenTitleHtml.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	// fix/collapse-toggle-icon-and-filtered-page-results
 	public function generateIconCloseOpenTitleHtml( $filter, $filterSettings, $showTitle ) {
