@@ -870,8 +870,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		
 		//fix/collapse-toggle-icon-and-filtered-page-results
 		$hasCategoryFilter = false;
-		foreach ( $filtersDataBackend as $_fs ) {
-			if ( 'wpfCategory' === $_fs['id'] && ! empty( $_fs['settings'] ) ) {
+		foreach ( $filtersDataBackend as $filteringSettings ) {
+			if ( 'wpfCategory' === $filteringSettings['id'] && ! empty( $filteringSettings['settings'] ) ) {
 				$hasCategoryFilter = true;
 				break;
 			}
