@@ -8,8 +8,15 @@
 defined( 'ABSPATH' ) || exit;
 
 class Meta_ValuesModelWpf extends ModelWpf {
+
+	/**
+	 * keyValueIds.
+	 */
 	private $keyValueIds = array();
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		$this->_setTbl('meta_values');
 		FrameWpf::_()->getTable('meta_values')->setEscape(true);
@@ -19,13 +26,23 @@ class Meta_ValuesModelWpf extends ModelWpf {
 			));
 	}
 
+	/**
+	 * selectMetaValues.
+	 */
 	public function selectMetaValues( $keyId ) {
 		$this->keyValueIds = $this->getKeyValueIds($keyId);
 	}
+
+	/**
+	 * resetMetaValues.
+	 */
 	public function resetMetaValues() {
 		$this->keyValueIds = array();
 	}
 
+	/**
+	 * getKeyValueIds.
+	 */
 	public function getKeyValueIds( $keyId, $keys = array(), $reverse = false ) {
 		$this->addIndexes();
 		$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
@@ -61,6 +78,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return $values;
 	}
 
+	/**
+	 * getFieldValuesList.
+	 */
 	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {
 		$metaModel = FrameWpf::_()->getModule('meta')->getModel('meta');
 		$maxKeySize = $metaModel->maxKeySize;
@@ -80,6 +100,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return empty($list) ? array() : $list;
 	}
 
+	/**
+	 * getMetaValueTerms.
+	 */
 	public function getMetaValueTerms( $keyId, $keys = array()) {
 		$cntField = ( empty($keys['fbv']) ? 'product_cnt' : 'variation_cnt' );
 
@@ -130,10 +153,10 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return empty($terms) ? array() : $terms;
 	}
 
+	/**
+	 * insertValueId.
+	 */
 	public function insertValueId( $keyId, $keys, $value ) {
-		/*if (empty($value) && '' === $value) {
-			return false;
-		}*/
 		$value = trim($value);
 		$key = implode('|', $keys) . '|' . $value;
 		if (!isset($this->keyValueIds[$key])) {
@@ -148,6 +171,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return $this->keyValueIds[$key];
 	}
 
+	/**
+	 * getMetaValueId.
+	 */
 	public function getMetaValueId( $keyId, $value, $keys = array() ) {
 		if (!empty($keys)) {
 			$this->addWhere($keys);
@@ -197,6 +223,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return empty($ids) ? array(0) : $ids;
 	}
 
+	/**
+	 * recalcValuesCount.
+	 */
 	public function recalcValuesCount( $keyIds = array() ) {
 
 		$query = 'UPDATE `@__meta_values` as v SET ' .
@@ -213,6 +242,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * backupOldValues.
+	 */
 	public function backupOldValues( $keyIds ) {
 		$where = ' WHERE key_id' . ( count($keyIds) ? ' IN (' . implode(',', $keyIds) . ')' : '=' . $keyIds[0] );
 		$query = 'INSERT IGNORE INTO `@__meta_values_bk` SELECT id, key_id, key2, key3, key4, value FROM `@__meta_values`' . $where;
@@ -227,6 +259,9 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * restoreOldValues.
+	 */
 	public function restoreOldValues( $keyIds ) {
 		$where = ' WHERE key_id' . ( count($keyIds) ? ' IN (' . implode(',', $keyIds) . ')' : '=' . $keyIds[0] );
 		$query = 'INSERT IGNORE INTO `@__meta_values` SELECT id, key_id, key2, key3, key4, value, 0, 0 FROM `@__meta_values_bk`' . $where;
@@ -236,5 +271,4 @@ class Meta_ValuesModelWpf extends ModelWpf {
 		}
 		return true;
 	}
-
 }
