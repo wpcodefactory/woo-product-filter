@@ -828,26 +828,41 @@ class WoofiltersViewWpf extends ViewWpf {
 	 *
 	 * @version 3.1.7
 	 */
+	// fix/collapse-toggle-icon-and-filtered-page-results
 	public function generateIconCloseOpenTitleHtml( $filter, $filterSettings, $showTitle ) {
-		if ( empty($filter['settings']) || empty($filterSettings['settings']['hide_filter_icon']) ) {
+		// Filter settings না থাকলে icon render করার দরকার নেই
+		if ( empty($filter['settings']) ) {
+			return '';
+		}
+		$hideFilterIcon = isset($filterSettings['settings']['hide_filter_icon'])
+			? (int) $filterSettings['settings']['hide_filter_icon']
+			: 1;
+
+		// hide_filter_icon = 0 হলে icon দেখানো বন্ধ
+		if ( ! $hideFilterIcon ) {
 			return '';
 		}
 
-		// deprecated fallback for previous settings
+		// Mobile এ showTitle না থাকলে filter settings থেকে নাও
 		if ( UtilsWpf::isMobile() && empty($showTitle) ) {
-			$showTitle =
-				$this->getFilterSetting($filter['settings'], 'f_enable_title');
+			$showTitle = $this->getFilterSetting($filter['settings'], 'f_enable_title');
 		}
 
-		if ('yes_open' === $showTitle) {
+		// FIX: yes_open state এ fa-minus icon দাও (আগে $icon = '' ছিল, icon render হতো না)
+		if ( 'yes_open' === $showTitle ) {
 			$iconClass = DispatcherWpf::applyFilters('getIconHtml', 'fa-minus', 'title_icons', $filterSettings);
-			$icon = '';
-		} elseif ('yes_close' === $showTitle) {
+			$icon      = '<i class="fa ' . $iconClass . ' wpfTitleToggle"></i>';
+
+		// yes_close state এ fa-plus icon দাও
+		} elseif ( 'yes_close' === $showTitle ) {
 			$iconClass = DispatcherWpf::applyFilters('getIconHtml', 'fa-plus', 'title_icons', $filterSettings);
 			$icon      = '<i class="fa ' . $iconClass . ' wpfTitleToggle"></i>';
+
+		// অন্য যেকোনো state এ icon নেই
 		} else {
 			$icon = '';
 		}
+
 		return $icon;
 	}
 

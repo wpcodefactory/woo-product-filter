@@ -867,9 +867,19 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$args['tax_query'] = $module->addHiddenFilterQuery($args['tax_query']);
 
 		$isAllProductsFiltering = $filterSettings['all_products_filtering'] && $filtersDataBackend;
+		
+		//fix/collapse-toggle-icon-and-filtered-page-results
+		$hasCategoryFilter = false;
+		foreach ( $filtersDataBackend as $_fs ) {
+			if ( 'wpfCategory' === $_fs['id'] && ! empty( $_fs['settings'] ) ) {
+				$hasCategoryFilter = true;
+				break;
+			}
+		}
 
 		if ( ! $isAllProductsFiltering ) {
-			if ( ( isset($queryvars['product_category_id']) || $asDefaultCats ) && ! $queryvars['product_tag'] && ! $queryvars['product_brand'] && ! $queryvars['pwb-brand'] ) {
+			// fix/collapse-toggle-icon-and-filtered-page-results
+			if ( ! $hasCategoryFilter && ( isset($queryvars['product_category_id']) || $asDefaultCats ) && ! $queryvars['product_tag'] && ! $queryvars['product_brand'] && ! $queryvars['pwb-brand'] ) {
 				$args['tax_query'][] = array(
 					'taxonomy'         => 'product_cat',
 					'field'            => 'id',
