@@ -870,14 +870,26 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 		$hasCategoryFilter = false;
 		foreach ( $filtersDataBackend as $filteringSettings ) {
-			if ( 'wpfCategory' === $filteringSettings['id'] && ! empty( $filteringSettings['settings'] ) ) {
+			if (
+				'wpfCategory' === $filteringSettings['id'] &&
+				! empty( $filteringSettings['settings'] )
+			) {
 				$hasCategoryFilter = true;
 				break;
 			}
 		}
 
 		if ( ! $isAllProductsFiltering ) {
-			if ( ! $hasCategoryFilter && ( isset($queryvars['product_category_id']) || $asDefaultCats ) && ! $queryvars['product_tag'] && ! $queryvars['product_brand'] && ! $queryvars['pwb-brand'] ) {
+			if (
+				! $hasCategoryFilter &&
+				(
+					isset($queryvars['product_category_id']) ||
+					$asDefaultCats
+				) &&
+				! $queryvars['product_tag'] &&
+				! $queryvars['product_brand'] &&
+				! $queryvars['pwb-brand']
+			) {
 				$args['tax_query'][] = array(
 					'taxonomy'         => 'product_cat',
 					'field'            => 'id',

@@ -832,10 +832,10 @@ class WoofiltersViewWpf extends ViewWpf {
 		if ( empty($filter['settings']) ) {
 			return '';
 		}
+
 		$hideFilterIcon = isset($filterSettings['settings']['hide_filter_icon'])
 			? (int) $filterSettings['settings']['hide_filter_icon']
 			: 1;
-
 		if ( ! $hideFilterIcon ) {
 			return '';
 		}
@@ -847,11 +847,9 @@ class WoofiltersViewWpf extends ViewWpf {
 		if ( 'yes_open' === $showTitle ) {
 			$iconClass = DispatcherWpf::applyFilters('getIconHtml', 'fa-minus', 'title_icons', $filterSettings);
 			$icon      = '<i class="fa ' . $iconClass . ' wpfTitleToggle"></i>';
-
 		} elseif ( 'yes_close' === $showTitle ) {
 			$iconClass = DispatcherWpf::applyFilters('getIconHtml', 'fa-plus', 'title_icons', $filterSettings);
 			$icon      = '<i class="fa ' . $iconClass . ' wpfTitleToggle"></i>';
-
 		} else {
 			$icon = '';
 		}
