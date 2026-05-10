@@ -867,7 +867,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$args['tax_query'] = $module->addHiddenFilterQuery($args['tax_query']);
 
 		$isAllProductsFiltering = $filterSettings['all_products_filtering'] && $filtersDataBackend;
-		
+
 		//fix/collapse-toggle-icon-and-filtered-page-results
 		$hasCategoryFilter = false;
 		foreach ( $filtersDataBackend as $filteringSettings ) {
