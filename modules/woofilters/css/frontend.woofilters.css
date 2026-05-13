@@ -23,6 +23,11 @@
 }
 .wpfFilterTitle {
 	margin-bottom: 5px;
+	display: flex;
+	justify-content: space-between;
+}
+.wpfFilterWrapper .wpfFilterTitle p {
+	margin: 0;
 }
 /*Price filter css*/
 .wpfFilterWrapper .ui-slider-horizontal {
@@ -1847,6 +1852,7 @@ select.woobewoo-flat-input {
 	background-size: contain;
 	cursor: pointer;
 	margin-right: 0.5rem;
+	margin-bottom: 0;
 }
 .wpfMainWrapper input[type="radio"],
 .woobewooRadio input {
