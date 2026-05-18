@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - DispatcherWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class DispatcherWpf {
 	protected static $_pref = 'wpf_';
 
@@ -23,7 +33,7 @@ class DispatcherWpf {
 		}
 		/**
 		 * Do custom action
-		 * 
+		 *
 		 * @since 1.0
 		*/
 		return do_action($t);
@@ -49,7 +59,7 @@ class DispatcherWpf {
 		} else {
 			/**
 			 * Do custom action
-			 * 
+			 *
 			 * @since 1.0
 			*/
 			return apply_filters( $t, $value );

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - ReqWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class ReqWpf {
 	protected static $_requestData;
 	protected static $_requestMethod;
@@ -38,7 +48,7 @@ class ReqWpf {
 			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field($_REQUEST['_wpnonce']);
 			if (!wp_verify_nonce($nonce, 'my-nonce')) {
 				echo esc_html__('Security check', 'woo-product-filter');
-				exit(); 
+				exit();
 			}
 		}
 
@@ -91,7 +101,7 @@ class ReqWpf {
 		}
 		return $default;
 	}
-	
+
 	public static function existGetVar( $begin ) {
 		if (isset($_GET) && is_array($_GET)) {
 			foreach ($_GET as $k => $v) {
@@ -173,7 +183,7 @@ class ReqWpf {
 			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field($_REQUEST['_wpnonce']);
 			if (!wp_verify_nonce($nonce, 'my-nonce')) {
 				esc_html__('Security check', 'woo-product-filter');
-				exit(); 
+				exit();
 			}
 		}
 		$in = strtolower($in);
@@ -204,7 +214,7 @@ class ReqWpf {
 			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field($_REQUEST['_wpnonce']);
 			if (!wp_verify_nonce($nonce, 'my-nonce')) {
 				esc_html__('Security check', 'woo-product-filter');
-				exit(); 
+				exit();
 			}
 		}
 		$what = strtolower($what);
