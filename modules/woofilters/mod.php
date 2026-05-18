@@ -62,6 +62,11 @@ class WoofiltersWpf extends ModuleWpf {
 			return;
 		}
 
+		$isBrizyContext = ! empty( $_REQUEST['action'] ) && 'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+		if ( $isBrizyContext ) {
+			return;
+		}
+
 		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 
 		if ( is_admin() ) {
@@ -2494,7 +2499,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getRenderMode.
 	 *
-	 * @version 2.9.4
+	 * @version 3.1.8
 	 */
 	public function getRenderMode( $id, $settings, $isWidget = true ) {
 		if ( ! isset( $this->renderModes[ $id ] ) || empty( $this->renderModes[ $id ] ) ) {
@@ -2510,7 +2515,8 @@ class WoofiltersWpf extends ModuleWpf {
 			$displayProduct         = false;
 			$displayBrand           = false;
 
-			if ( is_admin() ) {
+			$isBrizyEditContext = ! empty( $_REQUEST['action'] ) && 'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+			if ( is_admin() || $isBrizyEditContext ) {
 				$displayShop = true;
 			} else {
 				$displayOnPage = empty( $settings['display_on_page'] ) ? 'shop' : $settings['display_on_page'];

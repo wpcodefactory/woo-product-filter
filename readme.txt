@@ -154,6 +154,7 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.8 - 10/05/2026 =
+* Fix - Fixed brizy editor shortcode render issue.
 * Fix - Security - Fixed SQL injection vulnerability.
 * Fix - Fixed collapse toggle icon rendering.
 * Fix - Fixed filtered page results issue.
