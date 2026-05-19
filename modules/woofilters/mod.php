@@ -4990,12 +4990,14 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * queryResults.
+	 *
+	 * @version 3.1.8
 	 */
 	public function queryResults( $result ) {
 		if ( 0 === $result->total && $this->isFiltered(false) ) {
 			$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 			if ( isset( $options['not_found_products_message'] ) && '1' === $options['not_found_products_message']['value'] ) {
-				echo '<p class="woocommerce-info">' . esc_html__( 'No products were found matching your selection.', 'woocommerce' ) . '</p>';
+				echo '<p class="woocommerce-info">' . esc_html__( 'No products were found matching your selection.', 'woo-product-filter' ) . '</p>';
 			}
 		}
 

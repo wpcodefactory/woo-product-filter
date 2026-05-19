@@ -340,6 +340,8 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Add common styles and scripts.
 	 *
+	 * @version 3.1.8
+	 *
 	 * @param string $modPath
 	 */
 	public function addCommonAssets( $modPath, $settings = array() ) {
@@ -358,7 +360,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			FrameWpf::_()->addStyle('frontend.multiselect', $modPath . 'css/frontend.multiselect.css');
 			FrameWpf::_()->addScript('frontend.multiselect', $modPath . 'js/frontend.multiselect.js');
 			$selectedTitle = ( isset($options['selected_title']['value']) && '' !== $options['selected_title']['value'] ) ? $options['selected_title']['value'] : 'selected';
-			FrameWpf::_()->addJSVar( 'frontend.multiselect', 'wpfMultySelectedTraslate', ' ' . esc_attr__( $selectedTitle, 'woo-product-filter' ) );
+			FrameWpf::_()->addJSVar( 'frontend.multiselect', 'wpfMultySelectedTraslate', ' ' . esc_attr($selectedTitle) );
 		}
 
 		$slider = ( is_admin() || ! $forFilter || ( strpos($order, '"wpfPrice"') || strpos($order, '"slider"') ) );
@@ -2473,8 +2475,8 @@ class WoofiltersViewWpf extends ViewWpf {
 		$settings                              = $this->getFilterSetting($filter, 'settings', array());
 		$type                                  = $this->getFilterSetting($settings, 'f_frontend_type', 'list', null, array('list', 'dropdown', 'mul_dropdown'));
 		$filter['settings']['f_frontend_type'] = $type;
-		$addText                               = __($this->getFilterSetting($settings, 'f_add_text', 'and up'), 'woo-product-filter');
-		$addText5                              = __($this->getFilterSetting($settings, 'f_add_text5', '5 only'), 'woo-product-filter');
+		$addText                               = $this->getFilterSetting($settings, 'f_add_text', __('and up', 'woo-product-filter'));
+		$addText5                              = $this->getFilterSetting($settings, 'f_add_text5', __('5 only', 'woo-product-filter'));
 		$useExactValues                        = $this->getFilterSetting($settings, 'f_use_exact_values', false);
 
 		$wrapperStart = '<ul class="wpfFilterVerScroll">';
@@ -2520,11 +2522,11 @@ class WoofiltersViewWpf extends ViewWpf {
 			$wrapperStart = '<ul class="wpfFilterVerScroll' . $layout['class'] . '">';
 			$wrapperEnd   = '</ul>';
 		} elseif ( 'dropdown' === $type ) {
-			$wrapperStart = '<select aria-label="' . esc_html__($this->getRealDropdownLabel($settings, 'Rating'), 'woo-product-filter') . '">';
+			$wrapperStart = '<select aria-label="' . esc_html($this->getRealDropdownLabel($settings, ('Rating', 'woo-product-filter'))) . '">';
 			$text         = $this->getFilterSetting($settings, 'f_dropdown_first_option_text');
 
 			if ( ! empty($text) ) {
-				$htmlOpt = '<option value="" data-slug="">' . esc_html__($text, 'woo-product-filter') . '</option>' . $htmlOpt;
+				$htmlOpt = '<option value="" data-slug="">' . esc_html($text) . '</option>' . $htmlOpt;
 			} else {
 				$htmlOpt = '<option value="" data-slug="">' . esc_html__('Select all', 'woo-product-filter') . '</option>' . $htmlOpt;
 			}
@@ -2725,8 +2727,8 @@ class WoofiltersViewWpf extends ViewWpf {
 				$htmlOpt = '<ul class="wpfFilterVerScroll' . $inLineClass . '">' . $htmlOpt . '</ul>';
 			} elseif ( 'dropdown' == $type ) {
 				$htmlOpt =
-					'<select aria-label="' . esc_html__($this->getRealDropdownLabel($settings, 'Select'), 'woo-product-filter') . '"><option value="" data-slug="">' .
-					esc_html__($this->getFilterSetting($settings, 'f_dropdown_first_option_text', 'Select all'), 'woo-product-filter') .
+					'<select aria-label="' . esc_html($this->getRealDropdownLabel($settings, __('Select', 'woo-product-filter'))) . '"><option value="" data-slug="">' .
+					esc_html($this->getFilterSetting($settings, 'f_dropdown_first_option_text', __('Select all', 'woo-product-filter'))) .
 					'</option>' . $htmlOpt . '</select>';
 			} elseif ( 'mul_dropdown' == $type ) {
 				$htmlOpt = $this->getMultiSelectHtml( $htmlOpt, $settings );
@@ -2781,6 +2783,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $html;
 	}
 
+	/**
+	 * generateSearchFieldList.
+	 *
+	 * @version 3.1.8
+	 */
 	public function generateSearchFieldList( $html, $settings, $labels ) {
 		$type = $this->getFilterSetting($settings, 'f_frontend_type', 'list');
 		if ( ( 'list' != $type && 'radio' != $type ) ||
@@ -2791,7 +2798,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$isPro = FrameWpf::_()->isPro();
 
 		$search = '<div class="wpfSearchWrapper"><input class="wpfSearchFieldsFilter passiveFilter" type="text" placeholder="' .
-			esc_html__($this->getFilterSetting($settings, 'f_search_label', $labels['search']), 'woo-product-filter') . '">';
+			esc_html($this->getFilterSetting($settings, 'f_search_label', $labels['search'])) . '">';
 
 		if ( $isPro && $this->getFilterSetting($settings, 'f_show_search_button', false) ) {
 			$search .= '<button></button>';
@@ -3333,7 +3340,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceRangeOptionsHtml.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.8
 	 */
 	private function generatePriceRangeOptionsHtml( $filter, $ranges, $layout ) {
 		$html    = '';
@@ -3362,7 +3369,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			$html .= '<select aria-label="' . esc_html__('Price Range', 'woo-product-filter') . '">';
 
 			if ( ! empty($filter['settings']['f_dropdown_first_option_text']) ) {
-				$html .= '<option value="" data-slug="">' . esc_html__($filter['settings']['f_dropdown_first_option_text'], 'woo-product-filter') . '</option>';
+				$html .= '<option value="" data-slug="">' . esc_html($filter['settings']['f_dropdown_first_option_text']) . '</option>';
 			} else {
 				$html .= '<option value="" data-slug="">' . esc_html__('Select all', 'woo-product-filter') . '</option>';
 			}
@@ -3795,6 +3802,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $data;
 	}
 
+	/**
+	 * getMultiSelectHtml.
+	 *
+	 * @version 3.1.8
+	 */
 	public function getMultiSelectHtml( $htmlOpt, $settings ) {
 		$search         = array(
 			'show'        => $this->getFilterSetting( $settings, 'f_dropdown_search', 0 ),
@@ -3803,7 +3815,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$singleSelect   = ( $this->getFilterSetting( $settings, 'f_single_select', false ) ) ? 'data-single-select' : '';
 		$hideCheckboxes = ( $this->getFilterSetting( $settings, 'f_hide_checkboxes', false ) ) ? 'data-hide-checkboxes' : '';
 
-		return '<select class="needsclick" multiple data-placeholder="' . esc_attr__( $this->getFilterSetting( $settings, 'f_dropdown_first_option_text', 'Select all' ), 'woo-product-filter' ) . '"
+		return '<select class="needsclick" multiple data-placeholder="' . esc_attr( $this->getFilterSetting( $settings, 'f_dropdown_first_option_text', __('Select all', 'woo-product-filter') ) ) . '"
 				data-search="' . esc_attr( json_encode( $search, JSON_UNESCAPED_UNICODE ) ) . '" ' . $singleSelect . ' ' . $hideCheckboxes . '>' . $htmlOpt . '</select>';
 	}
 

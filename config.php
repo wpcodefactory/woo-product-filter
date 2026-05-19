@@ -4,9 +4,9 @@
  *
  * @version 3.1.7
  *
- * @author  woobewoo
+ * @author woobewoo
  *
- * @todo    (v3.1.8) Update `WPF_PRO_REQUIRES`?
+ * @todo (v3.1.8) Update `WPF_PRO_REQUIRES`?
  */
 
 defined( 'ABSPATH' ) || exit;

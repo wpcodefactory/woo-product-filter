@@ -1,17 +1,31 @@
 <?php
+/**
+ * Product Filter by WBW - Woofilters_ElementorWidgetWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
+defined( 'ABSPATH' ) || exit;
+
 class Woofilters_ElementorWidgetWpf extends Widget_Base {
-	
+
 	public static $adPath = '';
 	public static $labelPro = '';
 	public static $scriptsLoaded = false;
-	
+
+	/**
+	 * Constructor.
+	 *
+	 * @version 3.1.8
+	 */
 	public function __construct ( $data = array(), $args = null ) {
 		parent::__construct($data, $args);
-		
+
 		$isWooCommercePluginActivated = FrameWpf::_()->getModule('woofilters')->isWooCommercePluginActivated();
 		if (!$isWooCommercePluginActivated) {
 			return;
@@ -20,7 +34,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		if (static::$scriptsLoaded) {
 			return;
 		}
-		
+
 		if ( !is_admin() && !( \Elementor\Plugin::$instance->preview->is_preview_mode() ) ) {
 			return;
 		}
@@ -50,16 +64,20 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 
 		wp_register_style('frontend.multiselect', $modPath . 'css/frontend.multiselect.css', false, WPF_VERSION);
 		wp_register_script('frontend.multiselect', $modPath . 'js/frontend.multiselect.js', false, WPF_VERSION);
-		$selectedTitle = esc_attr__(( isset($options['selected_title']['value']) && ''!==$options['selected_title']['value'] ) ? $options['selected_title']['value'] : 'selected', 'woo-product-filter');
+		$selectedTitle = esc_attr(
+			( isset($options['selected_title']['value']) && ''!==$options['selected_title']['value'] )
+			? $options['selected_title']['value']
+			: __('selected', 'woo-product-filter')
+		);
 		wp_add_inline_script( 'frontend.multiselect', "var wpfMultySelectedTraslate = '{$selectedTitle}';", 'before' );
-		
+
 		//loadJqueryUi
 		wp_register_style('jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css', false, WPF_VERSION);
 		wp_register_style('jquery-ui.structure', WPF_CSS_PATH . 'jquery-ui.structure.min.css', false, WPF_VERSION);
 		wp_register_style('jquery-ui.theme', WPF_CSS_PATH . 'jquery-ui.theme.min.css', false, WPF_VERSION);
 		wp_register_style('jquery-slider', WPF_CSS_PATH . 'jquery-slider.css', false, WPF_VERSION);
 		wp_register_script('jquery-ui-slider', '', false, WPF_VERSION);
-			
+
 		//addPluginCustomStyles
 		$params = ReqWpf::get( 'get' );
 		if ( !is_admin() || ( isset($params['page']) && 'wpf-filters' === $params['page'] ) ) {
@@ -68,7 +86,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 
 		//addScriptsContent
 		if ( $isPro ) {
-			$modPathPRO = FrameWpf::_()->getModule('woofilterpro')->getModPath();		
+			$modPathPRO = FrameWpf::_()->getModule('woofilterpro')->getModPath();
 			wp_register_script('frontend.filters.pro', $modPathPRO . 'js/frontend.woofilters.pro.js', array('frontend.filters'), WPF_VERSION, true);
 			wp_localize_script('frontend.filters.pro', 'wpfTraslate', array(
 				'ShowMore'  => __( 'Show More', 'woo-product-filter' ),
@@ -80,16 +98,16 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 			wp_register_style('jquery-ui-autocomplete', $modPathPRO . 'css/jquery-ui-autocomplete.css', false, WPF_VERSION);
 			wp_register_script('ion.slider', $modPathPRO . 'js/ion.rangeSlider.min.js', false, WPF_VERSION);
 			wp_register_style('ion.slider', $modPathPRO . 'css/ion.rangeSlider.css', false, WPF_VERSION);
-		
+
 		}
-		
+
 		if (!$isPro) {
 			static::$adPath = FrameWpf::_()->getModule('woofilters')->getModPath() . 'img/ad/';
 			static::$labelPro = ' Pro';
 		}
-		static::$scriptsLoaded = true;	
+		static::$scriptsLoaded = true;
 	}
-	
+
 	protected function getFiltersSettings() {
 		$filters = FrameWpf::_()->getModule('woofilters')->getModel()->getFromTbl();
 		$filtersOpts = array();
@@ -100,7 +118,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 			$filtersOpts[ $filter['id'] ] = $filter['title'];
 			$filtersSettings[ $filter['id'] ] = unserialize($filter['setting_data']);
 		}
-		
+
 		return array( $filtersOpts, $filtersSettings );
 	}
 
@@ -112,37 +130,37 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		return array('frontend.filters', 'tooltipster', 'frontend.filters.accessibility', 'frontend.multiselect', 'frontend.filters.pro',
 			 'jquery-ui', 'jquery-ui.structure', 'jquery-ui.theme', 'jquery-slider', 'custom.filters', 'custom.filters.pro', 'jquery-ui-autocomplete', 'ion.slider');
 	}
-	
+
 	public function get_name() {
 		return 'woofilters';
 	}
-	
+
 	public function get_title() {
 		return __( 'Woofilters', 'woo-product-filter' );
 	}
-	
+
 	public function get_icon() {
 		return 'eicon-table-of-contents';
 	}
-	
+
 	public function get_keywords() {
 		return array( 'woofilters', 'filter', 'woocommerce' );
 	}
-	
+
 	public function get_categories() {
 		return array( 'general', 'woocommerce-elements' );
 	}
-	
+
 	public function is_reload_preview_required() {
 		return true;
 	}
-	
+
 	protected function register_controls() {
 		if (!is_admin()) {
 			return false;
 		}
 		list( $filtersOpts ) = $this->getFiltersSettings();
-		
+
 		$this->start_controls_section(
 			'section_content',
 			array(
@@ -150,7 +168,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'tab' => Controls_Manager::TAB_CONTENT,
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_id',
 			array(
@@ -160,7 +178,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'default' => 0,
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_name',
 			array(
@@ -174,7 +192,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				),
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_create',
 			array(
@@ -191,28 +209,28 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-		
+
 		$this->addWooFilterContentTabControls();
-		
+
 		$this->addWooFilterStyleTabControls();
-		
+
 		$this->addWooFilterAndvancedTabControls();
 	}
-	
+
 	protected function render() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
 		?>
 		<div class="elementor-woofilters"><?php echo $shortcode ? do_shortcode( '[wpf-filters id="' . $shortcode . '"]' ) : ''; ?></div>
 		<?php
 	}
-	
+
 	public function render_plain_content() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
 		echo $shortcode ? do_shortcode( '[wpf-filters id="' . $shortcode . '"]' ) : '';
 	}
-	
+
 	protected function content_template() {}
-	
+
 	public function addWooFilterContentTabControls() {
 		$this->start_controls_section(
 			'section_filters',
@@ -221,7 +239,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'tab' => Controls_Manager::TAB_CONTENT,
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_trigger',
 			array(
@@ -230,7 +248,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'label_block' => false,
 			)
 		);
-		
+
 		$this->add_control(
 			'filters_raw',
 			array(
@@ -238,7 +256,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'raw' => FrameWpf::_()->getModule('woofilters')->getView()->getContent('woofiltersEditTabElementorFilters'),
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_save',
 			array(
@@ -253,12 +271,12 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				),
 			)
 		);
-		
+
 		$this->end_controls_section();
 	}
-	
+
 	public function addWooFilterStyleTabControls() {
-		
+
 		$this->start_controls_section(
 			'section_options',
 			array(
@@ -266,7 +284,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'tab' => Controls_Manager::TAB_STYLE,
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_options_trigger',
 			array(
@@ -275,7 +293,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'label_block' => false,
 			)
 		);
-		
+
 		$this->add_control(
 			'filters_raw_options',
 			array(
@@ -283,7 +301,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'raw' => FrameWpf::_()->getModule('woofilters')->getView()->getContent('woofiltersEditTabElementorOptions'),
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_save_options',
 			array(
@@ -298,10 +316,10 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				),
 			)
 		);
-		
+
 		$this->end_controls_section();
 	}
-	
+
 	public function addWooFilterAndvancedTabControls() {
 		$this->start_controls_section(
 			'section_design',
@@ -310,7 +328,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'tab' => Controls_Manager::TAB_ADVANCED,
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_design_trigger',
 			array(
@@ -319,7 +337,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'label_block' => false,
 			)
 		);
-		
+
 		$this->add_control(
 			'filters_raw_design',
 			array(
@@ -327,7 +345,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				'raw' => FrameWpf::_()->getModule('woofilters')->getView()->getContent('woofiltersEditTabElementorDesign'),
 			)
 		);
-		
+
 		$this->add_control(
 			'filter_save_design',
 			array(
@@ -342,7 +360,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 				),
 			)
 		);
-		
+
 		$this->end_controls_section();
 	}
 }
