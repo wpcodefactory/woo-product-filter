@@ -1,3 +1,15 @@
+<?php
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters Attribute
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e('Select attribute', 'woo-product-filter'); ?>
@@ -25,15 +37,15 @@
 ViewWpf::display('woofiltersEditTabCommonTitle');
 
 $attributesTypes = array(
-	'list' => esc_attr__( 'Checkbox list (multiple select)', 'woo-product-filter' ),
-	'radio' => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
-	'dropdown' => esc_attr__( 'Dropdown', 'woo-product-filter' ),
+	'list'         => esc_attr__( 'Checkbox list (multiple select)', 'woo-product-filter' ),
+	'radio'        => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
+	'dropdown'     => esc_attr__( 'Dropdown', 'woo-product-filter' ),
 	'mul_dropdown' => esc_attr__( 'Multiple Dropdown', 'woo-product-filter' ),
-	'colors' => esc_attr__(  'Colors', 'woo-product-filter' ) . $labelPro,
-	'buttons' => esc_attr__( 'Buttons', 'woo-product-filter' ) . $labelPro,
-	'text' => esc_attr__( 'Text', 'woo-product-filter' ) . $labelPro,
-	'switch' => esc_attr__( 'Switch', 'woo-product-filter' ) . $labelPro,
-	'slider' => esc_attr__( 'Slider', 'woo-product-filter' ) . $labelPro,
+	'colors'       => esc_attr__(  'Colors', 'woo-product-filter' ) . $labelPro,
+	'buttons'      => esc_attr__( 'Buttons', 'woo-product-filter' ) . $labelPro,
+	'text'         => esc_attr__( 'Text', 'woo-product-filter' ) . $labelPro,
+	'switch'       => esc_attr__( 'Switch', 'woo-product-filter' ) . $labelPro,
+	'slider'       => esc_attr__( 'Slider', 'woo-product-filter' ) . $labelPro,
 );
 ?>
 <div class="row-settings-block">
@@ -43,7 +55,7 @@ $attributesTypes = array(
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_frontend_type', array(
 					'options' => $attributesTypes,
 					'attrs' => 'class="woobewoo-flat-input' . ( $isPro ? '' : ' wpfWithProAd' ) . '"'
@@ -63,7 +75,7 @@ else :
 			<div class="row-settings-block col-md-12 wpfFilterTypePro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
 				<?php if (FrameWpf::_()->isWCLicense()) { ?>
 				<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
-				<?php } else { ?> 
+				<?php } else { ?>
 				<a href="<?php echo esc_url('https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/'); ?>" target="_blank">
 					<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
 				</a>
@@ -329,7 +341,7 @@ ViewWpf::display('woofiltersEditTabCustomTags');
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full wpf-multi-select">
-			<?php 
+			<?php
 				HtmlWpf::selectlist('f_mlist', array(
 					'options' => array(),
 				));
@@ -371,7 +383,7 @@ ViewWpf::display('woofiltersEditTabCustomTags');
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_sort_by', array(
 					'options' => array( 'default' => esc_attr__('Don\'t sort', 'woo-product-filter'), 'asc' => esc_attr__( 'ASC', 'woo-product-filter'), 'desc' => esc_attr__( 'DESC', 'woo-product-filter') ),
 					'attrs' => 'class="woobewoo-flat-input"'
@@ -428,7 +440,7 @@ ViewWpf::display('woofiltersEditTabCustomTags');
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_layout', array(
 					'options' => array('ver' => esc_attr__('Vertical', 'woo-product-filter'), 'hor' => esc_attr__('Horizontal', 'woo-product-filter')),
 					'attrs' => 'class="woobewoo-flat-input"'

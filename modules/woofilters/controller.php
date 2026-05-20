@@ -273,7 +273,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * saveCategoryLabel.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 * @since   3.1.7
 	 */
 	public function saveCategoryLabel() {
@@ -283,7 +283,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			wp_die();
 		}
 		$term_id = isset($_POST['term_id']) ? absint($_POST['term_id']) : 0;
-		$label   = isset($_POST['label']) ? sanitize_text_field($_POST['label']) : '';
+		$label   = isset($_POST['label']) ? sanitize_text_field(wp_unslash($_POST['label'])) : '';
 		if (! $term_id || $label === '') {
 			wp_send_json_error(__('Invalid data', 'woo-product-filter'));
 		}

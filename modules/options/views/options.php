@@ -1,6 +1,18 @@
 <?php
+/**
+ * Product Filter by WBW - OptionsViewWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class OptionsViewWpf extends ViewWpf {
+
 	private $_news = array();
+
 	public function getNewFeatures() {
 		$res = array();
 		$readmePath = WPF_DIR . 'readme.txt';
@@ -21,6 +33,7 @@ class OptionsViewWpf extends ViewWpf {
 		}
 		return $res;
 	}
+
 	public function getAdminPage() {
 		$tabs = $this->getModule()->getTabs();
 		$activeTab = $this->getModule()->getActiveTab();
@@ -52,6 +65,7 @@ class OptionsViewWpf extends ViewWpf {
 
 		parent::display('optionsAdminPage');
 	}
+
 	public function sortOptsSet( $a, $b ) {
 		if ($a['weight'] > $b['weight']) {
 			return -1;
@@ -61,29 +75,37 @@ class OptionsViewWpf extends ViewWpf {
 		}
 		return 0;
 	}
+
 	public function getTabContent() {
 		FrameWpf::_()->addScript('admin.mainoptions', $this->getModule()->getModPath() . 'js/admin.mainoptions.js');
 		return parent::getContent('optionsAdminMain');
 	}
+
+	/**
+	 * serverSettings.
+	 *
+	 * @version 3.1.8
+	 */
 	public function serverSettings() {
 		global $wpdb;
 		$this->assign('systemInfo', array(
-			'Operating System' => array('value' => PHP_OS),
-			'PHP Version' => array('value' => PHP_VERSION),
-			'Server Software' => array('value' => ( empty($_SERVER['SERVER_SOFTWARE']) ? '' : sanitize_text_field($_SERVER['SERVER_SOFTWARE']) )),
-			'MySQL' => array('value' =>  $wpdb->db_version()),
-			'PHP Allow URL Fopen' => array('value' => ini_get('allow_url_fopen') ? 'Yes' : 'No'),
-			'PHP Memory Limit' => array('value' => ini_get('memory_limit')),
-			'PHP Max Post Size' => array('value' => ini_get('post_max_size')),
-			'PHP Max Upload Filesize' => array('value' => ini_get('upload_max_filesize')),
+			'Operating System'            => array('value' => PHP_OS),
+			'PHP Version'                 => array('value' => PHP_VERSION),
+			'Server Software'             => array('value' => ( empty($_SERVER['SERVER_SOFTWARE']) ? '' : sanitize_text_field(wp_unslash($_SERVER['SERVER_SOFTWARE'])) )),
+			'MySQL'                       => array('value' =>  $wpdb->db_version()),
+			'PHP Allow URL Fopen'         => array('value' => ini_get('allow_url_fopen') ? 'Yes' : 'No'),
+			'PHP Memory Limit'            => array('value' => ini_get('memory_limit')),
+			'PHP Max Post Size'           => array('value' => ini_get('post_max_size')),
+			'PHP Max Upload Filesize'     => array('value' => ini_get('upload_max_filesize')),
 			'PHP Max Script Execute Time' => array('value' => ini_get('max_execution_time')),
-			'PHP EXIF Support' => array('value' => extension_loaded('exif') ? 'Yes' : 'No'),
-			'PHP EXIF Version' => array('value' => phpversion('exif')),
-			'PHP XML Support' => array('value' => extension_loaded('libxml') ? 'Yes' : 'No', 'error' => !extension_loaded('libxml')),
-			'PHP CURL Support' => array('value' => extension_loaded('curl') ? 'Yes' : 'No', 'error' => !extension_loaded('curl')),
+			'PHP EXIF Support'            => array('value' => extension_loaded('exif') ? 'Yes' : 'No'),
+			'PHP EXIF Version'            => array('value' => phpversion('exif')),
+			'PHP XML Support'             => array('value' => extension_loaded('libxml') ? 'Yes' : 'No', 'error' => !extension_loaded('libxml')),
+			'PHP CURL Support'            => array('value' => extension_loaded('curl') ? 'Yes' : 'No', 'error' => !extension_loaded('curl')),
 		));
 		return parent::display('_serverSettings');
 	}
+
 	public function getSettingsTabContent() {
 		FrameWpf::_()->addScript('admin.settings', $this->getModule()->getModPath() . 'js/admin.settings.js');
 		FrameWpf::_()->addStyle('admin.settings.css', $this->getModule()->getModPath() . 'css/admin.settings.css');
@@ -94,12 +116,13 @@ class OptionsViewWpf extends ViewWpf {
 			FrameWpf::_()->addScript('admin.wp.colorpicker.alhpa.js', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js');
 			FrameWpf::_()->addStyle('loaders', FrameWpf::_()->getModule('woofilters')->getModPath() . 'css/loaders.css');
 		}
-		
+
 		$options = FrameWpf::_()->getModule('options')->getAll();
 		$this->assign('options', $options);
 		$this->assign('exportAllSubscribersUrl', UriWpf::mod('subscribe', 'getWpCsvList'));
 		return parent::getContent('optionsSettingsTabContent');
 	}
+
 	public function getProTabContent() {
 		FrameWpf::_()->addScript('admin.settings', $this->getModule()->getModPath() . 'js/admin.settings.js');
 		FrameWpf::_()->addStyle('admin.settings.css', $this->getModule()->getModPath() . 'css/admin.settings.css');

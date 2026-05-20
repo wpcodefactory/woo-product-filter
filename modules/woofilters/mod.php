@@ -4,7 +4,7 @@
  *
  * @version 3.1.8
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -409,14 +409,14 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * forceProductFilter.
 	 *
-	 * @version 2.9.1
+	 * @version 3.1.8
 	 */
 	public function forceProductFilter( $query ) {
 
 		$uri = (
 			empty( $_SERVER['REQUEST_URI'] ) ?
 			'' :
-			sanitize_text_field( $_SERVER['REQUEST_URI'] )
+			sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) )
 		);
 		if ( false !== strpos( $uri, 'wp-json/wc-analytics/' ) ) {
 			return $query;
@@ -1776,13 +1776,21 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * setSubcategoriesLink.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.8
 	 */
 	public function setSubcategoriesLink( $link ) {
-		$curUrl = isset($_SERVER['REQUEST_URI']) ? parse_url( esc_url_raw( $_SERVER['REQUEST_URI'] ) ) : array();
+		$curUrl = (
+			isset($_SERVER['REQUEST_URI'])
+			? parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) )
+			: array()
+		);
 		$catUrl = parse_url($link);
 		if (!empty($curUrl['query'])) {
-			$link .= ( empty($catUrl['query']) ? '?' : '&' ) . $curUrl['query'] . ( $this->existsWpfParams() ? '&redirect=1' : '' );
+			$link .= (
+				( empty($catUrl['query']) ? '?' : '&' ) .
+				$curUrl['query'] .
+				( $this->existsWpfParams() ? '&redirect=1' : '' )
+			);
 		}
 		return $link;
 	}

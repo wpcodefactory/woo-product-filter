@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Notice Dismiss JS
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 "use strict";

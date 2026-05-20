@@ -4,7 +4,7 @@
  *
  * @version 3.1.8
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -276,10 +276,11 @@ class FrameWpf {
 	/**
 	 * Check permissions for action in controller by $code.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.8
 	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
+	 *
 	 * @return bool true if ok, else - false
 	 */
 	public function havePermissions( $code, $action ) {
@@ -290,10 +291,10 @@ class FrameWpf {
 			$permissions = $mod->getController()->getPermissions();
 			if (!empty($permissions)) { // Special permissions
 				if (isset($permissions[WPF_METHODS]) && !empty($permissions[WPF_METHODS])) {
-					foreach ($permissions[WPF_METHODS] as $method => $permission) {   // Make case-insensitive
+					foreach ($permissions[WPF_METHODS] as $method => $permission) { // Make case-insensitive
 						$permissions[WPF_METHODS][strtolower($method)] = $permission;
 					}
-					if (array_key_exists($action, $permissions[WPF_METHODS])) {        // Permission for this method exists
+					if (array_key_exists($action, $permissions[WPF_METHODS])) { // Permission for this method exists
 						$currentUserPosition = self::_()->getModule('user')->getCurrentUserPosition();
 						if (
 							is_array($permissions[ WPF_METHODS ][ $action ] ) &&
@@ -314,16 +315,16 @@ class FrameWpf {
 					}
 					foreach ($permissions[WPF_USERLEVELS] as $userlevel => $methods) {
 						if (is_array($methods)) {
-							$lowerMethods = array_map('strtolower', $methods);           // Make case-insensitive
-							if (in_array($action, $lowerMethods)) {                      // Permission for this method exists
+							$lowerMethods = array_map('strtolower', $methods); // Make case-insensitive
+							if (in_array($action, $lowerMethods)) { // Permission for this method exists
 								if ($currentUserPosition === $userlevel) {
 									$res = true;
 								}
 								break;
 							}
 						} else {
-							$lowerMethod = strtolower($methods);             // Make case-insensitive
-							if ($lowerMethod == $action) {                   // Permission for this method exists
+							$lowerMethod = strtolower($methods); // Make case-insensitive
+							if ($lowerMethod == $action) { // Permission for this method exists
 								if ($currentUserPosition === $userlevel) {
 									$res = true;
 								}
@@ -338,7 +339,11 @@ class FrameWpf {
 				if (!empty($noncedMethods)) {
 					$noncedMethods = array_map('strtolower', $noncedMethods);
 					if (in_array($action, $noncedMethods)) {
-						$nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : ReqWpf::getVar('_wpnonce');
+						$nonce = (
+							isset($_REQUEST['_wpnonce'])
+							? sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']))
+							: ReqWpf::getVar('_wpnonce')
+						);
 						if (!wp_verify_nonce( $nonce, $action )) {
 							die();
 						}

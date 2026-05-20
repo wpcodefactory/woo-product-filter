@@ -6,7 +6,7 @@
  * You can use it in any part of your code with construction
  * FrameWpf::_()->getModule('woofilters')->getModel('settings');
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -1,13 +1,32 @@
 <?php
+/**
+ * Product Filter by WBW - UriWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class UriWpf {
+
 	/**
-	 * Tell link form method to replace symbols for special html caracters only for ONE output
+	 * Tell link form method to replace symbols for special html characters only for ONE output.
 	 */
 	private static $_oneHtmlEnc = false;
+
+	/**
+	 * fileToPageParam.
+	 */
 	public static function fileToPageParam( $file ) {
 		$file = str_replace(DS, '/', $file);
 		return substr($file, strpos($file, WPF_PLUG_NAME));
 	}
+
+	/**
+	 * _.
+	 */
 	public static function _( $params ) {
 		global $wp_rewrite;
 		$link = '';
@@ -35,9 +54,17 @@ class UriWpf {
 		}
 		return $link;
 	}
+
+	/**
+	 * page.
+	 */
 	public static function page( $id ) {
 		return get_page_link($id);
 	}
+
+	/**
+	 * getGetParams.
+	 */
 	public static function getGetParams( $exclude = array() ) {
 		$res = array();
 		if (isset($_GET) && !empty($_GET)) {
@@ -50,6 +77,10 @@ class UriWpf {
 		}
 		return $res;
 	}
+
+	/**
+	 * mod.
+	 */
 	public static function mod( $name, $action = '', $data = null ) {
 		$params = array('mod' => $name);
 		if ($action) {
@@ -69,6 +100,10 @@ class UriWpf {
 		}
 		return self::_($params);
 	}
+
+	/**
+	 * atach.
+	 */
 	public static function atach( $params ) {
 		$getData = self::getGetParams();
 		if (!empty($getData)) {
@@ -80,43 +115,69 @@ class UriWpf {
 		}
 		return self::_($params);
 	}
+
 	/**
-	 * Get current path
+	 * Get current path.
+	 *
+	 * @version 3.1.8
 	 *
 	 * @return string current link
 	 */
 	public static function getCurrent() {
-		$url = ( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field($_SERVER['HTTP_HOST']) ) . ( empty($_SERVER['SCRIPT_NAME']) ? '' : sanitize_text_field($_SERVER['SCRIPT_NAME']) );
+		$url = (
+			( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) ) .
+			( empty($_SERVER['SCRIPT_NAME']) ? '' : sanitize_text_field(wp_unslash($_SERVER['SCRIPT_NAME'])) )
+		);
 		if (!empty($_SERVER['HTTPS'])) {
 			return 'https://' . $url;
 		} else {
 			return 'http://' . $url;
 		}
 	}
+
+	/**
+	 * getFullUrl.
+	 *
+	 * @version 3.1.8
+	 */
 	public static function getFullUrl() {
 		$url = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
-		$url .= ( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field($_SERVER['HTTP_HOST']) ) . ( empty($_SERVER['REQUEST_URI']) ? '' : sanitize_text_field($_SERVER['REQUEST_URI']) );
+		$url .= (
+			( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) ) .
+			( empty($_SERVER['REQUEST_URI']) ? '' : sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) )
+		);
 		return $url;
 	}
+
 	/**
-	 * Replace symbols to special html caracters in one output
+	 * Replace symbols to special html characters in one output.
 	 */
 	public static function oneHtmlEnc() {
 		self::$_oneHtmlEnc = true;
 	}
+
+	/**
+	 * makeHttps.
+	 */
 	public static function makeHttps( $link ) {
 		if (strpos($link, 'https:') === false) {
 			$link = str_replace('http:', 'https:', $link);
 		}
 		return $link;
 	}
+
+	/**
+	 * isHttps.
+	 */
 	public static function isHttps() {
 		return is_ssl();
 	}
+
 	/**
-	 * If url is without http:// - just domain name for example - we will add it here
+	 * If url is without http:// - just domain name for example - we will add it here.
 	 *
 	 * @param string $url Url to check
+	 *
 	 * @return string Checked and corrected URL (if this will be required)
 	 */
 	public static function normal( $url ) {

@@ -1,5 +1,15 @@
 <?php
-	ViewWpf::display('woofiltersEditTabCommonTitle');
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters Sort By
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+ViewWpf::display('woofiltersEditTabCommonTitle');
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -11,11 +21,11 @@
 			<?php
 				HtmlWpf::selectbox('f_frontend_type', array(
 					'options' => array(
-						'dropdown' => esc_attr__( 'Dropdown (single select)', 'woo-product-filter' ),
+						'dropdown'     => esc_attr__( 'Dropdown (single select)', 'woo-product-filter' ),
 						'mul_dropdown' => esc_attr__( 'Stylized Dropdown', 'woo-product-filter' ) . $labelPro,
-						'radio' => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
+						'radio'        => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
 					),
-					'attrs' => 'class="woobewoo-flat-input"'
+					'attrs'   => 'class="woobewoo-flat-input"'
 				));
 				?>
 		</div>
@@ -44,11 +54,11 @@
 			foreach ($labels as $key => $value) {
 				$strMove = '<div class="wpfMoveWrap' . $classMobile . '"><a href="#" class="wpfMove wpfMoveUp js-wpfMove"><i class="fa fa-chevron-up"></i></a><a href="#" class="wpfMove wpfMoveDown js-wpfMove"><i class="fa fa-chevron-down"></i></a></div>';
 				$options[] = array(
-					'id' => 'f_sortby_' . $key,
-					'value' => $key, 
-					'checked' => 1, 
-					'text' => '<div><input type="text" class="woobewoo-flat-input js-sortby-item" name="f_option_labels[' . $key . ']" data-name="' . $key . '" placeholder="' . esc_attr($value) . '"/></div>' . $strMove
-					);
+					'id'      => 'f_sortby_' . $key,
+					'value'   => $key,
+					'checked' => 1,
+					'text'    => '<div><input type="text" class="woobewoo-flat-input js-sortby-item" name="f_option_labels[' . $key . ']" data-name="' . $key . '" placeholder="' . esc_attr($value) . '"/></div>' . $strMove
+				);
 			}
 			HtmlWpf::checkboxlist('f_options', array('options' => $options), '</div><div class="settings-value settings-value-elementor-row-revert js-wpf-row-move">');
 			?>
@@ -60,4 +70,3 @@
 if ( $isPro ) {
 	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortBy' );
 }
-?>
