@@ -62,7 +62,10 @@ class WoofiltersWpf extends ModuleWpf {
 			return;
 		}
 
-		$isBrizyContext = ! empty( $_REQUEST['action'] ) && 'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+		$isBrizyContext = (
+			! empty( $_REQUEST['action'] ) &&
+			'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+		);
 		if ( $isBrizyContext ) {
 			return;
 		}
@@ -2523,7 +2526,10 @@ class WoofiltersWpf extends ModuleWpf {
 			$displayProduct         = false;
 			$displayBrand           = false;
 
-			$isBrizyEditContext = ! empty( $_REQUEST['action'] ) && 'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+			$isBrizyEditContext = (
+				! empty( $_REQUEST['action'] ) &&
+				'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+			);
 			if ( is_admin() || $isBrizyEditContext ) {
 				$displayShop = true;
 			} else {

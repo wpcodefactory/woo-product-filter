@@ -300,7 +300,12 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 		$this->assign('viewId', $viewId);
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) && 'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) ) {
+		if (
+			defined( 'DOING_AJAX' ) &&
+			DOING_AJAX &&
+			isset( $_REQUEST['action'] ) &&
+			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+		) {
 			$cssLink = '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/frontend.woofilters.css' ) . '" type="text/css">';
 			if ( $this->isCustomStyle($settings['settings']) ) {
 				$cssLink .= '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/custom.woofilters.css' ) . '" type="text/css">';
@@ -703,7 +708,13 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$blockHeight = $this->getFilterSetting($settingsOriginal['settings'], 'filter_block_height', false, true);
 		$showImmediately = $this->getFilterSetting($settingsOriginal['settings'], 'show_filter_immediately') == '1';
-		if ( ! $showImmediately && defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) && 'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) ) {
+		if (
+			! $showImmediately &&
+			defined( 'DOING_AJAX' ) &&
+			DOING_AJAX &&
+			isset( $_REQUEST['action'] ) &&
+			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+		) {
 			$showImmediately = true;
 		}
 		$blockStyle      =
