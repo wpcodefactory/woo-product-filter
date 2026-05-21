@@ -179,6 +179,8 @@ class FrameWpf {
 
 	/**
 	 * init.
+	 *
+	 * @version 3.1.8
 	 */
 	public function init() {
 		ReqWpf::init();
@@ -197,12 +199,11 @@ class FrameWpf {
 
 		add_action($addAssetsAction, array($this, 'addScripts'));
 		add_action($addAssetsAction, array($this, 'addStyles'));
-		global $langOK;
+
 		register_activation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array('UtilsWpf', 'activatePlugin')); //See classes/install.php file
 		register_uninstall_hook(WPF_DIR . DS . WPF_MAIN_FILE, array('UtilsWpf', 'deletePlugin'));
 		register_deactivation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
 
-		add_action('init', array($this, 'connectLang'));
 		add_action('after_plugin_row_woofilter-pro/woofilter-pro.php', array($this, 'pluginRow'), 5, 3);
 		add_filter('the_content', array('WoofiltersWpf', 'getProductsShortcode'), -99999);
 	}
@@ -243,14 +244,6 @@ class FrameWpf {
 			</tr>
 			<?php
 		}
-	}
-
-	/**
-	 * connectLang.
-	 */
-	public function connectLang() {
-		global $langOK;
-		$langOK = load_plugin_textdomain('woo-product-filter', false, WPF_PLUG_NAME . '/languages/');
 	}
 
 	/**

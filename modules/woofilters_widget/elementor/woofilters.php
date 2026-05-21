@@ -43,16 +43,16 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		$modPath = FrameWpf::_()->getModule('woofilters')->getModPath();
 		$tempPath = FrameWpf::_()->getModule('templates')->getModPath();
 
-		wp_register_script('commonWpf', WPF_JS_PATH . 'common.js', array('jquery'), WPF_VERSION);
-		wp_register_script('coreWpf', WPF_JS_PATH . 'core.js', array('jquery'), WPF_VERSION);
+		wp_register_script('commonWpf', WPF_JS_PATH . 'common.js', array('jquery'), WPF_VERSION, false);
+		wp_register_script('coreWpf', WPF_JS_PATH . 'core.js', array('jquery'), WPF_VERSION, false);
 
-		wp_register_script('tooltipster', $tempPath . 'lib/tooltipster/jquery.tooltipster.min.js', false, WPF_VERSION);
+		wp_register_script('tooltipster', $tempPath . 'lib/tooltipster/jquery.tooltipster.min.js', false, WPF_VERSION, false);
 		wp_register_style('tooltipster', $tempPath . 'lib/tooltipster/tooltipster.css', false, WPF_VERSION);
 
 		//addCommonAssets
 		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 		wp_register_style('frontend.filters', $modPath . 'css/frontend.woofilters.css', false, WPF_VERSION);
-		wp_register_script('frontend.filters', $modPath . 'js/frontend.woofilters.js', false, WPF_VERSION);
+		wp_register_script('frontend.filters', $modPath . 'js/frontend.woofilters.js', false, WPF_VERSION, false);
 		if ( \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
 			$code = 'var isElementorPreview=1;';
 			wp_add_inline_script('frontend.filters', $code, 'before');
@@ -63,7 +63,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		}
 
 		wp_register_style('frontend.multiselect', $modPath . 'css/frontend.multiselect.css', false, WPF_VERSION);
-		wp_register_script('frontend.multiselect', $modPath . 'js/frontend.multiselect.js', false, WPF_VERSION);
+		wp_register_script('frontend.multiselect', $modPath . 'js/frontend.multiselect.js', false, WPF_VERSION, false);
 		$selectedTitle = esc_attr(
 			( isset($options['selected_title']['value']) && ''!==$options['selected_title']['value'] )
 			? $options['selected_title']['value']
@@ -76,7 +76,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		wp_register_style('jquery-ui.structure', WPF_CSS_PATH . 'jquery-ui.structure.min.css', false, WPF_VERSION);
 		wp_register_style('jquery-ui.theme', WPF_CSS_PATH . 'jquery-ui.theme.min.css', false, WPF_VERSION);
 		wp_register_style('jquery-slider', WPF_CSS_PATH . 'jquery-slider.css', false, WPF_VERSION);
-		wp_register_script('jquery-ui-slider', '', false, WPF_VERSION);
+		wp_register_script('jquery-ui-slider', '', false, WPF_VERSION, false);
 
 		//addPluginCustomStyles
 		$params = ReqWpf::get( 'get' );
@@ -94,9 +94,9 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 			));
 			wp_register_style('frontend.filters.pro', $modPathPRO . 'css/frontend.woofilters.pro.css', false, WPF_VERSION);
 			wp_register_style('custom.filters.pro', $modPathPRO . 'css/custom.woofilters.pro.css', false, WPF_VERSION);
-			wp_register_script('jquery-ui-autocomplete', '', false, WPF_VERSION);
+			wp_register_script('jquery-ui-autocomplete', '', false, WPF_VERSION, false);
 			wp_register_style('jquery-ui-autocomplete', $modPathPRO . 'css/jquery-ui-autocomplete.css', false, WPF_VERSION);
-			wp_register_script('ion.slider', $modPathPRO . 'js/ion.rangeSlider.min.js', false, WPF_VERSION);
+			wp_register_script('ion.slider', $modPathPRO . 'js/ion.rangeSlider.min.js', false, WPF_VERSION, false);
 			wp_register_style('ion.slider', $modPathPRO . 'css/ion.rangeSlider.css', false, WPF_VERSION);
 
 		}

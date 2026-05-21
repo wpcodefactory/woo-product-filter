@@ -1,30 +1,35 @@
 <?php
-
 /**
+ * Product Filter by WBW - Base_MixpanelBase Class
+ *
  * This a Base class which all Mixpanel classes extend from to provide some very basic
  * debugging and logging functionality. It also serves to persist $_options across the library.
  *
+ * @version 3.1.8
+ *
+ * @author woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
+
 class Base_MixpanelBase {
 
-
 	/**
-	 * Default options that can be overridden via the $options constructor arg
+	 * Default options that can be overridden via the $options constructor arg.
 	 *
 	 * @var array
 	 */
 	private $_defaults = array(
-		'max_batch_size'    => 50, // the max batch size Mixpanel will accept is 50,
-		'max_queue_size'    => 1000, // the max num of items to hold in memory before flushing
-		'debug'             => true, // enable/disable debug mode
-		'consumer'          => 'curl', // which consumer to use
+		'max_batch_size'    => 50,                 // the max batch size Mixpanel will accept is 50,
+		'max_queue_size'    => 1000,               // the max num of items to hold in memory before flushing
+		'debug'             => true,               // enable/disable debug mode
+		'consumer'          => 'curl',             // which consumer to use
 		'host'              => 'api.mixpanel.com', // the host name for api calls
-		'events_endpoint'   => '/track', // host relative endpoint for events
-		'people_endpoint'   => '/engage', // host relative endpoint for people updates
-		'use_ssl'           => true, // use ssl when available
-		'error_callback'    => null // callback to use on consumption failures
+		'events_endpoint'   => '/track',           // host relative endpoint for events
+		'people_endpoint'   => '/engage',          // host relative endpoint for people updates
+		'use_ssl'           => true,               // use ssl when available
+		'error_callback'    => null                // callback to use on consumption failures
 	);
-
 
 	/**
 	 * An array of options to be used by the Mixpanel library.
@@ -33,9 +38,8 @@ class Base_MixpanelBase {
 	 */
 	protected $_options = array();
 
-
 	/**
-	 * Construct a new MixpanelBase object and merge custom options with defaults
+	 * Construct a new MixpanelBase object and merge custom options with defaults.
 	 *
 	 * @param array $options
 	 */
@@ -44,24 +48,18 @@ class Base_MixpanelBase {
 		$this->_options = $options;
 	}
 
-
 	/**
-	 * Log a message to PHP's error log
+	 * Log a message to PHP's error log.
 	 *
 	 * @param $msg
 	 */
 	protected function _log( $msg ) {
 		// No logs for us
 		return;
-		$arr = debug_backtrace();
-		$class = $arr[0]['class'];
-		$line = $arr[0]['line'];
-		error_log ( "[ $class - line $line ] : " . $msg );
 	}
 
-
 	/**
-	 * Returns true if in debug mode, false if in production mode
+	 * Returns true if in debug mode, false if in production mode.
 	 *
 	 * @return bool
 	 */

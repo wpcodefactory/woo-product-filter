@@ -445,7 +445,7 @@ class UtilsWpf {
 		}
 		delete_option( 'wpf_slug_format_rewrite_option_bootstrapped' ); // Re-run slug rewrite bootstrap logic after each activation.
 		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::init();
@@ -468,7 +468,7 @@ class UtilsWpf {
 	public static function deletePlugin() {
 		global $wpdb;
 		if (function_exists('is_multisite') && is_multisite()) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::delete();
@@ -489,7 +489,7 @@ class UtilsWpf {
 	public static function deactivatePlugin( $networkwide ) {
 		global $wpdb;
 		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::deactivate();

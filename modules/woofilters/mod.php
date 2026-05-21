@@ -294,8 +294,8 @@ class WoofiltersWpf extends ModuleWpf {
 		$q = new WP_Query( DispatcherWpf::applyFilters( 'beforeFilterExistsTermsWithEmptyArgs', array(
 			'post_type'   => 'product',
 			'fields'      => 'ids',
-			'meta_query'  => array('wpf_not_clauses' => 1),
-			'tax_query'   => array(),
+			'meta_query'  => array('wpf_not_clauses' => 1), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			'tax_query'   => array(),                       // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			'post__in'    => array_merge( array( 0 ), $ids ),
 			'aws_post_in' => array_merge( array( 0 ), $ids ),
 		) ) );
@@ -463,7 +463,7 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( isset( $query->query_vars['post_type'] ) && 'product' === $query->query_vars['post_type'] && function_exists( 'debug_backtrace' ) ) {
 				$needFiltered  = false;
 				$changePerPage = false;
-				$backtrace     = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 10 ); //phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
+				$backtrace     = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 10 ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
 				if ( is_array( $backtrace ) ) {
 					$classes = array(
 						'Essential_Addons_Elementor\Elements\Product_Grid',
@@ -1723,8 +1723,8 @@ class WoofiltersWpf extends ModuleWpf {
 				$filterSettings['display_product_variations'] = 1;
 			}
 			$args = array(
-				'tax_query'  => $q->get( 'tax_query' ),
-				'meta_query' => $q->get( 'meta_query' ),
+				'tax_query'  => $q->get( 'tax_query' ),  // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+				'meta_query' => $q->get( 'meta_query' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 				'post__in'   => $q->get( 'post__in' ),
 			);
 			$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
@@ -1861,11 +1861,11 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 
 		if ( ! isset( $args['tax_query'] ) ) {
-			$args['tax_query'] = array();
+			$args['tax_query'] = array();  // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		}
 
 		if ( ! isset( $args['meta_query'] ) ) {
-			$args['meta_query'] = array();
+			$args['meta_query'] = array(); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 		}
 
 		if ( count( $params ) > 0 || ! empty($this->preselects) ) {
@@ -1873,8 +1873,8 @@ class WoofiltersWpf extends ModuleWpf {
 			$params             = array_merge( $this->preselects, $params );
 			$this->fields       = $this->addCustomFieldsQuery( $params, $mode );
 			$metaQuery          = $this->addCustomMetaQuery( $args['meta_query'], $params, $mode );
-			$args['meta_query'] = $metaQuery;
-			$args['tax_query']  = $this->groupTaxQueryArgs( $taxQuery );
+			$args['meta_query'] = $metaQuery;                            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			$args['tax_query']  = $this->groupTaxQueryArgs( $taxQuery ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			foreach ( $this->fields as $key => $value ) {
 				$args[ $key ] = $value;
 			}
@@ -2138,7 +2138,7 @@ class WoofiltersWpf extends ModuleWpf {
 						}
 					}
 				}
-				$args['tax_query'] = $this->addHiddenFilterQuery(array());
+				$args['tax_query'] = $this->addHiddenFilterQuery(array()); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			}
 
 			$metaQuery           = isset( $args['meta_query'] ) ? $args['meta_query'] : array();
@@ -2157,8 +2157,8 @@ class WoofiltersWpf extends ModuleWpf {
 			$metaQuery = $this->addCustomMetaQuery( $metaQuery, $preselects, $mode );
 			$taxQuery  = $this->addCustomTaxQuery( $taxQuery, $preselects, $mode );
 
-			$args['meta_query'] = $metaQuery;
-			$args['tax_query']  = $this->groupTaxQueryArgs( $taxQuery );
+			$args['meta_query'] = $metaQuery;                            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			$args['tax_query']  = $this->groupTaxQueryArgs( $taxQuery ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			foreach ( $fields as $key => $value ) {
 				$args[ $key ] = $value;
 			}
@@ -3726,7 +3726,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$args['order']     = 'ASC';
 
 			if ( ! empty( $args['meta_key'] ) && empty( $args['meta_value'] ) && empty( $args['meta_value_num'] ) ) {
-				$args['meta_key'] = '';
+				$args['meta_key'] = ''; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			}
 			$isModeStandart = in_array( $mode, array( 'full', 'light' ), true );
 
@@ -3912,8 +3912,8 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( empty( $this->mainWCQuery ) ) {
 				$q = new WP_Query( DispatcherWpf::applyFilters( 'beforeFilterExistsTermsWithEmptyArgs', array(
 					'post_type'  => 'product',
-					'meta_query' => array(),
-					'tax_query'  => array(),
+					'meta_query' => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+					'tax_query'  => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				) ) );
 				$this->loadProductsFilter( $q );
 			}
@@ -3950,8 +3950,8 @@ class WoofiltersWpf extends ModuleWpf {
 			if ( 'product' !== $postType && ( ! is_array( $postType ) || ! in_array( 'product', $postType, true ) ) ) {
 				$q = new WP_Query( DispatcherWpf::applyFilters( 'beforeFilterExistsTermsWithEmptyArgs', array(
 					'post_type'  => 'product',
-					'meta_query' => array(),
-					'tax_query'  => array(),
+					'meta_query' => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+					'tax_query'  => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 				) ) );
 				$this->loadProductsFilter( $q );
 				$args         = $this->mainWCQuery;
@@ -4002,7 +4002,7 @@ class WoofiltersWpf extends ModuleWpf {
 				'post_status'         => 'publish',
 				'post_type'           => 'product',
 				'ignore_sticky_posts' => true,
-				'tax_query'           => array(),
+				'tax_query'           => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			);
 		}
 
@@ -4277,7 +4277,7 @@ class WoofiltersWpf extends ModuleWpf {
 				'currentSettings' => $param['currentSettings'],
 			) );
 			$wpdb->wpf_prepared_query = $sql['main'];
-			$termProducts             = $wpdb->get_results( $wpdb->wpf_prepared_query );
+			$termProducts             = $wpdb->get_results( $wpdb->wpf_prepared_query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		}
 
 		$existTerms = array();
@@ -4671,7 +4671,7 @@ class WoofiltersWpf extends ModuleWpf {
 										$name          = $setting['name'];
 										$data          = ReqWpf::get( 'get' );
 										unset( $data[ $name ] );
-										$args['meta_query'] = DispatcherWpf::applyFilters( 'addCustomMetaQueryPro', $args['meta_query'], $data, 'url' );
+										$args['meta_query'] = DispatcherWpf::applyFilters( 'addCustomMetaQueryPro', $args['meta_query'], $data, 'url' ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 										$filterLoop         = new WP_Query( $args );
 
 										if ( $filterLoop->have_posts() ) {
