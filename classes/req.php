@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - ReqWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class ReqWpf {
 	protected static $_requestData;
 	protected static $_requestMethod;
@@ -28,17 +38,20 @@ class ReqWpf {
 	/**
 	 * Function getVar.
 	 *
+	 * @version 3.1.8
+	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
 	 * @param mixed $default default value - will be returned if $name wasn't found
+	 *
 	 * @return mixed value of a variable, if didn't found - $default (NULL by default)
 	*/
 	public static function getVar( $name, $from = 'all', $default = null ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field($_REQUEST['_wpnonce']);
+			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
 			if (!wp_verify_nonce($nonce, 'my-nonce')) {
 				echo esc_html__('Security check', 'woo-product-filter');
-				exit(); 
+				exit();
 			}
 		}
 
@@ -54,12 +67,12 @@ class ReqWpf {
 		switch ($from) {
 			case 'get':
 				if (isset($_GET[$name])) {
-					return sanitize_text_field($_GET[$name]);
+					return sanitize_text_field(wp_unslash($_GET[$name]));
 				}
 				break;
 			case 'post':
 				if (isset($_POST[$name])) {
-					return sanitize_text_field($_POST[$name]);
+					return sanitize_text_field(wp_unslash($_POST[$name]));
 				}
 				break;
 			case 'file':
@@ -75,12 +88,12 @@ class ReqWpf {
 				break;
 			case 'server':
 				if (isset($_SERVER[$name])) {
-					return sanitize_text_field($_SERVER[$name]);
+					return sanitize_text_field(wp_unslash($_SERVER[$name]));
 				}
 				break;
 			case 'cookie':
 				if (isset($_COOKIE[$name])) {
-					$value = sanitize_text_field($_COOKIE[$name]);
+					$value = sanitize_text_field(wp_unslash($_COOKIE[$name]));
 					if (strpos($value, '_JSON:') === 0) {
 						$value = explode('_JSON:', $value);
 						$value = UtilsWpf::jsonDecode(array_pop($value));
@@ -91,7 +104,7 @@ class ReqWpf {
 		}
 		return $default;
 	}
-	
+
 	public static function existGetVar( $begin ) {
 		if (isset($_GET) && is_array($_GET)) {
 			foreach ($_GET as $k => $v) {
@@ -107,13 +120,16 @@ class ReqWpf {
 	/**
 	 * Getting similar parameters when redirecting to set filter values.
 	 *
+	 * @version 3.1.8
+	 *
 	 * @param string $part part of parameter
+	 *
 	 * @return string
 	 */
 	public static function getFilterRedirect( $part ) {
 		$params = array();
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field($_REQUEST['_wpnonce']);
+			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
 			if (!wp_verify_nonce($nonce, 'my-nonce')) {
 				echo esc_html__('Security check', 'woo-product-filter');
 				exit();
@@ -168,12 +184,18 @@ class ReqWpf {
 				break;
 		}
 	}
+
+	/**
+	 * clearVar.
+	 *
+	 * @version 3.1.8
+	 */
 	public static function clearVar( $name, $in = 'input', $params = array() ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field($_REQUEST['_wpnonce']);
+			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
 			if (!wp_verify_nonce($nonce, 'my-nonce')) {
 				esc_html__('Security check', 'woo-product-filter');
-				exit(); 
+				exit();
 			}
 		}
 		$in = strtolower($in);
@@ -199,12 +221,18 @@ class ReqWpf {
 				break;
 		}
 	}
+
+	/**
+	 * get.
+	 *
+	 * @version 3.1.8
+	 */
 	public static function get( $what ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field($_REQUEST['_wpnonce']);
+			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
 			if (!wp_verify_nonce($nonce, 'my-nonce')) {
 				esc_html__('Security check', 'woo-product-filter');
-				exit(); 
+				exit();
 			}
 		}
 		$what = strtolower($what);
@@ -224,12 +252,32 @@ class ReqWpf {
 		}
 		return null;
 	}
+
+	/**
+	 * getMethod.
+	 *
+	 * @version 3.1.8
+	 */
 	public static function getMethod() {
 		if (!self::$_requestMethod) {
-			self::$_requestMethod = strtoupper( self::getVar('method', 'all', isset($_SERVER['REQUEST_METHOD']) ? sanitize_text_field($_SERVER['REQUEST_METHOD']) : '') );
+			self::$_requestMethod = strtoupper(
+				self::getVar(
+					'method',
+					'all',
+					(
+						isset($_SERVER['REQUEST_METHOD'])
+						? sanitize_text_field(wp_unslash($_SERVER['REQUEST_METHOD']))
+						: ''
+					)
+				)
+			);
 		}
 		return self::$_requestMethod;
 	}
+
+	/**
+	 * getAdminPage.
+	 */
 	public static function getAdminPage() {
 		$pagePath = self::getVar('page');
 		if (!empty($pagePath) && strpos($pagePath, '/') !== false) {
@@ -238,13 +286,27 @@ class ReqWpf {
 		}
 		return false;
 	}
+
+	/**
+	 * getMethod.
+	 *
+	 * @version 3.1.8
+	 */
 	public static function getRequestUri() {
-		return isset($_SERVER['REQUEST_URI']) ? sanitize_text_field($_SERVER['REQUEST_URI']) : '';
+		return (
+			isset($_SERVER['REQUEST_URI'])
+			? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI']))
+			: ''
+		);
 	}
+
+	/**
+	 * getMode.
+	 */
 	public static function getMode() {
 		$mod = self::getVar('mod');
 		if (!$mod) {
-			$mod = self::getVar('page');     //Admin usage
+			$mod = self::getVar('page'); // Admin usage
 		}
 		return $mod;
 	}

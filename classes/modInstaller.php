@@ -4,9 +4,9 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.1.3
+ * @version 3.1.8
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -26,7 +26,7 @@ class ModInstallerWpf {
 	/**
 	 * Install new ModuleWpf into plugin.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.8
 	 *
 	 * @param string $module new ModuleWpf data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
@@ -60,11 +60,11 @@ class ModInstallerWpf {
 					return true;
 				} else {
 					/* translators: %s: module name */
-					ErrorsWpf::push(esc_html(sprintf(__('Move files for %s failed'), $module['code'])), ErrorsWpf::MOD_INSTALL);
+					ErrorsWpf::push(esc_html(sprintf(__('Move files for %s failed', 'woo-product-filter'), $module['code'])), ErrorsWpf::MOD_INSTALL);
 				}
 			} else {
 				/* translators: %s: module name */
-				ErrorsWpf::push(esc_html(sprintf(__('%s is not plugin module'), $module['code'])), ErrorsWpf::MOD_INSTALL);
+				ErrorsWpf::push(esc_html(sprintf(__('%s is not plugin module', 'woo-product-filter'), $module['code'])), ErrorsWpf::MOD_INSTALL);
 			}
 		}
 		return false;
@@ -105,9 +105,12 @@ class ModInstallerWpf {
 	/**
 	 * Move files to plugin modules directory.
 	 *
-	 * @param string $code code for module
-	 * @param string $path path from what module will be moved
-	 * @return bool is success - true, else - false
+	 * @version 3.1.8
+	 *
+	 * @param string $code code for module.
+	 * @param string $path path from what module will be moved.
+	 *
+	 * @return bool is success - true, else - false.
 	 */
 	public static function moveFiles( $code, $path ) {
 		if (!is_dir(WPF_MODULES_DIR . $code)) {
@@ -115,7 +118,16 @@ class ModInstallerWpf {
 				UtilsWpf::copyDirectories($path, WPF_MODULES_DIR . $code);
 				return true;
 			} else {
-				ErrorsWpf::push(esc_html__('Cannot create module directory. Try to set permission to ' . WPF_MODULES_DIR . ' directory 755 or 777', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
+				ErrorsWpf::push(
+					esc_html(
+						sprintf(
+							/* translators: %s: modules dir */
+							__('Cannot create module directory. Try to set permission to %s directory 755 or 777', 'woo-product-filter'),
+							WPF_MODULES_DIR
+						)
+					),
+					ErrorsWpf::MOD_INSTALL
+				);
 			}
 		} else {
 			return true;
@@ -192,9 +204,12 @@ class ModInstallerWpf {
 	/**
 	 * Check whether modules is installed or not, if not and must be activated - install it.
 	 *
-	 * @param array $codes array with modules data to store in database
-	 * @param string $path path to plugin file where modules is stored (__FILE__ for example)
-	 * @return bool true if check ok, else - false
+	 * @version 3.1.8
+	 *
+	 * @param array  $codes array with modules data to store in database.
+	 * @param string $path  path to plugin file where modules is stored (__FILE__ for example).
+	 *
+	 * @return bool true if check ok, else - false.
 	 */
 	public static function check( $extPlugName = '' ) {
 		if (WPF_TEST_MODE) {
@@ -216,7 +231,7 @@ class ModInstallerWpf {
 					$m = '';
 					if (!self::install($modDataArr, $locations['plugDir'])) {
 						/* translators: %s: module name */
-						ErrorsWpf::push(esc_html(sprintf(__('Install %s failed'), $modDataArr['code'])), ErrorsWpf::MOD_INSTALL);
+						ErrorsWpf::push(esc_html(sprintf(__('Install %s failed', 'woo-product-filter'), $modDataArr['code'])), ErrorsWpf::MOD_INSTALL);
 					}
 				}
 			}

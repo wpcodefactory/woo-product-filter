@@ -1,5 +1,15 @@
 <?php
-	ViewWpf::display('woofiltersEditTabCommonTitle');
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters Price Range
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+ViewWpf::display('woofiltersEditTabCommonTitle');
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -8,13 +18,13 @@
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_frontend_type', array(
 					'options' => array(
-						'list' => esc_attr__( 'Checkbox list', 'woo-product-filter' ),
+						'list'     => esc_attr__( 'Checkbox list', 'woo-product-filter' ),
 						'dropdown' => esc_attr__( 'Dropdown', 'woo-product-filter' )
 					),
-					'attrs' => 'class="woobewoo-flat-input"'
+					'attrs'   => 'class="woobewoo-flat-input"'
 				));
 				?>
 		</div>
@@ -27,10 +37,10 @@
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::text('f_dropdown_first_option_text', array(
 					'placeholder' => esc_attr__('Select all', 'woo-product-filter'),
-					'attrs' => 'class="woobewoo-flat-input"'
+					'attrs'       => 'class="woobewoo-flat-input"'
 				));
 				?>
 		</div>
@@ -50,7 +60,7 @@
 				<?php esc_html_e('Step', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr(__('Set the value of prise increase step. The default value is set to 20. All the steps are equal. When setting the step, please note that the number of elements in the list should not exceed 100, otherwise the step setting will be reset and automatically calculated.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 			</div>
-			<?php 
+			<?php
 				HtmlWpf::text('f_step', array(
 					'value' => 20,
 					'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"'
@@ -73,7 +83,7 @@
 		</div>
 	</div>
 </div>
-<?php 
+<?php
 if ($isPro) {
 	DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersPriceRange');
 } else {
@@ -122,13 +132,13 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w50">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_layout', array(
 					'options' => array(
 						'ver' => esc_attr__('Vertical', 'woo-product-filter'),
 						'hor' => esc_attr__('Horizontal', 'woo-product-filter')
 					),
-					'attrs' => 'class="woobewoo-flat-input"'
+					'attrs'   => 'class="woobewoo-flat-input"'
 				));
 				?>
 		</div>
@@ -153,4 +163,4 @@ if ($isPro) {
 </div>
 <?php HtmlWpf::hidden('f_range_by_hands_values', array()); ?>
 <?php HtmlWpf::hidden('f_range_by_hands_default', array()); ?>
-<?php HtmlWpf::hidden('f_preselect', array()); ?>
+<?php HtmlWpf::hidden('f_preselect', array());

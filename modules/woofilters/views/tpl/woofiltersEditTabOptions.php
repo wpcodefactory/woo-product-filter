@@ -2,9 +2,9 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Options
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -939,7 +939,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e('Autoscroll To Products After Filtering', 'woo-product-filter'); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('After filtration will be scroll to products block') ); ?>"></i>
+					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('After filtration will be scroll to products block', 'woo-product-filter') ); ?>"></i>
 				</div>
 				<div class="settings-block-values col-xs-8 col-lg-9">
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>

@@ -1,5 +1,15 @@
 <?php
-	ViewWpf::display('woofiltersEditTabCommonTitle');
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters Author
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+ViewWpf::display('woofiltersEditTabCommonTitle');
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -8,7 +18,7 @@
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full">
-			<?php 
+			<?php
 				HtmlWpf::selectlist('f_mlist', array(
 					'options' => $roles
 				));
@@ -23,7 +33,7 @@
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_frontend_type', array(
 					'options' => array(
 						'list' => esc_attr__( 'Checkbox list', 'woo-product-filter' ),
@@ -48,7 +58,7 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::text('f_dropdown_first_option_text', array(
 					'placeholder' => esc_attr__('Select all', 'woo-product-filter'),
 					'attrs' => 'class="woobewoo-flat-input"'
@@ -96,7 +106,7 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_layout', array(
 					'options' => array('ver' => esc_attr__('Vertical', 'woo-product-filter'), 'hor' => esc_attr__('Horizontal', 'woo-product-filter')),
 					'attrs' => 'class="woobewoo-flat-input"'

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters Search Text
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 if ($isPro) {
 	DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersSearchText');
 } else {
@@ -12,4 +22,4 @@ if ($isPro) {
 		</a>
 		<?php } ?>
 	</div>
-<?php } ?>
+<?php }

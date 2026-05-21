@@ -2,22 +2,18 @@
 /**
  * Product Filter by WBW - Config
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
- * @author  woobewoo
+ * @author woobewoo
  *
- * @todo    (v3.1.8) Update `WPF_PRO_REQUIRES`?
+ * @todo (v3.1.8) Update `WPF_PRO_REQUIRES`?
  */
 
 defined( 'ABSPATH' ) || exit;
 
 global $wpdb;
 
-if (!defined('WPLANG') || WPLANG == '') {
-	define('WPF_WPLANG', 'en_GB');
-} else {
-	define('WPF_WPLANG', WPLANG);
-}
+define('WPF_WPLANG', (!defined('WPLANG') || WPLANG == '' ? 'en_GB' : WPLANG ));
 
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
