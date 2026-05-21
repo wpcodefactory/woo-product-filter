@@ -1,17 +1,39 @@
 <?php
+/**
+ * Product Filter by WBW - InstallerWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class InstallerWpf {
+
+	/**
+	 * update_to_version_method.
+	 */
 	public static $update_to_version_method = '';
+
+	/**
+	 * _firstTimeActivated.
+	 */
 	private static $_firstTimeActivated = false;
+
+	/**
+	 * init.
+	 */
 	public static function init( $isUpdate = false ) {
 		global $wpdb;
-		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Versiom */
+		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Version */
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		$current_version = get_option($wpPrefix . WPF_DB_PREF . 'db_version', 0);
 		if (!$current_version) {
 			self::$_firstTimeActivated = true;
 		}
 		/**
-		 * Table modules 
+		 * Table modules.
 		 */
 		if (!DbWpf::exist('@__modules')) {
 			dbDelta(DbWpf::prepareQuery("CREATE TABLE IF NOT EXISTS `@__modules` (
@@ -31,7 +53,7 @@ class InstallerWpf {
 				(NULL, 'pages',1,1,'Pages'),
 				(NULL, 'templates',1,1,'templates'),
 				(NULL, 'promo',1,1,'promo'),
-				(NULL, 'admin_nav',1,1,'admin_nav'),			  
+				(NULL, 'admin_nav',1,1,'admin_nav'),
 				(NULL, 'woofilters',1,1,'woofilters'),
 				(NULL, 'woofilters_widget',1,1,'woofilters_widget'),
 				(NULL, 'mail',1,1,'mail'),
@@ -39,7 +61,7 @@ class InstallerWpf {
 				(NULL, 'overview',1,1,'overview');");
 		}
 		/**
-		 *  Table modules_type 
+		 *  Table modules_type.
 		 */
 		if (!DbWpf::exist('@__modules_type')) {
 			dbDelta(DbWpf::prepareQuery('CREATE TABLE IF NOT EXISTS `@__modules_type` (
@@ -52,7 +74,7 @@ class InstallerWpf {
 				(6,'addons');");
 		}
 		/**
-		 * Table filters
+		 * Table filters.
 		 */
 		if (!DbWpf::exist('@__filters')) {
 			dbDelta(DbWpf::prepareQuery('CREATE TABLE IF NOT EXISTS `@__filters` (
@@ -66,8 +88,8 @@ class InstallerWpf {
 			DbWpf::query('ALTER TABLE `@__filters` MODIFY setting_data MEDIUMTEXT;');
 		}
 		/**
-		* Plugin usage statistwpf
-		*/
+		 * Plugin usage statistwpf.
+		 */
 		if (!DbWpf::exist('@__usage_stat')) {
 			dbDelta(DbWpf::prepareQuery("CREATE TABLE `@__usage_stat` (
 			  `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -81,7 +103,7 @@ class InstallerWpf {
 			DbWpf::query("INSERT INTO `@__usage_stat` (code, visits) VALUES ('installed', 1)");
 		}
 		/**
-		 *  Table meta_keys 
+		 *  Table meta_keys.
 		 */
 		if (!DbWpf::exist('@__meta_keys')) {
 			dbDelta(DbWpf::prepareQuery('CREATE TABLE IF NOT EXISTS `@__meta_keys` (
@@ -110,7 +132,7 @@ class InstallerWpf {
 				(NULL,0,'_sale_price','',0,0,1,0,CURRENT_TIMESTAMP,NULL,NULL,NULL);");
 		}
 		/**
-		 *  Table meta_data 
+		 *  Table meta_data.
 		 */
 		if (!DbWpf::exist('@__meta_data')) {
 			dbDelta(DbWpf::prepareQuery('CREATE TABLE IF NOT EXISTS `@__meta_data` (
@@ -126,7 +148,7 @@ class InstallerWpf {
 			) DEFAULT CHARSET=utf8;'));
 		}
 		/**
-		 *  Table meta_values 
+		 *  Table meta_values.
 		 */
 		if (!DbWpf::exist('@__meta_values')) {
 			dbDelta(DbWpf::prepareQuery('CREATE TABLE IF NOT EXISTS `@__meta_values` (
@@ -142,7 +164,7 @@ class InstallerWpf {
 			) DEFAULT CHARSET=utf8;'));
 		}
 		/**
-		 *  Table meta_values_bk
+		 *  Table meta_values_bk.
 		 */
 		if (!DbWpf::exist('@__meta_values_bk')) {
 			dbDelta(DbWpf::prepareQuery('CREATE TABLE IF NOT EXISTS `@__meta_values_bk` (
@@ -159,7 +181,7 @@ class InstallerWpf {
 		InstallerDbUpdaterWpf::runUpdate($current_version);
 		if ($current_version && !self::$_firstTimeActivated) {
 			self::setUsed();
-			// For users that just updated our plugin - don't need tp show step-by-step tutorial
+			// For users that just updated our plugin - don't need to show step-by-step tutorial
 			update_user_meta(get_current_user_id(), WPF_CODE . '-tour-hst', array('closed' => 1));
 		}
 		update_option($wpPrefix . WPF_DB_PREF . 'db_version', WPF_VERSION);
@@ -168,35 +190,59 @@ class InstallerWpf {
 			wp_schedule_single_event( time() + 5, 'wpf_calc_meta_indexing' );
 		}
 	}
+
+	/**
+	 * setUsed.
+	 */
 	public static function setUsed() {
 		update_option(WPF_DB_PREF . 'plug_was_used', 1);
 	}
+
+	/**
+	 * isUsed.
+	 */
 	public static function isUsed() {
 		return (int) get_option(WPF_DB_PREF . 'plug_was_used');
 	}
+
+	/**
+	 * delete.
+	 */
 	public static function delete() {
 		self::_checkSendStat('delete');
 		global $wpdb;
 		$wpPrefix = $wpdb->prefix;
-		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'modules`');
-		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'modules_type`');
-		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'usage_stat`');
-		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'meta_data`');
+		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'modules`');      // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'modules_type`'); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'usage_stat`');   // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+		$wpdb->query('DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql(WPF_DB_PREF) . 'meta_data`');    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 		delete_option($wpPrefix . WPF_DB_PREF . 'db_version');
 		delete_option($wpPrefix . WPF_DB_PREF . 'db_installed');
 	}
+
+	/**
+	 * deactivate.
+	 */
 	public static function deactivate() {
 		self::_checkSendStat('deactivate');
 	}
+
+	/**
+	 * _checkSendStat.
+	 */
 	private static function _checkSendStat( $statCode ) {
 		if (class_exists('FrameWpf') && FrameWpf::_()->getModule('promo') && FrameWpf::_()->getModule('options')) {
 			FrameWpf::_()->getModule('promo')->getModel()->saveUsageStat( $statCode );
 			FrameWpf::_()->getModule('promo')->getModel()->checkAndSend( true );
 		}
 	}
+
+	/**
+	 * update.
+	 */
 	public static function update() {
 		global $wpdb;
-		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Versiom */
+		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Version */
 		$currentVersion = get_option($wpPrefix . WPF_DB_PREF . 'db_version', 0);
 		if (!$currentVersion || version_compare(WPF_VERSION, $currentVersion, '>')) {
 			self::init( true );

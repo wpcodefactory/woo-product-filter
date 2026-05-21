@@ -1,26 +1,34 @@
 <?php
+/**
+ * Product Filter by WBW - Producers_MixpanelEvents Class
+ *
+ * Provides an API to track events on Mixpanel.
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 require_once(dirname(__FILE__) . '/MixpanelBaseProducer.php');
 require_once(dirname(__FILE__) . '/MixpanelPeople.php');
 require_once(dirname(__FILE__) . '/../ConsumerStrategies/CurlConsumer.php');
 
-/**
- * Provides an API to track events on Mixpanel
- */
 class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 
 	/**
-	 * An array of properties to attach to every tracked event
+	 * An array of properties to attach to every tracked event.
 	 *
 	 * @var array
 	 */
 	private $_super_properties = array('mp_lib' => 'php');
 
-
 	/**
-	 * Track an event defined by $event associated with metadata defined by $properties
+	 * Track an event defined by $event associated with metadata defined by $properties.
 	 *
 	 * @param string $event
-	 * @param array $properties
+	 * @param array  $properties
 	 */
 	public function track( $event, $properties = array() ) {
 
@@ -40,18 +48,16 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 		$this->enqueue($params);
 	}
 
-
 	/**
 	 * Register a property to be sent with every event. If the property has already been registered, it will be
 	 * overwritten.
 	 *
 	 * @param string $property
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function register( $property, $value ) {
 		$this->_super_properties[$property] = $value;
 	}
-
 
 	/**
 	 * Register multiple properties to be sent with every event. If any of the properties have already been registered,
@@ -65,7 +71,6 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 		}
 	}
 
-
 	/**
 	 * Register a property to be sent with every event. If the property has already been registered, it will NOT be
 	 * overwritten.
@@ -78,7 +83,6 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 			$this->register($property, $value);
 		}
 	}
-
 
 	/**
 	 * Register multiple properties to be sent with every event. If any of the properties have already been registered,
@@ -94,7 +98,6 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 		}
 	}
 
-
 	/**
 	 * Un-register an property to be sent with every event.
 	 *
@@ -103,7 +106,6 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 	public function unregister( $property ) {
 		unset($this->_super_properties[$property]);
 	}
-
 
 	/**
 	 * Un-register a list of properties to be sent with every event.
@@ -116,27 +118,25 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 		}
 	}
 
-
 	/**
-	 * Get a property that is set to be sent with every event
+	 * Get a property that is set to be sent with every event.
 	 *
 	 * @param string $property
+	 *
 	 * @return mixed
 	 */
 	public function getProperty( $property ) {
 		return $this->_super_properties[$property];
 	}
 
-
 	/**
-	 * Identify the user you want to associate to tracked events
+	 * Identify the user you want to associate to tracked events.
 	 *
 	 * @param string|int $user_id
 	 */
 	public function identify( $user_id ) {
 		$this->register('distinct_id', $user_id);
 	}
-
 
 	/**
 	 * Alias an existing id with a different unique id. This is helpful when you want to associate a generated id to
@@ -148,7 +148,9 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 	 *
 	 * @param string|int $original_id
 	 * @param string|int $new_id
+	 *
 	 * @return array $msg
+	 *
 	 * @throws Exception
 	 */
 	public function createAlias( $original_id, $new_id ) {
@@ -157,11 +159,11 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 			'properties'    =>  array('distinct_id' => $original_id, 'alias' => $new_id, 'token' => $this->_token)
 		);
 
-		$options = array_merge( $this->_options, array('endpoint' => $this->_getEndpoint(), 'fork' => false) );
+		$options      = array_merge( $this->_options, array('endpoint' => $this->_getEndpoint(), 'fork' => false) );
 		$curlConsumer = new ConsumerStrategies_CurlConsumer($options);
-		$success = $curlConsumer->persist(array($msg));
+		$success      = $curlConsumer->persist(array($msg));
 		if (!$success) {
-			error_log("Creating Mixpanel Alias (original id: $original_id, new id: $new_id) failed");
+			error_log("Creating Mixpanel Alias (original id: $original_id, new id: $new_id) failed"); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			throw new Exception('Tried to create an alias but the call was not successful');
 		} else {
 			return $msg;
@@ -169,7 +171,7 @@ class Producers_MixpanelEvents extends Producers_MixpanelBaseProducer {
 	}
 
 	/**
-	 * Returns the "events" endpoint
+	 * Returns the "events" endpoint.
 	 *
 	 * @return string
 	 */

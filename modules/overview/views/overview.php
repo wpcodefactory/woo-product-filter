@@ -32,10 +32,10 @@ class OverviewViewWpf extends ViewWpf {
 	public function showRestApiInfo() {
 		$dismiss = (int) FrameWpf::_()->getModule('options')->get('dismiss_wpf-rest-api');
 		if ($dismiss) {
-			return;	// it was already dismissed by user - no need to show it again
+			return; // it was already dismissed by user - no need to show it again
 		}
 		global $wpdb;
-		$api = $wpdb->get_var("SELECT 1 FROM {$wpdb->prefix}woocommerce_api_keys");
+		$api = $wpdb->get_var("SELECT 1 FROM {$wpdb->prefix}woocommerce_api_keys"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		if (1 != $api) {
 			return;
 		}
@@ -59,5 +59,4 @@ class OverviewViewWpf extends ViewWpf {
 		$this->assign('msgSlug', 'wpf-rest-api');
 		HtmlWpf::echoEscapedHtml($this->getContent('showAdminInfo'));
 	}
-
 }

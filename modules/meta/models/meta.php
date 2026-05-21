@@ -179,7 +179,7 @@ class MetaModelWpf extends ModelWpf {
 				$keysData = array($keyName);
 			}
 			foreach ($keysData as $keyName) {
-				set_time_limit(300);
+				set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 				if ($this->hasEmojis($keyName)) {
 					continue;
 				}
@@ -274,7 +274,7 @@ class MetaModelWpf extends ModelWpf {
 							if ($isMetaVar) {
 								$query = $insert . 'val_id) SELECT DISTINCT post_parent,0,' . $keyId . ',v.id' . $from . ' INNER ' . $join . $where . " AND m.meta_key='" . $keyNameVar . "' AND p.post_type='product_variation'";
 							} else {
-								set_time_limit(300);
+								set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 								DbWpf::query('SET session wait_timeout=600');
 
 								if ($isAllProducts) {
@@ -407,7 +407,7 @@ class MetaModelWpf extends ModelWpf {
 				$keysModel->updateKeyData($parent, array('status' => 1));
 			}
 		}
-		set_time_limit(300);
+		set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 		if (!$this->addIndexes()) {
 			return false;
 		}
@@ -435,7 +435,7 @@ class MetaModelWpf extends ModelWpf {
 					}
 				}
 				foreach ($attrIds as $key => $ids) {
-					set_time_limit(300);
+					set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 					$keyName = 'attribute_' . $key;
 					$keyData = $keysModel->getKeyData($keyName, false);
 					if (empty($keyData)) {
@@ -488,7 +488,7 @@ class MetaModelWpf extends ModelWpf {
 				}
 
 			}
-			set_time_limit(300);
+			set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 
 			if (!$valsModel->recalcValuesCount($isAllKeys ? array() : $keyRecalc)) {
 				$this->pushError($valsModel->getErrors());

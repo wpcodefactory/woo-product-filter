@@ -3,7 +3,7 @@ Contributors: woobewoo
 Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 3.4.0
-Tested up to: 6.9
+Tested up to: 7.0
 Stable tag: 3.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -153,7 +153,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.8 - 20/05/2026 =
+= 3.1.8 - 21/05/2026 =
 * Fix - Security - Fixed SQL injection vulnerability.
 * Fix - Fixed collapse toggle icon rendering.
 * Fix - Fixed filtered page results issue.
@@ -165,6 +165,7 @@ Please report security bugs found in the source code of the plugin through the [
 * Fix - Added support for all WooCommerce product shortcodes to resolve AJAX pagination issues.
 * Dev - Added keyboard accessibility support for filters.
 * Dev - Improved coding standards and code cleaned up.
+* Tested up to: 7.0.
 
 = 3.1.7 - 22/04/2026 =
 * Dev - Block component created for page create so that admin can select filtering.
