@@ -368,14 +368,14 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * addElementorParamsToPagenationLinks.
 	 *
-	 * @version 2.9.0
+	 * @version 3.1.8
 	 */
 	public function addElementorParamsToPagenationLinks( $widget_content ) {
 		$pattern = '/<a\s+[^>]*class=["\'][^"\']*page-numbers[^"\']*["\'][^>]*href=["\']([^"\']+)["\'][^>]*>/i';
 
 		return preg_replace_callback($pattern, function ( $matches ) {
 			$originalUrl = $matches[1];
-			$urlParts    = parse_url(html_entity_decode($originalUrl));
+			$urlParts    = wp_parse_url(html_entity_decode($originalUrl));
 
 			$existingParams = array();
 			if ( isset($urlParts['query']) ) {
@@ -1789,10 +1789,10 @@ class WoofiltersWpf extends ModuleWpf {
 	public function setSubcategoriesLink( $link ) {
 		$curUrl = (
 			isset($_SERVER['REQUEST_URI'])
-			? parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) )
+			? wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) )
 			: array()
 		);
-		$catUrl = parse_url($link);
+		$catUrl = wp_parse_url($link);
 		if (!empty($curUrl['query'])) {
 			$link .= (
 				( empty($catUrl['query']) ? '?' : '&' ) .

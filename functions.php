@@ -37,17 +37,20 @@ if (!function_exists('dateToTimestampWpf')) {
 /**
  * Generate random string name.
  *
+ * @version 3.1.8
+ *
  * @param int $lenFrom min len
  * @param int $lenTo max len
+ *
  * @return string random string with length from $lenFrom to $lenTo
  */
 if (!function_exists('getRandNameWpf')) {
 	function getRandNameWpf( $lenFrom = 6, $lenTo = 9 ) {
 		$res = '';
-		$len = mt_rand($lenFrom, $lenTo);
+		$len = wp_rand($lenFrom, $lenTo);
 		if ($len) {
 			for ($i = 0; $i < $len; $i++) {
-				$res .= chr(mt_rand(97, 122)); /*rand symbol from a to z*/
+				$res .= chr(wp_rand(97, 122)); /*rand symbol from a to z*/
 			}
 		}
 		return $res;
@@ -204,7 +207,10 @@ if (!function_exists('jsonEncodeUTFnormalWpf')) {
 /**
  * Prepares the params values to store into db.
  *
+ * @version 3.1.8
+ *
  * @param array $d $_POST array
+ *
  * @return array
  */
 if (!function_exists('prepareParamsWpf')) {
@@ -230,7 +236,7 @@ if (!function_exists('prepareParamsWpf')) {
 		}
 		if (isset($d['code'])) {
 			if ('' == $d['code']) {
-				$d['code'] = prepareFieldCodeWpf($d['label']) . '_' . rand(0, 9999999);
+				$d['code'] = prepareFieldCodeWpf($d['label']) . '_' . wp_rand(0, 9999999);
 			}
 		}
 		return $d;

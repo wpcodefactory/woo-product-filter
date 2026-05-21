@@ -170,9 +170,11 @@ class UtilsWpf {
 
 	/**
 	 * deleteFile.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function deleteFile( $str ) {
-		return @unlink($str);
+		return wp_delete_file($str);
 	}
 
 	/**
@@ -345,6 +347,8 @@ class UtilsWpf {
 
 	/**
 	 * getRandStr.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function getRandStr( $length = 10, $allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', $params = array() ) {
 		$result = '';
@@ -353,7 +357,7 @@ class UtilsWpf {
 			$allowedChars = strtolower($allowedChars);
 		}
 		while (strlen($result) < $length) {
-			$result .= substr($allowedChars, rand(0, $allowedCharsLen), 1);
+			$result .= substr($allowedChars, wp_rand(0, $allowedCharsLen), 1);
 		}
 
 		return $result;
@@ -803,11 +807,13 @@ class UtilsWpf {
 
 	/**
 	 * getReferalHost.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function getReferalHost() {
 		$refUrl = self::getReferalUrl();
 		if (!empty($refUrl)) {
-			$refer = parse_url( $refUrl );
+			$refer = wp_parse_url( $refUrl );
 			if ($refer && isset($refer['host']) && !empty($refer['host'])) {
 				return $refer['host'];
 			}

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - HtmlWpf Class
  *
- * @version 3.1.5
+ * @version 3.1.8
  *
  * @author woobewoo
  */
@@ -10,8 +10,9 @@
 defined( 'ABSPATH' ) || exit;
 
 class HtmlWpf {
+
 	public static $categoriesOptions = array();
-	public static $productsOptions = array();
+	public static $productsOptions   = array();
 
 	/**
 	 * echoEscapedHtml.
@@ -26,13 +27,16 @@ class HtmlWpf {
 		echo esc_html($html);
 		remove_filter('esc_html', array('HtmlWpf', 'skipHtmlEscape'), 99, 2);
 	}
+
 	public static function skipHtmlEscape( $safe_text, $text ) {
 		return $text;
 	}
+
 	public static function block( $name, $params = array('attrs' => '', 'value' => '') ) {
 		$output .= '<p class="toe_' . self::nameToClassId($name) . '">' . $params['value'] . '</p>';
 		return $output;
 	}
+
 	public static function nameToClassId( $name, $params = array() ) {
 		if (!empty($params) && isset($params['attrs']) && strpos($params['attrs'], 'id="') !== false) {
 			preg_match('/id="(.+)"/ui', $params['attrs'], $idMatches);
@@ -42,6 +46,7 @@ class HtmlWpf {
 		}
 		return str_replace(array('[', ']'), '', $name);
 	}
+
 	public static function textarea( $name, $params = array('attrs' => '', 'value' => '', 'rows' => 3, 'cols' => 50) ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['rows'] = isset($params['rows']) ? $params['rows'] : 3;
@@ -71,6 +76,7 @@ class HtmlWpf {
 			( isset($params['value']) ? esc_html($params['value']) : '' ) .
 		'</textarea>';
 	}
+
 	public static function input( $name, $params = array('attrs' => '', 'type' => 'text', 'value' => '') ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['attrs'] .= self::_dataToAttrs($params);
@@ -95,6 +101,7 @@ class HtmlWpf {
 		}
 		echo ' />';
 	}
+
 	private static function _dataToAttrs( $params ) {
 		$res = '';
 		foreach ($params as $k => $v) {
@@ -104,26 +111,32 @@ class HtmlWpf {
 		}
 		return $res;
 	}
+
 	public static function text( $name, $params = array('attrs' => '', 'value' => '') ) {
 		$params['type'] = 'text';
 		self::input($name, $params);
 	}
+
 	public static function email( $name, $params = array('attrs' => '', 'value' => '') ) {
 		$params['type'] = 'email';
 		self::input($name, $params);
 	}
+
 	public static function reset( $name, $params = array('attrs' => '', 'value' => '') ) {
 		$params['type'] = 'reset';
 		self::input($name, $params);
 	}
+
 	public static function password( $name, $params = array('attrs' => '', 'value' => '') ) {
 		$params['type'] = 'password';
 		self::input($name, $params);
 	}
+
 	public static function hidden( $name, $params = array('attrs' => '', 'value' => '') ) {
 		$params['type'] = 'hidden';
 		self::input($name, $params);
 	}
+
 	public static function checkbox( $name, $params = array('attrs' => '', 'value' => '', 'checked' => '') ) {
 		$params['type'] = 'checkbox';
 		if ( isset($params['checked']) && $params['checked'] ) {
@@ -138,18 +151,25 @@ class HtmlWpf {
 		$params['attrs'] .= ' ' . ( isset($params['checked']) ? $params['checked'] : '' );
 		self::input($name, $params);
 	}
+
+	/**
+	 * checkboxToggle.
+	 *
+	 * @version 3.1.8
+	 */
 	public static function checkboxToggle( $name, $params = array('attrs' => '', 'value' => '', 'checked' => '') ) {
 		$params['type'] = 'checkbox';
 		$params['checked'] = isset($params['checked']) && $params['checked'] ? 'checked' : '';
 		if ( !isset($params['value']) || ( null === $params['value'] ) ) {
 			$params['value'] = 1;
 		}
-		$id = ( empty($params['id']) ? self::nameToClassId($name) . mt_rand(9, 9999) : $params['id'] );
+		$id = ( empty($params['id']) ? self::nameToClassId($name) . wp_rand(9, 9999) : $params['id'] );
 		$params['attrs'] = 'id="' . esc_attr($id) . '" class="toggle" ' . ( isset($params['attrs']) ? $params['attrs'] . ' ' : '' ) . $params['checked'];
 
 		self::input($name, $params);
 		echo '<label for="' . esc_attr($id) . '" class="toggle"></label>';
 	}
+
 	public static function checkboxlist( $name, $params = array('options' => array(), 'attrs' => '', 'checked' => '', 'delim' => '<br />', 'usetable' => 5), $delim = '<br />' ) {
 		if (!strpos($name, '[]')) {
 			$name .= '[]';
@@ -192,10 +212,12 @@ class HtmlWpf {
 			}
 		}
 	}
+
 	public static function submit( $name, $params = array('attrs' => '', 'value' => '') ) {
 		$params['type'] = 'submit';
 		self::input($name, $params);
 	}
+
 	public static function img( $src, $usePlugPath = 1, $params = array('width' => '', 'height' => '', 'attrs' => '') ) {
 		if ($usePlugPath) {
 			$src = WPF_IMG_PATH . $src;
@@ -210,6 +232,7 @@ class HtmlWpf {
 		}
 		echo ' />';
 	}
+
 	public static function selectbox( $name, $params = array('attrs' => '', 'options' => array(), 'value' => '') ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['attrs'] .= self::_dataToAttrs($params);
@@ -229,6 +252,7 @@ class HtmlWpf {
 		}
 		echo '</select>';
 	}
+
 	public static function selectlist( $name, $params = array('attrs'=>'', 'size'=> 5, 'options' => array(), 'value' => '') ) {
 		if (!strpos($name, '[]')) {
 			$name .= '[]';
@@ -254,10 +278,12 @@ class HtmlWpf {
 		}
 		echo '</select>';
 	}
+
 	public static function file( $name, $params = array() ) {
 		$params['type'] = 'file';
 		self::input($name, $params);
 	}
+
 	public static function button( $params = array('attrs' => '', 'value' => '') ) {
 		echo '<button ';
 		if (!empty($params['attrs'])) {
@@ -265,6 +291,7 @@ class HtmlWpf {
 		}
 		echo '>' . esc_html($params['value']) . '</button>';
 	}
+
 	public static function buttonA( $params = array('attrs' => '', 'value' => '') ) {
 		echo '<a href="#" ';
 		if (!empty($params['attrs'])) {
@@ -272,6 +299,7 @@ class HtmlWpf {
 		}
 		echo '>' . esc_html($params['value']) . '</a>';
 	}
+
 	public static function inputButton( $params = array('attrs' => '', 'value' => '') ) {
 		if (!is_array($params)) {
 			$params = array();
@@ -279,6 +307,7 @@ class HtmlWpf {
 		$params['type'] = 'button';
 		self::input('', $params);
 	}
+
 	public static function radiobuttons( $name, $params = array('attrs' => '', 'options' => array(), 'value' => '', '') ) {
 		if (isset($params['options']) && is_array($params['options']) && !empty($params['options'])) {
 			$params['labeled'] = isset($params['labeled']) ? $params['labeled'] : false;
@@ -299,6 +328,7 @@ class HtmlWpf {
 			}
 		}
 	}
+
 	public static function radiobutton( $name, $params = array('attrs' => '', 'value' => '', 'checked' => '') ) {
 		$params['type'] = 'radio';
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
@@ -307,6 +337,7 @@ class HtmlWpf {
 		}
 		self::input($name, $params);
 	}
+
 	public static function formStart( $name, $params = array('action' => '', 'method' => 'GET', 'attrs' => '', 'hideMethodInside' => false) ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['action'] = isset($params['action']) ? $params['action'] : '';
@@ -321,9 +352,11 @@ class HtmlWpf {
 			self::hidden('method', array('value' => $params['method']));
 		}
 	}
+
 	public static function formEnd() {
 		echo '</form>';
 	}
+
 	public static function categorySelectlist( $name, $params = array('attrs'=>'', 'size'=> 5, 'value' => '') ) {
 		self::_loadCategoriesOptions();
 		if (self::$categoriesOptions) {
@@ -332,6 +365,7 @@ class HtmlWpf {
 		}
 		return false;
 	}
+
 	public static function categorySelectbox( $name, $params = array('attrs'=>'', 'size'=> 5, 'value' => '') ) {
 		self::_loadCategoriesOptions();
 		if (!empty(self::$categoriesOptions)) {
@@ -340,6 +374,7 @@ class HtmlWpf {
 		}
 		return false;
 	}
+
 	public static function productsSelectlist( $name, $params = array('attrs'=>'', 'size'=> 5, 'value' => '') ) {
 		self::_loadProductsOptions();
 		if (!empty(self::$productsOptions)) {
@@ -348,6 +383,7 @@ class HtmlWpf {
 		}
 		return false;
 	}
+
 	public static function productsSelectbox( $name, $params = array('attrs'=>'', 'size'=> 5, 'value' => '') ) {
 		self::_loadProductsOptions();
 		if (!empty(self::$productsOptions)) {
@@ -356,6 +392,7 @@ class HtmlWpf {
 		}
 		return false;
 	}
+
 	protected static function _loadCategoriesOptions() {
 		if (empty(self::$categoriesOptions)) {
 			$categories = FrameWpf::_()->getModule('products')->getCategories();
@@ -366,6 +403,7 @@ class HtmlWpf {
 			}
 		}
 	}
+
 	protected static function _loadProductsOptions() {
 		if (empty(self::$productsOptions)) {
 			$products = FrameWpf::_()->getModule('products')->getModel()->get(array('getFields' => 'post.ID, post.post_title'));
@@ -376,6 +414,7 @@ class HtmlWpf {
 			}
 		}
 	}
+
 	public static function colorpicker( $name, $params = array('value' => '') ) {
 		$value = isset($params['value']) ? $params['value'] : '';
 		echo '<div class="woobewoo-color-picker">';
@@ -383,6 +422,7 @@ class HtmlWpf {
 		self::text($name, array('value' => $value, 'attrs' => 'class="woobewoo-color-result-text"'));
 		echo '</div>';
 	}
+
 	public static function checkboxHiddenVal( $name, $params = array('attrs' => '', 'value' => '', 'checked' => '') ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$paramsCheck = $params;
@@ -394,15 +434,18 @@ class HtmlWpf {
 		self::checkbox(self::nameToClassId($name), $paramsCheck);
 		self::hidden($name, $paramsHidden);
 	}
+
 	public static function checkedOpt( $arr, $key, $value = true, $default = false ) {
 		if (!isset($arr[ $key ])) {
 			return $default ? true : false;
 		}
 		return true === $value ? $arr[ $key ] : $arr[ $key ] == $value;
 	}
+
 	public static function nonceForAction( $action ) {
 		self::hidden('_wpnonce', array('value' => wp_create_nonce(strtolower($action))));
 	}
+
 	public static function selectIcon( $name, $params ) {
 		echo '<div class="button chooseLoaderIcon">' . esc_html__('Choose Icon', 'woo-product-filter') . '</div>';
 	}
@@ -410,6 +453,7 @@ class HtmlWpf {
 	public static function startMetaButton( $name, $params ) {
 		echo '<button id="wpfStartMetaIndexing" class="button button-primary"><i class="fa fa-play" aria-hidden="true"></i></button>';
 	}
+
 	public static function startOptimizingButton( $name, $params ) {
 		echo '<button id="wpfStartOptimizing" class="button button-primary"><i class="fa fa-play" aria-hidden="true"></i></button>';
 	}

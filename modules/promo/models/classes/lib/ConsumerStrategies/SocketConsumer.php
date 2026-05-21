@@ -1,5 +1,9 @@
 <?php
 /**
+ * Product Filter by WBW - ConsumerStrategies_SocketConsumer Class
+ *
+ * Consumes messages and writes them to host/endpoint using a persistent socket.
+ *
  * Portions of this class were borrowed from
  * https://github.com/segmentio/analytwpf-php/blob/master/lib/Analytwpf/Consumer/Socket.php.
  * Thanks for the work!
@@ -31,11 +35,11 @@
  * OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+defined( 'ABSPATH' ) || exit;
+
 require_once(dirname(__FILE__) . '/AbstractConsumer.php');
 
-/**
- * Consumes messages and writes them to host/endpoint using a persistent socket
- */
 class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsumer {
 
 	private $_host;
@@ -46,13 +50,12 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 	private $_async;
 
 	/**
-	 * Creates a new SocketConsumer and assigns properties from the $options array
+	 * Creates a new SocketConsumer and assigns properties from the $options array.
 	 *
 	 * @param array $options
 	 */
 	public function __construct( $options = array() ) {
 		parent::__construct($options);
-
 
 		$this->_host = $options['host'];
 		$this->_endpoint = $options['endpoint'];
@@ -68,11 +71,11 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 		}
 	}
 
-
 	/**
 	 * Write using a persistent socket connection.
 	 *
 	 * @param array $batch
+	 *
 	 * @return bool
 	 */
 	public function persist( $batch ) {
@@ -96,9 +99,8 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 		return $this->_write($socket, $body);
 	}
 
-
 	/**
-	 * Return cached socket if open or create a new persistent socket
+	 * Return cached socket if open or create a new persistent socket.
 	 *
 	 * @return bool|resource
 	 */
@@ -121,9 +123,10 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 	}
 
 	/**
-	 * Attempt to open a new socket connection, cache it, and return the resource
+	 * Attempt to open a new socket connection, cache it, and return the resource.
 	 *
 	 * @param bool $retry
+	 *
 	 * @return bool|resource
 	 */
 	private function _createSocket( $retry = true ) {
@@ -150,7 +153,7 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 	}
 
 	/**
-	 * Attempt to close and dereference a socket resource
+	 * Attempt to close and dereference a socket resource.
 	 */
 	private function _destroySocket() {
 		$socket = $this->_socket;
@@ -158,13 +161,13 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 		fclose($socket);
 	}
 
-
 	/**
-	 * Write $data through the given $socket
+	 * Write $data through the given $socket.
 	 *
 	 * @param $socket
 	 * @param $data
 	 * @param bool $retry
+	 *
 	 * @return bool
 	 */
 	private function _write( $socket, $data, $retry = true ) {
@@ -225,7 +228,6 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 			return false;
 		}
 
-
 		// only wait for the response in debug mode or if we explicitly want to be synchronous
 		if ($this->_debug() || !$this->_async) {
 			$res = $this->handleResponse(fread($socket, 2048));
@@ -238,11 +240,11 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 		return $success;
 	}
 
-
 	/**
-	 * Parse the response from a socket write (only used for debugging)
+	 * Parse the response from a socket write (only used for debugging).
 	 *
 	 * @param $response
+	 *
 	 * @return array
 	 */
 	private function handleResponse( $response ) {
@@ -258,7 +260,6 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 				$value = $kvsplit[1];
 				$headers[$header] = trim($value);
 			}
-
 		}
 
 		// extract status
