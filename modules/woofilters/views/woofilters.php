@@ -181,6 +181,11 @@ class WoofiltersViewWpf extends ViewWpf {
 		return parent::getContent('woofiltersEditAdmin');
 	}
 
+	/**
+	 * renderHtml.
+	 *
+	 * @version 3.1.8
+	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
 
@@ -294,6 +299,16 @@ class WoofiltersViewWpf extends ViewWpf {
 				break;
 		}
 		$this->assign('viewId', $viewId);
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) && 'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) ) {
+			$cssLink = '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/frontend.woofilters.css' ) . '" type="text/css">';
+			if ( $this->isCustomStyle($settings['settings']) ) {
+				$cssLink .= '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/custom.woofilters.css' ) . '" type="text/css">';
+			}
+			$cssLink = DispatcherWpf::applyFilters( 'brizyEditorCssLinks', $cssLink, $settings, $modPath );
+			$html    = $cssLink . $html;
+		}
+
 		$this->assign('html', $html);
 
 		return parent::getContent('woofiltersHtml');
@@ -688,6 +703,9 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$blockHeight = $this->getFilterSetting($settingsOriginal['settings'], 'filter_block_height', false, true);
 		$showImmediately = $this->getFilterSetting($settingsOriginal['settings'], 'show_filter_immediately') == '1';
+		if ( ! $showImmediately && defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) && 'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) ) {
+			$showImmediately = true;
+		}
 		$blockStyle      =
 			( $showImmediately ? '' : 'visibility:hidden;' ) . 'width:' . $blockWidth . ';' .
 			( '100%' == $blockWidth ? '' : 'float:left;' ) .
