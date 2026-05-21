@@ -154,8 +154,8 @@ Please report security bugs found in the source code of the plugin through the [
 == Changelog ==
 
 = 3.1.8 - 21/05/2026 =
-* Fix - Fixed filter not working with brizy products widget.
-* Fix - Fixed brizy editor shortcode render issue.
+* Fix - Fixed filter not working with Brizy products widget.
+* Fix - Fixed Brizy editor shortcode render issue.
 * Fix - Security - Fixed SQL injection vulnerability.
 * Fix - Fixed collapse toggle icon rendering.
 * Fix - Fixed filtered page results issue.
