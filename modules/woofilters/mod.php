@@ -414,7 +414,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * forceProductFilter.
 	 *
-	 * @version 2.9.1
+	 * @version 3.1.8
 	 */
 	public function forceProductFilter( $query ) {
 
@@ -587,7 +587,7 @@ class WoofiltersWpf extends ModuleWpf {
 			if (!empty($query->query_vars['posts_per_page']) && $query->query_vars['posts_per_page'] > 0) {
 				if ( ! empty($this->mainWCQueryFiltered) ) {
 					foreach ( $this->mainWCQueryFiltered as $key => $value ) {
-						if ( ! in_array($key, array('paged', 'posts_per_page', 'post_type')) ) {
+						if ( ! in_array($key, array('paged', 'posts_per_page', 'post_type', 'fields')) ) {
 							$query->set($key, $value);
 						}
 					}
