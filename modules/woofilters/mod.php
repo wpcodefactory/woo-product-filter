@@ -985,7 +985,27 @@ class WoofiltersWpf extends ModuleWpf {
 	}
 
 	/**
+	 * get_sidebars_widgets.
+	 *
+	 * @version 3.1.8
+	 * @since   3.1.8
+	 *
+	 * @see https://developer.wordpress.org/reference/functions/wp_get_sidebars_widgets/
+	 */
+	public function get_sidebars_widgets() {
+		$sidebars_widgets = get_option( 'sidebars_widgets', array() );
+
+		if ( is_array( $sidebars_widgets ) && isset( $sidebars_widgets['array_version'] ) ) {
+			unset( $sidebars_widgets['array_version'] );
+		}
+
+		return apply_filters( 'sidebars_widgets', $sidebars_widgets );
+	}
+
+	/**
 	 * addPreselectedParams.
+	 *
+	 * @version 3.1.8
 	 */
 	public function addPreselectedParams( $need = false ) {
 		if ( ! is_admin() || $need ) {
@@ -994,7 +1014,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$filterWidget = 'wpfwoofilterswidget';
 
 				$widgetOpions    = get_option( 'widget_' . $filterWidget );
-				$sidebarsWidgets = wp_get_sidebars_widgets();
+				$sidebarsWidgets = $this->get_sidebars_widgets();
 				$preselects      = array();
 				$filters         = array();
 
@@ -4175,7 +4195,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$addSqls['main']['fields']       = ( $param['withCount'] ? '' : 'DISTINCT ' ) . 'tr.term_taxonomy_id, tt.term_id, tt.taxonomy, tt.parent' . ( $param['withCount'] ? ', COUNT(*) as cnt' : '' );
 
 			$taxonomyListFormatter           = implode( ',', array_fill( 0, count( $taxonomyList ), '%s' ) );
-			$addSqls['main']['taxonomyList'] = $wpdb->prepare( $taxonomyListFormatter, ...$taxonomyList );
+			$addSqls['main']['taxonomyList'] = $wpdb->prepare( $taxonomyListFormatter, ...$taxonomyList ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( $byVariations ) {
 				$attrTaxonomyList = array();

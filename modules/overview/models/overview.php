@@ -153,8 +153,8 @@ class OverviewModelWpf extends ModelWpf {
 	 * overviewHttpRequestTimeout.
 	 */
 	public function overviewHttpRequestTimeout( $handle ) {
-		curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 30 );
-		curl_setopt( $handle, CURLOPT_TIMEOUT, 30 );
+		curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 30 ); // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
+		curl_setopt( $handle, CURLOPT_TIMEOUT, 30 );        // phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 	}
 
 	/**

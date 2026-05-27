@@ -1,30 +1,32 @@
 <?php
+/**
+ * Product Filter by WBW - PromoWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class PromoWpf extends ModuleWpf {
+
 	private $_mainLink = '';
-	private $_minDataInStatToSend = 20;	// At least 20 points in table shuld be present before send stats
+
+	private $_minDataInStatToSend = 20; // At least 20 points in table should be present before send stats
+
 	private $_assetsUrl = '';
+
 	public function __construct( $d ) {
 		parent::__construct($d);
 		$this->getMainLink();
 		DispatcherWpf::addFilter('jsInitVariables', array($this, 'addMainOpts'));
 	}
+
 	public function init() {
 		parent::init();
-		/*add_action('admin_footer', array($this, 'displayAdminFooter'), 9);
-		if (is_admin()) {
-			add_action('init', array($this, 'checkWelcome'));
-			add_action('init', array($this, 'checkStatisticStatus'));
-			add_action('admin_footer', array($this, 'checkPluginDeactivation'));
-		}
-		$this->weLoveYou();
-		DispatcherWpf::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
-		DispatcherWpf::addFilter('subDestList', array($this, 'addSubDestList'));
-		DispatcherWpf::addAction('beforeSaveOpts', array($this, 'checkSaveOpts'));
-		DispatcherWpf::addFilter('showTplsList', array($this, 'checkProTpls'));
-		add_action('admin_notices', array($this, 'checkAdminPromoNotices'));
-		// Admin tutorial
-		add_action('admin_enqueue_scripts', array( $this, 'loadTutorial'));*/
 	}
+
 	public function checkAdminPromoNotices() {
 		return;
 		if (!FrameWpf::_()->isAdminPlugOptsPage()) {
@@ -35,7 +37,7 @@ class PromoWpf extends ModuleWpf {
 		$startUsage = (int) FrameWpf::_()->getModule('options')->get('start_usage');
 		$currTime = time();
 		$day = 24 * 3600;
-		if ($startUsage) {	// Already saved
+		if ($startUsage) { // Already saved
 			/* translators: %s: label */
 			$rateMsg = '<h3>' . esc_html(sprintf(__('Hey, I noticed you just use %s over a week – that’s awesome!', 'woo-product-filter'), WPF_WP_PLUGIN_NAME)) . '</h3><p>' .
 				esc_html__('Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'woo-product-filter') . '</p>';
@@ -102,53 +104,60 @@ class PromoWpf extends ModuleWpf {
 			HtmlWpf::echoEscapedHtml($html);
 		}
 	}
+
 	public function addAdminTab( $tabs ) {
 		return $tabs;
 	}
+
 	public function addSubDestList( $subDestList ) {
 		if (!$this->isPro()) {
 			$subDestList = array_merge($subDestList, array(
-				'constantcontact' => array('label' => esc_html__('Constant Contact - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'campaignmonitor' => array('label' => esc_html__('Campaign Monitor - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'constantcontact'  => array('label' => esc_html__('Constant Contact - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'campaignmonitor'  => array('label' => esc_html__('Campaign Monitor - PRO', 'woo-product-filter'), 'require_confirm' => true),
 				'verticalresponse' => array('label' => esc_html__('Vertical Response - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'sendgrid' => array('label' => esc_html__('SendGrid - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'get_response' => array('label' => esc_html__('GetResponse - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'icontact' => array('label' => esc_html__('iContact - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'activecampaign' => array('label' => esc_html__('Active Campaign - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'mailrelay' => array('label' => esc_html__('Mailrelay - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'arpreach' => array('label' => esc_html__('arpReach - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'sgautorepondeur' => array('label' => esc_html__('SG Autorepondeur - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'benchmarkemail' => array('label' => esc_html__('Benchmark - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'infusionsoft' => array('label' => esc_html__('InfusionSoft - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'salesforce' => array('label' => esc_html__('SalesForce - Web-to-Lead - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'convertkit' => array('label' => esc_html__('ConvertKit - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'myemma' => array('label' => esc_html__('Emma - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'sendinblue' => array('label' => esc_html__('SendinBlue - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'vision6' => array('label' => esc_html__('Vision6 - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'vtiger' => array('label' => esc_html__('Vtiger - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'ymlp' => array('label' => esc_html__('Your Mailing List Provider (Ymlp) - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'fourdem' => array('label' => esc_html__('4Dem.it - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'sendgrid'         => array('label' => esc_html__('SendGrid - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'get_response'     => array('label' => esc_html__('GetResponse - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'icontact'         => array('label' => esc_html__('iContact - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'activecampaign'   => array('label' => esc_html__('Active Campaign - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'mailrelay'        => array('label' => esc_html__('Mailrelay - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'arpreach'         => array('label' => esc_html__('arpReach - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'sgautorepondeur'  => array('label' => esc_html__('SG Autorepondeur - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'benchmarkemail'   => array('label' => esc_html__('Benchmark - PRO', 'woo-product-filter'), 'require_confirm' => true),
+				'infusionsoft'     => array('label' => esc_html__('InfusionSoft - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'salesforce'       => array('label' => esc_html__('SalesForce - Web-to-Lead - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'convertkit'       => array('label' => esc_html__('ConvertKit - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'myemma'           => array('label' => esc_html__('Emma - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'sendinblue'       => array('label' => esc_html__('SendinBlue - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'vision6'          => array('label' => esc_html__('Vision6 - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'vtiger'           => array('label' => esc_html__('Vtiger - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'ymlp'             => array('label' => esc_html__('Your Mailing List Provider (Ymlp) - PRO', 'woo-product-filter'), 'require_confirm' => false),
+				'fourdem'          => array('label' => esc_html__('4Dem.it - PRO', 'woo-product-filter'), 'require_confirm' => false),
 			));
 		}
 		return $subDestList;
 	}
+
 	public function getOverviewTabContent() {
 		return $this->getView()->getOverviewTabContent();
 	}
+
 	public function showWelcomePage() {
 		$this->getView()->showWelcomePage();
 	}
+
 	public function displayAdminFooter() {
 		if (FrameWpf::_()->isAdminPlugPage()) {
 			$this->getView()->displayAdminFooter();
 		}
 	}
+
 	private function _preparePromoLink( $link, $ref = '' ) {
 		if (empty($ref)) {
 			$ref = 'user';
 		}
 		return $link;
 	}
+
 	public function weLoveYou() {
 		if (!$this->isPro()) {
 			DispatcherWpf::addFilter('popupEditTabs', array($this, 'addUserExp'), 10, 2);
@@ -156,9 +165,11 @@ class PromoWpf extends ModuleWpf {
 			DispatcherWpf::addFilter('editPopupMainOptsShowOn', array($this, 'showAdditionalmainAdminShowOnOptions'));
 		}
 	}
+
 	public function showAdditionalmainAdminShowOnOptions( $popup ) {
 		$this->getView()->showAdditionalmainAdminShowOnOptions($popup);
 	}
+
 	public function addUserExp( $tabs, $popup ) {
 		$modPath = '';
 		$tabs['wpfPopupAbTesting'] = array(
@@ -182,6 +193,7 @@ class PromoWpf extends ModuleWpf {
 		}
 		return $tabs;
 	}
+
 	public function addUserExpDesign( $tabs ) {
 		$tabs['wpfPopupLayeredPopup'] = array(
 			'title' => esc_html__('Popup Location', 'woo-product-filter'),
@@ -191,17 +203,21 @@ class PromoWpf extends ModuleWpf {
 		);
 		return $tabs;
 	}
+
 	/**
-	 * Public shell for private method
+	 * Public shell for private method.
 	 */
 	public function preparePromoLink( $link, $ref = '' ) {
 		return $this->_preparePromoLink($link, $ref);
 	}
+
 	public function checkStatisticStatus() {
 	}
+
 	public function getMinStatSend() {
 		return $this->_minDataInStatToSend;
 	}
+
 	public function getMainLink() {
 		if (empty($this->_mainLink)) {
 			$affiliateQueryString = '';
@@ -209,9 +225,11 @@ class PromoWpf extends ModuleWpf {
 		}
 		return $this->_mainLink ;
 	}
+
 	public function getWooBeWooPluginLink() {
 		return 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ;
 	}
+
 	public function generateMainLink( $params = '' ) {
 		$mainLink = $this->getMainLink();
 		if (!empty($params)) {
@@ -219,19 +237,20 @@ class PromoWpf extends ModuleWpf {
 		}
 		return $mainLink;
 	}
+
 	public function getContactFormFields() {
 		$fields = array(
-			'name' => array('label' => esc_html__('Name', 'woo-product-filter'), 'valid' => 'notEmpty', 'html' => 'text'),
-			'email' => array('label' => esc_html__('Email', 'woo-product-filter'), 'html' => 'email', 'valid' => array('notEmpty', 'email'), 'placeholder' => 'example@mail.com', 'def' => get_bloginfo('admin_email')),
-			'website' => array('label' => esc_html__('Website', 'woo-product-filter'), 'html' => 'text', 'placeholder' => 'http://example.com', 'def' => get_bloginfo('url')),
-			'subject' => array('label' => esc_html__('Subject', 'woo-product-filter'), 'valid' => 'notEmpty', 'html' => 'text'),
+			'name'     => array('label' => esc_html__('Name', 'woo-product-filter'), 'valid' => 'notEmpty', 'html' => 'text'),
+			'email'    => array('label' => esc_html__('Email', 'woo-product-filter'), 'html' => 'email', 'valid' => array('notEmpty', 'email'), 'placeholder' => 'example@mail.com', 'def' => get_bloginfo('admin_email')),
+			'website'  => array('label' => esc_html__('Website', 'woo-product-filter'), 'html' => 'text', 'placeholder' => 'http://example.com', 'def' => get_bloginfo('url')),
+			'subject'  => array('label' => esc_html__('Subject', 'woo-product-filter'), 'valid' => 'notEmpty', 'html' => 'text'),
 			'category' => array('label' => esc_html__('Topic', 'woo-product-filter'), 'valid' => 'notEmpty', 'html' => 'selectbox', 'options' => array(
-				'plugins_options' => esc_html__('Plugin options', 'woo-product-filter'),
-				'bug' => esc_html__('Report a bug', 'woo-product-filter'),
+				'plugins_options'       => esc_html__('Plugin options', 'woo-product-filter'),
+				'bug'                   => esc_html__('Report a bug', 'woo-product-filter'),
 				'functionality_request' => esc_html__('Require a new functionality', 'woo-product-filter'),
-				'other' => esc_html__('Other', 'woo-product-filter'),
+				'other'                 => esc_html__('Other', 'woo-product-filter'),
 			)),
-			'message' => array('label' => esc_html__('Message', 'woo-product-filter'), 'valid' => 'notEmpty', 'html' => 'textarea', 'placeholder' => esc_attr__('Hello Woobewoo Team!', 'woo-product-filter')),
+			'message'  => array('label' => esc_html__('Message', 'woo-product-filter'), 'valid' => 'notEmpty', 'html' => 'textarea', 'placeholder' => esc_attr__('Hello Woobewoo Team!', 'woo-product-filter')),
 		);
 		foreach ($fields as $k => $v) {
 			if (isset($fields[ $k ]['valid']) && !is_array($fields[ $k ]['valid'])) {
@@ -240,15 +259,17 @@ class PromoWpf extends ModuleWpf {
 		}
 		return $fields;
 	}
+
 	public function isPro() {
 		static $isPro;
 		if (is_null($isPro)) {
 			// license is always active with PRO - even if license key was not entered,
-			// add_options module was from the begining of the times in PRO, and will be active only once user will activate license on site
+			// add_options module was from the beginning of the times in PRO, and will be active only once user will activate license on site
 			$isPro = FrameWpf::_()->getModule('license') && FrameWpf::_()->getModule('on_exit');
 		}
 		return $isPro;
 	}
+
 	public function checkWelcome() {
 		$from = ReqWpf::getVar('from', 'get');
 		$pl = ReqWpf::getVar('pl', 'get');
@@ -266,14 +287,17 @@ class PromoWpf extends ModuleWpf {
 			}
 		}
 	}
+
 	public function getContactLink() {
 		return $this->getMainLink() . '#contact';
 	}
+
 	public function addMainOpts( $opts ) {
 		$title = 'WordPress PopUp Plugin';
 		$opts['options']['love_link_html'] = '<a title="' . $title . '" href="' . $this->generateMainLink('utm_source=plugin&utm_medium=love_link&utm_campaign=popup') . '" target="_blank">' . $title . '</a>';
 		return $opts;
 	}
+
 	public function checkSaveOpts( $newValues ) {
 		$loveLinkEnb = (int) FrameWpf::_()->getModule('options')->get('add_love_link');
 		$loveLinkEnbNew = isset($newValues['opt_values']['add_love_link']) ? (int) $newValues['opt_values']['add_love_link'] : 0;
@@ -281,6 +305,7 @@ class PromoWpf extends ModuleWpf {
 			$this->getModel()->saveUsageStat('love_link.' . ( $loveLinkEnbNew ? 'enb' : 'dslb' ));
 		}
 	}
+
 	public function checkProTpls( $list ) {
 		if (!$this->isPro()) {
 			$imgsPath = '';
@@ -300,12 +325,14 @@ class PromoWpf extends ModuleWpf {
 		}
 		return $list;
 	}
+
 	public function loadTutorial() {
 		// Don't run on WP < 3.3
 		if (get_bloginfo( 'version' ) < '3.3') {
 			return;
 		}
 	}
+
 	public function checkToShowTutorial() {
 		if (ReqWpf::getVar('tour', 'get') == 'clear-hst') {
 			$this->getModel()->clearTourHst();
@@ -495,19 +522,21 @@ class PromoWpf extends ModuleWpf {
 			return;
 		}
 		$tourData['html'] = $this->getView()->getTourHtml();
-		//FrameWpf::_()->getModule('templates')->loadCoreJs();
 		wp_enqueue_style( 'wp-pointer' );
 		wp_enqueue_script( 'jquery-ui' );
 		wp_enqueue_script( 'wp-pointer' );
 		FrameWpf::_()->addScript(WPF_CODE . 'admin.tour', $this->getModPath() . 'js/admin.tour.js');
 		FrameWpf::_()->addJSVar(WPF_CODE . 'admin.tour', 'wpfAdminTourData', $tourData);
 	}
+
 	public function getContactFormPlgUrl() {
 		return 'http://wordpress.org/support/plugin/contact-form-by-woobewoo';
 	}
+
 	public function showFeaturedPluginsPage() {
 		return $this->getView()->showFeaturedPluginsPage();
 	}
+
 	public function checkPluginDeactivation() {
 		if (function_exists('get_current_screen')) {
 			$screen = get_current_screen();
@@ -524,6 +553,7 @@ class PromoWpf extends ModuleWpf {
 			}
 		}
 	}
+
 	public function connectItemEditStats() {
 		FrameWpf::_()->addScript(WPF_CODE . '.admin.item.edit.stats', $this->getModPath() . 'js/admin.item.edit.stats.js');
 	}
