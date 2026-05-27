@@ -153,7 +153,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.8 - 21/05/2026 =
+= 3.1.8 - 27/05/2026 =
 * Fix - Fixed filter not working with Brizy products widget.
 * Fix - Fixed Brizy editor shortcode render issue.
 * Fix - Security - Fixed SQL injection vulnerability.
@@ -167,6 +167,7 @@ Please report security bugs found in the source code of the plugin through the [
 * Fix - Added support for all WooCommerce product shortcodes to resolve AJAX pagination issues.
 * Dev - Added keyboard accessibility support for filters.
 * Dev - Improved coding standards and code cleaned up.
+* WC tested up to: 10.8.
 * Tested up to: 7.0.
 
 = 3.1.7 - 22/04/2026 =
