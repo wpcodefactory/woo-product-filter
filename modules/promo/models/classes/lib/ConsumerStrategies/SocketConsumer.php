@@ -131,7 +131,7 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 	 */
 	private function _createSocket( $retry = true ) {
 		try {
-			$socket = pfsockopen($this->_protocol . '://' . $this->_host, $this->_port, $err_no, $err_msg, $this->_connect_timeout);
+			$socket = pfsockopen($this->_protocol . '://' . $this->_host, $this->_port, $err_no, $err_msg, $this->_connect_timeout); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_pfsockopen
 
 			if ($this->_debug()) {
 				$this->_log('Opening socket connection to ' . $this->_protocol . '://' . $this->_host . ':' . $this->_port);
@@ -158,7 +158,7 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 	private function _destroySocket() {
 		$socket = $this->_socket;
 		$this->_socket = null;
-		fclose($socket);
+		fclose($socket); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 	}
 
 	/**
@@ -187,7 +187,7 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 		while (!$socket_closed && $bytes_sent < $bytes_total) {
 
 			try {
-				$bytes = fwrite($socket, $data, $max_bytes_per_write);
+				$bytes = fwrite($socket, $data, $max_bytes_per_write); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
 
 				if ($this->_debug()) {
 					$this->_log('Socket wrote ' . $bytes . ' bytes');
@@ -230,7 +230,7 @@ class ConsumerStrategies_SocketConsumer extends ConsumerStrategies_AbstractConsu
 
 		// only wait for the response in debug mode or if we explicitly want to be synchronous
 		if ($this->_debug() || !$this->_async) {
-			$res = $this->handleResponse(fread($socket, 2048));
+			$res = $this->handleResponse(fread($socket, 2048)); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
 			if ('200' != $res['status']) {
 				$this->_handleError($res['status'], $res['body']);
 				$success = false;

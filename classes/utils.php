@@ -49,9 +49,9 @@ class UtilsWpf {
 	 * createDir.
 	 */
 	public static function createDir( $path, $params = array('chmod' => null, 'httpProtect' => false) ) {
-		if (@mkdir($path)) {
+		if (@mkdir($path)) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
 			if (!is_null($params['chmod'])) {
-				@chmod($path, $params['chmod']);
+				@chmod($path, $params['chmod']); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod
 			}
 			if (!empty($params['httpProtect'])) {
 				self::httpProtectDir($path);
@@ -83,7 +83,7 @@ class UtilsWpf {
 	 */
 	public static function copyDirectories( $source, $destination ) {
 		if (is_dir($source)) {
-			@mkdir($destination);
+			@mkdir($destination); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
 			$directory = dir($source);
 			while ( false !== ( $readdirectory = $directory->read() ) ) {
 				if ( ( '.' == $readdirectory ) || ( '..' == $readdirectory ) ) {
@@ -188,7 +188,7 @@ class UtilsWpf {
 			foreach ($scan as $index => $path) {
 				self::deleteDir($path);
 			}
-			return @rmdir($str);
+			return @rmdir($str); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
 		}
 	}
 
@@ -514,7 +514,7 @@ class UtilsWpf {
 	 * isWritable.
 	 */
 	public static function isWritable( $filename ) {
-		return is_writable($filename);
+		return is_writable($filename); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 	}
 
 	/**
