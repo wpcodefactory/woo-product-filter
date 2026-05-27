@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
  * @author woobewoo
  */
@@ -158,23 +158,6 @@ class TemplatesWpf extends ModuleWpf {
 	 */
 	public function loadSlimscroll() {
 		FrameWpf::_()->addScript('jquery.slimscroll', WPF_JS_PATH . 'slimscroll.min.js');
-	}
-
-	/**
-	 * loadCodemirror.
-	 */
-	public function loadCodemirror() {
-		$modPath = FrameWpf::_()->getModule('templates')->getModPath();
-		FrameWpf::_()->addStyle('wpfCodemirror', $modPath . 'lib/codemirror/codemirror.css');
-		FrameWpf::_()->addStyle('codemirror-addon-hint', $modPath . 'lib/codemirror/addon/hint/show-hint.css');
-		FrameWpf::_()->addScript('wpfCodemirror', $modPath . 'lib/codemirror/codemirror.js');
-		FrameWpf::_()->addScript('codemirror-addon-show-hint', $modPath . 'lib/codemirror/addon/hint/show-hint.js');
-		FrameWpf::_()->addScript('codemirror-addon-xml-hint', $modPath . 'lib/codemirror/addon/hint/xml-hint.js');
-		FrameWpf::_()->addScript('codemirror-addon-html-hint', $modPath . 'lib/codemirror/addon/hint/html-hint.js');
-		FrameWpf::_()->addScript('codemirror-mode-xml', $modPath . 'lib/codemirror/mode/xml/xml.js');
-		FrameWpf::_()->addScript('codemirror-mode-javascript', $modPath . 'lib/codemirror/mode/javascript/javascript.js');
-		FrameWpf::_()->addScript('codemirror-mode-css', $modPath . 'lib/codemirror/mode/css/css.js');
-		FrameWpf::_()->addScript('codemirror-mode-htmlmixed', $modPath . 'lib/codemirror/mode/htmlmixed/htmlmixed.js');
 	}
 
 	/**
