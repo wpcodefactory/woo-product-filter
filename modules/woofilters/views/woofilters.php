@@ -305,8 +305,8 @@ class WoofiltersViewWpf extends ViewWpf {
 		if (
 			defined( 'DOING_AJAX' ) &&
 			DOING_AJAX &&
-			isset( $_REQUEST['action'] ) &&
-			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+			isset( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
 			$cssLink = '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/frontend.woofilters.css' ) . '" type="text/css">'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 			if ( $this->isCustomStyle($settings['settings']) ) {
@@ -714,8 +714,8 @@ class WoofiltersViewWpf extends ViewWpf {
 			! $showImmediately &&
 			defined( 'DOING_AJAX' ) &&
 			DOING_AJAX &&
-			isset( $_REQUEST['action'] ) &&
-			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+			isset( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
 			$showImmediately = true;
 		}

@@ -53,9 +53,9 @@ class WoofiltersWpf extends ModuleWpf {
 		add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
 
 		$isThriveContext = (
-			isset( $_GET['tvet'] ) ||
-			isset( $_GET['tcbf'] ) ||
-			isset( $_GET['_preview'] )
+			isset( $_GET['tvet'] ) ||  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			isset( $_GET['tcbf'] ) ||  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			isset( $_GET['_preview'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		);
 		if ( $isThriveContext ) {
 			// Register shortcodes only — skip all heavy product query hooks
@@ -63,8 +63,8 @@ class WoofiltersWpf extends ModuleWpf {
 		}
 
 		$isBrizyContext = (
-			! empty( $_REQUEST['action'] ) &&
-			'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+			! empty( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		);
 		if ( $isBrizyContext ) {
 			return;
@@ -172,7 +172,7 @@ class WoofiltersWpf extends ModuleWpf {
 			add_filter( 'db_archive_module_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
 		}
 		if ( is_plugin_active( 'fusion-builder/fusion-builder.php' ) ) {
-			if ( isset($_GET['wpf_skip']) ) {
+			if ( isset($_GET['wpf_skip']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$_GET['wpf_skip'] = 2;
 			}
 			add_filter( 'fusion_post_cards_shortcode_query_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
@@ -199,12 +199,12 @@ class WoofiltersWpf extends ModuleWpf {
 		// Integration with Advanced Woo Search
 		add_filter( 'aws_search_results_products_ids', array( $this, 'my_aws_search_results_products_ids') );
 		add_filter( 'aws_search_page_filters', function ( $filters ) {
-			if ( isset($_GET['pr_stock']) ) {
+			if ( isset($_GET['pr_stock']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				unset($filters['in_status']);
 			}
 			return $filters;
 		}, 99 );
-		if ( isset($_GET['type_aws']) && isset($_GET['aws_filter']) && $this->isFiltered(false) ) {
+		if ( isset($_GET['type_aws']) && isset($_GET['aws_filter']) && $this->isFiltered(false) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			ReqWpf::clearVar('type_aws', 'get');
 		}
 
@@ -252,7 +252,7 @@ class WoofiltersWpf extends ModuleWpf {
 	function discourage_search_engines_from_indexing( $robots ) {
 		if (
 			FrameWpf::_()->getModule( 'options' )->getModel()->get( 'discourage_search_engines_from_indexing' ) &&
-			! empty( preg_grep( '/^wpf_/', array_keys( $_GET ) ) )
+			! empty( preg_grep( '/^wpf_/', array_keys( $_GET ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
 			$robots['noindex'] = true;
 		}
@@ -2547,8 +2547,8 @@ class WoofiltersWpf extends ModuleWpf {
 			$displayBrand           = false;
 
 			$isBrizyEditContext = (
-				! empty( $_REQUEST['action'] ) &&
-				'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) )
+				! empty( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			);
 			if ( is_admin() || $isBrizyEditContext ) {
 				$displayShop = true;

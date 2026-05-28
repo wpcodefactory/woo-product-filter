@@ -27,82 +27,13 @@ class PromoWpf extends ModuleWpf {
 		parent::init();
 	}
 
+	/**
+	 * checkAdminPromoNotices.
+	 *
+	 * @version 3.1.8
+	 */
 	public function checkAdminPromoNotices() {
 		return;
-		if (!FrameWpf::_()->isAdminPlugOptsPage()) {
-			return;
-		}
-		$notices = array();
-		// Start usage
-		$startUsage = (int) FrameWpf::_()->getModule('options')->get('start_usage');
-		$currTime = time();
-		$day = 24 * 3600;
-		if ($startUsage) { // Already saved
-			/* translators: %s: label */
-			$rateMsg = '<h3>' . esc_html(sprintf(__('Hey, I noticed you just use %s over a week – that’s awesome!', 'woo-product-filter'), WPF_WP_PLUGIN_NAME)) . '</h3><p>' .
-				esc_html__('Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'woo-product-filter') . '</p>';
-			$rateMsg .= '<p><a href="https://wordpress.org/support/plugin/woo-product-filter/reviews/?rate=5#new-post" target="_blank" class="button button-primary" data-statistic-code="done">' .
-				esc_html__('Ok, you deserve it', 'woo-product-filter') . '</a>
-				<a href="#" class="button" data-statistic-code="later">' . esc_html__('Nope, maybe later', 'woo-product-filter') . '</a>
-				<a href="#" class="button" data-statistic-code="hide">' . esc_html__('I already did', 'woo-product-filter') . '</a></p>';
-			/* translators: %s: label */
-			$enbPromoLinkMsg = '<h3>' . esc_html(sprintf(__('More then eleven days with our %s plugin - Congratulations!', 'woo-product-filter'), WPF_WP_PLUGIN_NAME)) . '</h3>';
-			/* translators: %s: url */
-			$enbPromoLinkMsg .= '<p>' . sprintf(esc_html__('On behalf of the entire %s company I would like to thank you for been with us, and I really hope that our software helped you.', 'woo-product-filter'), '<a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/') . '" target="_blank">' . esc_html(WPF_WP_PLUGIN_URL) . '</a>') . '</p>';
-			$enbPromoLinkMsg .= '<p>' . esc_html__('And today, if you want, - you can help us. This is really simple - you can just add small promo link to our site under your PopUps. This is small step for you, but a big help for us! Sure, if you don\'t want - just skip this and continue enjoy our software!', 'woo-product-filter') . '</p>';
-			$enbPromoLinkMsg .= '<p><a href="#" class="button button-primary" data-statistic-code="done">' . esc_html__('Ok, you deserve it', 'woo-product-filter') . '</a>
-				<a href="#" class="button" data-statistic-code="later">' . esc_html__('Nope, maybe later', 'woo-product-filter') . '</a>
-				<a href="#" class="button" data-statistic-code="hide">' . esc_html__('Skip', 'woo-product-filter') . '</a></p>';
-			$enbStatsMsg = '<p>' . esc_html__('You can help us improve our plugin - by', 'woo-product-filter') .
-				' <a href="' . esc_url(FrameWpf::_()->getModule('options')->getTabUrl('settings')) . '" data-statistic-code="hide" class="button button-primary wpfEnbStatsAdBtn">' .
-				esc_html__('enabling Usage Statistics', 'woo-product-filter') . '</a>.' .
-				esc_html__('We will collect only our plugin usage statistic data - to understand Your needs and make our solution better for You.', 'woo-product-filter') . '</p>';
-			/* translators: %s: url */
-			$checkOtherPlugins = '<p>' . sprintf(esc_html__('Check out %s! Years of experience in WordPress plugins developers made those list unbreakable!', 'woo-product-filter'), '<a href="' . esc_url(FrameWpf::_()->getModule('options')->getTabUrl('featured-plugins')) . '" target="_blank" class="button button-primary" data-statistic-code="hide">our other Plugins</a>') . '</p>';
-			$notices = array(
-				'rate_msg' => array('html' => $rateMsg, 'show_after' => 7 * $day),
-				'enb_promo_link_msg' => array('html' => $enbPromoLinkMsg, 'show_after' => 11 * $day),
-				'enb_stats_msg' => array('html' => $enbStatsMsg, 'show_after' => 5 * $day),
-			);
-			foreach ($notices as $nKey => $n) {
-				if ($currTime - $startUsage <= $n['show_after']) {
-					unset($notices[ $nKey ]);
-					continue;
-				}
-				$done = (int) FrameWpf::_()->getModule('options')->get('done_' . $nKey);
-				if ($done) {
-					unset($notices[ $nKey ]);
-					continue;
-				}
-				$hide = (int) FrameWpf::_()->getModule('options')->get('hide_' . $nKey);
-				if ($hide) {
-					unset($notices[ $nKey ]);
-					continue;
-				}
-				$later = (int) FrameWpf::_()->getModule('options')->get('later_' . $nKey);
-				if ( $later && ( $currTime - $later ) <= 2 * $day ) {	// remember each 2 days
-					unset($notices[ $nKey ]);
-					continue;
-				}
-				if ('enb_promo_link_msg' == $nKey && ( (int) FrameWpf::_()->getModule('options')->get('add_love_link') )) {
-					unset($notices[ $nKey ]);
-					continue;
-				}
-			}
-		} else {
-			FrameWpf::_()->getModule('options')->getModel()->save('start_usage', $currTime);
-		}
-		if (!empty($notices)) {
-			if (isset($notices['rate_msg']) && isset($notices['enb_promo_link_msg']) && !empty($notices['enb_promo_link_msg'])) {
-				unset($notices['rate_msg']);	// Show only one from those messages
-			}
-			$html = '';
-			foreach ($notices as $nKey => $n) {
-				$this->getModel()->saveUsageStat($nKey . '.show', true);
-				$html .= '<div class="updated notice is-dismissible woobewoo-admin-notice" data-code="' . $nKey . '">' . $n['html'] . '</div>';
-			}
-			HtmlWpf::echoEscapedHtml($html);
-		}
 	}
 
 	public function addAdminTab( $tabs ) {
@@ -537,13 +468,18 @@ class PromoWpf extends ModuleWpf {
 		return $this->getView()->showFeaturedPluginsPage();
 	}
 
+	/**
+	 * checkPluginDeactivation.
+	 *
+	 * @version 3.1.8
+	 */
 	public function checkPluginDeactivation() {
 		if (function_exists('get_current_screen')) {
 			$screen = get_current_screen();
 			if ($screen && isset($screen->base) && 'plugins' == $screen->base) {
 				FrameWpf::_()->getModule('templates')->loadCoreJs();
 				FrameWpf::_()->getModule('templates')->loadCoreCss();
-				wp_enqueue_style('jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css', array(), '1.0');
+				wp_enqueue_style('jquery-ui', $this->getModPath() . 'css/jquery-ui.css', array(), '1.0');
 				FrameWpf::_()->addScript('jquery-ui-dialog');
 				FrameWpf::_()->addScript(WPF_CODE . '.admin.plugins', $this->getModPath() . 'js/admin.plugins.js');
 				FrameWpf::_()->addJSVar(WPF_CODE . '.admin.plugins', 'wpfPluginsData', array(
