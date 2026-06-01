@@ -4,7 +4,7 @@
  *
  * @version 3.1.2
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -240,7 +240,7 @@ class MetaWpf extends ModuleWpf {
 	 */
 	public function recalcProductStockStatus( $productId ) {
 		if ( ! $this->isDisabledAutoindexingBySS() ) {
-			$this->getModel()->recalcMetaValues( $productId, array( 'meta_key' => '_stock_status' ) );
+			$this->getModel()->recalcMetaValues( $productId, array( 'meta_key' => '_stock_status' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 		}
 	}
 

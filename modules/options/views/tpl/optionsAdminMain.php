@@ -1,3 +1,15 @@
+<?php
+/**
+ * Product Filter by WBW - Options - Admin Main
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+?>
 <style type="text/css">
 	.wpfAdminMainLeftSide {
 		width: 56%;

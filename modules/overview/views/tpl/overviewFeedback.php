@@ -4,7 +4,7 @@
  *
  * @version 3.1.7
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -99,4 +99,4 @@ if (!$isSubscribe || !$isRating) {
 			</div>
 		<?php } ?>
 	</div>
-<?php } ?>
+<?php }

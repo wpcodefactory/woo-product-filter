@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoModelWpf Class
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;

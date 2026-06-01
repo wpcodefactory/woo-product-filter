@@ -4,7 +4,7 @@
  * @version 2.9.3
  * @since   2.9.3
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 jQuery( document ).ready(

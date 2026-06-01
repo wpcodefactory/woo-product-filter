@@ -1,3 +1,15 @@
+<?php
+/**
+ * Product Filter by WBW - Promo - Featured Plugins
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+?>
 <section id="woobewoo-featured-plugins" class="woobewoo-item woobewoo-panel">
 	<div class="woobewooPageBundleContainer container-fluid">
 		<div class="bundle-text col-md-7 col-xs-12"><?php esc_html_e('Get plugins bundle today and save over 80%', 'woo-product-filter'); ?></div>

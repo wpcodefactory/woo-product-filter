@@ -4,7 +4,7 @@
  *
  * @version 3.1.2
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +31,7 @@ class OptionsWpf extends ModuleWpf {
 	 */
 	public function init() {
 		add_action('init', array($this, 'startSession'), -1);
-		add_action('init', array($this, 'initAllOptValues'), 99); // It should be init after all languages was inited (frame::connectLang)
+		add_action('init', array($this, 'initAllOptValues'), 99); // It should be init after all languages was inited
 		DispatcherWpf::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
 	}
 

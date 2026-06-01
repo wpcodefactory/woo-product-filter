@@ -4,7 +4,7 @@
  * @version 3.0.8
  * @since   3.0.8
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 (function () {

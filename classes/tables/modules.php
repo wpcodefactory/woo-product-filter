@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TableModulesWpf Class
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;

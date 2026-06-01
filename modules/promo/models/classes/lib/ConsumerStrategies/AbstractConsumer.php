@@ -1,13 +1,20 @@
 <?php
+/**
+ * Product Filter by WBW - ConsumerStrategies_AbstractConsumer Class
+ *
+ * Provides some base methods for use by a Consumer implementation.
+ *
+ * @version 3.1.8
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 require_once(dirname(__FILE__) . '/../Base/MixpanelBase.php');
 
-/**
- * Provides some base methods for use by a Consumer implementation
- */
 abstract class ConsumerStrategies_AbstractConsumer extends Base_MixpanelBase {
 
 	/**
-	 * Creates a new AbstractConsumer
+	 * Creates a new AbstractConsumer.
 	 *
 	 * @param array $options
 	 */
@@ -21,9 +28,10 @@ abstract class ConsumerStrategies_AbstractConsumer extends Base_MixpanelBase {
 	}
 
 	/**
-	 * Encode an array to be persisted
+	 * Encode an array to be persisted.
 	 *
 	 * @param array $params
+	 *
 	 * @return string
 	 */
 	protected function _encode( $params ) {
@@ -31,29 +39,19 @@ abstract class ConsumerStrategies_AbstractConsumer extends Base_MixpanelBase {
 	}
 
 	/**
-	 * Handles errors that occur in a consumer
+	 * Handles errors that occur in a consumer.
 	 *
 	 * @param $code
 	 * @param $msg
 	 */
 	protected function _handleError( $code, $msg ) {
-		/*if (isset($this->_options['error_callback'])) {
-			$handler = $this->_options['error_callback'];
-			call_user_func($handler, $code, $msg);
-		}
-
-		if ($this->_debug()) {
-			$arr = debug_backtrace();
-			$class = get_class($arr[0]['object']);
-			$line = $arr[0]['line'];
-			error_log ( "[ $class - line $line ] : " . print_r($msg, true) );
-		}*/
 	}
 
 	/**
-	 * Persist a batch of messages in whatever way the implementer sees fit
+	 * Persist a batch of messages in whatever way the implementer sees fit.
 	 *
 	 * @param array $batch an array of messages to consume
+	 *
 	 * @return boolean success or fail
 	 */
 	abstract public function persist( $batch );

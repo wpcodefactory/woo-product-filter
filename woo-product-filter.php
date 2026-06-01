@@ -10,9 +10,11 @@
  * Text Domain: woo-product-filter
  * Domain Path: /languages
  * WC requires at least: 3.4.1
- * WC tested up to: 10.7
+ * WC tested up to: 10.8
  * Requires Plugins: woocommerce
- **/
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 defined( 'ABSPATH' ) || exit;
 
