@@ -2,9 +2,9 @@
 Contributors: woobewoo
 Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
-Requires at least: 3.4.0
+Requires at least: 5.0.0
 Tested up to: 7.0
-Stable tag: 3.1.7
+Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,7 +153,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.8 - 28/05/2026 =
+= 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.
 * Fix - Fixed Brizy editor shortcode render issue.
 * Fix - Security - Fixed SQL injection vulnerability.
