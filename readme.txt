@@ -153,6 +153,9 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 3.1.9 - 01/06/2026 =
+* Fix - Fixed subcategories filter bug on page load.
+
 = 3.1.8 - 21/05/2026 =
 * Fix - Fixed filter not working with brizy products widget.
 * Fix - Fixed brizy editor shortcode render issue.
