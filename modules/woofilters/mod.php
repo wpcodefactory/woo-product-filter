@@ -53,16 +53,19 @@ class WoofiltersWpf extends ModuleWpf {
 		add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
 
 		$isThriveContext = (
-			isset( $_GET['tvet'] ) ||
-			isset( $_GET['tcbf'] ) ||
-			isset( $_GET['_preview'] )
+			isset( $_GET['tvet'] ) ||  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			isset( $_GET['tcbf'] ) ||  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			isset( $_GET['_preview'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		);
 		if ( $isThriveContext ) {
 			// Register shortcodes only — skip all heavy product query hooks
 			return;
 		}
 
-		$isBrizyContext = ! empty( $_REQUEST['action'] ) && 'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+		$isBrizyContext = (
+			! empty( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		);
 		if ( $isBrizyContext ) {
 			return;
 		}
@@ -169,7 +172,7 @@ class WoofiltersWpf extends ModuleWpf {
 			add_filter( 'db_archive_module_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
 		}
 		if ( is_plugin_active( 'fusion-builder/fusion-builder.php' ) ) {
-			if ( isset($_GET['wpf_skip']) ) {
+			if ( isset($_GET['wpf_skip']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$_GET['wpf_skip'] = 2;
 			}
 			add_filter( 'fusion_post_cards_shortcode_query_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
@@ -196,12 +199,12 @@ class WoofiltersWpf extends ModuleWpf {
 		// Integration with Advanced Woo Search
 		add_filter( 'aws_search_results_products_ids', array( $this, 'my_aws_search_results_products_ids') );
 		add_filter( 'aws_search_page_filters', function ( $filters ) {
-			if ( isset($_GET['pr_stock']) ) {
+			if ( isset($_GET['pr_stock']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				unset($filters['in_status']);
 			}
 			return $filters;
 		}, 99 );
-		if ( isset($_GET['type_aws']) && isset($_GET['aws_filter']) && $this->isFiltered(false) ) {
+		if ( isset($_GET['type_aws']) && isset($_GET['aws_filter']) && $this->isFiltered(false) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			ReqWpf::clearVar('type_aws', 'get');
 		}
 
@@ -249,7 +252,7 @@ class WoofiltersWpf extends ModuleWpf {
 	function discourage_search_engines_from_indexing( $robots ) {
 		if (
 			FrameWpf::_()->getModule( 'options' )->getModel()->get( 'discourage_search_engines_from_indexing' ) &&
-			! empty( preg_grep( '/^wpf_/', array_keys( $_GET ) ) )
+			! empty( preg_grep( '/^wpf_/', array_keys( $_GET ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
 			$robots['noindex'] = true;
 		}
@@ -365,14 +368,14 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * addElementorParamsToPagenationLinks.
 	 *
-	 * @version 2.9.0
+	 * @version 3.1.8
 	 */
 	public function addElementorParamsToPagenationLinks( $widget_content ) {
 		$pattern = '/<a\s+[^>]*class=["\'][^"\']*page-numbers[^"\']*["\'][^>]*href=["\']([^"\']+)["\'][^>]*>/i';
 
 		return preg_replace_callback($pattern, function ( $matches ) {
 			$originalUrl = $matches[1];
-			$urlParts    = parse_url(html_entity_decode($originalUrl));
+			$urlParts    = wp_parse_url(html_entity_decode($originalUrl));
 
 			$existingParams = array();
 			if ( isset($urlParts['query']) ) {
@@ -982,7 +985,27 @@ class WoofiltersWpf extends ModuleWpf {
 	}
 
 	/**
+	 * get_sidebars_widgets.
+	 *
+	 * @version 3.1.8
+	 * @since   3.1.8
+	 *
+	 * @see https://developer.wordpress.org/reference/functions/wp_get_sidebars_widgets/
+	 */
+	public function get_sidebars_widgets() {
+		$sidebars_widgets = get_option( 'sidebars_widgets', array() );
+
+		if ( is_array( $sidebars_widgets ) && isset( $sidebars_widgets['array_version'] ) ) {
+			unset( $sidebars_widgets['array_version'] );
+		}
+
+		return apply_filters( 'sidebars_widgets', $sidebars_widgets );
+	}
+
+	/**
 	 * addPreselectedParams.
+	 *
+	 * @version 3.1.8
 	 */
 	public function addPreselectedParams( $need = false ) {
 		if ( ! is_admin() || $need ) {
@@ -991,7 +1014,7 @@ class WoofiltersWpf extends ModuleWpf {
 				$filterWidget = 'wpfwoofilterswidget';
 
 				$widgetOpions    = get_option( 'widget_' . $filterWidget );
-				$sidebarsWidgets = wp_get_sidebars_widgets();
+				$sidebarsWidgets = $this->get_sidebars_widgets();
 				$preselects      = array();
 				$filters         = array();
 
@@ -1783,10 +1806,10 @@ class WoofiltersWpf extends ModuleWpf {
 	public function setSubcategoriesLink( $link ) {
 		$curUrl = (
 			isset($_SERVER['REQUEST_URI'])
-			? parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) )
+			? wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) )
 			: array()
 		);
-		$catUrl = parse_url($link);
+		$catUrl = wp_parse_url($link);
 		if (!empty($curUrl['query'])) {
 			$link .= (
 				( empty($catUrl['query']) ? '?' : '&' ) .
@@ -2527,7 +2550,10 @@ class WoofiltersWpf extends ModuleWpf {
 			$displayProduct         = false;
 			$displayBrand           = false;
 
-			$isBrizyEditContext = ! empty( $_REQUEST['action'] ) && 'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) );
+			$isBrizyEditContext = (
+				! empty( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			);
 			if ( is_admin() || $isBrizyEditContext ) {
 				$displayShop = true;
 			} else {
@@ -4173,7 +4199,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$addSqls['main']['fields']       = ( $param['withCount'] ? '' : 'DISTINCT ' ) . 'tr.term_taxonomy_id, tt.term_id, tt.taxonomy, tt.parent' . ( $param['withCount'] ? ', COUNT(*) as cnt' : '' );
 
 			$taxonomyListFormatter           = implode( ',', array_fill( 0, count( $taxonomyList ), '%s' ) );
-			$addSqls['main']['taxonomyList'] = $wpdb->prepare( $taxonomyListFormatter, ...$taxonomyList );
+			$addSqls['main']['taxonomyList'] = $wpdb->prepare( $taxonomyListFormatter, ...$taxonomyList ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 			if ( $byVariations ) {
 				$attrTaxonomyList = array();

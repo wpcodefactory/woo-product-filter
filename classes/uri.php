@@ -67,8 +67,8 @@ class UriWpf {
 	 */
 	public static function getGetParams( $exclude = array() ) {
 		$res = array();
-		if (isset($_GET) && !empty($_GET)) {
-			foreach ($_GET as $key => $val) {
+		if (isset($_GET) && !empty($_GET)) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			foreach ($_GET as $key => $val) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if (in_array($key, $exclude)) {
 					continue;
 				}

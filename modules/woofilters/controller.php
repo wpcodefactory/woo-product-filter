@@ -337,7 +337,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * filtersFrontend.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.8
 	 */
 	public function filtersFrontend() {
 		$res = new ResponseWpf();
@@ -391,7 +391,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		if ( isset( $args['posts_per_page'] ) && $args['posts_per_page'] > 0 ) {
 			$queryvars['posts_per_page'] = $args['posts_per_page'];
 		}
-		$parts    = parse_url($curUrl);
+		$parts    = wp_parse_url($curUrl);
 		$urlQuery = array();
 		if ( ! empty($parts['query']) ) {
 			parse_str($parts['query'], $urlQuery);
@@ -864,13 +864,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			'posts_per_page'      => $queryvars['posts_per_page'],
 			'ignore_sticky_posts' => true,
 			'wpf_query'           => 1,
-			'tax_query'           => array('wpf_tax' => 1),
+			'tax_query'           => array('wpf_tax' => 1), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		);
 		if ( ! empty($filterSettings['default_query']) ) {
 			$args = array_merge($args, $filterSettings['default_query']);
 		}
 
-		$args['tax_query'] = $module->addHiddenFilterQuery($args['tax_query']);
+		$args['tax_query'] = $module->addHiddenFilterQuery($args['tax_query']); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 
 		$isAllProductsFiltering = $filterSettings['all_products_filtering'] && $filtersDataBackend;
 
@@ -1012,17 +1012,17 @@ class WoofiltersControllerWpf extends ControllerWpf {
 							case 'price':
 								$args['orderby']  = 'meta_value_num';
 								$args['order']    = 'ASC';
-								$args['meta_key'] = '_price';
+								$args['meta_key'] = '_price'; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 								break;
 							case 'price-desc':
 								$args['orderby']  = 'meta_value_num';
 								$args['order']    = 'DESC';
-								$args['meta_key'] = '_price';
+								$args['meta_key'] = '_price'; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 								break;
 							case 'popularity':
 								$args['orderby']  = 'meta_value_num';
 								$args['order']    = 'DESC';
-								$args['meta_key'] = 'total_sales';
+								$args['meta_key'] = 'total_sales'; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 								break;
 							case 'rating':
 								$args['meta_key'] = '_wc_average_rating'; // @codingStandardsIgnoreLine
@@ -1266,7 +1266,12 @@ class WoofiltersControllerWpf extends ControllerWpf {
 						break;
 					case 'wpfSearchNumber':
 						if ( ! empty($setting['settings']['value']) ) {
-							$args['tax_query'] = DispatcherWpf::applyFilters('addCustomTaxQueryPro', $args['tax_query'], array($setting['name'] => $setting['settings']['value']), 'url');
+							$args['tax_query'] = DispatcherWpf::applyFilters( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+								'addCustomTaxQueryPro',
+								$args['tax_query'],
+								array($setting['name'] => $setting['settings']['value']),
+								'url'
+							);
 						}
 						break;
 				}
@@ -1316,7 +1321,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 					$args['orderby'] = $vars['orderby'];
 					$args['order']   = empty( $vars['order'] ) ? 'ASC' : $vars['order'];
 					if ( ! empty( $vars['meta_key'] ) ) {
-						$args['meta_key'] = $vars['meta_key'];
+						$args['meta_key'] = $vars['meta_key']; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 					}
 				}
 			}

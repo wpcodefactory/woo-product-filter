@@ -1,15 +1,20 @@
 <?php
-require_once(dirname(__FILE__) . '/AbstractConsumer.php');
 /**
- * Consumes messages and writes them to a file
+ * Product Filter by WBW - ConsumerStrategies_FileConsumer Class
+ *
+ * Consumes messages and writes them to a file.
  */
+
+defined( 'ABSPATH' ) || exit;
+
+require_once(dirname(__FILE__) . '/AbstractConsumer.php');
+
 class ConsumerStrategies_FileConsumer extends ConsumerStrategies_AbstractConsumer {
 
 	private $_file;
 
-
 	/**
-	 * Creates a new FileConsumer and assigns properties from the $options array
+	 * Creates a new FileConsumer and assigns properties from the $options array.
 	 *
 	 * @param array $options
 	 */
@@ -20,11 +25,11 @@ class ConsumerStrategies_FileConsumer extends ConsumerStrategies_AbstractConsume
 		$this->_file = array_key_exists('file', $options) ? $options['file'] :  dirname(__FILE__) . '/../../messages.txt';
 	}
 
-
 	/**
-	 * Append $batch to a file
+	 * Append $batch to a file.
 	 *
 	 * @param array $batch
+	 *
 	 * @return bool
 	 */
 	public function persist( $batch ) {

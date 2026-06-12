@@ -114,7 +114,7 @@ class ModInstallerWpf {
 	 */
 	public static function moveFiles( $code, $path ) {
 		if (!is_dir(WPF_MODULES_DIR . $code)) {
-			if (mkdir(WPF_MODULES_DIR . $code)) {
+			if (mkdir(WPF_MODULES_DIR . $code)) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
 				UtilsWpf::copyDirectories($path, WPF_MODULES_DIR . $code);
 				return true;
 			} else {

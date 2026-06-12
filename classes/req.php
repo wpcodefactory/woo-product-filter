@@ -10,8 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 class ReqWpf {
+
 	protected static $_requestData;
+
 	protected static $_requestMethod;
+
 	public static $_requestWithNonce = false;
 
 	public static function init() {
@@ -19,7 +22,6 @@ class ReqWpf {
 	}
 
 	public static function startSession() {
-
 		if (!UtilsWpf::isSessionStarted()) {
 			if (version_compare(phpversion(), '5.7.0', '<')) {
 				session_start();
@@ -106,8 +108,8 @@ class ReqWpf {
 	}
 
 	public static function existGetVar( $begin ) {
-		if (isset($_GET) && is_array($_GET)) {
-			foreach ($_GET as $k => $v) {
+		if (isset($_GET) && is_array($_GET)) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			foreach ($_GET as $k => $v) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if (strpos($k, $begin) === 0) {
 					return true;
 				}
@@ -115,7 +117,6 @@ class ReqWpf {
 		}
 		return false;
 	}
-
 
 	/**
 	 * Getting similar parameters when redirecting to set filter values.
@@ -149,6 +150,7 @@ class ReqWpf {
 	public static function sanitizeData( $filtered, $value ) {
 		return is_array($value) ? self::sanitizeArray($value) : $filtered;
 	}
+
 	public static function sanitizeArray( $arr ) {
 		$newArr = array();
 		foreach ($arr as $k => $v) {
@@ -156,10 +158,12 @@ class ReqWpf {
 		}
 		return $newArr;
 	}
+
 	public static function isEmpty( $name, $from = 'all' ) {
 		$val = self::getVar($name, $from);
 		return empty($val);
 	}
+
 	public static function setVar( $name, $val, $in = 'input', $params = array() ) {
 		$in = strtolower($in);
 		switch ($in) {

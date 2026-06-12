@@ -13,14 +13,16 @@ class WoofiltersViewWpf extends ViewWpf {
 
 	private static $uniqueBlockId  = 0;
 	private static $filterOrderKey = 0;
+
 	protected static $blockId      = '';
 	protected static $filtersCss   = '';
 	protected static $isLeerFilter = false;
 
-	public $settings                       = array('settings' => array());
-	public $proLink                        = '';
-	public $linkSetting                    = '';
-	public $filter                         = array('id' => 0);
+	public $settings    = array('settings' => array());
+	public $proLink     = '';
+	public $linkSetting = '';
+	public $filter      = array('id' => 0);
+
 	protected static $currentSettings      = array();
 	protected static $currentFilterRecount = false;
 
@@ -252,40 +254,40 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		DispatcherWpf::doAction('addScriptsContent', false, $settings);
 
-		$viewId = $id . '_' . mt_rand(0, 999999);
+		$viewId = $id . '_' . wp_rand(0, 999999);
 
 		switch ( $mode ) {
-			case 1: //category page
+			case 1: // category page
 				$catObj = get_queried_object();
 				$html   = $this->generateFiltersHtml($settings, $viewId, $catObj->term_id);
 				break;
-			case 2: //shop page
+			case 2: // shop page
 				$html = $this->generateFiltersHtml($settings, $viewId);
 				break;
-			case 3: //tag page
+			case 3: // tag page
 				$catObj = get_queried_object();
 				$html   = $this->generateFiltersHtml($settings, $viewId, false, false, array('product_tag' => $catObj->term_id));
 				break;
-			case 4: //brand page
+			case 4: // brand page
 				$catObj = get_queried_object();
 				$html   = $this->generateFiltersHtml($settings, $viewId, false, false, array('product_brand' => $catObj->term_id));
 				break;
-			case 5: //perfect brand page
+			case 5: // perfect brand page
 				$catObj = get_queried_object();
 				$html   = $this->generateFiltersHtml($settings, $viewId, false, false, array('pwb-brand' => $catObj->term_id));
 				break;
-			case 6: //attribute page
+			case 6: // attribute page
 				$catObj = get_queried_object();
 				$html   = $this->generateFiltersHtml($settings, $viewId, false, false, array($catObj->taxonomy => $catObj->term_id));
 				break;
-			case 7: //vendor page
+			case 7: // vendor page
 				$html = $this->generateFiltersHtml( $settings, $viewId, false, false, array( 'vendors' => $this->getVendor() ) );
 				break;
-			case 10: //shortcode and admin preview
-			case 8: //product page
+			case 10: // shortcode and admin preview
+			case 8: // product page
 				$html = $this->generateFiltersHtml($settings, $viewId, false, true);
 				break;
-			case 12: //all pages
+			case 12: // all pages
 				$catId = false;
 				if ( is_product_category() ) {
 					$catObj = get_queried_object();
@@ -293,17 +295,22 @@ class WoofiltersViewWpf extends ViewWpf {
 				}
 				$html = $this->generateFiltersHtml($settings, $viewId, $catId, true);
 				break;
-			case 11: //brand page
+			case 11: // brand page
 				$catObj = get_queried_object();
 				$html   = $this->generateFiltersHtml( $settings, $viewId, false, false, array( $catObj->taxonomy => $catObj->term_id ) );
 				break;
 		}
 		$this->assign('viewId', $viewId);
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) && 'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) ) {
-			$cssLink = '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/frontend.woofilters.css' ) . '" type="text/css">';
+		if (
+			defined( 'DOING_AJAX' ) &&
+			DOING_AJAX &&
+			isset( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		) {
+			$cssLink = '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/frontend.woofilters.css' ) . '" type="text/css">'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 			if ( $this->isCustomStyle($settings['settings']) ) {
-				$cssLink .= '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/custom.woofilters.css' ) . '" type="text/css">';
+				$cssLink .= '<link rel="stylesheet" href="' . esc_url( $modPath . 'css/custom.woofilters.css' ) . '" type="text/css">'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
 			}
 			$cssLink = DispatcherWpf::applyFilters( 'brizyEditorCssLinks', $cssLink, $settings, $modPath );
 			$html    = $cssLink . $html;
@@ -703,11 +710,18 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$blockHeight = $this->getFilterSetting($settingsOriginal['settings'], 'filter_block_height', false, true);
 		$showImmediately = $this->getFilterSetting($settingsOriginal['settings'], 'show_filter_immediately') == '1';
-		if ( ! $showImmediately && defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_REQUEST['action'] ) && 'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) ) {
+		if (
+			! $showImmediately &&
+			defined( 'DOING_AJAX' ) &&
+			DOING_AJAX &&
+			isset( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		) {
 			$showImmediately = true;
 		}
-		$blockStyle      =
-			( $showImmediately ? '' : 'visibility:hidden;' ) . 'width:' . $blockWidth . ';' .
+		$blockStyle =
+			( $showImmediately ? '' : 'visibility:hidden;' ) .
+			'width:' . $blockWidth . ';' .
 			( '100%' == $blockWidth ? '' : 'float:left;' ) .
 			( $blockHeight ? 'height:' . $blockHeight . 'px;overflow: hidden;' : '' );
 
@@ -1478,7 +1492,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$currentCategoryId = 0;
 		if ( $this->getFilterSetting( $settings, 'f_hide_page_category', false ) ) {
-			$path     = parse_url( ReqWpf::getVar( 'REQUEST_URI', 'server' ), PHP_URL_PATH );
+			$path     = wp_parse_url( ReqWpf::getVar( 'REQUEST_URI', 'server' ), PHP_URL_PATH );
 			$parts    = explode( '/', $path );
 			$slug     = $parts[ count( $parts ) - 1 ];
 			$category = get_term_by( 'slug', $slug, 'product_cat' );
@@ -2639,7 +2653,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			$filterNameSlug = str_replace('pa_', '', $attrName);
 			$filterName     = "wpf_filter_{$filterNameSlug}{$index}";
 		}
-		$attrLabel = strip_tags($attrLabel);
+		$attrLabel = wp_strip_all_tags($attrLabel);
 
 		$logic     = FrameWpf::_()->getModule('woofilters')->getAttrFilterLogic();
 		$logicSlug = $this->getFilterSetting($settings, 'f_query_logic', 'or', false, array_keys($logic['loop']));
@@ -3293,7 +3307,7 @@ class WoofiltersViewWpf extends ViewWpf {
 						$checked = 'checked';
 					}
 
-					$rand    = rand(1, 99999);
+					$rand    = wp_rand(1, 99999);
 					$checkId = 'wpfTaxonomyInputCheckbox' . $filterItem->term_id . $rand;
 
 					$checkbox = '<span class="wpfCheckbox' . ( $isMulti ? ' wpfMulti' : '' ) . '"><input type="checkbox" id="' . $checkId . '" ' . $checked . '><label aria-label="' . esc_attr( $displayName ) . '" for="' . $checkId . '"></label></span>';
@@ -3435,7 +3449,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 				if ( $isList ) {
 					$html   .= '<li data-range="' . $dataRange . '"><' . $tagWrapper . ' class="wpfLiLabel">';
-					$checkId = 'wpfPriceRangeCheckbox' . rand(1, 99999);
+					$checkId = 'wpfPriceRangeCheckbox' . wp_rand(1, 99999);
 					$html   .= '<span class="wpfCheckbox"><input type="checkbox" aria-label="' . esc_html__('Price Range', 'woo-product-filter') . '" id="' . $checkId . '"' . ( $selected ? ' checked' : '' ) . '><label aria-label="' . esc_attr( $priceRangeLabel ) . '" for="' . $checkId . '"></label></span>';
 					$html   .= '<span class="wpfDisplay"><span class="wpfValue">' . $priceRange . '</span></span>';
 					$html   .= '</' . $tagWrapper . '></li>';
@@ -3454,7 +3468,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			if ( $isPro && $this->getFilterSetting($filter['settings'], 'f_custom_fields', false) ) {
 				$customText = $this->getFilterSetting($filter['settings'], 'f_custom_text', esc_attr__('Custom', 'woo-product-filter')) . ' ';
 				$selected   = ( $isCustom && ( ',' != $urlRange ) );
-				$checkId    = 'wpfPriceRangeCheckbox' . rand(1, 99999);
+				$checkId    = 'wpfPriceRangeCheckbox' . wp_rand(1, 99999);
 				$html      .= '<li data-range="' . ( $selected ? $urlRange : '' ) . '"><' . $tagWrapper . ' class="wpfLiLabel">';
 				$html      .= '<span class="wpfCheckbox wpfPriceCheckboxCustom"><input type="checkbox" id="' . $checkId . '"' . ( $selected ? ' checked' : '' ) . '><label aria-label="' . esc_attr( $customText ) . '" for="' . $checkId . '"></label></span>';
 				$html      .= '<span class="wpfDisplay"><span class="wpfValue">' . $customText . '</span></span>';
@@ -3773,7 +3787,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			}
 			// pagination in a query url structure like &paged=999999999
 		} else {
-			$queryUrl     = parse_url($base, PHP_URL_QUERY);
+			$queryUrl     = wp_parse_url($base, PHP_URL_QUERY);
 			$queryUrlList = explode('&', $queryUrl);
 
 			foreach ( $queryUrlList as $query ) {

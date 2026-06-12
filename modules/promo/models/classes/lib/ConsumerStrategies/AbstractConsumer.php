@@ -5,8 +5,6 @@
  * Provides some base methods for use by a Consumer implementation.
  *
  * @version 3.1.8
- *
- * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
