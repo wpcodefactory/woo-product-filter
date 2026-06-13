@@ -1640,6 +1640,7 @@ function wpfIsThriveEditor() {
 			_thisObj.QStringWork('product-page', '', noWooPage, $filterWrapper, 'remove');
 			_thisObj.QStringWork('shopPage', '', noWooPage, $filterWrapper, 'remove');
 			_thisObj.QStringWork('avia-element-paging', '', noWooPage, $filterWrapper, 'remove');
+			// _thisObj.QStringWork('bpage', '', noWooPage, $filterWrapper, 'remove');
 
 			var curUrl = getCurrentUrlPartsWpf();
 			if (curUrl.search.length) {
@@ -3944,6 +3945,14 @@ function removePageQString() {
 		window.wpfNewUrl = path.substr(0, page + 1) + curUrl.search;
 	} else {
 		window.wpfNewUrl = curUrl.path + removePagenum(curUrl.search);
+
+		// also strip Brizy Pro's /bpage/N/ path segment
+		// var bpage = path.indexOf('/bpage/');
+		// if (bpage != -1 && history.pushState) {
+		// 	window.wpfNewUrl = path.substr(0, bpage + 1) + curUrl.search;
+		// } else {
+		// 	window.wpfNewUrl = curUrl.path + removePagenum(curUrl.search);
+		// }
 	}
 }
 
