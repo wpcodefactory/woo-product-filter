@@ -1581,7 +1581,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadProductsFilter.
 	 *
-	 * @version 2.9.4
+	 * @version 3.1.9
 	 */
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
@@ -1778,9 +1778,6 @@ class WoofiltersWpf extends ModuleWpf {
 				$categoryPageId = $this->maybeGetQueriedObjectID();
 			}
 			if ( $categoryPageId && $this->isFiltered( false ) ) {
-				if ( $this->needSubcategoriesDisplay($categoryPageId) ) {
-					wc_set_loop_prop('is_filtered', false);
-				}
 				add_filter('woocommerce_product_loop_start', function ( $args ) use ( $categoryPageId ) {
 					return $this->maybeShowProductSubcategories($args, $categoryPageId);
 				});
@@ -1825,13 +1822,20 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * maybeShowProductSubcategories.
+	 *
+	 * @version 3.1.9
 	 */
 	public function maybeShowProductSubcategories( $loop_html, $categoryPageId ) {
-		$display_type = woocommerce_get_loop_display_mode();
+		// Use term meta directly instead of woocommerce_get_loop_display_mode(), which
+		// returns 'products' whenever is_filtered=true — causing subcategories to vanish
+		// on full page reload after filters are applied.
+		$display_type = get_term_meta($categoryPageId, 'display_type', true);
+		$display_type = '' === $display_type ? get_option('woocommerce_category_archive_display', '') : $display_type;
 		if ( 'subcategories' === $display_type || 'both' === $display_type ) {
 			add_filter('term_link', array( $this, 'setSubcategoriesLink' ), 99 );
 			$taxonomies  = $this->getFilterTaxonomies(array(), true);
-			$filterItems = $this->getFilterExistsItems($this->mainWCQueryFiltered, $taxonomies, $categoryPageId, $categoryPageId);
+			$queryArgs   = ( '' !== $this->mainWCQueryFiltered ? $this->mainWCQueryFiltered : $this->mainWCQuery );
+			$filterItems = $this->getFilterExistsItems($queryArgs, $taxonomies, (int) $categoryPageId, (int) $categoryPageId);
 			$categoryIn  = isset($filterItems['categories']) ? $filterItems['categories'] : array();
 			if ( count($categoryIn) > 0 ) {
 				ob_start();
