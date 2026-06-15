@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
