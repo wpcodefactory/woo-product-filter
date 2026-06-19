@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin WooFilters WC CSS
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -157,7 +157,7 @@
 	background-color: #f8fafb;
 	box-shadow: none;
 }
-}
+
 @media (min-width: 992px) {
 	.woobewoo-content .no-md-lr-padding {
 		padding-left: 0!important;
