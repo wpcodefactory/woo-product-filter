@@ -1,3 +1,15 @@
+<?php
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Custom Tags
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e('Use Custom tags', 'woo-product-filter'); ?>

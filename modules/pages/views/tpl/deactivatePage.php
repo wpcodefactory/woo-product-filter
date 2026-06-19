@@ -1,9 +1,19 @@
 <?php
-	$name = WPF_WP_PLUGIN_NAME;
+/**
+ * Product Filter by WBW - Deactivate Page
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$name = WPF_WP_PLUGIN_NAME;
 ?>
 <html>
 	<head>
-		<title><?php esc_html_e( $name ); ?></title>
+		<title><?php echo esc_html( $name ); ?></title>
 		<style type="text/css">
 			.wpfDeletePage {
 				position: fixed;
@@ -18,7 +28,7 @@
 	</head>
 	<body>
 		<div class="wpfDeletePage">
-			<div><?php esc_html_e( $name ); ?></div>
+			<div><?php echo esc_html( $name ); ?></div>
 			<?php HtmlWpf::formStart('deactivatePlugin', array('action' => $this->REQUEST_URI, 'method' => $this->REQUEST_METHOD)); ?>
 			<?php
 			$formData = array();

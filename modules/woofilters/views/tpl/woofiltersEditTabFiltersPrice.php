@@ -1,4 +1,14 @@
 <?php
+/**
+ * Product Filter by WBW - Woofilters Edit Tab Filters Price
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 ViewWpf::display('woofiltersEditTabCommonTitle');
 
 $skins = array(
@@ -19,9 +29,9 @@ $skins = array(
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e('Filter skin', 'woo-product-filter'); ?>
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="
-		<?php 
+		<?php
 		echo esc_attr(__('Select the price filter skin.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/price-product-filter/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>')
-		; 
+		;
 		?>
 		"></i>
 	</div>
@@ -39,7 +49,7 @@ $skins = array(
 
 	</div>
 </div>
-<?php 
+<?php
 if ($isPro) {
 	DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersPriceSkin');
 } else {
@@ -55,8 +65,8 @@ if ($isPro) {
 				</a>
 				<?php } ?>
 			</div>
-			<?php 
-		} 
+			<?php
+		}
 		if ('square' == $key) {
 			break;
 		}
@@ -80,7 +90,7 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_currency_position', array(
 					'options' => array('before' => esc_attr__( 'Before', 'woo-product-filter' ), 'after' => esc_attr__( 'After', 'woo-product-filter' )),
 					'attrs' => 'class="woobewoo-flat-input"'
@@ -95,7 +105,7 @@ if ($isPro) {
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php 
+			<?php
 				HtmlWpf::selectbox('f_currency_show_as', array(
 					'options' => array('symbol' => esc_attr__( 'Symbol', 'woo-product-filter' ), 'code' => esc_attr__( 'Code', 'woo-product-filter' )),
 					'attrs' => 'class="woobewoo-flat-input"'
@@ -155,4 +165,3 @@ else :
 	</div>
 <?php
 	endif;
-?>

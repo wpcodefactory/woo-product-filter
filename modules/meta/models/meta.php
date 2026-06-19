@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - MetaModelWpf Class
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -179,7 +179,7 @@ class MetaModelWpf extends ModelWpf {
 				$keysData = array($keyName);
 			}
 			foreach ($keysData as $keyName) {
-				set_time_limit(300);
+				set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 				if ($this->hasEmojis($keyName)) {
 					continue;
 				}
@@ -187,7 +187,17 @@ class MetaModelWpf extends ModelWpf {
 				$keyData = $keysModel->getKeyData($keyName, true);
 				if ($isLike) {
 					if (empty($keyData)) {
-						$id = $keysModel->saveKeyData(array_merge($key, array('meta_key' => $keyName, 'meta_like' => 0, 'parent' => $key['id'], 'status' => 0)));
+						$id = $keysModel->saveKeyData(
+							array_merge(
+								$key,
+								array(
+									'meta_key'  => $keyName, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+									'meta_like' => 0,
+									'parent'    => $key['id'],
+									'status'    => 0,
+								)
+							)
+						);
 						if ($id) {
 							$keyData['id'] = $id;
 						} else {
@@ -274,7 +284,7 @@ class MetaModelWpf extends ModelWpf {
 							if ($isMetaVar) {
 								$query = $insert . 'val_id) SELECT DISTINCT post_parent,0,' . $keyId . ',v.id' . $from . ' INNER ' . $join . $where . " AND m.meta_key='" . $keyNameVar . "' AND p.post_type='product_variation'";
 							} else {
-								set_time_limit(300);
+								set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 								DbWpf::query('SET session wait_timeout=600');
 
 								if ($isAllProducts) {
@@ -407,7 +417,7 @@ class MetaModelWpf extends ModelWpf {
 				$keysModel->updateKeyData($parent, array('status' => 1));
 			}
 		}
-		set_time_limit(300);
+		set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 		if (!$this->addIndexes()) {
 			return false;
 		}
@@ -435,11 +445,21 @@ class MetaModelWpf extends ModelWpf {
 					}
 				}
 				foreach ($attrIds as $key => $ids) {
-					set_time_limit(300);
+					set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 					$keyName = 'attribute_' . $key;
 					$keyData = $keysModel->getKeyData($keyName, false);
 					if (empty($keyData)) {
-						$keyId = $keysModel->saveKeyData(array_merge($parentKey, array('meta_key' => $keyName, 'meta_like' => 0, 'parent' => $parentKeyId, 'status' => 0)));
+						$keyId = $keysModel->saveKeyData(
+							array_merge(
+								$parentKey,
+								array(
+									'meta_key'  => $keyName, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+									'meta_like' => 0,
+									'parent'    => $parentKeyId,
+									'status'    => 0,
+								)
+							)
+						);
 					} else {
 						$keyId = $keyData['id'];
 					}
@@ -488,7 +508,7 @@ class MetaModelWpf extends ModelWpf {
 				}
 
 			}
-			set_time_limit(300);
+			set_time_limit(300); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 
 			if (!$valsModel->recalcValuesCount($isAllKeys ? array() : $keyRecalc)) {
 				$this->pushError($valsModel->getErrors());

@@ -4,7 +4,7 @@
  *
  * @version 3.0.1
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;

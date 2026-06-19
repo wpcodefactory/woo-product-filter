@@ -1,13 +1,23 @@
 <?php
+/**
+ * Product Filter by WBW - ErrorsWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class ErrorsWpf {
 	const FATAL = 'fatal';
 	const MOD_INSTALL = 'mod_install';
 	private static $errors = array();
 	private static $haveErrors = false;
-	
+
 	public static $current = array();
 	public static $displayed = false;
-	
+
 	public static function push( $error, $type = 'common' ) {
 		if (!isset(self::$errors[$type])) {
 			self::$errors[$type] = array();
@@ -18,7 +28,7 @@ class ErrorsWpf {
 			self::$errors[$type][] = $error;
 		}
 		self::$haveErrors = true;
-		
+
 		if ('session' == $type) {
 			self::setSession(self::$errors[$type]);
 		}

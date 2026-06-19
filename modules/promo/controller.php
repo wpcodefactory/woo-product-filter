@@ -1,5 +1,21 @@
 <?php
+/**
+ * Product Filter by WBW - PromoControllerWpf Class
+ *
+ * @version 3.1.8
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class PromoControllerWpf extends ControllerWpf {
+
+	/**
+	 * welcomePageSaveInfo.
+	 *
+	 * @version 3.1.8
+	 */
 	public function welcomePageSaveInfo() {
 		$res = new ResponseWpf();
 		InstallerWpf::setUsed();
@@ -10,16 +26,27 @@ class PromoControllerWpf extends ControllerWpf {
 		}
 		$originalPage = ReqWpf::getVar('original_page');
 		$http = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
-		if ( strpos($originalPage, $http . ( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field($_SERVER['HTTP_HOST']) ) ) !== 0 ) {
+		if (
+			strpos(
+				$originalPage,
+				$http . ( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) )
+			) !== 0
+		) {
 			$originalPage = '';
 		}
 		redirectWpf($originalPage);
 	}
+
+	/**
+	 * sendContact.
+	 *
+	 * @version 3.1.8
+	 */
 	public function sendContact() {
 		$res = new ResponseWpf();
 		$time = time();
 		$prevSendTime = (int) get_option(WPF_CODE . '_last__time_contact_send');
-		if ( $prevSendTime && ( $time - $prevSendTime ) < 5 * 60 ) {	// Only one message per five minutes
+		if ( $prevSendTime && ( $time - $prevSendTime ) < 5 * 60 ) { // Only one message per five minutes
 			$res->pushError(esc_html__('Please don\'t send contact requests so often - wait for response for your previous requests.', 'woo-product-filter'));
 			$res->ajaxExec();
 		}
@@ -55,7 +82,7 @@ class PromoControllerWpf extends ControllerWpf {
 			}
 		}
 		if (!$res->error()) {
-			$msg = 'Message from: ' . get_bloginfo('name') . ', Host: ' . ( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field($_SERVER['HTTP_HOST']) ) . '<br />';
+			$msg = 'Message from: ' . get_bloginfo('name') . ', Host: ' . ( empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) ) . '<br />';
 			$msg .= 'Plugin: ' . WPF_WP_PLUGIN_NAME . '<br />';
 			foreach ($fields as $fName => $fData) {
 				if (in_array($fName, array('name', 'email', 'subject'))) {
@@ -66,14 +93,10 @@ class PromoControllerWpf extends ControllerWpf {
 				}
 				$msg .= '<b>' . $fData['label'] . '</b>: ' . nl2br($data[ $fName ]) . '<br />';
 			}
-			/*if (FrameWpf::_()->getModule('mail')->send('support@supsystic.zendesk.com', $data['subject'], $msg, $data['name'], $data['email'])) {
-				update_option(WPF_CODE . '_last__time_contact_send', $time);
-			} else {
-				$res->pushError( FrameWpf::_()->getModule('mail')->getMailErrors() );
-			}*/
 		}
 		$res->ajaxExec();
 	}
+
 	public function addNoticeAction() {
 		$res = new ResponseWpf();
 		$code = ReqWpf::getVar('code', 'post');
@@ -99,6 +122,7 @@ class PromoControllerWpf extends ControllerWpf {
 		}
 		$res->ajaxExec();
 	}
+
 	public function addTourStep() {
 		$res = new ResponseWpf();
 		if ($this->getModel()->addTourStep(ReqWpf::get('post'))) {
@@ -108,6 +132,7 @@ class PromoControllerWpf extends ControllerWpf {
 		}
 		$res->ajaxExec();
 	}
+
 	public function closeTour() {
 		$res = new ResponseWpf();
 		if ($this->getModel()->closeTour(ReqWpf::get('post'))) {
@@ -117,6 +142,7 @@ class PromoControllerWpf extends ControllerWpf {
 		}
 		$res->ajaxExec();
 	}
+
 	public function addTourFinish() {
 		$res = new ResponseWpf();
 		if ($this->getModel()->addTourFinish(ReqWpf::get('post'))) {
@@ -126,6 +152,7 @@ class PromoControllerWpf extends ControllerWpf {
 		}
 		$res->ajaxExec();
 	}
+
 	public function saveDeactivateData() {
 		$res = new ResponseWpf();
 		if ($this->getModel()->saveDeactivateData(ReqWpf::get('post'))) {
@@ -135,15 +162,17 @@ class PromoControllerWpf extends ControllerWpf {
 		}
 		$res->ajaxExec();
 	}
+
 	public function enbStatsOpt() {
 		$res = new ResponseWpf();
 		FrameWpf::_()->getModule('options')->getModel()->save('send_stats', 1);
 		$res->ajaxExec();
 	}
+
 	public function getPermissions() {
 		return array(
 			WPF_USERLEVELS => array(
-				WPF_ADMIN => array('welcomePageSaveInfo', 'sendContact', 'addNoticeAction', 
+				WPF_ADMIN => array('welcomePageSaveInfo', 'sendContact', 'addNoticeAction',
 					'addStep', 'closeTour', 'addTourFinish', 'saveDeactivateData', 'enbStatsOpt')
 			),
 		);

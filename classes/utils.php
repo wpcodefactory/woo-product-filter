@@ -2,9 +2,9 @@
 /**
  * Product Filter by WBW - UtilsWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.8
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -49,9 +49,9 @@ class UtilsWpf {
 	 * createDir.
 	 */
 	public static function createDir( $path, $params = array('chmod' => null, 'httpProtect' => false) ) {
-		if (@mkdir($path)) {
+		if (@mkdir($path)) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
 			if (!is_null($params['chmod'])) {
-				@chmod($path, $params['chmod']);
+				@chmod($path, $params['chmod']); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod
 			}
 			if (!empty($params['httpProtect'])) {
 				self::httpProtectDir($path);
@@ -83,7 +83,7 @@ class UtilsWpf {
 	 */
 	public static function copyDirectories( $source, $destination ) {
 		if (is_dir($source)) {
-			@mkdir($destination);
+			@mkdir($destination); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
 			$directory = dir($source);
 			while ( false !== ( $readdirectory = $directory->read() ) ) {
 				if ( ( '.' == $readdirectory ) || ( '..' == $readdirectory ) ) {
@@ -104,6 +104,8 @@ class UtilsWpf {
 
 	/**
 	 * getIP.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function getIP() {
 		$res = '';
@@ -111,18 +113,18 @@ class UtilsWpf {
 			if (!isset($_SERVER['HTTP_X_REAL_IP']) || empty($_SERVER['HTTP_X_REAL_IP'])) {
 				if (!isset($_SERVER['HTTP_X_SUCURI_CLIENTIP']) || empty($_SERVER['HTTP_X_SUCURI_CLIENTIP'])) {
 					if (!isset($_SERVER['HTTP_X_FORWARDED_FOR']) || empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-						$res = empty($_SERVER['REMOTE_ADDR']) ? '' : sanitize_text_field($_SERVER['REMOTE_ADDR']);
+						$res = empty($_SERVER['REMOTE_ADDR']) ? '' : sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']));
 					} else {
-						$res = sanitize_text_field($_SERVER['HTTP_X_FORWARDED_FOR']);
+						$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']));
 					}
 				} else {
-					$res = sanitize_text_field($_SERVER['HTTP_X_SUCURI_CLIENTIP']);
+					$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_SUCURI_CLIENTIP']));
 				}
 			} else {
-				$res = sanitize_text_field($_SERVER['HTTP_X_REAL_IP']);
+				$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_REAL_IP']));
 			}
 		} else {
-			$res = sanitize_text_field($_SERVER['HTTP_CLIENT_IP']);
+			$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_CLIENT_IP']));
 		}
 
 		return $res;
@@ -168,9 +170,11 @@ class UtilsWpf {
 
 	/**
 	 * deleteFile.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function deleteFile( $str ) {
-		return @unlink($str);
+		return wp_delete_file($str);
 	}
 
 	/**
@@ -184,7 +188,7 @@ class UtilsWpf {
 			foreach ($scan as $index => $path) {
 				self::deleteDir($path);
 			}
-			return @rmdir($str);
+			return @rmdir($str); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
 		}
 	}
 
@@ -343,6 +347,8 @@ class UtilsWpf {
 
 	/**
 	 * getRandStr.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function getRandStr( $length = 10, $allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', $params = array() ) {
 		$result = '';
@@ -351,7 +357,7 @@ class UtilsWpf {
 			$allowedChars = strtolower($allowedChars);
 		}
 		while (strlen($result) < $length) {
-			$result .= substr($allowedChars, rand(0, $allowedCharsLen), 1);
+			$result .= substr($allowedChars, wp_rand(0, $allowedCharsLen), 1);
 		}
 
 		return $result;
@@ -360,10 +366,12 @@ class UtilsWpf {
 	/**
 	 * Get current host location.
 	 *
+	 * @version 3.1.8
+	 *
 	 * @return string host string
 	 */
 	public static function getHost() {
-		return empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field($_SERVER['HTTP_HOST']);
+		return empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST']));
 	}
 
 	/**
@@ -441,7 +449,7 @@ class UtilsWpf {
 		}
 		delete_option( 'wpf_slug_format_rewrite_option_bootstrapped' ); // Re-run slug rewrite bootstrap logic after each activation.
 		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::init();
@@ -464,7 +472,7 @@ class UtilsWpf {
 	public static function deletePlugin() {
 		global $wpdb;
 		if (function_exists('is_multisite') && is_multisite()) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::delete();
@@ -485,7 +493,7 @@ class UtilsWpf {
 	public static function deactivatePlugin( $networkwide ) {
 		global $wpdb;
 		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ($blog_id as $id) {
 				if (switch_to_blog($id)) {
 					InstallerWpf::deactivate();
@@ -506,7 +514,7 @@ class UtilsWpf {
 	 * isWritable.
 	 */
 	public static function isWritable( $filename ) {
-		return is_writable($filename);
+		return is_writable($filename); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 	}
 
 	/**
@@ -619,9 +627,11 @@ class UtilsWpf {
 
 	/**
 	 * getUserBrowserString.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function getUserBrowserString() {
-		return isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field($_SERVER['HTTP_USER_AGENT']) : false;
+		return isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : false;
 	}
 
 	/**
@@ -721,10 +731,12 @@ class UtilsWpf {
 
 	/**
 	 * getBrowserLangCode.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function getBrowserLangCode() {
-		return isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && !empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])
-			? strtolower(substr(sanitize_text_field($_SERVER['HTTP_ACCEPT_LANGUAGE']), 0, 2))
+		return !empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])
+			? strtolower(substr(sanitize_text_field(wp_unslash($_SERVER['HTTP_ACCEPT_LANGUAGE'])), 0, 2))
 			: self::getLangCode2Letter();
 	}
 
@@ -795,11 +807,13 @@ class UtilsWpf {
 
 	/**
 	 * getReferalHost.
+	 *
+	 * @version 3.1.8
 	 */
 	public static function getReferalHost() {
 		$refUrl = self::getReferalUrl();
 		if (!empty($refUrl)) {
-			$refer = parse_url( $refUrl );
+			$refer = wp_parse_url( $refUrl );
 			if ($refer && isset($refer['host']) && !empty($refer['host'])) {
 				return $refer['host'];
 			}

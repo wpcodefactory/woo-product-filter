@@ -1,10 +1,19 @@
 <?php
+/**
+ * Product Filter by WBW - Meta_KeysModelWpf Class
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 class Meta_KeysModelWpf extends ModelWpf {
-	// meta_mode: 0-global, 1-filter
-	// meta_type: 0-text, 1-decimal, 2-int, 3-decimal+int, 7-array json, 8-serialised array, 9-list, 5-list with custom separator
-	// key_size: for array count keys
-	// value_size: for text max lenght
-	// status: 1-calculated (global), 0-need calc, 2- lock, 9-don't recalc
+
+	// meta_mode:  0-global, 1-filter
+	// meta_type:  0-text, 1-decimal, 2-int, 3-decimal+int, 7-array json, 8-serialised array, 9-list, 5-list with custom separator
+	// key_size:   for array count keys
+	// value_size: for text max length
+	// status:     1-calculated (global), 0-need calc, 2- lock, 9-don't recalc
 
 	public $lockLimit = 10; //minutes
 
@@ -40,7 +49,7 @@ class Meta_KeysModelWpf extends ModelWpf {
 
 	public function resetLockedKeys() {
 		$query = 'UPDATE @__meta_keys SET status=0, updated=CURRENT_TIMESTAMP WHERE status=2 AND TIMESTAMPDIFF(MINUTE, locked, CURRENT_TIMESTAMP)>' . $this->lockLimit;
-		if (!DbWpf::query($query)) { 
+		if (!DbWpf::query($query)) {
 			$this->pushError(DbWpf::getError());
 			return false;
 		}
@@ -66,7 +75,7 @@ class Meta_KeysModelWpf extends ModelWpf {
 		if ($calcLock) {
 			$select .= ', TIMESTAMPDIFF(MINUTE, locked, CURRENT_TIMESTAMP) as lock_duration';
 		}
-		return $this->setSelectFields($select)->addWhere(array('meta_key' => $key))->getFromTbl(array('return' => 'row'));
+		return $this->setSelectFields($select)->addWhere(array('meta_key' => $key))->getFromTbl(array('return' => 'row')); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 	}
 
 	public function saveKeyData( $data ) {
@@ -83,11 +92,11 @@ class Meta_KeysModelWpf extends ModelWpf {
 			return false;
 		}
 		$data['updated'] = $now;
-		
+
 		if (isset($data['status'])) {
-			if (1 == $data['status']) {	
+			if (1 == $data['status']) {
 				$data['calculated'] = $now;
-			} else if (2 == $data['status']) {	
+			} else if (2 == $data['status']) {
 				$data['locked'] = $now;
 			}
 			FrameWpf::_()->getModule('woofilters')->resetMetaKeys();
@@ -117,7 +126,7 @@ class Meta_KeysModelWpf extends ModelWpf {
 					}
 					$keyIds[] = $data['id'];
 				}
-			} else if (!$this->insert(array('meta_key' => $key, 'meta_mode' => 1, 'status' => 0))) {
+			} else if (!$this->insert(array('meta_key' => $key, 'meta_mode' => 1, 'status' => 0))) { // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 				return false;
 			}
 		}
@@ -125,7 +134,7 @@ class Meta_KeysModelWpf extends ModelWpf {
 			$valuesMeta->restoreOldValues($keyIds);
 			$keyIds = array();
 		}
-		
+
 		if ($remove) {
 			foreach ($allKeys as $key => $data) {
 				if ( ( 1 == $data['meta_mode'] ) && ( 9 != $data['status'] ) && !in_array($key, $filterKeys) ) {
@@ -142,6 +151,7 @@ class Meta_KeysModelWpf extends ModelWpf {
 		FrameWpf::_()->getModule('woofilters')->resetMetaKeys();
 		return true;
 	}
+
 	public function controlFiltersMetaKeys( $deep = false ) {
 		$filtersModel = FrameWpf::_()->getModule('woofilters')->getModel();
 		$filterKeys = $filtersModel->getFiltersMetaKeys(0, $deep);
