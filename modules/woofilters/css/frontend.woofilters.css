@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters CSS
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -354,6 +354,9 @@
 }
 .wfpClickable {
 	cursor: pointer;
+}
+.wpfFilterWrapper li {
+	margin: 0;
 }
 .rtl .wpfFilterWrapper li {
 	text-align: right !important;
@@ -1852,6 +1855,7 @@ select.woobewoo-flat-input {
 	background-size: contain;
 	cursor: pointer;
 	margin-right: 0.5rem;
+	margin-left: 0;
 	margin-bottom: 0;
 }
 .wpfMainWrapper input[type="radio"],
