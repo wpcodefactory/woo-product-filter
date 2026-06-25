@@ -6,7 +6,6 @@
  *
  * @author woobewoo
  *
- * @todo (v3.1.8) Update `WPF_PRO_REQUIRES`?
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -62,12 +61,11 @@ define('WPF_CURRENT', 'current');
 define('WPF_EOL', "\n");
 
 define('WPF_PLUGIN_INSTALLED', true);
-define('WPF_VERSION', '3.1.8');
-define('WPF_PRO_REQUIRES', '2.0.0');
+define('WPF_VERSION', '3.1.9-dev-20260621-0000');
 define('WPF_USER', 'user');
 
 define('WPF_CLASS_PREFIX', 'wpfc');
-define('WPF_FREE_VERSION', false);
+define('WPF_FREE_VERSION', true);
 define('WPF_TEST_MODE', true);
 
 define('WPF_SUCCESS', 'Success');

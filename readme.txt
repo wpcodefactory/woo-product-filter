@@ -153,6 +153,10 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
+= 3.1.9 - 25/06/2026 =
+* Fix - Fixed mobile_detect nullable parameter deprecation warning.
+* Dev - Cleanup pro codes.
+
 = 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.
 * Fix - Fixed Brizy editor shortcode render issue.

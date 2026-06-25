@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -26,7 +26,7 @@ function wpfIsThriveEditor() {
 /**
  * Main function.
  *
- * @version 3.1.8
+ * @version 3.1.9
  */
 (function ($, app) {
 	"use strict";
@@ -1261,7 +1261,7 @@ function wpfIsThriveEditor() {
 			displayType = filterWrapper.data('display-type'),
 			filterType = filterWrapper.data('filter-type');
 
-		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand'|| filterType == 'wpfBrand') {
+		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand') {
 			var isOne = displayType == 'list';
 		} else {
 			var isOne = displayType == 'radio';
@@ -1481,7 +1481,7 @@ function wpfIsThriveEditor() {
 					withChildren = '1';
 				}
 
-				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined' || filterType === 'wpfSearchText'  || filterType === 'wpfSearchNumber') {
+				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined') {
 					valueToPushBackend['id'] = filterType;
 					valueToPushBackend['uniqId'] = uniqId;
 					valueToPushBackend['logic'] = logic;

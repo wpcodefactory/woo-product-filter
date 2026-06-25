@@ -2,19 +2,13 @@
 /**
  * Product Filter by WBW - Woofilters Edit Admin
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$isPro = $this->is_pro;
-$labelPro = '';
-if (!$isPro) {
-	$adPath = $this->getModule()->getModPath() . 'img/ad/';
-	$labelPro = ' - Pro feature';
-}
 $isWCLicense = FrameWpf::_()->isWCLicense();
 
 list($categoryDisplay, $parentCategories) = $this->getModule()->getCategoriesDisplay();
@@ -26,21 +20,6 @@ $settings = $this->getFilterSetting($this->settings, 'settings', array());
 list($attrDisplay, $attrTypes, $attrNames) = $this->getModule()->getAttributesDisplay();
 
 list($roles) = $this->getModule()->getRolesDisplay();
-
-$wpfBrand = array(
-	'exist' => taxonomy_exists('product_brand')
-);
-
-$catArgs = array(
-	'orderby' => 'name',
-	'order' => 'asc',
-	'hide_empty' => false,
-);
-$brandDisplay = array();
-$parentBrands = array();
-if (taxonomy_exists('pwb-brand')) {
-	list($brandDisplay, $parentBrands) = $this->getModule()->getCategoriesDisplay('pwb-brand');
-}
 
 ?>
 

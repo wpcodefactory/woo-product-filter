@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.9
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
@@ -106,20 +106,6 @@ class WoofiltersModelWpf extends ModelWpf {
 				'unique'       => true,
 				'content_type' => 'meta',
 			),
-			'wpfSearchText' => array(
-				'name'         => esc_html__('Search by Text', 'woo-product-filter'),
-				'slug'         => esc_attr__('text', 'woo-product-filter'),
-				'enabled'      => false,
-				'unique'       => true,
-				'content_type' => '',
-			),
-			'wpfSearchNumber' => array(
-				'name'         => esc_html__('Search by Number', 'woo-product-filter'),
-				'slug'         => esc_attr__('number', 'woo-product-filter'),
-				'enabled'      => false,
-				'unique'       => false,
-				'content_type' => '',
-			),
 			'wpfCustomField' => array(
 				'name'         => esc_html__('Custom Field (Allow ACF plugin)', 'woo-product-filter'),
 				'slug'         => esc_attr__('custom_field', 'woo-product-filter'),
@@ -141,39 +127,6 @@ class WoofiltersModelWpf extends ModelWpf {
 				'enabled'      => true,
 				'unique'       => false,
 				'content_type' => 'taxonomy',
-			);
-		}
-
-		/**
-		 * Plugin compatibility and native WC `product_brand` taxonomy.
-		 *
-		 * @version 2.9.7
-		 *
-		 * @link https://woocommerce.com/products/brands
-		 */
-		if (taxonomy_exists('product_brand')) {
-			$filterTypes['wpfBrand'] = array(
-				'name'         => esc_html__('Product brands', 'woo-product-filter'),
-				'slug'         => esc_attr__('brand', 'woo-product-filter'),
-				'enabled'      => false,
-				'unique'       => true,
-				'content_type' => 'taxonomy',
-				'filtername'   => 'product_brand',
-			);
-		}
-
-		/**
-		 * Plugin compatibility.
-		 *
-		 * @link https://wordpress.org/plugins/wc-vendors/
-		 */
-		if ( class_exists('WC_Vendors')) {
-			$filterTypes['wpfVendors'] = array(
-				'name'         => esc_html__('Vendors', 'woo-product-filter'),
-				'slug'         => esc_attr__('vendors', 'woo-product-filter'),
-				'enabled'      => false,
-				'unique'       => true,
-				'content_type' => 'user',
 			);
 		}
 

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -38,34 +38,6 @@ class PromoWpf extends ModuleWpf {
 
 	public function addAdminTab( $tabs ) {
 		return $tabs;
-	}
-
-	public function addSubDestList( $subDestList ) {
-		if (!$this->isPro()) {
-			$subDestList = array_merge($subDestList, array(
-				'constantcontact'  => array('label' => esc_html__('Constant Contact - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'campaignmonitor'  => array('label' => esc_html__('Campaign Monitor - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'verticalresponse' => array('label' => esc_html__('Vertical Response - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'sendgrid'         => array('label' => esc_html__('SendGrid - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'get_response'     => array('label' => esc_html__('GetResponse - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'icontact'         => array('label' => esc_html__('iContact - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'activecampaign'   => array('label' => esc_html__('Active Campaign - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'mailrelay'        => array('label' => esc_html__('Mailrelay - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'arpreach'         => array('label' => esc_html__('arpReach - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'sgautorepondeur'  => array('label' => esc_html__('SG Autorepondeur - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'benchmarkemail'   => array('label' => esc_html__('Benchmark - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'infusionsoft'     => array('label' => esc_html__('InfusionSoft - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'salesforce'       => array('label' => esc_html__('SalesForce - Web-to-Lead - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'convertkit'       => array('label' => esc_html__('ConvertKit - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'myemma'           => array('label' => esc_html__('Emma - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'sendinblue'       => array('label' => esc_html__('SendinBlue - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'vision6'          => array('label' => esc_html__('Vision6 - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'vtiger'           => array('label' => esc_html__('Vtiger - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'ymlp'             => array('label' => esc_html__('Your Mailing List Provider (Ymlp) - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'fourdem'          => array('label' => esc_html__('4Dem.it - PRO', 'woo-product-filter'), 'require_confirm' => false),
-			));
-		}
-		return $subDestList;
 	}
 
 	public function getOverviewTabContent() {

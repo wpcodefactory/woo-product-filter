@@ -2,19 +2,12 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Elementor Filters
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
-
-$isPro = FrameWpf::_()->isPro();
-$labelPro = '';
-if (!$isPro) {
-	$adPath = FrameWpf::_()->getModule('woofilters')->getModPath() . 'img/ad/';
-	$labelPro = ' Pro';
-}
 
 list($categoryDisplay, $parentCategories) = FrameWpf::_()->getModule('woofilters')->getCategoriesDisplay();
 
@@ -23,28 +16,6 @@ list($tagsDisplay) = FrameWpf::_()->getModule('woofilters')->getTagsDisplay();
 list($attrDisplay, $attrTypes, $attrNames) = FrameWpf::_()->getModule('woofilters')->getAttributesDisplay();
 
 list($roles) = FrameWpf::_()->getModule('woofilters')->getRolesDisplay();
-
-$wpfBrand = array(
-	'exist' => taxonomy_exists('product_brand')
-);
-
-$catArgs = array(
-	'taxonomy' => 'pwb-brand',
-	'orderby' => 'name',
-	'order' => 'asc',
-	'hide_empty' => false,
-);
-$brandDisplay = array();
-$parentBrands = array();
-if (taxonomy_exists('pwb-brand')) {
-	$productBrands = get_terms( $catArgs );
-	foreach ($productBrands as $c) {
-		if (0 == $c->parent) {
-			array_push($parentBrands, $c->term_id);
-		}
-		$brandDisplay[$c->term_id] = $c->name;
-	}
-}
 
 $formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getModule('woofilters')->getView()->getCode() );
 ?>

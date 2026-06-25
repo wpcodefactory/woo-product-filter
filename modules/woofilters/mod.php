@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -1334,7 +1334,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * addCustomTaxQuery.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function addCustomTaxQuery( $taxQuery, $data, $mode ) {
 
@@ -1416,24 +1416,7 @@ class WoofiltersWpf extends ModuleWpf {
 						);
 					}
 				} elseif (
-					(
-						strpos( $key, 'product_brand' ) === 0 ||
-						(
-							strpos( $key, 'wpf_filter_brand' ) === 0 &&
-							! taxonomy_exists(
-								'pa_' .
-								preg_replace(
-									'/_\d+$/',
-									'',
-									str_replace(
-										'wpf_filter_',
-										'',
-										$key
-									)
-								)
-							)
-						)
-					) &&
+					strpos( $key, 'product_brand' ) === 0 &&
 					taxonomy_exists('product_brand') &&
 					!is_admin()
 				) {
@@ -1581,7 +1564,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadProductsFilter.
 	 *
-	 * @version 2.9.4
+	 * @version 3.1.9
 	 */
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
@@ -1732,28 +1715,26 @@ class WoofiltersWpf extends ModuleWpf {
 					break;
 			}
 		}
-		if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
-			$filterSettings = array();
-			$params         = array();
-			if ( ReqWpf::getVar( 'wpf_fbv' ) ) {
-				$filterSettings['filtering_by_variations'] = 1;
-				$params                                    = ReqWpf::get( 'get' );
-			}
-			if ( ReqWpf::getVar( 'wpf_ebv' ) ) {
-				$filterSettings['exclude_backorder_variations'] = 1;
-			}
-			if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
-				$filterSettings['display_product_variations'] = 1;
-			}
-			$args = array(
-				'tax_query'  => $q->get( 'tax_query' ),  // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-				'meta_query' => $q->get( 'meta_query' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				'post__in'   => $q->get( 'post__in' ),
-			);
-			$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
-			$q->set( 'post__in', $args['post__in'] );
-			$q->set( 'tax_query', $args['tax_query'] );
+		$filterSettings = array();
+		$params         = array();
+		if ( ReqWpf::getVar( 'wpf_fbv' ) ) {
+			$filterSettings['filtering_by_variations'] = 1;
+			$params                                    = ReqWpf::get( 'get' );
 		}
+		if ( ReqWpf::getVar( 'wpf_ebv' ) ) {
+			$filterSettings['exclude_backorder_variations'] = 1;
+		}
+		if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
+			$filterSettings['display_product_variations'] = 1;
+		}
+		$args = array(
+			'tax_query'  => $q->get( 'tax_query' ),  // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			'meta_query' => $q->get( 'meta_query' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			'post__in'   => $q->get( 'post__in' ),
+		);
+		$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
+		$q->set( 'post__in', $args['post__in'] );
+		$q->set( 'tax_query', $args['tax_query'] );
 
 		$q = DispatcherWpf::applyFilters( 'loadProductsFilterPro', $q );
 
@@ -2114,7 +2095,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadShortcodeProductsFilter.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.9
 	 */
 	public function loadShortcodeProductsFilter( $args, $attributes = array(), $type = '' ) {
 		$hash         = md5( serialize( $args ) . serialize( $attributes ) );
@@ -2214,11 +2195,7 @@ class WoofiltersWpf extends ModuleWpf {
 				if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
 					$filterSettings['display_product_variations'] = 1;
 				}
-				if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
-					$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
-				} else {
-					$args = DispatcherWpf::applyFilters( 'checkBeforeFiltersFrontendArgs', $args, $filterSettings, $params );
-				}
+				$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
 				if ( $this->shortcodeWCQuery[ $filterKey ] !== $args ) {
 					$this->shortcodeWCQueryFiltered[ $filterKey ] = $args;
 				}
@@ -2664,19 +2641,8 @@ class WoofiltersWpf extends ModuleWpf {
 					$mode = 10;
 				} elseif ( is_product() && $displayProduct && $displayMobile ) {
 					$mode = 8;
-				} elseif (
-					FrameWpf::_()->isPro() &&
-					( is_tax( 'pwb-brand' ) || is_tax( 'product_brand' ) ) &&
-					$displayBrand &&
-					$displayMobile
-				) {
-					$mode = 11;
-				} elseif ( 'all_pages' === $displayOnPage ) {
-					if ( FrameWpf::_()->isPro() ) {
-						$mode = 12;
-					} elseif ( is_shop() ) {
-						$mode = 2; // shop mode if not PRO
-					}
+				} else {
+					$mode = DispatcherWpf::applyFilters( 'getRenderMode', $mode, $displayOnPage, $displayBrand, $displayMobile );
 				}
 			}
 			$this->renderModes[ $id ] = $mode;
@@ -2711,7 +2677,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getDisplayMode.
 	 *
-	 * @version 2.9.4
+	 * @version 3.1.9
 	 */
 	public function getDisplayMode() {
 		if ( is_null( $this->displayMode ) ) {
@@ -3166,12 +3132,14 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * renderSelectedFilters.
+	 *
+	 * @version 3.1.9
 	 */
 	public function renderSelectedFilters( $params ) {
 		$p = array(
 			'id' => ( isset($params['id']) ? (int) $params['id'] : 0 ),
 		);
-		return FrameWpf::_()->isPro() ? $this->getView()->renderSelectedFiltersHtml( $p ) : '';
+		return DispatcherWpf::applyFilters( 'renderSelectedFilters', '', $p );
 	}
 
 	/**
@@ -3316,6 +3284,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * getFilterTaxonomies.
+	 *
+	 * @version 3.1.9
 	 */
 	public function getFilterTaxonomies( $settings, $calcCategories = false, $filterSettings = array(), $ajax = false, $urlQuery = array() ) {
 
@@ -3374,10 +3344,6 @@ class WoofiltersWpf extends ModuleWpf {
 
 					break;
 
-				case 'wpfBrand':
-					$taxonomy = 'product_brand';
-					break;
-
 				case 'wpfPerfectBrand':
 					$taxonomy = 'pwb-brand';
 					break;
@@ -3391,19 +3357,17 @@ class WoofiltersWpf extends ModuleWpf {
 					break;
 
 				case 'wpfAuthor':
-				case 'wpfVendors':
 				case 'wpfRating':
 					$other[] = $filter['id'];
 					break;
-				case 'wpfSearchNumber':
-					if ( ! empty( $filter['settings']['f_conrol_products'] ) && ! empty( $filter['settings']['f_list'] ) ) {
-						$slug     = $filter['settings']['f_list'];
-						$taxonomy = ( is_numeric( $slug ) )
-							? wc_attribute_taxonomy_name_by_id( (int) $slug )
-							: DispatcherWpf::applyFilters( 'getCustomAttributeName', $slug, $filter );
-					}
-					break;
+
 				default:
+					$filterData = DispatcherWpf::applyFilters( 'getFilterTaxonomyByType', array(
+						'taxonomy' => $taxonomy,
+						'other'    => $other,
+					), $filter, $settings, $ajax, $urlQuery );
+					$taxonomy = $filterData['taxonomy'];
+					$other    = $filterData['other'];
 					break;
 
 			}
@@ -4139,7 +4103,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4280,31 +4244,19 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 		}
 
-		if ( FrameWpf::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
-			$termProducts = ! isset( $sql['main'] ) ? array() : DbWpf::get( $sql['main'] );
+		$termProducts = ! isset( $sql['main'] ) ? array() : DbWpf::get( $sql['main'] );
 
-			if ( false === $termProducts ) {
-				$termProducts = array();
-			}
-
-			$termProducts = DispatcherWpf::applyFilters( 'addCustomAttributesSql', $termProducts, array(
-				'taxonomies'      => $param['taxonomy'],
-				'withCount'       => $param['withCount'],
-				'listTable'       => $listTable,
-				'generalSettings' => $param['generalSettings'],
-				'currentSettings' => $param['currentSettings'],
-			) );
-		} else {
-			$sql['main']              = DispatcherWpf::applyFilters( 'addCustomAttributesSql', $sql['main'], array(
-				'taxonomies'      => $param['taxonomy'],
-				'withCount'       => $param['withCount'],
-				'productList'     => '(select id from ' . $listTable . ')',
-				'generalSettings' => $param['generalSettings'],
-				'currentSettings' => $param['currentSettings'],
-			) );
-			$wpdb->wpf_prepared_query = $sql['main'];
-			$termProducts             = $wpdb->get_results( $wpdb->wpf_prepared_query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		if ( false === $termProducts ) {
+			$termProducts = array();
 		}
+
+		$termProducts = DispatcherWpf::applyFilters( 'addCustomAttributesSql', $termProducts, array(
+			'taxonomies'      => $param['taxonomy'],
+			'withCount'       => $param['withCount'],
+			'listTable'       => $listTable,
+			'generalSettings' => $param['generalSettings'],
+			'currentSettings' => $param['currentSettings'],
+		) );
 
 		$existTerms = array();
 
@@ -4601,6 +4553,8 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns additional data on minimum and maximum prices and users.
 	 *
+	 * @version 3.1.9
+	 *
 	 * @param $args
 	 * @param $param
 	 *
@@ -4674,7 +4628,6 @@ class WoofiltersWpf extends ModuleWpf {
 							break;
 
 						case 'wpfAuthor':
-						case 'wpfVendors':
 							if ( empty( $result['existsUsers'] ) ) {
 								$query = 'SELECT DISTINCT ' . $wpdb->users . '.ID' .
 										' FROM ' . $listTable . ' AS wpf_temp' .
@@ -4683,6 +4636,10 @@ class WoofiltersWpf extends ModuleWpf {
 
 								$result['existsUsers'] = dbWpf::get( $query );
 							}
+							break;
+
+						default:
+							$result = DispatcherWpf::applyFilters( 'getExistsMoreByType', $result, $args, $param, $setting );
 							break;
 
 						case 'wpfAttribute':

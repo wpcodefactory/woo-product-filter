@@ -4,7 +4,7 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -137,6 +137,8 @@ class ModInstallerWpf {
 
 	/**
 	 * _getPluginLocations.
+	 *
+	 * @version 3.1.9
 	 */
 	private static function _getPluginLocations() {
 		$locations = array();
@@ -156,7 +158,7 @@ class ModInstallerWpf {
 			}
 		}
 
-		$locations['plugPath'] = empty($plug) && function_exists('getProPlugFullPathWpf') ? plugin_basename(getProPlugFullPathWpf()) : plugin_basename( trim( $plug ) );
+		$locations['plugPath'] = plugin_basename( trim( $plug ) );
 		$locations['plugDir'] = dirname(WP_PLUGIN_DIR . DS . $locations['plugPath']);
 		$locations['plugMainFile'] = WP_PLUGIN_DIR . DS . $locations['plugPath'];
 		$locations['xmlPath'] = $locations['plugDir'] . DS . 'install.xml';
@@ -169,6 +171,8 @@ class ModInstallerWpf {
 	 * @param string $xmlPath
 	 *
 	 * @return array
+	 *
+	 * @version 3.1.9
 	 */
 	private static function _getModulesFromXml( $xmlPath ) {
 		$modDataArr = array();
@@ -196,7 +200,7 @@ class ModInstallerWpf {
 				ErrorsWpf::push(esc_html__('No XML file were found', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
 			}
 		} else {
-			$modDataArr = unserialize(WPF_PRO_MODULES);
+			$modDataArr = apply_filters( 'wpf_getModulesFallback', array() );
 		}
 		return $modDataArr;
 	}

@@ -2,13 +2,13 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Design
  *
- * @version 3.1.7
- *
- * @author woobewoo
+ * @version 3.1.9
+ * @author  woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
+$isPro = FrameWpf::_()->isPro();
 ?>
 <div class="woobewoo_row row-tab" id="row-tab-design">
 	<div class="sub-tab woobewoo-input-group col-xs-12">
@@ -202,80 +202,68 @@ defined( 'ABSPATH' ) || exit;
 		<div class="settings-block-title">
 			<?php esc_html_e('Blocks Styling', 'woo-product-filter'); ?>
 		</div>
-		<?php
-		if ($isPro) {
-			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignBlocks', $this->settings);
-		} else {
-			?>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-sm-3">
-					<?php esc_html_e('Use Custom Styles', 'woo-product-filter'); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose custom styles for filter blocks. Any settings you leave blank will default.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/filter-block-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-sm-9">
-					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
-				</div>
+		<?php DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignBlocks', $this->settings); ?>
+		<?php if ( ! $isPro ) : ?>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-sm-3">
+				<?php esc_html_e('Use Custom Styles', 'woo-product-filter'); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose custom styles for filter blocks. Any settings you leave blank will default.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/filter-block-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 			</div>
-		<?php } ?>
+			<div class="settings-block-values col-xs-8 col-sm-9">
+				<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+			</div>
+		</div>
+		<?php endif; ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-titles">
 		<div class="settings-block-title">
 			<?php esc_html_e('Titles Styling', 'woo-product-filter'); ?>
 		</div>
-		<?php
-		if ($isPro) {
-			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignTitles', $this->settings);
-		} else {
-			?>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-sm-3">
-					<?php esc_html_e('Use Custom Styles', 'woo-product-filter'); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose custom styles for filter titles. Any settings you leave blank will default.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/filter-title-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-sm-9">
-					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
-				</div>
+		<?php DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignTitles', $this->settings); ?>
+		<?php if ( ! $isPro ) : ?>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-sm-3">
+				<?php esc_html_e('Use Custom Styles', 'woo-product-filter'); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose custom styles for filter titles. Any settings you leave blank will default.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/filter-title-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 			</div>
-		<?php } ?>
+			<div class="settings-block-values col-xs-8 col-sm-9">
+				<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+			</div>
+		</div>
+		<?php endif; ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-buttons">
 		<div class="settings-block-title">
 			<?php esc_html_e('Buttons Styling', 'woo-product-filter'); ?>
 		</div>
-		<?php
-		if ($isPro) {
-			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignButtons', $this->settings);
-		} else {
-			?>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-sm-3">
-					<?php esc_html_e('Use Custom Styles', 'woo-product-filter'); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose custom styles for filter buttons. Any settings you leave blank will default.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/buttons-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-sm-9">
-					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
-				</div>
+		<?php DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignButtons', $this->settings); ?>
+		<?php if ( ! $isPro ) : ?>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-sm-3">
+				<?php esc_html_e('Use Custom Styles', 'woo-product-filter'); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('Choose custom styles for filter buttons. Any settings you leave blank will default.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/buttons-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 			</div>
-		<?php } ?>
+			<div class="settings-block-values col-xs-8 col-sm-9">
+				<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+			</div>
+		</div>
+		<?php endif; ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-floating">
 		<div class="settings-block-title">
 			<?php esc_html_e('Floating Modе Options', 'woo-product-filter'); ?>
 		</div>
-		<?php
-		if ($isPro) {
-			DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignFloating', $this->settings, $this->filter['id']);
-		} else {
-			?>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-sm-3">
-					<?php esc_html_e('Use Floating Modе', 'woo-product-filter'); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('The filter will be located in a popup.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/buttons-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-sm-9">
-					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
-				</div>
+		<?php DispatcherWpf::doAction('addEditTabDesign', 'partEditTabDesignFloating', $this->settings, $this->filter['id']); ?>
+		<?php if ( ! $isPro ) : ?>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-sm-3">
+				<?php esc_html_e('Use Floating Modе', 'woo-product-filter'); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr(__('The filter will be located in a popup.', 'woo-product-filter') . ' <a href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/documentation/buttons-design/') . '" class="wupsales-wc-hidden" target="_blank">' . __('Learn More', 'woo-product-filter') . '</a>'); ?>"></i>
 			</div>
-		<?php } ?>
+			<div class="settings-block-values col-xs-8 col-sm-9">
+				<span class="settings-value wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
+			</div>
+		</div>
+		<?php endif; ?>
 	</div>
 </div>
