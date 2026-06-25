@@ -6,7 +6,7 @@
  * Version: 3.1.9-dev-20260625-1100
  * Author: woobewoo
  * Author URI: https://woobewoo.com/
- * Requires at least: 5.0.0
+ * Requires at least: 6.2
  * Text Domain: woo-product-filter
  * Domain Path: /languages
  * WC requires at least: 3.4.1
