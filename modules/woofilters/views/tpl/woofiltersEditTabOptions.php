@@ -983,6 +983,7 @@ $isPro = FrameWpf::_()->isPro();
 						<span class="wpfProLabel"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 					</div>
 				<?php endif; ?>
+				<?php DispatcherWpf::doAction( 'addEditTabDesign', 'partEnableFilterIconOnLoad', $this->settings ); ?>
 			</div>
 		</div>
 		<?php DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabOptionsLoader', $this->settings ); ?>
