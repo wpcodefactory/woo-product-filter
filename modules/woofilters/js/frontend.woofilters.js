@@ -1401,7 +1401,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * filtering.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.9
 	 */
 	WpfFrontendPage.prototype.filtering = (function ($filterWrapper, clearAll, redirectLink, onlyRecalcFilter) {
 		var _thisObj = this.$obj;
@@ -1640,6 +1640,7 @@ function wpfIsThriveEditor() {
 			_thisObj.QStringWork('product-page', '', noWooPage, $filterWrapper, 'remove');
 			_thisObj.QStringWork('shopPage', '', noWooPage, $filterWrapper, 'remove');
 			_thisObj.QStringWork('avia-element-paging', '', noWooPage, $filterWrapper, 'remove');
+			_thisObj.QStringWork('bpage', '', noWooPage, $filterWrapper, 'remove');
 
 			var curUrl = getCurrentUrlPartsWpf();
 			if (curUrl.search.length) {
@@ -3936,6 +3937,11 @@ function changeUrl(filterSlug, filterValue, $wooPage, $filterWrapper) {
 	return urlValue;
 }
 
+/**
+ * removePageQString.
+ *
+ * @version 3.1.9
+ */
 function removePageQString() {
 	var curUrl = getCurrentUrlPartsWpf(),
 		path = curUrl.path,
@@ -3943,7 +3949,13 @@ function removePageQString() {
 	if(page != -1 && history.pushState) {
 		window.wpfNewUrl = path.substr(0, page + 1) + curUrl.search;
 	} else {
-		window.wpfNewUrl = curUrl.path + removePagenum(curUrl.search);
+		// also strip Brizy Pro's /bpage/N/ path segment
+		var bpage = path.indexOf('/bpage/');
+		if (bpage != -1 && history.pushState) {
+			window.wpfNewUrl = path.substr(0, bpage + 1) + curUrl.search;
+		} else {
+			window.wpfNewUrl = curUrl.path + removePagenum(curUrl.search);
+		}
 	}
 }
 
