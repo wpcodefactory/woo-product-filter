@@ -181,7 +181,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
@@ -203,9 +203,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		// preview case
 		if ( isset( $params['settings'] ) ) {
 			$params['settings']['filters']['order'] = stripcslashes( $params['settings']['filters']['order'] );
-			if ( ! empty( $params['settings']['css_editor'] ) ) {
-				$params['settings']['css_editor'] = base64_encode( $params['settings']['css_editor'] );
-			}
 			$settings = $params;
 			// other
 		} else {
@@ -505,14 +502,6 @@ class WoofiltersViewWpf extends ViewWpf {
 	 * @version 3.1.9
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
-		$customCss = '';
-		if ( ! empty($filterSettings['settings']['css_editor']) ) {
-			$customCss = stripslashes(base64_decode($filterSettings['settings']['css_editor']));
-			unset($filterSettings['settings']['css_editor']);
-		}
-		if ( ! empty($filterSettings['settings']['js_editor']) ) {
-			$filterSettings['settings']['js_editor'] = stripslashes(base64_decode($filterSettings['settings']['js_editor']));
-		}
 		$this->setCurrentSettings($filterSettings);
 		$this->resetFiltersCss();
 
@@ -784,7 +773,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html  = DispatcherWpf::applyFilters('addHtmlAfterFilter', $html, $settings, $this->filter['id']);
 		$html .= '</div>';
 		$html .= self::$filterExistsTermsJS;
-		$html  = '<style type="text/css" id="wpfCustomCss-' . $viewId . '">' . DispatcherWpf::applyFilters('addCustomCss', $customCss . self::$filtersCss, $settings, $filterId) . '</style>' . $html;
+		$html  = '<style type="text/css" id="wpfCustomCss-' . $viewId . '">' . DispatcherWpf::applyFilters('addCustomCss', self::$filtersCss, $settings, $filterId) . '</style>' . $html;
 
 		$this->resetFilterExistsTerms();
 

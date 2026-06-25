@@ -61,7 +61,7 @@ define('WPF_CURRENT', 'current');
 define('WPF_EOL', "\n");
 
 define('WPF_PLUGIN_INSTALLED', true);
-define('WPF_VERSION', '3.1.9-dev-20260625-1100');
+define('WPF_VERSION', '3.1.9-dev-20260626-0000');
 define('WPF_USER', 'user');
 
 define('WPF_CLASS_PREFIX', 'wpfc');

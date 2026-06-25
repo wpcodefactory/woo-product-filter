@@ -141,34 +141,6 @@ $isPro = FrameWpf::_()->isPro();
 		</div>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-sm-3">
-				<?php esc_html_e('CSS editor', 'woo-product-filter'); ?>
-				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('Custom CSS', 'woo-product-filter'); ?>"></i>
-			</div>
-			<div class="settings-block-values settings-w100 col-xs-12 col-sm-9">
-				<?php
-					HtmlWpf::textarea('settings[css_editor]', array(
-						'value' => ( isset($this->settings['settings']['css_editor']) ? stripslashes(base64_decode($this->settings['settings']['css_editor'])) : '' ),
-						'auto_width' => true
-					));
-					?>
-			</div>
-		</div>
-		<div class="woobewoo_row row-settings-block" data-no-preview="1">
-			<div class="settings-block-label col-xs-4 col-sm-3">
-				<?php esc_html_e('JS editor', 'woo-product-filter'); ?>
-				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('Custom JS', 'woo-product-filter'); ?>"></i>
-			</div>
-			<div class="settings-block-values settings-w100 col-xs-12 col-sm-9">
-				<?php
-					HtmlWpf::textarea('settings[js_editor]', array(
-						'value' => ( isset($this->settings['settings']['js_editor']) ? stripslashes(base64_decode($this->settings['settings']['js_editor'])) : '' ),
-						'auto_width' => true
-					));
-					?>
-			</div>
-		</div>
-		<div class="woobewoo_row row-settings-block">
-			<div class="settings-block-label col-xs-4 col-sm-3">
 				<?php esc_html_e('Don\'t load Fontawesome', 'woo-product-filter'); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('Attention! Do not enable this option if you are not sure. It is worth using if your theme loads the Fontawesome library on its own, or if you plan to change filter icons to custom ones with CSS.', 'woo-product-filter'); ?>"></i>
 			</div>
