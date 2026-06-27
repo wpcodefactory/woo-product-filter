@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - InstallerWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -23,11 +23,15 @@ class InstallerWpf {
 
 	/**
 	 * init.
+	 *
+	 * @version 3.1.9
 	 */
 	public static function init( $isUpdate = false ) {
 		global $wpdb;
 		$wpPrefix = $wpdb->prefix; /* add to 0.0.3 Version */
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		if ( ! function_exists( 'dbDelta' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		}
 		$current_version = get_option($wpPrefix . WPF_DB_PREF . 'db_version', 0);
 		if (!$current_version) {
 			self::$_firstTimeActivated = true;

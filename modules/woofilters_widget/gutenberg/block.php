@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Block
  *
- * @version 3.1.7
+ * @version 3.1.9
  * @since   3.1.7
  *
  * @author woobewoo
@@ -19,15 +19,21 @@ add_action('init', function () {
 			),
 		),
 
-		// Dynamic render (same as widget)
+		/**
+		 * render_callback.
+		 *
+		 * @version 3.1.9
+		 * @since   3.1.7
+		 */
 		'render_callback' => function ($attributes) {
 
 			if (empty($attributes['filter_id'])) {
 				return '';
 			}
 
-			return do_shortcode(
-				'[wpf-filters id="' . esc_attr($attributes['filter_id']) . '"]'
+			return wp_kses(
+				do_shortcode( '[wpf-filters id="' . esc_attr( $attributes['filter_id'] ) . '"]' ),
+				HtmlWpf::getAllowedHtmlTags()
 			);
 		},
 	));

@@ -1,5 +1,11 @@
 <?php
 class Woofilters_WidgetViewWpf extends ViewWpf {
+
+	/**
+	 * displayWidget.
+	 *
+	 * @version 3.1.9
+	 */
 	public function displayWidget( $instance, $args ) {
 		if ( isset($instance['id']) && $instance['id'] ) {
 			// now disabled rule: if is_shop() or is_product_category() or is_product_tag() or is_customize_preview()
@@ -8,10 +14,11 @@ class Woofilters_WidgetViewWpf extends ViewWpf {
 				if ( isset( $args['before_widget'] ) && isset( $args['after_widget'] ) ) {
 					$widget = $args['before_widget'] . $widget . $args['after_widget'];
 				}
-				HtmlWpf::echoEscapedHtml( $widget );
+				echo wp_kses( $widget, HtmlWpf::getAllowedHtmlTags() );
 			}
 		}
 	}
+
 	public function displayForm( $data, $widget ) {
 		FrameWpf::_()->addStyle('woofilters_widget', $this->getModule()->getModPath() . 'css/gmap_widget.css');
 		$filters = FrameWpf::_()->getModule('woofilters')->getModel()->getFromTbl();

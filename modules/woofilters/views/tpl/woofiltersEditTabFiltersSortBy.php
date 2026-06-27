@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Sort By
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -19,12 +19,13 @@ ViewWpf::display('woofiltersEditTabCommonTitle');
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
+				$sortbyFrontendTypes = array(
+					'dropdown' => esc_attr__( 'Dropdown (single select)', 'woo-product-filter' ),
+					'radio'    => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
+				);
+				$sortbyFrontendTypes = DispatcherWpf::applyFilters( 'getAdminFilterTypes', $sortbyFrontendTypes, 'wpfSortBy' );
 				HtmlWpf::selectbox('f_frontend_type', array(
-					'options' => array(
-						'dropdown'     => esc_attr__( 'Dropdown (single select)', 'woo-product-filter' ),
-						'mul_dropdown' => esc_attr__( 'Stylized Dropdown', 'woo-product-filter' ) . $labelPro,
-						'radio'        => esc_attr__( 'Radiobuttons list (single select)', 'woo-product-filter' ),
-					),
+					'options' => $sortbyFrontendTypes,
 					'attrs'   => 'class="woobewoo-flat-input"'
 				));
 				?>
@@ -67,6 +68,4 @@ ViewWpf::display('woofiltersEditTabCommonTitle');
 </div>
 
 <?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortBy' );
-}
+DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortBy' );

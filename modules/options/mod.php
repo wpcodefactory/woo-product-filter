@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsWpf Class
  *
- * @version 3.1.2
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -238,7 +238,7 @@ class OptionsWpf extends ModuleWpf {
 	/**
 	 * getAll.
 	 *
-	 * @version 3.1.2
+	 * @version 3.1.9
 	 */
 	public function getAll() {
 		if (empty($this->_options)) {
@@ -315,13 +315,9 @@ class OptionsWpf extends ModuleWpf {
 					'html'  => 'checkboxHiddenVal',
 				);
 			}
-			$isPro = FrameWpf::_()->getModule('promo')->isPro();
 			foreach ($this->_options as $catKey => $cData) {
 				foreach ($cData['opts'] as $optKey => $opt) {
 					$this->_optionsToCategoires[ $optKey ] = $catKey;
-					if (isset($opt['pro']) && !$isPro) {
-						$this->_options[ $catKey ]['opts'][ $optKey ]['pro'] = FrameWpf::_()->getModule('promo')->generateMainLink('utm_source=plugin&utm_medium=' . $optKey . '&utm_campaign=popup');
-					}
 				}
 			}
 			$this->getModel()->fillInValues( $this->_options );

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersControllerWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -212,14 +212,15 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		return $data;
 	}
 
+	/**
+	 * drawFilterAjax.
+	 *
+	 * @version 3.1.9
+	 */
 	public function drawFilterAjax() {
 		$res  = new ResponseWpf();
 		$data = ReqWpf::get('post');
 		if ( isset($data) && $data ) {
-			$isPro = FrameWpf::_()->isPro();
-			if ( ! empty($data['settings']['js_editor']) ) {
-				$data['settings']['js_editor'] = '';
-			}
 			if ( ! empty($data['settings']['filters']['order']) ) {
 				$metaKeys = $this->getDataFilterMetaKeys(stripcslashes($data['settings']['filters']['order']));
 				if ( count($metaKeys) > 0 ) {
@@ -229,7 +230,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 			$html = FrameWpf::_()->getModule('woofilters')->getView()->renderHtml($data);
 
-			$html .= '<script type="text/javascript">window.wpfFrontendPage.init();' . ( $isPro ? 'window.wpfFrontendPage.eventsFrontendPro();' : '' ) . '</script>';
+			$initScript = DispatcherWpf::applyFilters( 'drawFilterAjaxScript', 'window.wpfFrontendPage.init();' );
+			$html      .= '<script type="text/javascript">' . $initScript . '</script>';
 			$res->setHtml($html);
 		} else {
 			$res->pushError($this->getModule('woofilters')->getErrors());
@@ -238,13 +240,18 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * save.
+	 *
+	 * @version 3.1.9
+	 */
 	public function save() {
 
-		if ( is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) ) {
+		if ( wpf_is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) ) {
 			do_action( 'litespeed_purge_all' );
 		}
 
-		if ( is_plugin_active( 'wp-rocket/wp-rocket.php' ) && function_exists( 'rocket_clean_domain' ) ) {
+		if ( wpf_is_plugin_active( 'wp-rocket/wp-rocket.php' ) && function_exists( 'rocket_clean_domain' ) ) {
 			if ( FrameWpf::_()->getModule( 'options' )->get( 'disable_clean_rocket_cache' ) != 1 ) {
 				rocket_clean_domain();
 			}
@@ -337,7 +344,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * filtersFrontend.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function filtersFrontend() {
 		$res = new ResponseWpf();
@@ -509,11 +516,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		if ( ! $recount ) {
 			$taxonomies['count'] = array();
 		}
-		if ( FrameWpf::_()->proVersionCompare('1.4.8') ) {
-			$args = $module->addBeforeFiltersFrontendArgs($args, $filterSettings, $urlQuery);
-		} else {
-			$args = DispatcherWpf::applyFilters('beforeFilterExistsTerms', $args, $filterSettings, $urlQuery);
-		}
+		$args = $module->addBeforeFiltersFrontendArgs($args, $filterSettings, $urlQuery);
 		$filterItems = $module->getFilterExistsItems($args, $taxonomies, $calcParentCategory, $categoryPageId, $generalSettings, true , $filterSettings, array(), $urlQuery);
 		if ( $onlyStatistics ) {
 			$isFound = empty($filterItems['have_posts']) ? 0 : 1;
@@ -562,12 +565,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			if ( $showProducts || empty($categoryHtml) ) {
 
 				//get products
-				if ( FrameWpf::_()->proVersionCompare('1.4.8') ) {
-					//$loop = new WP_Query($module->addBeforeFiltersFrontendArgs($args, $filterSettings));
-					$loop = new WP_Query($args);
-				} else {
-					$loop = new WP_Query(DispatcherWpf::applyFilters('beforeFiltersFrontendArgs', $args, $filterSettings));
-				}
+				$loop = new WP_Query($args);
 				if ( $displayProductVariations ) {
 					DispatcherWpf::doAction('beforeLoopVariations', $filterSettings);
 				}
@@ -653,14 +651,14 @@ class WoofiltersControllerWpf extends ControllerWpf {
 						$args['after_page_number']  = '</span>';
 						unset( $args['type'] );
 						$links = paginate_links( $args );
-						HtmlWpf::echoEscapedHtml( _navigation_markup( $links, 'pagination', '' ) );
+						echo wp_kses_post( _navigation_markup( $links, 'pagination', '' ) );
 						break;
 					case 'Themify Ultra':
 						$args['before_page_number'] = '<span>';
 						$args['after_page_number']  = '</span>';
 						unset( $args['type'] );
 						$links = paginate_links( $args );
-						HtmlWpf::echoEscapedHtml( '<div class="pagenav tf_clear tf_box tf_textr tf_clearfix">' . $links . '</div>' );
+						echo wp_kses_post( '<div class="pagenav tf_clear tf_box tf_textr tf_clearfix">' . $links . '</div>' );
 						break;
 					default:
 						wc_get_template( 'loop/pagination.php', $args );
@@ -823,7 +821,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables
@@ -1247,37 +1245,10 @@ class WoofiltersControllerWpf extends ControllerWpf {
 							}
 						}
 						break;
-					case 'wpfBrand':
-						$brandsIdStr = $setting['settings'];
-						if ( $brandsIdStr ) {
-							$args['tax_query'][] = array(
-								'taxonomy' => 'product_brand',
-								'field'    => 'id',
-								'terms'    => $brandsIdStr,
-								'operator' => ( isset($setting['logic']) && ( 'or' == $setting['logic'] ) ? 'IN' : 'AND' ),
-							);
-						}
-						break;
-					case 'wpfVendors':
-						$vendorIds = $setting['settings'];
-						if ( ! empty($vendorIds) ) {
-							$args['author__in'] = $vendorIds;
-						}
-						break;
-					case 'wpfSearchNumber':
-						if ( ! empty($setting['settings']['value']) ) {
-							$args['tax_query'] = DispatcherWpf::applyFilters( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-								'addCustomTaxQueryPro',
-								$args['tax_query'],
-								array($setting['name'] => $setting['settings']['value']),
-								'url'
-							);
-						}
-						break;
 				}
 			}
 		}
-		//DispatcherWpf::doAction('addArgsForFilteringBySettings', $filtersDataBackend);
+		$args = DispatcherWpf::applyFilters( 'addFilterArgsBySettings', $args, $filtersDataBackend );
 
 		if ( isset($temp['wpfCategory']) ) {
 			$temp['wpfCategory']['relation'] = strtoupper($MultiLogic);

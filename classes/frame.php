@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - FrameWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -32,8 +32,6 @@ class FrameWpf {
 	private $_scriptsVars        = array();
 	private $_mod                = '';
 	private $_action             = '';
-	private $_proVersion         = null;
-
 	/**
 	 * Object with result of executing non-ajax module request.
 	 */
@@ -204,46 +202,7 @@ class FrameWpf {
 		register_uninstall_hook(WPF_DIR . DS . WPF_MAIN_FILE, array('UtilsWpf', 'deletePlugin'));
 		register_deactivation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
 
-		add_action('after_plugin_row_woofilter-pro/woofilter-pro.php', array($this, 'pluginRow'), 5, 3);
 		add_filter('the_content', array('WoofiltersWpf', 'getProductsShortcode'), -99999);
-	}
-
-	/**
-	 * pluginRow.
-	 */
-	public function pluginRow( $plugin_file, $plugin_data, $status ) {
-		if ( !version_compare($plugin_data['Version'], WPF_PRO_REQUIRES, '>=') ) {
-			$colspan = version_compare($GLOBALS['wp_version'], '5.5', '<') ? 3 : 4;
-			$active = is_plugin_active($plugin_file) ? ' active' : '';
-			?>
-			<style>
-				.plugins tr[data-slug="woo-product-filter-pro"] td,
-				.plugins tr[data-slug="woo-product-filter-pro"] th {
-					box-shadow:none;
-				}
-				<?php if ( isset($plugin_data['update']) && !empty($plugin_data['update']) ) { ?>
-				.plugins tr.wpf-pro-plugin-tr td{
-					box-shadow:none !important;
-				}
-				.plugins wpf-pro-plugin-tr .update-message{
-					margin-bottom:0;
-				}
-				<?php } ?>
-			</style>
-			<tr class="plugin-update-tr wpf-pro-plugin-tr<?php echo esc_attr($active); ?>">
-				<td colspan="<?php echo esc_attr($colspan); ?>" class="plugin-update colspanchange">
-					<div class="update-message notice inline notice-error notice-alt">
-						<p>
-						<?php
-							/* translators: 1: plugin name 2: plugin version */
-							echo sprintf(esc_html__('Current version of Free (Base) plugin %1$s requires version of WBW Product Filter PRO plugin at least %2$s.', 'woo-product-filter'), esc_html__('Product Filter by WBW', 'woo-product-filter'), esc_html(WPF_PRO_REQUIRES));
-						?>
-						</p>
-					</div>
-				</td>
-			</tr>
-			<?php
-		}
 	}
 
 	/**
@@ -562,20 +521,18 @@ class FrameWpf {
 	}
 
 	/**
-	 * Add all scripts from _scripts array to wordpress.
+	 * Add all scripts from _scripts array to WordPress.
+	 *
+	 * @version 3.1.9
 	 */
 	public function addScripts() {
 		if (!empty($this->_scripts)) {
 			foreach ($this->_scripts as $s) {
 
-				if ( ! function_exists( 'is_plugin_active' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/plugin.php';
-				}
-
 				$enqueue = true;
 
 				// if the oxygen plugin is activated then check if the script is already registered
-				if ( is_plugin_active( 'oxygen/functions.php' ) && 'jquery-ui-autocomplete' === $s['handle'] ) {
+				if ( wpf_is_plugin_active( 'oxygen/functions.php' ) && 'jquery-ui-autocomplete' === $s['handle'] ) {
 					$wp_scripts = wp_scripts();
 					if ( isset( $wp_scripts->registered[ $s['handle'] ] ) ) {
 						$enqueue = false;
@@ -657,27 +614,6 @@ class FrameWpf {
 	}
 
 	/**
-	 * loadPlugins.
-	 */
-	public function loadPlugins() {
-		require_once ABSPATH . 'wp-includes/pluggable.php';
-	}
-
-	/**
-	 * loadWPSettings.
-	 */
-	public function loadWPSettings() {
-		require_once ABSPATH . 'wp-settings.php';
-	}
-
-	/**
-	 * loadLocale.
-	 */
-	public function loadLocale() {
-		require_once ABSPATH . 'wp-includes/locale.php';
-	}
-
-	/**
 	 * moduleActive.
 	 */
 	public function moduleActive( $code ) {
@@ -729,13 +665,6 @@ class FrameWpf {
 	}
 
 	/**
-	 * licenseDeactivated.
-	 */
-	public function licenseDeactivated() {
-		return ( !$this->getModule('license') && $this->moduleExists('license') );
-	}
-
-	/**
 	 * savePluginActivationErrors.
 	 */
 	public function savePluginActivationErrors() {
@@ -754,25 +683,6 @@ class FrameWpf {
 	 */
 	public function isPro() {
 		return $this->moduleExists('license') && $this->getModule('license') && $this->getModule('access');
-	}
-
-	/**
-	 * proVersionCompare.
-	 */
-	public function proVersionCompare( $requires, $compare = '>', $notPro = true ) {
-		if ( is_null( $this->_proVersion ) ) {
-			if ( $this->isPro() && function_exists( 'getProPlugFullPathWpf' ) ) {
-				if ( ! function_exists( 'get_plugin_data' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/plugin.php' ;
-				}
-				$plugin_data       = get_file_data( getProPlugFullPathWpf(), array( 'Version' => 'Version' ) );
-				$this->_proVersion = $plugin_data['Version'];
-			} else {
-				$this->_proVersion = false;
-			}
-		}
-
-		return ( ( $notPro && false === $this->_proVersion ) || version_compare( $this->_proVersion, $requires, $compare ) );
 	}
 
 	/**

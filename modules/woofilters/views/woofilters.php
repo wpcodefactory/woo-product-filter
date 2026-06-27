@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -126,7 +126,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * getEditTabContent.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.9
 	 */
 	public function getEditTabContent( $idIn ) {
 
@@ -142,10 +142,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		FrameWpf::_()->getModule('templates')->loadChosenSelects();
 		FrameWpf::_()->getModule('templates')->loadBootstrap();
 		FrameWpf::_()->addScript('notify-js', WPF_JS_PATH . 'notify.js', array(), false, true);
-		FrameWpf::_()->addScript('chosen.order.jquery.min.js', $modPath . 'js/chosen.order.jquery.min.js');
 		FrameWpf::_()->addScript('admin.filters', $modPath . 'js/admin.woofilters.js');
-		FrameWpf::_()->addScript('admin.wp.colorpicker.alhpa.js', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array('wp-color-picker'));
-		FrameWpf::_()->addJSVar('wp-color-picker', 'wpColorPickerL10n', array());
 		FrameWpf::_()->addScript('adminCreateTableWpf', $modPath . 'js/create-filter.js', array(), false, true);
 		FrameWpf::_()->addJSVar('admin.filters', 'url', admin_url('admin-ajax.php'));
 		FrameWpf::_()->addJSVar(
@@ -165,8 +162,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		FrameWpf::_()->addScript('jquery.slider.js', $modPath . 'js/jquery_slider/jquery.slider.js');
 		FrameWpf::_()->addStyle('jquery.slider.css', $modPath . 'css/jquery.slider.min.css');
 
-		FrameWpf::_()->addStyle('loaders', $modPath . 'css/loaders.css');
-
 		DispatcherWpf::doAction('addScriptsContent', true, $settings);
 
 		$link        = FrameWpf::_()->getModule('options')->getTabUrl( $this->getCode() );
@@ -178,7 +173,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		$this->assign('linkSetting', $linkSetting);
 		$this->assign('settings', $settings);
 		$this->assign('filter', $filter);
-		$this->assign('is_pro', FrameWpf::_()->isPro());
 
 		return parent::getContent('woofiltersEditAdmin');
 	}
@@ -186,7 +180,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
@@ -208,9 +202,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		// preview case
 		if ( isset( $params['settings'] ) ) {
 			$params['settings']['filters']['order'] = stripcslashes( $params['settings']['filters']['order'] );
-			if ( ! empty( $params['settings']['css_editor'] ) ) {
-				$params['settings']['css_editor'] = base64_encode( $params['settings']['css_editor'] );
-			}
 			$settings = $params;
 			// other
 		} else {
@@ -321,13 +312,18 @@ class WoofiltersViewWpf extends ViewWpf {
 		return parent::getContent('woofiltersHtml');
 	}
 
+	/**
+	 * getVendor.
+	 *
+	 * @version 3.1.9
+	 */
 	private function getVendor() {
 		if ( class_exists('WC_Vendors') ) {
 			$vendor_shop = urldecode( get_query_var( 'vendor_shop' ) );
 			return WCV_Vendors::get_vendor_id( $vendor_shop );
 		}
 
-		if ( is_plugin_active( 'dokan-lite/dokan.php' ) ) {
+		if ( wpf_is_plugin_active( 'dokan-lite/dokan.php' ) ) {
 			$custom_store_url = dokan_get_option( 'custom_store_url', 'dokan_general', 'store' );
 			return get_query_var( $custom_store_url );
 		}
@@ -358,13 +354,14 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Add common styles and scripts.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param string $modPath
 	 */
 	public function addCommonAssets( $modPath, $settings = array() ) {
 		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 		FrameWpf::_()->addStyle( 'frontend.filters', $modPath . 'css/frontend.woofilters.css' );
+		FrameWpf::_()->addStyle( 'loaders', $modPath . 'css/loaders.css' );
 		FrameWpf::_()->addScript( 'frontend.filters', $modPath . 'js/frontend.woofilters.js' );
 
 		if ( isset( $options['content_accessibility'] ) && '1' === $options['content_accessibility']['value'] ) {
@@ -391,6 +388,8 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Add assets  to render html(shortcode and widget).
 	 *
+	 * @version 3.1.9
+	 *
 	 * @param string $modPath
 	 */
 	public function addRenderHtmlAssets( $modPath, $settings = array() ) {
@@ -411,9 +410,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$loader  = ( ( isset($options['loader_enable']) && isset($options['loader_enable']['value']) && ! empty($options['loader_enable']['value']) )
 			|| ( $this->getFilterSetting($settings, 'filter_loader_icon_onload_enable') == 1 )
 			|| ( ( $this->getFilterSetting($settings, 'enable_overlay') == 1 ) && ( $this->getFilterSetting($settings, 'enable_overlay_icon') == 1 ) ) );
-		if ( $loader ) {
-			FrameWpf::_()->addStyle('loaders', $modPath . 'css/loaders.css');
-		}
+		DispatcherWpf::doAction( 'addLoaderStyles', $loader );
 		FrameWpf::_()->addJSVar('frontend.filters', 'url', admin_url('admin-ajax.php'));
 		if ( $this->getFilterSetting($settings, 'disable_fontawesome_loading', false, 1) != 1 ) {
 			FrameWpf::_()->getModule('templates')->loadFontAwesome();
@@ -506,17 +503,9 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
-		$customCss = '';
-		if ( ! empty($filterSettings['settings']['css_editor']) ) {
-			$customCss = stripslashes(base64_decode($filterSettings['settings']['css_editor']));
-			unset($filterSettings['settings']['css_editor']);
-		}
-		if ( ! empty($filterSettings['settings']['js_editor']) ) {
-			$filterSettings['settings']['js_editor'] = stripslashes(base64_decode($filterSettings['settings']['js_editor']));
-		}
 		$this->setCurrentSettings($filterSettings);
 		$this->resetFiltersCss();
 
@@ -596,8 +585,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		if ( $allProductsFiltering ) {
 			$prodCatId = false;
 		}
-		$isPro = FrameWpf::_()->isPro();
-
 		if ( ! $allProductsFiltering && ! empty($taxonomies) ) {
 			foreach ( $taxonomies as $tax => $value ) {
 				switch ( $tax ) {
@@ -605,9 +592,7 @@ class WoofiltersViewWpf extends ViewWpf {
 						$querySettings['product_tag'] = $value;
 						break;
 					case 'product_brand':
-						if ( $isPro ) {
-							$querySettings['product_brand'] = $value;
-						}
+						$querySettings['product_brand'] = $value;
 						break;
 					case 'pwb-brand':
 						$querySettings['pwb-brand'] = $value;
@@ -728,9 +713,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		$this->setFilterCss('#' . $filterId . ' .wpfFilterWrapper {' . $blockStyle . '}');
 
 		$blockStyle = '';
-		if ( $isPro ) {
-			$proView = FrameWpf::_()->getModule('woofilterpro')->getView();
-		}
 
 		$this->setFilterExistsItems($filtersOrder, $prodCatId, $querySettings, $settings);
 		$useTitleAsSlug = $this->getFilterSetting($settingsOriginal['settings'], 'use_title_as_slug', false);
@@ -751,11 +733,8 @@ class WoofiltersViewWpf extends ViewWpf {
 			$method = 'generate' . str_replace('wpf', '', $filter['id']) . 'FilterHtml';
 			if ( 'wpfCategory' !== $filter['id'] ) {
 				$settingsOriginal['page_taxonomies'] = $taxonomies;
-				if ( $isPro && method_exists($proView, $method) ) {
-					$html .= $proView->{$method}($filter, $settingsOriginal, $blockStyle, $key, $viewId);
-				} elseif ( method_exists($this, $method) ) {
-					$html .= $this->{$method}($filter, $settingsOriginal, $blockStyle, $key);
-				}
+				$filterHtml = method_exists( $this, $method ) ? $this->{$method}( $filter, $settingsOriginal, $blockStyle, $key ) : '';
+				$html      .= DispatcherWpf::applyFilters( 'renderFilterBlockHtml', $filterHtml, $method, $filter, $settingsOriginal, $blockStyle, $key, $viewId );
 			} else {
 
 				if ( ! $prodCatId && isset( $querySettings['product_category_id'] ) ) {
@@ -781,13 +760,9 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 
 		if ( ! $showImmediately ) {
-			if ( $isPro && method_exists($proView, 'generateLoaderLayoutHtml') ) {
-				$html .= $proView->generateLoaderLayoutHtml($options);
-			} else {
-				$this->setFilterCss('#' . $filterId . ' .wpfLoaderLayout {position:absolute;top:0;bottom:0;left:0;right:0;background-color: rgba(255, 255, 255, 0.9);z-index: 999;}');
-				$this->setFilterCss('#' . $filterId . ' .wpfLoaderLayout i {position:absolute;z-index:9;top:50%;left:50%;margin-top:-30px;margin-left:-30px;color:rgba(0,0,0,.9);}');
-				$html .= '<div class="wpfLoaderLayout"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>';
-			}
+			$this->setFilterCss( '#' . $filterId . ' .wpfLoaderLayout {position:absolute;top:0;bottom:0;left:0;right:0;background-color: rgba(255, 255, 255, 0.9);z-index: 999;}' );
+			$this->setFilterCss( '#' . $filterId . ' .wpfLoaderLayout i {position:absolute;z-index:9;top:50%;left:50%;margin-top:-30px;margin-left:-30px;color:rgba(0,0,0,.9);}' );
+			$html .= DispatcherWpf::applyFilters( 'generateLoaderLayoutHtml', '<div class="wpfLoaderLayout"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>', $options );
 		}
 
 		//if loader enable on load
@@ -802,7 +777,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html  = DispatcherWpf::applyFilters('addHtmlAfterFilter', $html, $settings, $this->filter['id']);
 		$html .= '</div>';
 		$html .= self::$filterExistsTermsJS;
-		$html  = '<style type="text/css" id="wpfCustomCss-' . $viewId . '">' . DispatcherWpf::applyFilters('addCustomCss', $customCss . self::$filtersCss, $settings, $filterId) . '</style>' . $html;
+		$html  = '<style type="text/css" id="wpfCustomCss-' . $viewId . '">' . DispatcherWpf::applyFilters('addCustomCss', self::$filtersCss, $settings, $filterId) . '</style>' . $html;
 
 		$this->resetFilterExistsTerms();
 
@@ -812,7 +787,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateOverlayHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function generateOverlayHtml( $settings ) {
 		$settings          = $this->getFilterSetting($settings, 'settings', array());
@@ -831,10 +806,6 @@ class WoofiltersViewWpf extends ViewWpf {
 			$colorPreview = $this->getFilterSetting($settings, 'filter_loader_icon_color', 'black');
 			$iconName     = $this->getFilterSetting($settings, 'filter_loader_icon_name', 'default');
 			$iconNumber   = $this->getFilterSetting($settings, 'filter_loader_icon_number', '0');
-
-			if ( ! FrameWpf::_()->isPro() ) {
-				$iconName = 'default';
-			}
 
 			$html .= '<div class="wpfPreview">';
 			if ( 'custom' === $iconName ) {
@@ -1045,7 +1016,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceInputsHtml.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.9
 	 */
 	public function generatePriceInputsHtml( $settings ) {
 		$dataStep = 1;
@@ -1068,9 +1039,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 
 		$dec = $this->getFilterSetting($settings, 'decimal', 0, true);
-		if ( FrameWpf::_()->isPro() ) {
-			$settings = DispatcherWpf::applyFilters('checkPriceArgs', $settings);
-		}
+		$settings = DispatcherWpf::applyFilters('checkPriceArgs', $settings);
 
 		if ( $this->getFilterSetting($settings, 'f_currency_show_as', '') === 'symbol' ) {
 			$currencyShowAs = get_woocommerce_currency_symbol();
@@ -1150,13 +1119,13 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceRangeFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function generatePriceRangeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings  = $this->getFilterSetting($filter, 'settings', array());
 		$layout    = $this->getFilterLayout($settings, $filterSettings);
 		$type      = $this->getFilterSetting($settings, 'f_frontend_type', 'list');
-		$underOver = FrameWpf::_()->isPro() && $this->getFilterSetting($settings, 'f_under_over', false);
+		$underOver = $this->getFilterSetting($settings, 'f_under_over', false);
 
 		$defaultRange = '';
 		$module       = FrameWpf::_()->getModule('woofilters');
@@ -2247,13 +2216,13 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateOnSaleFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function generateOnSaleFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_onsale';
 		$settings   = $this->getFilterSetting($filter, 'settings', array());
 
-		$defaultOnsale = FrameWpf::_()->isPro() ? $this->getFilterSetting($settings, 'f_default_onsale', false) : false;
+		$defaultOnsale = $this->getFilterSetting($settings, 'f_default_onsale', false);
 		$hiddenOnsale  = $defaultOnsale && $this->getFilterSetting($settings, 'f_hidden_onsale', false);
 
 		$layout      = $this->getFilterLayout($settings, $filterSettings);
@@ -2824,7 +2793,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateSearchFieldList.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function generateSearchFieldList( $html, $settings, $labels ) {
 		$type = $this->getFilterSetting($settings, 'f_frontend_type', 'list');
@@ -2833,16 +2802,14 @@ class WoofiltersViewWpf extends ViewWpf {
 		) ) {
 			return $html;
 		}
-		$isPro = FrameWpf::_()->isPro();
-
 		$search = '<div class="wpfSearchWrapper"><input class="wpfSearchFieldsFilter passiveFilter" type="text" placeholder="' .
 			esc_html($this->getFilterSetting($settings, 'f_search_label', $labels['search'])) . '">';
 
-		if ( $isPro && $this->getFilterSetting($settings, 'f_show_search_button', false) ) {
+		if ( $this->getFilterSetting($settings, 'f_show_search_button', false) ) {
 			$search .= '<button></button>';
 		}
 		$search .= '</div>';
-		if ( $isPro && $this->getFilterSetting($settings, 'f_search_position', 'before') == 'after' ) {
+		if ( $this->getFilterSetting($settings, 'f_search_position', 'before') == 'after' ) {
 			$html .= $search;
 		} else {
 			$html = $search . $html;
@@ -3134,7 +3101,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateTaxonomyOptionsHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	private function generateTaxonomyOptionsHtml( $filterItemList, $selectedElem, $filter = false, $excludeIds = false, $pre = '', $layout = 0, $includeIds = false, $showedTerms = false, $countsTerms = false, $itemLevel = 0, $currentCategoryId = 0 ) {
 		$html     = '';
@@ -3148,7 +3115,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			$includeIds = explode(',', $includeIds);
 		}
 		$showCount            = $this->getFilterSetting($filter['settings'], 'f_show_count');
-		$showImage            = FrameWpf::_()->isPro() && $this->getFilterSetting($filter['settings'], 'f_show_images', false);
+		$showImage            = $this->getFilterSetting($filter['settings'], 'f_show_images', false);
 		$allProductsFiltering = $this->getFilterSetting($settings['settings'], 'all_products_filtering', false);
 		if ( $allProductsFiltering && ( ! empty($filter['custom_taxonomy'] ) || ! empty($filter['custom_meta']) ) ) {
 			$allProductsFiltering = false;
@@ -3160,15 +3127,9 @@ class WoofiltersViewWpf extends ViewWpf {
 		$type    = $this->getFilterSetting($filter['settings'], 'f_frontend_type', 'list');
 		$isMulti = ( 'multi' === $type );
 
-		if ( FrameWpf::_()->isPro() ) {
-			if ( method_exists(FrameWpf::_()->getModule('woofilterpro'), 'getCollapsibleFiltreOptions') ) {
-				$collapsibleList = FrameWpf::_()->getModule('woofilterpro')->getCollapsibleFiltreOptions($filter['id']);
-			} else {
-				$collapsibleList = array('multi');
-			}
-			if ( in_array($type, $collapsibleList) ) {
-				$isCollapsible = $this->getFilterSetting($filter['settings'], 'f_multi_collapsible', false);
-			}
+		$collapsibleList = DispatcherWpf::applyFilters( 'getCollapsibleFiltreOptions', array(), $filter['id'] );
+		if ( in_array( $type, $collapsibleList ) ) {
+			$isCollapsible = $this->getFilterSetting( $filter['settings'], 'f_multi_collapsible', false );
 		}
 
 		$isHierarchical = $this->getFilterSetting($filter['settings'], 'f_show_hierarchical', false);
@@ -3378,18 +3339,17 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceRangeOptionsHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	private function generatePriceRangeOptionsHtml( $filter, $ranges, $layout ) {
 		$html    = '';
-		$isPro   = FrameWpf::_()->isPro();
 		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 
 		$minValue  = ReqWpf::getVar('wpf_min_price');
 		$maxValue  = ReqWpf::getVar('wpf_max_price');
 		$urlRange  = $minValue . ',' . $maxValue;
 		$type      = $filter['settings']['f_frontend_type'];
-		$underOver = $isPro && $this->getFilterSetting($filter['settings'], 'f_under_over', false);
+		$underOver = $this->getFilterSetting($filter['settings'], 'f_under_over', false);
 		if ( $underOver ) {
 			$underText = $this->getFilterSetting($filter['settings'], 'f_under_text', esc_attr__('Under', 'woo-product-filter')) . ' ';
 			$overText  = $this->getFilterSetting($filter['settings'], 'f_over_text', esc_attr__('Over', 'woo-product-filter')) . ' ';
@@ -3435,7 +3395,7 @@ class WoofiltersViewWpf extends ViewWpf {
 				}
 
 				// some plugin uses a different hook, use it if the standard one did not change the price
-				if ( is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) {
+				if ( wpf_is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || wpf_is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) {
 					$wc_price[0] = apply_filters( 'woocommerce_product_get_regular_price', $range[0], null );
 					$wc_price[1] = apply_filters( 'woocommerce_product_get_regular_price', $range[1], null );
 				} else {
@@ -3465,7 +3425,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			remove_filter( 'raw_woocommerce_price', array(alg_wc_currency_switcher_plugin()->core, 'change_price_by_currency'));
 		}
 		if ( $isList ) {
-			if ( $isPro && $this->getFilterSetting($filter['settings'], 'f_custom_fields', false) ) {
+			if ( $this->getFilterSetting($filter['settings'], 'f_custom_fields', false) ) {
 				$customText = $this->getFilterSetting($filter['settings'], 'f_custom_text', esc_attr__('Custom', 'woo-product-filter')) . ' ';
 				$selected   = ( $isCustom && ( ',' != $urlRange ) );
 				$checkId    = 'wpfPriceRangeCheckbox' . wp_rand(1, 99999);
@@ -3482,14 +3442,21 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $html;
 	}
 
+	/**
+	 * generateLoaderHtml.
+	 *
+	 * @version 3.1.9
+	 *
+	 * @param $filterId
+	 * @param $settings
+	 *
+	 * @return string
+	 */
 	private function generateLoaderHtml( $filterId, $settings ) {
 		$settings     = $this->getFilterSetting($settings, 'settings', array());
 		$colorPreview = $this->getFilterSetting($settings, 'filter_loader_icon_color', 'black');
 		$iconName     = $this->getFilterSetting($settings, 'filter_loader_icon_name', 'default');
 		$iconNumber   = $this->getFilterSetting($settings, 'filter_loader_icon_number', '0');
-		if ( ! FrameWpf::_()->isPro() ) {
-			$iconName = 'default';
-		}
 		$htmlPreview = '<div class="wpfPreview wpfPreviewLoader wpfHidden">';
 		if ( 'custom' === $iconName ) {
 			$settings['is_overlay'] = false;

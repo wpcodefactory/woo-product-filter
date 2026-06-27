@@ -2,19 +2,12 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Elementor Options
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
-
-$isPro = FrameWpf::_()->isPro();
-$labelPro = '';
-if (!$isPro) {
-	$adPath = FrameWpf::_()->getModule('woofilters')->getModPath() . 'img/ad/';
-	$labelPro = ' Pro';
-}
 
 $formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getModule('woofilters')->getView()->getCode() );
 ?>

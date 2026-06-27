@@ -14,13 +14,19 @@ abstract class ViewWpf extends BaseObjectWpf {
 	 */
 	protected $_code = '';
 
+	/**
+	 * display.
+	 *
+	 * @version 3.1.9
+	 */
 	public function display( $tpl = '' ) {
 		$tpl = ( empty($tpl) ) ? $this->_tpl : $tpl;
 		$content = $this->getContent($tpl);
 		if (false !== $content) {
-			HtmlWpf::echoEscapedHtml($content);
+			echo wp_kses( $content, HtmlWpf::getAllowedHtmlTags() );
 		}
 	}
+
 	public function getPath( $tpl ) {
 		$path = '';
 		$parentModule = FrameWpf::_()->getModule( $this->_code );

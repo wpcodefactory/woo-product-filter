@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - HtmlWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -15,21 +15,85 @@ class HtmlWpf {
 	public static $productsOptions   = array();
 
 	/**
-	 * echoEscapedHtml.
+	 * getAllowedHtmlTags.
 	 *
-	 * @param $html
+	 * Returns a comprehensive wp_kses() allowed-tags array for filter widget
+	 * output. Extends the 'post' context with form elements and data-* / aria-*
+	 * attributes that the filter widget emits.
 	 *
-	 * @return void
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 *
+	 * @return array
 	 */
-	public static function echoEscapedHtml( $html ) {
-		remove_all_filters( 'esc_html');
-		add_filter('esc_html', array('HtmlWpf', 'skipHtmlEscape'), 99, 2);
-		echo esc_html($html);
-		remove_filter('esc_html', array('HtmlWpf', 'skipHtmlEscape'), 99, 2);
-	}
+	public static function getAllowedHtmlTags() {
+		$allowed = wp_kses_allowed_html( 'post' );
 
-	public static function skipHtmlEscape( $safe_text, $text ) {
-		return $text;
+		$common = array(
+			'id'      => true,
+			'class'   => true,
+			'style'   => true,
+			'title'   => true,
+			'data-*'  => true,
+			'aria-*'  => true,
+			'role'    => true,
+			'tabindex' => true,
+		);
+
+		// Extend elements that 'post' already defines.
+		foreach ( array( 'div', 'span', 'ul', 'ol', 'li', 'p', 'a', 'img', 'section', 'nav', 'header', 'footer' ) as $tag ) {
+			$allowed[ $tag ] = isset( $allowed[ $tag ] ) ? array_merge( $allowed[ $tag ], $common ) : $common;
+		}
+		$allowed['a']   = array_merge( isset( $allowed['a'] ) ? $allowed['a'] : array(), $common, array( 'href' => true, 'target' => true, 'rel' => true ) );
+		$allowed['img'] = array_merge( isset( $allowed['img'] ) ? $allowed['img'] : array(), $common, array( 'src' => true, 'alt' => true, 'width' => true, 'height' => true ) );
+
+		// Form elements (stripped by wp_kses_post).
+		$allowed['form']  = array_merge( $common, array( 'action' => true, 'method' => true, 'enctype' => true, 'name' => true, 'novalidate' => true ) );
+		$allowed['input'] = array_merge( $common, array(
+			'type'         => true,
+			'name'         => true,
+			'value'        => true,
+			'checked'      => true,
+			'disabled'     => true,
+			'readonly'     => true,
+			'placeholder'  => true,
+			'min'          => true,
+			'max'          => true,
+			'step'         => true,
+			'autocomplete' => true,
+			'required'     => true,
+			'size'         => true,
+			'maxlength'    => true,
+		) );
+		$allowed['select']   = array_merge( $common, array( 'name' => true, 'multiple' => true, 'size' => true, 'disabled' => true, 'required' => true ) );
+		$allowed['option']   = array_merge( $common, array( 'value' => true, 'selected' => true, 'disabled' => true ) );
+		$allowed['optgroup'] = array_merge( $common, array( 'label' => true, 'disabled' => true ) );
+		$allowed['button']   = array_merge( $common, array( 'type' => true, 'name' => true, 'value' => true, 'disabled' => true ) );
+		$allowed['label']    = array_merge( $common, array( 'for' => true ) );
+		$allowed['textarea'] = array_merge( $common, array(
+			'name'        => true,
+			'rows'        => true,
+			'cols'        => true,
+			'disabled'    => true,
+			'readonly'    => true,
+			'placeholder' => true,
+			'required'    => true,
+			'maxlength'   => true,
+		) );
+
+		// SVG subset (used for icons inside filter items).
+		$allowed['svg']      = array_merge( $common, array( 'xmlns' => true, 'viewbox' => true, 'width' => true, 'height' => true, 'fill' => true, 'stroke' => true ) );
+		$allowed['path']     = array( 'd' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true );
+		$allowed['circle']   = array( 'cx' => true, 'cy' => true, 'r' => true, 'fill' => true );
+		$allowed['polyline'] = array( 'points' => true, 'fill' => true, 'stroke' => true );
+		$allowed['line']     = array( 'x1' => true, 'y1' => true, 'x2' => true, 'y2' => true, 'stroke' => true );
+		$allowed['use']      = array( 'xlink:href' => true, 'href' => true );
+
+		// Inline CSS and stylesheet links injected by the filter widget.
+		$allowed['style'] = array( 'type' => true, 'media' => true, 'id' => true );
+		$allowed['link']  = array( 'rel' => true, 'href' => true, 'type' => true, 'media' => true, 'id' => true );
+
+		return $allowed;
 	}
 
 	public static function block( $name, $params = array('attrs' => '', 'value' => '') ) {
@@ -47,7 +111,17 @@ class HtmlWpf {
 		return str_replace(array('[', ']'), '', $name);
 	}
 
-	public static function textarea( $name, $params = array('attrs' => '', 'value' => '', 'rows' => 3, 'cols' => 50) ) {
+	/**
+	 * textarea.
+	 *
+	 * @version 3.1.9
+	 *
+	 * @param $name
+	 * @param $params
+	 *
+	 * @return void
+	 */
+	public static function textarea( $name, $params = array( 'attrs' => '', 'value' => '', 'rows' => 3, 'cols' => 50) ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['rows'] = isset($params['rows']) ? $params['rows'] : 3;
 		$params['cols'] = isset($params['cols']) ? $params['cols'] : 50;
@@ -69,7 +143,7 @@ class HtmlWpf {
 		}
 		echo '<textarea name="' . esc_attr($name) . '" ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo ( isset($params['rows']) ? ' rows="' . esc_attr($params['rows']) . '"' : '' ) .
 			( isset($params['cols']) ? ' cols="' . esc_attr($params['cols']) . '"' : '' ) . '>' .
@@ -97,16 +171,23 @@ class HtmlWpf {
 
 		echo '<input type="' . esc_attr($params['type']) . '" name="' . esc_attr($name) . '" value="' . esc_attr($params['value']) . '" ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo ' />';
 	}
 
+	/**
+	 * _dataToAttrs.
+	 *
+	 * @param $params
+	 *
+	 * @return string
+	 */
 	private static function _dataToAttrs( $params ) {
 		$res = '';
 		foreach ($params as $k => $v) {
 			if (strpos($k, 'data-') === 0) {
-				$res .= ' ' . $k . '="' . $v . '"';
+				$res .= ' ' . esc_attr($k) . '="' . esc_attr($v) . '"';
 			}
 		}
 		return $res;
@@ -170,6 +251,11 @@ class HtmlWpf {
 		echo '<label for="' . esc_attr($id) . '" class="toggle"></label>';
 	}
 
+	/**
+	 * checkboxlist.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function checkboxlist( $name, $params = array('options' => array(), 'attrs' => '', 'checked' => '', 'delim' => '<br />', 'usetable' => 5), $delim = '<br />' ) {
 		if (!strpos($name, '[]')) {
 			$name .= '[]';
@@ -197,10 +283,10 @@ class HtmlWpf {
 				));
 				echo '&nbsp;';
 				if (!empty($v['text'])) {
-					self::echoEscapedHtml($v['text']);
+					echo esc_html( $v['text'] );
 				}
 				if (!empty($params['delim'])) {
-					self::echoEscapedHtml($params['delim']);
+					echo wp_kses_post( $params['delim'] );
 				}
 				if (!empty($params['usetable'])) {
 					echo '</td>';
@@ -218,6 +304,11 @@ class HtmlWpf {
 		self::input($name, $params);
 	}
 
+	/**
+	 * img.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function img( $src, $usePlugPath = 1, $params = array('width' => '', 'height' => '', 'attrs' => '') ) {
 		if ($usePlugPath) {
 			$src = WPF_IMG_PATH . $src;
@@ -228,11 +319,16 @@ class HtmlWpf {
 				. ( isset($params['height']) ? 'height="' . esc_attr($params['height']) . '"' : '' )
 				. ' ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo ' />';
 	}
 
+	/**
+	 * selectbox.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function selectbox( $name, $params = array('attrs' => '', 'options' => array(), 'value' => '') ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['attrs'] .= self::_dataToAttrs($params);
@@ -241,7 +337,7 @@ class HtmlWpf {
 		}
 		echo '<select name="' . esc_attr($name) . '" ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo '>';
 		$existValue = isset($params['value']);
@@ -253,6 +349,11 @@ class HtmlWpf {
 		echo '</select>';
 	}
 
+	/**
+	 * selectlist.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function selectlist( $name, $params = array('attrs'=>'', 'size'=> 5, 'options' => array(), 'value' => '') ) {
 		if (!strpos($name, '[]')) {
 			$name .= '[]';
@@ -265,7 +366,7 @@ class HtmlWpf {
 
 		echo '<select multiple="multiple" size="' . esc_attr($params['size']) . '" name="' . esc_attr($name) . '" ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo '>';
 
@@ -284,18 +385,28 @@ class HtmlWpf {
 		self::input($name, $params);
 	}
 
+	/**
+	 * button.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function button( $params = array('attrs' => '', 'value' => '') ) {
 		echo '<button ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo '>' . esc_html($params['value']) . '</button>';
 	}
 
+	/**
+	 * buttonA.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function buttonA( $params = array('attrs' => '', 'value' => '') ) {
 		echo '<a href="#" ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo '>' . esc_html($params['value']) . '</a>';
 	}
@@ -338,13 +449,18 @@ class HtmlWpf {
 		self::input($name, $params);
 	}
 
+	/**
+	 * formStart.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function formStart( $name, $params = array('action' => '', 'method' => 'GET', 'attrs' => '', 'hideMethodInside' => false) ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['action'] = isset($params['action']) ? $params['action'] : '';
 		$params['method'] = isset($params['method']) ? $params['method'] : 'GET';
 		echo '<form name="' . esc_attr($name) . '" action="' . esc_attr($params['action']) . '" method="' . esc_attr($params['method']) . '" ';
 		if (!empty($params['attrs'])) {
-			self::echoEscapedHtml($params['attrs']);
+			echo $params['attrs']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Plugin-controlled attribute string; values are escaped at construction.
 		}
 		echo '>';
 

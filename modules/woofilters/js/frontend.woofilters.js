@@ -26,7 +26,7 @@ function wpfIsThriveEditor() {
 /**
  * Main function.
  *
- * @version 3.1.8
+ * @version 3.1.9
  */
 (function ($, app) {
 	"use strict";
@@ -95,7 +95,6 @@ function wpfIsThriveEditor() {
 		_thisObj.disableLeerOptions();
 		_thisObj.eventsFrontend();
 		_thisObj.changeSlugByUrl();
-		_thisObj.runCustomJs();
 		_thisObj.addCustomCss();
 		_thisObj.chageRangeFieldWidth();
 		_thisObj.addSpecificPluginActions();
@@ -284,27 +283,6 @@ function wpfIsThriveEditor() {
 			var wrapper = jQuery(this);
 
 			hideFilterLoader(wrapper);
-		});
-	});
-
-	WpfFrontendPage.prototype.runCustomJs = (function () {
-		var _thisObj = this.$obj;
-		jQuery('.wpfMainWrapper').each(function () {
-			var wrapper = jQuery(this),
-				jsCodeStr = '',
-				settings = _thisObj.getFilterMainSettings(wrapper);
-			if(settings){
-				settings = settings.settings;
-				jsCodeStr = settings.js_editor;
-			}
-			if(jsCodeStr.length > 0){
-				try {
-					eval(jsCodeStr);
-				}catch(e) {
-					console.log(e);
-				}
-
-			}
 		});
 	});
 
@@ -1261,7 +1239,7 @@ function wpfIsThriveEditor() {
 			displayType = filterWrapper.data('display-type'),
 			filterType = filterWrapper.data('filter-type');
 
-		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand'|| filterType == 'wpfBrand') {
+		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand') {
 			var isOne = displayType == 'list';
 		} else {
 			var isOne = displayType == 'radio';
@@ -1481,7 +1459,7 @@ function wpfIsThriveEditor() {
 					withChildren = '1';
 				}
 
-				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined' || filterType === 'wpfSearchText'  || filterType === 'wpfSearchNumber') {
+				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined') {
 					valueToPushBackend['id'] = filterType;
 					valueToPushBackend['uniqId'] = uniqId;
 					valueToPushBackend['logic'] = logic;

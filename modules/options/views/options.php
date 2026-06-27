@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsViewWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -106,16 +106,17 @@ class OptionsViewWpf extends ViewWpf {
 		return parent::display('_serverSettings');
 	}
 
+	/**
+	 * getSettingsTabContent.
+	 *
+	 * @version 3.1.9
+	 */
 	public function getSettingsTabContent() {
 		FrameWpf::_()->addScript('admin.settings', $this->getModule()->getModPath() . 'js/admin.settings.js');
 		FrameWpf::_()->addStyle('admin.settings.css', $this->getModule()->getModPath() . 'css/admin.settings.css');
 		FrameWpf::_()->getModule('templates')->loadJqueryUi();
 		FrameWpf::_()->addScript('notify-js', WPF_JS_PATH . 'notify.js', array(), false, true);
-		if (FrameWpf::_()->isPro()) {
-			FrameWpf::_()->addJSVar('wp-color-picker', 'wpColorPickerL10n', array());
-			FrameWpf::_()->addScript('admin.wp.colorpicker.alhpa.js', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js');
-			FrameWpf::_()->addStyle('loaders', FrameWpf::_()->getModule('woofilters')->getModPath() . 'css/loaders.css');
-		}
+		DispatcherWpf::doAction( 'loadSettingsTabAssets' );
 
 		$options = FrameWpf::_()->getModule('options')->getAll();
 		$this->assign('options', $options);

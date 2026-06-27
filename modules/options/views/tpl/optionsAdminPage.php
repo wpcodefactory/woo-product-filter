@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Options Admin Page
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -68,9 +68,9 @@ defined( 'ABSPATH' ) || exit;
 			</nav>
 			<div class="contantArea woobewoo-container woobewoo-wdt-100 woobewoo-relative woobewoo-<?php echo esc_attr($this->activeTab); ?>">
 				<div class="breadcrumb_heading">
-					<?php HtmlWpf::echoEscapedHtml($this->breadcrumbs); ?>
+					<?php echo wp_kses_post( $this->breadcrumbs ); ?>
 				</div>
-				<?php HtmlWpf::echoEscapedHtml($this->content); ?>
+				<?php echo wp_kses( $this->content, HtmlWpf::getAllowedHtmlTags() ); ?>
 				<div class="clear"></div>
 			</div>
 		</section>

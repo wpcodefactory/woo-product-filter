@@ -2,7 +2,7 @@
 Contributors: woobewoo
 Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
-Requires at least: 5.0.0
+Requires at least: 5.0
 Tested up to: 7.0
 Stable tag: 3.1.8
 License: GPLv2 or later
@@ -17,13 +17,13 @@ It's fully customizable and 100% compatible with Elementor, giving you full cont
 
 = WooCommerce Product Filter Key Features =
 
-**[Comprehensive Filtering](https://woobewoo.com/feature/filters-by-price-price-range-sort-categories-tags-and-attributes?utm_source=wordpress&utm_medium=criteria&utm_campaign=filter "Comprehensive Filtering")**
+**Comprehensive Filtering**
 let customers filter products by: Price, Price range, Categories, Tags, Author, Featured, On Sale, In Stock, Rating, Search by text**, Attribute filters.
 
 **[Flexible Display Options](https://woobewoo.com/plugins/woocommerce-filter/?utm_source=wordpress&utm_medium=description&utm_campaign=filter "Main example")**
 present the filters in various formats to suit your storefront's design and user preferences. Options include: radio button list (single select) dropdown (single select), checkbox list (multi-select)** and icons** for attribute filters (colour, size, rating).
 
-**[AJAX live search](https://woobewoo.com/feature/ajax-live-search?utm_source=wordpress&utm_medium=ajax&utm_campaign=filter "AJAX live search")**
+**AJAX live search**
 Enable instant results without page reloads for a faster shopping  with AJAX live search. AJAX search provides instant filtering results without the need to reload the page. This feature can be configured to activate immediately after a user selects their desired filter options and clicks the filter button, making product searches faster and more intuitive.
 
 **[Elementor Integration](https://woobewoo.com/documentation/elementor-compatibility/ "Elementor Compatibility")**
@@ -44,7 +44,7 @@ With Live Preview, the results will appear in the panel right at the moment you 
 **Variety of options for sorting products**
 The product search plugin for WooCommerce allows sorting your products by popularity, rating, price, newness, alphabetical ascender, or descender.
 
-**[Create new product filters in a few clicks](https://woobewoo.com/feature/customize-and-set-up?utm_source=wordpress&utm_medium=easytosetup&utm_campaign=filter "Easy to customize and set up")**
+**[Create new product filters in a few clicks](https://woobewoo.com/documentation/create-your-first-product-filter/?utm_source=wordpress&utm_medium=easytosetup)**
 Easy to customize and set up. Just add a filter to every page using a widget or shortcodes.
 
 **[Price filter design](https://woobewoo.com/documentation/woocommerce-filter-main-settings/#a "Price filter")**
@@ -56,7 +56,7 @@ Adjust them manually and specify the exact value of every step as well.
 **[Show Count](https://woobewoo.com/documentation/show-count-option/ "Show Count") and Recount products by selected filter**
 Recount the products by selected filters and display the exact number of products matching the filter results.
 
-**[Fully responsive](https://woobewoo.com/feature/looks-and-works-great-on-all-devices?utm_source=wordpress&utm_medium=responsive&utm_campaign=filter "Looks and works great on all devices")**
+**Fully responsive**
 The filter looks and works properly on different devices particularly mobile phones and tablets as well as desktops and laptops.
 
 = Support and suggestions for WooCommerce Product Filter Plugin =
@@ -97,6 +97,16 @@ Press Activate button
 6. Product filter constructor. Attribute
 7. Product filter constructor. Rating
 8. Product filter admin panel. Design tab
+
+== External services ==
+
+This plugin connects to an external server provided by WooBewoo (woobewoo.com) to handle the following admin-side forms. No data is ever sent automatically — these requests only occur when an administrator explicitly submits one of the forms below from within the WordPress admin panel.
+
+**Contact Us form:** Sends the administrator's name, email address, subject, message, site URL, and plugin version to woobewoo.com.
+**Subscribe form:** Sends the administrator's email address and site URL to woobewoo.com.
+**Rating form:** Sends the administrator's email address, rating score, feedback message, and site URL to woobewoo.com.
+
+[Terms of Service](https://woobewoo.com/terms-conditions/) | [Privacy Policy](https://woobewoo.com/privacy-policy/)
 
 == Frequently Asked Questions ==
 
@@ -153,9 +163,13 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.9 - 14/06/2026 =
+= 3.1.9 - 27/06/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
+* Fix - Fixed mobile_detect nullable parameter deprecation warning.
+* Update - Replaced Outdated library `chosen` with `tom-select`.
+* Update - Removed Css & Js editor due to repository compliance.
+* Dev - Cleanup pro codes.
 
 = 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.

@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Woofilters JS
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -16,7 +16,7 @@
 
 	function AdminPage() {
 		this.$obj = this;
-		this.$allowMultipleFilters = ['wpfAttribute', 'wpfBrand', 'wpfCustomMeta'];
+		this.$allowMultipleFilters = ['wpfAttribute', 'wpfCustomMeta'];
 		this.$multiSelectFields = ['f_mlist[]', 'f_exclude_terms[]', 'f_cglist[][]', 'f_search_by_attributes_list[]', 'f_additional_attributes_list[]'];
 		this.$noOptionsFilters = [''];
 		this.filtersSettings = [];
@@ -233,7 +233,8 @@
 				$subTabsContent.removeClass('active');
 				if($curSubTab.length != 1) {
 					$subTabs.addClass('disabled');
-					$curSubTab = $subTabs.get(0).removeClass('disabled');
+					$curSubTab = jQuery($subTabs.get(0));
+					$curSubTab.removeClass('disabled');
 				}
 				$subTabsContent.filter($curSubTab.attr('href')).addClass('active');
 			}
@@ -247,18 +248,6 @@
 				$picker = $this.closest('.woobewoo-color-picker');
 			if(color == '')	$picker.find('.wp-picker-clear').trigger('click');
 			else $picker.find('.woobewoo-color-result').wpColorPicker('color', $this.val());
-		});
-
-		$form.find('input[name="settings[filter_loader_icon_color]"]').off('color-change').on('color-change', function(e){
-			jQuery('.woobewoo-filter-loader').css({color:jQuery(this).val()});
-		});
-
-
-		jQuery('.chooseLoaderIcon').off('click').on('click', function(e){
-			e.preventDefault();
-			if(typeof(_thisObj.chooseIconPopup) == 'function') {
-				_thisObj.chooseIconPopup();
-			}
 		});
 
 		$form.off('submit').on('submit', function (e) {
@@ -478,23 +467,14 @@
 			settingsValues.find('input[type="checkbox"],select').trigger('wpf-change');
 		}
 
-		// remove unnecessary levels for brands
-		jQuery('div[data-filter="wpfBrand"] div[data-parent="f_custom_tags"]').each(function () {
-			var name  = jQuery('select', this).attr('name');
-			let level = /.*?(\d+)]$/.exec(name);
-			if (level !== null && level[1] > 1) {
-				jQuery(this).hide();
-			}
-		});
-
 		$(document).keydown(function(e) {
 			if (e.keyCode == 65 && e.ctrlKey) {
 				var $multiBlock = $('.wpfFiltersBlock .wpfFilter .wpfOptions:not(.wpfHidden) .wpf-multi-select');
-				if ($multiBlock.length == 1 && $multiBlock.find('.chosen-container-multi').hasClass('chosen-container-active')) {
+				if ($multiBlock.length == 1 && $multiBlock.find('.ts-wrapper').hasClass('focus')) {
 					var ctrlAttr = $multiBlock.attr('data-ctrl-a') != '1',
 						$select = $multiBlock.find('select');
 					$select.find('option').prop('selected', ctrlAttr);
-					$select.trigger('chosen:updated');
+					if ($select[0] && $select[0].tomselect) $select[0].tomselect.sync();
 					$multiBlock.attr('data-ctrl-a', ctrlAttr ? '1' : '0');
 				}
 			}
@@ -549,19 +529,18 @@
 			_noOptionsFilters = this.$noOptionsFilters,
 			wpfGetPreviewInit = false;
 
-		jQuery('.wpfMainWrapper').find('select[multiple]').multiselect({
-			columns: 1,
-			placeholder: 'Select options'
+		jQuery('.wpfMainWrapper').find('select[multiple]').not('.wpfOptionsTemplate select, .wpfTemplates select').each(function() {
+			var el = this;
+			jQuery(el).next('.ms-options-wrap').remove();
+			jQuery(el).removeAttr('size').show();
+			if (!el.tomselect) {
+				new TomSelect(el, { plugins: ['remove_button'], maxOptions: null });
+			}
 		});
 
 		jQuery('document').ready(function(){
-			jQuery(".chosen-choices").sortable();
 			jQuery('.color-group').trigger('color-group');
 		});
-		if (WPF_DATA.isWCLicense) {
-			jQuery('.wpfProLabel a').attr('href','');
-		}
-
 		jQuery("body").off('change', "[name='f_show_inputs']").on('change', "[name='f_show_inputs']", function (e) {
 			e.preventDefault();
 			if(jQuery(this).prop('checked')) {
@@ -613,7 +592,7 @@
 			}
 		});
 
-		jQuery('#wpfFiltersEditForm select[name="f_mlist[]"],#wpfFiltersEditForm select[name="f_exclude_terms[]"]').off('chosen:updated').on('chosen:updated',function() {
+		jQuery('#wpfFiltersEditForm select[name="f_mlist[]"],#wpfFiltersEditForm select[name="f_exclude_terms[]"]').off('change.tomselect').on('change.tomselect',function() {
 			if(! jQuery(this).closest(".wpfFiltersBlockPreview").length ) {
 				_this.getPreviewAjax();
 			}
@@ -632,7 +611,7 @@
 					}
 				});
 			}
-			mList.trigger("chosen:updated");
+			if (mList[0] && mList[0].tomselect) mList[0].tomselect.sync();
 		});
 
 		jQuery('#wpfChooseFilters').off('change').on('change', function(){
@@ -661,8 +640,7 @@
 					option.text(originalText + " ("+ADDED_TEXT+")");
 					option.attr("data-added", "1");
 				}
-				if (option.attr('data-enabled') != '1') data = 'pro';
-				else if (option.attr('data-unique') == 1) {
+				if (option.attr('data-unique') == 1) {
 					if(filtersBlock.find('.wpfFilter[data-filter="'+option.attr('value')+'"]').length) {
 						data = 'uniq';
 					} else {
@@ -697,7 +675,7 @@
 		jQuery('#wpfAddFilterButton').off('click').on('click', function(e){
 			e.preventDefault();
 			var option = jQuery('#wpfChooseFilters option:selected');
-			if(option.length == 0 || option.attr('data-enabled') != '1' || option.attr('data-available') != 'add') return;
+			if(option.length == 0 || option.attr('data-available') != 'add') return;
 
 			_this.wpfAddFilter(option.attr('value'));
 			resetEnabledFilters();
@@ -726,7 +704,7 @@
 				optionsOther.addClass('wpfHidden');
 				i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
 				options.removeClass('wpfHidden');
-				options.find('select[name="f_mlist[]"]').trigger('chosen:updated');
+				var _mlistEl = options.find('select[name="f_mlist[]"]')[0]; if (_mlistEl && _mlistEl.tomselect) _mlistEl.tomselect.sync();
 			}else{
 				i.removeClass('fa-chevron-up').addClass('fa-chevron-down');
 				options.addClass('wpfHidden');
@@ -914,7 +892,7 @@
 		if(mlist.find('option').length > 1) {
 			mlist.closest('.row-settings-block').removeClass('wpfHidden');
 		}
-		mlist.trigger('chosen:updated');
+		if (mlist[0] && mlist[0].tomselect) mlist[0].tomselect.sync();
 		mlist.trigger('change');
 		if(typeof(_this.changeAttributeTermsPro) == 'function') {
 			_this.changeAttributeTermsPro(mlist.closest('.wpfFilter'), settings);
@@ -954,7 +932,8 @@
 				_thisObj.setAttrTerms(attr_terms, attrSlug);
 			}
 		} else {
-			attr_terms.val('').trigger('chosen:updated');
+			attr_terms.val('');
+			if (attr_terms[0] && attr_terms[0].tomselect) attr_terms[0].tomselect.sync();
 			attr_terms.trigger('change');
 		}
 
@@ -1077,7 +1056,13 @@
 		_this.filterIterator++;
 
 		blockTemplate.trigger('changeTooltips');
-		blockTemplate.find('select[name="f_mlist[]"],select[name="f_exclude_terms[]"]').chosen({ width:"95%" });
+		blockTemplate.find('select[name="f_mlist[]"],select[name="f_exclude_terms[]"]').each(function() {
+			jQuery(this).next('.ms-options-wrap').remove();
+			jQuery(this).removeAttr('size').show();
+			if (!this.tomselect) {
+				new TomSelect(this, { plugins: ['remove_button'], maxOptions: null });
+			}
+		});
 
 		blockTemplate.find('input,select').trigger('wpf-change');
 
@@ -1116,19 +1101,6 @@
 				e.preventDefault();
 				defaultSlider.slider('values', 1, $(this).val());
 			});
-			blockTemplate.find('select[name="f_skin_type"].wpfWithProAd').on('change', function(e){
-				e.preventDefault();
-				var proLabel = $(this).closest('.row-settings-block').find('.wpfProLabel'),
-					isPro = $('option:selected', this).text().match(/Pro$/);
-				if (isPro) {
-					proLabel.removeClass('wpfHidden');
-				} else {
-					proLabel.addClass('wpfHidden');
-				}
-				blockTemplate.find('.wpfPriceSkinPro').addClass('wpfHidden');
-				blockTemplate.find('.wpfPriceSkinPro[data-type="'+$(this).val()+'"]').removeClass('wpfHidden');
-			}).trigger('change');
-
 		} else if(id == 'wpfSortBy') {
 			jQuery('#wpfContainerSortBy a.js-wpfMove').on('click', function(e) {
 				wpfSortBy_MoveRow(e, this);
@@ -1196,7 +1168,7 @@
 					var elmNameClear = elm.name.replace(/\[(\d+)\]/g, "[]");
 					if( _this.$multiSelectFields.includes(elmNameClear) ){
 						//add more filter for this type
-						var arrayValues = typeof ChosenOrder !== 'undefined' && ChosenOrder.isChosenified(elm) ? $elm.getSelectionOrder() : $elm.val();
+						var arrayValues = $elm.val();
 						//var arrayValues = $elm.getSelectionOrder();
 						if(arrayValues){
 							items[elm.name] = arrayValues.toString();

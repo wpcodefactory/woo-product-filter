@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoViewWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -20,6 +20,11 @@ class PromoViewWpf extends ViewWpf {
 		parent::display('additionalmainAdminShowOnOptions');
 	}
 
+	/**
+	 * getOverviewTabContent.
+	 *
+	 * @version 3.1.9
+	 */
 	public function getOverviewTabContent() {
 		FrameWpf::_()->getModule('templates')->loadJqueryUi();
 
@@ -29,7 +34,6 @@ class PromoViewWpf extends ViewWpf {
 		$this->assign('mainLink', $this->getModule()->getMainLink());
 		$this->assign('faqList', $this->getFaqList());
 		$this->assign('serverSettings', $this->getServerSettings());
-		$this->assign('news', $this->getNewsContent());
 		$this->assign('contactFields', $this->getModule()->getContactFormFields());
 		return '';
 	}
@@ -55,25 +59,6 @@ class PromoViewWpf extends ViewWpf {
 			esc_html__("PopUp doesn't appear on the website", 'woo-product-filter')
 				=> $str2,
 		);
-	}
-
-	public function getNewsContent() {
-		$getData = wp_remote_get('https://' . WPF_WP_PLUGIN_URL . '/news/main.html');
-		$content = '';
-		if ($getData
-			&& is_array($getData)
-			&& isset($getData['response'])
-			&& isset($getData['response']['code'])
-			&& 200 == $getData['response']['code']
-			&& isset($getData['body'])
-			&& !empty($getData['body'])
-		) {
-			$content = $getData['body'];
-		} else {
-			/* translators: %s: url */
-			$content = sprintf(esc_html__('There were some problems while trying to retrieve our news, but you can always check all list %s.', 'woo-product-filter'), '<a target="_blank" href="' . esc_url('https://' . WPF_WP_PLUGIN_URL . '/news') . '">here</a>');
-		}
-		return $content;
 	}
 
 	/**

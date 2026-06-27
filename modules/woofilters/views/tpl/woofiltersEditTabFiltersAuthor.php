@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Author
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -34,12 +34,13 @@ ViewWpf::display('woofiltersEditTabCommonTitle');
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
+				$authorFrontendTypes = array(
+					'list'     => esc_attr__( 'Checkbox list', 'woo-product-filter' ),
+					'dropdown' => esc_attr__( 'Dropdown', 'woo-product-filter' ),
+				);
+				$authorFrontendTypes = DispatcherWpf::applyFilters( 'getAdminFilterTypes', $authorFrontendTypes, 'wpfAuthor' );
 				HtmlWpf::selectbox('f_frontend_type', array(
-					'options' => array(
-						'list' => esc_attr__( 'Checkbox list', 'woo-product-filter' ),
-						'dropdown' => esc_attr__( 'Dropdown', 'woo-product-filter' ),
-						'mul_dropdown' => esc_attr__( 'Multiple Dropdown', 'woo-product-filter' ) . $labelPro,
-					),
+					'options' => $authorFrontendTypes,
 					'attrs' => 'class="woobewoo-flat-input"'
 				));
 				?>
@@ -47,9 +48,7 @@ ViewWpf::display('woofiltersEditTabCommonTitle');
 	</div>
 </div>
 <?php
-if ($isPro) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect');
-}
+DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect');
 ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
