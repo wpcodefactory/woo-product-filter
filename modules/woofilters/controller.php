@@ -651,14 +651,14 @@ class WoofiltersControllerWpf extends ControllerWpf {
 						$args['after_page_number']  = '</span>';
 						unset( $args['type'] );
 						$links = paginate_links( $args );
-						HtmlWpf::echoEscapedHtml( _navigation_markup( $links, 'pagination', '' ) );
+						echo wp_kses_post( _navigation_markup( $links, 'pagination', '' ) );
 						break;
 					case 'Themify Ultra':
 						$args['before_page_number'] = '<span>';
 						$args['after_page_number']  = '</span>';
 						unset( $args['type'] );
 						$links = paginate_links( $args );
-						HtmlWpf::echoEscapedHtml( '<div class="pagenav tf_clear tf_box tf_textr tf_clearfix">' . $links . '</div>' );
+						echo wp_kses_post( '<div class="pagenav tf_clear tf_box tf_textr tf_clearfix">' . $links . '</div>' );
 						break;
 					default:
 						wc_get_template( 'loop/pagination.php', $args );

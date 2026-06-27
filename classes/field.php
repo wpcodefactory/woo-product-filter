@@ -74,8 +74,8 @@ class FieldWpf {
 		$this->validate[] = $validate;
 	}
 	/**
-	 * Set $value property. 
-	 * Sure - it is public and can be set directly, but it can be more 
+	 * Set $value property.
+	 * Sure - it is public and can be set directly, but it can be more
 	 * comfortable to use this method in future
 	 *
 	 * @param mixed $value value to be set
@@ -168,9 +168,18 @@ class FieldWpf {
 		}
 		return $value;
 	}
+
+	/**
+	 * showValue.
+	 *
+	 * @version 3.1.9
+	 *
+	 * @return void
+	 */
 	public function showValue() {
-		HtmlWpf::echoEscapedHtml($this->displayValue());
+		echo wp_kses( $this->displayValue(), HtmlWpf::getAllowedHtmlTags() );
 	}
+
 	public function addHtmlParam( $name, $value ) {
 		$this->htmlParams[$name] = $value;
 	}
@@ -189,7 +198,7 @@ class FieldWpf {
 	/**
 	 * Check if the element exists in array
 	 *
-	 * @param array $param 
+	 * @param array $param
 	 */
 	public function checkVarFromParam( $param, $element ) {
 		return UtilsWpf::xmlAttrToStr($param, $element);
@@ -197,13 +206,13 @@ class FieldWpf {
 
 	/**
 	 * Prepares configuration options
-	 * 
+	 *
 	 * @param file $xml
-	 * @return array $config_params 
+	 * @return array $config_params
 	 */
 	public function prepareConfigOptions( $xml ) {
 		// load xml structure of parameters
-		$config = simplexml_load_file($xml);           
+		$config = simplexml_load_file($xml);
 		$config_params = array();
 		foreach ($config->params->param as $param) {
 			// read the variables

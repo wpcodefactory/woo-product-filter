@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OverviewViewWpf Class
  *
- * @version 2.8.6
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -28,6 +28,8 @@ class OverviewViewWpf extends ViewWpf {
 
 	/**
 	 * showRestApiInfo.
+	 *
+	 * @version 3.1.9
 	 */
 	public function showRestApiInfo() {
 		$dismiss = (int) FrameWpf::_()->getModule('options')->get('dismiss_wpf-rest-api');
@@ -57,6 +59,6 @@ class OverviewViewWpf extends ViewWpf {
 			' <a href="#" class="button button-dismiss">' . esc_html__('No, thanks', 'woo-product-filter') . '</a>'
 		);
 		$this->assign('msgSlug', 'wpf-rest-api');
-		HtmlWpf::echoEscapedHtml($this->getContent('showAdminInfo'));
+		echo wp_kses( $this->getContent( 'showAdminInfo' ), HtmlWpf::getAllowedHtmlTags() );
 	}
 }

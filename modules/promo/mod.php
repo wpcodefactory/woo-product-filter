@@ -443,7 +443,7 @@ class PromoWpf extends ModuleWpf {
 	/**
 	 * checkPluginDeactivation.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function checkPluginDeactivation() {
 		if (function_exists('get_current_screen')) {
@@ -457,7 +457,7 @@ class PromoWpf extends ModuleWpf {
 				FrameWpf::_()->addJSVar(WPF_CODE . '.admin.plugins', 'wpfPluginsData', array(
 					'plugName' => WPF_PLUG_NAME . '/' . WPF_MAIN_FILE,
 				));
-				HtmlWpf::echoEscapedHtml($this->getView()->getPluginDeactivation());
+				echo wp_kses( $this->getView()->getPluginDeactivation(), HtmlWpf::getAllowedHtmlTags() );
 			}
 		}
 	}

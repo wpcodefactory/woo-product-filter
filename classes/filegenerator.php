@@ -1,7 +1,10 @@
 <?php
 /**
- * Class to generate fiels and output them in attachment by http (https) protocol
+ * Class to generate files and output them in attachment by http (https) protocol
+ *
+ * @version 3.1.9
  */
+
 class FilegeneratorWpf {
 	protected static $_instances = array();
 	protected $_filename = '';
@@ -22,6 +25,12 @@ class FilegeneratorWpf {
 	public static function _( $filename, $data, $type ) {
 		return self::getInstance($filename, $data, $type);
 	}
+
+	/**
+	 * generate.
+	 *
+	 * @version 3.1.9
+	 */
 	public function generate() {
 		switch ($this->_type) {
 			case 'txt':
@@ -34,9 +43,10 @@ class FilegeneratorWpf {
 				$this->_getDefaultHeader();
 				break;
 		}
-		HtmlWpf::echoEscapedHtml($this->_data);
+		echo esc_html( $this->_data );
 		exit();
 	}
+
 	protected function _getTxtHeader() {
 		header('Content-Disposition: attachment; filename="' . $this->_filename . '.txt"');
 		header('Content-type: text/plain');

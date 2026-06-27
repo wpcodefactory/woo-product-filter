@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Show Admin Notice
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -11,5 +11,5 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 <div class="error notice is-dismissible">
-	<p><?php HtmlWpf::echoEscapedHtml($this->errorMsg); ?></p>
+	<p><?php echo esc_html( $this->errorMsg ); ?></p>
 </div>

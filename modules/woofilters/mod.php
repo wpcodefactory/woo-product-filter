@@ -3151,6 +3151,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * showAdminErrors.
+	 *
+	 * @version 3.1.9
 	 */
 	public function showAdminErrors() {
 		// check WooCommerce is installed and activated
@@ -3171,7 +3173,7 @@ class WoofiltersWpf extends ModuleWpf {
 			// check current module
 			if ( ReqWpf::getVar( 'page' ) == WPF_SHORTCODE || FrameWpf::_()->isWCLicense() ) {
 				// show message
-				HtmlWpf::echoEscapedHtml( $tableView->getContent( 'showAdminNotice' ) );
+				echo wp_kses( $tableView->getContent( 'showAdminNotice' ), HtmlWpf::getAllowedHtmlTags() );
 			}
 		}
 	}
