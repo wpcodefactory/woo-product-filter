@@ -7,6 +7,32 @@
  * @author woobewoo
  */
 
+/**
+ * Check whether a plugin is active without loading wp-admin/includes/plugin.php.
+ *
+ * Works on both single-site and multisite. Replaces is_plugin_active() so that
+ * plugin code never has to require_once a core admin file.
+ *
+ * @version 3.1.9
+ * @since   3.1.9
+ *
+ * @param string $plugin Plugin base file, e.g. 'woocommerce/woocommerce.php'.
+ * @return bool
+ */
+if ( ! function_exists( 'wpf_is_plugin_active' ) ) {
+	function wpf_is_plugin_active( $plugin ) {
+		$active = (array) get_option( 'active_plugins', array() );
+		if ( in_array( $plugin, $active, true ) ) {
+			return true;
+		}
+		if ( is_multisite() ) {
+			$network_active = (array) get_site_option( 'active_sitewide_plugins', array() );
+			return isset( $network_active[ $plugin ] );
+		}
+		return false;
+	}
+}
+
 defined( 'ABSPATH' ) || exit;
 
 /**

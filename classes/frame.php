@@ -521,20 +521,18 @@ class FrameWpf {
 	}
 
 	/**
-	 * Add all scripts from _scripts array to wordpress.
+	 * Add all scripts from _scripts array to WordPress.
+	 *
+	 * @version 3.1.9
 	 */
 	public function addScripts() {
 		if (!empty($this->_scripts)) {
 			foreach ($this->_scripts as $s) {
 
-				if ( ! function_exists( 'is_plugin_active' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/plugin.php';
-				}
-
 				$enqueue = true;
 
 				// if the oxygen plugin is activated then check if the script is already registered
-				if ( is_plugin_active( 'oxygen/functions.php' ) && 'jquery-ui-autocomplete' === $s['handle'] ) {
+				if ( wpf_is_plugin_active( 'oxygen/functions.php' ) && 'jquery-ui-autocomplete' === $s['handle'] ) {
 					$wp_scripts = wp_scripts();
 					if ( isset( $wp_scripts->registered[ $s['handle'] ] ) ) {
 						$enqueue = false;
@@ -613,27 +611,6 @@ class FrameWpf {
 			}
 		}
 		$this->_stylesInitialized = true;
-	}
-
-	/**
-	 * loadPlugins.
-	 */
-	public function loadPlugins() {
-		require_once ABSPATH . 'wp-includes/pluggable.php';
-	}
-
-	/**
-	 * loadWPSettings.
-	 */
-	public function loadWPSettings() {
-		require_once ABSPATH . 'wp-settings.php';
-	}
-
-	/**
-	 * loadLocale.
-	 */
-	public function loadLocale() {
-		require_once ABSPATH . 'wp-includes/locale.php';
 	}
 
 	/**

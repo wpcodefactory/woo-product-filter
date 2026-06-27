@@ -312,13 +312,18 @@ class WoofiltersViewWpf extends ViewWpf {
 		return parent::getContent('woofiltersHtml');
 	}
 
+	/**
+	 * getVendor.
+	 *
+	 * @version 3.1.9
+	 */
 	private function getVendor() {
 		if ( class_exists('WC_Vendors') ) {
 			$vendor_shop = urldecode( get_query_var( 'vendor_shop' ) );
 			return WCV_Vendors::get_vendor_id( $vendor_shop );
 		}
 
-		if ( is_plugin_active( 'dokan-lite/dokan.php' ) ) {
+		if ( wpf_is_plugin_active( 'dokan-lite/dokan.php' ) ) {
 			$custom_store_url = dokan_get_option( 'custom_store_url', 'dokan_general', 'store' );
 			return get_query_var( $custom_store_url );
 		}
@@ -3390,7 +3395,7 @@ class WoofiltersViewWpf extends ViewWpf {
 				}
 
 				// some plugin uses a different hook, use it if the standard one did not change the price
-				if ( is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) {
+				if ( wpf_is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || wpf_is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) {
 					$wc_price[0] = apply_filters( 'woocommerce_product_get_regular_price', $range[0], null );
 					$wc_price[1] = apply_filters( 'woocommerce_product_get_regular_price', $range[1], null );
 				} else {

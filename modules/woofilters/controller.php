@@ -240,13 +240,18 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * save.
+	 *
+	 * @version 3.1.9
+	 */
 	public function save() {
 
-		if ( is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) ) {
+		if ( wpf_is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) ) {
 			do_action( 'litespeed_purge_all' );
 		}
 
-		if ( is_plugin_active( 'wp-rocket/wp-rocket.php' ) && function_exists( 'rocket_clean_domain' ) ) {
+		if ( wpf_is_plugin_active( 'wp-rocket/wp-rocket.php' ) && function_exists( 'rocket_clean_domain' ) ) {
 			if ( FrameWpf::_()->getModule( 'options' )->get( 'disable_clean_rocket_cache' ) != 1 ) {
 				rocket_clean_domain();
 			}
