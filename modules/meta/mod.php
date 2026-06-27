@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - MetaWpf Class
  *
- * @version 3.1.2
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -72,14 +72,14 @@ class MetaWpf extends ModuleWpf {
 	/**
 	 * addOptions.
 	 *
-	 * @version 3.1.2
+	 * @version 3.1.9
 	 */
 	public function addOptions( $options ) {
 		$opts = array_merge(array(
 			'start_indexing' => array(
 				'label'        => esc_html__('Start indexing product parameters', 'woo-product-filter'),
 				'desc'         => esc_html__('For correct and fast operation of filters, the plugin creates index tables for product parameters. This tables are automatically rebuilt by editing / creating products. But if you edited products with third-party plugins or methods, and/or noticed that the filter does not work correctly, then click this button to forcefully rebuild the index tables. If you have a lot of products, the process may take a while.', 'woo-product-filter') .
-					'<br><br>' . esc_html__('There is a way to start indexing with a URL: ', 'woo-product-filter') . '<br><b>/wp-admin/admin-ajax.php?mod=meta&action=doMetaIndexingFree&pl=wpf&reqType=ajax</b><br>' .
+					'<br><br>' . esc_html__('There is a way to start indexing with a URL: ', 'woo-product-filter') . '<br><b>' . esc_url( admin_url( 'admin-ajax.php?mod=meta&action=doMetaIndexingFree&pl=wpf&reqType=ajax' ) ) . '</b><br>' .
 					esc_html__('Add a parameter &inCron=1 if you need to run in the background (via cron).', 'woo-product-filter'),
 				'html'         => 'startMetaButton',
 				'def'          => '',

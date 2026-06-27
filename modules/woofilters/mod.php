@@ -133,7 +133,7 @@ class WoofiltersWpf extends ModuleWpf {
 		add_action( 'woocommerce_shortcode_before_products_loop', array( $this, 'addWoocommerceShortcodeQuerySettings' ) );
 		add_action( 'woocommerce_shortcode_before_sale_products_loop', array( $this, 'addWoocommerceShortcodeQuerySettings' ) );
 
-		if ( ! wpf_wpf_is_plugin_active( 'woocommerce-product-feeds/woocommerce-gpf.php' ) ) {
+		if ( ! wpf_is_plugin_active( 'woocommerce-product-feeds/woocommerce-gpf.php' ) ) {
 			trait_exists( '\Essential_Addons_Elementor\Template\Content\Product_Grid' ) && add_action( 'pre_get_posts', array(
 				$this,
 				'loadProductsFilterForProductGrid',

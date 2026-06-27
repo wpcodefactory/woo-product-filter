@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Config
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  *
@@ -29,17 +29,16 @@ define('WPF_IMG_DIR', WPF_DIR . 'img' . DS);
 define('WPF_TEMPLATES_DIR', WPF_DIR . 'templates' . DS);
 define('WPF_MODULES_DIR', WPF_DIR . 'modules' . DS);
 define('WPF_FILES_DIR', WPF_DIR . 'files' . DS);
-define('WPF_ADMIN_DIR', ABSPATH . 'wp-admin' . DS);
 
-define('WPF_PLUGINS_URL', plugins_url());
+define('WPF_PLUGINS_URL', plugin_dir_url(__FILE__));
 if (!defined('WPF_SITE_URL')) {
 	define('WPF_SITE_URL', get_bloginfo('wpurl') . '/');
 }
-define('WPF_JS_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/js/');
-define('WPF_CSS_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/css/');
-define('WPF_IMG_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/img/');
-define('WPF_MODULES_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/modules/');
-define('WPF_TEMPLATES_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/templates/');
+define('WPF_JS_PATH', WPF_PLUGINS_URL . 'js/');
+define('WPF_CSS_PATH', WPF_PLUGINS_URL . 'css/');
+define('WPF_IMG_PATH', WPF_PLUGINS_URL . 'img/');
+define('WPF_MODULES_PATH', WPF_PLUGINS_URL . 'modules/');
+define('WPF_TEMPLATES_PATH', WPF_PLUGINS_URL . 'templates/');
 define('WPF_JS_DIR', WPF_DIR . 'js/');
 
 define('WPF_URL', WPF_SITE_URL);
