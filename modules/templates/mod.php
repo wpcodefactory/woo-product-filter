@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -228,10 +228,13 @@ class TemplatesWpf extends ModuleWpf {
 
 	/**
 	 * loadChosenSelects.
+	 *
+	 * @version 3.1.9
 	 */
 	public function loadChosenSelects() {
-		FrameWpf::_()->addStyle('jquery.chosen', FrameWpf::_()->getModule('templates')->getModPath() . 'lib/chosen/chosen.min.css');
-		FrameWpf::_()->addScript('jquery.chosen', FrameWpf::_()->getModule('templates')->getModPath() . 'lib/chosen/chosen.jquery.min.js');
+		$modPath = FrameWpf::_()->getModule('templates')->getModPath();
+		FrameWpf::_()->addStyle('tom-select', $modPath . 'lib/tom-select/tom-select.min.css');
+		FrameWpf::_()->addScript('tom-select', $modPath . 'lib/tom-select/tom-select.complete.min.js', array('jquery'));
 	}
 
 	/**

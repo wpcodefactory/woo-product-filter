@@ -98,6 +98,16 @@ Press Activate button
 7. Product filter constructor. Rating
 8. Product filter admin panel. Design tab
 
+== External services ==
+
+This plugin connects to an external server provided by WooBewoo (woobewoo.com) to handle the following admin-side forms. No data is ever sent automatically — these requests only occur when an administrator explicitly submits one of the forms below from within the WordPress admin panel.
+
+**Contact Us form:** Sends the administrator's name, email address, subject, message, site URL, and plugin version to woobewoo.com.
+**Subscribe form:** Sends the administrator's email address and site URL to woobewoo.com.
+**Rating form:** Sends the administrator's email address, rating score, feedback message, and site URL to woobewoo.com.
+
+[Terms of Service](https://woobewoo.com/terms-conditions/) | [Privacy Policy](https://woobewoo.com/privacy-policy/)
+
 == Frequently Asked Questions ==
 
 = How to create a product filter for my website? =
@@ -153,10 +163,11 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.9 - 25/06/2026 =
+= 3.1.9 - 27/06/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
 * Fix - Fixed mobile_detect nullable parameter deprecation warning.
+* Update - Replaced Outdated library `chosen` with `tom-select`.
 * Update - Removed Css & Js editor due to repository compliance.
 * Dev - Cleanup pro codes.
 

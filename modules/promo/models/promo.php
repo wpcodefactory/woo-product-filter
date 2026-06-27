@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - PromoModelWpf Class
  *
+ * @version 3.1.9
+ *
  * @author woobewoo
  */
 
@@ -31,21 +33,11 @@ class PromoModelWpf extends ModelWpf {
 
 	/**
 	 * welcomePageSaveInfo.
+	 *
+	 * @version 3.1.9
 	 */
 	public function welcomePageSaveInfo( $d = array() ) {
-		return; // Nothing todo for now
-		$reqUrl = $this->_getApiUrl() . '?mod=options&action=saveWelcomePageInquirer&pl=rcs';
-		$d['where_find_us'] = (int) 5; // Hardcode for now
-		wp_remote_post($reqUrl, array(
-			'body' => array(
-				'site_url'      => get_bloginfo('wpurl'),
-				'site_name'     => get_bloginfo('name'),
-				'where_find_us' => $d['where_find_us'],
-				'plugin_code'   => WPF_CODE,
-			)
-		));
-		// In any case - give user possibility to move further
-		return true;
+		return;
 	}
 
 	/**
@@ -96,25 +88,11 @@ class PromoModelWpf extends ModelWpf {
 
 	/**
 	 * sendUsageStat.
+	 *
+	 * @version 3.1.9
 	 */
 	public function sendUsageStat() {
-		return; // Nothing todo for now
-		$allStat = $this->getAllUsageStat();
-		if (empty($allStat)) {
-			return;
-		}
-		$reqUrl = $this->_getApiUrl() . '?mod=options&action=saveUsageStat&pl=rcs';
-		$res = wp_remote_post($reqUrl, array(
-			'body' => array(
-				'site_url'    => get_bloginfo('wpurl'),
-				'site_name'   => get_bloginfo('name'),
-				'plugin_code' => WPF_CODE,
-				'all_stat'    => $allStat,
-			)
-		));
-		$this->clearUsageStat();
-		// In any case - give user possibility to move further
-		return true;
+		return;
 	}
 
 	/**
