@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ReqWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -16,10 +16,6 @@ class ReqWpf {
 	protected static $_requestMethod;
 
 	public static $_requestWithNonce = false;
-
-	public static function init() {
-		add_filter('sanitize_text_field', array('ReqWpf', 'sanitizeData'), 999, 2);
-	}
 
 	public static function startSession() {
 		if (!UtilsWpf::isSessionStarted()) {
@@ -40,7 +36,7 @@ class ReqWpf {
 	/**
 	 * Function getVar.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
@@ -69,33 +65,33 @@ class ReqWpf {
 		switch ($from) {
 			case 'get':
 				if (isset($_GET[$name])) {
-					return sanitize_text_field(wp_unslash($_GET[$name]));
+					return self::sanitizeValue(wp_unslash($_GET[$name]));
 				}
 				break;
 			case 'post':
 				if (isset($_POST[$name])) {
-					return sanitize_text_field(wp_unslash($_POST[$name]));
+					return self::sanitizeValue(wp_unslash($_POST[$name]));
 				}
 				break;
 			case 'file':
 			case 'files':
 				if (isset($_FILES[$name])) {
-					return sanitize_text_field($_FILES[$name]);
+					return self::sanitizeValue($_FILES[$name]);
 				}
 				break;
 			case 'session':
 				if (isset($_SESSION[$name])) {
-					return sanitize_text_field($_SESSION[$name]);
+					return self::sanitizeValue($_SESSION[$name]);
 				}
 				break;
 			case 'server':
 				if (isset($_SERVER[$name])) {
-					return sanitize_text_field(wp_unslash($_SERVER[$name]));
+					return self::sanitizeValue(wp_unslash($_SERVER[$name]));
 				}
 				break;
 			case 'cookie':
 				if (isset($_COOKIE[$name])) {
-					$value = sanitize_text_field(wp_unslash($_COOKIE[$name]));
+					$value = self::sanitizeValue(wp_unslash($_COOKIE[$name]));
 					if (strpos($value, '_JSON:') === 0) {
 						$value = explode('_JSON:', $value);
 						$value = UtilsWpf::jsonDecode(array_pop($value));
@@ -121,7 +117,7 @@ class ReqWpf {
 	/**
 	 * Getting similar parameters when redirecting to set filter values.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param string $part part of parameter
 	 *
@@ -139,12 +135,29 @@ class ReqWpf {
 		if ( isset($_GET['redirect']) ) {
 			foreach ( $_GET as $key => $value ) {
 				if ( strpos ($key, $part) === 0 ) {
-					$params[] = sanitize_text_field( $value );
+					$params[] = self::sanitizeValue( $value );
 				}
 			}
 		}
 
 		return implode('|', $params);
+	}
+
+	/**
+	 * sanitizeValue.
+	 *
+	 * Sanitizes a value without altering global sanitize_text_field behavior.
+	 * Handles arrays recursively via sanitizeArray().
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 *
+	 * @param mixed $value
+	 *
+	 * @return mixed
+	 */
+	private static function sanitizeValue( $value ) {
+		return is_array( $value ) ? self::sanitizeArray( $value ) : sanitize_text_field( $value );
 	}
 
 	public static function sanitizeData( $filtered, $value ) {
