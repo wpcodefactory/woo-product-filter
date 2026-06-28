@@ -185,10 +185,19 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		return $vars;
 	}
 
+	/**
+	 * _prepareTextLikeSearch.
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.4
+	 */
 	protected function _prepareTextLikeSearch( $val ) {
-		$query = '(title LIKE "%' . $val . '%"';
-		if ( is_numeric($val) ) {
-			$query .= ' OR id LIKE "%' . (int) $val . '%"';
+		global $wpdb;
+		$like  = '%' . $wpdb->esc_like( $val ) . '%';
+		$query = $wpdb->prepare( '(title LIKE %s', $like ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		if ( is_numeric( $val ) ) {
+			$id_like = '%' . $wpdb->esc_like( (string) (int) $val ) . '%';
+			$query  .= $wpdb->prepare( ' OR id LIKE %s', $id_like ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		}
 		$query .= ')';
 		return $query;

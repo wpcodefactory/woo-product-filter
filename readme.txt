@@ -163,10 +163,11 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.9 - 27/06/2026 =
+= 3.1.9 - 28/06/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
 * Fix - Fixed mobile_detect nullable parameter deprecation warning.
+* Fix - Fixed SQL Injection vulnerability.
 * Update - Replaced Outdated library `chosen` with `tom-select`.
 * Update - Removed Css & Js editor due to repository compliance.
 * Dev - Cleanup pro codes.
