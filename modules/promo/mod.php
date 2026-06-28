@@ -173,10 +173,21 @@ class PromoWpf extends ModuleWpf {
 		return $isPro;
 	}
 
+	/**
+	 * checkWelcome.
+	 *
+	 * @version 3.1.9
+	 *
+	 * @return void
+	 */
 	public function checkWelcome() {
 		$from = ReqWpf::getVar('from', 'get');
 		$pl = ReqWpf::getVar('pl', 'get');
 		if ( 'welcome-page' == $from && WPF_CODE == $pl && FrameWpf::_()->getModule('user')->isAdmin() ) {
+			$nonce = ReqWpf::getVar('wpfNonce', 'get');
+			if (!wp_verify_nonce($nonce, 'wpf-save-nonce') || !current_user_can('manage_options')) {
+				return;
+			}
 			$welcomeSent = (int) get_option(WPF_DB_PREF . 'welcome_sent');
 			if (!$welcomeSent) {
 				$this->getModel()->welcomePageSaveInfo();
@@ -236,9 +247,19 @@ class PromoWpf extends ModuleWpf {
 		}
 	}
 
+	/**
+	 * checkToShowTutorial.
+	 *
+	 * @version 3.1.9
+	 *
+	 * @return void
+	 */
 	public function checkToShowTutorial() {
 		if (ReqWpf::getVar('tour', 'get') == 'clear-hst') {
-			$this->getModel()->clearTourHst();
+			$nonce = ReqWpf::getVar('wpfNonce', 'get');
+			if (wp_verify_nonce($nonce, 'wpf-save-nonce') && current_user_can('manage_options')) {
+				$this->getModel()->clearTourHst();
+			}
 		}
 		$hst = $this->getModel()->getTourHst();
 		if ( ( isset($hst['closed']) && $hst['closed'] ) || ( isset($hst['finished']) && $hst['finished'] ) ) {

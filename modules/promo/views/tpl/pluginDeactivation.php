@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Promo - Plugin Deactivation
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -108,6 +108,7 @@ defined( 'ABSPATH' ) || exit;
 		</label>
 		<?php HtmlWpf::hidden('mod', array('value' => 'promo')); ?>
 		<?php HtmlWpf::hidden('action', array('value' => 'saveDeactivateData')); ?>
+		<?php HtmlWpf::hidden('wpfNonce', array('value' => wp_create_nonce('wpf-save-nonce'))); ?>
 	</form>
 	<a href="" class="wpfDeactivateSkipDataBtn"><?php esc_html_e('Skip & Deactivate', 'woo-product-filter'); ?></a>
 </div>

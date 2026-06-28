@@ -573,7 +573,7 @@ class FrameWpf {
 			if ( is_array( $val ) ) {
 				wp_localize_script( $script, $name, $val );
 			} else {
-				$code = "var {$name} = '" . esc_js( $val ) . "';";
+				$code = "var {$name} = " . wp_json_encode( $val ) . ';';
 				wp_add_inline_script( $script, $code, 'before' );
 			}
 		} else {

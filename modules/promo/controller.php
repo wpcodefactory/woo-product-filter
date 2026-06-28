@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoControllerWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -12,11 +12,28 @@ defined( 'ABSPATH' ) || exit;
 class PromoControllerWpf extends ControllerWpf {
 
 	/**
+	 * checkAdminNonce.
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 */
+	private function checkAdminNonce() {
+		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		if (!current_user_can('manage_options')) {
+			wp_die();
+		}
+	}
+
+	/**
 	 * welcomePageSaveInfo.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function welcomePageSaveInfo() {
+		check_admin_referer('wpf-save-nonce', 'wpfNonce');
+		if (!current_user_can('manage_options')) {
+			wp_die();
+		}
 		$res = new ResponseWpf();
 		InstallerWpf::setUsed();
 		if ($this->getModel()->welcomePageSaveInfo(ReqWpf::get('get'))) {
@@ -40,9 +57,10 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * sendContact.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function sendContact() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		$time = time();
 		$prevSendTime = (int) get_option(WPF_CODE . '_last__time_contact_send');
@@ -97,7 +115,13 @@ class PromoControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * addNoticeAction.
+	 *
+	 * @version 3.1.9
+	 */
 	public function addNoticeAction() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		$code = ReqWpf::getVar('code', 'post');
 		$choice = ReqWpf::getVar('choice', 'post');
@@ -123,7 +147,13 @@ class PromoControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * addTourStep.
+	 *
+	 * @version 3.1.9
+	 */
 	public function addTourStep() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		if ($this->getModel()->addTourStep(ReqWpf::get('post'))) {
 			$res->addMessage(esc_html__('Information was saved. Thank you!', 'woo-product-filter'));
@@ -133,7 +163,13 @@ class PromoControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * closeTour.
+	 *
+	 * @version 3.1.9
+	 */
 	public function closeTour() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		if ($this->getModel()->closeTour(ReqWpf::get('post'))) {
 			$res->addMessage(esc_html__('Information was saved. Thank you!', 'woo-product-filter'));
@@ -143,7 +179,13 @@ class PromoControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * addTourFinish.
+	 *
+	 * @version 3.1.9
+	 */
 	public function addTourFinish() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		if ($this->getModel()->addTourFinish(ReqWpf::get('post'))) {
 			$res->addMessage(esc_html__('Information was saved. Thank you!', 'woo-product-filter'));
@@ -153,7 +195,13 @@ class PromoControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * saveDeactivateData.
+	 *
+	 * @version 3.1.9
+	 */
 	public function saveDeactivateData() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		if ($this->getModel()->saveDeactivateData(ReqWpf::get('post'))) {
 			$res->addMessage(esc_html__('Thank you for Feedback!', 'woo-product-filter'));
@@ -163,7 +211,13 @@ class PromoControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * enbStatsOpt.
+	 *
+	 * @version 3.1.9
+	 */
 	public function enbStatsOpt() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		FrameWpf::_()->getModule('options')->getModel()->save('send_stats', 1);
 		$res->ajaxExec();
@@ -173,7 +227,7 @@ class PromoControllerWpf extends ControllerWpf {
 		return array(
 			WPF_USERLEVELS => array(
 				WPF_ADMIN => array('welcomePageSaveInfo', 'sendContact', 'addNoticeAction',
-					'addStep', 'closeTour', 'addTourFinish', 'saveDeactivateData', 'enbStatsOpt')
+					'addTourStep', 'closeTour', 'addTourFinish', 'saveDeactivateData', 'enbStatsOpt')
 			),
 		);
 	}

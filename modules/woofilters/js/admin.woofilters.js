@@ -259,7 +259,7 @@
 				_this.sendFormWpf({
 					btn: jQuery('#buttonSave'),
 					data: _this.serializeAnythingWpf(),
-					appendData: {wpfNonce: window.wpfNonce},
+					appendData: {wpfNonce: WPF_DATA.wpfNonce},
 					onSuccess: function (res) {
 						var currentUrl = window.location.href;
 						if (!res.error && res.data.edit_link && currentUrl !== res.data.edit_link && !_thisObj.isElementorEditMode) {
@@ -297,7 +297,7 @@
 					pl: 'wpf',
 					action: 'saveCategoryLabel',
 					reqType: 'ajax',
-					wpfNonce: window.wpfNonce,
+					wpfNonce: WPF_DATA.wpfNonce,
 					term_id: termId,
 					label: updated
 				},
@@ -322,7 +322,7 @@
 						id: id,
 						pl: 'wpf',
 						reqType: "ajax",
-						wpfNonce: window.wpfNonce
+						wpfNonce: WPF_DATA.wpfNonce
 					};
 					jQuery.ajax({
 						url: url,

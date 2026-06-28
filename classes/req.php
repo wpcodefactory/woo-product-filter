@@ -17,6 +17,25 @@ class ReqWpf {
 
 	public static $_requestWithNonce = false;
 
+	/**
+	 * verifyRequestNonce.
+	 *
+	 * @version 3.1.9
+	 * @since 3.1.9
+	 *
+	 * @return void
+	 */
+	protected static function verifyRequestNonce() {
+		$nonce = empty($_REQUEST['wpfNonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['wpfNonce']));
+		if (empty($nonce) && !empty($_REQUEST['_wpnonce'])) {
+			$nonce = sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
+		}
+		if (!wp_verify_nonce($nonce, 'wpf-save-nonce')) {
+			echo esc_html__('Security check', 'woo-product-filter');
+			exit();
+		}
+	}
+
 	public static function startSession() {
 		if (!UtilsWpf::isSessionStarted()) {
 			if (version_compare(phpversion(), '5.7.0', '<')) {
@@ -46,11 +65,7 @@ class ReqWpf {
 	*/
 	public static function getVar( $name, $from = 'all', $default = null ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				echo esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
 
 		$from = strtolower($from);
@@ -126,11 +141,7 @@ class ReqWpf {
 	public static function getFilterRedirect( $part ) {
 		$params = array();
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				echo esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
 		if ( isset($_GET['redirect']) ) {
 			foreach ( $_GET as $key => $value ) {
@@ -205,15 +216,11 @@ class ReqWpf {
 	/**
 	 * clearVar.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public static function clearVar( $name, $in = 'input', $params = array() ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
 		$in = strtolower($in);
 		switch ($in) {
@@ -242,15 +249,11 @@ class ReqWpf {
 	/**
 	 * get.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public static function get( $what ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
 		$what = strtolower($what);
 		switch ($what) {

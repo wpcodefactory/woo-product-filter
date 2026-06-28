@@ -165,9 +165,6 @@ list($roles) = $this->getModule()->getRolesDisplay();
 							</div>
 							<span id="wpfFilterTitleEditMsg"></span>
 						</div>
-						<!-- <div class="col-md-3 no-l-padding hidden-sm hidden-xs">
-							<div class="wpfPreviewTitle"><?php echo esc_html__('Preview', 'woo-product-filter'); ?></div>
-						</div> -->
 					</div>
 					<div class="wpfMainTabsContainer woobewooFiltersParentContainer woobewoo-d-flex selectFiltersMain woobewoo-p-24">
 						<div class="woobewooFiltersMainLeftCol wpfFiltersTabContents woobewoo-p-0-i">

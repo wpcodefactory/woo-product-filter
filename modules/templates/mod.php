@@ -57,12 +57,14 @@ class TemplatesWpf extends ModuleWpf {
 
 	/**
 	 * init.
+	 *
+	 * @version 3.1.9
 	 */
 	public function init() {
 		if (is_admin()) {
 			$isAdminPlugOptsPage = FrameWpf::_()->isAdminPlugOptsPage();
 			if ($isAdminPlugOptsPage) {
-				$this->loadCoreJs();
+				add_action('init', array($this, 'loadCoreJs'));
 				$this->loadAdminCoreJs();
 				$this->loadCoreCss();
 				$this->loadChosenSelects();
@@ -107,7 +109,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * loadCoreJs.
 	 *
-	 * @version 3.0.8
+	 * @version 3.1.9
 	 */
 	public function loadCoreJs() {
 		FrameWpf::_()->addScript('jquery');
@@ -139,6 +141,7 @@ class TemplatesWpf extends ModuleWpf {
 			$jsData['isPro']       = FrameWpf::_()->getModule('promo')->isPro();
 			$jsData['mainLink']    = FrameWpf::_()->getModule('promo')->getMainLink();
 			$jsData['isWCLicense'] = FrameWpf::_()->isWCLicense();
+			$jsData['wpfNonce']    = wp_create_nonce('wpf-save-nonce');
 		}
 		$jsData = DispatcherWpf::applyFilters('jsInitVariables', $jsData);
 		FrameWpf::_()->addJSVar('coreWpf', 'WPF_DATA', $jsData);

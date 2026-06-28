@@ -102,8 +102,13 @@ class PromoViewWpf extends ViewWpf {
 		$this->assign('mainLink', $this->getModule()->getMainLink());
 	}
 
+	/**
+	 * _makeWelcomeLink.
+	 *
+	 * @version 3.1.9
+	 */
 	private function _makeWelcomeLink( $link ) {
-		return UriWpf::_(array('baseUrl' => $link, 'from' => 'welcome-page', 'pl' => WPF_CODE));
+		return UriWpf::_(array('baseUrl' => $link, 'from' => 'welcome-page', 'pl' => WPF_CODE, 'wpfNonce' => wp_create_nonce('wpf-save-nonce')));
 	}
 
 	public function getTourHtml() {
