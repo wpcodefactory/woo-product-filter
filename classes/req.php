@@ -3,8 +3,7 @@
  * Product Filter by WBW - ReqWpf Class
  *
  * @version 3.1.9
- *
- * @author woobewoo
+ * @author  woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -143,8 +142,8 @@ class ReqWpf {
 		if (self::$_requestWithNonce) {
 			self::verifyRequestNonce();
 		}
-		if ( isset($_GET['redirect']) ) {
-			foreach ( $_GET as $key => $value ) {
+		if ( isset($_GET['redirect']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			foreach ( $_GET as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if ( strpos ($key, $part) === 0 ) {
 					$params[] = self::sanitizeValue( $value );
 				}
@@ -258,19 +257,46 @@ class ReqWpf {
 		$what = strtolower($what);
 		switch ($what) {
 			case 'get':
-				return $_GET;
-				break;
+				return self::sanitizeArray(wp_unslash($_GET)); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			case 'post':
-				return $_POST;
-				break;
+				return self::sanitizeArray(wp_unslash($_POST)); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			case 'session':
-				return $_SESSION;
-				break;
+				return isset($_SESSION) ? self::sanitizeArray($_SESSION) : array();
 			case 'files':
-				return $_FILES;
-				break;
+				return self::sanitizeFiles($_FILES);
 		}
 		return null;
+	}
+
+	/**
+	 * sanitizeFiles.
+	 *
+	 * Sanitizes a $_FILES array: file names and MIME types are cleaned;
+	 * tmp_name is server-generated and left as-is.
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 *
+	 * @param array $files Raw $_FILES array.
+	 *
+	 * @return array
+	 */
+	private static function sanitizeFiles( $files ) {
+		$clean = array();
+		foreach ( $files as $key => $file ) {
+			if ( is_array($file) && isset($file['name']) ) {
+				$clean[$key] = array(
+					'name'     => sanitize_file_name( $file['name'] ),
+					'type'     => sanitize_mime_type( $file['type'] ),
+					'tmp_name' => $file['tmp_name'],
+					'size'     => absint( $file['size'] ),
+					'error'    => absint( $file['error'] ),
+				);
+			} else {
+				$clean[$key] = $file;
+			}
+		}
+		return $clean;
 	}
 
 	/**

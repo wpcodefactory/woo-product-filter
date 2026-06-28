@@ -3501,16 +3501,16 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * wpfCurrentLocation.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function wpfCurrentLocation() {
 		if ( empty($_SERVER['HTTP_HOST']) ) {
 			return '';
 		}
-		if ( ( isset($_SERVER['HTTPS']) &&
-			( ( 'on' == $_SERVER['HTTPS'] ) || ( 1 == $_SERVER['HTTPS'] ) ) ) ||
-			( isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
-			( 'https' == $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) ) {
+		$https_val = isset( $_SERVER['HTTPS'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) : '';
+		$x_proto   = isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) : '';
+		if ( ( '' !== $https_val && ( 'on' === $https_val || '1' === $https_val ) ) ||
+			( '' !== $x_proto && 'https' === $x_proto ) ) {
 			$protocol = 'https://';
 		} else {
 			$protocol = 'http://';

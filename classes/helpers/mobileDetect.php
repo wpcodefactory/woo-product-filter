@@ -8,7 +8,7 @@
  * Mobile_Detect is a lightweight PHP class for detecting mobile devices (including tablets).
  * It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.
  * License     Code and contributions have 'MIT License'
- *              More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt 
+ *              More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
  *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
  *
  * @link        Homepage:     http://mobiledetect.net
@@ -16,7 +16,7 @@
  *              Google Code:  http://code.google.com/p/php-mobile-detect/
  *              README:       https://github.com/serbanghita/Mobile-Detect/blob/master/README.md
  *              HOWTO:        https://github.com/serbanghita/Mobile-Detect/wiki/Code-examples
- * @version     2.8.24
+ * @version     3.1.9
  */
 
 class Mobile_Detect {
@@ -613,7 +613,7 @@ class Mobile_Detect {
 		'Coast'         => array('Coast/[VER]'),
 		'Dolfin'        => 'Dolfin/[VER]',
 		// @reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent/Firefox
-		'Firefox'       => array('Firefox/[VER]', 'FxiOS/[VER]'), 
+		'Firefox'       => array('Firefox/[VER]', 'FxiOS/[VER]'),
 		'Fennec'        => 'Fennec/[VER]',
 		// http://msdn.microsoft.com/en-us/library/ms537503(v=vs.85).aspx
 		// https://msdn.microsoft.com/en-us/library/ie/hh869301(v=vs.85).aspx
@@ -696,11 +696,13 @@ class Mobile_Detect {
 	 *
 	 * @param array $httpHeaders The headers to set. If null, then using PHP's _SERVER to extract
 	 *                           the headers. The default null is left for backwards compatibility.
+	 *
+	 * @version 3.1.9
 	 */
 	public function setHttpHeaders( $httpHeaders = null ) {
 		// use global _SERVER if $httpHeaders aren't defined
 		if (!is_array($httpHeaders) || !count($httpHeaders)) {
-			$httpHeaders = $_SERVER;
+			$httpHeaders = $_SERVER; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- values are sanitized individually in the loop below
 		}
 
 		// clear existing headers
@@ -710,7 +712,7 @@ class Mobile_Detect {
 		// start with HTTP_.
 		foreach ($httpHeaders as $key => $value) {
 			if (substr($key, 0, 5) === 'HTTP_') {
-				$this->httpHeaders[$key] = $value;
+				$this->httpHeaders[$key] = sanitize_text_field(wp_unslash($value));
 			}
 		}
 
@@ -778,11 +780,13 @@ class Mobile_Detect {
 	 *
 	 * @param array $cfHeaders List of HTTP header
 	 * @return  boolean If there were CloudFront headers to be set
+	 *
+	 * @version 3.1.9
 	 */
 	public function setCfHeaders( $cfHeaders = null ) {
 		// use global _SERVER if $cfHeaders aren't defined
 		if (!is_array($cfHeaders) || !count($cfHeaders)) {
-			$cfHeaders = $_SERVER;
+			$cfHeaders = $_SERVER; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- values are sanitized individually in the loop below
 		}
 
 		// clear existing headers
@@ -793,7 +797,7 @@ class Mobile_Detect {
 		$response = false;
 		foreach ($cfHeaders as $key => $value) {
 			if (substr(strtolower($key), 0, 16) === 'http_cloudfront_') {
-				$this->cloudfrontHeaders[strtoupper($key)] = $value;
+				$this->cloudfrontHeaders[strtoupper($key)] = sanitize_text_field(wp_unslash($value));
 				$response = true;
 			}
 		}
