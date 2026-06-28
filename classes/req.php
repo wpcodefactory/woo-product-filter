@@ -69,43 +69,43 @@ class ReqWpf {
 
 		$from = strtolower($from);
 		if ('all' == $from) {
-			if (isset($_GET[$name])) {
+			if (isset($_GET[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$from = 'get';
-			} elseif (isset($_POST[$name])) {
+			} elseif (isset($_POST[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$from = 'post';
 			}
 		}
 
 		switch ($from) {
 			case 'get':
-				if (isset($_GET[$name])) {
-					return self::sanitizeValue(wp_unslash($_GET[$name]));
+				if (isset($_GET[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					return self::sanitizeValue(wp_unslash($_GET[$name])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'post':
-				if (isset($_POST[$name])) {
-					return self::sanitizeValue(wp_unslash($_POST[$name]));
+				if (isset($_POST[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					return self::sanitizeValue(wp_unslash($_POST[$name])); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'file':
 			case 'files':
-				if (isset($_FILES[$name])) {
-					return self::sanitizeValue($_FILES[$name]);
+				if (isset($_FILES[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					return self::sanitizeValue($_FILES[$name]); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'session':
 				if (isset($_SESSION[$name])) {
-					return self::sanitizeValue($_SESSION[$name]);
+					return self::sanitizeValue($_SESSION[$name]); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'server':
 				if (isset($_SERVER[$name])) {
-					return self::sanitizeValue(wp_unslash($_SERVER[$name]));
+					return self::sanitizeValue(wp_unslash($_SERVER[$name])); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'cookie':
 				if (isset($_COOKIE[$name])) {
-					$value = self::sanitizeValue(wp_unslash($_COOKIE[$name]));
+					$value = self::sanitizeValue(wp_unslash($_COOKIE[$name])); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 					if (strpos($value, '_JSON:') === 0) {
 						$value = explode('_JSON:', $value);
 						$value = UtilsWpf::jsonDecode(array_pop($value));
@@ -224,12 +224,12 @@ class ReqWpf {
 		$in = strtolower($in);
 		switch ($in) {
 			case 'get':
-				if (isset($_GET[$name])) {
+				if (isset($_GET[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					unset($_GET[$name]);
 				}
 				break;
 			case 'post':
-				if (isset($_POST[$name])) {
+				if (isset($_POST[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					unset($_POST[$name]);
 				}
 				break;
@@ -259,11 +259,11 @@ class ReqWpf {
 			case 'get':
 				return self::sanitizeArray(wp_unslash($_GET)); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			case 'post':
-				return self::sanitizeArray(wp_unslash($_POST)); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				return self::sanitizeArray(wp_unslash($_POST)); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 			case 'session':
 				return isset($_SESSION) ? self::sanitizeArray($_SESSION) : array();
 			case 'files':
-				return self::sanitizeFiles($_FILES);
+				return self::sanitizeFiles($_FILES); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		}
 		return null;
 	}
