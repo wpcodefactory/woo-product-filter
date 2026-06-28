@@ -9,7 +9,7 @@ class Woofilters_WidgetViewWpf extends ViewWpf {
 	public function displayWidget( $instance, $args ) {
 		if ( isset($instance['id']) && $instance['id'] ) {
 			// now disabled rule: if is_shop() or is_product_category() or is_product_tag() or is_customize_preview()
-			$widget = do_shortcode( '[' . WPF_SHORTCODE . ' id=' . $instance['id'] . ' mode="widget"]' );
+			$widget = do_shortcode( '[' . WPF_SHORTCODE . ' id=' . intval( $instance['id'] ) . ' mode="widget"]' );
 			if ( '' !== $widget ) {
 				if ( isset( $args['before_widget'] ) && isset( $args['after_widget'] ) ) {
 					$widget = $args['before_widget'] . $widget . $args['after_widget'];

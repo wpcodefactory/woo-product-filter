@@ -566,13 +566,15 @@ class FrameWpf {
 
 	/**
 	 * addJSVar.
+	 *
+	 * @version 3.1.9
 	 */
 	public function addJSVar( $script, $name, $val ) {
 		if ($this->_scriptsInitialized) {
 			if ( is_array( $val ) ) {
 				wp_localize_script( $script, $name, $val );
 			} else {
-				$code = "var {$name} = '{$val}';";
+				$code = "var {$name} = '" . esc_js( $val ) . "';";
 				wp_add_inline_script( $script, $code, 'before' );
 			}
 		} else {
