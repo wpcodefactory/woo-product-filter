@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - ResponseWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 #[\AllowDynamicProperties]
 class ResponseWpf {
 	public $code = 0;

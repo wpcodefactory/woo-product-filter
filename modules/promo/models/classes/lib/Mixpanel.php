@@ -106,6 +106,9 @@ require_once(dirname(__FILE__) . '/Producers/MixpanelEvents.php');
  * ));
  *
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Mixpanel extends Base_MixpanelBase {
 
 

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - LangWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class LangWpf {
 	private static $_codeStorage = array();
 	private static $_data = array();

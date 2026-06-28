@@ -19,6 +19,8 @@
  * @version     3.1.9
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Mobile_Detect {
 	/**
 	 * Mobile detection type.

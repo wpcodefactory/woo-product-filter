@@ -5,6 +5,8 @@
  * @version 3.1.9
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class FilegeneratorWpf {
 	protected static $_instances = array();
 	protected $_filename = '';

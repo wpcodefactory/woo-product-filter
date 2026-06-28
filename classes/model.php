@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - ModelWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 abstract class ModelWpf extends BaseObjectWpf {
 	protected $_data = array();
 	protected $_code = '';

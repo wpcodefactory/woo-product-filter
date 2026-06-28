@@ -1,7 +1,13 @@
 <?php
 /**
- * Maps widget class
+ * Product Filter by WBW - WpfWoofiltersWidget Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class WpfWoofiltersWidget extends WP_Widget {
 	public function __construct() {
 		$widgetOps = array(

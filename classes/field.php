@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - FieldWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class FieldWpf {
 	public $name = '';
 	public $html = '';

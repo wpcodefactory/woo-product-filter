@@ -7,6 +7,8 @@
  * @author woobewoo
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class UserWpf extends ModuleWpf {
 	protected $_data = array();
 	protected $_curentID = 0;

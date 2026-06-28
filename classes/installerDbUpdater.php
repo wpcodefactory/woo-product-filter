@@ -1,4 +1,12 @@
 <?php
+/**
+ * Product Filter by WBW - InstallerDbUpdaterWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class InstallerDbUpdaterWpf {
 	public static function runUpdate( $current_version ) {

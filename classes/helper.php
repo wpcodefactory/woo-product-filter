@@ -1,9 +1,13 @@
 <?php
 /**
- * Abstract class of module helper
- * Module helper has all the functions that are needed in module workflow
- * Besides it contains the methods to build html elements
+ * Product Filter by WBW - HelperWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 abstract class HelperWpf {
 	protected $_code = '';
 	protected $_module = '';
