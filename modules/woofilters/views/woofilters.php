@@ -3432,7 +3432,7 @@ class WoofiltersViewWpf extends ViewWpf {
 				$html      .= '<li data-range="' . ( $selected ? $urlRange : '' ) . '"><' . $tagWrapper . ' class="wpfLiLabel">';
 				$html      .= '<span class="wpfCheckbox wpfPriceCheckboxCustom"><input type="checkbox" id="' . $checkId . '"' . ( $selected ? ' checked' : '' ) . '><label aria-label="' . esc_attr( $customText ) . '" for="' . $checkId . '"></label></span>';
 				$html      .= '<span class="wpfDisplay"><span class="wpfValue">' . $customText . '</span></span>';
-				$html      .= '<span class="wpfPriceRangeCustom"><input class="passiveFilter" type="text" name="wpf_custom_min" value="' . ( $selected ? ReqWpf::getVar('wpf_min_price') : '' ) . '" aria-label="' . esc_html__('Minimum Price', 'woo-product-filter') . '"> - <input class="passiveFilter" type="text" name="wpf_custom_max"  value="' . ( $selected ? ReqWpf::getVar('wpf_max_price') : '' ) . '" aria-label="' . esc_html__('Maximum Price', 'woo-product-filter') . '"><i class="fa fa-chevron-right"></i></span>';
+				$html      .= '<span class="wpfPriceRangeCustom"><input class="passiveFilter" type="text" name="wpf_custom_min" value="' . ( $selected ? esc_attr( ReqWpf::getVar('wpf_min_price') ) : '' ) . '" aria-label="' . esc_html__('Minimum Price', 'woo-product-filter') . '"> - <input class="passiveFilter" type="text" name="wpf_custom_max"  value="' . ( $selected ? esc_attr( ReqWpf::getVar('wpf_max_price') ) : '' ) . '" aria-label="' . esc_html__('Maximum Price', 'woo-product-filter') . '"><i class="fa fa-chevron-right"></i></span>';
 				$html      .= '</' . $tagWrapper . '></li>';
 			}
 		} else {

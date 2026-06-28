@@ -65,7 +65,7 @@ define('WPF_USER', 'user');
 
 define('WPF_CLASS_PREFIX', 'wpfc');
 define('WPF_FREE_VERSION', true);
-define('WPF_TEST_MODE', true);
+define('WPF_TEST_MODE', false);
 
 define('WPF_SUCCESS', 'Success');
 define('WPF_FAILED', 'Failed');

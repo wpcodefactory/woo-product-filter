@@ -13,7 +13,7 @@ class FilegeneratorWpf {
 	protected $_data = '';
 	protected $_type = '';
 	public function __construct( $filename, $data, $type ) {
-		$this->_filename = $filename;
+		$this->_filename = sanitize_file_name( $filename );
 		$this->_data = $data;
 		$this->_type = strtolower($type);
 	}

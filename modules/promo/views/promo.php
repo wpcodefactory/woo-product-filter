@@ -117,10 +117,15 @@ class PromoViewWpf extends ViewWpf {
 		return '';
 	}
 
+	/**
+	 * showFeaturedPluginsPage.
+	 *
+	 * @version 3.1.9
+	 */
 	public function showFeaturedPluginsPage() {
 		FrameWpf::_()->getModule('templates')->loadBootstrapSimple();
 		FrameWpf::_()->addStyle('admin.featured-plugins', $this->getModule()->getModPath() . 'css/admin.featured-plugins.css');
-		FrameWpf::_()->getModule('templates')->loadGoogleFont('Montserrat');
+
 		$siteUrl       = 'https://' . WPF_WP_PLUGIN_URL . '/';
 		$pluginsUrl    = $siteUrl . 'plugins/';
 		$uploadsUrl    = $siteUrl . 'wp-content/uploads/';
