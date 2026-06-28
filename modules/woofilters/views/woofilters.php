@@ -727,7 +727,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			$filter                    = DispatcherWpf::applyFilters('controlFilterSettings', $filter);
 			$filter['blockAttributes'] = empty($filter['blockAttributes']) ? '' : ' ' . $filter['blockAttributes'];
 			if ( $useTitleAsSlug ) {
-				$filter['blockAttributes'] .= ' data-title="' . $this->getFilterSetting($filter['settings'], 'f_title', '') . '"';
+				$filter['blockAttributes'] .= ' data-title="' . esc_attr( $this->getFilterSetting($filter['settings'], 'f_title', '') ) . '"';
 			}
 
 			$method = 'generate' . str_replace('wpf', '', $filter['id']) . 'FilterHtml';
@@ -1135,7 +1135,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			$htmlOpt = $this->generatePriceRangeOptionsHtml($filter, $ranges, $layout);
 			$default = explode(',', $this->getFilterSetting($settings, 'f_range_by_hands_default', ''));
 			if ( count($default) == 2 && ( 'i' != $default[0] || 'i' != $default[1] ) ) {
-				$defaultRange = ' data-default="' . ( 'i' == $default[0] ? '' : $module->getCurrencyPrice($default[0]) ) . ',' . ( 'i' == $default[1] ? '' : $module->getCurrencyPrice($default[1]) ) . '"';
+				$defaultRange = ' data-default="' . esc_attr( 'i' == $default[0] ? '' : $module->getCurrencyPrice($default[0]) ) . ',' . esc_attr( 'i' == $default[1] ? '' : $module->getCurrencyPrice($default[1]) ) . '"';
 			}
 		} elseif ( $filter['settings']['f_range_automatic'] ) {
 			$prices = self::$filterExistsPrices;
@@ -1184,7 +1184,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 				' data-radio="' . ( 'list' == $type ? '1' : '0' ) . '"' .
 				$defaultRange .
-			( ( isset( $prices->tax ) ) ? ' data-tax="' . $prices->tax . '"' : '' ) .
+			( ( isset( $prices->tax ) ) ? ' data-tax="' . esc_attr( $prices->tax ) . '"' : '' ) .
 				$filter['blockAttributes'] .
 			'>';
 
