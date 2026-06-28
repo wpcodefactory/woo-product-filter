@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Overview CSS
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -159,9 +159,9 @@
 	margin-left: 0 !important;
 }
 .wpfRatingStar{
-	display: flex;
-	width: 1em;
-	height: 1em;
+	display: block;
+	width: 30px;
+	height: 30px;
 	fill: currentColor;
 	stroke: #a3a3a3;
 	stroke-width: 2px;
@@ -169,18 +169,7 @@
 .wpfStarsRatingLine .checked {
 	color: #eeee22;
 }
-.wpfRatingStar {
-	display: flex;
-	width: 1em;
-	height: 1em;
-	fill: currentColor;
-	stroke: #a3a3a3;
-	stroke-width: 2px;
-	stroke: #a3a3a3;
-	font-size: 30px;
-	line-height: 30px;
-}
-.wpfStarDefault, .wpf-overview-hidden {
+.wpf-overview-hidden {
 	display: none;
 }
 .wpfLineStarsRating .wpfStarItem:hover ~ .wpfStarItem{color: #eeeeee;}
