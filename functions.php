@@ -2,10 +2,36 @@
 /**
  * Product Filter by WBW - Functions
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
+
+/**
+ * Check whether a plugin is active without loading wp-admin/includes/plugin.php.
+ *
+ * Works on both single-site and multisite. Replaces is_plugin_active() so that
+ * plugin code never has to require_once a core admin file.
+ *
+ * @version 3.1.9
+ * @since   3.1.9
+ *
+ * @param string $plugin Plugin base file, e.g. 'woocommerce/woocommerce.php'.
+ * @return bool
+ */
+if ( ! function_exists( 'wpf_is_plugin_active' ) ) {
+	function wpf_is_plugin_active( $plugin ) {
+		$active = (array) get_option( 'active_plugins', array() );
+		if ( in_array( $plugin, $active, true ) ) {
+			return true;
+		}
+		if ( is_multisite() ) {
+			$network_active = (array) get_site_option( 'active_sitewide_plugins', array() );
+			return isset( $network_active[ $plugin ] );
+		}
+		return false;
+	}
+}
 
 defined( 'ABSPATH' ) || exit;
 
@@ -139,12 +165,15 @@ if (!function_exists('toeCreateObjWpf')) {
 /**
  * Redirect user to specified location. Be advised that it should redirect even if headers already sent.
  *
+ * @version 3.1.9
+ *
  * @param string $url where page must be redirected
  */
 if (!function_exists('redirectWpf')) {
 	function redirectWpf( $url ) {
 		if (headers_sent()) {
-			echo '<script type="text/javascript"> document.location.href = "' . esc_url($url) . '"; </script>';
+			// JavaScript fallback is necessary here — PHP headers are already sent so wp_redirect() cannot be used.
+			echo '<script type="text/javascript"> document.location.href = "' . esc_url($url) . '"; </script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		} else {
 			header('Location: ' . $url);
 		}
@@ -336,55 +365,22 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 }
 
 /**
- * woofilterInstallBaseMsg.
+ * wpf_install_base_msg.
+ *
+ * @version 3.1.9
  */
-add_action('admin_notices', 'woofilterInstallBaseMsg');
-if (!function_exists('woofilterInstallBaseMsg')) {
-	function woofilterInstallBaseMsg() {
+add_action('admin_notices', 'wpf_install_base_msg');
+if (!function_exists('wpf_install_base_msg')) {
+	function wpf_install_base_msg() {
 		if ( class_exists('FrameWpf') ) {
-			if ( !FrameWpf::_()->proVersionCompare(WPF_PRO_REQUIRES, '>=') ) {
+			if (FrameWpf::_()->getModule('options')->getModel()->get('start_indexing') == 2) {
 				$plugName = __('Product Filter by WBW', 'woo-product-filter');
-				$plugWpUrl = 'https://wordpress.org/plugins/woo-product-filter/';
-				echo '<div class="notice error is-dismissible"><p><strong>';
-				/* translators: 1: plugin name 2: plugin version */
-				echo sprintf(esc_html__('Please install latest PRO version of %1$s plugin (requires at least %2$s). ', 'woo-product-filter'), esc_html($plugName), esc_html(WPF_PRO_REQUIRES));
-				/* translators: %s: plugin name */
-				echo sprintf(esc_html__('In this way you will have full and upgraded PRO version of %s.', 'woo-product-filter'), esc_html($plugName)) .
-					'</strong></p></div>';
-			} else if (FrameWpf::_()->getModule('options')->getModel()->get('start_indexing') == 2) {
-				$plugName = __('Product Filter by WBW', 'woo-product-filter');
-				$plugWpUrl = 'https://wordpress.org/plugins/woo-product-filter/';
 				echo '<div class="notice error is-dismissible"><p><strong>';
 				/* translators: %s: plugin name */
 				echo sprintf(esc_html__('The plugin %s started indexing the product database metadata. If you have a large database, this may take a while, but in the future it will significantly increase your filtering speed.', 'woo-product-filter'), esc_html($plugName)) .
 					'</strong></p></div>';
 			} else {
 				FrameWpf::_()->getModule('overview')->getView()->showRestApiInfo();
-			}
-		}
-	}
-}
-
-/**
- * woofilterProDeactivate.
- */
-add_action( 'admin_init', 'woofilterProDeactivate' );
-if (!function_exists('woofilterProDeactivate')) {
-	function woofilterProDeactivate() {
-		if (class_exists('FrameWpf') && function_exists('getProPlugFullPathWpf')) {
-			$pathPro = getProPlugFullPathWpf();
-			$proPlugin = plugin_basename($pathPro);
-			if (is_plugin_active($proPlugin)) {
-				$pluginData = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
-				$isProActive = FrameWpf::_()->moduleActive('access');
-				if ( !version_compare($pluginData['Version'], WPF_PRO_REQUIRES, '>=') ) {
-					//deactivate_plugins($proPlugin);
-					if ($isProActive) {
-						call_user_func_array(array('ModInstallerWpf', 'deactivate'), array(array('license')));
-					}
-				} elseif (!$isProActive) {
-					call_user_func_array(array('ModInstallerWpf', 'activate'), array(true));
-				}
 			}
 		}
 	}

@@ -11,6 +11,9 @@ if (!function_exists('json_encode')) {
 /**
  * Provides some base methods for use by a message Producer
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 abstract class Producers_MixpanelBaseProducer extends Base_MixpanelBase {
 
 	protected $_token;

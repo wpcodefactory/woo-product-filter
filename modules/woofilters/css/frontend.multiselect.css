@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Frontend Multiselect CSS
+ *
+ * @version 3.1.9
+ *
+ * @author woobewoo
+ */
+
 .ms-options-wrap,
 .ms-options-wrap * {
     box-sizing: border-box;
@@ -131,9 +139,6 @@
     border-top-color: #666;
     margin-top: -3px;
     border-top-width: 6px;
-}
-.ms-options-wrap + .select2-container {
-    display: none !important;
 }
 .rtl .ms-options-wrap button {
 	text-align: right;

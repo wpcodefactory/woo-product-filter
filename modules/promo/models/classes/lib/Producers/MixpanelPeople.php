@@ -4,6 +4,9 @@ require_once(dirname(__FILE__) . '/MixpanelBaseProducer.php');
 /**
  * Provides an API to create/update profiles on Mixpanel
  */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Producers_MixpanelPeople extends Producers_MixpanelBaseProducer {
 
 	/**

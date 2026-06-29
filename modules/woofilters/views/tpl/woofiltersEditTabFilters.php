@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -40,7 +40,6 @@ $filtersList = $this->getModel()->getAllFilters();
 						</svg>
 				</button>
 			</div>
-			<span data-option='pro' class="wpfProLabel wpfHidden"><a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a></span>
 			<span data-option='uniq' class="wpfProLabel wpfHidden"><?php esc_html_e('Already in the list', 'woo-product-filter'); ?></span>
 			<span data-option='group' class="wpfProLabel wpfHidden">
 			<?php
@@ -147,7 +146,12 @@ $filtersList = $this->getModel()->getAllFilters();
 			<div class="wpfFilterOptions" data-filter="<?php echo esc_attr($filter); ?>">
 				<?php
 				HtmlWpf::hidden('f_name', array('value' => $data['name']));
-				include_once 'woofiltersEditTabFilters' . substr($filter, 3) . '.php';
+				$tplFile = __DIR__ . '/woofiltersEditTabFilters' . substr( $filter, 3 ) . '.php';
+				if ( file_exists( $tplFile ) ) {
+					include_once $tplFile;
+				} else {
+					DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFilters' . substr( $filter, 3 ), $this->settings );
+				}
 				?>
 			</div>
 			<?php } ?>

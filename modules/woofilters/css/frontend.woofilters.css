@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters CSS
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -746,8 +746,7 @@ ul ul.wpfHideAllParent {
 .woobewoo-plugin input[type="text"],
 .woobewoo-plugin input[type="search"],
 .woobewoo-plugin select,
-.woobewoo-plugin button.ms-choice,
-.woobewoo-plugin .chosen-container-multi .chosen-choices {
+.woobewoo-plugin button.ms-choice {
 	background-color: #ffffff;
 	color: #64808e !important;
 	border: 1px solid #d8dfe3;
@@ -755,6 +754,16 @@ ul ul.wpfHideAllParent {
 	font-size: 13px !important;
 	outline: none;
 	border-radius: 8px !important;
+}
+.woobewoo-plugin .ts-control > input {
+	width: auto !important;
+	min-height: 0 !important;
+	height: auto !important;
+	border: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
 }
 .woobewoo-tbl-pagination-shell .ui-pg-table td:last-of-type {
 	padding-right: 0 !important;
@@ -1631,14 +1640,12 @@ select.woobewoo-flat-input {
 }
 .wpfFiltersTabContents,
 .wpfFiltersTabContents .settings-value div:not([class]),
-.wpfFiltersTabContents .chosen-container {
+.wpfFiltersTabContents .ts-wrapper {
 	max-width: 100% !important;
 }
 .wpfFiltersTabContents .settings-value div:not([class]),
-.wpfFiltersTabContents .chosen-container ul,
-.wpfFiltersTabContents .chosen-container ul li,
-.wpfFiltersTabContents .chosen-container,
-.wpfFiltersTabContents input:not([type="radio"]):not([type="checkbox"]),
+.wpfFiltersTabContents .ts-wrapper,
+.wpfFiltersTabContents input:not([type="radio"]):not([type="checkbox"]):not(.ts-control input),
 .wpfFiltersTabContents .settings-value,
 .wpfFiltersTabContents select {
 	width: 100% !important;
@@ -1762,37 +1769,7 @@ select.woobewoo-flat-input {
 	right: 24px;
 	z-index: 9;
 }
-.filterExportImportBtn {
-	display: flex;
-	align-items: center;
-	min-height: 44px;
-	font-size: 14px;
-	background-color: #dbdce1;
-	color: #636977 !important;
-	border-radius: 12px;
-	padding: 5px 16px;
-	cursor: pointer;
-	transition: 0.4s;
-}
-.filterExportImportBtn.export {
-	background-color: #636977;
-	color: #f9fafa !important;
-}
-.filterExportImportBtn .pro_label {
-	background-color: #d8ad35;
-	padding: 3px 10px;
-	border-radius: 8px;
-	height: 24px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 12px;
-	font-weight: 600;
-	color: var(--woobewoo-black);
-	right: 8px;
-	position: absolute;
-	top: -12px;
-}
+
 .searchIcon {
 	display: flex;
 	align-items: center;

@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Beautify Design CSS
  *
- * @version 3.1.7
+ * @version 3.1.9
  * @since   3.1.7
  *
  * @author woobewoo
@@ -208,14 +208,12 @@
 }
 .wpfFiltersTabContents,
 .wpfFiltersTabContents .settings-value div:not([class]),
-.wpfFiltersTabContents .chosen-container {
+.wpfFiltersTabContents .ts-wrapper {
 	max-width: 100% !important;
 }
 .wpfFiltersTabContents .settings-value div:not([class]),
-.wpfFiltersTabContents .chosen-container ul,
-.wpfFiltersTabContents .chosen-container ul li,
-.wpfFiltersTabContents .chosen-container,
-.wpfFiltersTabContents input:not([type="radio"]):not([type="checkbox"]),
+.wpfFiltersTabContents .ts-wrapper,
+.wpfFiltersTabContents input:not([type="radio"]):not([type="checkbox"]):not(.ts-control input),
 .wpfFiltersTabContents .settings-value,
 .wpfFiltersTabContents select {
 	width: 100% !important;
@@ -748,8 +746,7 @@
 .woobewoo-plugin input[type="text"],
 .woobewoo-plugin input[type="search"],
 .woobewoo-plugin select,
-.woobewoo-plugin button.ms-choice,
-.woobewoo-plugin .chosen-container-multi .chosen-choices {
+.woobewoo-plugin button.ms-choice {
 	background-color: #ffffff;
 	color: #64808e !important;
 	border: 1px solid #d8dfe3;
@@ -821,7 +818,7 @@
 	justify-content: center;
 	align-items: center;
 }
-.woobewoo-plugin input:not([type="radio"]):not([type="checkbox"]),
+.woobewoo-plugin input:not([type="radio"]):not([type="checkbox"]):not(.ts-control input),
 .woobewoo-plugin select,
 .woobewoo-plugin textarea {
 	border-color: #9da2ae !important;

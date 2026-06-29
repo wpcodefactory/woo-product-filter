@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - TableWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 abstract class TableWpf {
 	/**
 	 * ID column name

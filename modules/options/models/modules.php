@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - ModulesModelWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class ModulesModelWpf extends ModelWpf {
 	public function __construct() {
 		$this->_setTbl('modules');

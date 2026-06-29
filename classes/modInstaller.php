@@ -4,7 +4,7 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -26,7 +26,7 @@ class ModInstallerWpf {
 	/**
 	 * Install new ModuleWpf into plugin.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param string $module new ModuleWpf data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
@@ -36,9 +36,9 @@ class ModInstallerWpf {
 		$plugin_dir = basename( untrailingslashit( WP_PLUGIN_DIR ) );
 		$exPlugDest = explode( $plugin_dir, $path );
 		if (!empty($exPlugDest[1])) {
-			$module['ex_plug_dir'] = str_replace(DS, '', $exPlugDest[1]);
+			$module['ex_plug_dir'] = str_replace(WPF_DS, '', $exPlugDest[1]);
 		}
-		$path = $path . DS . $module['code'];
+		$path = $path . WPF_DS . $module['code'];
 		if (!empty($module) && !empty($path) && is_dir($path)) {
 			if (self::isModule($path)) {
 				$filesMoved = false;
@@ -72,6 +72,8 @@ class ModInstallerWpf {
 
 	/**
 	 * _runModuleInstall.
+	 *
+	 * @version 3.1.9
 	 */
 	protected static function _runModuleInstall( $module, $action = 'install' ) {
 		$moduleLocationDir = WPF_MODULES_DIR;
@@ -80,8 +82,8 @@ class ModInstallerWpf {
 		}
 		if (is_dir($moduleLocationDir . $module['code'])) {
 			if (!class_exists($module['code'] . strFirstUpWpf(WPF_CODE))) {
-				if (file_exists($moduleLocationDir . $module['code'] . DS . 'mod.php')) {
-					require $moduleLocationDir . $module['code'] . DS . 'mod.php';
+				if (file_exists($moduleLocationDir . $module['code'] . WPF_DS . 'mod.php')) {
+					require $moduleLocationDir . $module['code'] . WPF_DS . 'mod.php';
 				}
 			}
 			$moduleClass = toeGetClassNameWpf($module['code']);
@@ -137,6 +139,8 @@ class ModInstallerWpf {
 
 	/**
 	 * _getPluginLocations.
+	 *
+	 * @version 3.1.9
 	 */
 	private static function _getPluginLocations() {
 		$locations = array();
@@ -156,10 +160,10 @@ class ModInstallerWpf {
 			}
 		}
 
-		$locations['plugPath'] = empty($plug) && function_exists('getProPlugFullPathWpf') ? plugin_basename(getProPlugFullPathWpf()) : plugin_basename( trim( $plug ) );
-		$locations['plugDir'] = dirname(WP_PLUGIN_DIR . DS . $locations['plugPath']);
-		$locations['plugMainFile'] = WP_PLUGIN_DIR . DS . $locations['plugPath'];
-		$locations['xmlPath'] = $locations['plugDir'] . DS . 'install.xml';
+		$locations['plugPath'] = plugin_basename( trim( $plug ) );
+		$locations['plugDir'] = dirname(WP_PLUGIN_DIR . WPF_DS . $locations['plugPath']);
+		$locations['plugMainFile'] = WP_PLUGIN_DIR . WPF_DS . $locations['plugPath'];
+		$locations['xmlPath'] = $locations['plugDir'] . WPF_DS . 'install.xml';
 		return $locations;
 	}
 
@@ -169,6 +173,8 @@ class ModInstallerWpf {
 	 * @param string $xmlPath
 	 *
 	 * @return array
+	 *
+	 * @version 3.1.9
 	 */
 	private static function _getModulesFromXml( $xmlPath ) {
 		$modDataArr = array();
@@ -196,7 +202,7 @@ class ModInstallerWpf {
 				ErrorsWpf::push(esc_html__('No XML file were found', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
 			}
 		} else {
-			$modDataArr = unserialize(WPF_PRO_MODULES);
+			$modDataArr = apply_filters( 'wpf_getModulesFallback', array() );
 		}
 		return $modDataArr;
 	}
@@ -348,10 +354,12 @@ class ModInstallerWpf {
 
 	/**
 	 * _uninstallTables.
+	 *
+	 * @version 3.1.9
 	 */
 	protected static function _uninstallTables( $module ) {
-		if (is_dir(WPF_MODULES_DIR . $module['code'] . DS . 'tables')) {
-			$tableFiles = UtilsWpf::getFilesList(WPF_MODULES_DIR . $module['code'] . DS . 'tables');
+		if (is_dir(WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables')) {
+			$tableFiles = UtilsWpf::getFilesList(WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables');
 			if (!empty($tableNames)) {
 				foreach ($tableFiles as $file) {
 					$tableName = str_replace('.php', '', $file);
@@ -365,13 +373,15 @@ class ModInstallerWpf {
 
 	/**
 	 * _installTables.
+	 *
+	 * @version 3.1.9
 	 */
 	public static function _installTables( $module, $action = 'install' ) {
-		$modDir = empty($module['ex_plug_dir']) ? WPF_MODULES_DIR . $module['code'] . DS : UtilsWpf::getPluginDir($module['ex_plug_dir']) . $module['code'] . DS;
+		$modDir = empty($module['ex_plug_dir']) ? WPF_MODULES_DIR . $module['code'] . WPF_DS : UtilsWpf::getPluginDir($module['ex_plug_dir']) . $module['code'] . WPF_DS;
 		if (is_dir($modDir . 'tables')) {
 			$tableFiles = UtilsWpf::getFilesList($modDir . 'tables');
 			if (!empty($tableFiles)) {
-				FrameWpf::_()->extractTables($modDir . 'tables' . DS);
+				FrameWpf::_()->extractTables($modDir . 'tables' . WPF_DS);
 				foreach ($tableFiles as $file) {
 					$tableName = str_replace('.php', '', $file);
 					if (FrameWpf::_()->getTable($tableName)) {

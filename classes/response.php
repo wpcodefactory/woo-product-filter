@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - ResponseWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 #[\AllowDynamicProperties]
 class ResponseWpf {
 	public $code = 0;
@@ -17,6 +26,12 @@ class ResponseWpf {
 	public function isAjax() {
 		return $this->getReqType() == 'ajax';
 	}
+
+	/**
+	 * ajaxExec.
+	 *
+	 * @version 3.1.9
+	 */
 	public function ajaxExec( $forceAjax = false ) {
 		$isAjax = $this->isAjax();
 		$redirect = ReqWpf::getVar('redirect');
@@ -24,12 +39,13 @@ class ResponseWpf {
 			$this->error = true;
 		}
 		if ( $isAjax || $forceAjax ) {
-			HtmlWpf::echoEscapedHtml( jsonEncodeUTFnormalWpf( $this ) );
+			echo jsonEncodeUTFnormalWpf( $this ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- AJAX JSON response; HTML escaping would corrupt JSON syntax.
 			ReqWpf::endSession();
 			exit();
 		}
 		return $this;
 	}
+
 	public function mainRedirect( $redirectUrl = '' ) {
 		$redirectUrl = empty($redirectUrl) ? WPF_SITE_URL : $redirectUrl;
 		$redirectData = array();

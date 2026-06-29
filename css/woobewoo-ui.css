@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - UI CSS
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -513,8 +513,7 @@ ul.woobewoo-bar-controls > li.separator {
 
 /*textboxes*/
 .woobewoo-plugin input[type=text], .woobewoo-plugin input[type=search],
-.woobewoo-plugin select, .woobewoo-plugin button.ms-choice,
-.woobewoo-plugin .chosen-container-multi .chosen-choices {
+.woobewoo-plugin select, .woobewoo-plugin button.ms-choice {
 	background-color: #ffffff;
 	color: #64808e !important;
 	border: 1px solid #d8dfe3;
@@ -522,6 +521,16 @@ ul.woobewoo-bar-controls > li.separator {
 	min-height: 20px !important;
 	font-size: 13px !important;
 	outline: none;
+}
+.woobewoo-plugin .ts-control > input {
+	height: auto !important;
+	min-height: 0 !important;
+	border: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
+	width: auto !important;
 }
 .woobewoo-plugin select {
 	background: #fff url(images/down.png) no-repeat right 5px top 55% !important;
@@ -759,32 +768,6 @@ select.woobewoo-flat-input option {
 	padding: 5px;
 }
 
-/*chosen selects*/
-.woobewoo-plugin .chosen-container-multi .chosen-choices li.search-choice {
-	background-image: none;
-	background-color: transparent;
-	border: 1px solid #d8dfe3;
-	border-radius: 0;
-	color: #64808e;
-	box-shadow: none;
-}
-.woobewoo-plugin .chosen-container-multi input {
-	color: #64808e !important;
-}
-.woobewoo-plugin .chosen-container-multi .chosen-choices {
-	background-image: none;
-}
-.woobewoo-plugin .chosen-container-active .chosen-choices {
-	border-color: #4ae8ea;
-	box-shadow: none;
-}
-.woobewoo-plugin .chosen-container.chosen-container-multi:not(.chosen-responsive) {
-	min-width: 100px;	/*As if select is hidden on chosen init action - it will be with width: 0 - and this is really bad*/
-}
-.woobewoo-plugin .chosen-responsive {
-	width: 100% !important;
-}
-
 /*back to top*/
 #wpfPopupGoToTop {
 	position: fixed;
@@ -1005,9 +988,6 @@ select.woobewoo-flat-input option {
 	}
 	.woobewoo-breadcrumbs {
 		display: none;
-	}
-	.woobewoo-plugin .chosen-container.chosen-container-multi {
-		min-width: 50px;
 	}
 	#wpfPopupMainControllsShell {
 		padding-right: 45px !important;

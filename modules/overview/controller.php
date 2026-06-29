@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OverviewControllerWpf Class
  *
- * @version 3.0.1
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -12,9 +12,27 @@ defined( 'ABSPATH' ) || exit;
 class OverviewControllerWpf extends ControllerWpf {
 
 	/**
+	 * checkAdminNonce.
+	 *
+	 * @version 3.1.9
+	 * @since 3.1.9
+	 *
+	 * @return void
+	 */
+	private function checkAdminNonce() {
+		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		if (!current_user_can('manage_options') && !current_user_can('manage_woocommerce')) {
+			wp_die();
+		}
+	}
+
+	/**
 	 * subscribe.
+	 *
+	 * @version 3.1.9
 	 */
 	public function subscribe() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		if ($this->getModel()->subscribe(ReqWpf::get('post'))) {
 			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
@@ -26,8 +44,11 @@ class OverviewControllerWpf extends ControllerWpf {
 
 	/**
 	 * contactus.
+	 *
+	 * @version 3.1.9
 	 */
 	public function contactus() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		if ($this->getModel()->contactus(ReqWpf::get('post'))) {
 			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
@@ -39,8 +60,11 @@ class OverviewControllerWpf extends ControllerWpf {
 
 	/**
 	 * rating.
+	 *
+	 * @version 3.1.9
 	 */
 	public function rating() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		if ($this->getModel()->rating(ReqWpf::get('post'))) {
 			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
@@ -53,9 +77,10 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * dismissNotice.
 	 *
-	 * @version 3.0.1
+	 * @version 3.1.9
 	 */
 	public function dismissNotice() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		$slug = ReqWpf::getVar('slug');
 		if (
@@ -71,9 +96,10 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * approveNotice.
 	 *
-	 * @version 3.0.1
+	 * @version 3.1.9
 	 */
 	public function approveNotice() {
+		$this->checkAdminNonce();
 		$res = new ResponseWpf();
 		$slug = ReqWpf::getVar('slug');
 		if (

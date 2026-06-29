@@ -1,6 +1,8 @@
 /**
  * Product Filter by WBW - Admin Options JS
  *
+ * @version 3.1.9
+ *
  * @author woobewoo
  */
 
@@ -442,7 +444,7 @@ function wpfInitPlugNotices() {
 				if(!$notice.data('stats-sent')) {
 					// User closed this message - that is his choise, let's respect this and save it's saved status
 					jQuery.sendFormWpf({
-						data: {mod: 'promo', action: 'addNoticeAction', code: $notice.data('code'), choice: 'hide'}
+						data: {mod: 'promo', action: 'addNoticeAction', code: $notice.data('code'), choice: 'hide', wpfNonce: WPF_DATA.wpfNonce}
 					});
 				}
 			});
@@ -450,7 +452,7 @@ function wpfInitPlugNotices() {
 				var href = jQuery(this).attr('href')
 				,	$notice = jQuery(this).parents('.woobewoo-admin-notice');
 				jQuery.sendFormWpf({
-					data: {mod: 'promo', action: 'addNoticeAction', code: $notice.data('code'), choice: jQuery(this).data('statistic-code')}
+					data: {mod: 'promo', action: 'addNoticeAction', code: $notice.data('code'), choice: jQuery(this).data('statistic-code'), wpfNonce: WPF_DATA.wpfNonce}
 				});
 				$notice.data('stats-sent', 1).find('.notice-dismiss').trigger('click');
 				if(!href || href === '' || href === '#')
@@ -460,70 +462,11 @@ function wpfInitPlugNotices() {
 			if($enbStatsBtn && $enbStatsBtn.length) {
 				$enbStatsBtn.click(function(){
 					jQuery.sendFormWpf({
-						data: {mod: 'promo', action: 'enbStatsOpt'}
+						data: {mod: 'promo', action: 'enbStatsOpt', wpfNonce: WPF_DATA.wpfNonce}
 					});
 					return false;
 				});
 			}
-		});
-	}
-}
-/**
- * Main promo popup will show each time user will try to modify PRO option with free version only
- */
-function wpfGetMainPromoPopup() {
-	if(jQuery('#wpfOptInProWnd').hasClass('ui-dialog-content')) {
-		return jQuery('#wpfOptInProWnd');
-	}
-	return jQuery('#wpfOptInProWnd').dialog({
-		modal:    true
-	,	autoOpen: false
-	,	width: 540
-	,	height: 200
-	,	open: function() {
-			jQuery('#wpfOptWndTemplateTxt').hide();
-			jQuery('#wpfOptWndOptionTxt').show();
-		}
-	});
-}
-function wpfInitMainPromoPopup() {
-	if(!WPF_DATA.isPro) {
-		var $proOptWnd = wpfGetMainPromoPopup();
-		jQuery('.wpfProOpt').change(function(e){
-			e.stopPropagation();
-			var needShow = true
-			,	isRadio = jQuery(this).attr('type') == 'radio'
-			,	isCheck = jQuery(this).attr('type') == 'checkbox';
-			if(isRadio && !jQuery(this).attr('checked')) {
-				needShow = false;
-			}
-			if(!needShow) {
-				return;
-			}
-			if(isRadio) {
-				jQuery('input[name="'+ jQuery(this).attr('name')+ '"]:first').parents('label:first').click();
-				if(jQuery(this).parents('.iradio_minimal:first').length) {
-					var self = this;
-					setTimeout(function(){
-						jQuery(self).parents('.iradio_minimal:first').removeClass('checked');
-					}, 10);
-				}
-			}
-			var parent = null;
-			if(jQuery(this).parents('#wpfPopupMainOpts').length) {
-				parent = jQuery(this).parents('label:first');
-			} else if(jQuery(this).parents('.wpfPopupOptRow:first').length) {
-				parent = jQuery(this).parents('.wpfPopupOptRow:first');
-			} else {
-				parent = jQuery(this).parents('tr:first');
-			}
-			if(!parent.length) return;
-			var promoLink = parent.find('.wpfProOptMiniLabel a').attr('href');
-			if(promoLink && promoLink != '') {
-				jQuery('#wpfOptInProWnd a').attr('href', promoLink);
-			}
-			$proOptWnd.dialog('open');
-			return false;
 		});
 	}
 }
