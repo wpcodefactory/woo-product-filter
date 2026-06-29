@@ -68,8 +68,8 @@ class UtilsWpf {
 	 */
 	public static function httpProtectDir( $path ) {
 		$content = 'DENY FROM ALL';
-		if ( strrpos( $path, DS ) != strlen( $path ) ) {
-			$path .= DS;
+		if ( strrpos( $path, WPF_DS ) != strlen( $path ) ) {
+			$path .= WPF_DS;
 		}
 		global $wp_filesystem;
 		if ( empty( $wp_filesystem ) ) {
@@ -198,6 +198,8 @@ class UtilsWpf {
 
 	/**
 	 * Retrieves list of directories ().
+	 *
+	 * @version 3.1.9
 	 */
 	public static function getDirList( $path ) {
 		$res = array();
@@ -210,7 +212,7 @@ class UtilsWpf {
 				if (!is_dir($path . $f)) {
 					continue;
 				}
-				$res[$f] = array('path' => $path . $f . DS);
+				$res[$f] = array('path' => $path . $f . WPF_DS);
 			}
 		}
 		return $res;
@@ -218,13 +220,15 @@ class UtilsWpf {
 
 	/**
 	 * Retrieves list of files.
+	 *
+	 * @version 3.1.9
 	 */
 	public static function getFilesList( $path ) {
 		$files = array();
 		if (is_dir($path)) {
 			$dirHandle = opendir($path);
 			while ( ( $file = readdir($dirHandle) ) !== false ) {
-				if ( ( '.' != $file ) && ( '..' != $file ) && ( '.svn' != $f ) && is_file($path . DS . $file) ) {
+				if ( ( '.' != $file ) && ( '..' != $file ) && ( '.svn' != $file ) && is_file($path . WPF_DS . $file) ) {
 					$files[] = $file;
 				}
 			}
@@ -264,11 +268,13 @@ class UtilsWpf {
 	/**
 	 * Retrieve full directory of plugin.
 	 *
+	 * @version 3.1.9
+	 *
 	 * @param string $name - plugin name
 	 * @return string full path in file system to plugin directory
 	 */
 	public static function getPluginDir( $name = '' ) {
-		return WP_PLUGIN_DIR . DS . $name . DS;
+		return WP_PLUGIN_DIR . WPF_DS . $name . WPF_DS;
 	}
 
 	/**

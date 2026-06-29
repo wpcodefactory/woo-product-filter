@@ -473,6 +473,15 @@ class PromoWpf extends ModuleWpf {
 				FrameWpf::_()->getModule('templates')->loadCoreJs();
 				FrameWpf::_()->getModule('templates')->loadCoreCss();
 				wp_enqueue_style('jquery-ui', $this->getModPath() . 'css/jquery-ui.css', array(), '1.0');
+				wp_add_inline_style( 'styleWpf', '
+					.wpfDeactivateDescShell { display: none; margin-left: 25px; margin-top: 5px; }
+					.wpfDeactivateReasonShell { display: block; margin-bottom: 10px; }
+					#wpfDeactivateWnd { display: none; }
+					#wpfDeactivateWnd input[type="text"], #wpfDeactivateWnd textarea { width: 100%; }
+					#wpfDeactivateWnd h4 { line-height: 1.53em; }
+					#wpfDeactivateWnd + .ui-dialog-buttonpane .ui-dialog-buttonset { float: none; }
+					.wpfDeactivateSkipDataBtn { float: right; margin-top: 15px; text-decoration: none; color: #777 !important; }
+				' );
 				FrameWpf::_()->addScript('jquery-ui-dialog');
 				FrameWpf::_()->addScript(WPF_CODE . '.admin.plugins', $this->getModPath() . 'js/admin.plugins.js');
 				FrameWpf::_()->addJSVar(WPF_CODE . '.admin.plugins', 'wpfPluginsData', array(

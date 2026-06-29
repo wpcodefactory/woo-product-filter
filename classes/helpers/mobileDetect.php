@@ -21,6 +21,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+if ( ! class_exists( 'Mobile_Detect' ) ) :
+
 class Mobile_Detect {
 	/**
 	 * Mobile detection type.
@@ -1420,3 +1422,5 @@ class Mobile_Detect {
 		return self::MOBILE_GRADE_C;
 	}
 }
+
+endif;

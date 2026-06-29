@@ -14,21 +14,19 @@ global $wpdb;
 
 define('WPF_WPLANG', (!defined('WPLANG') || WPLANG == '' ? 'en_GB' : WPLANG ));
 
-if (!defined('DS')) {
-	define('DS', DIRECTORY_SEPARATOR);
-}
+define('WPF_DS', DIRECTORY_SEPARATOR);
 
 define('WPF_PLUG_NAME', basename(dirname(__FILE__)));
-define('WPF_DIR', WP_PLUGIN_DIR . DS . WPF_PLUG_NAME . DS);
-define('WPF_TPL_DIR', WPF_DIR . 'tpl' . DS);
-define('WPF_CLASSES_DIR', WPF_DIR . 'classes' . DS);
-define('WPF_TABLES_DIR', WPF_CLASSES_DIR . 'tables' . DS);
-define('WPF_HELPERS_DIR', WPF_CLASSES_DIR . 'helpers' . DS);
-define('WPF_LANG_DIR', WPF_DIR . 'languages' . DS);
-define('WPF_IMG_DIR', WPF_DIR . 'img' . DS);
-define('WPF_TEMPLATES_DIR', WPF_DIR . 'templates' . DS);
-define('WPF_MODULES_DIR', WPF_DIR . 'modules' . DS);
-define('WPF_FILES_DIR', WPF_DIR . 'files' . DS);
+define('WPF_DIR', WP_PLUGIN_DIR . WPF_DS . WPF_PLUG_NAME . WPF_DS);
+define('WPF_TPL_DIR', WPF_DIR . 'tpl' . WPF_DS);
+define('WPF_CLASSES_DIR', WPF_DIR . 'classes' . WPF_DS);
+define('WPF_TABLES_DIR', WPF_CLASSES_DIR . 'tables' . WPF_DS);
+define('WPF_HELPERS_DIR', WPF_CLASSES_DIR . 'helpers' . WPF_DS);
+define('WPF_LANG_DIR', WPF_DIR . 'languages' . WPF_DS);
+define('WPF_IMG_DIR', WPF_DIR . 'img' . WPF_DS);
+define('WPF_TEMPLATES_DIR', WPF_DIR . 'templates' . WPF_DS);
+define('WPF_MODULES_DIR', WPF_DIR . 'modules' . WPF_DS);
+define('WPF_FILES_DIR', WPF_DIR . 'files' . WPF_DS);
 
 define('WPF_PLUGINS_URL', plugin_dir_url(__FILE__));
 if (!defined('WPF_SITE_URL')) {
@@ -60,7 +58,7 @@ define('WPF_CURRENT', 'current');
 define('WPF_EOL', "\n");
 
 define('WPF_PLUGIN_INSTALLED', true);
-define('WPF_VERSION', '3.1.9-dev-20260628-1200');
+define('WPF_VERSION', '3.1.9-dev-20260629-1200');
 define('WPF_USER', 'user');
 
 define('WPF_CLASS_PREFIX', 'wpfc');

@@ -517,6 +517,9 @@
 						visibility: 'visible'
 					});
 					container.css({visibility: container.find('.wpfFilterWrapper').length ? 'visible' : 'hidden'});
+					if (res.data && res.data.initFrontend && typeof window.wpfFrontendPage !== 'undefined') {
+						window.wpfFrontendPage.init();
+					}
 				}
 				_this.wpfWaitResponse = false;
 			},

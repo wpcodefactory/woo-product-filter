@@ -28,8 +28,14 @@ class Woofilters_WidgetViewWpf extends ViewWpf {
 		}
 	}
 
+	/**
+	 * displayForm.
+	 *
+	 * @version 3.1.9
+	 */
 	public function displayForm( $data, $widget ) {
 		FrameWpf::_()->addStyle('woofilters_widget', $this->getModule()->getModPath() . 'css/gmap_widget.css');
+		wp_add_inline_script( 'jquery', 'jQuery(document).ready(function(){ jQuery(".wpfWidgetRowCell select option[value=\'0\']").prop("disabled",true); });' );
 		$filters = FrameWpf::_()->getModule('woofilters')->getModel()->getFromTbl();
 		$filtersOpts = array();
 		if (empty($filters)) {

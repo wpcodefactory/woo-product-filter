@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Options - Admin Main
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -10,20 +10,6 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
-<style type="text/css">
-	.wpfAdminMainLeftSide {
-		width: 56%;
-		float: left;
-	}
-	.wpfAdminMainRightSide {
-		width: <?php echo ( empty($this->optsDisplayOnMainPage) ? 100 : 40 ); ?>%;
-		float: left;
-		text-align: center;
-	}
-	#wpfMainOccupancy {
-		box-shadow: none !important;
-	}
-</style>
 <section>
 	<div class="woobewoo-item woobewoo-panel">
 		<div id="containerWrapper">

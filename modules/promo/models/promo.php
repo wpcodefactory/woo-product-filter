@@ -192,11 +192,13 @@ class PromoModelWpf extends ModelWpf {
 
 	/**
 	 * _getBigStatClient.
+	 *
+	 * @version 3.1.9
 	 */
 	private function _getBigStatClient() {
 		if (!$this->_bigCli) {
 			if (!class_exists('Mixpanel')) {
-				require_once($this->getModule()->getModDir() . 'models' . DS . 'classes' . DS . 'lib' . DS . 'Mixpanel.php');
+				require_once($this->getModule()->getModDir() . 'models' . WPF_DS . 'classes' . WPF_DS . 'lib' . WPF_DS . 'Mixpanel.php');
 			}
 			$opts = array();
 			if (!function_exists('curl_init')) {

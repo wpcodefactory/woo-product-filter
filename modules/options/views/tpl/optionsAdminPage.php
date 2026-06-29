@@ -11,23 +11,6 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 
-<style type="text/css">
-	.woobewoo-main {
-		display: none;
-	}
-
-	.woobewoo-plugin-loader {
-		width: 100%;
-		height: 100px;
-		text-align: center;
-	}
-
-	.woobewoo-plugin-loader div {
-		font-size: 30px;
-		position: relation;
-		margin-top: 40px;
-	}
-</style>
 <div class="wrap woobewoo-wrap">
 	<div class="woobewoo-plugin woobewoo-main">
 		<section id="mainContainer" class="woobewoo-content woobewoo-d-flex woobewoo-items-stretch">

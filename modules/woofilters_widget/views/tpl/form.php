@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Widget Form
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -24,8 +24,3 @@ defined( 'ABSPATH' ) || exit;
 		?>
 	</div>
 </div>
-<script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery('.wpfWidgetRowCell select option[value="0"]').prop('disabled',true);
-	});
-</script>

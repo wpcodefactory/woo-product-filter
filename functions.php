@@ -165,12 +165,15 @@ if (!function_exists('toeCreateObjWpf')) {
 /**
  * Redirect user to specified location. Be advised that it should redirect even if headers already sent.
  *
+ * @version 3.1.9
+ *
  * @param string $url where page must be redirected
  */
 if (!function_exists('redirectWpf')) {
 	function redirectWpf( $url ) {
 		if (headers_sent()) {
-			echo '<script type="text/javascript"> document.location.href = "' . esc_url($url) . '"; </script>';
+			// JavaScript fallback is necessary here — PHP headers are already sent so wp_redirect() cannot be used.
+			echo '<script type="text/javascript"> document.location.href = "' . esc_url($url) . '"; </script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		} else {
 			header('Location: ' . $url);
 		}
@@ -362,13 +365,13 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 }
 
 /**
- * woofilterInstallBaseMsg.
+ * wpf_install_base_msg.
  *
  * @version 3.1.9
  */
-add_action('admin_notices', 'woofilterInstallBaseMsg');
-if (!function_exists('woofilterInstallBaseMsg')) {
-	function woofilterInstallBaseMsg() {
+add_action('admin_notices', 'wpf_install_base_msg');
+if (!function_exists('wpf_install_base_msg')) {
+	function wpf_install_base_msg() {
 		if ( class_exists('FrameWpf') ) {
 			if (FrameWpf::_()->getModule('options')->getModel()->get('start_indexing') == 2) {
 				$plugName = __('Product Filter by WBW', 'woo-product-filter');

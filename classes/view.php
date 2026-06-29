@@ -36,20 +36,32 @@ abstract class ViewWpf extends BaseObjectWpf {
 		}
 	}
 
+	/**
+	 * getPath.
+	 *
+	 * @version 3.1.9
+	 */
 	public function getPath( $tpl ) {
 		$path = '';
 		$parentModule = FrameWpf::_()->getModule( $this->_code );
-		if (file_exists($parentModule->getModDir() . 'views' . DS . 'tpl' . DS . $tpl . '.php')) { //Then try to find it in module directory
-			$path = $parentModule->getModDir() . DS . 'views' . DS . 'tpl' . DS . $tpl . '.php';
+		if (file_exists($parentModule->getModDir() . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php')) { //Then try to find it in module directory
+			$path = $parentModule->getModDir() . WPF_DS . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php';
 		}
 		return $path;
 	}
+
 	public function getModule() {
 		return FrameWpf::_()->getModule( $this->_code );
 	}
 	public function getModel( $code = '' ) {
 		return FrameWpf::_()->getModule( $this->_code )->getController()->getModel($code);
 	}
+
+	/**
+	 * getContent.
+	 *
+	 * @version 3.1.9
+	 */
 	public function getContent( $tpl = '' ) {
 		$tpl = ( empty($tpl) ) ? $this->_tpl : $tpl;
 		$path = $this->getPath($tpl);
@@ -57,13 +69,14 @@ abstract class ViewWpf extends BaseObjectWpf {
 		if ($path) {
 			$content = '';
 			ob_start();
-			require $parentModule->getModDir() . DS . 'views' . DS . 'tpl' . DS . $tpl . '.php';
+			require $parentModule->getModDir() . WPF_DS . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php';
 			$content = ob_get_contents();
 			ob_end_clean();
 			return $content;
 		}
 		return false;
 	}
+
 	public function setTheme( $theme ) {
 		$this->_theme = $theme;
 	}

@@ -10,34 +10,6 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
-<style type="text/css">
-	.wpfDeactivateDescShell {
-		display: none;
-		margin-left: 25px;
-		margin-top: 5px;
-	}
-	.wpfDeactivateReasonShell {
-		display: block;
-		margin-bottom: 10px;
-	}
-	#wpfDeactivateWnd {display: none;}
-	#wpfDeactivateWnd input[type="text"],
-	#wpfDeactivateWnd textarea {
-		width: 100%;
-	}
-	#wpfDeactivateWnd h4 {
-		line-height: 1.53em;
-	}
-	#wpfDeactivateWnd + .ui-dialog-buttonpane .ui-dialog-buttonset {
-		float: none;
-	}
-	.wpfDeactivateSkipDataBtn {
-		float: right;
-		margin-top: 15px;
-		text-decoration: none;
-		color: #777 !important;
-	}
-</style>
 <div id="wpfDeactivateWnd" title="<?php esc_html_e('Your Feedback', 'woo-product-filter'); ?>">
 	<h4>
 	<?php

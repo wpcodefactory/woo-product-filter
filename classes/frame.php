@@ -124,6 +124,8 @@ class FrameWpf {
 
 	/**
 	 * _extractModules.
+	 *
+	 * @version 3.1.9
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable('modules')
@@ -141,16 +143,16 @@ class FrameWpf {
 					$this->_allModules[$m['code']] = 1;
 					if ((bool) $m['active']) {
 						if (!class_exists($code . strFirstUpWpf(WPF_CODE))) {
-							if (file_exists($moduleLocationDir . $code . DS . 'mod.php')) {
-								require $moduleLocationDir . $code . DS . 'mod.php';
+							if (file_exists($moduleLocationDir . $code . WPF_DS . 'mod.php')) {
+								require $moduleLocationDir . $code . WPF_DS . 'mod.php';
 							}
 						}
 
 						$moduleClass = toeGetClassNameWpf($code);
 						if (class_exists($moduleClass)) {
 							$this->_modules[$code] = new $moduleClass($m);
-							if (is_dir($moduleLocationDir . $code . DS . 'tables')) {
-								$this->_extractTables($moduleLocationDir . $code . DS . 'tables' . DS);
+							if (is_dir($moduleLocationDir . $code . WPF_DS . 'tables')) {
+								$this->_extractTables($moduleLocationDir . $code . WPF_DS . 'tables' . WPF_DS);
 							}
 						}
 					}
@@ -197,9 +199,9 @@ class FrameWpf {
 		add_action($addAssetsAction, array($this, 'addScripts'));
 		add_action($addAssetsAction, array($this, 'addStyles'));
 
-		register_activation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array('UtilsWpf', 'activatePlugin')); //See classes/install.php file
-		register_uninstall_hook(WPF_DIR . DS . WPF_MAIN_FILE, array('UtilsWpf', 'deletePlugin'));
-		register_deactivation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
+		register_activation_hook(WPF_DIR . WPF_DS . WPF_MAIN_FILE, array('UtilsWpf', 'activatePlugin')); //See classes/install.php file
+		register_uninstall_hook(WPF_DIR . WPF_DS . WPF_MAIN_FILE, array('UtilsWpf', 'deletePlugin'));
+		register_deactivation_hook(WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
 
 		add_filter('the_content', array('WoofiltersWpf', 'getProductsShortcode'), -99999);
 	}

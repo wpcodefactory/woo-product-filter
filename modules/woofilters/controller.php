@@ -239,9 +239,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 			$html = FrameWpf::_()->getModule('woofilters')->getView()->renderHtml($data);
 
-			$initScript = DispatcherWpf::applyFilters( 'drawFilterAjaxScript', 'window.wpfFrontendPage.init();' );
-			$html      .= '<script type="text/javascript">' . $initScript . '</script>';
 			$res->setHtml($html);
+			$res->addData( 'initFrontend', true );
 		} else {
 			$res->pushError($this->getModule('woofilters')->getErrors());
 		}
@@ -428,7 +427,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$paginationLeer  = '';
 		$resultCountHtml = '';
 		$loopStart       = '';
-		$jscript         = '';
+		$wpfActions      = array();
 
 		if ( ! $onlyFilterRecount ) {
 
@@ -541,13 +540,23 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				$optionsHtml = $this->getOptionsHtml($filterItems['exists'], $generalSettings);
 			}
 
-			$jscript .= '<script type="text/javascript">wpfShowHideFiltersAtts(' . json_encode($filterItems['exists']) . ', ' . json_encode($filterItems['existsUsers']) . ', "' . $synchroFilterId . '");</script>';
+			$wpfActions['wpfShowHideFiltersAtts'] = array(
+				'exists'      => $filterItems['exists'],
+				'existsUsers' => $filterItems['existsUsers'],
+				'synchroId'   => $synchroFilterId,
+			);
 			if ( $recount ) {
-				$jscript .= '<script type="text/javascript">wpfChangeFiltersCount(' . json_encode($filterItems['exists']) . ', "' . $synchroFilterId . '");</script>';
+				$wpfActions['wpfChangeFiltersCount'] = array(
+					'exists'    => $filterItems['exists'],
+					'synchroId' => $synchroFilterId,
+				);
 			}
 		}
 		if ( ! empty($wpfFId) ) {
-			$jscript .= '<script type="text/javascript">wpfDoActionsAfterLoad(' . $wpfFId . ',' . ( empty($filterItems) || empty($filterItems['have_posts']) ? 0 : 1 ) . ');</script>';
+			$wpfActions['wpfDoActionsAfterLoad'] = array(
+				'fid'       => $wpfFId,
+				'havePosts' => ( empty($filterItems) || empty($filterItems['have_posts']) ? 0 : 1 ),
+			);
 		}
 
 		if ( ! $onlyFilterRecount ) {
@@ -718,7 +727,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$prices['wpf_min_price'] = $filteredPrices->wpfMinPrice;
 
 			if ( ! empty( $prices['wpf_max_price'] ) ) {
-				$jscript .= '<script type="text/javascript">wpfChangePriceFiltersCount(' . json_encode( $prices ) . ');</script>';
+				$wpfActions['wpfChangePriceFiltersCount'] = $prices;
 			}
 		}
 
@@ -733,7 +742,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$res->addData('loopStartHtml', $loopStart);
 		$res->addData('paginationLeerHtml', $paginationLeer);
 		$res->addData('prices', $prices);
-		$res->addData('jscript', $jscript);
+		$res->addData('wpfActions', $wpfActions);
 		$res->addData('fid', $wpfFId);
 
 		if ( isset($optionsHtml) ) {

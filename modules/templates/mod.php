@@ -27,19 +27,17 @@ class TemplatesWpf extends ModuleWpf {
 
 	/**
 	 * getCdnUrl.
+	 *
+	 * @version 3.1.9
 	 */
 	public function getCdnUrl() {
 		if (empty($this->_cdnUrl)) {
-			if ((int) FrameWpf::_()->getModule('options')->get('use_local_cdn')) {
-				$uploadsDir = wp_upload_dir( null, false );
-				$this->_cdnUrl = $uploadsDir['baseurl'] . '/' . WPF_CODE . '/';
-				if (UriWpf::isHttps()) {
-					$this->_cdnUrl = str_replace('http://', 'https://', $this->_cdnUrl);
-				}
-				DispatcherWpf::addFilter('externalCdnUrl', array($this, 'modifyExternalToLocalCdn'));
-			} else {
-				$this->_cdnUrl = ( UriWpf::isHttps() ? 'https' : 'http' ) . '://woobewoo-14700.kxcdn.com/';
+			$uploadsDir = wp_upload_dir( null, false );
+			$this->_cdnUrl = $uploadsDir['baseurl'] . '/' . WPF_CODE . '/';
+			if (UriWpf::isHttps()) {
+				$this->_cdnUrl = str_replace('http://', 'https://', $this->_cdnUrl);
 			}
+			DispatcherWpf::addFilter('externalCdnUrl', array($this, 'modifyExternalToLocalCdn'));
 		}
 		return $this->_cdnUrl;
 	}
@@ -301,11 +299,13 @@ class TemplatesWpf extends ModuleWpf {
 
 	/**
 	 * loadCssAnims.
+	 *
+	 * @version 3.1.9
 	 */
 	public function loadCssAnims() {
 		static $loaded = false;
 		if (!$loaded) {
-			FrameWpf::_()->addStyle('animate.styles', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css');
+			FrameWpf::_()->addStyle('animate.styles', FrameWpf::_()->getModule('templates')->getModPath() . 'css/animate.min.css');
 			$loaded = true;
 		}
 	}

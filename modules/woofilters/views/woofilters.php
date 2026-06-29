@@ -444,15 +444,19 @@ class WoofiltersViewWpf extends ViewWpf {
 
 	/**
 	 * For now after render we run once filtering, in order to display products on custom page.
+	 *
+	 * @version 3.1.9
 	 */
 	public function renderProductsListHtml( $params ) {
-		$html      = '<div class="woocommerce wpfNoWooPage">';
-			$html .= '<p class="woocommerce-result-count"></p>';
-			$html .= '<ul class="products columns-4"></ul>';
-			$html .= '<nav class="woocommerce-pagination"></nav>';
+		$init_attr = '';
 		if ( ReqWpf::getVar( 'wpf_skip' ) != '1' ) {
-			$html .= '<script>jQuery(document).ready(function() { setTimeout(function() {jQuery("body").trigger("wpffiltering"); }, 1000); })</script>';
+			$init_attr = ' data-wpf-init-filtering="1"';
+			wp_add_inline_script( 'frontend.filters', 'jQuery(document).ready(function(){ var el = jQuery(".wpfNoWooPage[data-wpf-init-filtering]"); if(el.length){ setTimeout(function(){ jQuery("body").trigger("wpffiltering"); }, 1000); } });' );
 		}
+		$html  = '<div class="woocommerce wpfNoWooPage"' . $init_attr . '>';
+		$html .= '<p class="woocommerce-result-count"></p>';
+		$html .= '<ul class="products columns-4"></ul>';
+		$html .= '<nav class="woocommerce-pagination"></nav>';
 		$html .= '</div>';
 
 		return $html;
@@ -777,7 +781,17 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html  = DispatcherWpf::applyFilters('addHtmlAfterFilter', $html, $settings, $this->filter['id']);
 		$html .= '</div>';
 		$html .= self::$filterExistsTermsJS;
-		$html  = '<style type="text/css" id="wpfCustomCss-' . $viewId . '">' . DispatcherWpf::applyFilters('addCustomCss', self::$filtersCss, $settings, $filterId) . '</style>' . $html;
+
+		$customCss = DispatcherWpf::applyFilters( 'addCustomCss', self::$filtersCss, $settings, $filterId );
+		if ( $customCss ) {
+			if ( ! wp_doing_ajax() && ! is_admin() ) {
+				// On initial frontend page load enqueue inline style via WP API for compliance with wp.org guidelines.
+				wp_add_inline_style( 'frontend.filters', $customCss );
+			} else {
+				// AJAX / admin-preview context: wp_enqueue_* is not available, inline tag is the only option.
+				$html = '<style id="wpfCustomCss-' . esc_attr( $viewId ) . '">' . $customCss . '</style>' . $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+		}
 
 		$this->resetFilterExistsTerms();
 

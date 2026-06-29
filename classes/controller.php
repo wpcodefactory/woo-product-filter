@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ControllerWpf Class
  *
- * @version 3.1.3
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -57,15 +57,21 @@ abstract class ControllerWpf {
 		}
 		return $this->_models[$name];
 	}
+
+	/**
+	 * _createModel.
+	 *
+	 * @version 3.1.9
+	 */
 	protected function _createModel( $name = '' ) {
 		if (empty($name)) {
 			$name = $this->getCode();
 		}
 		$parentModule = FrameWpf::_()->getModule( $this->getCode() );
 		$className = '';
-		if (file_exists($parentModule->getModDir() . 'models' . DS . $name . '.php')) {
-			require $parentModule->getModDir() . 'models' . DS . $name . '.php';
-			//if (importWpf($parentModule->getModDir() . 'models' . DS . $name . '.php')) {
+		if (file_exists($parentModule->getModDir() . 'models' . WPF_DS . $name . '.php')) {
+			require $parentModule->getModDir() . 'models' . WPF_DS . $name . '.php';
+			//if (importWpf($parentModule->getModDir() . 'models' . WPF_DS . $name . '.php')) {
 			$className = toeGetClassNameWpf($name . 'Model');
 		}
 
@@ -76,15 +82,21 @@ abstract class ControllerWpf {
 		}
 		return null;
 	}
+
+	/**
+	 * _createView.
+	 *
+	 * @version 3.1.9
+	 */
 	protected function _createView( $name = '' ) {
 		if (empty($name)) {
 			$name = $this->getCode();
 		}
 		$parentModule = FrameWpf::_()->getModule( $this->getCode() );
 		$className = '';
-		if (file_exists($parentModule->getModDir() . 'views' . DS . $name . '.php')) {
-			require $parentModule->getModDir() . 'views' . DS . $name . '.php';
-			//if (importWpf($parentModule->getModDir() . 'views' . DS . $name . '.php')) {
+		if (file_exists($parentModule->getModDir() . 'views' . WPF_DS . $name . '.php')) {
+			require $parentModule->getModDir() . 'views' . WPF_DS . $name . '.php';
+			//if (importWpf($parentModule->getModDir() . 'views' . WPF_DS . $name . '.php')) {
 			$className = toeGetClassNameWpf($name . 'View');
 		}
 
@@ -95,6 +107,7 @@ abstract class ControllerWpf {
 		}
 		return null;
 	}
+
 	public function display( $viewName = '' ) {
 		$view = $this->getView($viewName);
 		if (null === $view) {

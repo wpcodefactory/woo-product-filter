@@ -3890,8 +3890,14 @@ class WoofiltersWpf extends ModuleWpf {
 			$recalculateFilters = $this->getFilterSetting( $settings, 'recalculate_filters', false );
 			if ( $recalculateFilters ) {
 				$fid                     = ReqWpf::getVar( 'wpf_fid' );
-				$jsFound                 = ( ! is_null( $fid ) && ! empty( $fid ) ? 'wpfDoActionsAfterLoad(' . $fid . ',' . ( empty( $result['have_posts'] ) ? 0 : 1 ) . ');' : '' );
-				$result['existsTermsJS'] = '<div class="wpfExistsTermsJS" data-fid="' . esc_attr($fid) . '"><script type="text/javascript">' . $jsFound . 'wpfShowHideFiltersAtts(' . wp_json_encode( $result['exists'] ) . ', ' . wp_json_encode( $result['existsUsers'] ) . ');</script><script type="text/javascript">wpfChangeFiltersCount(' . wp_json_encode( $result['exists'] ) . ');</script></div>';
+				$have_posts              = empty( $result['have_posts'] ) ? 0 : 1;
+				// Data attributes used instead of inline scripts for WP.org compliance.
+				$result['existsTermsJS'] = '<div class="wpfExistsTermsJS"'
+					. ' data-fid="' . esc_attr( $fid ) . '"'
+					. ' data-have-posts="' . esc_attr( $have_posts ) . '"'
+					. ' data-exists="' . esc_attr( wp_json_encode( $result['exists'] ) ) . '"'
+					. ' data-exists-users="' . esc_attr( wp_json_encode( $result['existsUsers'] ) ) . '"'
+					. '></div>';
 			}
 		}
 		return $result;

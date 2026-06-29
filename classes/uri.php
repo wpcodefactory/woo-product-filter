@@ -17,9 +17,11 @@ class UriWpf {
 
 	/**
 	 * fileToPageParam.
+	 *
+	 * @version 3.1.9
 	 */
 	public static function fileToPageParam( $file ) {
-		$file = str_replace(DS, '/', $file);
+		$file = str_replace(WPF_DS, '/', $file);
 		return substr($file, strpos($file, WPF_PLUG_NAME));
 	}
 
