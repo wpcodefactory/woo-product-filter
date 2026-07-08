@@ -165,3 +165,111 @@ DispatcherWpf::addAction('afterModulesInit', array($this, 'myMethod'));
 - `modules/options/models/options.php` — settings CRUD
 - `classes/frame.php` — global routing, asset registration
 - `classes/installer.php` — DB schema changes (increment `WPF_DB_VERSION`)
+
+# Plugin update process
+Tutorial on the update process of a WPFactory plugin. Every time a plugin gets updated there are some points to be considered.
+
+## 1. Main file Version header field
+The [**Version**](https://developer.wordpress.org/plugins/plugin-basics/header-requirements/#header-fields) header field from the main plugin file should be changed to any greater number than the official version number and `-dev` should be added to it.
+
+Let's suppose the official version of a Plugin A is `1.0.0`. While making changes to that plugin, the **Version** should be changed to `1.0.1-dev`. Until a new release is published, that should be the plugin **Version** number.
+
+> [!NOTE]
+> When the new version is ready to be released, the `-dev` should be removed and new version should be `1.0.1`.
+
+## 2. Readme.txt Stable tag header field
+The [**Stable tag**](https://developer.wordpress.org/plugins/wordpress-org/how-your-readme-txt-works/#readme-header-information) header field from the `readme.txt` file should match the official version.
+
+Let's suppose the official version of a Plugin A is `1.0.0`. While making changes to that plugin, the **Stable tag** should remain as `1.0.0`. Until a new release is published, that should be the **Stable tag** number.
+
+> [!NOTE]
+> When the new version is ready to be released, it should be changed to match the main file version header field, which is `1.0.1` in this example.
+
+## 3. The plugin version variable
+Variables exists on `config.php`. While editing a plugin, this version variable should be changed to any greater number than the official version number along with `-dev-YYYYMMDD-HHHH`.
+
+Let's suppose the official version of a Plugin A is `1.0.0` and the current date time is 2024-07-18 20:10. While making changes to that plugin, the version variable should be changed to `1.0.1-dev-20240718-2010`. In theory, every time the plugin gets updated, this version should reflect the current datetime, but that's ok if it doesn't happen.
+
+> [!NOTE]
+> When the new version is ready to be released, it should be changed to match the main file version header field, which is `1.0.1` in this example.
+
+## 5. PHPdoc @version tag
+The [**@version**](https://docs.phpdoc.org/guide/references/phpdoc/tags/version.html) phpdoc tag should match the plugin version on every element changed, including Functions and class methods, Classes, Class members (including properties and constants), Requires and includes, Hooks (actions and filters), Inline comments, File headers and Constants.
+
+Let's suppose the official version of a Plugin A is `1.0.0`. While making changes to that plugin, the **@version** should be changed to `1.0.1` only in the parts of the code that were changed along with the class header. Example:
+
+### From:
+```diff
+
+<?php
+/**
+ * Plugin A - Class Test.
+ *
+ * @version 1.0.0
+ * @since   1.0.0
+ * @author  WPFactory
+ */
+
+class Test {
+
+	/**
+	 * Method A.
+	 *
+	 * @version 1.0.0
+	 * @since   1.0.0
+	 */
+	function method_a() {
+		echo 'Some text';
+	}
+
+	/**
+	 * Method B.
+	 *
+	 * @version 1.0.0
+	 * @since   1.0.0
+	 */
+	function method_b() {
+		echo 'Some text';
+	}
+
+}
+```
+
+### To:
+```diff
+
+<?php
+/**
+ * Plugin A - Class Test.
+ *
+-* @version 1.0.0
++* @version 1.0.1
+ * @since   1.0.0
+ * @author  WPFactory
+ */
+
+class Test {
+
+	/**
+	 * Method A
+-	 * @version 1.0.0
++	 * @version 1.0.1
+	 * @since   1.0.0
+	 */
+	function method_a() {
+-		echo 'Some text';
++		echo 'A different text';
+	}
+
+	/**
+	 * Method B.
+	 *
+	 * @version 1.0.0
+	 * @since   1.0.0
+	 */
+	function method_b() {
+		echo 'Some text';
+	}
+
+}
+```

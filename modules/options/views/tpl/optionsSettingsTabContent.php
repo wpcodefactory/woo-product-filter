@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Options Settings Tab Content
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -46,9 +46,6 @@ defined( 'ABSPATH' ) || exit;
 										$htmlOpts['options'] = $opt['options'];
 									}
 								}
-								if (isset($opt['pro']) && !empty($opt['pro'])) {
-									$htmlOpts['attrs'] .= ' class="wpfProOpt"';
-								}
 								?>
 								<tr
 									<?php if (isset($opt['connect']) && $opt['connect']) { ?>
@@ -70,14 +67,7 @@ defined( 'ABSPATH' ) || exit;
 												?>
 											</span>
 										<?php } ?>
-										<?php if (isset($opt['pro']) && !empty($opt['pro'])) { ?>
-											<span class="wpfProOptMiniLabel">
-												<a href="<?php echo esc_url($opt['pro']); ?>" target="_blank">
-													<a href="<?php echo esc_url($this->proLink); ?>" target="_blank"><?php esc_html_e('PRO Option', 'woo-product-filter'); ?></a>
-												</a>
-											</span>
-										<?php } ?>
-									</th>
+										</th>
 									<td class="col-w-1perc">
 										<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr($opt['desc']); ?>"></i>
 									</td>
@@ -89,9 +79,9 @@ defined( 'ABSPATH' ) || exit;
 											<?php
 											if (isset($opt['add_sub_opts']) && !empty($opt['add_sub_opts'])) {
 												if (is_string($opt['add_sub_opts'])) {
-													HtmlWpf::echoEscapedHtml($opt['add_sub_opts']);
+													echo wp_kses( $opt['add_sub_opts'], HtmlWpf::getAllowedHtmlTags() );
 												} elseif (is_callable($opt['add_sub_opts'])) {
-													HtmlWpf::echoEscapedHtml(call_user_func_array($opt['add_sub_opts'], array($this->options)));
+													echo wp_kses( call_user_func_array( $opt['add_sub_opts'], array( $this->options ) ), HtmlWpf::getAllowedHtmlTags() );
 												}
 											}
 											?>

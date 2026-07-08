@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Admin Tour JS
+ *
+ * @version 3.1.9
+ *
+ * @author woobewoo
+ */
+
 "use strict";
 var g_wpfCurrTour = null
 ,	g_wpfTourOpenedWithTab = false
@@ -76,7 +84,7 @@ function _wpfOpenPointer(tourId, pointId) {
 					e.preventDefault();
 					jQuery.sendFormWpf({
 						msgElID: 'noMessages'
-					,	data: {mod: 'promo', action: 'addTourFinish', tourId: tourId, pointId: pointId}
+					,	data: {mod: 'promo', action: 'addTourFinish', tourId: tourId, pointId: pointId, wpfNonce: WPF_DATA.wpfNonce}
 					});
 					g_wpfCurrTour.element.pointer('close');
 				});
@@ -86,7 +94,7 @@ function _wpfOpenPointer(tourId, pointId) {
 					e.preventDefault();
 					jQuery.sendFormWpf({
 						msgElID: 'noMessages'
-					,	data: {mod: 'promo', action: 'closeTour', tourId: tourId, pointId: pointId}
+					,	data: {mod: 'promo', action: 'closeTour', tourId: tourId, pointId: pointId, wpfNonce: WPF_DATA.wpfNonce}
 					});
 					t.element.pointer('close');
 					g_wpfAdminTourDissmissed = true;
@@ -105,6 +113,6 @@ function _wpfOpenPointer(tourId, pointId) {
 function _wpfTourSendNext(tourId, pointId) {
 	jQuery.sendFormWpf({
 		msgElID: 'noMessages'
-	,	data: {mod: 'promo', action: 'addTourStep', tourId: tourId, pointId: pointId}
+	,	data: {mod: 'promo', action: 'addTourStep', tourId: tourId, pointId: pointId, wpfNonce: WPF_DATA.wpfNonce}
 	});
 }

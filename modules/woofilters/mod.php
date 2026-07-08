@@ -45,7 +45,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function init() {
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
@@ -133,10 +133,7 @@ class WoofiltersWpf extends ModuleWpf {
 		add_action( 'woocommerce_shortcode_before_products_loop', array( $this, 'addWoocommerceShortcodeQuerySettings' ) );
 		add_action( 'woocommerce_shortcode_before_sale_products_loop', array( $this, 'addWoocommerceShortcodeQuerySettings' ) );
 
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-		if ( ! is_plugin_active( 'woocommerce-product-feeds/woocommerce-gpf.php' ) ) {
+		if ( ! wpf_is_plugin_active( 'woocommerce-product-feeds/woocommerce-gpf.php' ) ) {
 			trait_exists( '\Essential_Addons_Elementor\Template\Content\Product_Grid' ) && add_action( 'pre_get_posts', array(
 				$this,
 				'loadProductsFilterForProductGrid',
@@ -157,7 +154,7 @@ class WoofiltersWpf extends ModuleWpf {
 				remove_action( 'pre_get_posts', 'Tbp_Public::set_archive_per_page' );
 			}
 
-			if ( is_plugin_active( 'yith-woocommerce-ajax-product-filter-premium/init.php' ) && class_exists( 'YITH_WCAN_Query_Premium' ) ) {
+			if ( wpf_is_plugin_active( 'yith-woocommerce-ajax-product-filter-premium/init.php' ) && class_exists( 'YITH_WCAN_Query_Premium' ) ) {
 				remove_filter( 'woocommerce_product_query', array( YITH_WCAN_Query_Premium::instance(), 'alter_product_query' ) );
 			}
 		} );
@@ -168,17 +165,17 @@ class WoofiltersWpf extends ModuleWpf {
 		add_action( 'shortcode_atts_products', array( $this, 'shortcodeAttsProducts' ), 999, 3 );
 		$this->setFilterClauses();
 
-		if ( is_plugin_active( 'divi-bodycommerce/divi-bodyshop-woocommerce.php' ) ) {
+		if ( wpf_is_plugin_active( 'divi-bodycommerce/divi-bodyshop-woocommerce.php' ) ) {
 			add_filter( 'db_archive_module_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
 		}
-		if ( is_plugin_active( 'fusion-builder/fusion-builder.php' ) ) {
+		if ( wpf_is_plugin_active( 'fusion-builder/fusion-builder.php' ) ) {
 			if ( isset($_GET['wpf_skip']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$_GET['wpf_skip'] = 2;
 			}
 			add_filter( 'fusion_post_cards_shortcode_query_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
 			add_filter( 'fusion_woo_product_grid_query_args', array( $this, 'replaceArgsIfBuilderGridUsed' ) );
 		}
-		if ( is_plugin_active( 'show-products-by-attributes-variations/addify_show_variation_single_product.php' ) ) {
+		if ( wpf_is_plugin_active( 'show-products-by-attributes-variations/addify_show_variation_single_product.php' ) ) {
 			remove_all_actions( 'woocommerce_product_query', 100 );
 		}
 
@@ -187,13 +184,13 @@ class WoofiltersWpf extends ModuleWpf {
 			return false;
 		} );
 
-		if ( is_plugin_active('elementor/elementor.php') ) {
+		if ( wpf_is_plugin_active('elementor/elementor.php') ) {
 			add_action('elementor/frontend/before_render', array($this, 'forceElementorProductFilter'));
 			add_filter('elementor/widget/render_content', array($this, 'addElementorParamsToPagenationLinks'));
 		}
 		add_filter( 'woocommerce_product_object_query_args', array( $this, 'replaceArgsIfBuilderUsed' ) );
 
-		if ( is_plugin_active( 'woolementor/woolementor.php' ) ) {
+		if ( wpf_is_plugin_active( 'woolementor/woolementor.php' ) ) {
 			add_filter( 'woolementor-product_query_params', array( $this, 'replaceArgsIfBuilderUsed' ) );
 		}
 		// Integration with Advanced Woo Search
@@ -231,7 +228,7 @@ class WoofiltersWpf extends ModuleWpf {
 		// Theme Bricks + Bricks Builder
 		add_filter( 'bricks/posts/query_vars', array($this, 'loadShortcodeProductsFilter'), 20, 1 );
 
-		if ( is_plugin_active( 'jet-woo-builder/jet-woo-builder.php' ) ) {
+		if ( wpf_is_plugin_active( 'jet-woo-builder/jet-woo-builder.php' ) ) {
 			add_filter('jet-woo-builder/shortcodes/jet-woo-products/final-query-args', array($this, 'replaceArgsIfJetWooBuilderUsed'));
 		}
 
@@ -1334,7 +1331,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * addCustomTaxQuery.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function addCustomTaxQuery( $taxQuery, $data, $mode ) {
 
@@ -1416,24 +1413,7 @@ class WoofiltersWpf extends ModuleWpf {
 						);
 					}
 				} elseif (
-					(
-						strpos( $key, 'product_brand' ) === 0 ||
-						(
-							strpos( $key, 'wpf_filter_brand' ) === 0 &&
-							! taxonomy_exists(
-								'pa_' .
-								preg_replace(
-									'/_\d+$/',
-									'',
-									str_replace(
-										'wpf_filter_',
-										'',
-										$key
-									)
-								)
-							)
-						)
-					) &&
+					strpos( $key, 'product_brand' ) === 0 &&
 					taxonomy_exists('product_brand') &&
 					!is_admin()
 				) {
@@ -1565,6 +1545,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * getVendor.
+	 *
+	 * @version 3.1.9
 	 */
 	public function getVendor() {
 		if ( class_exists('WC_Vendors') ) {
@@ -1572,7 +1554,7 @@ class WoofiltersWpf extends ModuleWpf {
 			return WCV_Vendors::get_vendor_id( $vendor_shop );
 		}
 
-		if ( is_plugin_active( 'dokan-lite/dokan.php' ) ) {
+		if ( wpf_is_plugin_active( 'dokan-lite/dokan.php' ) ) {
 			$custom_store_url = dokan_get_option( 'custom_store_url', 'dokan_general', 'store' );
 			return get_query_var( $custom_store_url );
 		}
@@ -1732,28 +1714,26 @@ class WoofiltersWpf extends ModuleWpf {
 					break;
 			}
 		}
-		if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
-			$filterSettings = array();
-			$params         = array();
-			if ( ReqWpf::getVar( 'wpf_fbv' ) ) {
-				$filterSettings['filtering_by_variations'] = 1;
-				$params                                    = ReqWpf::get( 'get' );
-			}
-			if ( ReqWpf::getVar( 'wpf_ebv' ) ) {
-				$filterSettings['exclude_backorder_variations'] = 1;
-			}
-			if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
-				$filterSettings['display_product_variations'] = 1;
-			}
-			$args = array(
-				'tax_query'  => $q->get( 'tax_query' ),  // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-				'meta_query' => $q->get( 'meta_query' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-				'post__in'   => $q->get( 'post__in' ),
-			);
-			$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
-			$q->set( 'post__in', $args['post__in'] );
-			$q->set( 'tax_query', $args['tax_query'] );
+		$filterSettings = array();
+		$params         = array();
+		if ( ReqWpf::getVar( 'wpf_fbv' ) ) {
+			$filterSettings['filtering_by_variations'] = 1;
+			$params                                    = ReqWpf::get( 'get' );
 		}
+		if ( ReqWpf::getVar( 'wpf_ebv' ) ) {
+			$filterSettings['exclude_backorder_variations'] = 1;
+		}
+		if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
+			$filterSettings['display_product_variations'] = 1;
+		}
+		$args = array(
+			'tax_query'  => $q->get( 'tax_query' ),  // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			'meta_query' => $q->get( 'meta_query' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			'post__in'   => $q->get( 'post__in' ),
+		);
+		$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
+		$q->set( 'post__in', $args['post__in'] );
+		$q->set( 'tax_query', $args['tax_query'] );
 
 		$q = DispatcherWpf::applyFilters( 'loadProductsFilterPro', $q );
 
@@ -2118,7 +2098,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadShortcodeProductsFilter.
 	 *
-	 * @version 2.8.6
+	 * @version 3.1.9
 	 */
 	public function loadShortcodeProductsFilter( $args, $attributes = array(), $type = '' ) {
 		$hash         = md5( serialize( $args ) . serialize( $attributes ) );
@@ -2218,11 +2198,7 @@ class WoofiltersWpf extends ModuleWpf {
 				if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
 					$filterSettings['display_product_variations'] = 1;
 				}
-				if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
-					$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
-				} else {
-					$args = DispatcherWpf::applyFilters( 'checkBeforeFiltersFrontendArgs', $args, $filterSettings, $params );
-				}
+				$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
 				if ( $this->shortcodeWCQuery[ $filterKey ] !== $args ) {
 					$this->shortcodeWCQueryFiltered[ $filterKey ] = $args;
 				}
@@ -2668,19 +2644,8 @@ class WoofiltersWpf extends ModuleWpf {
 					$mode = 10;
 				} elseif ( is_product() && $displayProduct && $displayMobile ) {
 					$mode = 8;
-				} elseif (
-					FrameWpf::_()->isPro() &&
-					( is_tax( 'pwb-brand' ) || is_tax( 'product_brand' ) ) &&
-					$displayBrand &&
-					$displayMobile
-				) {
-					$mode = 11;
-				} elseif ( 'all_pages' === $displayOnPage ) {
-					if ( FrameWpf::_()->isPro() ) {
-						$mode = 12;
-					} elseif ( is_shop() ) {
-						$mode = 2; // shop mode if not PRO
-					}
+				} else {
+					$mode = DispatcherWpf::applyFilters( 'getRenderMode', $mode, $displayOnPage, $displayBrand, $displayMobile );
 				}
 			}
 			$this->renderModes[ $id ] = $mode;
@@ -2691,6 +2656,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * isVendor.
+	 *
+	 * @version 3.1.9
 	 */
 	private function isVendor() {
 
@@ -2698,7 +2665,7 @@ class WoofiltersWpf extends ModuleWpf {
 			return true;
 		}
 
-		if ( is_plugin_active( 'dokan-lite/dokan.php' ) && function_exists( 'dokan_is_store_page' ) ) {
+		if ( wpf_is_plugin_active( 'dokan-lite/dokan.php' ) && function_exists( 'dokan_is_store_page' ) ) {
 			return dokan_is_store_page();
 		}
 
@@ -2715,7 +2682,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getDisplayMode.
 	 *
-	 * @version 2.9.4
+	 * @version 3.1.9
 	 */
 	public function getDisplayMode() {
 		if ( is_null( $this->displayMode ) ) {
@@ -2948,6 +2915,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * getCurrencyPrice.
+	 *
+	 * @version 3.1.9
 	 */
 	public function getCurrencyPrice( $raw_price, $dec = false ) {
 		if ( function_exists( 'alg_wc_currency_switcher_plugin' ) ) {
@@ -2959,7 +2928,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$price = apply_filters( 'raw_woocommerce_price', $raw_price );
 
 			// some plugin uses a different hook, use it if the standard one did not change the price
-			if ( $price === $raw_price && ( is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) ) {
+			if ( $price === $raw_price && ( wpf_is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || wpf_is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) ) {
 				$price = apply_filters( 'woocommerce_product_get_regular_price', $raw_price, null );
 			}
 			if ( $price === $raw_price && class_exists(\Yay_Currency\Helpers\YayCurrencyHelper::class) ) {
@@ -3170,16 +3139,20 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * renderSelectedFilters.
+	 *
+	 * @version 3.1.9
 	 */
 	public function renderSelectedFilters( $params ) {
 		$p = array(
 			'id' => ( isset($params['id']) ? (int) $params['id'] : 0 ),
 		);
-		return FrameWpf::_()->isPro() ? $this->getView()->renderSelectedFiltersHtml( $p ) : '';
+		return DispatcherWpf::applyFilters( 'renderSelectedFilters', '', $p );
 	}
 
 	/**
 	 * showAdminErrors.
+	 *
+	 * @version 3.1.9
 	 */
 	public function showAdminErrors() {
 		// check WooCommerce is installed and activated
@@ -3200,7 +3173,7 @@ class WoofiltersWpf extends ModuleWpf {
 			// check current module
 			if ( ReqWpf::getVar( 'page' ) == WPF_SHORTCODE || FrameWpf::_()->isWCLicense() ) {
 				// show message
-				HtmlWpf::echoEscapedHtml( $tableView->getContent( 'showAdminNotice' ) );
+				echo wp_kses( $tableView->getContent( 'showAdminNotice' ), HtmlWpf::getAllowedHtmlTags() );
 			}
 		}
 	}
@@ -3320,6 +3293,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * getFilterTaxonomies.
+	 *
+	 * @version 3.1.9
 	 */
 	public function getFilterTaxonomies( $settings, $calcCategories = false, $filterSettings = array(), $ajax = false, $urlQuery = array() ) {
 
@@ -3378,10 +3353,6 @@ class WoofiltersWpf extends ModuleWpf {
 
 					break;
 
-				case 'wpfBrand':
-					$taxonomy = 'product_brand';
-					break;
-
 				case 'wpfPerfectBrand':
 					$taxonomy = 'pwb-brand';
 					break;
@@ -3395,19 +3366,17 @@ class WoofiltersWpf extends ModuleWpf {
 					break;
 
 				case 'wpfAuthor':
-				case 'wpfVendors':
 				case 'wpfRating':
 					$other[] = $filter['id'];
 					break;
-				case 'wpfSearchNumber':
-					if ( ! empty( $filter['settings']['f_conrol_products'] ) && ! empty( $filter['settings']['f_list'] ) ) {
-						$slug     = $filter['settings']['f_list'];
-						$taxonomy = ( is_numeric( $slug ) )
-							? wc_attribute_taxonomy_name_by_id( (int) $slug )
-							: DispatcherWpf::applyFilters( 'getCustomAttributeName', $slug, $filter );
-					}
-					break;
+
 				default:
+					$filterData = DispatcherWpf::applyFilters( 'getFilterTaxonomyByType', array(
+						'taxonomy' => $taxonomy,
+						'other'    => $other,
+					), $filter, $settings, $ajax, $urlQuery );
+					$taxonomy = $filterData['taxonomy'];
+					$other    = $filterData['other'];
 					break;
 
 			}
@@ -3654,6 +3623,8 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Get filter existing individual filters items.
 	 *
+	 * @version 3.1.9
+	 *
 	 * @param int | null $args wp_query args
 	 * @param array $taxonomies
 	 * @param int | null $calcCategory
@@ -3739,9 +3710,9 @@ class WoofiltersWpf extends ModuleWpf {
 			);
 
 			// the search-everything plugin contains an error while adding the arguments
-			if ( is_plugin_active( 'search-everything/search-everything.php' ) ) {
+			if ( wpf_is_plugin_active( 'search-everything/search-everything.php' ) ) {
 				remove_all_filters( 'posts_search' );
-			} elseif ( is_plugin_active( 'custom-woocommerce-enhancements/custom-woocommerce-enhancements.php' ) ) {
+			} elseif ( wpf_is_plugin_active( 'custom-woocommerce-enhancements/custom-woocommerce-enhancements.php' ) ) {
 				if ( isset($args['s']) && '' === $args['s'] ) {
 					remove_filter( 'posts_search', 'custom_exact_word_search' );
 				}
@@ -3919,8 +3890,14 @@ class WoofiltersWpf extends ModuleWpf {
 			$recalculateFilters = $this->getFilterSetting( $settings, 'recalculate_filters', false );
 			if ( $recalculateFilters ) {
 				$fid                     = ReqWpf::getVar( 'wpf_fid' );
-				$jsFound                 = ( ! is_null( $fid ) && ! empty( $fid ) ? 'wpfDoActionsAfterLoad(' . $fid . ',' . ( empty( $result['have_posts'] ) ? 0 : 1 ) . ');' : '' );
-				$result['existsTermsJS'] = '<div class="wpfExistsTermsJS" data-fid="' . esc_attr($fid) . '"><script type="text/javascript">' . $jsFound . 'wpfShowHideFiltersAtts(' . wp_json_encode( $result['exists'] ) . ', ' . wp_json_encode( $result['existsUsers'] ) . ');</script><script type="text/javascript">wpfChangeFiltersCount(' . wp_json_encode( $result['exists'] ) . ');</script></div>';
+				$have_posts              = empty( $result['have_posts'] ) ? 0 : 1;
+				// Data attributes used instead of inline scripts for WP.org compliance.
+				$result['existsTermsJS'] = '<div class="wpfExistsTermsJS"'
+					. ' data-fid="' . esc_attr( $fid ) . '"'
+					. ' data-have-posts="' . esc_attr( $have_posts ) . '"'
+					. ' data-exists="' . esc_attr( wp_json_encode( $result['exists'] ) ) . '"'
+					. ' data-exists-users="' . esc_attr( wp_json_encode( $result['existsUsers'] ) ) . '"'
+					. '></div>';
 			}
 		}
 		return $result;
@@ -4143,7 +4120,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4284,31 +4261,19 @@ class WoofiltersWpf extends ModuleWpf {
 			}
 		}
 
-		if ( FrameWpf::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
-			$termProducts = ! isset( $sql['main'] ) ? array() : DbWpf::get( $sql['main'] );
+		$termProducts = ! isset( $sql['main'] ) ? array() : DbWpf::get( $sql['main'] );
 
-			if ( false === $termProducts ) {
-				$termProducts = array();
-			}
-
-			$termProducts = DispatcherWpf::applyFilters( 'addCustomAttributesSql', $termProducts, array(
-				'taxonomies'      => $param['taxonomy'],
-				'withCount'       => $param['withCount'],
-				'listTable'       => $listTable,
-				'generalSettings' => $param['generalSettings'],
-				'currentSettings' => $param['currentSettings'],
-			) );
-		} else {
-			$sql['main']              = DispatcherWpf::applyFilters( 'addCustomAttributesSql', $sql['main'], array(
-				'taxonomies'      => $param['taxonomy'],
-				'withCount'       => $param['withCount'],
-				'productList'     => '(select id from ' . $listTable . ')',
-				'generalSettings' => $param['generalSettings'],
-				'currentSettings' => $param['currentSettings'],
-			) );
-			$wpdb->wpf_prepared_query = $sql['main'];
-			$termProducts             = $wpdb->get_results( $wpdb->wpf_prepared_query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		if ( false === $termProducts ) {
+			$termProducts = array();
 		}
+
+		$termProducts = DispatcherWpf::applyFilters( 'addCustomAttributesSql', $termProducts, array(
+			'taxonomies'      => $param['taxonomy'],
+			'withCount'       => $param['withCount'],
+			'listTable'       => $listTable,
+			'generalSettings' => $param['generalSettings'],
+			'currentSettings' => $param['currentSettings'],
+		) );
 
 		$existTerms = array();
 
@@ -4605,6 +4570,8 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns additional data on minimum and maximum prices and users.
 	 *
+	 * @version 3.1.9
+	 *
 	 * @param $args
 	 * @param $param
 	 *
@@ -4678,7 +4645,6 @@ class WoofiltersWpf extends ModuleWpf {
 							break;
 
 						case 'wpfAuthor':
-						case 'wpfVendors':
 							if ( empty( $result['existsUsers'] ) ) {
 								$query = 'SELECT DISTINCT ' . $wpdb->users . '.ID' .
 										' FROM ' . $listTable . ' AS wpf_temp' .
@@ -4687,6 +4653,10 @@ class WoofiltersWpf extends ModuleWpf {
 
 								$result['existsUsers'] = dbWpf::get( $query );
 							}
+							break;
+
+						default:
+							$result = DispatcherWpf::applyFilters( 'getExistsMoreByType', $result, $args, $param, $setting );
 							break;
 
 						case 'wpfAttribute':

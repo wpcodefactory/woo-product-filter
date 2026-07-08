@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters_ElementorWidgetWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function __construct ( $data = array(), $args = null ) {
 		parent::__construct($data, $args);
@@ -39,7 +39,6 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 			return;
 		}
 
-		$isPro = FrameWpf::_()->isPro();
 		$modPath = FrameWpf::_()->getModule('woofilters')->getModPath();
 		$tempPath = FrameWpf::_()->getModule('templates')->getModPath();
 
@@ -64,12 +63,10 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 
 		wp_register_style('frontend.multiselect', $modPath . 'css/frontend.multiselect.css', false, WPF_VERSION);
 		wp_register_script('frontend.multiselect', $modPath . 'js/frontend.multiselect.js', false, WPF_VERSION, false);
-		$selectedTitle = esc_attr(
-			( isset($options['selected_title']['value']) && ''!==$options['selected_title']['value'] )
+		$selectedTitle = ( isset($options['selected_title']['value']) && '' !== $options['selected_title']['value'] )
 			? $options['selected_title']['value']
-			: __('selected', 'woo-product-filter')
-		);
-		wp_add_inline_script( 'frontend.multiselect', "var wpfMultySelectedTraslate = '{$selectedTitle}';", 'before' );
+			: __('selected', 'woo-product-filter');
+		wp_add_inline_script( 'frontend.multiselect', "var wpfMultySelectedTraslate = '" . esc_js( $selectedTitle ) . "';", 'before' );
 
 		//loadJqueryUi
 		wp_register_style('jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css', false, WPF_VERSION);
@@ -85,26 +82,8 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		}
 
 		//addScriptsContent
-		if ( $isPro ) {
-			$modPathPRO = FrameWpf::_()->getModule('woofilterpro')->getModPath();
-			wp_register_script('frontend.filters.pro', $modPathPRO . 'js/frontend.woofilters.pro.js', array('frontend.filters'), WPF_VERSION, true);
-			wp_localize_script('frontend.filters.pro', 'wpfTraslate', array(
-				'ShowMore'  => __( 'Show More', 'woo-product-filter' ),
-				'ShowFewer' => __( 'Show Fewer', 'woo-product-filter' ),
-			));
-			wp_register_style('frontend.filters.pro', $modPathPRO . 'css/frontend.woofilters.pro.css', false, WPF_VERSION);
-			wp_register_style('custom.filters.pro', $modPathPRO . 'css/custom.woofilters.pro.css', false, WPF_VERSION);
-			wp_register_script('jquery-ui-autocomplete', '', false, WPF_VERSION, false);
-			wp_register_style('jquery-ui-autocomplete', $modPathPRO . 'css/jquery-ui-autocomplete.css', false, WPF_VERSION);
-			wp_register_script('ion.slider', $modPathPRO . 'js/ion.rangeSlider.min.js', false, WPF_VERSION, false);
-			wp_register_style('ion.slider', $modPathPRO . 'css/ion.rangeSlider.css', false, WPF_VERSION);
+		DispatcherWpf::doAction( 'addElementorWidgetScripts' );
 
-		}
-
-		if (!$isPro) {
-			static::$adPath = FrameWpf::_()->getModule('woofilters')->getModPath() . 'img/ad/';
-			static::$labelPro = ' Pro';
-		}
 		static::$scriptsLoaded = true;
 	}
 
@@ -220,13 +199,13 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 	protected function render() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
 		?>
-		<div class="elementor-woofilters"><?php echo $shortcode ? do_shortcode( '[wpf-filters id="' . $shortcode . '"]' ) : ''; ?></div>
+		<div class="elementor-woofilters"><?php echo $shortcode ? do_shortcode( '[wpf-filters id="' . esc_attr( $shortcode ) . '"]' ) : ''; ?></div>
 		<?php
 	}
 
 	public function render_plain_content() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
-		echo $shortcode ? do_shortcode( '[wpf-filters id="' . $shortcode . '"]' ) : '';
+		echo $shortcode ? do_shortcode( '[wpf-filters id="' . esc_attr( $shortcode ) . '"]' ) : '';
 	}
 
 	protected function content_template() {}

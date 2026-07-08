@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - LangWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class LangWpf {
 	private static $_codeStorage = array();
 	private static $_data = array();
@@ -10,14 +19,20 @@ class LangWpf {
 	public static function attach( $d ) {
 		self::$_data = array_merge(self::$_data, self::extract($d));
 	}
+
+	/**
+	 * extract.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function extract( $d = array('dir' => '', 'LangWpf' => '') ) {
 		$data = array();
 		if (isset($d['dir']) && !empty($d['dir'])) {
 			$langDirPath = $d['dir'];
 		} else if (isset($d['LangWpf']) && !empty($d['LangWpf'])) {
-			$langDirPath = WPF_LANG_DIR . $d['LangWpf'] . DS;
+			$langDirPath = WPF_LANG_DIR . $d['LangWpf'] . WPF_DS;
 		} else {
-			$langDirPath = WPF_LANG_DIR . WPF_WPLANG . DS;
+			$langDirPath = WPF_LANG_DIR . WPF_WPLANG . WPF_DS;
 		}
 
 		if (is_dir($langDirPath)) {
@@ -44,6 +59,7 @@ class LangWpf {
 		}
 		return $data;
 	}
+
 	/**
 	 * Get string for output
 	 *

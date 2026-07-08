@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Deactivate Page
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -14,6 +14,7 @@ $name = WPF_WP_PLUGIN_NAME;
 <html>
 	<head>
 		<title><?php echo esc_html( $name ); ?></title>
+		<?php // This page is a standalone HTML document output outside WordPress (no wp_head() available), so inline style is the only option. ?>
 		<style type="text/css">
 			.wpfDeletePage {
 				position: fixed;

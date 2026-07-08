@@ -2,11 +2,10 @@
 /**
  * Product Filter by WBW - Config
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  *
- * @todo (v3.1.8) Update `WPF_PRO_REQUIRES`?
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,32 +14,29 @@ global $wpdb;
 
 define('WPF_WPLANG', (!defined('WPLANG') || WPLANG == '' ? 'en_GB' : WPLANG ));
 
-if (!defined('DS')) {
-	define('DS', DIRECTORY_SEPARATOR);
-}
+define('WPF_DS', DIRECTORY_SEPARATOR);
 
 define('WPF_PLUG_NAME', basename(dirname(__FILE__)));
-define('WPF_DIR', WP_PLUGIN_DIR . DS . WPF_PLUG_NAME . DS);
-define('WPF_TPL_DIR', WPF_DIR . 'tpl' . DS);
-define('WPF_CLASSES_DIR', WPF_DIR . 'classes' . DS);
-define('WPF_TABLES_DIR', WPF_CLASSES_DIR . 'tables' . DS);
-define('WPF_HELPERS_DIR', WPF_CLASSES_DIR . 'helpers' . DS);
-define('WPF_LANG_DIR', WPF_DIR . 'languages' . DS);
-define('WPF_IMG_DIR', WPF_DIR . 'img' . DS);
-define('WPF_TEMPLATES_DIR', WPF_DIR . 'templates' . DS);
-define('WPF_MODULES_DIR', WPF_DIR . 'modules' . DS);
-define('WPF_FILES_DIR', WPF_DIR . 'files' . DS);
-define('WPF_ADMIN_DIR', ABSPATH . 'wp-admin' . DS);
+define('WPF_DIR', WP_PLUGIN_DIR . WPF_DS . WPF_PLUG_NAME . WPF_DS);
+define('WPF_TPL_DIR', WPF_DIR . 'tpl' . WPF_DS);
+define('WPF_CLASSES_DIR', WPF_DIR . 'classes' . WPF_DS);
+define('WPF_TABLES_DIR', WPF_CLASSES_DIR . 'tables' . WPF_DS);
+define('WPF_HELPERS_DIR', WPF_CLASSES_DIR . 'helpers' . WPF_DS);
+define('WPF_LANG_DIR', WPF_DIR . 'languages' . WPF_DS);
+define('WPF_IMG_DIR', WPF_DIR . 'img' . WPF_DS);
+define('WPF_TEMPLATES_DIR', WPF_DIR . 'templates' . WPF_DS);
+define('WPF_MODULES_DIR', WPF_DIR . 'modules' . WPF_DS);
+define('WPF_FILES_DIR', WPF_DIR . 'files' . WPF_DS);
 
-define('WPF_PLUGINS_URL', plugins_url());
+define('WPF_PLUGINS_URL', plugin_dir_url(__FILE__));
 if (!defined('WPF_SITE_URL')) {
 	define('WPF_SITE_URL', get_bloginfo('wpurl') . '/');
 }
-define('WPF_JS_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/js/');
-define('WPF_CSS_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/css/');
-define('WPF_IMG_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/img/');
-define('WPF_MODULES_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/modules/');
-define('WPF_TEMPLATES_PATH', WPF_PLUGINS_URL . '/' . WPF_PLUG_NAME . '/templates/');
+define('WPF_JS_PATH', WPF_PLUGINS_URL . 'js/');
+define('WPF_CSS_PATH', WPF_PLUGINS_URL . 'css/');
+define('WPF_IMG_PATH', WPF_PLUGINS_URL . 'img/');
+define('WPF_MODULES_PATH', WPF_PLUGINS_URL . 'modules/');
+define('WPF_TEMPLATES_PATH', WPF_PLUGINS_URL . 'templates/');
 define('WPF_JS_DIR', WPF_DIR . 'js/');
 
 define('WPF_URL', WPF_SITE_URL);
@@ -62,13 +58,12 @@ define('WPF_CURRENT', 'current');
 define('WPF_EOL', "\n");
 
 define('WPF_PLUGIN_INSTALLED', true);
-define('WPF_VERSION', '3.1.9-dev-20260614-0115');
-define('WPF_PRO_REQUIRES', '2.0.0');
+define('WPF_VERSION', '3.1.9-dev-20260629-1200');
 define('WPF_USER', 'user');
 
 define('WPF_CLASS_PREFIX', 'wpfc');
-define('WPF_FREE_VERSION', false);
-define('WPF_TEST_MODE', true);
+define('WPF_FREE_VERSION', true);
+define('WPF_TEST_MODE', false);
 
 define('WPF_SUCCESS', 'Success');
 define('WPF_FAILED', 'Failed');

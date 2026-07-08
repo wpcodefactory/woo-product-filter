@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoWpf Class
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -38,34 +38,6 @@ class PromoWpf extends ModuleWpf {
 
 	public function addAdminTab( $tabs ) {
 		return $tabs;
-	}
-
-	public function addSubDestList( $subDestList ) {
-		if (!$this->isPro()) {
-			$subDestList = array_merge($subDestList, array(
-				'constantcontact'  => array('label' => esc_html__('Constant Contact - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'campaignmonitor'  => array('label' => esc_html__('Campaign Monitor - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'verticalresponse' => array('label' => esc_html__('Vertical Response - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'sendgrid'         => array('label' => esc_html__('SendGrid - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'get_response'     => array('label' => esc_html__('GetResponse - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'icontact'         => array('label' => esc_html__('iContact - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'activecampaign'   => array('label' => esc_html__('Active Campaign - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'mailrelay'        => array('label' => esc_html__('Mailrelay - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'arpreach'         => array('label' => esc_html__('arpReach - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'sgautorepondeur'  => array('label' => esc_html__('SG Autorepondeur - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'benchmarkemail'   => array('label' => esc_html__('Benchmark - PRO', 'woo-product-filter'), 'require_confirm' => true),
-				'infusionsoft'     => array('label' => esc_html__('InfusionSoft - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'salesforce'       => array('label' => esc_html__('SalesForce - Web-to-Lead - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'convertkit'       => array('label' => esc_html__('ConvertKit - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'myemma'           => array('label' => esc_html__('Emma - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'sendinblue'       => array('label' => esc_html__('SendinBlue - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'vision6'          => array('label' => esc_html__('Vision6 - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'vtiger'           => array('label' => esc_html__('Vtiger - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'ymlp'             => array('label' => esc_html__('Your Mailing List Provider (Ymlp) - PRO', 'woo-product-filter'), 'require_confirm' => false),
-				'fourdem'          => array('label' => esc_html__('4Dem.it - PRO', 'woo-product-filter'), 'require_confirm' => false),
-			));
-		}
-		return $subDestList;
 	}
 
 	public function getOverviewTabContent() {
@@ -201,10 +173,21 @@ class PromoWpf extends ModuleWpf {
 		return $isPro;
 	}
 
+	/**
+	 * checkWelcome.
+	 *
+	 * @version 3.1.9
+	 *
+	 * @return void
+	 */
 	public function checkWelcome() {
 		$from = ReqWpf::getVar('from', 'get');
 		$pl = ReqWpf::getVar('pl', 'get');
 		if ( 'welcome-page' == $from && WPF_CODE == $pl && FrameWpf::_()->getModule('user')->isAdmin() ) {
+			$nonce = ReqWpf::getVar('wpfNonce', 'get');
+			if (!wp_verify_nonce($nonce, 'wpf-save-nonce') || !current_user_can('manage_options')) {
+				return;
+			}
 			$welcomeSent = (int) get_option(WPF_DB_PREF . 'welcome_sent');
 			if (!$welcomeSent) {
 				$this->getModel()->welcomePageSaveInfo();
@@ -264,9 +247,19 @@ class PromoWpf extends ModuleWpf {
 		}
 	}
 
+	/**
+	 * checkToShowTutorial.
+	 *
+	 * @version 3.1.9
+	 *
+	 * @return void
+	 */
 	public function checkToShowTutorial() {
 		if (ReqWpf::getVar('tour', 'get') == 'clear-hst') {
-			$this->getModel()->clearTourHst();
+			$nonce = ReqWpf::getVar('wpfNonce', 'get');
+			if (wp_verify_nonce($nonce, 'wpf-save-nonce') && current_user_can('manage_options')) {
+				$this->getModel()->clearTourHst();
+			}
 		}
 		$hst = $this->getModel()->getTourHst();
 		if ( ( isset($hst['closed']) && $hst['closed'] ) || ( isset($hst['finished']) && $hst['finished'] ) ) {
@@ -471,7 +464,7 @@ class PromoWpf extends ModuleWpf {
 	/**
 	 * checkPluginDeactivation.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public function checkPluginDeactivation() {
 		if (function_exists('get_current_screen')) {
@@ -480,12 +473,21 @@ class PromoWpf extends ModuleWpf {
 				FrameWpf::_()->getModule('templates')->loadCoreJs();
 				FrameWpf::_()->getModule('templates')->loadCoreCss();
 				wp_enqueue_style('jquery-ui', $this->getModPath() . 'css/jquery-ui.css', array(), '1.0');
+				wp_add_inline_style( 'styleWpf', '
+					.wpfDeactivateDescShell { display: none; margin-left: 25px; margin-top: 5px; }
+					.wpfDeactivateReasonShell { display: block; margin-bottom: 10px; }
+					#wpfDeactivateWnd { display: none; }
+					#wpfDeactivateWnd input[type="text"], #wpfDeactivateWnd textarea { width: 100%; }
+					#wpfDeactivateWnd h4 { line-height: 1.53em; }
+					#wpfDeactivateWnd + .ui-dialog-buttonpane .ui-dialog-buttonset { float: none; }
+					.wpfDeactivateSkipDataBtn { float: right; margin-top: 15px; text-decoration: none; color: #777 !important; }
+				' );
 				FrameWpf::_()->addScript('jquery-ui-dialog');
 				FrameWpf::_()->addScript(WPF_CODE . '.admin.plugins', $this->getModPath() . 'js/admin.plugins.js');
 				FrameWpf::_()->addJSVar(WPF_CODE . '.admin.plugins', 'wpfPluginsData', array(
 					'plugName' => WPF_PLUG_NAME . '/' . WPF_MAIN_FILE,
 				));
-				HtmlWpf::echoEscapedHtml($this->getView()->getPluginDeactivation());
+				echo wp_kses( $this->getView()->getPluginDeactivation(), HtmlWpf::getAllowedHtmlTags() );
 			}
 		}
 	}

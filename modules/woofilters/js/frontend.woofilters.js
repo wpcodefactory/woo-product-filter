@@ -26,7 +26,7 @@ function wpfIsThriveEditor() {
 /**
  * Main function.
  *
- * @version 3.1.8
+ * @version 3.1.9
  */
 (function ($, app) {
 	"use strict";
@@ -95,7 +95,6 @@ function wpfIsThriveEditor() {
 		_thisObj.disableLeerOptions();
 		_thisObj.eventsFrontend();
 		_thisObj.changeSlugByUrl();
-		_thisObj.runCustomJs();
 		_thisObj.addCustomCss();
 		_thisObj.chageRangeFieldWidth();
 		_thisObj.addSpecificPluginActions();
@@ -284,27 +283,6 @@ function wpfIsThriveEditor() {
 			var wrapper = jQuery(this);
 
 			hideFilterLoader(wrapper);
-		});
-	});
-
-	WpfFrontendPage.prototype.runCustomJs = (function () {
-		var _thisObj = this.$obj;
-		jQuery('.wpfMainWrapper').each(function () {
-			var wrapper = jQuery(this),
-				jsCodeStr = '',
-				settings = _thisObj.getFilterMainSettings(wrapper);
-			if(settings){
-				settings = settings.settings;
-				jsCodeStr = settings.js_editor;
-			}
-			if(jsCodeStr.length > 0){
-				try {
-					eval(jsCodeStr);
-				}catch(e) {
-					console.log(e);
-				}
-
-			}
 		});
 	});
 
@@ -1261,7 +1239,7 @@ function wpfIsThriveEditor() {
 			displayType = filterWrapper.data('display-type'),
 			filterType = filterWrapper.data('filter-type');
 
-		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand'|| filterType == 'wpfBrand') {
+		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand') {
 			var isOne = displayType == 'list';
 		} else {
 			var isOne = displayType == 'radio';
@@ -1481,7 +1459,7 @@ function wpfIsThriveEditor() {
 					withChildren = '1';
 				}
 
-				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined' || filterType === 'wpfSearchText'  || filterType === 'wpfSearchNumber') {
+				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined') {
 					valueToPushBackend['id'] = filterType;
 					valueToPushBackend['uniqId'] = uniqId;
 					valueToPushBackend['logic'] = logic;
@@ -2309,8 +2287,8 @@ function wpfIsThriveEditor() {
 							}
 						});
 					}
-					if ('jscript' in res.data) {
-						_thisObj.setAjaxJScript(res.data['jscript']);
+					if ('wpfActions' in res.data) {
+						_thisObj.applyWpfActions(res.data['wpfActions']);
 					}
 					if (_thisObj.filterClick) {
 						if (customListSelector !== '' && productListElem.length) {
@@ -2457,8 +2435,7 @@ function wpfIsThriveEditor() {
 				var pageBlock = jQuery(isContainer && (foundContainer || block.length == 0) ? productContainerSelector : productListSelector);
 				if (block.length == 0 || pageBlock.length == 0) {
 					if ($wrapperSettings.recalculate_filters === '1') {
-						var existsTermsJS = jQuery(data).find('.wpfExistsTermsJS').html();
-						_thisObj.setAjaxJScript(existsTermsJS);
+						_thisObj.applyExistsTermsData(jQuery(data).find('.wpfExistsTermsJS'));
 					}
 					if ($wrapperSettings.no_redirect_by_no_products === '1' && pageBlock.length > 0) {
 						block = jQuery('<div><div class="wpfNoProducts">' + $wrapperSettings.text_no_products + '</div></div>');
@@ -2526,8 +2503,7 @@ function wpfIsThriveEditor() {
 				_thisObj.afterAjaxFiltering($wrapperSettings);
 				_thisObj.runReadyList();
 				if ($wrapperSettings.recalculate_filters === '1') {
-					var existsTermsJS = jQuery(data).find('.wpfExistsTermsJS').html();
-					_thisObj.setAjaxJScript(existsTermsJS);
+					_thisObj.applyExistsTermsData(jQuery(data).find('.wpfExistsTermsJS'));
 				}
 
 			}
@@ -2558,8 +2534,8 @@ function wpfIsThriveEditor() {
 
 					if (!res.error) {
 
-						if ('jscript' in res.data) {
-							_thisObj.setAjaxJScript(res.data['jscript'], filterId);
+						if ('wpfActions' in res.data) {
+							_thisObj.applyWpfActions(res.data['wpfActions']);
 						}
 
 					}
@@ -2571,16 +2547,42 @@ function wpfIsThriveEditor() {
 	});
 
 	WpfFrontendPage.prototype.setAjaxJScript = (function(jscript, filterId){
-		var _thisObj = this.$obj,
-			filter = jQuery('#' + (typeof(filterId) == 'undefined' ? _thisObj.currentLoadId : filterId));
-		if (filter.length && jscript != '') {
-			var jsBlock = filter.find('.wpfAjaxJSBlock');
-			if (jsBlock.length == 0) {
-				jQuery('<div class="wpfAjaxJSBlock wpfHidden"></div>').appendTo(filter);
-			}
-			filter.find('.wpfAjaxJSBlock').html(jscript);
-		}
+		var _thisObj = this.$obj;
 		_thisObj.currentAjaxJSLoaded = true;
+	});
+
+	WpfFrontendPage.prototype.applyExistsTermsData = (function(existsTermsEl) {
+		if (!existsTermsEl || existsTermsEl.length === 0) return;
+		var exists      = existsTermsEl.data('exists'),
+			existsUsers = existsTermsEl.data('existsUsers') || {},
+			havePosts   = existsTermsEl.data('havePosts'),
+			fid         = existsTermsEl.data('fid');
+		if (exists) {
+			wpfShowHideFiltersAtts(exists, existsUsers);
+			wpfChangeFiltersCount(exists);
+		}
+		if (fid) {
+			wpfDoActionsAfterLoad(fid, havePosts ? 1 : 0);
+		}
+	});
+
+	WpfFrontendPage.prototype.applyWpfActions = (function(actions) {
+		if (!actions) return;
+		if ('wpfShowHideFiltersAtts' in actions) {
+			var a = actions.wpfShowHideFiltersAtts;
+			wpfShowHideFiltersAtts(a.exists, a.existsUsers, a.synchroId);
+		}
+		if ('wpfChangeFiltersCount' in actions) {
+			var b = actions.wpfChangeFiltersCount;
+			wpfChangeFiltersCount(b.exists, b.synchroId);
+		}
+		if ('wpfDoActionsAfterLoad' in actions) {
+			var c = actions.wpfDoActionsAfterLoad;
+			wpfDoActionsAfterLoad(c.fid, c.havePosts);
+		}
+		if ('wpfChangePriceFiltersCount' in actions) {
+			wpfChangePriceFiltersCount(actions.wpfChangePriceFiltersCount);
+		}
 	});
 
 	WpfFrontendPage.prototype.afterAjaxFiltering = (function($wrapperSettings){

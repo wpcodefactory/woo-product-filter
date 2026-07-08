@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters On Sale
  *
- * @version 3.1.8
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -18,8 +18,12 @@ ViewWpf::display('woofiltersEditTabCommonTitle');
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
+				$onsaleFrontendTypes = array(
+					'list' => esc_attr__( 'Checkbox', 'woo-product-filter' ),
+				);
+				$onsaleFrontendTypes = DispatcherWpf::applyFilters( 'getAdminFilterTypes', $onsaleFrontendTypes, 'wpfOnSale' );
 				HtmlWpf::selectbox('f_frontend_type', array(
-					'options' => array('list' => esc_attr__( 'Checkbox', 'woo-product-filter' ), 'switch' => esc_attr__( 'Toggle Switch', 'woo-product-filter' ) . $labelPro),
+					'options' => $onsaleFrontendTypes,
 					'attrs'   => 'class="woobewoo-flat-input"'
 				));
 				?>
@@ -27,9 +31,7 @@ ViewWpf::display('woofiltersEditTabCommonTitle');
 	</div>
 </div>
 <?php
-if ($isPro) {
-	DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersSwitchType');
-}
+DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersSwitchType');
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -48,6 +50,4 @@ if ($isPro) {
 	</div>
 </div>
 <?php
-if ($isPro) {
-	DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersOnSale');
-}
+DispatcherWpf::doAction('addEditTabFilters', 'partEditTabFiltersOnSale');

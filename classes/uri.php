@@ -2,9 +2,8 @@
 /**
  * Product Filter by WBW - UriWpf Class
  *
- * @version 3.1.8
- *
- * @author woobewoo
+ * @version 3.1.9
+ * @author  woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,9 +17,11 @@ class UriWpf {
 
 	/**
 	 * fileToPageParam.
+	 *
+	 * @version 3.1.9
 	 */
 	public static function fileToPageParam( $file ) {
-		$file = str_replace(DS, '/', $file);
+		$file = str_replace(WPF_DS, '/', $file);
 		return substr($file, strpos($file, WPF_PLUG_NAME));
 	}
 
@@ -64,6 +65,8 @@ class UriWpf {
 
 	/**
 	 * getGetParams.
+	 *
+	 * @version 3.1.9
 	 */
 	public static function getGetParams( $exclude = array() ) {
 		$res = array();
@@ -72,7 +75,7 @@ class UriWpf {
 				if (in_array($key, $exclude)) {
 					continue;
 				}
-				$res[$key] = $val;
+				$res[$key] = is_array($val) ? array_map('sanitize_text_field', array_map('wp_unslash', $val)) : sanitize_text_field(wp_unslash($val));
 			}
 		}
 		return $res;

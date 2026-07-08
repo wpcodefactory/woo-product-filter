@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - UI WC CSS
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -483,32 +483,6 @@ ul.woobewoo-bar-controls > li.separator {
 	padding: 5px;
 }
 
-/*chosen selects*/
-.woobewoo-plugin .chosen-container-multi .chosen-choices li.search-choice {
-	background-image: none;
-	background-color: transparent;
-	border: 1px solid #d8dfe3;
-	border-radius: 0;
-	color: #506971;
-	box-shadow: none;
-}
-.woobewoo-plugin .chosen-container-multi input {
-	color: #506971 !important;
-}
-.woobewoo-plugin .chosen-container-multi .chosen-choices {
-	background-image: none;
-}
-.woobewoo-plugin .chosen-container-active .chosen-choices {
-	border-color: #4ae8ea;
-	box-shadow: none;
-}
-.woobewoo-plugin .chosen-container.chosen-container-multi:not(.chosen-responsive) {
-	min-width: 100px;	/*As if select is hidden on chosen init action - it will be with width: 0 - and this is really bad*/
-}
-.woobewoo-plugin .chosen-responsive {
-	width: 100% !important;
-}
-
 /*back to top*/
 #wpfPopupGoToTop {
 	position: fixed;
@@ -738,9 +712,6 @@ ul.woobewoo-bar-controls > li.separator {
 	.woobewoo-breadcrumbs {
 		display: none;
 	}
-	.woobewoo-plugin .chosen-container.chosen-container-multi {
-		min-width: 50px;
-	}
 	#wpfPopupMainControllsShell {
 		padding-right: 45px !important;
 	}
@@ -759,10 +730,6 @@ ul.woobewoo-bar-controls > li.separator {
 	.woobewoo-tbl-pagination-shell .ui-pg-table .ui-paging-info {
 		display: none !important;
 	}
-}
-/*wp add transition for all links in admin area, this is not required for our chosen "x" buttons*/
-a.search-choice-close {
-	transition-duration: 0s;
 }
 
 .woobewoo-color-picker {

@@ -2,9 +2,8 @@
 /**
  * Product Filter by WBW - ReqWpf Class
  *
- * @version 3.1.8
- *
- * @author woobewoo
+ * @version 3.1.9
+ * @author  woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +16,23 @@ class ReqWpf {
 
 	public static $_requestWithNonce = false;
 
-	public static function init() {
-		add_filter('sanitize_text_field', array('ReqWpf', 'sanitizeData'), 999, 2);
+	/**
+	 * verifyRequestNonce.
+	 *
+	 * @version 3.1.9
+	 * @since 3.1.9
+	 *
+	 * @return void
+	 */
+	protected static function verifyRequestNonce() {
+		$nonce = empty($_REQUEST['wpfNonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['wpfNonce']));
+		if (empty($nonce) && !empty($_REQUEST['_wpnonce'])) {
+			$nonce = sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
+		}
+		if (!wp_verify_nonce($nonce, 'wpf-save-nonce')) {
+			echo esc_html__('Security check', 'woo-product-filter');
+			exit();
+		}
 	}
 
 	public static function startSession() {
@@ -40,7 +54,7 @@ class ReqWpf {
 	/**
 	 * Function getVar.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
@@ -50,52 +64,48 @@ class ReqWpf {
 	*/
 	public static function getVar( $name, $from = 'all', $default = null ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				echo esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
 
 		$from = strtolower($from);
 		if ('all' == $from) {
-			if (isset($_GET[$name])) {
+			if (isset($_GET[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$from = 'get';
-			} elseif (isset($_POST[$name])) {
+			} elseif (isset($_POST[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$from = 'post';
 			}
 		}
 
 		switch ($from) {
 			case 'get':
-				if (isset($_GET[$name])) {
-					return sanitize_text_field(wp_unslash($_GET[$name]));
+				if (isset($_GET[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					return self::sanitizeValue(wp_unslash($_GET[$name])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'post':
-				if (isset($_POST[$name])) {
-					return sanitize_text_field(wp_unslash($_POST[$name]));
+				if (isset($_POST[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					return self::sanitizeValue(wp_unslash($_POST[$name])); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'file':
 			case 'files':
-				if (isset($_FILES[$name])) {
-					return sanitize_text_field($_FILES[$name]);
+				if (isset($_FILES[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					return self::sanitizeValue($_FILES[$name]); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'session':
 				if (isset($_SESSION[$name])) {
-					return sanitize_text_field($_SESSION[$name]);
+					return self::sanitizeValue($_SESSION[$name]); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'server':
 				if (isset($_SERVER[$name])) {
-					return sanitize_text_field(wp_unslash($_SERVER[$name]));
+					return self::sanitizeValue(wp_unslash($_SERVER[$name])); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'cookie':
 				if (isset($_COOKIE[$name])) {
-					$value = sanitize_text_field(wp_unslash($_COOKIE[$name]));
+					$value = self::sanitizeValue(wp_unslash($_COOKIE[$name])); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 					if (strpos($value, '_JSON:') === 0) {
 						$value = explode('_JSON:', $value);
 						$value = UtilsWpf::jsonDecode(array_pop($value));
@@ -121,7 +131,7 @@ class ReqWpf {
 	/**
 	 * Getting similar parameters when redirecting to set filter values.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 *
 	 * @param string $part part of parameter
 	 *
@@ -130,21 +140,34 @@ class ReqWpf {
 	public static function getFilterRedirect( $part ) {
 		$params = array();
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				echo esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
-		if ( isset($_GET['redirect']) ) {
-			foreach ( $_GET as $key => $value ) {
+		if ( isset($_GET['redirect']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			foreach ( $_GET as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if ( strpos ($key, $part) === 0 ) {
-					$params[] = sanitize_text_field( $value );
+					$params[] = self::sanitizeValue( $value );
 				}
 			}
 		}
 
 		return implode('|', $params);
+	}
+
+	/**
+	 * sanitizeValue.
+	 *
+	 * Sanitizes a value without altering global sanitize_text_field behavior.
+	 * Handles arrays recursively via sanitizeArray().
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 *
+	 * @param mixed $value
+	 *
+	 * @return mixed
+	 */
+	private static function sanitizeValue( $value ) {
+		return is_array( $value ) ? self::sanitizeArray( $value ) : sanitize_text_field( $value );
 	}
 
 	public static function sanitizeData( $filtered, $value ) {
@@ -192,25 +215,21 @@ class ReqWpf {
 	/**
 	 * clearVar.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public static function clearVar( $name, $in = 'input', $params = array() ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
 		$in = strtolower($in);
 		switch ($in) {
 			case 'get':
-				if (isset($_GET[$name])) {
+				if (isset($_GET[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					unset($_GET[$name]);
 				}
 				break;
 			case 'post':
-				if (isset($_POST[$name])) {
+				if (isset($_POST[$name])) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					unset($_POST[$name]);
 				}
 				break;
@@ -229,32 +248,55 @@ class ReqWpf {
 	/**
 	 * get.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	public static function get( $what ) {
 		if (self::$_requestWithNonce) {
-			$nonce = empty($_REQUEST['_wpnonce']) ? '' : sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
-			if (!wp_verify_nonce($nonce, 'my-nonce')) {
-				esc_html__('Security check', 'woo-product-filter');
-				exit();
-			}
+			self::verifyRequestNonce();
 		}
 		$what = strtolower($what);
 		switch ($what) {
 			case 'get':
-				return $_GET;
-				break;
+				return self::sanitizeArray(wp_unslash($_GET)); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			case 'post':
-				return $_POST;
-				break;
+				return self::sanitizeArray(wp_unslash($_POST)); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 			case 'session':
-				return $_SESSION;
-				break;
+				return isset($_SESSION) ? self::sanitizeArray($_SESSION) : array();
 			case 'files':
-				return $_FILES;
-				break;
+				return self::sanitizeFiles($_FILES); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		}
 		return null;
+	}
+
+	/**
+	 * sanitizeFiles.
+	 *
+	 * Sanitizes a $_FILES array: file names and MIME types are cleaned;
+	 * tmp_name is server-generated and left as-is.
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 *
+	 * @param array $files Raw $_FILES array.
+	 *
+	 * @return array
+	 */
+	private static function sanitizeFiles( $files ) {
+		$clean = array();
+		foreach ( $files as $key => $file ) {
+			if ( is_array($file) && isset($file['name']) ) {
+				$clean[$key] = array(
+					'name'     => sanitize_file_name( $file['name'] ),
+					'type'     => sanitize_mime_type( $file['type'] ),
+					'tmp_name' => $file['tmp_name'],
+					'size'     => absint( $file['size'] ),
+					'error'    => absint( $file['error'] ),
+				);
+			} else {
+				$clean[$key] = $file;
+			}
+		}
+		return $clean;
 	}
 
 	/**

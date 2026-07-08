@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Overview Tab Content
  *
- * @version 3.1.7
+ * @version 3.1.9
  *
  * @author woobewoo
  */
@@ -130,7 +130,6 @@ $modPath = $this->getModule()->getModPath();
 									<?php esc_html_e('Send message', 'woo-product-filter'); ?>
 								</button>
 							</div>
-							<!-- </div> -->
 						</div>
 					</div>
 				</div>

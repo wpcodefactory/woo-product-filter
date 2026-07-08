@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - OptionsControllerWpf Class
+ *
+ * @version 3.1.9
+ * @author  woobewoo
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class OptionsControllerWpf extends ControllerWpf {
 	public function saveGroup() {
 		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
