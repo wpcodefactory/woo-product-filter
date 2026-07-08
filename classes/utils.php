@@ -384,7 +384,6 @@ class UtilsWpf {
 	 * @return bool true if user are watching this site from mobile device
 	 */
 	public static function isMobile() {
-		//importClassWpf('Mobile_Detect', WPF_HELPERS_DIR . 'mobileDetect.php');
 		if (!class_exists('Mobile_Detect')) {
 			if (file_exists(WPF_HELPERS_DIR . 'mobileDetect.php')) {
 				require WPF_HELPERS_DIR . 'mobileDetect.php';
@@ -400,7 +399,6 @@ class UtilsWpf {
 	 * @return bool true if user are watching this site from tablet device
 	 */
 	public static function isTablet() {
-		//importClassWpf('Mobile_Detect', WPF_HELPERS_DIR . 'mobileDetect.php');
 		if (!class_exists('Mobile_Detect')) {
 			if (file_exists(WPF_HELPERS_DIR . 'mobileDetect.php')) {
 				require WPF_HELPERS_DIR . 'mobileDetect.php';

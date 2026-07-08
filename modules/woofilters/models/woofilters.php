@@ -331,12 +331,12 @@ class WoofiltersModelWpf extends ModelWpf {
 			}
 			return $idInsert;
 		} elseif ( empty($id) && !empty($title) && !empty($duplicateId) ) {  //duplicate filter
-			$duplicateData                      = $this->getById($duplicateId);
+			$duplicateData             = $this->getById($duplicateId);
 			$settings                  = unserialize($duplicateData['setting_data']);
 			$duplicateData['settings'] = $settings['settings'];
-			$duplicateData['title']             = isset($title) ? $title : 'untitled';
-			$duplicateData['id']                = '';
-			$idInsert                           = $this->insert( $duplicateData );
+			$duplicateData['title']    = isset($title) ? $title : 'untitled';
+			$duplicateData['id']       = '';
+			$idInsert                  = $this->insert( $duplicateData );
 			return $idInsert;
 		}
 		return false;

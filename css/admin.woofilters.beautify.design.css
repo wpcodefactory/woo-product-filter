@@ -1409,25 +1409,25 @@ select.woobewoo-flat-input {
 /* Gray out checkboxes initially */
 /* Initially gray out the checkboxes and labels */
 #addDialog_list input[type="checkbox"]:not(:checked) {
-		opacity: 0.5;
-		pointer-events: none; /* Prevent interaction with disabled checkboxes */
+	opacity: 0.5;
+	pointer-events: none; /* Prevent interaction with disabled checkboxes */
 }
 
 #addDialog_list label {
-		color: #999; /* Gray color for labels */
-		pointer-events: none; /* Prevent interaction with disabled labels */
+	color: #999; /* Gray color for labels */
+	pointer-events: none; /* Prevent interaction with disabled labels */
 }
 
 /* Enable the checkboxes and labels when text is entered */
 #addDialog_title:valid + .wpfPopupBlock + .wpfPopupBlock #addDialog_list input[type="checkbox"]:not(:checked),
 #addDialog_title:valid + .wpfPopupBlock + .wpfPopupBlock label {
-		opacity: 1;
-		pointer-events: auto; /* Allow interaction with enabled checkboxes */
+	opacity: 1;
+	pointer-events: auto; /* Allow interaction with enabled checkboxes */
 }
 
 #addDialog_list input[type="checkbox"]:checked {
-		opacity: 1;
-		pointer-events: auto;
+	opacity: 1;
+	pointer-events: auto;
 }
 
 #addDialog_list label {

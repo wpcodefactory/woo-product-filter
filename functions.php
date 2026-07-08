@@ -7,6 +7,8 @@
  * @author woobewoo
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Check whether a plugin is active without loading wp-admin/includes/plugin.php.
  *
@@ -32,8 +34,6 @@ if ( ! function_exists( 'wpf_is_plugin_active' ) ) {
 		return false;
 	}
 }
-
-defined( 'ABSPATH' ) || exit;
 
 /**
  * Set first letter in a string as UPPERCASE.
@@ -164,8 +164,6 @@ if (!function_exists('toeCreateObjWpf')) {
 
 /**
  * Redirect user to specified location. Be advised that it should redirect even if headers already sent.
- *
- * @version 3.1.9
  *
  * @param string $url where page must be redirected
  */
@@ -373,7 +371,7 @@ add_action('admin_notices', 'wpf_install_base_msg');
 if (!function_exists('wpf_install_base_msg')) {
 	function wpf_install_base_msg() {
 		if ( class_exists('FrameWpf') ) {
-			if (FrameWpf::_()->getModule('options')->getModel()->get('start_indexing') == 2) {
+			if (2 == FrameWpf::_()->getModule('options')->getModel()->get('start_indexing')) {
 				$plugName = __('Product Filter by WBW', 'woo-product-filter');
 				echo '<div class="notice error is-dismissible"><p><strong>';
 				/* translators: %s: plugin name */
