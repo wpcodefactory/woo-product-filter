@@ -98,7 +98,7 @@ Press Activate button
 7. Product filter constructor. Rating
 8. Product filter admin panel. Design tab
 
-== External services ==
+== External Services ==
 
 This plugin connects to an external server provided by WooBewoo (woobewoo.com) to handle the following admin-side forms. No data is ever sent automatically — these requests only occur when an administrator explicitly submits one of the forms below from within the WordPress admin panel.
 
@@ -107,6 +107,10 @@ This plugin connects to an external server provided by WooBewoo (woobewoo.com) t
 **Rating form:** Sends the administrator's email address, rating score, feedback message, and site URL to woobewoo.com.
 
 [Terms of Service](https://woobewoo.com/terms-conditions/) | [Privacy Policy](https://woobewoo.com/privacy-policy/)
+
+This plugin may communicate with the following third-party services:
+
+* **Google Fonts** (https://fonts.googleapis.com) — Loaded only when a Google Font is explicitly selected in the plugin's design settings. No data is sent to Google; the request is a standard CSS font-stylesheet fetch. [Google Privacy Policy](https://policies.google.com/privacy).
 
 == Frequently Asked Questions ==
 
@@ -161,22 +165,17 @@ You may help us translate the plugin into your language and get the PRO version 
 = Where do I report security bugs found in this plugin? =
 Please report security bugs found in the source code of the plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fbdb8-8978-4dfd-b6cd-a768233271db). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
-== External Services ==
-
-This plugin may communicate with the following third-party services:
-
-* **Google Fonts** (https://fonts.googleapis.com) — Loaded only when a Google Font is explicitly selected in the plugin's design settings. No data is sent to Google; the request is a standard CSS font-stylesheet fetch. [Google Privacy Policy](https://policies.google.com/privacy).
-
 == Changelog ==
 
-= 3.1.9 - 28/06/2026 =
+= 3.1.9 - 07/07/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
-* Fix - Fixed mobile_detect nullable parameter deprecation warning.
+* Fix - Fixed `Mobile_Detect` nullable parameter deprecation warning.
 * Fix - Fixed SQL Injection vulnerability.
-* Update - Replaced Outdated library `chosen` with `tom-select`.
-* Update - Removed Css & Js editor due to repository compliance.
-* Dev - Cleanup pro codes.
+* Dev - Replaced Outdated library `chosen` with `tom-select`.
+* Dev - Removed CSS & JS editor due to repository compliance.
+* Dev - Cleanup pro code.
+* WC tested up to: 10.9.
 
 = 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.
