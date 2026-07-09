@@ -167,7 +167,7 @@ Please report security bugs found in the source code of the plugin through the [
 
 == Changelog ==
 
-= 3.1.9 - 07/07/2026 =
+= 3.1.9 - 09/07/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
 * Fix - Fixed `Mobile_Detect` nullable parameter deprecation warning.

@@ -2682,7 +2682,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getDisplayMode.
 	 *
-	 * @version 3.1.9
+	 * @version 2.9.4
 	 */
 	public function getDisplayMode() {
 		if ( is_null( $this->displayMode ) ) {

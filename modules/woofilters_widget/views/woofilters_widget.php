@@ -3,10 +3,11 @@
  * Product Filter by WBW - Woofilters_WidgetViewWpf Class
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class Woofilters_WidgetViewWpf extends ViewWpf {
 

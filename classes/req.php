@@ -3,7 +3,8 @@
  * Product Filter by WBW - ReqWpf Class
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -20,7 +21,7 @@ class ReqWpf {
 	 * verifyRequestNonce.
 	 *
 	 * @version 3.1.9
-	 * @since 3.1.9
+	 * @since   3.1.9
 	 *
 	 * @return void
 	 */

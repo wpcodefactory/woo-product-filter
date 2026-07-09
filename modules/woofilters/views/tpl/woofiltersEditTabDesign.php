@@ -3,7 +3,8 @@
  * Product Filter by WBW - Woofilters Edit Tab Design
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;

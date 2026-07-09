@@ -67,7 +67,7 @@ defined( 'ABSPATH' ) || exit;
 												?>
 											</span>
 										<?php } ?>
-										</th>
+									</th>
 									<td class="col-w-1perc">
 										<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr($opt['desc']); ?>"></i>
 									</td>

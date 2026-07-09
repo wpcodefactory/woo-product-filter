@@ -14,6 +14,11 @@
 		return false;
 	}
 
+	/**
+	 * AdminPage.
+	 *
+	 * @version 3.1.9
+	 */
 	function AdminPage() {
 		this.$obj = this;
 		this.$allowMultipleFilters = ['wpfAttribute', 'wpfCustomMeta'];
@@ -192,6 +197,11 @@
 		});
 	});
 
+	/**
+	 * eventsAdminPage.
+	 *
+	 * @version 3.1.9
+	 */
 	AdminPage.prototype.eventsAdminPage = (function () {
 		var _thisObj = this.$obj,
 			$mainTabsContent = jQuery('.row-tab'),
@@ -224,6 +234,11 @@
 			activateSubTab($mainTab);
 		});
 
+		/**
+		 * activateSubTab.
+		 *
+		 * @version 3.1.9
+		 */
 		function activateSubTab($tab) {
 			var $subTabs = $tab.find('.sub-tab a');
 
@@ -474,7 +489,9 @@
 					var ctrlAttr = $multiBlock.attr('data-ctrl-a') != '1',
 						$select = $multiBlock.find('select');
 					$select.find('option').prop('selected', ctrlAttr);
-					if ($select[0] && $select[0].tomselect) $select[0].tomselect.sync();
+					if ($select[0] && $select[0].tomselect) {
+						$select[0].tomselect.sync();
+					}
 					$multiBlock.attr('data-ctrl-a', ctrlAttr ? '1' : '0');
 				}
 			}
@@ -482,6 +499,11 @@
 
 	});
 
+	/**
+	 * getPreviewAjax.
+	 *
+	 * @version 3.1.9
+	 */
 	AdminPage.prototype.getPreviewAjax = (function (wait) {
 		var _this = this.$obj;
 		if(_this.wpfWaitLoad) return;
@@ -527,6 +549,11 @@
 
 	});
 
+	/**
+	 * eventsFilters.
+	 *
+	 * @version 3.1.9
+	 */
 	AdminPage.prototype.eventsFilters = (function () {
 		var _this = this.$obj,
 			_noOptionsFilters = this.$noOptionsFilters,
@@ -614,7 +641,9 @@
 					}
 				});
 			}
-			if (mList[0] && mList[0].tomselect) mList[0].tomselect.sync();
+			if (mList[0] && mList[0].tomselect) {
+				mList[0].tomselect.sync();
+			}
 		});
 
 		jQuery('#wpfChooseFilters').off('change').on('change', function(){
@@ -678,7 +707,9 @@
 		jQuery('#wpfAddFilterButton').off('click').on('click', function(e){
 			e.preventDefault();
 			var option = jQuery('#wpfChooseFilters option:selected');
-			if(option.length == 0 || option.attr('data-available') != 'add') return;
+			if(option.length == 0 || option.attr('data-available') != 'add') {
+				return;
+			}
 
 			_this.wpfAddFilter(option.attr('value'));
 			resetEnabledFilters();
@@ -707,7 +738,10 @@
 				optionsOther.addClass('wpfHidden');
 				i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
 				options.removeClass('wpfHidden');
-				var _mlistEl = options.find('select[name="f_mlist[]"]')[0]; if (_mlistEl && _mlistEl.tomselect) _mlistEl.tomselect.sync();
+				var _mlistEl = options.find('select[name="f_mlist[]"]')[0];
+				if (_mlistEl && _mlistEl.tomselect) {
+					_mlistEl.tomselect.sync();
+				}
 			}else{
 				i.removeClass('fa-chevron-up').addClass('fa-chevron-down');
 				options.addClass('wpfHidden');
@@ -858,6 +892,11 @@
 
 	});
 
+	/**
+	 * setAttrTerms.
+	 *
+	 * @version 3.1.9
+	 */
 	AdminPage.prototype.setAttrTerms = (function(mlist, slug){
 		var _this = this,
 			options = jQuery('.wpfAttributesTerms input[name="attr-'+slug+'"]');
@@ -895,7 +934,9 @@
 		if(mlist.find('option').length > 1) {
 			mlist.closest('.row-settings-block').removeClass('wpfHidden');
 		}
-		if (mlist[0] && mlist[0].tomselect) mlist[0].tomselect.sync();
+		if (mlist[0] && mlist[0].tomselect) {
+			mlist[0].tomselect.sync();
+		}
 		mlist.trigger('change');
 		if(typeof(_this.changeAttributeTermsPro) == 'function') {
 			_this.changeAttributeTermsPro(mlist.closest('.wpfFilter'), settings);
@@ -903,6 +944,11 @@
 		_this.getPreviewAjax();
 	});
 
+	/**
+	 * fListChanged.
+	 *
+	 * @version 3.1.9
+	 */
 	AdminPage.prototype.fListChanged = (function(_this, event){
 		var _thisObj = this,
 			attrSlug = _this.val(),
@@ -936,7 +982,9 @@
 			}
 		} else {
 			attr_terms.val('');
-			if (attr_terms[0] && attr_terms[0].tomselect) attr_terms[0].tomselect.sync();
+			if (attr_terms[0] && attr_terms[0].tomselect) {
+				attr_terms[0].tomselect.sync();
+			}
 			attr_terms.trigger('change');
 		}
 
@@ -955,6 +1003,11 @@
 		}
 	});
 
+	/**
+	 * wpfAddFilter.
+	 *
+	 * @version 3.1.9
+	 */
 	AdminPage.prototype.wpfAddFilter = (function(id, uniqId, settings) {
 		var _this = this,
 			_noOptionsFilters = this.$noOptionsFilters,
@@ -1119,6 +1172,11 @@
 		_this.wpfWaitLoad = false;
 	});
 
+	/**
+	 * saveFilters.
+	 *
+	 * @version 3.1.9
+	 */
 	AdminPage.prototype.saveFilters = (function () {
 		var _this = this.$obj,
 			filtersArr = [],

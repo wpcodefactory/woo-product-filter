@@ -196,6 +196,11 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		$this->addWooFilterAndvancedTabControls();
 	}
 
+	/**
+	 * render.
+	 *
+	 * @version 3.1.9
+	 */
 	protected function render() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
 		?>
@@ -203,6 +208,11 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * render_plain_content.
+	 *
+	 * @version 3.1.9
+	 */
 	public function render_plain_content() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
 		echo $shortcode ? do_shortcode( '[wpf-filters id="' . esc_attr( $shortcode ) . '"]' ) : '';

@@ -189,7 +189,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	 * _prepareTextLikeSearch.
 	 *
 	 * @version 3.1.9
-	 * @since   3.1.4
 	 */
 	protected function _prepareTextLikeSearch( $val ) {
 		global $wpdb;

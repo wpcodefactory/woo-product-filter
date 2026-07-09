@@ -3,7 +3,8 @@
  * Product Filter by WBW - UriWpf Class
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -75,7 +76,7 @@ class UriWpf {
 				if (in_array($key, $exclude)) {
 					continue;
 				}
-				$res[$key] = is_array($val) ? array_map('sanitize_text_field', array_map('wp_unslash', $val)) : sanitize_text_field(wp_unslash($val));
+				$res[$key] = is_array($val) ? array_map('sanitize_text_field', wp_unslash($val)) : sanitize_text_field(wp_unslash($val));
 			}
 		}
 		return $res;

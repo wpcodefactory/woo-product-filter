@@ -52,6 +52,12 @@ function _wpfOpenPointerAndPopupTab(tourId, pointId, tab) {
 	_wpfOpenPointer(tourId, pointId);
 	g_wpfTourOpenedWithTab = false;
 }
+
+/**
+ * _wpfOpenPointer.
+ *
+ * @version 3.1.9
+ */
 function _wpfOpenPointer(tourId, pointId) {
 	var pointer = wpfAdminTourData.tour[ tourId ].points[ pointId ];
 	var $content = wpfAdminTourData._$.find('#woobewoo-'+ tourId+ '-'+ pointId);
@@ -110,6 +116,12 @@ function _wpfOpenPointer(tourId, pointId) {
 		g_wpfCurrTour.pointer.css('top', minTop+ 'px');
 	}
 }
+
+/**
+ * _wpfTourSendNext.
+ *
+ * @version 3.1.9
+ */
 function _wpfTourSendNext(tourId, pointId) {
 	jQuery.sendFormWpf({
 		msgElID: 'noMessages'

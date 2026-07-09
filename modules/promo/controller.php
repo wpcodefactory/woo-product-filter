@@ -223,6 +223,11 @@ class PromoControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * getPermissions.
+	 *
+	 * @version 3.1.9
+	 */
 	public function getPermissions() {
 		return array(
 			WPF_USERLEVELS => array(

@@ -15,7 +15,7 @@ class OverviewControllerWpf extends ControllerWpf {
 	 * checkAdminNonce.
 	 *
 	 * @version 3.1.9
-	 * @since 3.1.9
+	 * @since   3.1.9
 	 *
 	 * @return void
 	 */

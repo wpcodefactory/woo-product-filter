@@ -435,6 +435,11 @@ function prepareToPlotDate(data) {
 	}
 	return data;
 }
+/**
+ * wpfInitPlugNotices.
+ *
+ * @version 3.1.9
+ */
 function wpfInitPlugNotices() {
 	var $notices = jQuery('.woobewoo-admin-notice');
 	if($notices && $notices.length) {

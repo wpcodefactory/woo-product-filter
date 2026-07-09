@@ -3,10 +3,11 @@
  * Product Filter by WBW - PagesViewWpf Class
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class PagesViewWpf extends ViewWpf {
 	public function displayDeactivatePage() {

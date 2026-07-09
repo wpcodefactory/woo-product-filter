@@ -3,9 +3,11 @@
  * Class to generate files and output them in attachment by http (https) protocol
  *
  * @version 3.1.9
+ *
+ * @author woobewoo
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class FilegeneratorWpf {
 	protected static $_instances = array();

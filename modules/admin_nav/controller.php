@@ -3,10 +3,11 @@
  * Product Filter by WBW - Admin_NavControllerWpf Class
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class Admin_NavControllerWpf extends ControllerWpf {
 	public function getPermissions() {

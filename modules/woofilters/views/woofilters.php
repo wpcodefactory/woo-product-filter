@@ -3523,8 +3523,10 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 		$https_val = isset( $_SERVER['HTTPS'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) : '';
 		$x_proto   = isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) : '';
-		if ( ( '' !== $https_val && ( 'on' === $https_val || '1' === $https_val ) ) ||
-			( '' !== $x_proto && 'https' === $x_proto ) ) {
+		if (
+			( '' !== $https_val && ( 'on' === $https_val || '1' === $https_val ) ) ||
+			( '' !== $x_proto && 'https' === $x_proto )
+		) {
 			$protocol = 'https://';
 		} else {
 			$protocol = 'http://';

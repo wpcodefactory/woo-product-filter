@@ -3,10 +3,11 @@
  * Product Filter by WBW - ModulesModelWpf Class
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class ModulesModelWpf extends ModelWpf {
 	public function __construct() {
@@ -37,18 +38,18 @@ class ModulesModelWpf extends ModelWpf {
 		if (is_numeric($id) && $id) {
 			if (isset($d['active'])) {
 				$d['active'] = ( ( is_string($d['active']) && 'true' == $d['active'] ) || 1 == $d['active'] ) ? 1 : 0;           //mmm.... govnokod?....)))
-			}		
+			}
 			if (FrameWpf::_()->getTable('modules')->update($d, array('id' => $id))) {
 				$res->messages[] = esc_html__('Module Updated', 'woo-product-filter');
 				$mod = FrameWpf::_()->getTable('modules')->getById($id);
 				$newType = FrameWpf::_()->getTable('modules_type')->getById($mod['type_id'], 'label');
 				$newType = $newType['label'];
 				$res->data = array(
-					'id' => $id, 
-					'label' => $mod['label'], 
-					'code' => $mod['code'], 
+					'id' => $id,
+					'label' => $mod['label'],
+					'code' => $mod['code'],
 					'type' => $newType,
-					'active' => $mod['active'], 
+					'active' => $mod['active'],
 				);
 			} else {
 				$tableErrors = FrameWpf::_()->getTable('modules')->getErrors();

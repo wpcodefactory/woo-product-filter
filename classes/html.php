@@ -30,13 +30,13 @@ class HtmlWpf {
 		$allowed = wp_kses_allowed_html( 'post' );
 
 		$common = array(
-			'id'      => true,
-			'class'   => true,
-			'style'   => true,
-			'title'   => true,
-			'data-*'  => true,
-			'aria-*'  => true,
-			'role'    => true,
+			'id'       => true,
+			'class'    => true,
+			'style'    => true,
+			'title'    => true,
+			'data-*'   => true,
+			'aria-*'   => true,
+			'role'     => true,
 			'tabindex' => true,
 		);
 
@@ -151,6 +151,11 @@ class HtmlWpf {
 		'</textarea>';
 	}
 
+	/**
+	 * input.
+	 *
+	 * @version 3.1.9
+	 */
 	public static function input( $name, $params = array('attrs' => '', 'type' => 'text', 'value' => '') ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
 		$params['attrs'] .= self::_dataToAttrs($params);
@@ -178,6 +183,8 @@ class HtmlWpf {
 
 	/**
 	 * _dataToAttrs.
+	 *
+	 * @version 3.1.9
 	 *
 	 * @param $params
 	 *

@@ -3,10 +3,11 @@
  * Product Filter by WBW - HelperWpf Class
  *
  * @version 3.1.9
- * @author  woobewoo
+ *
+ * @author woobewoo
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 abstract class HelperWpf {
 	protected $_code = '';

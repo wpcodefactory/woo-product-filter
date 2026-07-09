@@ -7,7 +7,7 @@
  * @author woobewoo
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 class UserWpf extends ModuleWpf {
 	protected $_data = array();

@@ -74,9 +74,9 @@ function wpfIsThriveEditor() {
 	}
 
 	/**
-	 * WpfFrontendPage.prototype.init.
+	 * init.
 	 *
-	 * @version 3.1.8
+	 * @version 3.1.9
 	 */
 	WpfFrontendPage.prototype.init = (function () {
 		var _thisObj = this.$obj;
@@ -565,7 +565,7 @@ function wpfIsThriveEditor() {
 	});
 
 	/**
-	 * WpfFrontendPage.prototype.eventsFrontend.
+	 * eventsFrontend.
 	 *
 	 * @version 3.1.8
 	 */
@@ -1234,6 +1234,11 @@ function wpfIsThriveEditor() {
 		return isExeption;
 	});
 
+	/**
+	 * detectSingleCheckbox.
+	 *
+	 * @version 3.1.9
+	 */
 	WpfFrontendPage.prototype.detectSingleCheckbox = (function (checkedInput) {
 		var filterWrapper = checkedInput.closest('.wpfFilterWrapper'),
 			displayType = filterWrapper.data('display-type'),
@@ -1283,7 +1288,7 @@ function wpfIsThriveEditor() {
 	});
 
 	/**
-	 * WpfFrontendPage.prototype.closeFilterToggle.
+	 * closeFilterToggle.
 	 *
 	 * @version 3.1.8
 	 */
@@ -1306,7 +1311,7 @@ function wpfIsThriveEditor() {
 	});
 
 	/**
-	 * WpfFrontendPage.prototype.closeFilterToggle.
+	 * closeFilterToggle.
 	 *
 	 * @version 3.1.8
 	 */
@@ -2175,6 +2180,11 @@ function wpfIsThriveEditor() {
 
 	});
 
+	/**
+	 * sendFiltersOptionsByAjax.
+	 *
+	 * @version 3.1.9
+	 */
 	WpfFrontendPage.prototype.sendFiltersOptionsByAjax = (function ($filtersDataBackend, $queryVars, $filterSettings, $generalSettings, $woocommerceSettings, $shortcodeAttr) {
 		var _thisObj = this.$obj,
 			$wrapperSettings = [];
@@ -2400,6 +2410,11 @@ function wpfIsThriveEditor() {
 		});
 	});
 
+	/**
+	 * ajaxForceThemeTemplates.
+	 *
+	 * @version 3.1.9
+	 */
 	WpfFrontendPage.prototype.ajaxForceThemeTemplates = (function (productContainerSelector, productListSelector, requestData, $wrapperSettings) {
 		var _thisObj = this.$obj,
 			curUrl = window.location.href,
@@ -2512,6 +2527,11 @@ function wpfIsThriveEditor() {
 		return false;
 	});
 
+	/**
+	 * ajaxOnlyRecount.
+	 *
+	 * @version 3.1.9
+	 */
 	WpfFrontendPage.prototype.ajaxOnlyRecount = (function (requestData, filterId, $wrapperSettings) {
 		var _thisObj = this.$obj;
 
@@ -2546,11 +2566,22 @@ function wpfIsThriveEditor() {
 
 	});
 
+	/**
+	 * setAjaxJScript.
+	 *
+	 * @version 3.1.9
+	 */
 	WpfFrontendPage.prototype.setAjaxJScript = (function(jscript, filterId){
 		var _thisObj = this.$obj;
 		_thisObj.currentAjaxJSLoaded = true;
 	});
 
+	/**
+	 * applyExistsTermsData.
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 */
 	WpfFrontendPage.prototype.applyExistsTermsData = (function(existsTermsEl) {
 		if (!existsTermsEl || existsTermsEl.length === 0) return;
 		var exists      = existsTermsEl.data('exists'),
@@ -2566,6 +2597,12 @@ function wpfIsThriveEditor() {
 		}
 	});
 
+	/**
+	 * applyWpfActions.
+	 *
+	 * @version 3.1.9
+	 * @since   3.1.9
+	 */
 	WpfFrontendPage.prototype.applyWpfActions = (function(actions) {
 		if (!actions) return;
 		if ('wpfShowHideFiltersAtts' in actions) {

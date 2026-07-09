@@ -1,6 +1,6 @@
 <?php
 /**
- * Mobile Detect Library
+ * Mobile Detect Library (v2.8.24)
  * =====================
  *
  * Motto: "Every business should have a mobile detection script to detect mobile readers"
@@ -16,10 +16,11 @@
  *              Google Code:  http://code.google.com/p/php-mobile-detect/
  *              README:       https://github.com/serbanghita/Mobile-Detect/blob/master/README.md
  *              HOWTO:        https://github.com/serbanghita/Mobile-Detect/wiki/Code-examples
- * @version     3.1.9
+ *
+ * @version 3.1.9
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Mobile_Detect' ) ) :
 
