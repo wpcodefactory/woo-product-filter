@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsViewWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -109,7 +109,7 @@ class OptionsViewWpf extends ViewWpf {
 	/**
 	 * getSettingsTabContent.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getSettingsTabContent() {
 		FrameWpf::_()->addScript('admin.settings', $this->getModule()->getModPath() . 'js/admin.settings.js');

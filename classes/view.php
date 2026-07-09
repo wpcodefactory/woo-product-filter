@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ViewWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -27,7 +27,7 @@ abstract class ViewWpf extends BaseObjectWpf {
 	/**
 	 * display.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function display( $tpl = '' ) {
 		$tpl = ( empty($tpl) ) ? $this->_tpl : $tpl;
@@ -40,7 +40,7 @@ abstract class ViewWpf extends BaseObjectWpf {
 	/**
 	 * getPath.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getPath( $tpl ) {
 		$path = '';
@@ -61,7 +61,7 @@ abstract class ViewWpf extends BaseObjectWpf {
 	/**
 	 * getContent.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getContent( $tpl = '' ) {
 		$tpl = ( empty($tpl) ) ? $this->_tpl : $tpl;

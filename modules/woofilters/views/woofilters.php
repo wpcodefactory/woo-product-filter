@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -126,7 +126,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * getEditTabContent.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getEditTabContent( $idIn ) {
 
@@ -180,7 +180,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
@@ -315,7 +315,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * getVendor.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private function getVendor() {
 		if ( class_exists('WC_Vendors') ) {
@@ -354,7 +354,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Add common styles and scripts.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param string $modPath
 	 */
@@ -388,7 +388,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * Add assets  to render html(shortcode and widget).
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param string $modPath
 	 */
@@ -445,7 +445,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * For now after render we run once filtering, in order to display products on custom page.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function renderProductsListHtml( $params ) {
 		$init_attr = '';
@@ -507,7 +507,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings($filterSettings);
@@ -801,7 +801,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateOverlayHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function generateOverlayHtml( $settings ) {
 		$settings          = $this->getFilterSetting($settings, 'settings', array());
@@ -1030,7 +1030,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceInputsHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function generatePriceInputsHtml( $settings ) {
 		$dataStep = 1;
@@ -1133,7 +1133,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceRangeFilterHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function generatePriceRangeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings  = $this->getFilterSetting($filter, 'settings', array());
@@ -2230,7 +2230,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateOnSaleFilterHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function generateOnSaleFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_onsale';
@@ -2807,7 +2807,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateSearchFieldList.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function generateSearchFieldList( $html, $settings, $labels ) {
 		$type = $this->getFilterSetting($settings, 'f_frontend_type', 'list');
@@ -3115,7 +3115,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateTaxonomyOptionsHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private function generateTaxonomyOptionsHtml( $filterItemList, $selectedElem, $filter = false, $excludeIds = false, $pre = '', $layout = 0, $includeIds = false, $showedTerms = false, $countsTerms = false, $itemLevel = 0, $currentCategoryId = 0 ) {
 		$html     = '';
@@ -3353,7 +3353,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceRangeOptionsHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private function generatePriceRangeOptionsHtml( $filter, $ranges, $layout ) {
 		$html    = '';
@@ -3459,7 +3459,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateLoaderHtml.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param $filterId
 	 * @param $settings
@@ -3515,7 +3515,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * wpfCurrentLocation.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function wpfCurrentLocation() {
 		if ( empty($_SERVER['HTTP_HOST']) ) {

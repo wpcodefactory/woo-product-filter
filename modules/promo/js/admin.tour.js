@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Tour JS
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -56,7 +56,7 @@ function _wpfOpenPointerAndPopupTab(tourId, pointId, tab) {
 /**
  * _wpfOpenPointer.
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 function _wpfOpenPointer(tourId, pointId) {
 	var pointer = wpfAdminTourData.tour[ tourId ].points[ pointId ];
@@ -120,7 +120,7 @@ function _wpfOpenPointer(tourId, pointId) {
 /**
  * _wpfTourSendNext.
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 function _wpfTourSendNext(tourId, pointId) {
 	jQuery.sendFormWpf({

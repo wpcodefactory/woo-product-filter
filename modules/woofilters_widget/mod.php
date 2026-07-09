@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters_WidgetWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -67,7 +67,7 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 	/**
 	 * woofiltersElementorEditorScripts.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function woofiltersElementorEditorScripts() {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {

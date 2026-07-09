@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TemplatesWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -28,7 +28,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * getCdnUrl.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getCdnUrl() {
 		if (empty($this->_cdnUrl)) {
@@ -56,7 +56,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function init() {
 		if (is_admin()) {
@@ -107,7 +107,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * loadCoreJs.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function loadCoreJs() {
 		FrameWpf::_()->addScript('jquery');
@@ -230,7 +230,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * loadChosenSelects.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function loadChosenSelects() {
 		$modPath = FrameWpf::_()->getModule('templates')->getModPath();
@@ -300,7 +300,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * loadCssAnims.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function loadCssAnims() {
 		static $loaded = false;

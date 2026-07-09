@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ReqWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -20,8 +20,8 @@ class ReqWpf {
 	/**
 	 * verifyRequestNonce.
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 *
 	 * @return void
 	 */
@@ -55,7 +55,7 @@ class ReqWpf {
 	/**
 	 * Function getVar.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
@@ -132,7 +132,7 @@ class ReqWpf {
 	/**
 	 * Getting similar parameters when redirecting to set filter values.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param string $part part of parameter
 	 *
@@ -160,8 +160,8 @@ class ReqWpf {
 	 * Sanitizes a value without altering global sanitize_text_field behavior.
 	 * Handles arrays recursively via sanitizeArray().
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 *
 	 * @param mixed $value
 	 *
@@ -216,7 +216,7 @@ class ReqWpf {
 	/**
 	 * clearVar.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function clearVar( $name, $in = 'input', $params = array() ) {
 		if (self::$_requestWithNonce) {
@@ -249,7 +249,7 @@ class ReqWpf {
 	/**
 	 * get.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function get( $what ) {
 		if (self::$_requestWithNonce) {
@@ -275,8 +275,8 @@ class ReqWpf {
 	 * Sanitizes a $_FILES array: file names and MIME types are cleaned;
 	 * tmp_name is server-generated and left as-is.
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 *
 	 * @param array $files Raw $_FILES array.
 	 *

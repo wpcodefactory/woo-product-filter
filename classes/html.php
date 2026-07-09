@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - HtmlWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -21,8 +21,8 @@ class HtmlWpf {
 	 * output. Extends the 'post' context with form elements and data-* / aria-*
 	 * attributes that the filter widget emits.
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 *
 	 * @return array
 	 */
@@ -114,7 +114,7 @@ class HtmlWpf {
 	/**
 	 * textarea.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param $name
 	 * @param $params
@@ -154,7 +154,7 @@ class HtmlWpf {
 	/**
 	 * input.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function input( $name, $params = array('attrs' => '', 'type' => 'text', 'value' => '') ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
@@ -184,7 +184,7 @@ class HtmlWpf {
 	/**
 	 * _dataToAttrs.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param $params
 	 *
@@ -261,7 +261,7 @@ class HtmlWpf {
 	/**
 	 * checkboxlist.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function checkboxlist( $name, $params = array('options' => array(), 'attrs' => '', 'checked' => '', 'delim' => '<br />', 'usetable' => 5), $delim = '<br />' ) {
 		if (!strpos($name, '[]')) {
@@ -314,7 +314,7 @@ class HtmlWpf {
 	/**
 	 * img.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function img( $src, $usePlugPath = 1, $params = array('width' => '', 'height' => '', 'attrs' => '') ) {
 		if ($usePlugPath) {
@@ -334,7 +334,7 @@ class HtmlWpf {
 	/**
 	 * selectbox.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function selectbox( $name, $params = array('attrs' => '', 'options' => array(), 'value' => '') ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';
@@ -359,7 +359,7 @@ class HtmlWpf {
 	/**
 	 * selectlist.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function selectlist( $name, $params = array('attrs'=>'', 'size'=> 5, 'options' => array(), 'value' => '') ) {
 		if (!strpos($name, '[]')) {
@@ -395,7 +395,7 @@ class HtmlWpf {
 	/**
 	 * button.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function button( $params = array('attrs' => '', 'value' => '') ) {
 		echo '<button ';
@@ -408,7 +408,7 @@ class HtmlWpf {
 	/**
 	 * buttonA.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function buttonA( $params = array('attrs' => '', 'value' => '') ) {
 		echo '<a href="#" ';
@@ -459,7 +459,7 @@ class HtmlWpf {
 	/**
 	 * formStart.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function formStart( $name, $params = array('action' => '', 'method' => 'GET', 'attrs' => '', 'hideMethodInside' => false) ) {
 		$params['attrs'] = isset($params['attrs']) ? $params['attrs'] : '';

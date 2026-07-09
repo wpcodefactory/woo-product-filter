@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Admin_NavControllerWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */

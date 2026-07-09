@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - FrameWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -125,7 +125,7 @@ class FrameWpf {
 	/**
 	 * _extractModules.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable('modules')
@@ -180,7 +180,7 @@ class FrameWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function init() {
 		$this->_extractTables();
@@ -524,7 +524,7 @@ class FrameWpf {
 	/**
 	 * Add all scripts from _scripts array to WordPress.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function addScripts() {
 		if (!empty($this->_scripts)) {
@@ -568,7 +568,7 @@ class FrameWpf {
 	/**
 	 * addJSVar.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function addJSVar( $script, $name, $val ) {
 		if ($this->_scriptsInitialized) {

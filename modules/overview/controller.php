@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OverviewControllerWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -14,8 +14,8 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * checkAdminNonce.
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 *
 	 * @return void
 	 */
@@ -29,7 +29,7 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * subscribe.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function subscribe() {
 		$this->checkAdminNonce();
@@ -45,7 +45,7 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * contactus.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function contactus() {
 		$this->checkAdminNonce();
@@ -61,7 +61,7 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * rating.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function rating() {
 		$this->checkAdminNonce();
@@ -77,7 +77,7 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * dismissNotice.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function dismissNotice() {
 		$this->checkAdminNonce();
@@ -96,7 +96,7 @@ class OverviewControllerWpf extends ControllerWpf {
 	/**
 	 * approveNotice.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function approveNotice() {
 		$this->checkAdminNonce();

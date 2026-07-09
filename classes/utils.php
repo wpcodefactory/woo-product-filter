@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - UtilsWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -64,7 +64,7 @@ class UtilsWpf {
 	/**
 	 * httpProtectDir.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function httpProtectDir( $path ) {
 		$content = 'DENY FROM ALL';
@@ -199,7 +199,7 @@ class UtilsWpf {
 	/**
 	 * Retrieves list of directories ().
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function getDirList( $path ) {
 		$res = array();
@@ -221,7 +221,7 @@ class UtilsWpf {
 	/**
 	 * Retrieves list of files.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function getFilesList( $path ) {
 		$files = array();
@@ -268,7 +268,7 @@ class UtilsWpf {
 	/**
 	 * Retrieve full directory of plugin.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param string $name - plugin name
 	 * @return string full path in file system to plugin directory
@@ -280,7 +280,7 @@ class UtilsWpf {
 	/**
 	 * getPluginPath.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function getPluginPath( $name = '' ) {
 		return trailingslashit( plugins_url( $name ) );

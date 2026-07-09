@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters_ElementorWidgetWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function __construct ( $data = array(), $args = null ) {
 		parent::__construct($data, $args);
@@ -199,7 +199,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 	/**
 	 * render.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected function render() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
@@ -211,7 +211,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 	/**
 	 * render_plain_content.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function render_plain_content() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );

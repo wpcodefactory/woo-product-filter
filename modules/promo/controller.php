@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoControllerWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -14,8 +14,8 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * checkAdminNonce.
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 */
 	private function checkAdminNonce() {
 		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
@@ -27,7 +27,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * welcomePageSaveInfo.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function welcomePageSaveInfo() {
 		check_admin_referer('wpf-save-nonce', 'wpfNonce');
@@ -57,7 +57,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * sendContact.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function sendContact() {
 		$this->checkAdminNonce();
@@ -118,7 +118,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * addNoticeAction.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function addNoticeAction() {
 		$this->checkAdminNonce();
@@ -150,7 +150,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * addTourStep.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function addTourStep() {
 		$this->checkAdminNonce();
@@ -166,7 +166,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * closeTour.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function closeTour() {
 		$this->checkAdminNonce();
@@ -182,7 +182,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * addTourFinish.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function addTourFinish() {
 		$this->checkAdminNonce();
@@ -198,7 +198,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * saveDeactivateData.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function saveDeactivateData() {
 		$this->checkAdminNonce();
@@ -214,7 +214,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * enbStatsOpt.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function enbStatsOpt() {
 		$this->checkAdminNonce();
@@ -226,7 +226,7 @@ class PromoControllerWpf extends ControllerWpf {
 	/**
 	 * getPermissions.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getPermissions() {
 		return array(

@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Woofilters JS
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -17,7 +17,7 @@
 	/**
 	 * AdminPage.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	function AdminPage() {
 		this.$obj = this;
@@ -200,7 +200,7 @@
 	/**
 	 * eventsAdminPage.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	AdminPage.prototype.eventsAdminPage = (function () {
 		var _thisObj = this.$obj,
@@ -237,7 +237,7 @@
 		/**
 		 * activateSubTab.
 		 *
-		 * @version 3.1.9
+		 * @version 3.2.0
 		 */
 		function activateSubTab($tab) {
 			var $subTabs = $tab.find('.sub-tab a');
@@ -502,7 +502,7 @@
 	/**
 	 * getPreviewAjax.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	AdminPage.prototype.getPreviewAjax = (function (wait) {
 		var _this = this.$obj;
@@ -552,7 +552,7 @@
 	/**
 	 * eventsFilters.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	AdminPage.prototype.eventsFilters = (function () {
 		var _this = this.$obj,
@@ -895,7 +895,7 @@
 	/**
 	 * setAttrTerms.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	AdminPage.prototype.setAttrTerms = (function(mlist, slug){
 		var _this = this,
@@ -947,7 +947,7 @@
 	/**
 	 * fListChanged.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	AdminPage.prototype.fListChanged = (function(_this, event){
 		var _thisObj = this,
@@ -1006,7 +1006,7 @@
 	/**
 	 * wpfAddFilter.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	AdminPage.prototype.wpfAddFilter = (function(id, uniqId, settings) {
 		var _this = this,
@@ -1175,7 +1175,7 @@
 	/**
 	 * saveFilters.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	AdminPage.prototype.saveFilters = (function () {
 		var _this = this.$obj,

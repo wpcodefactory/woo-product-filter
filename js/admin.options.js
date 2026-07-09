@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Options JS
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -438,7 +438,7 @@ function prepareToPlotDate(data) {
 /**
  * wpfInitPlugNotices.
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 function wpfInitPlugNotices() {
 	var $notices = jQuery('.woobewoo-admin-notice');

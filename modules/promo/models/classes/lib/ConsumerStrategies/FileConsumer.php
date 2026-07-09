@@ -4,7 +4,7 @@
  *
  * Consumes messages and writes them to a file.
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -30,7 +30,7 @@ class ConsumerStrategies_FileConsumer extends ConsumerStrategies_AbstractConsume
 	/**
 	 * Append $batch to a file.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param array $batch
 	 *

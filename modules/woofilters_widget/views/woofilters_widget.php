@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters_WidgetViewWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -14,7 +14,7 @@ class Woofilters_WidgetViewWpf extends ViewWpf {
 	/**
 	 * displayWidget.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function displayWidget( $instance, $args ) {
 		if ( isset($instance['id']) && $instance['id'] ) {
@@ -32,7 +32,7 @@ class Woofilters_WidgetViewWpf extends ViewWpf {
 	/**
 	 * displayForm.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function displayForm( $data, $widget ) {
 		FrameWpf::_()->addStyle('woofilters_widget', $this->getModule()->getModPath() . 'css/gmap_widget.css');

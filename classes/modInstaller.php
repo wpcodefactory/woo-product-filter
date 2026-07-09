@@ -4,7 +4,7 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -26,7 +26,7 @@ class ModInstallerWpf {
 	/**
 	 * Install new ModuleWpf into plugin.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param string $module new ModuleWpf data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
@@ -73,7 +73,7 @@ class ModInstallerWpf {
 	/**
 	 * _runModuleInstall.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected static function _runModuleInstall( $module, $action = 'install' ) {
 		$moduleLocationDir = WPF_MODULES_DIR;
@@ -140,7 +140,7 @@ class ModInstallerWpf {
 	/**
 	 * _getPluginLocations.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private static function _getPluginLocations() {
 		$locations = array();
@@ -174,7 +174,7 @@ class ModInstallerWpf {
 	 *
 	 * @return array
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private static function _getModulesFromXml( $xmlPath ) {
 		$modDataArr = array();
@@ -355,7 +355,7 @@ class ModInstallerWpf {
 	/**
 	 * _uninstallTables.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected static function _uninstallTables( $module ) {
 		if (is_dir(WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables')) {
@@ -374,7 +374,7 @@ class ModInstallerWpf {
 	/**
 	 * _installTables.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function _installTables( $module, $action = 'install' ) {
 		$modDir = empty($module['ex_plug_dir']) ? WPF_MODULES_DIR . $module['code'] . WPF_DS : UtilsWpf::getPluginDir($module['ex_plug_dir']) . $module['code'] . WPF_DS;

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersControllerWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -188,7 +188,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * _prepareTextLikeSearch.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected function _prepareTextLikeSearch( $val ) {
 		global $wpdb;
@@ -223,7 +223,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * drawFilterAjax.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function drawFilterAjax() {
 		$res  = new ResponseWpf();
@@ -250,7 +250,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * save.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function save() {
 
@@ -351,7 +351,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * filtersFrontend.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function filtersFrontend() {
 		$res = new ResponseWpf();
@@ -838,7 +838,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables

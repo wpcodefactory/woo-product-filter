@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - MetaWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -72,7 +72,7 @@ class MetaWpf extends ModuleWpf {
 	/**
 	 * addOptions.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function addOptions( $options ) {
 		$opts = array_merge(array(

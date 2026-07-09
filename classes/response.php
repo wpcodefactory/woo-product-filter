@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ResponseWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -31,7 +31,7 @@ class ResponseWpf {
 	/**
 	 * ajaxExec.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function ajaxExec( $forceAjax = false ) {
 		$isAjax = $this->isAjax();

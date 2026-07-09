@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ControllerWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -61,7 +61,7 @@ abstract class ControllerWpf {
 	/**
 	 * _createModel.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected function _createModel( $name = '' ) {
 		if (empty($name)) {
@@ -86,7 +86,7 @@ abstract class ControllerWpf {
 	/**
 	 * _createView.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected function _createView( $name = '' ) {
 		if (empty($name)) {

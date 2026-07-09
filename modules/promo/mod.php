@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -176,7 +176,7 @@ class PromoWpf extends ModuleWpf {
 	/**
 	 * checkWelcome.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @return void
 	 */
@@ -250,7 +250,7 @@ class PromoWpf extends ModuleWpf {
 	/**
 	 * checkToShowTutorial.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @return void
 	 */
@@ -464,7 +464,7 @@ class PromoWpf extends ModuleWpf {
 	/**
 	 * checkPluginDeactivation.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function checkPluginDeactivation() {
 		if (function_exists('get_current_screen')) {

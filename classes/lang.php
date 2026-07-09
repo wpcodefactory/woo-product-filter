@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - LangWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -24,7 +24,7 @@ class LangWpf {
 	/**
 	 * extract.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function extract( $d = array('dir' => '', 'LangWpf' => '') ) {
 		$data = array();

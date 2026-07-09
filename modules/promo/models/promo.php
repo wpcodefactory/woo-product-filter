@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoModelWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -34,7 +34,7 @@ class PromoModelWpf extends ModelWpf {
 	/**
 	 * welcomePageSaveInfo.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function welcomePageSaveInfo( $d = array() ) {
 		return;
@@ -89,7 +89,7 @@ class PromoModelWpf extends ModelWpf {
 	/**
 	 * sendUsageStat.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function sendUsageStat() {
 		return;
@@ -193,7 +193,7 @@ class PromoModelWpf extends ModelWpf {
 	/**
 	 * _getBigStatClient.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private function _getBigStatClient() {
 		if (!$this->_bigCli) {

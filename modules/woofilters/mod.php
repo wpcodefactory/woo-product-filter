@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -45,7 +45,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function init() {
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
@@ -1331,7 +1331,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * addCustomTaxQuery.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function addCustomTaxQuery( $taxQuery, $data, $mode ) {
 
@@ -1546,7 +1546,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getVendor.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getVendor() {
 		if ( class_exists('WC_Vendors') ) {
@@ -1563,7 +1563,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadProductsFilter.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
@@ -1803,7 +1803,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * maybeShowProductSubcategories.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function maybeShowProductSubcategories( $loop_html, $categoryPageId ) {
 		// Use term meta directly instead of woocommerce_get_loop_display_mode(), which
@@ -2098,7 +2098,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadShortcodeProductsFilter.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function loadShortcodeProductsFilter( $args, $attributes = array(), $type = '' ) {
 		$hash         = md5( serialize( $args ) . serialize( $attributes ) );
@@ -2657,7 +2657,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * isVendor.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private function isVendor() {
 
@@ -2916,7 +2916,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getCurrencyPrice.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getCurrencyPrice( $raw_price, $dec = false ) {
 		if ( function_exists( 'alg_wc_currency_switcher_plugin' ) ) {
@@ -3140,7 +3140,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * renderSelectedFilters.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function renderSelectedFilters( $params ) {
 		$p = array(
@@ -3152,7 +3152,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * showAdminErrors.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function showAdminErrors() {
 		// check WooCommerce is installed and activated
@@ -3294,7 +3294,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getFilterTaxonomies.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getFilterTaxonomies( $settings, $calcCategories = false, $filterSettings = array(), $ajax = false, $urlQuery = array() ) {
 
@@ -3623,7 +3623,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Get filter existing individual filters items.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param int | null $args wp_query args
 	 * @param array $taxonomies
@@ -4120,7 +4120,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4570,7 +4570,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * Returns additional data on minimum and maximum prices and users.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @param $args
 	 * @param $param

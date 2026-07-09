@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ModuleWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -55,7 +55,7 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	/**
 	 * getModDir.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getModDir() {
 		if (empty($this->_externalDir)) {
@@ -76,7 +76,7 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	/**
 	 * getModRealDir.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getModRealDir() {
 		return dirname(__FILE__) . WPF_DS;

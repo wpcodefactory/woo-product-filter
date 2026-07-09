@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - PromoViewWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -23,7 +23,7 @@ class PromoViewWpf extends ViewWpf {
 	/**
 	 * getOverviewTabContent.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getOverviewTabContent() {
 		FrameWpf::_()->getModule('templates')->loadJqueryUi();
@@ -105,7 +105,7 @@ class PromoViewWpf extends ViewWpf {
 	/**
 	 * _makeWelcomeLink.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	private function _makeWelcomeLink( $link ) {
 		return UriWpf::_(array('baseUrl' => $link, 'from' => 'welcome-page', 'pl' => WPF_CODE, 'wpfNonce' => wp_create_nonce('wpf-save-nonce')));
@@ -120,7 +120,7 @@ class PromoViewWpf extends ViewWpf {
 	/**
 	 * showFeaturedPluginsPage.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function showFeaturedPluginsPage() {
 		FrameWpf::_()->getModule('templates')->loadBootstrapSimple();

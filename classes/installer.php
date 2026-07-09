@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - InstallerWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -24,7 +24,7 @@ class InstallerWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function init( $isUpdate = false ) {
 		global $wpdb;

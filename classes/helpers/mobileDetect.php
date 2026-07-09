@@ -17,7 +17,7 @@
  *              README:       https://github.com/serbanghita/Mobile-Detect/blob/master/README.md
  *              HOWTO:        https://github.com/serbanghita/Mobile-Detect/wiki/Code-examples
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -702,7 +702,7 @@ class Mobile_Detect {
 	 * @param array $httpHeaders The headers to set. If null, then using PHP's _SERVER to extract
 	 *                           the headers. The default null is left for backwards compatibility.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function setHttpHeaders( $httpHeaders = null ) {
 		// use global _SERVER if $httpHeaders aren't defined
@@ -786,7 +786,7 @@ class Mobile_Detect {
 	 * @param array $cfHeaders List of HTTP header
 	 * @return  boolean If there were CloudFront headers to be set
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function setCfHeaders( $cfHeaders = null ) {
 		// use global _SERVER if $cfHeaders aren't defined

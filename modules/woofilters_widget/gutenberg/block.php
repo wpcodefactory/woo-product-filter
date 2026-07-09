@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Block
  *
- * @version 3.1.9
+ * @version 3.2.0
  * @since   3.1.7
  *
  * @author woobewoo
@@ -22,7 +22,7 @@ add_action('init', function () {
 		/**
 		 * render_callback.
 		 *
-		 * @version 3.1.9
+		 * @version 3.2.0
 		 * @since   3.1.7
 		 */
 		'render_callback' => function ($attributes) {

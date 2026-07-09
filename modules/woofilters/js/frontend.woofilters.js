@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -26,7 +26,7 @@ function wpfIsThriveEditor() {
 /**
  * Main function.
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 (function ($, app) {
 	"use strict";
@@ -76,7 +76,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	WpfFrontendPage.prototype.init = (function () {
 		var _thisObj = this.$obj;
@@ -1237,7 +1237,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * detectSingleCheckbox.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	WpfFrontendPage.prototype.detectSingleCheckbox = (function (checkedInput) {
 		var filterWrapper = checkedInput.closest('.wpfFilterWrapper'),
@@ -1384,7 +1384,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * filtering.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	WpfFrontendPage.prototype.filtering = (function ($filterWrapper, clearAll, redirectLink, onlyRecalcFilter) {
 		var _thisObj = this.$obj;
@@ -2183,7 +2183,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * sendFiltersOptionsByAjax.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	WpfFrontendPage.prototype.sendFiltersOptionsByAjax = (function ($filtersDataBackend, $queryVars, $filterSettings, $generalSettings, $woocommerceSettings, $shortcodeAttr) {
 		var _thisObj = this.$obj,
@@ -2413,7 +2413,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * ajaxForceThemeTemplates.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	WpfFrontendPage.prototype.ajaxForceThemeTemplates = (function (productContainerSelector, productListSelector, requestData, $wrapperSettings) {
 		var _thisObj = this.$obj,
@@ -2530,7 +2530,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * ajaxOnlyRecount.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	WpfFrontendPage.prototype.ajaxOnlyRecount = (function (requestData, filterId, $wrapperSettings) {
 		var _thisObj = this.$obj;
@@ -2569,7 +2569,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * setAjaxJScript.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	WpfFrontendPage.prototype.setAjaxJScript = (function(jscript, filterId){
 		var _thisObj = this.$obj;
@@ -2579,8 +2579,8 @@ function wpfIsThriveEditor() {
 	/**
 	 * applyExistsTermsData.
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 */
 	WpfFrontendPage.prototype.applyExistsTermsData = (function(existsTermsEl) {
 		if (!existsTermsEl || existsTermsEl.length === 0) return;
@@ -2600,8 +2600,8 @@ function wpfIsThriveEditor() {
 	/**
 	 * applyWpfActions.
 	 *
-	 * @version 3.1.9
-	 * @since   3.1.9
+	 * @version 3.2.0
+	 * @since   3.2.0
 	 */
 	WpfFrontendPage.prototype.applyWpfActions = (function(actions) {
 		if (!actions) return;
@@ -3979,7 +3979,7 @@ function changeUrl(filterSlug, filterValue, $wooPage, $filterWrapper) {
 /**
  * removePageQString.
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 function removePageQString() {
 	var curUrl = getCurrentUrlPartsWpf(),

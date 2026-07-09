@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Functions
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -15,8 +15,8 @@ defined( 'ABSPATH' ) || exit;
  * Works on both single-site and multisite. Replaces is_plugin_active() so that
  * plugin code never has to require_once a core admin file.
  *
- * @version 3.1.9
- * @since   3.1.9
+ * @version 3.2.0
+ * @since   3.2.0
  *
  * @param string $plugin Plugin base file, e.g. 'woocommerce/woocommerce.php'.
  * @return bool
@@ -365,7 +365,7 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 /**
  * wpf_install_base_msg.
  *
- * @version 3.1.9
+ * @version 3.2.0
  */
 add_action('admin_notices', 'wpf_install_base_msg');
 if (!function_exists('wpf_install_base_msg')) {

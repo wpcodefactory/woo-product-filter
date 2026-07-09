@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OverviewViewWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -29,7 +29,7 @@ class OverviewViewWpf extends ViewWpf {
 	/**
 	 * showRestApiInfo.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function showRestApiInfo() {
 		$dismiss = (int) FrameWpf::_()->getModule('options')->get('dismiss_wpf-rest-api');

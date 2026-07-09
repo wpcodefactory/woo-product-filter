@@ -3,7 +3,7 @@
  * Plugin Name: Product Filter for WooCommerce by WBW
  * Plugin URI: https://woobewoo.com/product/woocommerce-filter/
  * Description: Filter products in your store in most efficient way
- * Version: 3.1.9
+ * Version: 3.2.0
  * Author: woobewoo
  * Author URI: https://woobewoo.com/
  * Requires at least: 5.0

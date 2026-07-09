@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - UriWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -19,7 +19,7 @@ class UriWpf {
 	/**
 	 * fileToPageParam.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function fileToPageParam( $file ) {
 		$file = str_replace(WPF_DS, '/', $file);
@@ -67,7 +67,7 @@ class UriWpf {
 	/**
 	 * getGetParams.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public static function getGetParams( $exclude = array() ) {
 		$res = array();

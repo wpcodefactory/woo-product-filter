@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
@@ -304,7 +304,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * save.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function save( $data = array() ) {
 
@@ -345,7 +345,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * _dataSave.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	protected function _dataSave( $data, $update = false ) {
 		$esettings = isset($data['esettings']) ? UtilsWpf::jsonDecode(stripslashes($data['esettings'])) : array();

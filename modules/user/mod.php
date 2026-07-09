@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - UserWpf Class
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class UserWpf extends ModuleWpf {
 	/**
 	 * isAdmin.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @return bool
 	 */
@@ -50,7 +50,7 @@ class UserWpf extends ModuleWpf {
 	/**
 	 * _loadUserData.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 *
 	 * @return void
 	 */

@@ -2,7 +2,7 @@
 /**
  * Class to generate files and output them in attachment by http (https) protocol
  *
- * @version 3.1.9
+ * @version 3.2.0
  *
  * @author woobewoo
  */
@@ -33,7 +33,7 @@ class FilegeneratorWpf {
 	/**
 	 * generate.
 	 *
-	 * @version 3.1.9
+	 * @version 3.2.0
 	 */
 	public function generate() {
 		switch ($this->_type) {
