@@ -2,12 +2,14 @@
 /**
  * Product Filter by WBW - ConsumerStrategies_FileConsumer Class
  *
+ * @version 3.3.0
+ *
  * Consumes messages and writes them to a file.
  */
 
 defined( 'ABSPATH' ) || exit;
 
-require_once(dirname(__FILE__) . '/AbstractConsumer.php');
+require_once( dirname( __FILE__ ) . '/AbstractConsumer.php' );
 
 class ConsumerStrategies_FileConsumer extends ConsumerStrategies_AbstractConsumer {
 
@@ -19,22 +21,42 @@ class ConsumerStrategies_FileConsumer extends ConsumerStrategies_AbstractConsume
 	 * @param array $options
 	 */
 	public function __construct( $options ) {
-		parent::__construct($options);
+		parent::__construct( $options );
 
 		// what file to write to?
-		$this->_file = array_key_exists('file', $options) ? $options['file'] :  dirname(__FILE__) . '/../../messages.txt';
+		$this->_file = array_key_exists( 'file', $options ) ? $options['file'] : dirname( __FILE__ ) . '/../../messages.txt';
 	}
 
 	/**
 	 * Append $batch to a file.
+	 *
+	 * @version 3.3.0
 	 *
 	 * @param array $batch
 	 *
 	 * @return bool
 	 */
 	public function persist( $batch ) {
-		if (count($batch) > 0) {
-			return file_put_contents($this->_file, json_encode($batch) . "\n", FILE_APPEND | LOCK_EX) !== false;
+		if ( count( $batch ) > 0 ) {
+
+			global $wp_filesystem;
+
+			if ( empty( $wp_filesystem ) ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+				WP_Filesystem();
+			}
+
+
+
+			$existing = $wp_filesystem->exists( $this->_file ) ?
+				$wp_filesystem->get_contents( $this->_file ) :
+				'';
+
+			return $wp_filesystem->put_contents(
+				$this->_file,
+				$existing . wp_json_encode( $batch ) . "\n",
+				FS_CHMOD_FILE
+			);
 		} else {
 			return true;
 		}

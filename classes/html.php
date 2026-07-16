@@ -33,7 +33,7 @@ class HtmlWpf {
 	}
 
 	public static function block( $name, $params = array('attrs' => '', 'value' => '') ) {
-		$output .= '<p class="toe_' . self::nameToClassId($name) . '">' . $params['value'] . '</p>';
+		$output = '<p class="toe_' . self::nameToClassId($name) . '">' . $params['value'] . '</p>';
 		return $output;
 	}
 

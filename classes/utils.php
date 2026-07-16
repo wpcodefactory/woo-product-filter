@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - UtilsWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -63,16 +63,27 @@ class UtilsWpf {
 
 	/**
 	 * httpProtectDir.
+	 *
+	 * @version 3.3.0
 	 */
 	public static function httpProtectDir( $path ) {
 		$content = 'DENY FROM ALL';
-		if (strrpos($path, DS) != strlen($path)) {
+		if ( strrpos( $path, DS ) != strlen( $path ) ) {
 			$path .= DS;
 		}
-		if (file_put_contents($path . '.htaccess', $content)) {
-			return true;
+
+		global $wp_filesystem;
+
+		if ( empty( $wp_filesystem ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			WP_Filesystem();
 		}
-		return false;
+
+		return $wp_filesystem->put_contents(
+			$path . '.htaccess',
+			$content,
+			FS_CHMOD_FILE
+		);
 	}
 
 	/**
