@@ -2,7 +2,7 @@
 Contributors: woobewoo
 Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
-Requires at least: 5.0.0
+Requires at least: 5.0
 Tested up to: 7.0
 Stable tag: 3.1.8
 License: GPLv2 or later
@@ -17,16 +17,16 @@ It's fully customizable and 100% compatible with Elementor, giving you full cont
 
 = WooCommerce Product Filter Key Features =
 
-**[Comprehensive Filtering](https://woobewoo.com/feature/filters-by-price-price-range-sort-categories-tags-and-attributes?utm_source=wordpress&utm_medium=criteria&utm_campaign=filter "Comprehensive Filtering")**
+**Comprehensive Filtering**
 let customers filter products by: Price, Price range, Categories, Tags, Author, Featured, On Sale, In Stock, Rating, Search by text**, Attribute filters.
 
 **[Flexible Display Options](https://woobewoo.com/plugins/woocommerce-filter/?utm_source=wordpress&utm_medium=description&utm_campaign=filter "Main example")**
 present the filters in various formats to suit your storefront's design and user preferences. Options include: radio button list (single select) dropdown (single select), checkbox list (multi-select)** and icons** for attribute filters (colour, size, rating).
 
-**[AJAX live search](https://woobewoo.com/feature/ajax-live-search?utm_source=wordpress&utm_medium=ajax&utm_campaign=filter "AJAX live search")**
+**AJAX live search**
 Enable instant results without page reloads for a faster shopping  with AJAX live search. AJAX search provides instant filtering results without the need to reload the page. This feature can be configured to activate immediately after a user selects their desired filter options and clicks the filter button, making product searches faster and more intuitive.
 
-**[Elementor Integration](https://woobewoo.com/documentation/elementor-compatibility/ "Elementor Compatibility")**
+**[Elementor Integration](https://woobewoo.com/documentation/compatibility-with-elementor-addons/ "Elementor Compatibility")**
 WooCommerce Product Filter compatible with Elementor. Seamlessly create and customize filters using Elementor’s interface.
 All features of the WooCommerce Product Filter by WBW are accessible within the Elementor tab, providing a streamlined workflow for page building.
 
@@ -44,7 +44,7 @@ With Live Preview, the results will appear in the panel right at the moment you 
 **Variety of options for sorting products**
 The product search plugin for WooCommerce allows sorting your products by popularity, rating, price, newness, alphabetical ascender, or descender.
 
-**[Create new product filters in a few clicks](https://woobewoo.com/feature/customize-and-set-up?utm_source=wordpress&utm_medium=easytosetup&utm_campaign=filter "Easy to customize and set up")**
+**[Create new product filters in a few clicks](https://woobewoo.com/documentation/create-your-first-product-filter/?utm_source=wordpress&utm_medium=easytosetup&utm_campaign=filter "Easy to customize and set up")**
 Easy to customize and set up. Just add a filter to every page using a widget or shortcodes.
 
 **[Price filter design](https://woobewoo.com/documentation/woocommerce-filter-main-settings/#a "Price filter")**
@@ -56,7 +56,7 @@ Adjust them manually and specify the exact value of every step as well.
 **[Show Count](https://woobewoo.com/documentation/show-count-option/ "Show Count") and Recount products by selected filter**
 Recount the products by selected filters and display the exact number of products matching the filter results.
 
-**[Fully responsive](https://woobewoo.com/feature/looks-and-works-great-on-all-devices?utm_source=wordpress&utm_medium=responsive&utm_campaign=filter "Looks and works great on all devices")**
+**Fully responsive**
 The filter looks and works properly on different devices particularly mobile phones and tablets as well as desktops and laptops.
 
 = Support and suggestions for WooCommerce Product Filter Plugin =
@@ -117,7 +117,7 @@ Depending on the type and specificity of the filter, you can configure:
 * Show search and more.
 
 = How to add product filter to the store? =
-After creating the filter you can [add a filer it in 2 ways](https://woobewoo.com/documentation/how-to-add-woocommerce-product-filter-to-shop?utm_source=wordpress&utm_medium=addfiltertothestore&utm_campaign=filter "How to add WooCommerce product filter"): with shortcode and PHP code ( you can find them under the settings tab) or add WBW Product Filter widget.
+After creating the filter you can [add a filer it in 2 ways](https://woobewoo.com/documentation/how-to-add-woocommerce-product-filter-to-shop/?utm_source=wordpress&utm_medium=addfiltertothestore&utm_campaign=filter "How to add WooCommerce product filter"): with shortcode and PHP code ( you can find them under the settings tab) or add WBW Product Filter widget.
 
 * **Input shortcode**
 Copy Shortcode and paste it to your website content. Product Filter plugin will display the filter you created on the appropriate post/page using settings you tuned in this filter.
@@ -135,7 +135,7 @@ WooCommerce Product Filter is fully compatible and responsive! A plugin is worki
 = Why do I need a product filter? =
 On the standard site, customers have to scroll a lot of pages and links to find a product. It is an exhausted and time-consuming process, and there is where the product filtering comes. This feature allows users to find their route to a product, tuning different characteristics.
 
-You can read about [How to make the filtering works in the best way](https://woobewoo.com/blog/complete-guide-to-product-filtering-and-how-to-use-it-with-woobewoo-plugin?utm_source=wordpress&utm_medium=tipforsettings&utm_campaign=filter "How to make the filtering works in the best way")
+You can read about [How to make the filtering works in the best way](https://woobewoo.com/blog/complete-guide-to-product-filtering-and-how-to-use-it-with-woobewoo-plugin/?utm_source=wordpress&utm_medium=tipforsettings&utm_campaign=filter "How to make the filtering works in the best way")
 and find the tips Where to place a filter bar, how to display filters, how to present the most relative filters and not overload, customers.
 
 = My WooCommerce Product Filter plugin is not working? =
@@ -143,7 +143,7 @@ If you have problems with the work of plugin or something is not working as it s
 * Test the plugin with a WordPress default theme, to be sure that the error is not caused by the theme you are currently using.
 * Deactivate all plugins you are using and check if the problem is still occurring.
 * Ensure that plugin version, theme version, and WordPress are updated and the problem has not already been solved in a later plugin update.
-If none of this advice helps you, contact us via [support form on our website](https://woobewoo.com/contact-us?utm_source=wordpress&utm_medium=contactus&utm_campaign=wooproducttable "Contact us")and describe your problem.
+If none of this advice helps you, contact us via [support form on our website](https://woobewoo.com/contact-us/?utm_source=wordpress&utm_medium=contactus&utm_campaign=wooproducttable "Contact us")and describe your problem.
 
 = WooCommerce Product Filter plugin is not available in my language. What shall I do? =
 You may help us translate the plugin into your language and get the PRO version of the plugin for free as soon as it is released. If this method seems to be too complicated, please send us a request and we will let you know as soon as the WBW Filter plugin will be available in your localization.
