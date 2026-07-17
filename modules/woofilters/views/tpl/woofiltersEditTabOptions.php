@@ -1255,7 +1255,7 @@ $defaults = FrameWpf::_()->getModule('woofilters')->getDefaultSettings();
 				</div>
 			</div>
 		<?php } ?>
-	</div><!-- #sub-tab-options-loader -->
+	</div>
 	<div class="wpfLoaderIconTemplate wpfHidden">
 		<?php
 			$loaderSkins = array(

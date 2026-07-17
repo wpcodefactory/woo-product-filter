@@ -130,7 +130,6 @@ $modPath = $this->getModule()->getModPath();
 									<?php esc_html_e('Send message', 'woo-product-filter'); ?>
 								</button>
 							</div>
-							<!-- </div> -->
 						</div>
 					</div>
 				</div>
