@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - FrameWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -657,27 +657,6 @@ class FrameWpf {
 	}
 
 	/**
-	 * loadPlugins.
-	 */
-	public function loadPlugins() {
-		require_once ABSPATH . 'wp-includes/pluggable.php';
-	}
-
-	/**
-	 * loadWPSettings.
-	 */
-	public function loadWPSettings() {
-		require_once ABSPATH . 'wp-settings.php';
-	}
-
-	/**
-	 * loadLocale.
-	 */
-	public function loadLocale() {
-		require_once ABSPATH . 'wp-includes/locale.php';
-	}
-
-	/**
 	 * moduleActive.
 	 */
 	public function moduleActive( $code ) {
@@ -758,13 +737,12 @@ class FrameWpf {
 
 	/**
 	 * proVersionCompare.
+	 *
+	 * @version 3.3.0
 	 */
 	public function proVersionCompare( $requires, $compare = '>', $notPro = true ) {
 		if ( is_null( $this->_proVersion ) ) {
 			if ( $this->isPro() && function_exists( 'getProPlugFullPathWpf' ) ) {
-				if ( ! function_exists( 'get_plugin_data' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/plugin.php' ;
-				}
 				$plugin_data       = get_file_data( getProPlugFullPathWpf(), array( 'Version' => 'Version' ) );
 				$this->_proVersion = $plugin_data['Version'];
 			} else {
