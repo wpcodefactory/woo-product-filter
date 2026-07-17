@@ -151,6 +151,20 @@ You may help us translate the plugin into your language and get the PRO version 
 = Where do I report security bugs found in this plugin? =
 Please report security bugs found in the source code of the plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fbdb8-8978-4dfd-b6cd-a768233271db). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
+== External Services ==
+
+This plugin connects to an external server provided by WooBewoo (woobewoo.com) to handle the following admin-side forms. No data is ever sent automatically — these requests only occur when an administrator explicitly submits one of the forms below from within the WordPress admin panel.
+
+**Contact Us form:** Sends the administrator's name, email address, subject, message, site URL, and plugin version to woobewoo.com.
+**Subscribe form:** Sends the administrator's email address and site URL to woobewoo.com.
+**Rating form:** Sends the administrator's email address, rating score, feedback message, and site URL to woobewoo.com.
+
+[Terms of Service](https://woobewoo.com/terms-conditions/) | [Privacy Policy](https://woobewoo.com/privacy-policy/)
+
+This plugin may communicate with the following third-party services:
+
+* **Google Fonts** (https://fonts.googleapis.com) — Loaded only when a Google Font is explicitly selected in the plugin's design settings. No data is sent to Google; the request is a standard CSS font-stylesheet fetch. [Google Privacy Policy](https://policies.google.com/privacy).
+
 == Changelog ==
 
 = 3.3.0 - 16/07/2026 =
@@ -249,3 +263,8 @@ Please report security bugs found in the source code of the plugin through the [
 * Dev - Coding standards improved.
 
 [See changelog for all versions](https://plugins.svn.wordpress.org/woo-product-filter/trunk/changelog.txt).
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+This is the first release of the plugin.
