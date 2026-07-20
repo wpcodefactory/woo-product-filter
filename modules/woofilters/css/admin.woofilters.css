@@ -557,9 +557,6 @@ input.wpfSmallInput{
 	height: 150px;
 	cursor: pointer;
 }
-.wpfFiltersBlock td .chosen-container:nth-child(3){
-	display: none;
-}
 
 @media (max-width: 500px) {
 	.settings-value input, .wpfFiltersBlock .wpfFilter select {
@@ -602,10 +599,7 @@ input.wpfSmallInput{
 	display: table;
 	clear: both;
 }
-#wpfFiltersEditForm .chosen-container-multi {
-	width:100% !important;
-	max-width: 400px;
-}
+
 .wpfRightLabel {
 	line-height: 25px;
 	margin-left: 5px;

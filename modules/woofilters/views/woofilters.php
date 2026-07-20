@@ -142,7 +142,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		FrameWpf::_()->getModule('templates')->loadChosenSelects();
 		FrameWpf::_()->getModule('templates')->loadBootstrap();
 		FrameWpf::_()->addScript('notify-js', WPF_JS_PATH . 'notify.js', array(), false, true);
-		FrameWpf::_()->addScript('chosen.order.jquery.min.js', $modPath . 'js/chosen.order.jquery.min.js');
 		FrameWpf::_()->addScript('admin.filters', $modPath . 'js/admin.woofilters.js');
 		FrameWpf::_()->addScript('admin.wp.colorpicker.alhpa.js', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array('wp-color-picker'));
 		FrameWpf::_()->addJSVar('wp-color-picker', 'wpColorPickerL10n', array());

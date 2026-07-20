@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Woofilters JS
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -487,18 +487,28 @@
 			}
 		});
 
-		$(document).keydown(function(e) {
-			if (e.keyCode == 65 && e.ctrlKey) {
-				var $multiBlock = $('.wpfFiltersBlock .wpfFilter .wpfOptions:not(.wpfHidden) .wpf-multi-select');
-				if ($multiBlock.length == 1 && $multiBlock.find('.chosen-container-multi').hasClass('chosen-container-active')) {
-					var ctrlAttr = $multiBlock.attr('data-ctrl-a') != '1',
-						$select = $multiBlock.find('select');
-					$select.find('option').prop('selected', ctrlAttr);
-					$select.trigger('chosen:updated');
-					$multiBlock.attr('data-ctrl-a', ctrlAttr ? '1' : '0');
+		$( document ).keydown( function ( e ) {
+			if (
+				e.key.toLowerCase() === 'a' &&
+				( e.ctrlKey || e.metaKey )
+			) {
+				var $multiBlock = $( '.wpfFiltersBlock .wpfFilter .wpfOptions:not(.wpfHidden) .wpf-multi-select' );
+				if (
+					$multiBlock.length === 1 &&
+					$multiBlock.find( '.ts-wrapper' ).hasClass( 'focus' )
+				) {
+					const ctrlAttr = $multiBlock.attr( 'data-ctrl-a' ) !== '1',
+						$select = $multiBlock.find( 'select' );
+
+					$select.find( 'option' ).prop( 'selected', ctrlAttr );
+					if ( $select[ 0 ] && $select[ 0 ].tomselect ) {
+						$select[ 0 ].tomselect.sync();
+					}
+					$multiBlock.attr( 'data-ctrl-a', ctrlAttr ? '1' : '0' );
+					$select.trigger('change');
 				}
 			}
-		});
+		} );
 
 	});
 
@@ -555,7 +565,6 @@
 		});
 
 		jQuery('document').ready(function(){
-			jQuery(".chosen-choices").sortable();
 			jQuery('.color-group').trigger('color-group');
 		});
 		if (WPF_DATA.isWCLicense) {
@@ -613,27 +622,35 @@
 			}
 		});
 
-		jQuery('#wpfFiltersEditForm select[name="f_mlist[]"],#wpfFiltersEditForm select[name="f_exclude_terms[]"]').off('chosen:updated').on('chosen:updated',function() {
-			if(! jQuery(this).closest(".wpfFiltersBlockPreview").length ) {
+
+		jQuery( "body" )
+			.off( "change", '#wpfFiltersEditForm [name="f_hide_taxonomy"]' )
+			.on( "change", '#wpfFiltersEditForm [name="f_hide_taxonomy"]', function ( e ) {
+
+				var mList = jQuery( this ).closest( '.wpfFilter' ).find( 'select[name="f_mlist[]"]' ),
+					parentCats = mList.data( 'parents' );
+
+				mList.find( 'option' ).show();
+				if ( jQuery( this ).is( ':checked' ) ) {
+					mList.closest('.wpf-multi-select').attr( 'data-ctrl-a', '0' );
+					mList.find( 'option' ).each( function () {
+						var optVal = jQuery( this ).val();
+						if ( toeInArray( optVal, parentCats ) === - 1 ) {
+							jQuery( this ).prop( 'selected', false ).hide();
+						}
+					} );
+				}
 				_this.getPreviewAjax();
-			}
-		});
+				if ( mList[ 0 ] && mList[ 0 ].tomselect ) {
+					mList[ 0 ].tomselect.sync();
+				}
+			} );
 
-		jQuery("body").off("change", '#wpfFiltersEditForm [name="f_hide_taxonomy"]').on("change", '#wpfFiltersEditForm [name="f_hide_taxonomy"]', function(e) {
-			var mList = jQuery(this).closest('table').find('select[name="f_mlist[]"]'),
-				parentCats = mList.data('parents');
-
-			mList.find('option').show();
-			if (jQuery(this).is(':checked')){
-				mList.find('option').each(function(){
-					var optVal = jQuery(this).val();
-					if(toeInArray(optVal, parentCats) == -1){
-						jQuery(this).hide();
-					}
-				});
-			}
-			mList.trigger("chosen:updated");
-		});
+		jQuery( "body" )
+			.off( "change", '#wpfFiltersEditForm select[name="f_mlist[]"], #wpfFiltersEditForm select[name="f_exclude_terms[]"]' )
+			.on( "change", '#wpfFiltersEditForm select[name="f_mlist[]"], #wpfFiltersEditForm select[name="f_exclude_terms[]"]', function () {
+				_this.getPreviewAjax();
+			} );
 
 		jQuery('#wpfChooseFilters').off('change').on('change', function(){
 			var option = jQuery('#wpfChooseFilters option:selected'),
@@ -726,7 +743,6 @@
 				optionsOther.addClass('wpfHidden');
 				i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
 				options.removeClass('wpfHidden');
-				options.find('select[name="f_mlist[]"]').trigger('chosen:updated');
 			}else{
 				i.removeClass('fa-chevron-up').addClass('fa-chevron-down');
 				options.addClass('wpfHidden');
@@ -914,7 +930,7 @@
 		if(mlist.find('option').length > 1) {
 			mlist.closest('.row-settings-block').removeClass('wpfHidden');
 		}
-		mlist.trigger('chosen:updated');
+		if (mlist[0] && mlist[0].tomselect) { mlist[0].tomselect.sync() }
 		mlist.trigger('change');
 		if(typeof(_this.changeAttributeTermsPro) == 'function') {
 			_this.changeAttributeTermsPro(mlist.closest('.wpfFilter'), settings);
@@ -954,8 +970,11 @@
 				_thisObj.setAttrTerms(attr_terms, attrSlug);
 			}
 		} else {
-			attr_terms.val('').trigger('chosen:updated');
-			attr_terms.trigger('change');
+			attr_terms.val( '' );
+			if ( attr_terms[ 0 ] && attr_terms[ 0 ].tomselect ) {
+				attr_terms[ 0 ].tomselect.sync()
+			}
+			attr_terms.trigger( 'change' );
 		}
 
 		// temporarily disabled for custom meta field
@@ -1077,7 +1096,9 @@
 		_this.filterIterator++;
 
 		blockTemplate.trigger('changeTooltips');
-		blockTemplate.find('select[name="f_mlist[]"],select[name="f_exclude_terms[]"]').chosen({ width:"95%" });
+		blockTemplate.find( 'select[name="f_mlist[]"],select[name="f_exclude_terms[]"]' ).each( function () {
+			new TomSelect( this, { plugins: [ 'remove_button' ], maxOptions: null } );
+		} );
 
 		blockTemplate.find('input,select').trigger('wpf-change');
 
@@ -1196,7 +1217,7 @@
 					var elmNameClear = elm.name.replace(/\[(\d+)\]/g, "[]");
 					if( _this.$multiSelectFields.includes(elmNameClear) ){
 						//add more filter for this type
-						var arrayValues = typeof ChosenOrder !== 'undefined' && ChosenOrder.isChosenified(elm) ? $elm.getSelectionOrder() : $elm.val();
+						var arrayValues = $elm.val();
 						//var arrayValues = $elm.getSelectionOrder();
 						if(arrayValues){
 							items[elm.name] = arrayValues.toString();

@@ -746,8 +746,7 @@ ul ul.wpfHideAllParent {
 .woobewoo-plugin input[type="text"],
 .woobewoo-plugin input[type="search"],
 .woobewoo-plugin select,
-.woobewoo-plugin button.ms-choice,
-.woobewoo-plugin .chosen-container-multi .chosen-choices {
+.woobewoo-plugin button.ms-choice {
 	background-color: #ffffff;
 	color: #64808e !important;
 	border: 1px solid #d8dfe3;
@@ -755,6 +754,16 @@ ul ul.wpfHideAllParent {
 	font-size: 13px !important;
 	outline: none;
 	border-radius: 8px !important;
+}
+.woobewoo-plugin .ts-control > input {
+	width: auto !important;
+	min-height: 0 !important;
+	height: auto !important;
+	border: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
 }
 .woobewoo-tbl-pagination-shell .ui-pg-table td:last-of-type {
 	padding-right: 0 !important;
@@ -1631,14 +1640,12 @@ select.woobewoo-flat-input {
 }
 .wpfFiltersTabContents,
 .wpfFiltersTabContents .settings-value div:not([class]),
-.wpfFiltersTabContents .chosen-container {
+.wpfFiltersTabContents .ts-wrapper {
 	max-width: 100% !important;
 }
 .wpfFiltersTabContents .settings-value div:not([class]),
-.wpfFiltersTabContents .chosen-container ul,
-.wpfFiltersTabContents .chosen-container ul li,
-.wpfFiltersTabContents .chosen-container,
-.wpfFiltersTabContents input:not([type="radio"]):not([type="checkbox"]),
+.wpfFiltersTabContents .ts-wrapper,
+.wpfFiltersTabContents input:not([type="radio"]):not([type="checkbox"]):not(.ts-control input),
 .wpfFiltersTabContents .settings-value,
 .wpfFiltersTabContents select {
 	width: 100% !important;

@@ -167,9 +167,11 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.3.0 - 16/07/2026 =
+= 3.3.0 - 20/07/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
+* Dev - Replaced outdated library `chosen` with `tom-select`.
+* Dev - Improved coding standards and code cleaned up.
 
 = 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.
