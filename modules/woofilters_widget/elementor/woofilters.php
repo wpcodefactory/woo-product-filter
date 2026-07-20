@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters_ElementorWidgetWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -217,16 +217,32 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		$this->addWooFilterAndvancedTabControls();
 	}
 
+	/**
+	 * render.
+	 *
+	 * @version 3.3.0
+	 */
 	protected function render() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
 		?>
-		<div class="elementor-woofilters"><?php echo $shortcode ? do_shortcode( '[wpf-filters id="' . $shortcode . '"]' ) : ''; ?></div>
+		<div class="elementor-woofilters">
+			<?php
+			echo $shortcode ?
+				do_shortcode( '[wpf-filters id="' . absint( $shortcode ) . '"]' ) :
+				'';
+			?>
+		</div>
 		<?php
 	}
 
+	/**
+	 * render_plain_content.
+	 *
+	 * @version 3.3.0
+	 */
 	public function render_plain_content() {
 		$shortcode = $this->get_settings_for_display( 'filter_id' );
-		echo $shortcode ? do_shortcode( '[wpf-filters id="' . $shortcode . '"]' ) : '';
+		echo $shortcode ? do_shortcode( '[wpf-filters id="' . absint( $shortcode ) . '"]' ) : '';
 	}
 
 	protected function content_template() {}

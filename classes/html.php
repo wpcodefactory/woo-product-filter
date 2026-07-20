@@ -180,7 +180,7 @@ class HtmlWpf {
 	 *
 	 * @since 3.3.0
 	 */
-	public static function getEscapedHtml( $html ) {
+	public static function escapedHtml( $html ) {
 		return wp_kses( $html, self::getAllowedHtmlTags() );
 	}
 
@@ -190,7 +190,7 @@ class HtmlWpf {
 	 * @since 3.3.0
 	 */
 	public static function echoEscapedHtml( $html ) {
-		echo self::getEscapedHtml( $html );
+		echo self::escapedHtml( $html );
 	}
 
 	public static function skipHtmlEscape( $safe_text, $text ) {

@@ -1,16 +1,18 @@
 <?php
-require_once(dirname(__FILE__) . '/../Base/MixpanelBase.php');
-require_once(dirname(__FILE__) . '/../ConsumerStrategies/FileConsumer.php');
-require_once(dirname(__FILE__) . '/../ConsumerStrategies/CurlConsumer.php');
-require_once(dirname(__FILE__) . '/../ConsumerStrategies/SocketConsumer.php');
-
-if (!function_exists('json_encode')) {
-	throw new Exception('The JSON PHP extension is required.');
-}
-
 /**
  * Provides some base methods for use by a message Producer
  */
+
+defined( 'ABSPATH' ) || exit;
+
+require_once( dirname( __FILE__ ) . '/../Base/MixpanelBase.php' );
+require_once( dirname( __FILE__ ) . '/../ConsumerStrategies/FileConsumer.php' );
+require_once( dirname( __FILE__ ) . '/../ConsumerStrategies/CurlConsumer.php' );
+require_once( dirname( __FILE__ ) . '/../ConsumerStrategies/SocketConsumer.php' );
+
+if ( ! function_exists( 'json_encode' ) ) {
+	throw new Exception( 'The JSON PHP extension is required.' );
+}
 abstract class Producers_MixpanelBaseProducer extends Base_MixpanelBase {
 
 	protected $_token;

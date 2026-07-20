@@ -121,7 +121,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 									HtmlWpf::text(
 										'',
 										array(
-											'value'    => '[' . WPF_SHORTCODE . " id=$fid]",
+											'value'    => '[' . WPF_SHORTCODE . ' id=' . absint( $fid ) . ']',
 											'attrs'    => 'readonly onclick="this.setSelectionRange(0, this.value.length);" class="woobewoo-flat-input woobewoo-width-full"',
 											'required' => true,
 										)
@@ -133,7 +133,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 									HtmlWpf::text(
 										'',
 										array(
-											'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE . " id=$fid]') ?>",
+											'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE . " id=" . absint( $fid ) . "]') ?>",
 											'attrs'    => 'readonly onclick="this.setSelectionRange(0, this.value.length);" class="woobewoo-flat-input woobewoo-width-full"',
 											'required' => true,
 										)

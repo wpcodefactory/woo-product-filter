@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -446,14 +446,24 @@ class WoofiltersViewWpf extends ViewWpf {
 
 	/**
 	 * For now after render we run once filtering, in order to display products on custom page.
+	 *
+	 * @version 3.3.0
 	 */
 	public function renderProductsListHtml( $params ) {
-		$html      = '<div class="woocommerce wpfNoWooPage">';
-			$html .= '<p class="woocommerce-result-count"></p>';
-			$html .= '<ul class="products columns-4"></ul>';
-			$html .= '<nav class="woocommerce-pagination"></nav>';
+		$html = '<div class="woocommerce wpfNoWooPage">';
+		$html .= '<p class="woocommerce-result-count"></p>';
+		$html .= '<ul class="products columns-4"></ul>';
+		$html .= '<nav class="woocommerce-pagination"></nav>';
 		if ( ReqWpf::getVar( 'wpf_skip' ) != '1' ) {
-			$html .= '<script>jQuery(document).ready(function() { setTimeout(function() {jQuery("body").trigger("wpffiltering"); }, 1000); })</script>';
+			wp_add_inline_script(
+				'frontend.filters',
+				'jQuery(function($){
+				setTimeout(function() {
+					$("body").trigger("wpffiltering");
+				}, 1000);
+			});',
+				'after'
+			);
 		}
 		$html .= '</div>';
 
@@ -3694,19 +3704,24 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $isIncludeChildren;
 	}
 
+	/**
+	 * renderSelectedFiltersHtml.
+	 *
+	 * @version 3.3.0
+	 */
 	public function renderSelectedFiltersHtml( $params ) {
-		$id = isset($params['id']) ? (int) $params['id'] : 0;
+		$id = isset( $params['id'] ) ? absint( $params['id'] ) : 0;
 		if ( ! $id ) {
 			return false;
 		}
 
-		$filter = $this->getModel('woofilters')->getById($id);
+		$filter = $this->getModel( 'woofilters' )->getById( $id );
 		if ( ! $filter ) {
 			return false;
 		}
 
-		$settings        = unserialize($filter['setting_data'])['settings'];
-		$isDisplayParams = $this->getFilterSetting($settings, 'display_selected_params', false);
+		$settings        = unserialize( $filter['setting_data'] )['settings'];
+		$isDisplayParams = $this->getFilterSetting( $settings, 'display_selected_params', false );
 
 		return $isDisplayParams ? '<div class="wpfSelectedParameters wpfHidden" data-filter="' . $id . '"></div>' : '';
 	}

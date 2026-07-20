@@ -3150,32 +3150,38 @@ class WoofiltersWpf extends ModuleWpf {
 	}
 
 	/**
-	 * render.
+	 * renderProductsList.
+	 *
+	 * 3.3.0
 	 */
 	public function render( $params ) {
 		$p = array(
 			'id'   => ( isset($params['id']) ? (int) $params['id'] : 0 ),
 			'mode' => ( isset($params['mode']) && 'widget' == $params['mode'] ? 'widget' : '' ),
 		);
-		return $this->getView()->renderHtml( $p );
+		return HtmlWpf::escapedHtml( $this->getView()->renderHtml( $p ) );
 	}
 
 	/**
 	 * renderProductsList.
+	 *
+	 * 3.3.0
 	 */
 	public function renderProductsList( $params ) {
 		$params = array();
-		return $this->getView()->renderProductsListHtml( $params );
+		return HtmlWpf::escapedHtml( $this->getView()->renderProductsListHtml( $params ) );
 	}
 
 	/**
 	 * renderSelectedFilters.
+	 *
+	 * @version 3.3.0
 	 */
 	public function renderSelectedFilters( $params ) {
 		$p = array(
 			'id' => ( isset($params['id']) ? (int) $params['id'] : 0 ),
 		);
-		return FrameWpf::_()->isPro() ? $this->getView()->renderSelectedFiltersHtml( $p ) : '';
+		return FrameWpf::_()->isPro() ? HtmlWpf::escapedHtml( $this->getView()->renderSelectedFiltersHtml( $p ) ) : '';
 	}
 
 	/**
