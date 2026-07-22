@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsViewWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -74,11 +74,6 @@ class OptionsViewWpf extends ViewWpf {
 			return 1;
 		}
 		return 0;
-	}
-
-	public function getTabContent() {
-		FrameWpf::_()->addScript('admin.mainoptions', $this->getModule()->getModPath() . 'js/admin.mainoptions.js');
-		return parent::getContent('optionsAdminMain');
 	}
 
 	/**

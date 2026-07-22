@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsWpf Class
  *
- * @version 3.1.2
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -148,19 +148,20 @@ class OptionsWpf extends ModuleWpf {
 
 	/**
 	 * getTabs.
+	 *
+	 * @version 3.3.0
 	 */
 	public function getTabs() {
-		if (empty($this->_tabs)) {
-			$this->_tabs = DispatcherWpf::applyFilters('mainAdminTabs', array(
-				// example: 'main_page' => array('label' => esc_html__('Main Page', 'woo-product-filter'), 'callback' => array($this, 'getTabContent'), 'wp_icon' => 'dashicons-admin-home', 'sort_order' => 0),
-			));
-			foreach ($this->_tabs as $tabKey => $tab) {
-				if (!isset($this->_tabs[ $tabKey ]['url'])) {
-					$this->_tabs[ $tabKey ]['url'] = is_array($tab['callback']) ? $this->getTabUrl( $tabKey ) : $tab['callback'];
+		if ( empty( $this->_tabs ) ) {
+			$this->_tabs = DispatcherWpf::applyFilters( 'mainAdminTabs', array() );
+			foreach ( $this->_tabs as $tabKey => $tab ) {
+				if ( ! isset( $this->_tabs[ $tabKey ]['url'] ) ) {
+					$this->_tabs[ $tabKey ]['url'] = is_array( $tab['callback'] ) ? $this->getTabUrl( $tabKey ) : $tab['callback'];
 				}
 			}
-			uasort($this->_tabs, array($this, 'sortTabsClb'));
+			uasort( $this->_tabs, array( $this, 'sortTabsClb' ) );
 		}
+
 		return $this->_tabs;
 	}
 
@@ -185,13 +186,6 @@ class OptionsWpf extends ModuleWpf {
 	public function getTab( $tabKey ) {
 		$this->getTabs();
 		return isset($this->_tabs[ $tabKey ]) ? $this->_tabs[ $tabKey ] : false;
-	}
-
-	/**
-	 * getTabContent.
-	 */
-	public function getTabContent() {
-		return $this->getView()->getTabContent();
 	}
 
 	/**

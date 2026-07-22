@@ -391,30 +391,7 @@ class UtilsWpf {
 	 * @return bool true if user are watching this site from mobile device
 	 */
 	public static function isMobile() {
-		//importClassWpf('Mobile_Detect', WPF_HELPERS_DIR . 'mobileDetect.php');
-		if (!class_exists('Mobile_Detect')) {
-			if (file_exists(WPF_HELPERS_DIR . 'mobileDetect.php')) {
-				require WPF_HELPERS_DIR . 'mobileDetect.php';
-			}
-		}
-		$mobileDetect = new Mobile_Detect();
-		return $mobileDetect->isMobile();
-	}
-
-	/**
-	 * Check if device is tablet.
-	 *
-	 * @return bool true if user are watching this site from tablet device
-	 */
-	public static function isTablet() {
-		//importClassWpf('Mobile_Detect', WPF_HELPERS_DIR . 'mobileDetect.php');
-		if (!class_exists('Mobile_Detect')) {
-			if (file_exists(WPF_HELPERS_DIR . 'mobileDetect.php')) {
-				require WPF_HELPERS_DIR . 'mobileDetect.php';
-			}
-		}
-		$mobileDetect = new Mobile_Detect();
-		return $mobileDetect->isTablet();
+		return wp_is_mobile();
 	}
 
 	/**

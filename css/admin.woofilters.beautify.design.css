@@ -16,6 +16,7 @@
 	--woobewoo-primary-color: #2d6fff;
 	--woobewoo-pro-color: #e1c065;
 }
+
 .woobewoo-btn {
 	padding: 5px 12px;
 	border-radius: 12px;
@@ -27,109 +28,140 @@
 	cursor: pointer;
 	min-height: 44px;
 }
+
 .woobewoo-btn > *:not(:last-child) {
 	margin-right: 8px;
 }
+
 .woobewoo-btn,
 .woobewoo-btn * {
 	color: var(--woobewoo-white);
 }
+
 .woobewoo_row {
 	margin-left: -15px;
 	margin-right: -15px;
 	display: flex;
 	flex-wrap: wrap;
 }
+
 .woobewoo_row > * {
 	max-width: 100%;
 }
+
 .woobewoo_row::before,
 .woobewoo_row::after {
 	display: none !important;
 }
+
 .woobewoo-btn-primary {
 	background-color: var(--woobewoo-primary-color);
 }
+
 .woobewoo-inline-block,
 .woobewoo-d-inline-block {
 	display: inline-block;
 }
+
 .woobewoo-d-flex {
 	display: flex;
 }
+
 .woobewoo-flex-column {
 	flex-direction: column;
 }
+
 .woobewoo-wdt-100 {
 	width: 100%;
 }
+
 .woobewoo-max-width-100 {
 	max-width: 100%;
 }
+
 .woobewoo-max-width-100-i {
 	max-width: 100% !important;
 }
+
 .woobewoo-flex_auto {
 	flex: 0 0 auto;
 }
+
 .woobewoo-items-stretch {
 	align-items: stretch;
 }
+
 .woobewoo-items-center {
 	align-items: center;
 }
+
 .woobewoo-justify-between {
 	justify-content: space-between;
 }
+
 .woobewoo-justify-end {
 	justify-content: end;
 }
+
 .woobewoo-ms-auto {
 	margin-left: auto;
 }
+
 .woobewoo-relative {
 	position: relative;
 }
+
 .woobewoo-p-0 {
 	padding: 0;
 }
+
 .woobewoo-p-24 {
 	padding: 24px;
 }
+
 .woobewoo-py-24 {
 	padding-top: 24px;
 	padding-bottom: 24px;
 }
+
 .woobewoo-p-0-i {
 	padding: 0 !important;
 }
+
 .woobewoo-m-0 {
 	margin: 0;
 }
+
 .woobewoo-m-0-i {
 	margin: 0 !important;
 }
+
 .woobewoo-mb-3 {
 	margin-bottom: 1rem;
 }
+
 .woobewoo-ms-2 {
 	margin-left: 0.5rem;
 }
+
 .wpfFilterVerScroll .editablecat ul {
 	margin-top: 6px;
 }
+
 #row-tab-filters #wpfChooseFiltersBlock .wpfProLabel:not(.wpfHidden) {
 	margin-top: 5px;
 	margin-left: 0;
 }
+
 #mainContainer .woobewoo-navigation {
 	padding-top: 24px;
-	padding-left: 24px;
+	padding-left: 15px;
 	margin-right: 0;
 	min-width: 124px;
 	background-color: var(--woobewoo-white);
 	z-index: 10;
 }
+
 #mainContainer .woobewoo-navigation::after {
 	position: absolute;
 	right: 0;
@@ -141,19 +173,24 @@
 	content: "";
 	z-index: -1;
 }
+
 #mainContainer .woobewoo_logo {
-	margin-bottom: 30px;
+	padding: 30px;
 }
+
 #mainContainer .wpf-gopro {
 	background-color: transparent;
 }
+
 #mainContainer nav li:not(:last-child) {
 	margin-bottom: 16px;
 }
+
 #mainContainer nav .menuItem i,
 #mainContainer nav .menuItem {
 	color: var(--woobewoo-theme-dark);
 }
+
 #mainContainer nav .menuItem {
 	padding: 16px;
 	border-top-left-radius: 12px;
@@ -162,6 +199,7 @@
 	border: none;
 	box-shadow: none;
 }
+
 #mainContainer nav .active .menuItem {
 	background-color: var(--woobewoo-color-f4f5f5);
 }
@@ -170,6 +208,7 @@
 	width: 100% !important;
 	display: flex !important;
 }
+
 .wpfRadio input[type="radio"] {
 	--bs-form-check-bg: var(--bs-body-bg);
 	flex-shrink: 0 !important;
@@ -188,24 +227,30 @@
 	print-color-adjust: exact !important;
 	border-radius: 50%;
 }
+
 .wpfRadio input::before {
 	display: none !important;
 }
+
 .wpfRadio input[type="radio"]:checked {
 	background-color: #0d6efd;
 	border-color: #0d6efd;
 }
+
 .wpfRadio input[type="radio"]:checked {
 	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
 }
+
 .wpfFilterContent .wpfLiLabel {
 	display: flex;
 	align-items: center;
 }
+
 .wpfFilterContent .wpfLiLabel .wpfFilterTaxNameWrapper,
 .wpfFilterContent .wpfLiLabel .wpfValue {
 	padding-left: 0 !important;
 }
+
 .wpfFiltersTabContents,
 .wpfFiltersTabContents .settings-value div:not([class]),
 .wpfFiltersTabContents .ts-wrapper {
@@ -219,9 +264,11 @@
 .wpfFiltersTabContents select {
 	width: 100% !important;
 }
+
 .wpfFiltersTabContents .settings-value {
 	position: relative;
 }
+
 .wpfFiltersTabContents .wpfMoveWrap {
 	position: absolute;
 	right: 0;
@@ -229,9 +276,11 @@
 	transform: translateY(-50%);
 	margin-top: 0;
 }
+
 .wpfFilterOptions .settings-block-values .settings-value:last-child {
 	margin-right: 0;
 }
+
 .woobewoo_proLabel {
 	background-color: var(--woobewoo-pro-color);
 	border-radius: 7px;
@@ -241,9 +290,11 @@
 	align-items: center;
 	width: max-content;
 }
+
 .woobewoo_proLabel > *:not(:last-child) {
 	margin-right: 4px;
 }
+
 .woobewoo-tooltip {
 	border: 0 !important;
 	outline: none !important;
@@ -257,20 +308,22 @@
 	padding: 0 !important;
 	cursor: pointer;
 }
+
 .woobewoo-tooltip::before {
 	display: none;
 }
+
 .wpfNamePadding #wpfFilterTitleShell {
 	min-height: 44px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
+
 #tabsContainer .button {
 	display: flex !important;
 	align-items: center !important;
 	background-color: transparent !important;
-	border: none !important;
 	outline: none !important;
 	box-shadow: none !important;
 	padding: 12px 24px !important;
@@ -284,11 +337,13 @@
 	min-height: 48px;
 	margin-bottom: 0;
 }
+
 #tabsContainer {
 	border-bottom: 0 !important;
 	position: relative;
 	z-index: 10;
 }
+
 #tabsContainer::after {
 	position: absolute;
 	left: 0;
@@ -300,44 +355,55 @@
 	width: 100%;
 	z-index: -1;
 }
+
 #tabsContainer .button.current {
 	border-color: #dbdce1 !important;
 	color: #121315 !important;
 	background-color: var(--woobewoo-white) !important;
 }
+
 #tabsContainer .button > *:not(:last-child) {
 	margin-right: 8px !important;
 }
+
 .filterSection {
 	padding: 0 !important;
 }
+
 .selectFiltersMain {
 	display: flex;
 	flex-wrap: wrap;
 }
+
 .selectFiltersMain .woobewooFiltersMainLeftCol {
 	width: calc(100% - 300px);
 	margin-right: 24px;
 }
+
 .selectFiltersMain .woobewooFiltersMainRightCol {
 	width: 276px;
 }
+
 #wpfFiltersEditForm .tabs-wrapper {
 	float: unset !important;
 }
+
 .woobewooFiltersParentContainer {
 	background-color: var(--woobewoo-white);
 }
+
 .woobewooFiltersMainLeftCol .sub-tab-content .row-settings-block {
 	padding-bottom: 15px;
 	border-bottom: 1px solid #f9fafa;
 }
+
 .topBtnsArea {
 	position: absolute;
 	top: 24px;
 	right: 24px;
 	z-index: 9;
 }
+
 .filterExportImportBtn {
 	display: flex;
 	align-items: center;
@@ -350,10 +416,12 @@
 	cursor: pointer;
 	transition: 0.4s;
 }
+
 .filterExportImportBtn.export {
 	background-color: #636977;
 	color: #f9fafa !important;
 }
+
 .filterExportImportBtn .pro_label {
 	background-color: #d8ad35;
 	padding: 3px 10px;
@@ -369,6 +437,7 @@
 	position: absolute;
 	top: -12px;
 }
+
 .searchIcon {
 	display: flex;
 	align-items: center;
@@ -378,13 +447,16 @@
 	top: 50%;
 	transform: translateY(-50%);
 }
+
 .searchContainer {
 	max-width: 240px;
 	width: 100%;
 }
+
 .searchContainer input {
 	padding-left: 40px !important;
 }
+
 #wpfTableTblNav_center,
 #wpfTableTblNav_right {
 	padding: 24px;
@@ -399,6 +471,7 @@
 	margin-right: 0 !important;
 	width: 100%;
 }
+
 #wpfAddDialog input[type="radio"],
 #wpfAddDialog input[type="checkbox"],
 .wpfMainWrapper input[type="radio"],
@@ -426,11 +499,13 @@
 	cursor: pointer;
 	margin-right: 0.5rem;
 }
+
 #wpfAddDialog input[type="radio"],
 .wpfMainWrapper input[type="radio"],
 .woobewooRadio input {
 	border-radius: 50%;
 }
+
 #wpfAddDialog input[type="radio"]:checked,
 #wpfAddDialog input[type="checkbox"]:checked,
 .wpfMainWrapper input[type="radio"]:checked,
@@ -440,12 +515,14 @@
 	background-color: #303030 !important;
 	border-color: #303030 !important;
 }
+
 #wpfAddDialog input[type="checkbox"]:checked,
 .wpfMainWrapper input[type="checkbox"]:checked,
 .woobewooCheckbox input:checked {
 	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
 	background-image: var(--bs-form-check-bg-image);
 }
+
 #wpfAddDialog input[type="radio"]:checked,
 .wpfMainWrapper input[type="radio"]:checked,
 .woobewooRadio input:checked {
@@ -453,6 +530,7 @@
 	--bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640' fill='%23fff'%3e%3cpath d='M64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z'/%3e%3c/svg%3e");
 	background-image: var(--bs-form-check-bg-image);
 }
+
 #wpfAddDialog input[type="radio"]::before,
 #wpfAddDialog input[type="checkbox"]::before,
 .wpfMainWrapper input[type="radio"]::before,
@@ -461,38 +539,40 @@
 .woobewooCheckbox input::before {
 	display: none !important;
 }
+
 .woobewooRadio span,
 .woobewooCheckbox span {
 	display: inline-block;
 }
+
 .s-notify {
 	z-index: 9999999;
 }
+
 @media screen and (max-width: 1300px) {
 	.woobewooFiltersMainLeftCol .sub-tab-content {
 		padding-left: 0;
 		padding-right: 0;
 	}
 }
+
 @media screen and (max-width: 1200px) {
 	.selectFiltersMain .woobewooFiltersMainLeftCol {
 		width: 100%;
 		margin-right: 0;
 		margin-bottom: 24px;
 	}
+
 	.selectFiltersMain .woobewooFiltersMainRightCol {
 		width: 100%;
 	}
+
 	.woobewooFiltersMainLeftCol .row-settings-block {
 		padding-left: 0;
 		padding-right: 0;
 	}
 }
-@media screen and (min-width: 1023px) {
-	#mainContainer .woobewoo_logo {
-		margin-bottom: 44px;
-	}
-}
+
 /* Custom CSS end */
 
 .wpfFilterButton.wpfButton,
@@ -506,6 +586,7 @@
 	border: none;
 	background-color: #f4f5f5;
 }
+
 .woobewoo_logo svg {
 	max-width: 48px;
 }
@@ -516,6 +597,7 @@
 .breadcrumb_heading {
 	padding: 24px;
 }
+
 .breadcrumb_heading h2 {
 	color: #000000;
 	font-weight: 700;
@@ -524,17 +606,21 @@
 	margin: 0 0 10px;
 	line-height: 140%;
 }
+
 .woobewoo-breadcrumbs a {
 	font-size: 14px;
 	font-weight: 500;
 	color: #636977 !important;
 }
+
 .woobewoo-breadcrumbs a:first-child {
 	padding-left: 0;
 }
+
 .woobewoo-breadcrumbs {
 	padding: 0;
 }
+
 .woobewoo-breadcrumbs .breadcrumbs-separator {
 	background-image: url("../img/chevron_right.png");
 	background-position: center;
@@ -548,10 +634,12 @@
 	border-radius: 24px;
 	border: 1px solid #dbdce1;
 }
+
 .woobewoo-plugin.ui-dialog .ui-dialog-titlebar {
 	padding: 30px 24px !important;
 	background: #ffffff !important;
 }
+
 .woobewoo-plugin.ui-dialog .ui-dialog-title {
 	margin: 0;
 	font-weight: bold;
@@ -559,6 +647,7 @@
 	color: #000000 !important;
 	font-size: clamp(22px, 5vw, 32px);
 }
+
 .woobewoo-plugin.ui-dialog .ui-icon-closethick {
 	font-size: 14px;
 	height: 44px;
@@ -567,6 +656,7 @@
 	color: #636977 !important;
 	border: 1px solid #dbdce1;
 }
+
 .woobewoo-plugin.ui-dialog .ui-button-icon-only .ui-icon {
 	display: flex;
 	align-items: center;
@@ -574,32 +664,40 @@
 	top: 0 !important;
 	margin-left: -31px !important;
 }
+
 .woobewoo-plugin.ui-dialog .button.woobewoo-paginate:hover,
 .woobewoo-plugin.ui-dialog .button.woobewoo-paginate:focus,
 .woobewoo-plugin.ui-dialog .ui-dialog-titlebar-close:hover,
 .woobewoo-plugin.ui-dialog .ui-dialog-titlebar-close:focus {
 	background: transparent !important;
 }
+
 .woobewoo-plugin.ui-dialog .ui-widget-header {
 	border-bottom: none !important;
 }
+
 .woobewoo-plugin.ui-dialog .ui-dialog-content {
 	padding: 14px 24px 0 !important;
 }
+
 .woobewoo-plugin.ui-dialog .ui-widget-content.ui-dialog-content {
 	color: #1e1e1e !important;
 	font-size: clamp(14px, 3vw, 16px);
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupLabel {
 	font-weight: 400 !important;
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupLabel span {
 	font-size: 12px;
 	color: #636977;
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupBlock {
 	margin-bottom: 24px !important;
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupBlock #addDialog_title {
 	color: #000000 !important;
 	height: 42px;
@@ -607,24 +705,30 @@
 	padding: 12px 16px;
 	border-radius: 8px !important;
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupBlock #addDialog_title input::placeholder {
 	color: #b3b3b3 !important;
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupBlock #addDialog_list {
 	margin-top: 20px;
 	padding-top: 5px;
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupBlock #addDialog_list li {
 	margin-bottom: 16px;
 }
+
 .woobewoo-plugin.ui-dialog .wpfPopupBlock #addDialog_list li:last-child {
 	margin-bottom: 0;
 }
+
 .woobewoo-plugin.ui-dialog .ui-dialog-buttonpane {
 	background-color: #ffffff !important;
 	padding: 8px 20px !important;
 	border-top: 1px solid #f9fafa;
 }
+
 .woobewoo-plugin.ui-dialog .ui-dialog-buttonpane button {
 	color: #f9fafa !important;
 	height: 40px;
@@ -636,28 +740,34 @@
 	border-radius: 12px !important;
 	transition: all 360ms ease;
 }
+
 .woobewoo-plugin.ui-dialog .ui-dialog-buttonpane button:hover {
 	background: #0d4cd4 !important;
 }
+
 #containerWrapper #gbox_wpfTableTbl {
 	border-radius: 12px !important;
 	border: 1px solid #dbdce1;
 	overflow: hidden;
 }
+
 #gbox_wpfTableTbl .ui-state-default.ui-jqgrid-hdiv {
 	background: #f9fafa;
 	border-bottom: 1px solid #dbdce1 !important;
 	padding: 0 30px;
 }
+
 #gview_wpfTableTbl .ui-jqgrid-htable th div {
 	font-size: 14px;
 	font-weight: 500;
 	color: #636977 !important;
 }
+
 #wpfTableTbl tbody .ui-row-ltr {
 	border-bottom: 1px solid #dbdce1 !important;
 	padding: 0 30px !important;
 }
+
 #containerWrapper .ui-jqgrid tr.ui-row-ltr td {
 	padding: 0 30px;
 	/* text-align: start !important; */
@@ -671,6 +781,7 @@
 #wpfTableTblNavBtnsShell .button-small i {
 	margin-right: 6px;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Export selected"] button,
 #containerWrapper #wpfTableTblNavBtnsShell [title="Import tables"] button,
 #containerWrapper #wpfTableTblNavBtnsShell [title="Delete selected"] button {
@@ -678,14 +789,17 @@
 	padding: 8px 16px;
 	border-radius: 8px !important;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Import tables"] button {
 	background: #dbdce1 !important;
 	transition: all 360ms ease;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Export selected"] button {
 	background: #636977 !important;
 	transition: all 360ms ease;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Delete selected"] button {
 	font-size: 14px !important;
 	font-weight: 500 !important;
@@ -694,31 +808,31 @@
 	background: #b12224 !important;
 	transition: all 360ms ease;
 }
-#containerWrapper
-	#wpfTableTblNavBtnsShell
-	[title="Delete selected"]
-	button:hover {
+
+#containerWrapper #wpfTableTblNavBtnsShell [title="Delete selected"] button:hover {
 	background: #e20a0e !important;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Import tables"] button a,
 #containerWrapper #wpfTableTblNavBtnsShell [title="Export selected"] button a {
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 150%;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Import tables"] button a {
 	color: #636977 !important;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Export selected"] button a {
 	color: #f9fafa !important;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell [title="Import tables"] button:hover,
-#containerWrapper
-	#wpfTableTblNavBtnsShell
-	[title="Export selected"]
-	button:hover {
+#containerWrapper #wpfTableTblNavBtnsShell [title="Export selected"] button:hover {
 	background: #bbbbbd !important;
 }
+
 #containerWrapper #wpfTableTblNavBtnsShell .wpf-admin-btn-get-pro::before {
 	right: 10px;
 	top: -9px;
@@ -727,24 +841,27 @@
 	line-height: 100%;
 	background: #d8ad35;
 	border-radius: 8px;
-	padding: 0px 8px;
+	padding: 0 8px;
 	min-height: 24px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
 #containerWrapper #wpfTableTblSearchTxt {
 	min-height: 44px;
 	font-size: 16px !important;
 	border-radius: 8px !important;
 	padding: 21px 12px !important;
 }
+
 .woobewoo-plugin .ui-pg-table .ui-pg-input {
-	margin: 0px 7px;
+	margin: 0 7px;
 	padding: 8px;
 	height: 44px !important;
 	border-radius: 8px !important;
 }
+
 .woobewoo-plugin input[type="text"],
 .woobewoo-plugin input[type="search"],
 .woobewoo-plugin select,
@@ -757,9 +874,11 @@
 	outline: none;
 	border-radius: 8px !important;
 }
+
 .woobewoo-tbl-pagination-shell .ui-pg-table td:last-of-type {
 	padding-right: 0 !important;
 }
+
 .woobewoo-item #containerWrapper hr {
 	border-top: 0 !important;
 }
@@ -778,9 +897,11 @@
 	background: #2d6fff;
 	transition: all 360ms ease;
 }
+
 #wpfSettingsSaveBtn:hover {
 	background: #295cca;
 }
+
 #wpfSettingsForm .woobewoo-item {
 	background: #ffffff;
 	padding: 10px 20px 0 20px;
@@ -789,19 +910,23 @@
 	margin: 24px;
 	border-radius: 24px;
 }
+
 #containerWrapper .form-table th {
 	color: #636977;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 150%;
 }
+
 #containerWrapper .form-table th span {
 	font-size: 12px;
 	font-weight: 400;
 }
+
 #containerWrapper .form-table tr:not(:last-child) {
 	border-bottom: 0;
 }
+
 #containerWrapper .fa-question.woobewoo-tooltip,
 #containerWrapper .fa-question.woobewoo-tooltip-bottom,
 #containerWrapper .fa-question.woobewoo-tooltip-left,
@@ -820,14 +945,17 @@
 	justify-content: center;
 	align-items: center;
 }
+
 .woobewoo-plugin input:not([type="radio"]):not([type="checkbox"]):not(.ts-control input),
 .woobewoo-plugin select,
 .woobewoo-plugin textarea {
 	border-color: #9da2ae !important;
 }
+
 .woobewoo-plugin textarea {
 	border-radius: 8px !important;
 }
+
 .woobewoo-plugin .button,
 .woobewoo-plugin .button-primary,
 .ui-dialog .button,
@@ -840,31 +968,38 @@
 	background-color: #2d6fff;
 	transition: all 360ms ease;
 }
+
 .woobewoo-plugin input[type="text"] {
 	padding: 7px 10px;
 }
+
 .tooltipster-base.tooltipster-default .tooltipster-content {
 	font-size: 12px;
 	padding: 8px 10px;
 	font-weight: 400 !important;
 }
+
 #wpfStartMetaIndexing,
 #wpfStartOptimizing {
 	max-width: 60px;
 }
+
 #wpfFormOptDetails_optimizing_schedule select,
 #wpfFormOptDetails_indexing_schedule select {
 	margin-bottom: 8px;
 }
+
 #wpfFormOptDetails_optimizing_schedule select:last-child,
 #wpfFormOptDetails_indexing_schedule select:last-child {
 	margin-bottom: 0;
 }
+
 @media (min-width: 768px) {
 	#wpfFormOptDetails_optimizing_schedule select,
 	#wpfFormOptDetails_indexing_schedule select {
 		margin-bottom: 0;
 	}
+
 	#containerWrapper #wpfTableTblNavBtnsShell .wpf-admin-btn-get-pro::before {
 		top: -14px;
 	}
@@ -876,18 +1011,22 @@
 .wpf-gopro {
 	background-image: none !important;
 }
+
 #wpbody-content .wpf-gopro {
 	padding: 64px 20px;
 }
+
 #wpbody-content .wpf-gopro.wpf-gopro-wrapper:not(section.wpf-gopro-bundle) {
 	border-bottom: 1px solid #dbdce1;
 }
+
 #wpbody-content .wpf-gopro-header-title {
 	color: #1e1e1e;
 	font-size: clamp(18px, 2.5vw, 24px);
 	letter-spacing: -0.02em;
 	text-align: start;
 }
+
 #wpbody-content .wpf-gopro-header-subtitle {
 	margin-top: 8px;
 	margin-bottom: 56px;
@@ -896,57 +1035,57 @@
 	line-height: 120%;
 	text-align: start;
 }
+
 #wpbody-content .wpf-gopro-switch {
 	align-items: center;
 	margin: 0 auto 48px auto;
 }
+
 #wpbody-content .wpf-gopro-switch .wpf-gopro-text {
 	padding: 8px;
 	color: #1e1e1e;
 	font-size: 16px;
 	font-weight: normal;
 }
+
 #wpbody-content .wpf-gopro-switch .wpf-gopro-text.active {
 	color: #ffffff !important;
 	background: #121315 !important;
 	border-radius: 8px;
 }
+
 #wpbody-content .wpf-gopro-block {
 	background: #ffffff;
 	border: 1px solid #d9d9d9;
 	border-radius: 24px;
 	padding: 32px;
 }
+
 #wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-block {
 	background: #2d6fff !important;
 }
+
 #wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-buy a {
 	color: #001033 !important;
 	background-color: #f5f8ff !important;
 	transition: all 360ms ease;
 }
-#wpbody-content
-	.wpf-gopro-block-row
-	.col-md-4:nth-child(2)
-	.wpf-gopro-buy
-	a:hover {
+
+#wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-buy a:hover {
 	background-color: #efeeee !important;
 }
+
 #wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-desc {
 	color: #f5f8ff !important;
 }
+
 #wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-price,
 #wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-title,
-#wpbody-content
-	.wpf-gopro-block-row
-	.col-md-4:nth-child(2)
-	.wpf-gopro-desc:not(:last-child)::before {
+#wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-desc:not(:last-child)::before {
 	color: #f5f8ff !important;
 }
-#wpbody-content
-	.wpf-gopro-block-row
-	.col-md-4:nth-child(2)
-	.wpf-gopro-desc:last-child {
+
+#wpbody-content .wpf-gopro-block-row .col-md-4:nth-child(2) .wpf-gopro-desc:last-child {
 	padding-top: 45px;
 }
 
@@ -956,39 +1095,43 @@
 	color: #1e1e1e;
 	letter-spacing: -0.02em;
 }
+
 #wpbody-content .wpf-gopro-block-header .wpf-gopro-title {
 	padding-top: 0;
 	padding-bottom: 16px;
 }
+
 #wpbody-content .wpf-gopro-block-header .wpf-gopro-price {
 	font-size: clamp(36px, 3vw, 48px);
 	padding-top: 16px;
 	padding-bottom: 16px;
 	font-weight: 700;
 }
+
 #wpbody-content .wpf-gopro-block-header .wpf-gopro-desc {
 	position: relative;
 	color: #757575;
 	font-size: 16px;
 	font-weight: 400;
 	padding-top: 12px;
-	padding-bottom: 0px;
+	padding-bottom: 0;
 	padding-left: 14px;
 	display: flex;
 }
-#wpbody-content
-	.wpf-gopro-block-header
-	.wpf-gopro-desc:not(:last-child)::before {
+
+#wpbody-content .wpf-gopro-block-header .wpf-gopro-desc:not(:last-child)::before {
 	content: "•";
 	position: absolute;
 	left: 0;
 	font-size: 18px;
 }
+
 #wpbody-content .wpf-gopro-block-header .wpf-gopro-desc:last-child {
 	padding-top: 24px;
 	text-align: center;
 	padding-left: 0;
 }
+
 #wpbody-content .wpf-gopro-block-header .wpf-gopro-buy a {
 	min-width: 100%;
 	font-size: 14px;
@@ -998,9 +1141,11 @@
 	border: 0 !important;
 	transition: all 360ms ease;
 }
+
 #wpbody-content .wpf-gopro-block-header .wpf-gopro-buy a:hover {
 	background-color: #2659c8 !important;
 }
+
 @media screen and (min-width: 767px) {
 	#wpbody-content .wpf-gopro-block-row:not(.wpf-gopro-hidden) {
 		display: flex;
@@ -1040,16 +1185,19 @@
 	border-radius: 12px !important;
 	background-color: #2d6fff;
 }
+
 .wpfNamePadding #wpfFilterTitleWrapLabel {
 	color: #1e1e1e;
 	font-size: 16px;
 	font-weight: normal;
 }
+
 .wpfNamePadding #wpfFilterTitleShell {
 	padding: 2px 15px !important;
 	border-radius: 8px;
 	border: 1px solid #d9d9d9 !important;
 }
+
 .woobewoo-flat-input,
 .wpfShortcodeAdm #wpfCopyTextCodeExamples,
 .wpfCopyTextCodeShowBlock .woobewoo-flat-input.woobewoo-width-full {
@@ -1057,40 +1205,16 @@
 	text-align: start;
 	border: 1px solid #d9d9d9 !important;
 }
+
 #wpfFiltersEditForm .tabs-wrapper {
 	float: left;
 	width: 100%;
 }
-#wpfFiltersEditForm .wpfSub.tabs-wrapper li a.button {
-	color: #636977 !important;
-	font-weight: normal;
-	font-size: 14px;
-	height: 30px;
-	min-height: 30px;
-	line-height: 30px;
-	margin: 0;
-	border: 0 !important;
-	border-bottom-color: 0 !important;
-	padding: 21px 24px 17px !important;
-	background: transparent;
-}
-#wpfFiltersEditForm .wpfSub.tabs-wrapper li a.current {
-	font-weight: bold !important;
-	padding: 21px 24px 17px;
-	color: #121315 !important;
-	background: #ffffff !important;
-	border: 1px solid #dbdce1 !important;
-	border-bottom: none !important;
-	border-radius: 12px 12px 0 0 !important;
-}
-#wpfFiltersEditForm .wpfSub.tabs-wrapper li a.button:hover,
-#wpfFiltersEditForm .wpfSub.tabs-wrapper li a.button:active,
-#wpfFiltersEditForm .wpfSub.tabs-wrapper li a.button:focus {
-	background-color: #ffffff !important;
-}
+
 #wpfFiltersEditForm .wpfMainTabsContainer .woobewoo_row {
 	background: #ffffff !important;
 }
+
 .woobewoo-plugin .button,
 .woobewoo-plugin .button-primary,
 .ui-dialog .button,
@@ -1111,11 +1235,13 @@
 	border-radius: 12px !important;
 	background-color: #2d6fff;
 }
+
 .wpfFiltersTabContents .sub-tab {
 	padding: 4px;
 	background: #dbdce1;
 	border-radius: 12px;
 }
+
 .wpfFiltersTabContents .sub-tab .button.disabled {
 	min-height: 36px;
 	font-size: 14px;
@@ -1124,10 +1250,12 @@
 	background: #dbdce1 !important;
 	border-radius: 12px;
 }
+
 .wpfFiltersTabContents .sub-tab .button:not(.disabled) {
 	color: #121315 !important;
 	background: #ffffff !important;
 }
+
 .woobewoo-color-picker {
 	display: flex;
 	align-items: center;
@@ -1141,10 +1269,12 @@
 .wpfFiltersBlock.ui-sortable {
 	width: 100%;
 }
+
 #wpfChooseFiltersBlock {
 	display: flex;
 	flex-wrap: wrap;
 }
+
 .woobewoo-group-label {
 	width: 100%;
 	color: #1e1e1e;
@@ -1152,50 +1282,61 @@
 	font-weight: 400;
 	margin: 0 0 8px 0;
 }
+
 #wpfChooseFilters {
 	width: calc(100% - 150px);
 }
+
 #wpfAddFilterButton {
 	margin-left: 8px;
 	max-width: 142px;
 }
+
 .wpfFilter .wpfHeaders {
 	padding: 16px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
+
 .wpfFilter .wpfToggle {
 	color: #2e3137;
 	font-size: 12px;
 }
+
 .wpfFilter .wpfDelete {
 	order: 5;
 	color: #b12224;
 }
+
 .wpfFiltersBlock .wpfOptions {
 	padding: 16px !important;
 }
+
 select.woobewoo-flat-input {
 	padding-left: 13px !important;
 	padding-right: 25px !important;
 }
+
 .row-settings-block {
 	display: flex;
 	align-items: center;
 }
+
 .wpfFiltersBlock {
 	margin: 0;
 	padding: 15px;
 	border-radius: 8px;
 	border: 1px solid #dbdce1 !important;
 }
+
 .wpfFiltersBlock .wpfFilter {
 	width: 100%;
 	background: #f8fafb !important;
 	border-radius: 8px;
 	border: 1px solid #d9d9d9;
 }
+
 .wpfFiltersBlock .wpfFilter .wpfFilterTitle {
 	color: #636977 !important;
 	font-size: 16px !important;
@@ -1205,6 +1346,7 @@ select.woobewoo-flat-input {
 	max-width: 200px;
 	text-transform: capitalize !important;
 }
+
 .wpfFiltersBlockPreview {
 	background-color: #ffffff;
 	border: 1px solid #d8dfe3;
@@ -1216,10 +1358,12 @@ select.woobewoo-flat-input {
 	display: flex;
 	border-radius: 16px;
 }
+
 .wpfFiltersTabContents .woobewoo_row {
 	margin-left: 0;
 	margin-right: 0;
 }
+
 .settings-block-label.settings-w100:last-of-type {
 	display: flex;
 	flex-direction: column;
@@ -1236,10 +1380,12 @@ select.woobewoo-flat-input {
 	font-weight: 500;
 	color: #636977;
 }
+
 .settings-value-label i,
 .settings-block-label i {
 	margin-left: 10px !important;
 }
+
 .wpfProLabel a {
 	display: inline-block;
 	padding: 6px 8px;
@@ -1249,11 +1395,13 @@ select.woobewoo-flat-input {
 	background: #e1c065;
 	border-radius: 8px;
 }
+
 .woobewoo-plugin a,
 .tooltipster-content a,
 .woobewoo-plugin.ui-widget-content a {
 	color: #000000;
 }
+
 .woobewoo-plugin a:hover,
 .woobewoo-plugin a:focus,
 .tooltipster-content a:hover,
@@ -1279,10 +1427,12 @@ select.woobewoo-flat-input {
 	position: relative;
 	margin: 2px 0;
 }
+
 .woobewoo-plugin input.toggle:checked + label.toggle:after {
 	left: calc(100% - 2px);
 	transform: translateX(-100%);
 }
+
 .woobewoo-plugin label.toggle:after {
 	content: "";
 	position: absolute;
@@ -1294,10 +1444,11 @@ select.woobewoo-flat-input {
 	border-radius: 90px;
 	transition: 0.3s;
 }
+
 .woobewoo-plugin label.toggle:after {
 	content: "";
 	position: absolute;
-	top: 2.5px;
+	top: 2px;
 	left: 3px;
 	width: 18px;
 	height: 18px;
@@ -1312,30 +1463,36 @@ select.woobewoo-flat-input {
 .woobewoo-item.woobewoo-panel.wpf-overview-panel {
 	padding: 24px;
 }
+
 .woobewoo-item.woobewoo-panel.wpf-overview-panel .wpf-overview-block {
 	overflow: hidden;
 	border-radius: 12px;
 	border: 1px solid #d9d9d9;
 }
+
 .wpf-overview-block-header {
 	padding: 24px !important;
 	background: #f9f9f9;
 	border-bottom: 0 !important;
 }
+
 .wpf-overview-block-body {
 	padding: 24px !important;
 	background: #ffffff;
 }
+
 .wpf-overview-block-body .woobewoo_row {
-	margin-left: 0px;
-	margin-right: 0px;
+	margin-left: 0;
+	margin-right: 0;
 }
+
 .wpf-overview-block-body label,
 .wpf-overview-body-text label {
 	color: #1e1e1e;
 	font-size: 16px;
 	text-align: start;
 }
+
 .woobewoo-plugin .wpf-overview-body-text input.wpf-overview-input,
 .woobewoo-plugin .wpf-overview-body-text input.wpf-field-fullwidth,
 .woobewoo-plugin .wpf-overview-body-text textarea.wpf-field-fullwidth {
@@ -1345,10 +1502,12 @@ select.woobewoo-flat-input {
 	border: 1px solid #d9d9d9 !important;
 	border-radius: 8px !important;
 }
+
 .wpf-overview-body-text input.wpf-field-fullwidth::placeholder,
 .wpf-overview-body-text textarea.wpf-field-fullwidth::placeholder {
 	color: #b3b3b3;
 }
+
 #wpfSubscribeSubmit,
 #wpfContactSubmit {
 	font-size: 14px;
@@ -1359,40 +1518,48 @@ select.woobewoo-flat-input {
 	border-radius: 12px !important;
 	text-transform: uppercase;
 }
+
 .wpf-overview-body-text input.wpf-overview-input,
 .wpf-overview-center input.wpf-overview-input {
 	width: 100% !important;
 }
+
 .wpf-overview-title {
 	color: #1e1e1e !important;
 	font-weight: 600 !important;
 	font-size: clamp(20px, 3vw, 36px) !important;
 }
+
 .wpf-overview-body-title a,
 .wpf-overview-header-title {
 	color: #1e1e1e !important;
 	font-weight: 600 !important;
 	font-size: clamp(18px, 3vw, 20px) !important;
 }
+
 .wpf-overview-header-desc {
 	margin-bottom: 0 !important;
 	margin-top: 12px !important;
 	color: #757575 !important;
 	font-size: 14px !important;
 }
+
 .wpf-overview-img .wpf-overview-body-text a,
 .wpf-overview-img ul li a {
 	font-size: 14px;
 	color: #757575;
 }
+
 .wpf-overview-img {
 	margin-bottom: 0 !important;
 }
+
 .wpf-overview-flex-custom {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
+
 .wpf-overview-explore-all-plugins a {
 	margin-left: 20px;
 	white-space: nowrap;
@@ -1401,48 +1568,54 @@ select.woobewoo-flat-input {
 	color: #2d6fff !important;
 	transition: all 360ms ease;
 }
+
 .wpf-overview-explore-all-plugins a:hover {
 	color: #1749b5 !important;
 }
+
 .wpfStarsRatingLine .wpfRatingStar {
 	fill: rgb(255 255 255);
 	stroke: #000000;
 }
+
 /* Gray out checkboxes initially */
 /* Initially gray out the checkboxes and labels */
 #addDialog_list input[type="checkbox"]:not(:checked) {
-		opacity: 0.5;
-		pointer-events: none; /* Prevent interaction with disabled checkboxes */
+	opacity: 0.5;
+	pointer-events: none; /* Prevent interaction with disabled checkboxes */
 }
 
 #addDialog_list label {
-		color: #999; /* Gray color for labels */
-		pointer-events: none; /* Prevent interaction with disabled labels */
+	color: #999; /* Gray color for labels */
+	pointer-events: none; /* Prevent interaction with disabled labels */
 }
 
 /* Enable the checkboxes and labels when text is entered */
 #addDialog_title:valid + .wpfPopupBlock + .wpfPopupBlock #addDialog_list input[type="checkbox"]:not(:checked),
 #addDialog_title:valid + .wpfPopupBlock + .wpfPopupBlock label {
-		opacity: 1;
-		pointer-events: auto; /* Allow interaction with enabled checkboxes */
+	opacity: 1;
+	pointer-events: auto; /* Allow interaction with enabled checkboxes */
 }
 
 #addDialog_list input[type="checkbox"]:checked {
-		opacity: 1;
-		pointer-events: auto;
+	opacity: 1;
+	pointer-events: auto;
 }
 
 #addDialog_list label {
-		color: #333; /* Dark color for labels when enabled */
+	color: #333; /* Dark color for labels when enabled */
 }
+
 @media (max-width: 768px) {
 	.wpf-overview-flex-custom {
 		flex-direction: column;
 		align-items: flex-start;
 	}
+
 	.wpf-overview-explore-all-plugins a {
-		margin-left: 0px;
+		margin-left: 0;
 	}
+
 	.wpf-overview-explore-all-plugins {
 		margin-top: 20px;
 	}
