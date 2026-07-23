@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Design
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -137,34 +137,6 @@ defined( 'ABSPATH' ) || exit;
 					?>
 					<div class="settings-value-label">px</div>
 				</div>
-			</div>
-		</div>
-		<div class="woobewoo_row row-settings-block">
-			<div class="settings-block-label col-xs-4 col-sm-3">
-				<?php esc_html_e('CSS editor', 'woo-product-filter'); ?>
-				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('Custom CSS', 'woo-product-filter'); ?>"></i>
-			</div>
-			<div class="settings-block-values settings-w100 col-xs-12 col-sm-9">
-				<?php
-					HtmlWpf::textarea('settings[css_editor]', array(
-						'value' => ( isset($this->settings['settings']['css_editor']) ? stripslashes(base64_decode($this->settings['settings']['css_editor'])) : '' ),
-						'auto_width' => true
-					));
-					?>
-			</div>
-		</div>
-		<div class="woobewoo_row row-settings-block" data-no-preview="1">
-			<div class="settings-block-label col-xs-4 col-sm-3">
-				<?php esc_html_e('JS editor', 'woo-product-filter'); ?>
-				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__('Custom JS', 'woo-product-filter'); ?>"></i>
-			</div>
-			<div class="settings-block-values settings-w100 col-xs-12 col-sm-9">
-				<?php
-					HtmlWpf::textarea('settings[js_editor]', array(
-						'value' => ( isset($this->settings['settings']['js_editor']) ? stripslashes(base64_decode($this->settings['settings']['js_editor'])) : '' ),
-						'auto_width' => true
-					));
-					?>
 			</div>
 		</div>
 		<div class="woobewoo_row row-settings-block">

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersControllerWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -212,14 +212,16 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		return $data;
 	}
 
+	/**
+	 * drawFilterAjax.
+	 *
+	 * @since 3.3.0
+	 */
 	public function drawFilterAjax() {
 		$res  = new ResponseWpf();
 		$data = ReqWpf::get('post');
 		if ( isset($data) && $data ) {
 			$isPro = FrameWpf::_()->isPro();
-			if ( ! empty($data['settings']['js_editor']) ) {
-				$data['settings']['js_editor'] = '';
-			}
 			if ( ! empty($data['settings']['filters']['order']) ) {
 				$metaKeys = $this->getDataFilterMetaKeys(stripcslashes($data['settings']['filters']['order']));
 				if ( count($metaKeys) > 0 ) {

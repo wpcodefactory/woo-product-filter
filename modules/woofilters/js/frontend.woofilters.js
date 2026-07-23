@@ -26,7 +26,7 @@ function wpfIsThriveEditor() {
 /**
  * Main function.
  *
- * @version 3.1.8
+ * @version 3.3.0
  */
 (function ($, app) {
 	"use strict";
@@ -95,8 +95,6 @@ function wpfIsThriveEditor() {
 		_thisObj.disableLeerOptions();
 		_thisObj.eventsFrontend();
 		_thisObj.changeSlugByUrl();
-		_thisObj.runCustomJs();
-		_thisObj.addCustomCss();
 		_thisObj.chageRangeFieldWidth();
 		_thisObj.addSpecificPluginActions();
 		_thisObj.resizeWindow();
@@ -285,45 +283,6 @@ function wpfIsThriveEditor() {
 
 			hideFilterLoader(wrapper);
 		});
-	});
-
-	WpfFrontendPage.prototype.runCustomJs = (function () {
-		var _thisObj = this.$obj;
-		jQuery('.wpfMainWrapper').each(function () {
-			var wrapper = jQuery(this),
-				jsCodeStr = '',
-				settings = _thisObj.getFilterMainSettings(wrapper);
-			if(settings){
-				settings = settings.settings;
-				jsCodeStr = settings.js_editor;
-			}
-			if(jsCodeStr.length > 0){
-				try {
-					eval(jsCodeStr);
-				}catch(e) {
-					console.log(e);
-				}
-
-			}
-		});
-	});
-
-	WpfFrontendPage.prototype.addCustomCss = (function () {
-		if (jQuery('style#wpfCustomCss').length === 0) {
-			var cssCodeStr = '';
-
-			jQuery('.wpfMainWrapper').each(function () {
-				var wrapper = jQuery(this),
-					customCss = jQuery('style#wpfCustomCss-' + wrapper.attr('data-viewid'));
-				if (customCss.length) {
-					cssCodeStr += customCss.html();
-					customCss.remove();
-				}
-			});
-			if (cssCodeStr.length > 0) {
-				jQuery('<style type="text/css" id="wpfCustomCss">' + cssCodeStr + '</style>').appendTo('head');
-			}
-		}
 	});
 
 	WpfFrontendPage.prototype.chageRangeFieldWidth = (function () {

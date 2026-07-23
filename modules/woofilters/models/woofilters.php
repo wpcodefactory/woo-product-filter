@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -350,6 +350,8 @@ class WoofiltersModelWpf extends ModelWpf {
 
 	/**
 	 * save.
+	 *
+	 * 3.3.0
 	 */
 	public function save( $data = array() ) {
 
@@ -378,8 +380,6 @@ class WoofiltersModelWpf extends ModelWpf {
 		} elseif ( empty($id) && !empty($title) && !empty($duplicateId) ) {  //duplicate filter
 			$duplicateData                      = $this->getById($duplicateId);
 			$settings                           = unserialize($duplicateData['setting_data']);
-			$settings['settings']['css_editor'] = stripslashes(base64_decode($settings['settings']['css_editor']));
-			$settings['settings']['js_editor']  = stripslashes(base64_decode($settings['settings']['js_editor']));
 			$duplicateData['settings']          = $settings['settings'];
 			$duplicateData['title']             = isset($title) ? $title : 'untitled';
 			$duplicateData['id']                = '';
@@ -391,6 +391,8 @@ class WoofiltersModelWpf extends ModelWpf {
 
 	/**
 	 * _dataSave.
+	 *
+	 * @version 3.3.0
 	 */
 	protected function _dataSave( $data, $update = false ) {
 		$esettings = isset($data['esettings']) ? UtilsWpf::jsonDecode(stripslashes($data['esettings'])) : array();
@@ -400,10 +402,8 @@ class WoofiltersModelWpf extends ModelWpf {
 
 		$settings                             = isset($data['settings']) ? $data['settings'] : array();
 
-		$data['settings']['css_editor']       = isset($settings['css_editor']) ? base64_encode($settings['css_editor']) : '';
-		$data['settings']['js_editor']        = isset($settings['js_editor']) ? base64_encode($settings['js_editor']) : '';
 		$data['settings']['filters']['order'] = isset($settings['filters']) && isset($settings['filters']['order']) ? stripslashes($settings['filters']['order']) : '';
-		$notEdit                              = array('css_editor', 'js_editor', 'filters');
+		$notEdit = array( 'filters' );
 		foreach ($data['settings'] as $key => $value) {
 			if (!in_array($key, $notEdit) && is_string($value)) {
 				$v = str_replace('"', '&quot;', str_replace('\"', '"', $value));
