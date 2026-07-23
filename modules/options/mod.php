@@ -102,7 +102,6 @@ class OptionsWpf extends ModuleWpf {
 	public function getAdminPage() {
 		if (!InstallerWpf::isUsed()) {
 			InstallerWpf::setUsed(); // Show this welcome page - only one time
-			FrameWpf::_()->getModule('promo')->getModel()->bigStatAdd('Welcome Show');
 			FrameWpf::_()->getModule('options')->getModel()->save('plug_welcome_show', time()); // Remember this
 		}
 		return $this->getView()->getAdminPage();
@@ -232,7 +231,7 @@ class OptionsWpf extends ModuleWpf {
 	/**
 	 * getAll.
 	 *
-	 * @version 3.1.2
+	 * @version 3.3.0
 	 */
 	public function getAll() {
 		if (empty($this->_options)) {
@@ -308,15 +307,6 @@ class OptionsWpf extends ModuleWpf {
 					'def'   => '0',
 					'html'  => 'checkboxHiddenVal',
 				);
-			}
-			$isPro = FrameWpf::_()->getModule('promo')->isPro();
-			foreach ($this->_options as $catKey => $cData) {
-				foreach ($cData['opts'] as $optKey => $opt) {
-					$this->_optionsToCategoires[ $optKey ] = $catKey;
-					if (isset($opt['pro']) && !$isPro) {
-						$this->_options[ $catKey ]['opts'][ $optKey ]['pro'] = FrameWpf::_()->getModule('promo')->generateMainLink('utm_source=plugin&utm_medium=' . $optKey . '&utm_campaign=popup');
-					}
-				}
 			}
 			$this->getModel()->fillInValues( $this->_options );
 		}

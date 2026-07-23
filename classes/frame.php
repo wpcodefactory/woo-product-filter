@@ -111,27 +111,14 @@ class FrameWpf {
 	}
 
 	/**
-	 * _checkPromoModName.
-	 */
-	private function _checkPromoModName( $activeModules ) {
-		foreach ($activeModules as $i => $m) {
-			if ('supsystic_promo' == $m['code']) { // Well, rename it ;)
-				$activeModules[$i]['code']  = 'promo';
-				$activeModules[$i]['label'] = 'promo';
-				DbWpf::query("UPDATE `@__modules` SET code = 'promo', label = 'promo' WHERE code = 'supsystic_promo'");
-			}
-		}
-		return $activeModules;
-	}
-
-	/**
 	 * _extractModules.
+	 *
+	 * @version 3.3.0
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable('modules')
 				->innerJoin( $this->getTable('modules_type'), 'type_id' )
 				->get($this->getTable('modules')->alias() . '.*, ' . $this->getTable('modules_type')->alias() . '.label as type_name');
-		$activeModules = $this->_checkPromoModName($activeModules);
 		if ($activeModules) {
 			foreach ($activeModules as $m) {
 				$code = $m['code'];

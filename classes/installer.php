@@ -40,6 +40,8 @@ class InstallerWpf {
 
 		/**
 		 * Table modules.
+		 *
+		 * @version 3.3.0
 		 */
 		if ( ! DbWpf::exist( '@__modules' ) ) {
 			dbDelta( DbWpf::prepareQuery( "CREATE TABLE IF NOT EXISTS `@__modules` (
@@ -58,7 +60,6 @@ class InstallerWpf {
 				(NULL, 'user',1,1,'Users'),
 				(NULL, 'pages',1,1,'Pages'),
 				(NULL, 'templates',1,1,'templates'),
-				(NULL, 'promo',1,1,'promo'),
 				(NULL, 'admin_nav',1,1,'admin_nav'),
 				(NULL, 'woofilters',1,1,'woofilters'),
 				(NULL, 'woofilters_widget',1,1,'woofilters_widget'),
@@ -226,23 +227,6 @@ class InstallerWpf {
 		$wpdb->query( 'DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql( WPF_DB_PREF ) . 'meta_data`' );    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 		delete_option( $wpPrefix . WPF_DB_PREF . 'db_version' );
 		delete_option( $wpPrefix . WPF_DB_PREF . 'db_installed' );
-	}
-
-	/**
-	 * deactivate.
-	 */
-	public static function deactivate() {
-		self::_checkSendStat( 'deactivate' );
-	}
-
-	/**
-	 * _checkSendStat.
-	 */
-	private static function _checkSendStat( $statCode ) {
-		if ( class_exists( 'FrameWpf' ) && FrameWpf::_()->getModule( 'promo' ) && FrameWpf::_()->getModule( 'options' ) ) {
-			FrameWpf::_()->getModule( 'promo' )->getModel()->saveUsageStat( $statCode );
-			FrameWpf::_()->getModule( 'promo' )->getModel()->checkAndSend( true );
-		}
 	}
 
 	/**

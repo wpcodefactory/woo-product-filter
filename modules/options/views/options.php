@@ -34,6 +34,11 @@ class OptionsViewWpf extends ViewWpf {
 		return $res;
 	}
 
+	/**
+	 * getAdminPage.
+	 *
+	 * @version 3.3.0
+	 */
 	public function getAdminPage() {
 		$tabs = $this->getModule()->getTabs();
 		$activeTab = $this->getModule()->getActiveTab();
@@ -57,7 +62,6 @@ class OptionsViewWpf extends ViewWpf {
 		$this->assign('mainUrl', $this->getModule()->getTabUrl());
 		$this->assign('activeParentTabs', $activeParentTabs);
 		$this->assign('breadcrumbs', FrameWpf::_()->getModule('admin_nav')->getView()->getBreadcrumbs());
-		$this->assign('mainLink', FrameWpf::_()->getModule('promo')->getMainLink());
 
 		FrameWpf::_()->addScript('adminCreateTableWpf', FrameWpf::_()->getModule('woofilters')->getModPath() . 'js/create-filter.js', array(), false, true);
 		FrameWpf::_()->addJSVar('adminCreateTableWpf', 'url', admin_url('admin-ajax.php'));

@@ -16,6 +16,35 @@ class ResponseWpf {
 	public $messages = array();
 	public $html = '';
 	public $data = array();
+
+	/**
+	 * records.
+	 *
+	 * @version 3.3.0
+	 */
+	public $records = array();
+
+	/**
+	 * rows.
+	 *
+	 * @version 3.3.0
+	 */
+	public $rows = array();
+
+	/**
+	 * total.
+	 *
+	 * @version 3.3.0
+	 */
+	public $total = 0;
+
+	/**
+	 * page.
+	 *
+	 * @version 3.3.0
+	 */
+	public $page = 1;
+
 	/**
 	 * Marker to set data not in internal $data var, but set it as object parameters
 	 */

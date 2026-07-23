@@ -107,7 +107,7 @@ class TemplatesWpf extends ModuleWpf {
 	/**
 	 * loadCoreJs.
 	 *
-	 * @version 3.0.8
+	 * @version 3.3.0
 	 */
 	public function loadCoreJs() {
 		FrameWpf::_()->addScript('jquery');
@@ -136,8 +136,6 @@ class TemplatesWpf extends ModuleWpf {
 			'jsPath'   => WPF_JS_PATH,
 		);
 		if (is_admin()) {
-			$jsData['isPro']       = FrameWpf::_()->getModule('promo')->isPro();
-			$jsData['mainLink']    = FrameWpf::_()->getModule('promo')->getMainLink();
 			$jsData['isWCLicense'] = FrameWpf::_()->isWCLicense();
 		}
 		$jsData = DispatcherWpf::applyFilters('jsInitVariables', $jsData);
