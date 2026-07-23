@@ -58,12 +58,10 @@ class InstallerWpf {
 				(NULL, 'adminmenu',1,1,'Admin Menu'),
 				(NULL, 'options',1,1,'Options'),
 				(NULL, 'user',1,1,'Users'),
-				(NULL, 'pages',1,1,'Pages'),
 				(NULL, 'templates',1,1,'templates'),
 				(NULL, 'admin_nav',1,1,'admin_nav'),
 				(NULL, 'woofilters',1,1,'woofilters'),
 				(NULL, 'woofilters_widget',1,1,'woofilters_widget'),
-				(NULL, 'mail',1,1,'mail'),
 				(NULL, 'meta',1,1,'meta'),
 				(NULL, 'overview',1,1,'overview');" );
 		}

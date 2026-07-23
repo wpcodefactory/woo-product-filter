@@ -173,7 +173,7 @@ This plugin may communicate with the following third-party services:
 * Fix - "Creation of dynamic property is deprecated" notice fixed.
 * Dev - Replaced outdated library `chosen` with `tom-select`.
 * Dev - Removed Mobile Detect library and replaced it with `wp_is_mobile()`.
-* Dev - Removed promo module from the plugin.
+* Dev - Removed promo, pages, mail modules from the plugin.
 * Dev - Improved coding standards and code cleaned up.
 * WC tested up to: 10.9.
 
