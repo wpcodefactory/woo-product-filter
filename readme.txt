@@ -175,6 +175,7 @@ This plugin may communicate with the following third-party services:
 * Dev - Removed Mobile Detect library and replaced it with `wp_is_mobile()`.
 * Dev - Removed promo module from the plugin.
 * Dev - Improved coding standards and code cleaned up.
+* WC tested up to: 10.9.
 
 = 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.

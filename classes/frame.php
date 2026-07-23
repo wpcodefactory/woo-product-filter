@@ -167,7 +167,7 @@ class FrameWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	public function init() {
 		ReqWpf::init();
@@ -176,55 +176,54 @@ class FrameWpf {
 
 		$this->_initModules();
 
-		DispatcherWpf::doAction('afterModulesInit');
+		DispatcherWpf::doAction( 'afterModulesInit' );
 
 		ModInstallerWpf::checkActivationMessages();
 
 		$this->_execModules();
 
-		$addAssetsAction = $this->usePackAssets() && !is_admin() ? 'wp_footer' : 'init';
+		$addAssetsAction = $this->usePackAssets() && ! is_admin() ? 'wp_footer' : 'init';
 
-		add_action($addAssetsAction, array($this, 'addScripts'));
-		add_action($addAssetsAction, array($this, 'addStyles'));
+		add_action( $addAssetsAction, array( $this, 'addScripts' ) );
+		add_action( $addAssetsAction, array( $this, 'addStyles' ) );
 
-		register_activation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array('UtilsWpf', 'activatePlugin')); //See classes/install.php file
-		register_uninstall_hook(WPF_DIR . DS . WPF_MAIN_FILE, array('UtilsWpf', 'deletePlugin'));
-		register_deactivation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
+		register_activation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'activatePlugin') ); //See classes/install.php file
+		register_uninstall_hook( WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deletePlugin' ) );
+		register_deactivation_hook( WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
 
-		add_action('after_plugin_row_woofilter-pro/woofilter-pro.php', array($this, 'pluginRow'), 5, 3);
+		add_action( 'after_plugin_row_woofilter-pro/woofilter-pro.php', array( $this, 'pluginRow' ), 5, 2 );
 		add_filter('the_content', array('WoofiltersWpf', 'getProductsShortcode'), -99999);
 	}
 
 	/**
 	 * pluginRow.
+	 *
+	 * @version 3.3.0
 	 */
-	public function pluginRow( $plugin_file, $plugin_data, $status ) {
-		if ( !version_compare($plugin_data['Version'], WPF_PRO_REQUIRES, '>=') ) {
-			$colspan = version_compare($GLOBALS['wp_version'], '5.5', '<') ? 3 : 4;
-			$active = is_plugin_active($plugin_file) ? ' active' : '';
+	public function pluginRow( $plugin_file, $plugin_data ) {
+		if ( ! version_compare( $plugin_data['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
+			$colspan = version_compare( $GLOBALS['wp_version'], '5.5', '<' ) ? 3 : 4;
+
+			$classes = 'plugin-update-tr wpf-pro-plugin-tr';
+			if ( is_plugin_active( $plugin_file ) ) {
+				$classes .= ' active';
+			}
+			if ( ! empty( $plugin_data['update'] ) ) {
+				$classes .= ' wpf-pro-plugin-update';
+			}
 			?>
-			<style>
-				.plugins tr[data-slug="woo-product-filter-pro"] td,
-				.plugins tr[data-slug="woo-product-filter-pro"] th {
-					box-shadow:none;
-				}
-				<?php if ( isset($plugin_data['update']) && !empty($plugin_data['update']) ) { ?>
-				.plugins tr.wpf-pro-plugin-tr td{
-					box-shadow:none !important;
-				}
-				.plugins wpf-pro-plugin-tr .update-message{
-					margin-bottom:0;
-				}
-				<?php } ?>
-			</style>
-			<tr class="plugin-update-tr wpf-pro-plugin-tr<?php echo esc_attr($active); ?>">
-				<td colspan="<?php echo esc_attr($colspan); ?>" class="plugin-update colspanchange">
+			<tr class="<?php echo esc_attr( $classes ); ?>">
+				<td colspan="<?php echo esc_attr( $colspan ); ?>" class="plugin-update colspanchange">
 					<div class="update-message notice inline notice-error notice-alt">
 						<p>
-						<?php
-							/* translators: 1: plugin name 2: plugin version */
-							echo sprintf(esc_html__('Current version of Free (Base) plugin %1$s requires version of WBW Product Filter PRO plugin at least %2$s.', 'woo-product-filter'), esc_html__('Product Filter by WBW', 'woo-product-filter'), esc_html(WPF_PRO_REQUIRES));
-						?>
+							<?php
+							/* translators: %1$s: Plugin name, %2$s: Plugin version. */
+							echo sprintf(
+								esc_html__( 'Current version of Free (Base) plugin %1$s requires version of WBW Product Filter PRO plugin at least %2$s.', 'woo-product-filter' ),
+								esc_html__( 'Product Filter by WBW', 'woo-product-filter' ),
+								esc_html( WPF_PRO_REQUIRES )
+							);
+							?>
 						</p>
 					</div>
 				</td>

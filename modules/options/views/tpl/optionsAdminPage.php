@@ -10,29 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 ?>
-
-	<style type="text/css">
-		.woobewoo-main {
-			display: none;
-		}
-
-		.woobewoo-plugin-loader {
-			width: 100%;
-			height: 100px;
-			text-align: center;
-		}
-
-		.woobewoo-plugin-loader div {
-			font-size: 30px;
-			position: relative;
-			margin-top: 40px;
-		}
-	</style>
 	<div class="wrap woobewoo-wrap">
 		<div class="woobewoo-plugin woobewoo-main">
 			<section id="mainContainer" class="woobewoo-content woobewoo-d-flex woobewoo-items-stretch">
 				<nav class="woobewoo-navigation woobewoo-sticky <?php DispatcherWpf::doAction( 'adminMainNavClassAdd' ); ?>">
-					<a href="javascript:void(0);" class="woobewoo_logo woobewoo-d-inline-block">
+					<span class="woobewoo_logo woobewoo-d-inline-block">
 						<svg width="48" height="35" viewBox="0 0 48 35" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clip-path="url(#clip0_1_769)">
 								<path
@@ -45,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 								</clipPath>
 							</defs>
 						</svg>
-					</a>
+					</span>
 					<ul>
 						<?php foreach ( $this->tabs as $tabKey => $t ) { ?>
 							<?php

@@ -1,29 +1,57 @@
+/**
+ * Product Filter by WBW - Admin CSS
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
 .woobewoo-error {
 	color: #ff0000;
 }
+
 .wpfHidden {
 	display: none;
 }
+
 #toplevel_page_wpf-filters a[href*="?page=wpf-filters&tab=gopro"] {
-    color: green;
+	color: green;
 }
-#wpfAddDialog{
-	width: 100%!important;
+
+#wpfAddDialog {
+	width: 100% !important;
 	margin-top: 10px;
-	min-height: 32px!important;
+	min-height: 32px !important;
 }
-.wpfPopupLabel{
+
+.wpfPopupLabel {
 	font-weight: bold;
 }
-.wpfPopupBlock{
+
+.wpfPopupBlock {
 	margin-bottom: 15px;
 }
-.wpfPopupList{
-    max-height: 200px;
-    overflow: auto;
+
+.wpfPopupList {
+	max-height: 200px;
+	overflow: auto;
 	margin-top: 5px;
 }
-.wpfPopupList label{
+
+.wpfPopupList label {
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+/* Plugin update notice */
+.plugins tr[data-slug="product-filter-for-woocommerce-by-wbw-pro"]:has(+ .wpf-pro-plugin-tr) th,
+.plugins tr[data-slug="product-filter-for-woocommerce-by-wbw-pro"]:has(+ .wpf-pro-plugin-tr) td{
+	box-shadow: none;
+}
+
+.plugins tr[data-slug="product-filter-for-woocommerce-by-wbw-pro"].update + tr.wpf-pro-plugin-tr td {
+	box-shadow: none !important;
+}
+
+.plugins tr[data-slug="product-filter-for-woocommerce-by-wbw-pro"].update + tr.wpf-pro-plugin-tr .update-message {
+	margin-bottom: 0;
 }
