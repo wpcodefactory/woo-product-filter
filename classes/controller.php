@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ControllerWpf Class
  *
- * @version 3.1.3
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -57,6 +57,12 @@ abstract class ControllerWpf {
 		}
 		return $this->_models[$name];
 	}
+
+	/**
+	 * _createModel.
+	 *
+	 * @version 3.3.0
+	 */
 	protected function _createModel( $name = '' ) {
 		if (empty($name)) {
 			$name = $this->getCode();
@@ -66,7 +72,7 @@ abstract class ControllerWpf {
 		if (file_exists($parentModule->getModDir() . 'models' . DS . $name . '.php')) {
 			require $parentModule->getModDir() . 'models' . DS . $name . '.php';
 			//if (importWpf($parentModule->getModDir() . 'models' . DS . $name . '.php')) {
-			$className = toeGetClassNameWpf($name . 'Model');
+			$className = woobewoo_pf_toe_get_class_name($name . 'Model');
 		}
 
 		if ($className) {
@@ -76,6 +82,12 @@ abstract class ControllerWpf {
 		}
 		return null;
 	}
+
+	/**
+	 * _createView.
+	 *
+	 * @version 3.3.0
+	 */
 	protected function _createView( $name = '' ) {
 		if (empty($name)) {
 			$name = $this->getCode();
@@ -85,7 +97,7 @@ abstract class ControllerWpf {
 		if (file_exists($parentModule->getModDir() . 'views' . DS . $name . '.php')) {
 			require $parentModule->getModDir() . 'views' . DS . $name . '.php';
 			//if (importWpf($parentModule->getModDir() . 'views' . DS . $name . '.php')) {
-			$className = toeGetClassNameWpf($name . 'View');
+			$className = woobewoo_pf_toe_get_class_name($name . 'View');
 		}
 
 		if ($className) {

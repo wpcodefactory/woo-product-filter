@@ -1,4 +1,11 @@
 <?php
+/**
+ * Product Filter by WBW - ModulesModelWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
 class ModulesModelWpf extends ModelWpf {
 	public function __construct() {
 		$this->_setTbl('modules');
@@ -21,25 +28,31 @@ class ModulesModelWpf extends ModelWpf {
 				->getAll(FrameWpf::_()->getTable('modules')->alias() . '.*, ' . FrameWpf::_()->getTable('modules_type')->alias() . '.label as type');
 		}
 	}
+
+	/**
+	 * put.
+	 *
+	 * @version 3.3.0
+	 */
 	public function put( $d = array() ) {
 		$res = new ResponseWpf();
 		$id = $this->_getIDFromReq($d);
-		$d = prepareParamsWpf($d);
+		$d = woobewoo_pf_prepare_params($d);
 		if (is_numeric($id) && $id) {
 			if (isset($d['active'])) {
 				$d['active'] = ( ( is_string($d['active']) && 'true' == $d['active'] ) || 1 == $d['active'] ) ? 1 : 0;           //mmm.... govnokod?....)))
-			}		
+			}
 			if (FrameWpf::_()->getTable('modules')->update($d, array('id' => $id))) {
 				$res->messages[] = esc_html__('Module Updated', 'woo-product-filter');
 				$mod = FrameWpf::_()->getTable('modules')->getById($id);
 				$newType = FrameWpf::_()->getTable('modules_type')->getById($mod['type_id'], 'label');
 				$newType = $newType['label'];
 				$res->data = array(
-					'id' => $id, 
-					'label' => $mod['label'], 
-					'code' => $mod['code'], 
+					'id' => $id,
+					'label' => $mod['label'],
+					'code' => $mod['code'],
 					'type' => $newType,
-					'active' => $mod['active'], 
+					'active' => $mod['active'],
 				);
 			} else {
 				$tableErrors = FrameWpf::_()->getTable('modules')->getErrors();

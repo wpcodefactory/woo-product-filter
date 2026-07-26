@@ -1,4 +1,11 @@
 <?php
+/**
+ * Product Filter by WBW - FieldWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
 class FieldWpf {
 	public $name = '';
 	public $html = '';
@@ -74,8 +81,8 @@ class FieldWpf {
 		$this->validate[] = $validate;
 	}
 	/**
-	 * Set $value property. 
-	 * Sure - it is public and can be set directly, but it can be more 
+	 * Set $value property.
+	 * Sure - it is public and can be set directly, but it can be more
 	 * comfortable to use this method in future
 	 *
 	 * @param mixed $value value to be set
@@ -116,6 +123,12 @@ class FieldWpf {
 	public function setAdapt( $adapt ) {
 		$this->adapt = $adapt;
 	}
+
+	/**
+	 * displayValue.
+	 *
+	 * @version 3.3.0
+	 */
 	public function displayValue() {
 		$value = '';
 		switch ($this->html) {
@@ -156,9 +169,9 @@ class FieldWpf {
 							foreach ($this->value as $v) {
 								$valArr[] = $options[$v];
 							}
-							$value = recImplodeWpf('<br />', $valArr);
+							$value = woobewoo_pf_recursive_implode('<br />', $valArr);
 						} else {
-							$value = recImplodeWpf('<br />', $this->value);
+							$value = woobewoo_pf_recursive_implode('<br />', $this->value);
 						}
 					} else {
 						$value = $this->value;
@@ -189,7 +202,7 @@ class FieldWpf {
 	/**
 	 * Check if the element exists in array
 	 *
-	 * @param array $param 
+	 * @param array $param
 	 */
 	public function checkVarFromParam( $param, $element ) {
 		return UtilsWpf::xmlAttrToStr($param, $element);
@@ -197,13 +210,13 @@ class FieldWpf {
 
 	/**
 	 * Prepares configuration options
-	 * 
+	 *
 	 * @param file $xml
-	 * @return array $config_params 
+	 * @return array $config_params
 	 */
 	public function prepareConfigOptions( $xml ) {
 		// load xml structure of parameters
-		$config = simplexml_load_file($xml);           
+		$config = simplexml_load_file($xml);
 		$config_params = array();
 		foreach ($config->params->param as $param) {
 			// read the variables

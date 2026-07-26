@@ -1,4 +1,12 @@
 <?php
+/**
+ * Product Filter by WBW - TableWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
+
 abstract class TableWpf {
 	/**
 	 * ID column name
@@ -40,21 +48,26 @@ abstract class TableWpf {
 	 * Escape data before action
 	 */
 	protected $_escape = false;
-	
+
 	protected $_limitFrom = '';
 	protected $_limitTo = '';
-	
+
+	/**
+	 * getInstance.
+	 *
+	 * @version 3.3.0
+	 */
 	public static function getInstance( $table = '' ) {
 		static $instances = array();
 		if (!$table) {
 			throw new Exception('Unknown table [' . esc_html($table) . ']');
 		}
 		if (!isset($instances[$table])) {
-			$class = 'table' . strFirstUpWpf($table) . strFirstUpWpf(WPF_CODE);
+			$class = 'table' . woobewoo_pf_str_first_up($table) . woobewoo_pf_str_first_up(WPF_CODE);
 			if (class_exists($class)) {
 				$instances[$table] = new $class();
 			} else {
-				$instances[$table] = null; 
+				$instances[$table] = null;
 			}
 		}
 		return $instances[$table];
@@ -89,6 +102,12 @@ abstract class TableWpf {
 		$this->_join[] = 'INNER JOIN ' . $params['tbl'] . ' ' . $params['a'] . ' ON ' . $params['a'] . '.' . $params['on'] . ' = ' . $this->_alias . '.' . $params['joinOn'];
 		return $this;
 	}
+
+	/**
+	 * fillFromDB.
+	 *
+	 * @version 3.3.0
+	 */
 	public function fillFromDB( $id = 0, $where = '' ) {
 		$res = $this;
 		if ($id) {
@@ -98,7 +117,7 @@ abstract class TableWpf {
 		} else {
 			$data = $this->getAll();
 		}
-		
+
 		if ($data) {
 			if ($id) {
 				foreach ($data as $k => $v) {
@@ -112,7 +131,7 @@ abstract class TableWpf {
 					$row = array();
 					foreach ($field as $k => $v) {
 						if (isset($this->_fields[$k])) {
-							$row[$k] = toeCreateObjWpf('FieldWpf', array(
+							$row[$k] = woobewoo_pf_toe_create_obj('FieldWpf', array(
 								$this->_fields[$k]->name,
 								$this->_fields[$k]->html,
 								$this->_fields[$k]->type,
@@ -158,7 +177,7 @@ abstract class TableWpf {
 	}
 	public function setID( $id ) {
 		$this->_id = $id;
-	} 
+	}
 	public function getAll( $fields = '*' ) {
 		return $this->get($fields);
 	}
@@ -203,8 +222,8 @@ abstract class TableWpf {
 	}
 	/**
 	 * Add ORDER BY to SQL
-	 * 
-	 * @param mixed $fields 
+	 *
+	 * @param mixed $fields
 	 */
 	public function orderBy( $fields ) {
 		if (is_array($fields)) {
@@ -217,8 +236,8 @@ abstract class TableWpf {
 	}
 	/**
 	 * Add GROUP BY to SQL
-	 * 
-	 * @param mixed $fields 
+	 *
+	 * @param mixed $fields
 	 */
 	public function groupBy( $fields ) {
 		if (is_array($fields)) {
@@ -261,7 +280,7 @@ abstract class TableWpf {
 			} else {
 				$query .= ' LIMIT ' . $this->_limit;
 			}
-			
+
 			$this->_limit = '';
 		} elseif ( ( '' !== $this->_limitFrom ) && ( '' !== $this->_limitTo ) ) {
 			$query .= ' LIMIT ' . $this->_limitFrom . ',' . $this->_limitTo;
@@ -288,20 +307,20 @@ abstract class TableWpf {
 				$query = 'UPDATE ';
 				break;
 		}
-		
+
 		$fields = $this->_getQueryString($data, ',', true);
 		if (empty($fields)) {
 			$this->_addError(esc_html__('Nothing to update', 'woo-product-filter'));
 			return false;
 		}
-		
+
 		$query .= $this->_table . ' SET ' . $fields;
 
 		if (!empty($this->_errors)) {
 			return false;
 		}
 		if ( ( 'UPDATE' == $method ) && !empty($where) ) {
-			$query .= ' WHERE ' . $this->_getQueryString($where, 'AND'); 
+			$query .= ' WHERE ' . $this->_getQueryString($where, 'AND');
 		}
 		if (DbWpf::query($query)) {
 			if ('INSERT' == $method) {
@@ -410,6 +429,8 @@ abstract class TableWpf {
 	/**
 	 * Add new FieldWpfWpf for children table (@see class field)
 	 *
+	 * @version 3.3.0
+	 *
 	 * @param string $name name of a field
 	 * @param string $html html type of field (text, textarea, etc. @see html class)
 	 * @param string $type database type (int, varcahr, etc.)
@@ -417,7 +438,7 @@ abstract class TableWpf {
 	 * @return object $this - pointer to current object
 	 */
 	protected function _addField( $name, $html = 'text', $type = 'other', $default = '', $label = '', $maxlen = 0, $dbAdapt = '', $htmlAdapt = '', $description = '' ) {
-		$this->_fields[$name] = toeCreateObjWpf('FieldWpf', array($name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description));
+		$this->_fields[$name] = woobewoo_pf_toe_create_obj('FieldWpf', array($name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description));
 		return $this;
 	}
 	/**

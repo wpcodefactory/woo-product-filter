@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ModuleWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -148,6 +148,11 @@ abstract class ModuleWpf extends BaseObjectWpf {
 		return $this->_controller;
 	}
 
+	/**
+	 * _createController.
+	 *
+	 * @version 3.3.0
+	 */
 	protected function _createController() {
 		if (!file_exists($this->getModDir() . 'controller.php')) {
 			return false; // EXCEPTION!!!
@@ -158,7 +163,7 @@ abstract class ModuleWpf extends BaseObjectWpf {
 		if (file_exists($this->getModDir() . 'controller.php')) {
 			$className = '';
 			require $this->getModDir() . 'controller.php';
-			$className = toeGetClassNameWpf($this->getCode() . 'Controller');
+			$className = woobewoo_pf_toe_get_class_name($this->getCode() . 'Controller');
 			if (!empty($className)) {
 				$this->_controller = new $className($this->getCode());
 				$this->_controller->init();
