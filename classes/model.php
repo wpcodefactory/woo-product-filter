@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - ModelWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
 abstract class ModelWpf extends BaseObjectWpf {
 	protected $_data = array();
 	protected $_code = '';
@@ -162,7 +171,13 @@ abstract class ModelWpf extends BaseObjectWpf {
 			$table->setLimit( $this->_limit );
 		}
 	}
-	public function removeGroup( $ids ) {
+
+	/**
+	 * woobewoo_pf_remove_group.
+	 *
+	 * @version 3.3.0
+	 */
+	public function woobewoo_pf_remove_group( $ids ) {
 		if (!is_array($ids)) {
 			$ids = array($ids);
 		}

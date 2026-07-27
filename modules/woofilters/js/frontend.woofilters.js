@@ -3600,7 +3600,7 @@ function wpfIsThriveEditor() {
 					var wpfMainWrapper = $filter.closest('.wpfMainWrapper');
 					wpfMainWrapper.find('.wpfDisplay').css('font-weight', '');
 					wpfMainWrapper.find('.wpfAttrLabel').css('font-weight', '');
-					// console.log(wpfMainWrapper.find('input:checked'))
+
 					wpfMainWrapper.find('input:checked').each(function () {
 						var wpfDisplay = jQuery(this).closest('.wpfLiLabel').find('.wpfDisplay'),
 							wpfAttrLabel = jQuery(this).closest('.wpfColorsColBlock').find('.wpfAttrLabel');

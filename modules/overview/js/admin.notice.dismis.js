@@ -23,7 +23,7 @@ jQuery( document ).ready( function ($) {
 	$( document ).on( 'click', '.wpf-notice-dismis .button-approve', function () {
 		var $wrapper = $( this ).closest( '.wpf-notice-dismis' );
 		$.sendFormWpf( {
-			data: { mod: 'overview', action: 'approveNotice', 'slug': $wrapper.attr( 'data-disslug' ) }
+			data: { mod: 'overview', action: 'woobewoo_pf_approve_notice', 'slug': $wrapper.attr( 'data-disslug' ) }
 		} );
 		$wrapper.find( '.notice-dismiss' ).trigger( 'click' );
 	} );

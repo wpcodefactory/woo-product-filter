@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Create Filter JS
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -51,7 +51,7 @@
 							jQuery.sendFormWpf({
 								data: {
 									mod: 'woofilters',
-									action: 'save',
+									action: 'woobewoo_pf_save',
 									title: $input.val(),
 									duplicateId: $inputDuplicateId.val(),
 									settings: settings,
@@ -128,7 +128,7 @@
 							jQuery.sendFormWpf({
 								data: {
 									mod: 'woofilters',
-									action: 'save',
+									action: 'woobewoo_pf_save',
 									title: $inputDuplicate.val(),
 									duplicateId: jQuery('#addDialog_duplicateid').val(),
 									settings: settings,

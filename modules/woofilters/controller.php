@@ -213,11 +213,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * drawFilterAjax.
+	 * woobewoo_pf_draw_filter_ajax.
 	 *
 	 * @since 3.3.0
 	 */
-	public function drawFilterAjax() {
+	public function woobewoo_pf_draw_filter_ajax() {
 		$res  = new ResponseWpf();
 		$data = ReqWpf::get('post');
 		if ( isset($data) && $data ) {
@@ -241,11 +241,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * save.
+	 * woobewoo_pf_save.
 	 *
 	 * @version 3.3.0
 	 */
-	public function save() {
+	public function woobewoo_pf_save() {
 
 		if ( is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) ) {
 			do_action( 'litespeed_purge_all' );
@@ -1476,13 +1476,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	public function getPermissions() {
 		return array(
 			WPF_METHODS => array(
-				'getListForTbl' => array(
+				'woobewoo_pf_get_list_for_table' => array(
 					WPF_ADMIN,
 				),
-				'save' => array(
+				'woobewoo_pf_save' => array(
 					WPF_ADMIN,
 				),
-				'removeGroup' => array(
+				'woobewoo_pf_remove_group' => array(
 					WPF_ADMIN,
 				),
 				'woobewoo_pf_delete_by_id' => array(
@@ -1491,7 +1491,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				'woobewoo_pf_save_category_label' => array(
 					WPF_ADMIN,
 				),
-				'drawFilterAjax' => array(
+				'woobewoo_pf_draw_filter_ajax' => array(
 					WPF_ADMIN,
 				),
 				'woobewoo_pf_get_taxonomy_terms' => array(

@@ -12,9 +12,11 @@ defined( 'ABSPATH' ) || exit;
 class OverviewControllerWpf extends ControllerWpf {
 
 	/**
-	 * subscribe.
+	 * woobewoo_pf_subscribe.
+	 *
+	 * @version 3.3.0
 	 */
-	public function subscribe() {
+	public function woobewoo_pf_subscribe() {
 		$res = new ResponseWpf();
 		if ( $this->getModel()->subscribe( ReqWpf::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -25,9 +27,11 @@ class OverviewControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * contactus.
+	 * woobewoo_pf_contactus.
+	 *
+	 * @version 3.3.0
 	 */
-	public function contactus() {
+	public function woobewoo_pf_contactus() {
 		$res = new ResponseWpf();
 		if ( $this->getModel()->contactus( ReqWpf::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -38,9 +42,11 @@ class OverviewControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * rating.
+	 * woobewoo_pf_rating.
+	 *
+	 * @version 3.3.0
 	 */
-	public function rating() {
+	public function woobewoo_pf_rating() {
 		$res = new ResponseWpf();
 		if ( $this->getModel()->rating( ReqWpf::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -69,11 +75,11 @@ class OverviewControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * approveNotice.
+	 * woobewoo_pf_approve_notice.
 	 *
 	 * @version 3.3.0
 	 */
-	public function approveNotice() {
+	public function woobewoo_pf_approve_notice() {
 		$res  = new ResponseWpf();
 		$slug = ReqWpf::getVar( 'slug' );
 		if (
@@ -110,6 +116,18 @@ class OverviewControllerWpf extends ControllerWpf {
 		return array(
 			WPF_METHODS => array(
 				'woobewoo_pf_dismiss_notice' => array(
+					WPF_ADMIN,
+				),
+				'woobewoo_pf_approve_notice' => array(
+					WPF_ADMIN,
+				),
+				'woobewoo_pf_subscribe' => array(
+					WPF_ADMIN,
+				),
+				'woobewoo_pf_contactus' => array(
+					WPF_ADMIN,
+				),
+				'woobewoo_pf_rating' => array(
 					WPF_ADMIN,
 				),
 			),

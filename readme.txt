@@ -171,13 +171,13 @@ This plugin may communicate with the following third-party services:
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
 * Fix - "Creation of dynamic property is deprecated" notice fixed.
+* Fix - Fixed attribute filter selection issue.
+* Fix - Fixed admin notice dismiss permissions.
 * Dev - Replaced outdated library `chosen` with `tom-select`.
 * Dev - Removed Mobile Detect library and replaced it with `wp_is_mobile()`.
 * Dev - Removed promo, pages, mail modules from the plugin.
-* Dev - Added plugin prefix to CSS handles, JavaScript handles.
+* Dev - Added plugin prefix to CSS handles, JavaScript handles, AJAX action.
 * Dev - Improved coding standards and code cleaned up.
-* Dev - Fixed attribute filter selection issue.
-* Dev - Fixed admin notice dismiss permissions.
 * WC tested up to: 10.9.
 
 = 3.1.8 - 01/06/2026 =

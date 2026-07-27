@@ -534,7 +534,7 @@
 
 		$form.sendFormWpf({
 			data: $form.serializeAnythingWpf()
-		,	appendData: {mod: 'woofilters', action: 'drawFilterAjax'}
+		,	appendData: {mod: 'woofilters', action: 'woobewoo_pf_draw_filter_ajax'}
 		,	onSuccess: function(res) {
 				if(!res.error) {
 					var container = jQuery('.wpfFiltersBlockPreview');

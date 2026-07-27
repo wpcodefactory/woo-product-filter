@@ -120,13 +120,13 @@ abstract class ControllerWpf {
 	/**
 	 * Magic method: __call
 	 *
-	 * @version 3.1.3
+	 * @version 3.3.0
 	 *
 	 * @param $name
 	 * @param $arguments
 	 */
 	public function __call( $name, $arguments ) {
-		$blockedMethods = array( 'delete', 'clear', 'removeGroup' );
+		$blockedMethods = array( 'delete', 'clear', 'woobewoo_pf_remove_group' );
 		if ( in_array( $name, $blockedMethods, true ) ) {
 			return false;
 		}
@@ -171,7 +171,7 @@ abstract class ControllerWpf {
 	 *
 	 * @version 3.3.0
 	 */
-	public function getListForTbl() {
+	public function woobewoo_pf_get_list_for_table() {
 		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if (!current_user_can('manage_options')) {
 			wp_die();
@@ -251,18 +251,18 @@ abstract class ControllerWpf {
 	}
 
 	/**
-	 * removeGroup.
+	 * woobewoo_pf_remove_group.
 	 *
 	 * @version 3.3.0
 	 */
-	public function removeGroup() {
+	public function woobewoo_pf_remove_group() {
 		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if (!current_user_can('manage_options')) {
 			wp_die();
 		}
 
 		$res = new ResponseWpf();
-		if ($this->getModel()->removeGroup(ReqWpf::getVar('listIds', 'post'))) {
+		if ($this->getModel()->woobewoo_pf_remove_group(ReqWpf::getVar('listIds', 'post'))) {
 			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
 		} else {
 			$res->pushError($this->getModel()->getErrors());

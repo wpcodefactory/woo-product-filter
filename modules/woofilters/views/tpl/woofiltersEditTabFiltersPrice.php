@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Price
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -56,7 +56,7 @@ if ($isPro) {
 	foreach ($skins as $key => $value) {
 		if (strpos($value, $labelPro)) {
 			?>
-			<div class="row-settings-block col-md-12 wpfPriceSkinPro wpfHidden" data-type="<?php echo esc_attr($key); ?>">
+			<div class="row-settings-block wpfPriceSkinPro wpfHidden" data-type="<?php echo esc_attr($key); ?>">
 				<?php if (FrameWpf::_()->isWCLicense()) { ?>
 				<img class="wpfProAd" src="<?php echo esc_url($adPath . 'price_skin_' . $key . '.png'); ?>">
 				<?php } else { ?>

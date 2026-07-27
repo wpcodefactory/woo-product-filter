@@ -150,7 +150,7 @@ jQuery(document).ready(function(){
 		if(confirm(confirmMsg)) {
 			jQuery.sendFormWpf({
 				btn: this,
-				data: {mod: 'woofilters', action: 'removeGroup', listIds: listIds, wpfNonce: window.wpfNonce},
+				data: {mod: 'woofilters', action: 'woobewoo_pf_remove_group', listIds: listIds, wpfNonce: window.wpfNonce},
 				onSuccess: function(res) {
 					if(!res.error) {
 						jQuery('#wpfTableTbl').trigger( 'reloadGrid' );
@@ -173,7 +173,7 @@ jQuery(document).ready(function(){
 		if (listIds.length) {
 			jQuery.sendFormWpf({
 				btn: this,
-				data: {mod: 'woofilterpro', action: 'exportGroup', listIds: listIds, wpfNonce: window.wpfNonce},
+				data: {mod: 'woofilterpro', action: 'woobewoo_pf_export_group', listIds: listIds, wpfNonce: window.wpfNonce},
 				onSuccess: function(res) {
 					if(!res.error) {
 						var blob = new Blob(

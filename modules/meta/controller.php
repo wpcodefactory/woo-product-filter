@@ -14,15 +14,15 @@ class MetaControllerWpf extends ControllerWpf {
 	protected $_code = 'meta';
 
 	public function doMetaIndexingFree() {
-		return $this->doMetaIndexing(false);
+		return $this->woobewoo_pf_do_meta_indexing(false);
 	}
 
 	/**
-	 * doMetaIndexing.
+	 * woobewoo_pf_do_meta_indexing.
 	 *
 	 * @version 3.3.0
 	 */
-	public function doMetaIndexing( $realAjax = true ) {
+	public function woobewoo_pf_do_meta_indexing( $realAjax = true ) {
 		if ($realAjax) {
 			check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		}
@@ -49,11 +49,11 @@ class MetaControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * doMetaOptimizing.
+	 * woobewoo_pf_do_meta_optimizing.
 	 *
 	 * @version 3.3.0
 	 */
-	public function doMetaOptimizing() {
+	public function woobewoo_pf_do_meta_optimizing() {
 		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if (!current_user_can('manage_options')) {
 			wp_die();
@@ -80,7 +80,7 @@ class MetaControllerWpf extends ControllerWpf {
 		return array(
 			WPF_USERLEVELS => array(
 				WPF_ADMIN => array(
-					'doMetaIndexingFree', 'doMetaIndexing', 'doMetaOptimizing',
+					'doMetaIndexingFree', 'woobewoo_pf_do_meta_indexing', 'woobewoo_pf_do_meta_optimizing',
 				)
 			),
 		);
