@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters_WidgetWpf Class
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -67,7 +67,7 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 	/**
 	 * woofiltersElementorEditorScripts.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.0
 	 */
 	public function woofiltersElementorEditorScripts() {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
@@ -81,38 +81,38 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 
 			FrameWpf::_()->getModule('templates')->loadCoreCss();
 			FrameWpf::_()->getModule('templates')->loadChosenSelects();
-			FrameWpf::_()->addScript('notify-js', WPF_JS_PATH . 'notify.js', array(), false, true);
+			FrameWpf::_()->addScript('woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true);
 			FrameWpf::_()->addJSVar('wp-color-picker', 'wpColorPickerL10n', array());
-			FrameWpf::_()->addScript('admin.filters', $modPath . 'js/admin.woofilters.js', array('wp-color-picker'));
-			FrameWpf::_()->addScript('admin.wp.colorpicker.alhpa.js', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array('wp-color-picker'), WPF_VERSION);
+			FrameWpf::_()->addScript('woobewoo-pf-admin-filters', $modPath . 'js/admin.woofilters.js', array('wp-color-picker'));
+			FrameWpf::_()->addScript('woobewoo-pf-admin-colorpicker-alhpa', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array('wp-color-picker'), WPF_VERSION);
 
-			FrameWpf::_()->addStyle('admin.filters', $modPath . 'css/admin.woofilters.css');
-			FrameWpf::_()->addStyle('frontend.multiselect', $modPath . 'css/frontend.multiselect.css');
-			FrameWpf::_()->addScript('frontend.multiselect', $modPath . 'js/frontend.multiselect.js');
-			FrameWpf::_()->addJSVar( 'admin.filters', 'wpfI18n', array('edit_category_label' => esc_html__('Enter custom category name', 'woo-product-filter')));
+			FrameWpf::_()->addStyle('woobewoo-pf-admin-filters', $modPath . 'css/admin.woofilters.css');
+			FrameWpf::_()->addStyle('woobewoo-pf-frontend-multiselect', $modPath . 'css/frontend.multiselect.css');
+			FrameWpf::_()->addScript('woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js');
+			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'wpfI18n', array('edit_category_label' => esc_html__('Enter custom category name', 'woo-product-filter')));
 			if ( $isPro ) {
 				$modPathPRO = FrameWpf::_()->getModule('woofilterpro')->getModPath();
 				$modDirPRO = FrameWpf::_()->getModule('woofilterpro')->getModDir();
-				FrameWpf::_()->addScript('admin.filters.pro', $modPathPRO . 'js/admin.woofilters.pro.js', array('jquery'));
-				FrameWpf::_()->addStyle('admin.filters.pro', $modPathPRO . 'css/admin.woofilters.pro.css');
+				FrameWpf::_()->addScript('woobewoo-pf-admin-filters-pro', $modPathPRO . 'js/admin.woofilters.pro.js', array('jquery'));
+				FrameWpf::_()->addStyle('woobewoo-pf-admin-filters-pro', $modPathPRO . 'css/admin.woofilters.pro.css');
 				$jsData = file_exists($modDirPRO . 'files/fontAwesomeList.txt') ? file($modDirPRO . 'files/fontAwesomeList.txt') : array();
 				if (!empty($jsData)) {
 					$jsData = array_map(function( $item ) {
 						return 'fa-' . trim($item);
 					}, $jsData);
 				}
-				FrameWpf::_()->addJSVar('admin.filters.pro', 'FONT_AWESOME_DATA', $jsData);
+				FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters-pro', 'FONT_AWESOME_DATA', $jsData);
 			}
 
-			FrameWpf::_()->addStyle('admin.woofilters.elementor', $modPathW . 'css/admin.woofilters.elementor.css', false, WPF_VERSION);
-			FrameWpf::_()->addScript('admin.woofilters.elementor', $modPathW . 'js/admin.woofilters.elementor.js', array('admin.filters'), WPF_VERSION, true);
+			FrameWpf::_()->addStyle('woobewoo-pf-admin-woofilters-elementor', $modPathW . 'css/admin.woofilters.elementor.css', false, WPF_VERSION);
+			FrameWpf::_()->addScript('woobewoo-pf-admin-woofilters-elementor', $modPathW . 'js/admin.woofilters.elementor.js', array('woobewoo-pf-admin-filters'), WPF_VERSION, true);
 
-			FrameWpf::_()->addJSVar('admin.filters', 'isElementorEditMode', '1');
+			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'isElementorEditMode', '1');
 
-			FrameWpf::_()->addJSVar('admin.filters', 'url', admin_url('admin-ajax.php'));
+			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'url', admin_url('admin-ajax.php'));
 			list( $filtersOpts, $filtersSettings ) = $this->getFiltersSettings();
-			FrameWpf::_()->addJSVar('admin.filters', 'filtersSettings', $filtersSettings);
-			FrameWpf::_()->addJSVar('admin.filters', 'wpfNonce', wp_create_nonce('wpf-save-nonce'));
+			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'filtersSettings', $filtersSettings);
+			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'wpfNonce', wp_create_nonce('wpf-save-nonce'));
 		}
 
 	}
@@ -161,7 +161,7 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 		$modPath = FrameWpf::_()->getModule('woofilters_widget')->getModPath();
 
 		wp_enqueue_script(
-			'wbw-woofilters-block', $modPath . 'js/block.js',
+			'woobewoo-pf-admin-woofilters-block', $modPath . 'js/block.js',
 			array('wp-blocks','wp-element','wp-components', 'wp-block-editor'
 			),WPF_VERSION,true);
 
@@ -171,7 +171,7 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 			unset($filtersOpts['new']);
 		}
 		wp_localize_script(
-			'wbw-woofilters-block',
+			'woobewoo-pf-admin-woofilters-block',
 			'wbwFiltersData',
 			array(
 				'filters' => $filtersOpts,

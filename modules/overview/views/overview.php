@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OverviewViewWpf Class
  *
- * @version 2.8.6
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -13,14 +13,16 @@ class OverviewViewWpf extends ViewWpf {
 
 	/**
 	 * getOverviewTabContent.
+	 *
+	 * @version 3.3.0
 	 */
 	public function getOverviewTabContent() {
-		FrameWpf::_()->addScript('admin.overview', $this->getModule()->getModPath() . 'js/admin.overview.js');
+		FrameWpf::_()->addScript('woobewoo-pf-admin-overview', $this->getModule()->getModPath() . 'js/admin.overview.js');
 
 		FrameWpf::_()->getModule('templates')->loadJqueryUi();
 		FrameWpf::_()->getModule('templates')->loadBootstrap();
-		FrameWpf::_()->addScript('notify-js', WPF_JS_PATH . 'notify.js', array(), false, true);
-		FrameWpf::_()->addStyle('admin.overview.css', $this->getModule()->getModPath() . 'css/admin.overview.css');
+		FrameWpf::_()->addScript('woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true);
+		FrameWpf::_()->addStyle('woobewoo-pf-admin-overview', $this->getModule()->getModPath() . 'css/admin.overview.css');
 
 		$this->assign('isWeek', ( time() - $this->getModel()->getFirstOverview() ) > 608800);
 		return parent::getContent('overviewTabContent');
@@ -28,6 +30,8 @@ class OverviewViewWpf extends ViewWpf {
 
 	/**
 	 * showRestApiInfo.
+	 *
+	 * @version 3.3.0
 	 */
 	public function showRestApiInfo() {
 		$dismiss = (int) FrameWpf::_()->getModule('options')->get('dismiss_wpf-rest-api');
@@ -45,7 +49,7 @@ class OverviewViewWpf extends ViewWpf {
 		}
 
 		FrameWpf::_()->getModule('templates')->loadCoreJs();
-		FrameWpf::_()->addScript('wpf.admin.notice.dismis', $this->getModule()->getModPath() . 'js/admin.notice.dismis.js');
+		FrameWpf::_()->addScript('woobewoo-pf-admin-notice-dismis', $this->getModule()->getModPath() . 'js/admin.notice.dismis.js');
 
 		$this->assign( 'message',
 			'<b>' . esc_html__('We have detected that you are using REST API to update products.', 'woo-product-filter') . '</b><br/><br/>' .

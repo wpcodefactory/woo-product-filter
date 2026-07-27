@@ -563,7 +563,7 @@ class FrameWpf {
 				$enqueue = true;
 
 				// if the oxygen plugin is activated then check if the script is already registered
-				if ( is_plugin_active( 'oxygen/functions.php' ) && 'jquery-ui-autocomplete' === $s['handle'] ) {
+				if ( is_plugin_active( 'oxygen/functions.php' ) && 'woobewoo-pf-jquery-ui-autocomplete' === $s['handle'] ) {
 					$wp_scripts = wp_scripts();
 					if ( isset( $wp_scripts->registered[ $s['handle'] ] ) ) {
 						$enqueue = false;

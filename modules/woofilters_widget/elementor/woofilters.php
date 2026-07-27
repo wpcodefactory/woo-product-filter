@@ -21,7 +21,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	public function __construct ( $data = array(), $args = null ) {
 		parent::__construct($data, $args);
@@ -43,61 +43,61 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		$modPath = FrameWpf::_()->getModule('woofilters')->getModPath();
 		$tempPath = FrameWpf::_()->getModule('templates')->getModPath();
 
-		wp_register_script('commonWpf', WPF_JS_PATH . 'common.js', array('jquery'), WPF_VERSION, false);
-		wp_register_script('coreWpf', WPF_JS_PATH . 'core.js', array('jquery'), WPF_VERSION, false);
+		wp_register_script('woobewoo-pf-common', WPF_JS_PATH . 'common.js', array('jquery'), WPF_VERSION, false);
+		wp_register_script('woobewoo-pf-core', WPF_JS_PATH . 'core.js', array('jquery'), WPF_VERSION, false);
 
-		wp_register_script('tooltipster', $tempPath . 'lib/tooltipster/jquery.tooltipster.min.js', false, WPF_VERSION, false);
-		wp_register_style('tooltipster', $tempPath . 'lib/tooltipster/tooltipster.css', false, WPF_VERSION);
+		wp_register_script('woobewoo-pf-tooltipster', $tempPath . 'lib/tooltipster/jquery.tooltipster.min.js', false, WPF_VERSION, false);
+		wp_register_style('woobewoo-pf-tooltipster', $tempPath . 'lib/tooltipster/tooltipster.css', false, WPF_VERSION);
 
 		//addCommonAssets
 		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
-		wp_register_style('frontend.filters', $modPath . 'css/frontend.woofilters.css', false, WPF_VERSION);
-		wp_register_script('frontend.filters', $modPath . 'js/frontend.woofilters.js', false, WPF_VERSION, false);
+		wp_register_style('woobewoo-pf-frontend-filters', $modPath . 'css/frontend.woofilters.css', false, WPF_VERSION);
+		wp_register_script('woobewoo-pf-frontend-filters', $modPath . 'js/frontend.woofilters.js', false, WPF_VERSION, false);
 		if ( \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
 			$code = 'var isElementorPreview=1;';
-			wp_add_inline_script('frontend.filters', $code, 'before');
+			wp_add_inline_script('woobewoo-pf-frontend-filters', $code, 'before');
 		}
 
 		if ( isset( $options['content_accessibility'] ) && '1' === $options['content_accessibility']['value'] ) {
-			wp_register_style('frontend.filters.accessibility', $modPath . 'css/frontend.woofilters.accessibility.css', false, WPF_VERSION);
+			wp_register_style('woobewoo-pf-frontend-filters-accessibility', $modPath . 'css/frontend.woofilters.accessibility.css', false, WPF_VERSION);
 		}
 
-		wp_register_style('frontend.multiselect', $modPath . 'css/frontend.multiselect.css', false, WPF_VERSION);
-		wp_register_script('frontend.multiselect', $modPath . 'js/frontend.multiselect.js', false, WPF_VERSION, false);
+		wp_register_style('woobewoo-pf-frontend-multiselect', $modPath . 'css/frontend.multiselect.css', false, WPF_VERSION);
+		wp_register_script('woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js', false, WPF_VERSION, false);
 		$selectedTitle = esc_attr(
 			( isset($options['selected_title']['value']) && ''!==$options['selected_title']['value'] )
 			? $options['selected_title']['value']
 			: __('selected', 'woo-product-filter')
 		);
-		wp_add_inline_script( 'frontend.multiselect', "var wpfMultySelectedTraslate = '{$selectedTitle}';", 'before' );
+		wp_add_inline_script( 'woobewoo-pf-frontend-multiselect', "var wpfMultySelectedTraslate = '{$selectedTitle}';", 'before' );
 
 		//loadJqueryUi
-		wp_register_style('jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css', false, WPF_VERSION);
-		wp_register_style('jquery-ui.structure', WPF_CSS_PATH . 'jquery-ui.structure.min.css', false, WPF_VERSION);
-		wp_register_style('jquery-ui.theme', WPF_CSS_PATH . 'jquery-ui.theme.min.css', false, WPF_VERSION);
-		wp_register_style('jquery-slider', WPF_CSS_PATH . 'jquery-slider.css', false, WPF_VERSION);
+		wp_register_style('woobewoo-pf-jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css', false, WPF_VERSION);
+		wp_register_style('woobewoo-pf-jquery-ui-structure', WPF_CSS_PATH . 'jquery-ui.structure.min.css', false, WPF_VERSION);
+		wp_register_style('woobewoo-pf-jquery-ui-theme', WPF_CSS_PATH . 'jquery-ui.theme.min.css', false, WPF_VERSION);
+		wp_register_style('woobewoo-pf-jquery-slider', WPF_CSS_PATH . 'jquery-slider.css', false, WPF_VERSION);
 		wp_register_script('jquery-ui-slider', '', false, WPF_VERSION, false);
 
 		//addPluginCustomStyles
 		$params = ReqWpf::get( 'get' );
 		if ( !is_admin() || ( isset($params['page']) && 'wpf-filters' === $params['page'] ) ) {
-			wp_register_style('custom.filters', $modPath . 'css/custom.woofilters.css', false, WPF_VERSION);
+			wp_register_style('woobewoo-pf-custom-filters', $modPath . 'css/custom.woofilters.css', false, WPF_VERSION);
 		}
 
 		//addScriptsContent
 		if ( $isPro ) {
 			$modPathPRO = FrameWpf::_()->getModule('woofilterpro')->getModPath();
-			wp_register_script('frontend.filters.pro', $modPathPRO . 'js/frontend.woofilters.pro.js', array('frontend.filters'), WPF_VERSION, true);
-			wp_localize_script('frontend.filters.pro', 'wpfTraslate', array(
+			wp_register_script('woobewoo-pf-frontend-filters-pro', $modPathPRO . 'js/frontend.woofilters.pro.js', array('woobewoo-pf-frontend-filters'), WPF_VERSION, true);
+			wp_localize_script('woobewoo-pf-frontend-filters-pro', 'wpfTraslate', array(
 				'ShowMore'  => __( 'Show More', 'woo-product-filter' ),
 				'ShowFewer' => __( 'Show Fewer', 'woo-product-filter' ),
 			));
-			wp_register_style('frontend.filters.pro', $modPathPRO . 'css/frontend.woofilters.pro.css', false, WPF_VERSION);
-			wp_register_style('custom.filters.pro', $modPathPRO . 'css/custom.woofilters.pro.css', false, WPF_VERSION);
-			wp_register_script('jquery-ui-autocomplete', '', false, WPF_VERSION, false);
-			wp_register_style('jquery-ui-autocomplete', $modPathPRO . 'css/jquery-ui-autocomplete.css', false, WPF_VERSION);
-			wp_register_script('ion.slider', $modPathPRO . 'js/ion.rangeSlider.min.js', false, WPF_VERSION, false);
-			wp_register_style('ion.slider', $modPathPRO . 'css/ion.rangeSlider.css', false, WPF_VERSION);
+			wp_register_style('woobewoo-pf-frontend-filters-pro', $modPathPRO . 'css/frontend.woofilters.pro.css', false, WPF_VERSION);
+			wp_register_style('woobewoo-pf-custom-filters-pro', $modPathPRO . 'css/custom.woofilters.pro.css', false, WPF_VERSION);
+			wp_register_script('woobewoo-pf-jquery-ui-autocomplete', '', false, WPF_VERSION, false);
+			wp_register_style('woobewoo-pf-jquery-ui-autocomplete', $modPathPRO . 'css/jquery-ui-autocomplete.css', false, WPF_VERSION);
+			wp_register_script('woobewoo-pf-ion-slider', $modPathPRO . 'js/ion.rangeSlider.min.js', false, WPF_VERSION, false);
+			wp_register_style('woobewoo-pf-ion-slider', $modPathPRO . 'css/ion.rangeSlider.css', false, WPF_VERSION);
 
 		}
 
@@ -122,13 +122,46 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		return array( $filtersOpts, $filtersSettings );
 	}
 
+	/**
+	 * get_script_depends.
+	 *
+	 * @version 3.3.0
+	 */
 	public function get_script_depends() {
-		return array('commonWpf', 'coreWpf', 'jquery-ui-slider', 'tooltipster', 'frontend.filters', 'frontend.multiselect', 'frontend.filters.pro', 'jquery-ui-autocomplete', 'ion.slider');
+		return array(
+			'woobewoo-pf-common',
+			'woobewoo-pf-core',
+			'jquery-ui-slider',
+			'woobewoo-pf-tooltipster',
+			'woobewoo-pf-frontend-filters',
+			'woobewoo-pf-frontend-multiselect',
+			'woobewoo-pf-frontend-filters-pro',
+			'woobewoo-pf-jquery-ui-autocomplete',
+			'woobewoo-pf-ion-slider'
+		);
 	}
 
+	/**
+	 * get_style_depends.
+	 *
+	 * @version 3.3.0
+	 */
 	public function get_style_depends() {
-		return array('frontend.filters', 'tooltipster', 'frontend.filters.accessibility', 'frontend.multiselect', 'frontend.filters.pro',
-			 'jquery-ui', 'jquery-ui.structure', 'jquery-ui.theme', 'jquery-slider', 'custom.filters', 'custom.filters.pro', 'jquery-ui-autocomplete', 'ion.slider');
+		return array(
+			'woobewoo-pf-frontend-filters',
+			'woobewoo-pf-tooltipster',
+			'woobewoo-pf-frontend-filters-accessibility',
+			'woobewoo-pf-frontend-multiselect',
+			'woobewoo-pf-frontend-filters-pro',
+			'woobewoo-pf-jquery-ui',
+			'woobewoo-pf-jquery-ui-structure',
+			'woobewoo-pf-jquery-ui-theme',
+			'woobewoo-pf-jquery-slider',
+			'woobewoo-pf-custom-filters',
+			'woobewoo-pf-custom-filters-pro',
+			'woobewoo-pf-jquery-ui-autocomplete',
+			'woobewoo-pf-ion-slider'
+		);
 	}
 
 	public function get_name() {

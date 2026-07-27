@@ -45,7 +45,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	public function init() {
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
@@ -87,7 +87,7 @@ class WoofiltersWpf extends ModuleWpf {
 			} );
 		}
 
-		FrameWpf::_()->addScript( 'jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
+		FrameWpf::_()->addScript( 'woobewoo-pf-jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
 
 		$loadProductsFilterWCProductQueryPriority = (int) FrameWpf::_()->getModule('options')->getModel()->get('load_products_filter_wc_product_query_priority');
 		if ( 0 == $loadProductsFilterWCProductQueryPriority ) {
