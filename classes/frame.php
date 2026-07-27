@@ -265,48 +265,48 @@ class FrameWpf {
 	 * @return bool true if ok, else - false
 	 */
 	public function havePermissions( $code, $action ) {
-		$res = false;
-		$mod = $this->getModule($code);
-		$action = strtolower($action);
-		if ($mod) {
+		$res    = false;
+		$mod    = $this->getModule( $code );
+		$action = strtolower( $action );
+		if ( $mod ) {
 			$permissions = $mod->getController()->getPermissions();
-			if (!empty($permissions)) { // Special permissions
-				if (isset($permissions[WPF_METHODS]) && !empty($permissions[WPF_METHODS])) {
-					foreach ($permissions[WPF_METHODS] as $method => $permission) { // Make case-insensitive
-						$permissions[WPF_METHODS][strtolower($method)] = $permission;
+			if ( ! empty( $permissions ) ) { // Special permissions
+				if ( isset( $permissions[ WPF_METHODS ] ) && ! empty( $permissions[ WPF_METHODS ] ) ) {
+					foreach ( $permissions[ WPF_METHODS ] as $method => $permission ) { // Make case-insensitive
+						$permissions[ WPF_METHODS ][ strtolower( $method ) ] = $permission;
 					}
-					if (array_key_exists($action, $permissions[WPF_METHODS])) { // Permission for this method exists
-						$currentUserPosition = self::_()->getModule('user')->getCurrentUserPosition();
+					if ( array_key_exists( $action, $permissions[ WPF_METHODS ] ) ) { // Permission for this method exists
+						$currentUserPosition = self::_()->getModule( 'user' )->getCurrentUserPosition();
 						if (
-							is_array($permissions[ WPF_METHODS ][ $action ] ) &&
+							is_array( $permissions[ WPF_METHODS ][ $action ] ) &&
 							(
-								in_array($currentUserPosition, $permissions[ WPF_METHODS ][ $action ]) ||
-								$permissions[WPF_METHODS][$action] === $currentUserPosition
+								in_array( $currentUserPosition, $permissions[ WPF_METHODS ][ $action ] ) ||
+								$permissions[ WPF_METHODS ][ $action ] === $currentUserPosition
 							)
 						) {
 							$res = true;
 						}
 					}
 				}
-				if (isset($permissions[WPF_USERLEVELS]) && !empty($permissions[WPF_USERLEVELS])) {
-					$currentUserPosition = self::_()->getModule('user')->getCurrentUserPosition();
+				if ( isset( $permissions[ WPF_USERLEVELS ] ) && ! empty( $permissions[ WPF_USERLEVELS ] ) ) {
+					$currentUserPosition = self::_()->getModule( 'user' )->getCurrentUserPosition();
 					// For multi-sites network admin role is undefined, let's do this here
-					if (is_multisite() && is_admin() && is_super_admin()) {
+					if ( is_multisite() && is_admin() && is_super_admin() ) {
 						$currentUserPosition = WPF_ADMIN;
 					}
-					foreach ($permissions[WPF_USERLEVELS] as $userlevel => $methods) {
-						if (is_array($methods)) {
-							$lowerMethods = array_map('strtolower', $methods); // Make case-insensitive
-							if (in_array($action, $lowerMethods)) { // Permission for this method exists
-								if ($currentUserPosition === $userlevel) {
+					foreach ( $permissions[ WPF_USERLEVELS ] as $userlevel => $methods ) {
+						if ( is_array( $methods ) ) {
+							$lowerMethods = array_map( 'strtolower', $methods ); // Make case-insensitive
+							if ( in_array( $action, $lowerMethods ) ) { // Permission for this method exists
+								if ( $currentUserPosition === $userlevel ) {
 									$res = true;
 								}
 								break;
 							}
 						} else {
-							$lowerMethod = strtolower($methods); // Make case-insensitive
-							if ($lowerMethod == $action) { // Permission for this method exists
-								if ($currentUserPosition === $userlevel) {
+							$lowerMethod = strtolower( $methods ); // Make case-insensitive
+							if ( $lowerMethod == $action ) { // Permission for this method exists
+								if ( $currentUserPosition === $userlevel ) {
 									$res = true;
 								}
 								break;
@@ -315,17 +315,18 @@ class FrameWpf {
 					}
 				}
 			}
-			if ($res) { // Additional check for nonces
+
+			if ( $res ) { // Additional check for nonce
 				$noncedMethods = $mod->getController()->getNoncedMethods();
-				if (!empty($noncedMethods)) {
-					$noncedMethods = array_map('strtolower', $noncedMethods);
-					if (in_array($action, $noncedMethods)) {
-						$nonce = (
-							isset($_REQUEST['_wpnonce'])
-							? sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']))
-							: ReqWpf::getVar('_wpnonce')
+				if ( ! empty( $noncedMethods ) ) {
+					$noncedMethods = array_map( 'strtolower', $noncedMethods );
+					if ( in_array( $action, $noncedMethods ) ) {
+						$nonce = ( isset( $_REQUEST['_wpnonce'] ) ?
+							sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) :
+							ReqWpf::getVar( '_wpnonce' )
 						);
-						if (!wp_verify_nonce( $nonce, $action )) {
+
+						if ( ! wp_verify_nonce( $nonce, $action ) ) {
 							die();
 						}
 					}
@@ -601,13 +602,15 @@ class FrameWpf {
 
 	/**
 	 * addJSVar.
+	 *
+	 * @version 3.3.0
 	 */
 	public function addJSVar( $script, $name, $val ) {
 		if ($this->_scriptsInitialized) {
 			if ( is_array( $val ) ) {
 				wp_localize_script( $script, $name, $val );
 			} else {
-				$code = "var {$name} = '{$val}';";
+				$code = "var {$name} = " . wp_json_encode( $val ) . ';';
 				wp_add_inline_script( $script, $code, 'before' );
 			}
 		} else {

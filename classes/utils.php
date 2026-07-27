@@ -282,17 +282,11 @@ class UtilsWpf {
 
 	/**
 	 * getPluginPath.
+	 *
+	 * @version 3.3.0
 	 */
 	public static function getPluginPath( $name = '' ) {
-		$path = plugins_url($name) . '/';
-		if (substr($path, 0, 4) != 'http') {
-			$home = home_url();
-			if (is_ssl() && substr($home, 0, 5) != 'https') {
-				$home = 'https' . substr($home, 4);
-			}
-			$path = $home . ( substr($path, 0, 1) == '/' ? '' : '/' ) . $path;
-		}
-		return $path;
+		return trailingslashit( plugins_url( $name ) );
 	}
 
 	/**
