@@ -1712,7 +1712,7 @@ function wpfIsThriveEditor() {
 
 		return {
 			mod: 'woofilters',
-			action: 'filtersFrontend',
+			action: 'woobewoo_pf_filters_frontend',
 			filtersDataBackend: JSON.stringify($filtersDataBackend),
 			queryvars: $queryVars,
 			filterSettings: JSON.stringify($filterSettings),

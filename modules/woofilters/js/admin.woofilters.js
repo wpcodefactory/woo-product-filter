@@ -306,7 +306,7 @@
 				data: {
 					mod: 'woofilters',
 					pl: 'wpf',
-					action: 'saveCategoryLabel',
+					action: 'woobewoo_pf_save_category_label',
 					reqType: 'ajax',
 					wpfNonce: window.wpfNonce,
 					term_id: termId,
@@ -329,7 +329,7 @@
 				if (id) {
 					var data = {
 						mod: 'woofilters',
-						action: 'deleteByID',
+						action: 'woobewoo_pf_delete_by_id',
 						id: id,
 						pl: 'wpf',
 						reqType: "ajax",
@@ -950,32 +950,37 @@
 		attr_terms.closest('tr').addClass('wpfHidden');
 		attr_terms.find('option').remove();
 
-		if(attrSlug != 0) {
-			var terms = jQuery('.wpfAttributesTerms input[name="attr-'+attrSlug+'"]');
-			if(typeof(terms) == 'undefined' || terms.length == 0) {
-				jQuery.sendFormWpf({
+		if ( attrSlug != 0 ) {
+			var terms = jQuery( '.wpfAttributesTerms input[name="attr-' + attrSlug + '"]' );
+			if ( typeof (
+				terms
+			) == 'undefined' || terms.length == 0 ) {
+				jQuery.sendFormWpf( {
 					data: {
 						mod: 'woofilters',
-						action: 'getTaxonomyTerms',
+						action: 'woobewoo_pf_get_taxonomy_terms',
 						slug: attrSlug
 					},
-					onSuccess: function(res) {
-						if(!res.error && res.data.terms && res.data.keys) {
-							jQuery('.wpfAttributesTerms').append('<input type="hidden" name="attr-'+attrSlug+'" data-order="'+res.data.keys+'" value="'+res.data.terms+'">');
-							_thisObj.setAttrTerms(attr_terms, attrSlug);
+					onSuccess: function ( res ) {
+						if ( !res.error && res.data.terms && res.data.keys ) {
+							jQuery( '.wpfAttributesTerms' ).append( '<input type="hidden" name="attr-' + attrSlug + '" data-order="' + res.data.keys + '" value="' + res.data.terms + '">' );
+							_thisObj.setAttrTerms( attr_terms, attrSlug );
 						}
 					}
-				});
+				} );
 			} else {
-				_thisObj.setAttrTerms(attr_terms, attrSlug);
+				_thisObj.setAttrTerms( attr_terms, attrSlug );
 			}
-		} else {
-			attr_terms.val( '' );
-			if ( attr_terms[ 0 ] && attr_terms[ 0 ].tomselect ) {
-				attr_terms[ 0 ].tomselect.sync()
-			}
-			attr_terms.trigger( 'change' );
 		}
+
+		if ( attr_terms[0] && attr_terms[0].tomselect ) {
+			const ts = attr_terms[0].tomselect;
+			ts.clear();
+			ts.clearOptions();
+			ts.sync();
+		}
+
+		attr_terms.trigger('change');
 
 		// temporarily disabled for custom meta field
 		var	frontendType = _this.closest('.wpfFilter').find('select[name="f_frontend_type"]');
@@ -1097,7 +1102,15 @@
 
 		blockTemplate.trigger('changeTooltips');
 		blockTemplate.find( 'select[name="f_mlist[]"],select[name="f_exclude_terms[]"]' ).each( function () {
-			new TomSelect( this, { plugins: [ 'remove_button' ], maxOptions: null } );
+			new TomSelect(
+				this,
+				{
+					placeholder: 'select some options',
+					hidePlaceholder: true,
+					plugins: [ 'remove_button' ],
+					maxOptions: null
+				}
+			);
 		} );
 
 		blockTemplate.find('input,select').trigger('wpf-change');

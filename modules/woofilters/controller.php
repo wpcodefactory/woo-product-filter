@@ -240,6 +240,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * save.
+	 *
+	 * @version 3.3.0
+	 */
 	public function save() {
 
 		if ( is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) ) {
@@ -252,7 +257,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			}
 		}
 
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if ( ! current_user_can('manage_options') ) {
 			wp_die();
 		}
@@ -273,14 +278,14 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * saveCategoryLabel.
+	 * woobewoo_pf_save_category_label.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 * @since   3.1.7
 	 */
-	public function saveCategoryLabel() {
+	public function woobewoo_pf_save_category_label() {
 		// 🔐 Security
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if (! current_user_can('manage_options')) {
 			wp_die();
 		}
@@ -299,8 +304,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		));
 	}
 
-	public function deleteByID() {
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+	/**
+	 * woobewoo_pf_delete_by_id.
+	 *
+	 * @version 3.3.0
+	 */
+	public function woobewoo_pf_delete_by_id() {
+		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if ( ! current_user_can('manage_options') ) {
 			wp_die();
 		}
@@ -315,8 +325,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		return $res->ajaxExec();
 	}
 
+	/**
+	 * createTable.
+	 *
+	 * @version 3.3.0
+	 */
 	public function createTable() {
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if ( ! current_user_can('manage_options') ) {
 			wp_die();
 		}
@@ -337,11 +352,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * filtersFrontend.
+	 * woobewoo_pf_filters_frontend.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
-	public function filtersFrontend() {
+	public function woobewoo_pf_filters_frontend() {
 		$res = new ResponseWpf();
 
 		$params = ReqWpf::get('post');
@@ -805,9 +820,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	/**
-	 * getTaxonomyTerms.
+	 * woobewoo_pf_get_taxonomy_terms.
+	 *
+	 * @version 3.3.0
 	 */
-	public function getTaxonomyTerms() {
+	public function woobewoo_pf_get_taxonomy_terms() {
 
 		$res   = new ResponseWpf();
 		$slug  = ReqWpf::getVar('slug');
@@ -1451,7 +1468,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	/**
 	 * getPermissions.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.0
 	 * @since   3.1.3
 	 *
 	 * @return array
@@ -1468,16 +1485,19 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				'removeGroup' => array(
 					WPF_ADMIN,
 				),
-				'deleteByID' => array(
+				'woobewoo_pf_delete_by_id' => array(
 					WPF_ADMIN,
 				),
-				'saveCategoryLabel' => array(
+				'woobewoo_pf_save_category_label' => array(
 					WPF_ADMIN,
 				),
 				'drawFilterAjax' => array(
 					WPF_ADMIN,
 				),
-				'filtersFrontend' => array(
+				'woobewoo_pf_get_taxonomy_terms' => array(
+					WPF_ADMIN,
+				),
+				'woobewoo_pf_filters_frontend' => array(
 					WPF_GUEST,
 					WPF_ADMIN,
 					WPF_LOGGED,

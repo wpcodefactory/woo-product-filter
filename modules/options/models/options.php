@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - OptionsModelWpf Class
  *
+ * @version 3.3.0
+ *
  * @author woobewoo
  */
 
@@ -71,7 +73,12 @@ class OptionsModelWpf extends ModelWpf {
 		}
 	}
 
-	public function saveGroup( $d = array() ) {
+	/**
+	 * woobewoo_pf_save_group.
+	 *
+	 * @version 3.3.0
+	 */
+	public function woobewoo_pf_save_group( $d = array() ) {
 		if (isset($d['opt_values']) && is_array($d['opt_values']) && !empty($d['opt_values'])) {
 			DispatcherWpf::doAction('beforeSaveOpts', $d);
 			foreach ( $d['opt_values'] as $code => $val ) {

@@ -4743,9 +4743,11 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * addAjaxFilterForYithWoocompare.
+	 *
+	 * @version 3.3.0
 	 */
 	public function addAjaxFilterForYithWoocompare( $actions ) {
-		return array_merge( $actions, array( 'filtersFrontend' ) );
+		return array_merge( $actions, array( 'woobewoo_pf_filters_frontend' ) );
 	}
 
 	/**

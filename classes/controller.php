@@ -168,9 +168,11 @@ abstract class ControllerWpf {
 	}
 	/**
 	 * Common method for list table data
+	 *
+	 * @version 3.3.0
 	 */
 	public function getListForTbl() {
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if (!current_user_can('manage_options')) {
 			wp_die();
 		}
@@ -247,8 +249,14 @@ abstract class ControllerWpf {
 		$res = DispatcherWpf::applyFilters($this->getCode() . '_getListForTblResults', $res);
 		$res->ajaxExec();
 	}
+
+	/**
+	 * removeGroup.
+	 *
+	 * @version 3.3.0
+	 */
 	public function removeGroup() {
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if (!current_user_can('manage_options')) {
 			wp_die();
 		}

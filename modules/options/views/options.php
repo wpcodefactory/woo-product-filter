@@ -65,7 +65,7 @@ class OptionsViewWpf extends ViewWpf {
 
 		FrameWpf::_()->addScript('woobewoo-pf-admin-create-table', FrameWpf::_()->getModule('woofilters')->getModPath() . 'js/create-filter.js', array(), false, true);
 		FrameWpf::_()->addJSVar('woobewoo-pf-admin-create-table', 'url', admin_url('admin-ajax.php'));
-		FrameWpf::_()->addJSVar('woobewoo-pf-admin-create-table', 'wpfNonce', wp_create_nonce('wpf-save-nonce'));
+		FrameWpf::_()->addJSVar('woobewoo-pf-admin-create-table', 'wpfNonce', wp_create_nonce('woobewoo-pf-save-nonce'));
 
 		parent::display('optionsAdminPage');
 	}

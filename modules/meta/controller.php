@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - MetaControllerWpf Class
  *
- * @version 3.1.3
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -17,9 +17,14 @@ class MetaControllerWpf extends ControllerWpf {
 		return $this->doMetaIndexing(false);
 	}
 
+	/**
+	 * doMetaIndexing.
+	 *
+	 * @version 3.3.0
+	 */
 	public function doMetaIndexing( $realAjax = true ) {
 		if ($realAjax) {
-			check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+			check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		}
 		if (!current_user_can('manage_options')) {
 			wp_die();
@@ -42,8 +47,14 @@ class MetaControllerWpf extends ControllerWpf {
 		}
 		return $res->ajaxExec();
 	}
+
+	/**
+	 * doMetaOptimizing.
+	 *
+	 * @version 3.3.0
+	 */
 	public function doMetaOptimizing() {
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
+		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
 		if (!current_user_can('manage_options')) {
 			wp_die();
 		}

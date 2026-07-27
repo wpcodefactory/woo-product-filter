@@ -112,7 +112,7 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'url', admin_url('admin-ajax.php'));
 			list( $filtersOpts, $filtersSettings ) = $this->getFiltersSettings();
 			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'filtersSettings', $filtersSettings);
-			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'wpfNonce', wp_create_nonce('wpf-save-nonce'));
+			FrameWpf::_()->addJSVar('woobewoo-pf-admin-filters', 'wpfNonce', wp_create_nonce('woobewoo-pf-save-nonce'));
 		}
 
 	}
