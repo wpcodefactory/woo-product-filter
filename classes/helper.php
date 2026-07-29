@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 abstract class HelperWpf {
-	protected $_code = '';
+	protected $_code   = '';
 	protected $_module = '';
 	/**
 	 * Construct helper class
@@ -17,7 +17,7 @@ abstract class HelperWpf {
 	 * @param string $code
 	 */
 	public function __construct( $code ) {
-		$this->setCode($code);
+		$this->setCode( $code );
 	}
 	/**
 	 * Init function

@@ -9,4 +9,4 @@
 
 defined( 'ABSPATH' ) || exit;
 
-HtmlWpf::echoEscapedHtml(DispatcherWpf::applyFilters('filtersHtml', $this->html));
+HtmlWpf::echoEscapedHtml( DispatcherWpf::applyFilters( 'filtersHtml', $this->html ) );

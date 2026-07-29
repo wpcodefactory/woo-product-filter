@@ -21,17 +21,20 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Base config constants and functions.
  */
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config.php';
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'functions.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'config.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 
 /**
  * HPOS.
  */
-add_action( 'before_woocommerce_init', function () {
-	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+add_action(
+	'before_woocommerce_init',
+	function () {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
 	}
-} );
+);
 
 /**
  * Connect all required core classes.

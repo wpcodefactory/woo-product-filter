@@ -37,8 +37,8 @@ defined( 'ABSPATH' ) || exit;
 							?>
 							<li class="woobewoo-tab-<?php echo esc_attr( $tabKey ); ?> <?php echo( ( $this->activeTab == $tabKey || in_array( $tabKey, $this->activeParentTabs ) ) ? 'active' : '' ); ?>">
 								<a class="menuItem woobewoo-d-inline-block woobewoo-wdt-100"
-								   href="<?php echo esc_url( $t['url'] ); ?>"
-								   title="<?php echo esc_attr( $t['label'] ); ?>" <?php echo empty( $t['blank'] ) ? '' : ' target="_blank"'; ?>>
+									href="<?php echo esc_url( $t['url'] ); ?>"
+									title="<?php echo esc_attr( $t['label'] ); ?>" <?php echo empty( $t['blank'] ) ? '' : ' target="_blank"'; ?>>
 									<?php if ( isset( $t['fa_icon'] ) ) { ?>
 										<i class="fa <?php echo esc_attr( $t['fa_icon'] ); ?>"></i>
 									<?php } elseif ( isset( $t['wp_icon'] ) ) { ?>
@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 						<div class="wpfPopupBlock">
 							<label class="wpfPopupLabel"><?php esc_html_e( 'Filter name', 'woo-product-filter' ); ?></label>
 							<input id="addDialog_title" class="woobewoo-text woobewoo-width-full" type="text"
-							       placeholder="e.g. Shop Sidebar Filter"/>
+									placeholder="e.g. Shop Sidebar Filter"/>
 						</div>
 						<div class="wpfPopupBlock">
 							<label class="wpfPopupLabel"><?php esc_html_e( 'Choose filter types ', 'woo-product-filter' ); ?>
@@ -85,9 +85,9 @@ defined( 'ABSPATH' ) || exit;
 								foreach ( $filtersList as $filter => $data ) {
 									if ( 'wpfPriceRange' != $filter ) {
 										echo '<li><input type="checkbox" data-unique-id="' . esc_attr( uniqid( 'wpf_' ) ) .
-										     '" data-value="' . esc_attr( $filter ) .
-										     '"><label>' . esc_html( $data['name'] ) .
-										     '</label></li>';
+											'" data-value="' . esc_attr( $filter ) .
+											'"><label>' . esc_html( $data['name'] ) .
+											'</label></li>';
 									}
 								}
 								?>
@@ -124,4 +124,5 @@ defined( 'ABSPATH' ) || exit;
 			<div>Loading...<i class="fa fa-spinner fa-spin"></i></div>
 		</div>
 	</div>
-<?php DispatcherWpf::doAction( 'afterWoobewooWrap' );
+<?php
+DispatcherWpf::doAction( 'afterWoobewooWrap' );

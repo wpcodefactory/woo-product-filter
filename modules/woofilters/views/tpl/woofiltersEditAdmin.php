@@ -28,7 +28,7 @@ list( $attrDisplay, $attrTypes, $attrNames ) = $this->getModule()->getAttributes
 list( $roles ) = $this->getModule()->getRolesDisplay();
 
 $wpfBrand = array(
-	'exist' => taxonomy_exists( 'product_brand' )
+	'exist' => taxonomy_exists( 'product_brand' ),
 );
 
 $catArgs      = array(
@@ -79,11 +79,14 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 									<?php $filterTitle = isset( $this->filter['title'] ) ? $this->filter['title'] : 'empty'; ?>
 									<span id="wpfFilterTitleLabel"><?php echo esc_html( $filterTitle ); ?></span>
 									<?php
-									HtmlWpf::text( 'title', array(
-										'value'    => $filterTitle,
-										'attrs'    => 'class="wpfHidden" id="wpfFilterTitleTxt"',
-										'required' => true,
-									) );
+									HtmlWpf::text(
+										'title',
+										array(
+											'value'    => $filterTitle,
+											'attrs'    => 'class="wpfHidden" id="wpfFilterTitleTxt"',
+											'required' => true,
+										)
+									);
 									?>
 									<i class="fa fa-fw fa-pencil"></i>
 								</span>
@@ -133,7 +136,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 									HtmlWpf::text(
 										'',
 										array(
-											'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE . " id=" . absint( $fid ) . "]') ?>",
+											'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE . ' id=' . absint( $fid ) . "]') ?>",
 											'attrs'    => 'readonly onclick="this.setSelectionRange(0, this.value.length);" class="woobewoo-flat-input woobewoo-width-full"',
 											'required' => true,
 										)
@@ -143,21 +146,27 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 								<div
 									class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode shortcode_product wpfHidden woobewoo-flex-column">
 									<?php
-									HtmlWpf::text( '', array(
-										'value'    => '[' . WPF_SHORTCODE_PRODUCTS . ']',
-										'attrs'    => 'readonly onclick="this.setSelectionRange(0, this.value.length);" class="woobewoo-flat-input woobewoo-width-full"',
-										'required' => true,
-									) );
+									HtmlWpf::text(
+										'',
+										array(
+											'value'    => '[' . WPF_SHORTCODE_PRODUCTS . ']',
+											'attrs'    => 'readonly onclick="this.setSelectionRange(0, this.value.length);" class="woobewoo-flat-input woobewoo-width-full"',
+											'required' => true,
+										)
+									);
 									?>
 								</div>
 								<div
 									class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode phpcode_product wpfHidden woobewoo-flex-column">
 									<?php
-									HtmlWpf::text( '', array(
-										'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE_PRODUCTS . "]') ?>",
-										'attrs'    => 'readonly onclick="this.setSelectionRange(0, this.value.length);" class="woobewoo-flat-input woobewoo-width-full"',
-										'required' => true,
-									) );
+									HtmlWpf::text(
+										'',
+										array(
+											'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE_PRODUCTS . "]') ?>",
+											'attrs'    => 'readonly onclick="this.setSelectionRange(0, this.value.length);" class="woobewoo-flat-input woobewoo-width-full"',
+											'required' => true,
+										)
+									);
 									?>
 								</div>
 							<?php } ?>
@@ -227,9 +236,9 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 						class="wpfMainTabsContainer woobewooFiltersParentContainer woobewoo-d-flex selectFiltersMain woobewoo-p-24">
 						<div class="woobewooFiltersMainLeftCol wpfFiltersTabContents woobewoo-p-0-i">
 							<?php // All templates in the same folder now. This is simplest way to include all. ?>
-							<?php include_once 'woofiltersEditTabFilters.php'; ?>
-							<?php include_once 'woofiltersEditTabOptions.php'; ?>
-							<?php include_once 'woofiltersEditTabDesign.php'; ?>
+							<?php require_once 'woofiltersEditTabFilters.php'; ?>
+							<?php require_once 'woofiltersEditTabOptions.php'; ?>
+							<?php require_once 'woofiltersEditTabDesign.php'; ?>
 						</div>
 						<div class="col-md-3 woobewooFiltersMainRightCol">
 							<div class="hidden-lg hidden-md">

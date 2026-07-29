@@ -82,7 +82,7 @@ class TemplatesWpf extends ModuleWpf {
 			array(
 				'wp-i18n',
 				'jquery-ui-widget',
-				'iris'
+				'iris',
 			)
 		);
 		FrameWpf::_()->addScript( 'wp-color-picker' );
@@ -144,18 +144,27 @@ class TemplatesWpf extends ModuleWpf {
 	 */
 	public function loadCoreCss( $isElementorEditor = false ) {
 		$this->_styles = array(
-			'woobewoo-pf-style'         => array( 'path' => WPF_CSS_PATH . 'style.css', 'for' => 'admin' ),
-			'woobewoo-pf-ui'   => array(
-				'path' => WPF_CSS_PATH . 'woobewoo-ui' . ( FrameWpf::_()->isWCLicense() ? '-wc' : '' ) . '.css',
-				'for'  => 'admin'
+			'woobewoo-pf-style'            => array(
+				'path' => WPF_CSS_PATH . 'style.css',
+				'for'  => 'admin',
 			),
-			'dashicons'        => array( 'for' => 'admin' ),
-			'woobewoo-pf-bootstrap-alerts' => array( 'path' => WPF_CSS_PATH . 'bootstrap-alerts.css', 'for' => 'admin' ),
-			'woobewoo-pf-icheck'           => array( 'path' => WPF_CSS_PATH . 'jquery.icheck.css', 'for' => 'admin' ),
-			'wp-color-picker'  => array( 'for' => 'admin' ),
-			'woobewoo-pf-admin-ui'  => array(
+			'woobewoo-pf-ui'               => array(
+				'path' => WPF_CSS_PATH . 'woobewoo-ui' . ( FrameWpf::_()->isWCLicense() ? '-wc' : '' ) . '.css',
+				'for'  => 'admin',
+			),
+			'dashicons'                    => array( 'for' => 'admin' ),
+			'woobewoo-pf-bootstrap-alerts' => array(
+				'path' => WPF_CSS_PATH . 'bootstrap-alerts.css',
+				'for'  => 'admin',
+			),
+			'woobewoo-pf-icheck'           => array(
+				'path' => WPF_CSS_PATH . 'jquery.icheck.css',
+				'for'  => 'admin',
+			),
+			'wp-color-picker'              => array( 'for' => 'admin' ),
+			'woobewoo-pf-admin-ui'         => array(
 				'path' => WPF_CSS_PATH . 'admin.woofilters.beautify.design.css',
-				'for'  => 'admin'
+				'for'  => 'admin',
 			),
 		);
 		foreach ( $this->_styles as $s => $sInfo ) {
@@ -204,7 +213,7 @@ class TemplatesWpf extends ModuleWpf {
 			);
 			$langToLoad = UtilsWpf::getLangCode2Letter();
 
-			$availableLocales = array('ar', 'bg', 'bg1251', 'cat', 'cn', 'cs', 'da', 'de', 'dk', 'el', 'en', 'es', 'fa', 'fi', 'fr', 'gl', 'he', 'hr', 'hr1250', 'hu', 'id', 'is', 'it', 'ja', 'kr', 'lt', 'mne', 'nl', 'no', 'pl', 'pt', 'pt', 'ro', 'ru', 'sk', 'sr', 'sr', 'sv', 'th', 'tr', 'tw', 'ua', 'vi');
+			$availableLocales = array( 'ar', 'bg', 'bg1251', 'cat', 'cn', 'cs', 'da', 'de', 'dk', 'el', 'en', 'es', 'fa', 'fi', 'fr', 'gl', 'he', 'hr', 'hr1250', 'hu', 'id', 'is', 'it', 'ja', 'kr', 'lt', 'mne', 'nl', 'no', 'pl', 'pt', 'pt', 'ro', 'ru', 'sk', 'sr', 'sr', 'sv', 'th', 'tr', 'tw', 'ua', 'vi' );
 			if ( ! in_array( $langToLoad, $availableLocales ) ) {
 				$langToLoad = 'en';
 			}
@@ -241,7 +250,7 @@ class TemplatesWpf extends ModuleWpf {
 	 * loadDatePicker.
 	 */
 	public function loadDatePicker() {
-		FrameWpf::_()->addScript('jquery-ui-datepicker');
+		FrameWpf::_()->addScript( 'jquery-ui-datepicker' );
 	}
 
 	/**
@@ -249,13 +258,13 @@ class TemplatesWpf extends ModuleWpf {
 	 */
 	public function loadSortable() {
 		static $loaded = false;
-		if (!$loaded) {
-			FrameWpf::_()->addScript('jquery-ui-core');
-			FrameWpf::_()->addScript('jquery-ui-widget');
-			FrameWpf::_()->addScript('jquery-ui-mouse');
+		if ( ! $loaded ) {
+			FrameWpf::_()->addScript( 'jquery-ui-core' );
+			FrameWpf::_()->addScript( 'jquery-ui-widget' );
+			FrameWpf::_()->addScript( 'jquery-ui-mouse' );
 
-			FrameWpf::_()->addScript('jquery-ui-draggable');
-			FrameWpf::_()->addScript('jquery-ui-sortable');
+			FrameWpf::_()->addScript( 'jquery-ui-draggable' );
+			FrameWpf::_()->addScript( 'jquery-ui-sortable' );
 			$loaded = true;
 		}
 	}

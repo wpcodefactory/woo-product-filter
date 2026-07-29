@@ -10,12 +10,12 @@
 defined( 'ABSPATH' ) || exit;
 
 class ResponseWpf {
-	public $code = 0;
-	public $error = false;
-	public $errors = array();
+	public $code     = 0;
+	public $error    = false;
+	public $errors   = array();
 	public $messages = array();
-	public $html = '';
-	public $data = array();
+	public $html     = '';
+	public $data     = array();
 
 	/**
 	 * records.

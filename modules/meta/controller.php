@@ -19,7 +19,7 @@ class MetaControllerWpf extends ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function woobewoo_pf_do_meta_indexing_free() {
-		return $this->woobewoo_pf_do_meta_indexing(false);
+		return $this->woobewoo_pf_do_meta_indexing( false );
 	}
 
 	/**
@@ -91,7 +91,7 @@ class MetaControllerWpf extends ControllerWpf {
 					'woobewoo_pf_do_meta_indexing_free',
 					'woobewoo_pf_do_meta_indexing',
 					'woobewoo_pf_do_meta_optimizing',
-				)
+				),
 			),
 		);
 	}

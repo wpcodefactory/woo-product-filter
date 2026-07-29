@@ -10,14 +10,14 @@
 defined( 'ABSPATH' ) || exit;
 class LangWpf {
 	private static $_codeStorage = array();
-	private static $_data = array();
+	private static $_data        = array();
 	/**
 	 * Initialize language for plugin
 	 */
 	public static function init() {
 	}
 	public static function attach( $d ) {
-		self::$_data = array_merge(self::$_data, self::extract($d));
+		self::$_data = array_merge( self::$_data, self::extract( $d ) );
 	}
 
 	/**
@@ -25,11 +25,16 @@ class LangWpf {
 	 *
 	 * @version 3.3.0
 	 */
-	public static function extract( $d = array( 'dir' => '', 'LangWpf' => '' ) ) {
+	public static function extract(
+		$d = array(
+			'dir'     => '',
+			'LangWpf' => '',
+		)
+	) {
 		$data = array();
 		if ( isset( $d['dir'] ) && ! empty( $d['dir'] ) ) {
 			$langDirPath = $d['dir'];
-		} else if ( isset( $d['LangWpf'] ) && ! empty( $d['LangWpf'] ) ) {
+		} elseif ( isset( $d['LangWpf'] ) && ! empty( $d['LangWpf'] ) ) {
 			$langDirPath = WPF_LANG_DIR . $d['LangWpf'] . WPF_DS;
 		} else {
 			$langDirPath = WPF_LANG_DIR . WPF_WPLANG . WPF_DS;
@@ -67,14 +72,14 @@ class LangWpf {
 	 * @return string if found translation - return translated string, if no - return string $name
 	 */
 	public static function _( $name ) {
-		if (is_array($name)) {
+		if ( is_array( $name ) ) {
 			$res = array();
-			foreach ($name as $n) {
-				$res[] = self::_($n);
+			foreach ( $name as $n ) {
+				$res[] = self::_( $n );
 			}
-			return implode(' ', $res);
-		} elseif (isset(self::$_data[$name])) {
-			return self::$_data[$name];
+			return implode( ' ', $res );
+		} elseif ( isset( self::$_data[ $name ] ) ) {
+			return self::$_data[ $name ];
 		}
 		return $name;
 	}
@@ -84,38 +89,40 @@ class LangWpf {
 	public static function unEscKey( $key ) {
 		$illegals = self::getIllegalIniChars();
 		return str_replace(
-				$illegals,
-				array_keys($illegals),
-				$key);
+			$illegals,
+			array_keys( $illegals ),
+			$key
+		);
 	}
 	public static function escKey( $key ) {
 		$illegals = self::getIllegalIniChars();
 		return str_replace(
-				array_keys($illegals),
-				$illegals,
-				$key);
+			array_keys( $illegals ),
+			$illegals,
+			$key
+		);
 	}
 	/**
 	 * Illegal characters for keys in .ini files and it's representation for us
 	 */
 	public static function getIllegalIniChars() {
 		return array(
-			'?' => '%quest%',
-			'{' => '%opening_brace%',
-			'}' => '%closing_brace%',
-			'|' => '%vertical_bar%',
-			'&' => '%ampersand%',
-			'~' => '%tilde%',
-			'!' => '%exclamation_point%',
-			'[' => '%opening_bracket%',
-			']' => '%closing_bracket%',
-			'(' => '%opening_parenthesis%',
-			')' => '%closing_parenthesis%',
-			'^' => '%caret%',
-			'Yes' => '%Yes%',
-			'yes' => '%yes%',
-			'No' => '%No%',
-			'no' => '%no%',
+			'?'    => '%quest%',
+			'{'    => '%opening_brace%',
+			'}'    => '%closing_brace%',
+			'|'    => '%vertical_bar%',
+			'&'    => '%ampersand%',
+			'~'    => '%tilde%',
+			'!'    => '%exclamation_point%',
+			'['    => '%opening_bracket%',
+			']'    => '%closing_bracket%',
+			'('    => '%opening_parenthesis%',
+			')'    => '%closing_parenthesis%',
+			'^'    => '%caret%',
+			'Yes'  => '%Yes%',
+			'yes'  => '%yes%',
+			'No'   => '%No%',
+			'no'   => '%no%',
 			'none' => '%none%',
 		);
 	}

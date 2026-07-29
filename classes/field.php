@@ -9,16 +9,16 @@
 
 defined( 'ABSPATH' ) || exit;
 class FieldWpf {
-	public $name = '';
-	public $html = '';
-	public $type = '';
-	public $default = '';
-	public $value = '';
-	public $label = '';
-	public $maxlen = 0;
-	public $id = 0;
-	public $htmlParams = array();
-	public $validate = array();
+	public $name        = '';
+	public $html        = '';
+	public $type        = '';
+	public $default     = '';
+	public $value       = '';
+	public $label       = '';
+	public $maxlen      = 0;
+	public $id          = 0;
+	public $htmlParams  = array();
+	public $validate    = array();
 	public $description = '';
 	/**
 	 * Wheter or not add error html element right after input field
@@ -29,31 +29,35 @@ class FieldWpf {
 	/**
 	 * Name of method in table object to prepare data before insert / update operations
 	 */
-	public $adapt = array( 'HtmlWpf' => '', 'dbFrom' => '', 'dbTo' => '' );
+	public $adapt = array(
+		'HtmlWpf' => '',
+		'dbFrom'  => '',
+		'dbTo'    => '',
+	);
 	/**
 	 * Init database field representation
 	 *
 	 * @param string $html html type of field (text, textarea, etc. @see html class)
 	 * @param string $type database type (int, varcahr, etc.)
-	 * @param mixed $default default value for this field
+	 * @param mixed  $default default value for this field
 	 */
 	public function __construct( $name, $html = 'text', $type = 'other', $default = '', $label = '', $maxlen = 0, $adaption = array(), $validate = '', $description = '' ) {
-		$this->name = $name;
-		$this->html = $html;
-		$this->type = $type;
-		$this->default = $default;
-		$this->value = $default;    //Init field value same as default
-		$this->label = $label;
-		$this->maxlen = $maxlen;
+		$this->name        = $name;
+		$this->html        = $html;
+		$this->type        = $type;
+		$this->default     = $default;
+		$this->value       = $default;    // Init field value same as default
+		$this->label       = $label;
+		$this->maxlen      = $maxlen;
 		$this->description = $description;
-		if ($adaption) {
+		if ( $adaption ) {
 			$this->adapt = $adaption;
 		}
-		if ($validate) {
-			$this->setValidation($validate);
+		if ( $validate ) {
+			$this->setValidation( $validate );
 		}
-		if (( 'varchar' == $type ) && !empty($maxlen) && !in_array('validLen', $this->validate)) {
-			$this->addValidation('validLen');
+		if ( ( 'varchar' == $type ) && ! empty( $maxlen ) && ! in_array( 'validLen', $this->validate ) ) {
+			$this->addValidation( 'validLen' );
 		}
 	}
 	/**
@@ -68,14 +72,14 @@ class FieldWpf {
 		return $this->errorEl;
 	}
 	public function setValidation( $validate ) {
-		if (is_array($validate)) {
+		if ( is_array( $validate ) ) {
 			$this->validate = $validate;
 		} else {
 			$m = '';
-			if (strpos($validate, ',')) {
-				$this->validate = array_map('trim', explode(',', $validate));
+			if ( strpos( $validate, ',' ) ) {
+				$this->validate = array_map( 'trim', explode( ',', $validate ) );
 			} else {
-				$this->validate = array(trim($validate));
+				$this->validate = array( trim( $validate ) );
 			}
 		}
 	}
@@ -90,8 +94,8 @@ class FieldWpf {
 	 * @param mixed $value value to be set
 	 */
 	public function setValue( $value, $fromDB = false ) {
-		if (isset($this->adapt['dbFrom']) && $this->adapt['dbFrom'] && $fromDB) {
-			$value = FieldAdapterWpf::_($value, $this->adapt['dbFrom'], FieldAdapterWpf::DB);
+		if ( isset( $this->adapt['dbFrom'] ) && $this->adapt['dbFrom'] && $fromDB ) {
+			$value = FieldAdapterWpf::_( $value, $this->adapt['dbFrom'], FieldAdapterWpf::DB );
 		}
 		$this->value = $value;
 	}
@@ -133,47 +137,47 @@ class FieldWpf {
 	 */
 	public function displayValue() {
 		$value = '';
-		switch ($this->html) {
+		switch ( $this->html ) {
 			case 'checkboxlist':
-				$options = $this->getHtmlParam('OptionsWpf');
-				$value = array();
-				if (!empty($options) && is_array($options)) {
-					foreach ($options as $opt) {
-						if (isset($opt['checked']) && $opt['checked']) {
+				$options = $this->getHtmlParam( 'OptionsWpf' );
+				$value   = array();
+				if ( ! empty( $options ) && is_array( $options ) ) {
+					foreach ( $options as $opt ) {
+						if ( isset( $opt['checked'] ) && $opt['checked'] ) {
 							$value[] = $opt['text'];
 						}
 					}
 				}
-				if (empty($value)) {
-					$value = esc_html__('N/A', 'woo-product-filter');
+				if ( empty( $value ) ) {
+					$value = esc_html__( 'N/A', 'woo-product-filter' );
 				} else {
-					$value = implode('<br />', $value);
+					$value = implode( '<br />', $value );
 				}
 				break;
 			case 'selectbox':
 			case 'radiobuttons':
-				$options = $this->getHtmlParam('OptionsWpf');
-				if (!empty($options) && !empty($options[ $this->value ])) {
+				$options = $this->getHtmlParam( 'OptionsWpf' );
+				if ( ! empty( $options ) && ! empty( $options[ $this->value ] ) ) {
 					$value = $options[ $this->value ];
 				} else {
-					$value = esc_html__('N/A', 'woo-product-filter');
+					$value = esc_html__( 'N/A', 'woo-product-filter' );
 				}
 				break;
 			default:
-				if ('' == $this->value) {
-					$value = esc_html__('N/A', 'woo-product-filter');
+				if ( '' == $this->value ) {
+					$value = esc_html__( 'N/A', 'woo-product-filter' );
 				} else {
 					$m = '';
-					if (is_array($this->value)) {
-						$options = $this->getHtmlParam('OptionsWpf');
-						if (!empty($options) && is_array($options)) {
+					if ( is_array( $this->value ) ) {
+						$options = $this->getHtmlParam( 'OptionsWpf' );
+						if ( ! empty( $options ) && is_array( $options ) ) {
 							$valArr = array();
-							foreach ($this->value as $v) {
-								$valArr[] = $options[$v];
+							foreach ( $this->value as $v ) {
+								$valArr[] = $options[ $v ];
 							}
-							$value = woobewoo_pf_recursive_implode('<br />', $valArr);
+							$value = woobewoo_pf_recursive_implode( '<br />', $valArr );
 						} else {
-							$value = woobewoo_pf_recursive_implode('<br />', $this->value);
+							$value = woobewoo_pf_recursive_implode( '<br />', $this->value );
 						}
 					} else {
 						$value = $this->value;
@@ -184,22 +188,22 @@ class FieldWpf {
 		return $value;
 	}
 	public function showValue() {
-		HtmlWpf::echoEscapedHtml($this->displayValue());
+		HtmlWpf::echoEscapedHtml( $this->displayValue() );
 	}
 	public function addHtmlParam( $name, $value ) {
-		$this->htmlParams[$name] = $value;
+		$this->htmlParams[ $name ] = $value;
 	}
 	/**
 	 * Alias for addHtmlParam();
 	 */
 	public function setHtmlParam( $name, $value ) {
-		$this->addHtmlParam($name, $value);
+		$this->addHtmlParam( $name, $value );
 	}
 	public function setHtmlParams( $params ) {
 		$this->htmlParams = $params;
 	}
 	public function getHtmlParam( $name ) {
-		return isset($this->htmlParams[$name]) ? $this->htmlParams[$name] : false;
+		return isset( $this->htmlParams[ $name ] ) ? $this->htmlParams[ $name ] : false;
 	}
 	/**
 	 * Check if the element exists in array
@@ -207,7 +211,7 @@ class FieldWpf {
 	 * @param array $param
 	 */
 	public function checkVarFromParam( $param, $element ) {
-		return UtilsWpf::xmlAttrToStr($param, $element);
+		return UtilsWpf::xmlAttrToStr( $param, $element );
 	}
 
 	/**
@@ -218,29 +222,29 @@ class FieldWpf {
 	 */
 	public function prepareConfigOptions( $xml ) {
 		// load xml structure of parameters
-		$config = simplexml_load_file($xml);
+		$config        = simplexml_load_file( $xml );
 		$config_params = array();
-		foreach ($config->params->param as $param) {
+		foreach ( $config->params->param as $param ) {
 			// read the variables
-			$name = $this->checkVarFromParam($param, 'name');
-			$type = $this->checkVarFromParam($param, 'type');
-			$label = $this->checkVarFromParam($param, 'label');
-			$helper = $this->checkVarFromParam($param, 'HelperWpf');
-			$module = $this->checkVarFromParam($param, 'ModuleWpf');
-			$values = $this->checkVarFromParam($param, 'values');
-			$default = $this->checkVarFromParam($param, 'default');
-			$description = $this->checkVarFromParam($param, 'description');
-			if ('' == $name) {
+			$name        = $this->checkVarFromParam( $param, 'name' );
+			$type        = $this->checkVarFromParam( $param, 'type' );
+			$label       = $this->checkVarFromParam( $param, 'label' );
+			$helper      = $this->checkVarFromParam( $param, 'HelperWpf' );
+			$module      = $this->checkVarFromParam( $param, 'ModuleWpf' );
+			$values      = $this->checkVarFromParam( $param, 'values' );
+			$default     = $this->checkVarFromParam( $param, 'default' );
+			$description = $this->checkVarFromParam( $param, 'description' );
+			if ( '' == $name ) {
 				continue;
 			}
 			// fill in the variables to configuration array
-			$config_params[$name] = array(
-				'type' => $type,
-				'label' => $label,
-				'HelperWpf' => $helper,
-				'ModuleWpf' => $module,
-				'values' => $values,
-				'default' => $default,
+			$config_params[ $name ] = array(
+				'type'        => $type,
+				'label'       => $label,
+				'HelperWpf'   => $helper,
+				'ModuleWpf'   => $module,
+				'values'      => $values,
+				'default'     => $default,
 				'description' => $description,
 			);
 		}
@@ -259,7 +263,7 @@ class FieldWpf {
 	 * @return mixed - prepared value on the basis of $this->type
 	 */
 	public function valToType() {
-		switch ($this->type) {
+		switch ( $this->type ) {
 			case 'int':
 			case 'mediumint':
 			case 'smallint':

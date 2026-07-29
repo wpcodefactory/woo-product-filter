@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 $isSubscribe = $this->getModule()->getModel()->isSubscribe();
 $isRating    = $this->getModule()->getModel()->isRating();
 if ( ! $isSubscribe || ! $isRating ) {
-?>
+	?>
 	<div class="wpf-overview-block-row">
 		<?php if ( ! $isRating ) { ?>
 			<div class="woobewoo-wdt-100">
@@ -99,4 +99,5 @@ if ( ! $isSubscribe || ! $isRating ) {
 			</div>
 		<?php } ?>
 	</div>
-<?php }
+	<?php
+}

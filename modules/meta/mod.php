@@ -25,28 +25,28 @@ class MetaWpf extends ModuleWpf {
 		parent::init();
 		DispatcherWpf::addFilter( 'optionsDefine', array( $this, 'addOptions' ) );
 		add_action( 'woocommerce_update_product', array( $this, 'recalcProductMetaValues' ), 99999, 1 );
-		add_action( 'acf/save_post', array( $this, 'recalcProductMetaValuesAcf' ), 99999, 1);
+		add_action( 'acf/save_post', array( $this, 'recalcProductMetaValuesAcf' ), 99999, 1 );
 		add_action( 'woocommerce_product_set_stock_status', array( $this, 'recalcProductStockStatus' ), 100, 1 );
 		add_action( 'woocommerce_variation_set_stock_status', array( $this, 'recalcProductStockStatus' ), 100, 1 );
 		add_action( 'wpf_calc_meta_indexing', array( $this->getModel(), 'recalcMetaValues' ), 10, 1 );
 		add_action( 'wpf_calc_meta_indexing_shedule', array( $this, 'recalcMetaIndexingShedule' ), 10, 1 );
 		add_action( 'wpf_calc_meta_optimizing_shedule', array( $this, 'recalcMetaOptimizingShedule' ), 10, 1 );
 
-		add_filter('woocommerce_product_csv_importer_steps', array($this, 'recalcAfterImporting'));
+		add_filter( 'woocommerce_product_csv_importer_steps', array( $this, 'recalcAfterImporting' ) );
 	}
 
 	/**
 	 * isGlobalCalcRunning.
 	 */
 	public function isGlobalCalcRunning() {
-		return FrameWpf::_()->getModule('options')->getModel()->get('start_indexing') == 2;
+		return FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2;
 	}
 
 	/**
 	 * isDisabledAutoindexing.
 	 */
 	public function isDisabledAutoindexing() {
-		$param = FrameWpf::_()->getModule('options')->getModel()->get('disable_autoindexing');
+		$param = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing' );
 		return false === $param ? 0 : ( (int) $param );
 	}
 
@@ -54,7 +54,7 @@ class MetaWpf extends ModuleWpf {
 	 * isDisabledAutoindexingBySS.
 	 */
 	public function isDisabledAutoindexingBySS() {
-		$param = FrameWpf::_()->getModule('options')->getModel()->get('disable_autoindexing_by_ss');
+		$param = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing_by_ss' );
 		return false === $param ? 0 : ( (int) $param );
 	}
 
@@ -62,8 +62,8 @@ class MetaWpf extends ModuleWpf {
 	 * recalcAfterImporting.
 	 */
 	public function recalcAfterImporting( $steps ) {
-		$step = ReqWpf::getVar('step');
-		if (!is_null($step) && 'done' == $step && !$this->isDisabledAutoindexing()) {
+		$step = ReqWpf::getVar( 'step' );
+		if ( ! is_null( $step ) && 'done' == $step && ! $this->isDisabledAutoindexing() ) {
 			wp_schedule_single_event( time() + 1, 'wpf_calc_meta_indexing' );
 		}
 		return $steps;
@@ -75,74 +75,77 @@ class MetaWpf extends ModuleWpf {
 	 * @version 3.3.0
 	 */
 	public function addOptions( $options ) {
-		$opts = array_merge(array(
-			'start_indexing' => array(
-				'label'        => esc_html__('Start indexing product parameters', 'woo-product-filter'),
-				'desc'         => esc_html__('For correct and fast operation of filters, the plugin creates index tables for product parameters. This tables are automatically rebuilt by editing / creating products. But if you edited products with third-party plugins or methods, and/or noticed that the filter does not work correctly, then click this button to forcefully rebuild the index tables. If you have a lot of products, the process may take a while.', 'woo-product-filter') . '<br><br>' .
-				esc_html__('There is a way to start indexing with a URL: ', 'woo-product-filter') . '<br><strong>' .
-				esc_url( admin_url( 'admin-ajax.php?mod=meta&action=woobewoo_pf_do_meta_indexing_free&pl=wpf&reqType=ajax' ) ) . '</strong><br>' .
-				esc_html__('Add a parameter &inCron=1 if you need to run in the background (via cron).', 'woo-product-filter'),
-				'html'         => 'startMetaButton',
-				'def'          => '',
-				'add_sub_opts' => '<div class="woobewoo-check-group"><input type="checkbox" id="wpfStartIndexingCron"><label class="woobewoo-group-label">' . esc_html__( 'run in background ', 'woo-product-filter' ) . '</label></div>',
+		$opts = array_merge(
+			array(
+				'start_indexing'                          => array(
+					'label'        => esc_html__( 'Start indexing product parameters', 'woo-product-filter' ),
+					'desc'         => esc_html__( 'For correct and fast operation of filters, the plugin creates index tables for product parameters. This tables are automatically rebuilt by editing / creating products. But if you edited products with third-party plugins or methods, and/or noticed that the filter does not work correctly, then click this button to forcefully rebuild the index tables. If you have a lot of products, the process may take a while.', 'woo-product-filter' ) . '<br><br>' .
+					esc_html__( 'There is a way to start indexing with a URL: ', 'woo-product-filter' ) . '<br><strong>' .
+					esc_url( admin_url( 'admin-ajax.php?mod=meta&action=woobewoo_pf_do_meta_indexing_free&pl=wpf&reqType=ajax' ) ) . '</strong><br>' .
+					esc_html__( 'Add a parameter &inCron=1 if you need to run in the background (via cron).', 'woo-product-filter' ),
+					'html'         => 'startMetaButton',
+					'def'          => '',
+					'add_sub_opts' => '<div class="woobewoo-check-group"><input type="checkbox" id="wpfStartIndexingCron"><label class="woobewoo-group-label">' . esc_html__( 'run in background ', 'woo-product-filter' ) . '</label></div>',
+				),
+				'disable_autoindexing'                    => array(
+					'label' => esc_html__( 'Disable automatic calculation of index tables after editing products', 'woo-product-filter' ),
+					'desc'  => esc_html__( 'This can be useful if you add products only through imports. Then after importing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
+					'html'  => 'checkboxHiddenVal',
+					'def'   => '0',
+				),
+				'disable_autoindexing_by_ss'              => array(
+					'label' => esc_html__( 'Disable automatic calculation of index tables after product stock changes', 'woo-product-filter' ),
+					'desc'  => esc_html__( 'This can be useful when changing inventory status in bulk. Then after changing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
+					'html'  => 'checkboxHiddenVal',
+					'def'   => '0',
+				),
+				'indexing_schedule'                       => array(
+					'label'        => esc_html__( 'Start indexing on a schedule', 'woo-product-filter' ),
+					'desc'         => esc_html__( 'Indexing will start at the selected time according to the schedule', 'woo-product-filter' ),
+					'html'         => 'checkboxHiddenVal',
+					'def'          => '0',
+					'add_sub_opts' => array( $this, 'getSettingsIndexingSchedule' ),
+				),
+				'logging'                                 => array(
+					'label' => esc_html__( 'Logging', 'woo-product-filter' ),
+					'desc'  => esc_html__( 'Save debug messages to the WooCommerce SystemStatus Log', 'woo-product-filter' ),
+					'html'  => 'checkboxHiddenVal',
+					'def'   => '0',
+				),
+				'start_optimization'                      => array(
+					'label' => esc_html__( 'Start index tables optimization', 'woo-product-filter' ),
+					'desc'  => esc_html__( 'Sometimes index tables take up more space than they should, and product filtering takes longer than they should. Start optimizing your index tables to defragment them and rebuild your data in the most efficient way.', 'woo-product-filter' ),
+					'html'  => 'startOptimizingButton',
+					'def'   => '',
+				),
+				'optimizing_schedule'                     => array(
+					'label'        => esc_html__( 'Start optimization on a schedule', 'woo-product-filter' ),
+					'desc'         => esc_html__( 'Index tables optimization will start at the selected time according to the schedule', 'woo-product-filter' ),
+					'html'         => 'checkboxHiddenVal',
+					'def'          => '0',
+					'add_sub_opts' => array( $this, 'getSettingsOptimizingSchedule' ),
+				),
+				'price_thousands_sep'                     => array(
+					'label' => esc_html__( 'Price thousands separator', 'woo-product-filter' ),
+					'desc'  => esc_html__( 'Add thousands separator to the min/max prices in the Price filter', 'woo-product-filter' ),
+					'html'  => 'checkboxHiddenVal',
+					'def'   => '0',
+				),
+				'discourage_search_engines_from_indexing' => array(
+					'label' => esc_html__( 'Discourage search engines from indexing', 'woo-product-filter' ),
+					'desc'  => esc_html__( 'Discourages search engines from indexing pages that include URL parameters created by the product filter.', 'woo-product-filter' ),
+					'html'  => 'checkboxHiddenVal',
+					'def'   => '0',
+				),
+				'load_products_filter_wc_product_query_priority' => array(
+					'label' => esc_html__( 'WooCommerce product query action priority', 'woo-product-filter' ),
+					'desc'  => esc_html__( 'Leave blank for the default value.', 'woo-product-filter' ),
+					'html'  => 'input',
+					'def'   => '',
+				),
 			),
-			'disable_autoindexing' => array(
-				'label'        => esc_html__( 'Disable automatic calculation of index tables after editing products', 'woo-product-filter' ),
-				'desc'         => esc_html__( 'This can be useful if you add products only through imports. Then after importing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
-				'html'         => 'checkboxHiddenVal',
-				'def'          => '0',
-			),
-			'disable_autoindexing_by_ss' => array(
-				'label'        => esc_html__( 'Disable automatic calculation of index tables after product stock changes', 'woo-product-filter' ),
-				'desc'         => esc_html__( 'This can be useful when changing inventory status in bulk. Then after changing, just do a full recalculation of the index tables once by clicking the button above.', 'woo-product-filter' ),
-				'html'         => 'checkboxHiddenVal',
-				'def'          => '0',
-			),
-			'indexing_schedule' => array(
-				'label'        => esc_html__( 'Start indexing on a schedule', 'woo-product-filter' ),
-				'desc'         => esc_html__( 'Indexing will start at the selected time according to the schedule', 'woo-product-filter' ),
-				'html'         => 'checkboxHiddenVal',
-				'def'          => '0',
-				'add_sub_opts' => array( $this, 'getSettingsIndexingSchedule' ),
-			),
-			'logging' => array(
-				'label'        => esc_html__('Logging', 'woo-product-filter'),
-				'desc'         => esc_html__('Save debug messages to the WooCommerce SystemStatus Log', 'woo-product-filter'),
-				'html'         => 'checkboxHiddenVal',
-				'def'          => '0',
-			),
-			'start_optimization' => array(
-				'label'        => esc_html__('Start index tables optimization', 'woo-product-filter'),
-				'desc'         => esc_html__('Sometimes index tables take up more space than they should, and product filtering takes longer than they should. Start optimizing your index tables to defragment them and rebuild your data in the most efficient way.', 'woo-product-filter'),
-				'html'         => 'startOptimizingButton',
-				'def'          => '',
-			),
-			'optimizing_schedule' => array(
-				'label'        => esc_html__( 'Start optimization on a schedule', 'woo-product-filter' ),
-				'desc'         => esc_html__( 'Index tables optimization will start at the selected time according to the schedule', 'woo-product-filter' ),
-				'html'         => 'checkboxHiddenVal',
-				'def'          => '0',
-				'add_sub_opts' => array( $this, 'getSettingsOptimizingSchedule' ),
-			),
-			'price_thousands_sep' => array(
-				'label'        => esc_html__( 'Price thousands separator', 'woo-product-filter' ),
-				'desc'         => esc_html__( 'Add thousands separator to the min/max prices in the Price filter', 'woo-product-filter' ),
-				'html'         => 'checkboxHiddenVal',
-				'def'          => '0',
-			),
-			'discourage_search_engines_from_indexing' => array(
-				'label'        => esc_html__( 'Discourage search engines from indexing', 'woo-product-filter' ),
-				'desc'         => esc_html__( 'Discourages search engines from indexing pages that include URL parameters created by the product filter.', 'woo-product-filter' ),
-				'html'         => 'checkboxHiddenVal',
-				'def'          => '0',
-			),
-			'load_products_filter_wc_product_query_priority' => array(
-				'label'        => esc_html__( 'WooCommerce product query action priority', 'woo-product-filter'),
-				'desc'         => esc_html__( 'Leave blank for the default value.', 'woo-product-filter' ),
-				'html'         => 'input',
-				'def'          => '',
-			),
-		), $options['general']['opts']);
+			$options['general']['opts']
+		);
 
 		$options['general']['opts'] = $opts;
 		return $options;
@@ -188,7 +191,7 @@ class MetaWpf extends ModuleWpf {
 		);
 		$hoursHtml  = '';
 		foreach ( $hours as $value => $name ) {
-			$selected  = ( (int) $hourSelect === $value ) ? 'selected' : '';
+			$selected   = ( (int) $hourSelect === $value ) ? 'selected' : '';
 			$hoursHtml .= "<option value=\"{$value}\" {$selected}>{$name}</option>";
 		}
 
@@ -205,7 +208,7 @@ class MetaWpf extends ModuleWpf {
 		);
 		$daysHtml  = '';
 		foreach ( $days as $value => $name ) {
-			$selected = ( (int) $daySelect === $value ) ? 'selected' : '';
+			$selected  = ( (int) $daySelect === $value ) ? 'selected' : '';
 			$daysHtml .= "<option value=\"{$value}\" {$selected}>{$name}</option>";
 		}
 
@@ -217,7 +220,7 @@ class MetaWpf extends ModuleWpf {
 	 */
 	public function recalcProductMetaValues( $productId ) {
 		if ( ! $this->isDisabledAutoindexing() ) {
-			if (self::$wpfPreviousProductId !== $productId) {
+			if ( self::$wpfPreviousProductId !== $productId ) {
 				self::$wpfPreviousProductId = $productId;
 				$this->getModel()->recalcMetaValues( $productId );
 			}
@@ -229,7 +232,7 @@ class MetaWpf extends ModuleWpf {
 	 */
 	public function recalcProductMetaValuesAcf( $productId ) {
 		if ( ! $this->isDisabledAutoindexing() ) {
-			if (self::$wpfPreviousProductIdAcf !== $productId) {
+			if ( self::$wpfPreviousProductIdAcf !== $productId ) {
 				self::$wpfPreviousProductIdAcf = $productId;
 				$this->getModel()->recalcMetaValues( $productId );
 			}
@@ -250,7 +253,7 @@ class MetaWpf extends ModuleWpf {
 	 */
 	public function calcNeededMetaValues( $one = false ) {
 		if ( ! $this->isGlobalCalcRunning() ) {
-			if ($one && $this->isDisabledAutoindexingBySS() && $this->isDisabledAutoindexing()) {
+			if ( $one && $this->isDisabledAutoindexingBySS() && $this->isDisabledAutoindexing() ) {
 				return;
 			}
 			if ( ! $one || ! $this->calculated ) {
@@ -282,7 +285,6 @@ class MetaWpf extends ModuleWpf {
 		}
 
 		$this->getModel()->recalcMetaValues();
-
 	}
 
 	/**
@@ -300,5 +302,4 @@ class MetaWpf extends ModuleWpf {
 		}
 		$this->getModel()->optimizeMetaTables();
 	}
-
 }

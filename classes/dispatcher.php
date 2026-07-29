@@ -28,7 +28,7 @@ class DispatcherWpf {
 		$numArgs = func_num_args();
 		if ( $numArgs > 1 ) {
 			$args = array( $t );
-			for ( $i = 1; $i < $numArgs; $i ++ ) {
+			for ( $i = 1; $i < $numArgs; $i++ ) {
 				$args[] = func_get_arg( $i );
 			}
 
@@ -59,7 +59,7 @@ class DispatcherWpf {
 		}
 		if ( func_num_args() > 2 ) {
 			$args = array( $t );
-			for ( $i = 1; $i < func_num_args(); $i ++ ) {
+			for ( $i = 1; $i < func_num_args(); $i++ ) {
 				$args[] = func_get_arg( $i );
 			}
 

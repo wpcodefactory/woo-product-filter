@@ -58,7 +58,7 @@ if ( ! function_exists( 'woobewoo_pf_import_class' ) ) {
 
 				return true;
 			}
-			//return importWpf($path);
+			// return importWpf($path);
 		}
 
 		return false;
@@ -79,7 +79,7 @@ if ( ! function_exists( 'woobewoo_pf_toe_get_class_name' ) ) {
 		$className = '';
 		if ( class_exists( $class . woobewoo_pf_str_first_up( WPF_CODE ) ) ) {
 			$className = $class . woobewoo_pf_str_first_up( WPF_CODE );
-		} else if ( class_exists( WPF_CLASS_PREFIX . $class ) ) {
+		} elseif ( class_exists( WPF_CLASS_PREFIX . $class ) ) {
 			$className = WPF_CLASS_PREFIX . $class;
 		} else {
 			$className = $class;
@@ -147,11 +147,14 @@ if ( ! function_exists( 'woobewoo_pf_json_encode_utf_normal' ) ) {
 		if ( is_int( $value ) ) {
 			return (string) $value;
 		} elseif ( is_string( $value ) ) {
-			$value   = str_replace( array( '\\', '/', '"', "\r", "\n", "\b", "\f", "\t" ),
-				array( '\\\\', '\/', '\"', '\r', '\n', '\b', '\f', '\t' ), $value );
+			$value   = str_replace(
+				array( '\\', '/', '"', "\r", "\n", "\b", "\f", "\t" ),
+				array( '\\\\', '\/', '\"', '\r', '\n', '\b', '\f', '\t' ),
+				$value
+			);
 			$convmap = array( 0x80, 0xFFFF, 0, 0xFFFF );
 			$result  = '';
-			for ( $i = strlen( $value ) - 1; $i >= 0; $i -- ) {
+			for ( $i = strlen( $value ) - 1; $i >= 0; $i-- ) {
 				$mb_char = substr( $value, $i, 1 );
 				$result  = $mb_char . $result;
 			}
@@ -166,7 +169,7 @@ if ( ! function_exists( 'woobewoo_pf_json_encode_utf_normal' ) ) {
 		} elseif ( is_array( $value ) ) {
 			$with_keys = false;
 			$n         = count( $value );
-			for ( $i = 0, reset( $value ); $i < $n; $i ++, next( $value ) ) {
+			for ( $i = 0, reset( $value ); $i < $n; $i++, next( $value ) ) {
 				if ( key( $value ) !== $i ) {
 					$with_keys = true;
 					break;
@@ -222,7 +225,10 @@ if ( ! function_exists( 'woobewoo_pf_prepare_params' ) ) {
 			$d['params']                  = $params;
 		}
 		if ( empty( $options ) ) {
-			$options = array( 'value' => array( 'EMPTY' ), 'data' => array() );
+			$options = array(
+				'value' => array( 'EMPTY' ),
+				'data'  => array(),
+			);
 		}
 		if ( isset( $d['code'] ) ) {
 			if ( '' == $d['code'] ) {
@@ -281,7 +287,7 @@ if ( ! function_exists( 'woobewoo_pf_recursive_implode' ) ) {
 			if ( $i < ( $count - 1 ) ) {
 				$res .= $glue;
 			}
-			$i ++;
+			++$i;
 		}
 
 		return $res;
@@ -329,17 +335,17 @@ if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
 				$plugWpUrl = 'https://wordpress.org/plugins/woo-product-filter/';
 				echo '<div class="notice error is-dismissible"><p><strong>';
 				/* translators: 1: plugin name 2: plugin version */
-				echo sprintf( esc_html__( 'Please install latest PRO version of %1$s plugin (requires at least %2$s). ', 'woo-product-filter' ), esc_html( $plugName ), esc_html( WPF_PRO_REQUIRES ) );
+				printf( esc_html__( 'Please install latest PRO version of %1$s plugin (requires at least %2$s). ', 'woo-product-filter' ), esc_html( $plugName ), esc_html( WPF_PRO_REQUIRES ) );
 				/* translators: %s: plugin name */
 				echo sprintf( esc_html__( 'In this way you will have full and upgraded PRO version of %s.', 'woo-product-filter' ), esc_html( $plugName ) ) .
-				     '</strong></p></div>';
-			} else if ( FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
+					'</strong></p></div>';
+			} elseif ( FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
 				$plugName  = __( 'Product Filter by WBW', 'woo-product-filter' );
 				$plugWpUrl = 'https://wordpress.org/plugins/woo-product-filter/';
 				echo '<div class="notice error is-dismissible"><p><strong>';
 				/* translators: %s: plugin name */
 				echo sprintf( esc_html__( 'The plugin %s started indexing the product database metadata. If you have a large database, this may take a while, but in the future it will significantly increase your filtering speed.', 'woo-product-filter' ), esc_html( $plugName ) ) .
-				     '</strong></p></div>';
+					'</strong></p></div>';
 			} else {
 				FrameWpf::_()->getModule( 'overview' )->getView()->showRestApiInfo();
 			}
@@ -362,7 +368,7 @@ if ( ! function_exists( 'woobewoo_pf_pro_deactivate' ) ) {
 				$pluginData  = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
 				$isProActive = FrameWpf::_()->moduleActive( 'access' );
 				if ( ! version_compare( $pluginData['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
-					//deactivate_plugins($proPlugin);
+					// deactivate_plugins($proPlugin);
 					if ( $isProActive ) {
 						call_user_func_array( array( 'ModInstallerWpf', 'deactivate' ), array( array( 'license' ) ) );
 					}

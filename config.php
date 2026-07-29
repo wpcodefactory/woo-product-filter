@@ -6,7 +6,6 @@
  *
  * @todo (v3.1.8) Update `WPF_PRO_REQUIRES`?
  * @author woobewoo
- *
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -19,7 +18,7 @@ if ( ! defined( 'WPF_DS' ) ) {
 	define( 'WPF_DS', DIRECTORY_SEPARATOR );
 }
 
-define( 'WPF_PLUG_NAME', basename( dirname( __FILE__ ) ) );
+define( 'WPF_PLUG_NAME', basename( __DIR__ ) );
 define( 'WPF_DIR', WP_PLUGIN_DIR . WPF_DS . WPF_PLUG_NAME . WPF_DS );
 define( 'WPF_TPL_DIR', WPF_DIR . 'tpl' . WPF_DS );
 define( 'WPF_CLASSES_DIR', WPF_DIR . 'classes' . WPF_DS );
@@ -35,11 +34,11 @@ define( 'WPF_PLUGINS_URL', plugin_dir_url( __FILE__ ) );
 if ( ! defined( 'WPF_SITE_URL' ) ) {
 	define( 'WPF_SITE_URL', get_bloginfo( 'wpurl' ) . '/' );
 }
-define('WPF_JS_PATH', WPF_PLUGINS_URL . 'js/');
-define('WPF_CSS_PATH', WPF_PLUGINS_URL . 'css/');
-define('WPF_IMG_PATH', WPF_PLUGINS_URL . 'img/');
-define('WPF_MODULES_PATH', WPF_PLUGINS_URL . 'modules/');
-define('WPF_TEMPLATES_PATH', WPF_PLUGINS_URL . 'templates/');
+define( 'WPF_JS_PATH', WPF_PLUGINS_URL . 'js/' );
+define( 'WPF_CSS_PATH', WPF_PLUGINS_URL . 'css/' );
+define( 'WPF_IMG_PATH', WPF_PLUGINS_URL . 'img/' );
+define( 'WPF_MODULES_PATH', WPF_PLUGINS_URL . 'modules/' );
+define( 'WPF_TEMPLATES_PATH', WPF_PLUGINS_URL . 'templates/' );
 define( 'WPF_JS_DIR', WPF_DIR . 'js/' );
 
 define( 'WPF_URL', WPF_SITE_URL );
@@ -61,7 +60,7 @@ define( 'WPF_CURRENT', 'current' );
 define( 'WPF_EOL', "\n" );
 
 define( 'WPF_PLUGIN_INSTALLED', true );
-define( 'WPF_VERSION', '3.3.0-dev-20260729-1810' );
+define( 'WPF_VERSION', '3.3.0-dev-20260729-1855' );
 define( 'WPF_PRO_REQUIRES', '2.0.0' );
 define( 'WPF_USER', 'user' );
 

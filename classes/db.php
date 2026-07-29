@@ -26,27 +26,27 @@ class DbWpf {
 
 	public static function get( $query, $get = 'all', $outputType = ARRAY_A ) {
 		global $wpdb;
-		$get = strtolower($get);
-		$res = null;
-		$query = self::prepareQuery($query);
-		self::$query = $query;
+		$get                      = strtolower( $get );
+		$res                      = null;
+		$query                    = self::prepareQuery( $query );
+		self::$query              = $query;
 		$wpdb->wpf_prepared_query = $query;
-		switch ($get) {
+		switch ( $get ) {
 			case 'one':
-				$res = $wpdb->get_var($wpdb->wpf_prepared_query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$res = $wpdb->get_var( $wpdb->wpf_prepared_query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				break;
 			case 'row':
-				$res = $wpdb->get_row($wpdb->wpf_prepared_query, $outputType); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$res = $wpdb->get_row( $wpdb->wpf_prepared_query, $outputType ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				break;
 			case 'col':
-				$res = $wpdb->get_col($wpdb->wpf_prepared_query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$res = $wpdb->get_col( $wpdb->wpf_prepared_query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				break;
 			case 'all':
 			default:
-				$res = $wpdb->get_results($wpdb->wpf_prepared_query, $outputType); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$res = $wpdb->get_results( $wpdb->wpf_prepared_query, $outputType ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				break;
 		}
-		return empty($wpdb->last_error) ? $res : false;
+		return empty( $wpdb->last_error ) ? $res : false;
 	}
 
 	/**
@@ -56,15 +56,11 @@ class DbWpf {
 	 */
 	public static function query( $query, $affected = false ) {
 		global $wpdb;
-		$wpdb->wpf_prepared_query = self::prepareQuery($query);
+		$wpdb->wpf_prepared_query = self::prepareQuery( $query );
 		return (
-			$affected
-			? $wpdb->query($wpdb->wpf_prepared_query) // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			: (
-				$wpdb->query($wpdb->wpf_prepared_query) === false // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-				? false
-				: true
-			)
+			$affected ?
+				$wpdb->query( $wpdb->wpf_prepared_query ) : // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				( $wpdb->query( $wpdb->wpf_prepared_query ) === false ? false : true )  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		);
 	}
 
@@ -99,9 +95,10 @@ class DbWpf {
 	public static function prepareQuery( $query ) {
 		global $wpdb;
 		return str_replace(
-				array('#__', '^__', '@__'),
-				array($wpdb->prefix, WPF_DB_PREF, $wpdb->prefix . WPF_DB_PREF),
-				$query);
+			array( '#__', '^__', '@__' ),
+			array( $wpdb->prefix, WPF_DB_PREF, $wpdb->prefix . WPF_DB_PREF ),
+			$query
+		);
 	}
 
 	public static function getTableName( $name ) {
@@ -125,13 +122,13 @@ class DbWpf {
 	 * @return 3.3.0
 	 */
 	public static function timeToDate( $timestamp = 0 ) {
-		if ($timestamp) {
-			if (!is_numeric($timestamp)) {
-				$timestamp = woobewoo_pf_date_to_timestamp($timestamp);
+		if ( $timestamp ) {
+			if ( ! is_numeric( $timestamp ) ) {
+				$timestamp = woobewoo_pf_date_to_timestamp( $timestamp );
 			}
-			return gmdate('Y-m-d', $timestamp);
+			return gmdate( 'Y-m-d', $timestamp );
 		} else {
-			return gmdate('Y-m-d');
+			return gmdate( 'Y-m-d' );
 		}
 	}
 
@@ -141,66 +138,69 @@ class DbWpf {
 	 * @version 3.3.0
 	 */
 	public static function dateToTime( $date ) {
-		if (empty($date)) {
+		if ( empty( $date ) ) {
 			return '';
 		}
-		if (strpos($date, WPF_DATE_DL)) {
-			return woobewoo_pf_date_to_timestamp($date);
+		if ( strpos( $date, WPF_DATE_DL ) ) {
+			return woobewoo_pf_date_to_timestamp( $date );
 		}
-		$arr = explode('-', $date);
-		return woobewoo_pf_date_to_timestamp($arr[2] . WPF_DATE_DL . $arr[1] . WPF_DATE_DL . $arr[0]);
+		$arr = explode( '-', $date );
+		return woobewoo_pf_date_to_timestamp( $arr[2] . WPF_DATE_DL . $arr[1] . WPF_DATE_DL . $arr[0] );
 	}
 
 	public static function exist( $table, $column = '', $value = '' ) {
-		if (empty($column) && empty($value)) {       // Check if table exist
-			$res = self::get('SHOW TABLES LIKE "' . $table . '"', 'one');
-		} elseif (empty($value)) {                   // Check if column exist
-			$res = self::get('SHOW COLUMNS FROM ' . $table . ' LIKE "' . $column . '"', 'one');
+		if ( empty( $column ) && empty( $value ) ) {       // Check if table exist
+			$res = self::get( 'SHOW TABLES LIKE "' . $table . '"', 'one' );
+		} elseif ( empty( $value ) ) {                   // Check if column exist
+			$res = self::get( 'SHOW COLUMNS FROM ' . $table . ' LIKE "' . $column . '"', 'one' );
 		} else {                                     // Check if value in column table exist
-			$res = self::get('SELECT COUNT(*) AS total FROM ' . $table . ' WHERE ' . $column . ' = "' . $value . '"', 'one');
+			$res = self::get( 'SELECT COUNT(*) AS total FROM ' . $table . ' WHERE ' . $column . ' = "' . $value . '"', 'one' );
 		}
-		return !empty($res);
+		return ! empty( $res );
 	}
 
 	public static function prepareHtml( $d ) {
-		if (is_array($d)) {
-			foreach ($d as $i => $el) {
+		if ( is_array( $d ) ) {
+			foreach ( $d as $i => $el ) {
 				$d[ $i ] = self::prepareHtml( $el );
 			}
 		} else {
-			$d = esc_html($d);
+			$d = esc_html( $d );
 		}
 		return $d;
 	}
 
 	public static function prepareHtmlIn( $d ) {
-		if (is_array($d)) {
-			foreach ($d as $i => $el) {
+		if ( is_array( $d ) ) {
+			foreach ( $d as $i => $el ) {
 				$d[ $i ] = self::prepareHtml( $el );
 			}
 		} else {
-			$d = wp_filter_nohtml_kses($d);
+			$d = wp_filter_nohtml_kses( $d );
 		}
 		return $d;
 	}
 
 	public static function escape( $data ) {
 		global $wpdb;
-		return $wpdb->_escape($data);
+		return $wpdb->_escape( $data );
 	}
 
 	public static function getAutoIncrement( $table ) {
-		return (int) self::get('SELECT AUTO_INCREMENT
+		return (int) self::get(
+			'SELECT AUTO_INCREMENT
 			FROM information_schema.tables
 			WHERE table_name = "' . $table . '"
-			AND table_schema = DATABASE( );', 'one');
+			AND table_schema = DATABASE( );',
+			'one'
+		);
 	}
 
 	public static function setAutoIncrement( $table, $autoIncrement ) {
-		return self::query('ALTER TABLE `' . $table . '` AUTO_INCREMENT = ' . $autoIncrement . ';');
+		return self::query( 'ALTER TABLE `' . $table . '` AUTO_INCREMENT = ' . $autoIncrement . ';' );
 	}
 
 	public static function existsTableColumn( $table, $column ) {
-		return self::get("SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='" . $table . "' AND table_schema=DATABASE( ) AND column_name='" . $column . "'", 'one') == 1;
+		return self::get( "SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='" . $table . "' AND table_schema=DATABASE( ) AND column_name='" . $column . "'", 'one' ) == 1;
 	}
 }

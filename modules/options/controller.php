@@ -37,7 +37,7 @@ class OptionsControllerWpf extends ControllerWpf {
 	public function getPermissions() {
 		return array(
 			WPF_USERLEVELS => array(
-				WPF_ADMIN => array( 'woobewoo_pf_save_group' )
+				WPF_ADMIN => array( 'woobewoo_pf_save_group' ),
 			),
 		);
 	}

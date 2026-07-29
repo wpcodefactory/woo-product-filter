@@ -89,8 +89,8 @@ class OverviewControllerWpf extends ControllerWpf {
 			$opts = array(
 				'opt_values' => array(
 					'disable_autoindexing'       => 1,
-					'disable_autoindexing_by_ss' => 1
-				)
+					'disable_autoindexing_by_ss' => 1,
+				),
 			);
 			if ( FrameWpf::_()->getModule( 'options' )->get( 'indexing_schedule' ) != 1 ) {
 				$opts['opt_values']['indexing_schedule'] = 1;
@@ -121,17 +121,16 @@ class OverviewControllerWpf extends ControllerWpf {
 				'woobewoo_pf_approve_notice' => array(
 					WPF_ADMIN,
 				),
-				'woobewoo_pf_subscribe' => array(
+				'woobewoo_pf_subscribe'      => array(
 					WPF_ADMIN,
 				),
-				'woobewoo_pf_contactus' => array(
+				'woobewoo_pf_contactus'      => array(
 					WPF_ADMIN,
 				),
-				'woobewoo_pf_rating' => array(
+				'woobewoo_pf_rating'         => array(
 					WPF_ADMIN,
 				),
 			),
 		);
 	}
-
 }

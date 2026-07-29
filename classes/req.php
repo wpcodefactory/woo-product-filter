@@ -78,10 +78,10 @@ class ReqWpf {
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
-	 * @param mixed $default default value - will be returned if $name wasn't found
+	 * @param mixed  $default default value - will be returned if $name wasn't found
 	 *
 	 * @return mixed value of a variable, if didn't found - $default (NULL by default)
-	*/
+	 */
 	public static function getVar( $name, $from = 'all', $default = null ) {
 		if ( self::$_requestWithNonce ) {
 			$nonce = empty( $_REQUEST['_wpnonce'] ) ?

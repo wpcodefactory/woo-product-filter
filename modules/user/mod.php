@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) || exit;
 
 class UserWpf extends ModuleWpf {
 
-	protected $_data = array();
-	protected $_curentID = 0;
+	protected $_data       = array();
+	protected $_curentID   = 0;
 	protected $_dataLoaded = false;
 
 	public function loadUserData() {
@@ -31,7 +31,7 @@ class UserWpf extends ModuleWpf {
 	public function getCurrentUserPosition() {
 		if ( $this->isAdmin() ) {
 			return WPF_ADMIN;
-		} else if ( $this->getCurrentID() ) {
+		} elseif ( $this->getCurrentID() ) {
 			return WPF_LOGGED;
 		} else {
 			return WPF_GUEST;
@@ -64,9 +64,11 @@ class UserWpf extends ModuleWpf {
 
 	public function getAdminsList() {
 		global $wpdb;
-		$admins = DbWpf::get( 'SELECT * FROM #__users
+		$admins = DbWpf::get(
+			'SELECT * FROM #__users
 			INNER JOIN #__usermeta ON #__users.ID = #__usermeta.user_id
-			WHERE #__usermeta.meta_key = "#__capabilities" AND #__usermeta.meta_value LIKE "%administrator%"' );
+			WHERE #__usermeta.meta_key = "#__capabilities" AND #__usermeta.meta_value LIKE "%administrator%"'
+		);
 
 		return $admins;
 	}

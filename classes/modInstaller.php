@@ -117,16 +117,16 @@ class ModInstallerWpf {
 	 * @return bool is success - true, else - false.
 	 */
 	public static function moveFiles( $code, $path ) {
-		if (!is_dir(WPF_MODULES_DIR . $code)) {
-			if (mkdir(WPF_MODULES_DIR . $code)) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
-				UtilsWpf::copyDirectories($path, WPF_MODULES_DIR . $code);
+		if ( ! is_dir( WPF_MODULES_DIR . $code ) ) {
+			if ( mkdir( WPF_MODULES_DIR . $code ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
+				UtilsWpf::copyDirectories( $path, WPF_MODULES_DIR . $code );
 				return true;
 			} else {
 				ErrorsWpf::push(
 					esc_html(
 						sprintf(
 							/* translators: %s: modules dir */
-							__('Cannot create module directory. Try to set permission to %s directory 755 or 777', 'woo-product-filter'),
+							__( 'Cannot create module directory. Try to set permission to %s directory 755 or 777', 'woo-product-filter' ),
 							WPF_MODULES_DIR
 						)
 					),
@@ -146,8 +146,8 @@ class ModInstallerWpf {
 	 */
 	private static function _getPluginLocations() {
 		$locations = array();
-		$plug = ReqWpf::getVar('plugin');
-		if ( ( empty( $plug ) || is_array($plug) ) && !empty(self::$extPlugName) ) {
+		$plug      = ReqWpf::getVar( 'plugin' );
+		if ( ( empty( $plug ) || is_array( $plug ) ) && ! empty( self::$extPlugName ) ) {
 			$plug = self::$extPlugName;
 		}
 
@@ -156,16 +156,16 @@ class ModInstallerWpf {
 			if ( isset( $plug[0] ) ) {
 				$plug = $plug[0];
 			}
-		} else if (is_array($plug)) {
+		} elseif ( is_array( $plug ) ) {
 			if ( isset( $plug[0] ) ) {
 				$plug = $plug[0];
 			}
 		}
 
-		$locations['plugPath'] = empty($plug) && function_exists('getProPlugFullPathWpf') ? plugin_basename(getProPlugFullPathWpf()) : plugin_basename( trim( $plug ) );
-		$locations['plugDir'] = dirname(WP_PLUGIN_DIR . WPF_DS . $locations['plugPath']);
+		$locations['plugPath']     = empty( $plug ) && function_exists( 'getProPlugFullPathWpf' ) ? plugin_basename( getProPlugFullPathWpf() ) : plugin_basename( trim( $plug ) );
+		$locations['plugDir']      = dirname( WP_PLUGIN_DIR . WPF_DS . $locations['plugPath'] );
 		$locations['plugMainFile'] = WP_PLUGIN_DIR . WPF_DS . $locations['plugPath'];
-		$locations['xmlPath'] = $locations['plugDir'] . WPF_DS . 'install.xml';
+		$locations['xmlPath']      = $locations['plugDir'] . WPF_DS . 'install.xml';
 		return $locations;
 	}
 
@@ -181,30 +181,30 @@ class ModInstallerWpf {
 	private static function _getModulesFromXml( $xmlPath ) {
 		$modDataArr = array();
 
-		if (function_exists('simplexml_load_file')) {
-			$xml = UtilsWpf::getXml($xmlPath);
-			if ($xml) {
-				if (isset($xml->modules) && isset($xml->modules->mod)) {
+		if ( function_exists( 'simplexml_load_file' ) ) {
+			$xml = UtilsWpf::getXml( $xmlPath );
+			if ( $xml ) {
+				if ( isset( $xml->modules ) && isset( $xml->modules->mod ) ) {
 					$modules = array();
 					$xmlMods = $xml->modules->children();
-					foreach ($xmlMods->mod as $mod) {
+					foreach ( $xmlMods->mod as $mod ) {
 						$modules[] = $mod;
 					}
-					if (empty($modules)) {
-						ErrorsWpf::push(esc_html__('No modules were found in XML file', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
+					if ( empty( $modules ) ) {
+						ErrorsWpf::push( esc_html__( 'No modules were found in XML file', 'woo-product-filter' ), ErrorsWpf::MOD_INSTALL );
 					} else {
-						foreach ($modules as $m) {
-							$modDataArr[] = UtilsWpf::xmlNodeAttrsToArr($m);
+						foreach ( $modules as $m ) {
+							$modDataArr[] = UtilsWpf::xmlNodeAttrsToArr( $m );
 						}
 					}
 				} else {
-					ErrorsWpf::push(esc_html__('Invalid XML file', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
+					ErrorsWpf::push( esc_html__( 'Invalid XML file', 'woo-product-filter' ), ErrorsWpf::MOD_INSTALL );
 				}
 			} else {
-				ErrorsWpf::push(esc_html__('No XML file were found', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
+				ErrorsWpf::push( esc_html__( 'No XML file were found', 'woo-product-filter' ), ErrorsWpf::MOD_INSTALL );
 			}
 		} else {
-			$modDataArr = maybe_unserialize(WPF_PRO_MODULES);
+			$modDataArr = maybe_unserialize( WPF_PRO_MODULES );
 		}
 		return $modDataArr;
 	}
@@ -220,36 +220,36 @@ class ModInstallerWpf {
 	 * @return bool true if check ok, else - false.
 	 */
 	public static function check( $extPlugName = '' ) {
-		if (WPF_TEST_MODE) {
-			add_action('activated_plugin', array(FrameWpf::_(), 'savePluginActivationErrors'));
+		if ( WPF_TEST_MODE ) {
+			add_action( 'activated_plugin', array( FrameWpf::_(), 'savePluginActivationErrors' ) );
 		}
-		if (!empty($extPlugName)) {
+		if ( ! empty( $extPlugName ) ) {
 			self::$extPlugName = $extPlugName;
 		}
 		$locations = self::_getPluginLocations();
 
-		$modules = self::_getModulesFromXml($locations['xmlPath']);
-		foreach ($modules as $modDataArr) {
-			if (!empty($modDataArr)) {
+		$modules = self::_getModulesFromXml( $locations['xmlPath'] );
+		foreach ( $modules as $modDataArr ) {
+			if ( ! empty( $modDataArr ) ) {
 				// If module Exists - just activate it, we can't check this using FrameWpf::moduleExists because this will not work for multi-site WP
-				if (FrameWpf::_()->getTable('modules')->exists($modDataArr['code'], 'code')) {
-					self::activate($modDataArr);
+				if ( FrameWpf::_()->getTable( 'modules' )->exists( $modDataArr['code'], 'code' ) ) {
+					self::activate( $modDataArr );
 					// if not - install it
 				} else {
 					$m = '';
-					if (!self::install($modDataArr, $locations['plugDir'])) {
+					if ( ! self::install( $modDataArr, $locations['plugDir'] ) ) {
 						/* translators: %s: module name */
-						ErrorsWpf::push(esc_html(sprintf(__('Install %s failed', 'woo-product-filter'), $modDataArr['code'])), ErrorsWpf::MOD_INSTALL);
+						ErrorsWpf::push( esc_html( sprintf( __( 'Install %s failed', 'woo-product-filter' ), $modDataArr['code'] ) ), ErrorsWpf::MOD_INSTALL );
 					}
 				}
 			}
 		}
 		self::$extPlugName = '';
-		if (ErrorsWpf::haveErrors(ErrorsWpf::MOD_INSTALL)) {
-			self::displayErrors(false);
+		if ( ErrorsWpf::haveErrors( ErrorsWpf::MOD_INSTALL ) ) {
+			self::displayErrors( false );
 			return false;
 		}
-		update_option(WPF_CODE . '_full_installed', 1);
+		update_option( WPF_CODE . '_full_installed', 1 );
 		return true;
 	}
 
@@ -265,24 +265,26 @@ class ModInstallerWpf {
 	 */
 	public static function deactivate( $exclude = array() ) {
 		$locations = self::_getPluginLocations();
-		$modules = self::_getModulesFromXml($locations['xmlPath']);
-		if (empty($exclude) || !is_array($exclude)) {
+		$modules   = self::_getModulesFromXml( $locations['xmlPath'] );
+		if ( empty( $exclude ) || ! is_array( $exclude ) ) {
 			$exclude = array();
 		}
 
-		foreach ($modules as $modDataArr) {
-			if (FrameWpf::_()->moduleActive($modDataArr['code']) && !in_array($modDataArr['code'], $exclude)) { // If module is active - then deactivate it
-				if (FrameWpf::_()->getModule('options')->getModel('modules')->put(array(
-					'id' => FrameWpf::_()->getModule($modDataArr['code'])->getID(),
-					'active' => 0,
-				))->error) {
-					ErrorsWpf::push(esc_html__('Error Deactivation module', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
+		foreach ( $modules as $modDataArr ) {
+			if ( FrameWpf::_()->moduleActive( $modDataArr['code'] ) && ! in_array( $modDataArr['code'], $exclude ) ) { // If module is active - then deactivate it
+				if ( FrameWpf::_()->getModule( 'options' )->getModel( 'modules' )->put(
+					array(
+						'id'     => FrameWpf::_()->getModule( $modDataArr['code'] )->getID(),
+						'active' => 0,
+					)
+				)->error ) {
+					ErrorsWpf::push( esc_html__( 'Error Deactivation module', 'woo-product-filter' ), ErrorsWpf::MOD_INSTALL );
 				}
 			}
 		}
 
-		if (ErrorsWpf::haveErrors(ErrorsWpf::MOD_INSTALL)) {
-			self::displayErrors(false);
+		if ( ErrorsWpf::haveErrors( ErrorsWpf::MOD_INSTALL ) ) {
+			self::displayErrors( false );
 			return false;
 		}
 		return true;
@@ -293,20 +295,22 @@ class ModInstallerWpf {
 	 */
 	public static function activate( $modDataArr ) {
 		$locations = self::_getPluginLocations();
-		$modules = self::_getModulesFromXml($locations['xmlPath']);
-		foreach ($modules as $modDataArr) {
-			if (!FrameWpf::_()->moduleActive($modDataArr['code'])) { // If module is not active - then activate it
-				if (FrameWpf::_()->getModule('options')->getModel('modules')->put(array(
-					'code' => $modDataArr['code'],
-					'active' => 1,
-				))->error) {
-					ErrorsWpf::push(esc_html__('Error Activating module', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
+		$modules   = self::_getModulesFromXml( $locations['xmlPath'] );
+		foreach ( $modules as $modDataArr ) {
+			if ( ! FrameWpf::_()->moduleActive( $modDataArr['code'] ) ) { // If module is not active - then activate it
+				if ( FrameWpf::_()->getModule( 'options' )->getModel( 'modules' )->put(
+					array(
+						'code'   => $modDataArr['code'],
+						'active' => 1,
+					)
+				)->error ) {
+					ErrorsWpf::push( esc_html__( 'Error Activating module', 'woo-product-filter' ), ErrorsWpf::MOD_INSTALL );
 				} else {
-					$dbModData = FrameWpf::_()->getModule('options')->getModel('modules')->get(array('code' => $modDataArr['code']));
-					if (!empty($dbModData) && !empty($dbModData[0])) {
+					$dbModData = FrameWpf::_()->getModule( 'options' )->getModel( 'modules' )->get( array( 'code' => $modDataArr['code'] ) );
+					if ( ! empty( $dbModData ) && ! empty( $dbModData[0] ) ) {
 						$modDataArr['ex_plug_dir'] = $dbModData[0]['ex_plug_dir'];
 					}
-					self::_runModuleInstall($modDataArr, 'activate');
+					self::_runModuleInstall( $modDataArr, 'activate' );
 				}
 			}
 		}
@@ -316,11 +320,11 @@ class ModInstallerWpf {
 	 * Display all errors for module installer, must be used ONLY if You really need it.
 	 */
 	public static function displayErrors( $exit = true ) {
-		$errors = ErrorsWpf::get(ErrorsWpf::MOD_INSTALL);
-		foreach ($errors as $e) {
-			echo '<b class="woobewoo-error">' . esc_html($e) . '</b><br />';
+		$errors = ErrorsWpf::get( ErrorsWpf::MOD_INSTALL );
+		foreach ( $errors as $e ) {
+			echo '<b class="woobewoo-error">' . esc_html( $e ) . '</b><br />';
 		}
-		if ($exit) {
+		if ( $exit ) {
 			exit();
 		}
 	}
@@ -329,20 +333,20 @@ class ModInstallerWpf {
 	 * uninstall.
 	 */
 	public static function uninstall() {
-		$isPro = false;
+		$isPro     = false;
 		$locations = self::_getPluginLocations();
-		$modules = self::_getModulesFromXml($locations['xmlPath']);
-		foreach ($modules as $modDataArr) {
-			self::_uninstallTables($modDataArr);
-			FrameWpf::_()->getModule('options')->getModel('modules')->delete(array('code' => $modDataArr['code']));
-			UtilsWpf::deleteDir(WPF_MODULES_DIR . $modDataArr['code']);
+		$modules   = self::_getModulesFromXml( $locations['xmlPath'] );
+		foreach ( $modules as $modDataArr ) {
+			self::_uninstallTables( $modDataArr );
+			FrameWpf::_()->getModule( 'options' )->getModel( 'modules' )->delete( array( 'code' => $modDataArr['code'] ) );
+			UtilsWpf::deleteDir( WPF_MODULES_DIR . $modDataArr['code'] );
 
-			if ('license' == $modDataArr['code']) {
+			if ( 'license' == $modDataArr['code'] ) {
 				$isPro = true;
 			}
 		}
 
-		if ($isPro) {
+		if ( $isPro ) {
 			self::uninstallLicense();
 		}
 	}
@@ -351,7 +355,7 @@ class ModInstallerWpf {
 	 * uninstallLicense.
 	 */
 	public static function uninstallLicense() {
-		FrameWpf::_()->getModule('options')->getModel()->save('license_save_name', '');
+		FrameWpf::_()->getModule( 'options' )->getModel()->save( 'license_save_name', '' );
 	}
 
 	/**
@@ -360,13 +364,13 @@ class ModInstallerWpf {
 	 * @version 3.3.0
 	 */
 	protected static function _uninstallTables( $module ) {
-		if (is_dir(WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables')) {
-			$tableFiles = UtilsWpf::getFilesList(WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables');
-			if (!empty($tableNames)) {
-				foreach ($tableFiles as $file) {
-					$tableName = str_replace('.php', '', $file);
-					if (FrameWpf::_()->getTable($tableName)) {
-						FrameWpf::_()->getTable($tableName)->uninstall();
+		if ( is_dir( WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables' ) ) {
+			$tableFiles = UtilsWpf::getFilesList( WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables' );
+			if ( ! empty( $tableNames ) ) {
+				foreach ( $tableFiles as $file ) {
+					$tableName = str_replace( '.php', '', $file );
+					if ( FrameWpf::_()->getTable( $tableName ) ) {
+						FrameWpf::_()->getTable( $tableName )->uninstall();
 					}
 				}
 			}
