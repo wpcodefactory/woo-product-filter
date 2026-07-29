@@ -13,7 +13,12 @@ class MetaControllerWpf extends ControllerWpf {
 
 	protected $_code = 'meta';
 
-	public function doMetaIndexingFree() {
+	/**
+	 * woobewoo_pf_do_meta_indexing_free.
+	 *
+	 * @version 3.3.0
+	 */
+	public function woobewoo_pf_do_meta_indexing_free() {
 		return $this->woobewoo_pf_do_meta_indexing(false);
 	}
 
@@ -23,17 +28,21 @@ class MetaControllerWpf extends ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function woobewoo_pf_do_meta_indexing( $realAjax = true ) {
-		if ($realAjax) {
-			check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		}
-		if (!current_user_can('manage_options')) {
-			wp_die();
+		if ( $realAjax ) {
+			ReqWpf::verifyRequest();
+		} elseif ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Sorry, you are not allowed to perform this action.', 'woo-product-filter' ),
+				),
+				403
+			);
 		}
 
 		$res = new ResponseWpf();
 
-		if (ReqWpf::getVar('inCron')) {
-			if ( !wp_next_scheduled( 'wpf_calc_meta_indexing' ) ) {
+		if ( ReqWpf::getVar( 'inCron' ) ) {
+			if ( ! wp_next_scheduled( 'wpf_calc_meta_indexing' ) ) {
 				wp_schedule_single_event( time() + 3, 'wpf_calc_meta_indexing' );
 			}
 			$result = true;
@@ -41,10 +50,11 @@ class MetaControllerWpf extends ControllerWpf {
 			$result = $this->getModel()->recalcMetaValues();
 		}
 		if ( false != $result ) {
-			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
+			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
-			$res->pushError($this->getModel()->getErrors());
+			$res->pushError( $this->getModel()->getErrors() );
 		}
+
 		return $res->ajaxExec();
 	}
 
@@ -54,24 +64,22 @@ class MetaControllerWpf extends ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function woobewoo_pf_do_meta_optimizing() {
-		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		if (!current_user_can('manage_options')) {
-			wp_die();
-		}
+		ReqWpf::verifyRequest();
 
 		$res = new ResponseWpf();
 		if ( $this->getModel()->optimizeMetaTables() ) {
-			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
+			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
-			$res->pushError($this->getModel()->getErrors());
+			$res->pushError( $this->getModel()->getErrors() );
 		}
+
 		return $res->ajaxExec();
 	}
 
 	/**
 	 * getPermissions.
 	 *
-	 * @version 3.1.3
+	 * @version 3.3.0
 	 * @since   3.1.3
 	 *
 	 * @return array
@@ -80,7 +88,9 @@ class MetaControllerWpf extends ControllerWpf {
 		return array(
 			WPF_USERLEVELS => array(
 				WPF_ADMIN => array(
-					'doMetaIndexingFree', 'woobewoo_pf_do_meta_indexing', 'woobewoo_pf_do_meta_optimizing',
+					'woobewoo_pf_do_meta_indexing_free',
+					'woobewoo_pf_do_meta_indexing',
+					'woobewoo_pf_do_meta_optimizing',
 				)
 			),
 		);

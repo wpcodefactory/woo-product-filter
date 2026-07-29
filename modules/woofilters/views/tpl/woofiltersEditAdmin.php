@@ -262,7 +262,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 					?>
 
 					<?php HtmlWpf::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
-					<?php HtmlWpf::hidden( 'action', array( 'value' => 'save' ) ); ?>
+					<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
 					<?php HtmlWpf::hidden( 'id', array( 'value' => $this->filter['id'] ) ); ?>
 				</form>
 				<div class="woobewoo-clear"></div>

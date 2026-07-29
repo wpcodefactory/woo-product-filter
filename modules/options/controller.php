@@ -15,10 +15,7 @@ class OptionsControllerWpf extends ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function woobewoo_pf_save_group() {
-		check_ajax_referer( 'woobewoo-pf-save-nonce', 'wpfNonce' );
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die();
-		}
+		ReqWpf::verifyRequest();
 
 		$res = new ResponseWpf();
 		if ( $this->getModel()->woobewoo_pf_save_group( ReqWpf::get( 'post' ) ) ) {

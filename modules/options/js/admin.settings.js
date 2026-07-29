@@ -15,7 +15,7 @@ jQuery(document).ready(function(){
 	jQuery('#wpfSettingsForm').submit(function(){
 		jQuery(this).sendFormWpf({
 			btn: jQuery('#wpfSettingsSaveBtn'),
-			appendData: {wpfNonce: window.wpfNonce},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce},
 
 			onSuccess: function(res) {
 				if(res['messages'][0]) {
@@ -156,7 +156,7 @@ jQuery(document).ready(function(){
 			action: 'woobewoo_pf_do_meta_indexing',
 			},
 			btn: jQuery('#wpfStartMetaIndexing'),
-			appendData: {wpfNonce: window.wpfNonce, inCron: jQuery('#wpfStartIndexingCron').is(':checked') ? 1 : 0},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce, inCron: jQuery('#wpfStartIndexingCron').is(':checked') ? 1 : 0},
 			onSuccess: function(res) {
 				if (!res.error && res['messages'] && res['messages'].length) {
 					jQuery.sNotify({
@@ -176,7 +176,7 @@ jQuery(document).ready(function(){
 			action: 'woobewoo_pf_do_meta_optimizing',
 			},
 			btn: jQuery('#wpfStartOptimizing'),
-			appendData: {wpfNonce: window.wpfNonce},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce},
 			onSuccess: function(res) {
 				if (!res.error && res['messages'] && res['messages'].length) {
 					jQuery.sNotify({

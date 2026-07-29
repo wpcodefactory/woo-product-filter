@@ -21,6 +21,40 @@ class ReqWpf {
 		add_filter( 'sanitize_text_field', array( 'ReqWpf', 'sanitizeData' ), 999, 2 );
 	}
 
+	/**
+	 * verifyRequest.
+	 *
+	 * @version 3.3.0
+	 * @since 3.3.0
+	 *
+	 * @return void
+	 */
+	public static function verifyRequest() {
+		$nonce = empty( $_REQUEST['wpfNonce'] ) ?
+			'' :
+			sanitize_text_field( wp_unslash( $_REQUEST['wpfNonce'] ) );
+		if ( empty( $nonce ) && ! empty( $_REQUEST['_wpnonce'] ) ) {
+			$nonce = sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) );
+		}
+		if ( ! wp_verify_nonce( $nonce, 'woobewoo-pf-save-nonce' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Security check failed.', 'woo-product-filter' ),
+				),
+				403
+			);
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Sorry, you are not allowed to perform this action.', 'woo-product-filter' ),
+				),
+				403
+			);
+		}
+	}
+
 	public static function startSession() {
 		if ( ! UtilsWpf::isSessionStarted() ) {
 			if ( version_compare( phpversion(), '5.7.0', '<' ) ) {

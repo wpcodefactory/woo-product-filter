@@ -172,10 +172,7 @@ abstract class ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function woobewoo_pf_get_list_for_table() {
-		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		if (!current_user_can('manage_options')) {
-			wp_die();
-		}
+		ReqWpf::verifyRequest();
 		$res = new ResponseWpf();
 		$res->ignoreShellData();
 		$model = $this->getModel();
@@ -256,25 +253,25 @@ abstract class ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function woobewoo_pf_remove_group() {
-		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		if (!current_user_can('manage_options')) {
-			wp_die();
-		}
+		ReqWpf::verifyRequest();
 
 		$res = new ResponseWpf();
-		if ($this->getModel()->woobewoo_pf_remove_group(ReqWpf::getVar('listIds', 'post'))) {
-			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
+		if (
+			$this->getModel()->woobewoo_pf_remove_group( ReqWpf::getVar( 'listIds', 'post' ) )
+		) {
+			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
-			$res->pushError($this->getModel()->getErrors());
+			$res->pushError( $this->getModel()->getErrors() );
 		}
 		$res->ajaxExec();
 	}
+
 	public function clear() {
 		$res = new ResponseWpf();
-		if ($this->getModel()->clear()) {
-			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
+		if ( $this->getModel()->clear() ) {
+			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
-			$res->pushError($this->getModel()->getErrors());
+			$res->pushError( $this->getModel()->getErrors() );
 		}
 		$res->ajaxExec();
 	}

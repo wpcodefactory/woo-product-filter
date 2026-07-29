@@ -7,6 +7,7 @@
  */
 
 jQuery( document ).ready( function ( $ ) {
+
 	$( '.wpfStarsRatingLine input' ).on( 'change', function () {
 		var $this = $( this ),
 			$block = $this.closest( '.wpf-overview-block-body' ),
@@ -14,7 +15,7 @@ jQuery( document ).ready( function ( $ ) {
 		if ( value === 5 ) {
 			$( this ).sendFormWpf( {
 				data: 'mod=overview&action=woobewoo_pf_rating',
-				appendData: { wpfNonce: window.wpfNonce, rate: 5 },
+				appendData: { wpfNonce: woobewoo_pf_admin_ajax_object.nonce, rate: 5 },
 				noError: true,
 				onSuccess: function ( res ) {
 					wpfOverviewSubmitSuccess( $( '.wpfStarsRatingLine input' ), res );
@@ -41,7 +42,7 @@ jQuery( document ).ready( function ( $ ) {
 			$( this ).sendFormWpf( {
 				btn: $button,
 				data: 'mod=overview&action=woobewoo_pf_subscribe',
-				appendData: { wpfNonce: window.wpfNonce, email: email },
+				appendData: { wpfNonce: woobewoo_pf_admin_ajax_object.nonce, email: email },
 				noError: true,
 				onSuccess: function ( res ) {
 					wpfOverviewSubmitSuccess( $button, res, true );
@@ -50,6 +51,7 @@ jQuery( document ).ready( function ( $ ) {
 		}
 		return false;
 	} );
+
 	$( '#wpfContactSubmit' ).on( 'click', function () {
 		var $button = $( this ),
 			$form = $button.parent(),
@@ -75,7 +77,7 @@ jQuery( document ).ready( function ( $ ) {
 				btn: $button,
 				data: 'mod=overview&action=woobewoo_pf_contactus',
 				appendData: {
-					wpfNonce: window.wpfNonce,
+					wpfNonce: woobewoo_pf_admin_ajax_object.nonce,
 					email: email,
 					desc: $desc.val(),
 					name: $uname.val(),
@@ -95,6 +97,7 @@ jQuery( document ).ready( function ( $ ) {
 		}
 		return false;
 	} );
+
 	$( '#wpfRatingSubmit' ).on( 'click', function () {
 		var $button = $( this ),
 			$block = $button.closest( '.wpf-overview-block' ),
@@ -119,7 +122,7 @@ jQuery( document ).ready( function ( $ ) {
 				btn: $button,
 				data: 'mod=overview&action=woobewoo_pf_rating',
 				appendData: {
-					wpfNonce: window.wpfNonce,
+					wpfNonce: woobewoo_pf_admin_ajax_object.nonce,
 					email: email,
 					problem: problem,
 					rate: $block.find( 'input[name="wpfStarInput"]:checked' ).val()

@@ -6,7 +6,7 @@
  * @author woobewoo
  */
 
-(function ($) {
+( function ( $ ) {
 	"use strict";
 	function AdminPageElementor() {
 		this.$obj = this;
@@ -273,7 +273,7 @@
 				title: filterTitle,
 				duplicateId: typeof duplicateId !== 'undefined' ? duplicateId : ''
 			},
-			appendData: {wpfNonce: window.wpfNonce},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce},
 			onSuccess: function(res) {
 				if (!res.error) {
 					var $panel = $('#elementor-panel');
@@ -400,4 +400,4 @@
 		window.wpfAdminPageElementor = new AdminPageElementor();
 		window.wpfAdminPageElementor.init();
 	});
-}(window.jQuery));
+}( jQuery ) );

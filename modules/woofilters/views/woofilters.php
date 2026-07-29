@@ -116,8 +116,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		FrameWpf::_()->addScript( 'woobewoo-pf-admin-woofilters-list', $this->getModule()->getModPath() . 'js/admin.woofilters.list.js' );
 		FrameWpf::_()->addScript( 'woobewoo-pf-admin-create-table', $this->getModule()->getModPath() . 'js/create-filter.js', array(), false, true );
 		FrameWpf::_()->getModule( 'templates' )->loadFontAwesome();
-		FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-woofilters-list', 'wpfTblDataUrl', UriWpf::mod( 'woofilters', 'woobewoo_pf_get_list_for_table', array( 'reqType' => 'ajax' ) ) );
-		FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-woofilters-list', 'url', admin_url( 'admin-ajax.php' ) );
+
 		FrameWpf::_()->getModule( 'templates' )->loadBootstrap();
 		FrameWpf::_()->addStyle( 'woobewoo-pf-admin-filters', $this->getModule()->getModPath() . 'css/admin.woofilters' . $addWC . '.css' );
 		$proLink = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';

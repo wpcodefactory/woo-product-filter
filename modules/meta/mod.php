@@ -80,7 +80,7 @@ class MetaWpf extends ModuleWpf {
 				'label'        => esc_html__('Start indexing product parameters', 'woo-product-filter'),
 				'desc'         => esc_html__('For correct and fast operation of filters, the plugin creates index tables for product parameters. This tables are automatically rebuilt by editing / creating products. But if you edited products with third-party plugins or methods, and/or noticed that the filter does not work correctly, then click this button to forcefully rebuild the index tables. If you have a lot of products, the process may take a while.', 'woo-product-filter') . '<br><br>' .
 				esc_html__('There is a way to start indexing with a URL: ', 'woo-product-filter') . '<br><strong>' .
-				esc_url( admin_url( 'admin-ajax.php?mod=meta&action=doMetaIndexingFree&pl=wpf&reqType=ajax' ) ) . '</strong><br>' .
+				esc_url( admin_url( 'admin-ajax.php?mod=meta&action=woobewoo_pf_do_meta_indexing_free&pl=wpf&reqType=ajax' ) ) . '</strong><br>' .
 				esc_html__('Add a parameter &inCron=1 if you need to run in the background (via cron).', 'woo-product-filter'),
 				'html'         => 'startMetaButton',
 				'def'          => '',

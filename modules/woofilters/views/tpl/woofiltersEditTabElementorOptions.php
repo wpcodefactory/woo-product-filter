@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Elementor Options
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -52,7 +52,7 @@ $formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getMo
 		));
 		?>
 		<?php HtmlWpf::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
-		<?php HtmlWpf::hidden( 'action', array( 'value' => 'save' ) ); ?>
+		<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
 		<?php HtmlWpf::hidden( 'id', array( 'value' => '' ) ); ?>
 	</form>
 	<div class="woobewoo-clear"></div>

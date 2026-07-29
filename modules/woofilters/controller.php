@@ -257,23 +257,21 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			}
 		}
 
-		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		if ( ! current_user_can('manage_options') ) {
-			wp_die();
-		}
+		ReqWpf::verifyRequest();
 
 		$res = new ResponseWpf();
-		$id  = $this->getModel('woofilters')->save(ReqWpf::get('post'));
+		$id  = $this->getModel( 'woofilters' )->save( ReqWpf::get( 'post' ) );
 		if ( false != $id ) {
-			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
-			$res->addData('edit_link', $this->getModule()->getEditLink( $id ));
-			$filter   = $this->getModel('woofilters')->getById($id);
-			$settings = unserialize($filter['setting_data']);
-			$res->addData('filter', $filter);
-			$res->addData('filterSettings', $settings);
+			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
+			$res->addData( 'edit_link', $this->getModule()->getEditLink( $id ) );
+			$filter   = $this->getModel( 'woofilters' )->getById( $id );
+			$settings = unserialize( $filter['setting_data'] );
+			$res->addData( 'filter', $filter );
+			$res->addData( 'filterSettings', $settings );
 		} else {
-			$res->pushError ($this->getModel('woofilters')->getErrors());
+			$res->pushError( $this->getModel( 'woofilters' )->getErrors() );
 		}
+
 		return $res->ajaxExec();
 	}
 
@@ -284,24 +282,22 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	 * @since   3.1.7
 	 */
 	public function woobewoo_pf_save_category_label() {
-		// 🔐 Security
-		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		if (! current_user_can('manage_options')) {
-			wp_die();
+		ReqWpf::verifyRequest();
+		$term_id = isset( $_POST['term_id'] ) ? absint( $_POST['term_id'] ) : 0;
+		$label   = isset( $_POST['label'] ) ? sanitize_text_field( wp_unslash( $_POST['label'] ) ) : '';
+		if ( ! $term_id || $label === '' ) {
+			wp_send_json_error( __( 'Invalid data', 'woo-product-filter' ) );
 		}
-		$term_id = isset($_POST['term_id']) ? absint($_POST['term_id']) : 0;
-		$label   = isset($_POST['label']) ? sanitize_text_field(wp_unslash($_POST['label'])) : '';
-		if (! $term_id || $label === '') {
-			wp_send_json_error(__('Invalid data', 'woo-product-filter'));
-		}
-		$map = get_option('wpf_category_custom_labels', array());
-		$map[$term_id] = $label;
-		update_option('wpf_category_custom_labels', $map, false);
+		$map             = get_option( 'wpf_category_custom_labels', array() );
+		$map[ $term_id ] = $label;
+		update_option( 'wpf_category_custom_labels', $map, false );
 
-		wp_send_json_success(array(
-			'term_id' => $term_id,
-			'label'   => $label,
-		));
+		wp_send_json_success(
+			array(
+				'term_id' => $term_id,
+				'label'   => $label,
+			)
+		);
 	}
 
 	/**
@@ -310,18 +306,16 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function woobewoo_pf_delete_by_id() {
-		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		if ( ! current_user_can('manage_options') ) {
-			wp_die();
-		}
+		ReqWpf::verifyRequest();
 
 		$res = new ResponseWpf();
 
-		if ( $this->getModel('woofilters')->delete(ReqWpf::get('post')) != false ) {
-			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
+		if ( $this->getModel( 'woofilters' )->delete( ReqWpf::get( 'post' ) ) != false ) {
+			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
-			$res->pushError($this->getModel('woofilters')->getErrors());
+			$res->pushError( $this->getModel( 'woofilters' )->getErrors() );
 		}
+
 		return $res->ajaxExec();
 	}
 
@@ -331,10 +325,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	 * @version 3.3.0
 	 */
 	public function createTable() {
-		check_ajax_referer('woobewoo-pf-save-nonce', 'wpfNonce');
-		if ( ! current_user_can('manage_options') ) {
-			wp_die();
-		}
+		ReqWpf::verifyRequest();
 
 		$res = new ResponseWpf();
 		$id  = $this->getModel('woofilters')->save(ReqWpf::get('post'));

@@ -167,7 +167,7 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.3.0 - 27/07/2026 =
+= 3.3.0 - 29/07/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
 * Fix - "Creation of dynamic property is deprecated" notice fixed.
@@ -176,7 +176,7 @@ This plugin may communicate with the following third-party services:
 * Dev - Replaced outdated library `chosen` with `tom-select`.
 * Dev - Removed Mobile Detect library and replaced it with `wp_is_mobile()`.
 * Dev - Removed promo, pages, mail modules from the plugin.
-* Dev - Added plugin prefix to CSS handles, JavaScript handles, AJAX action.
+* Dev - Added plugin prefix to CSS/JavaScript handles, AJAX action/object.
 * Dev - Improved coding standards and code cleaned up.
 * WC tested up to: 10.9.
 
