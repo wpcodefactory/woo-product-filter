@@ -118,38 +118,38 @@ class FrameWpf {
 	 * @version 3.3.0
 	 */
 	protected function _extractModules() {
-		$activeModules = $this->getTable('modules')
-				->innerJoin( $this->getTable('modules_type'), 'type_id' )
-				->get($this->getTable('modules')->alias() . '.*, ' . $this->getTable('modules_type')->alias() . '.label as type_name');
-		if ($activeModules) {
-			foreach ($activeModules as $m) {
-				$code = $m['code'];
+		$activeModules = $this->getTable( 'modules' )
+		                      ->innerJoin( $this->getTable( 'modules_type' ), 'type_id' )
+		                      ->get( $this->getTable( 'modules' )->alias() . '.*, ' . $this->getTable( 'modules_type' )->alias() . '.label as type_name' );
+		if ( $activeModules ) {
+			foreach ( $activeModules as $m ) {
+				$code              = $m['code'];
 				$moduleLocationDir = WPF_MODULES_DIR;
-				if (!empty($m['ex_plug_dir'])) {
+				if ( ! empty( $m['ex_plug_dir'] ) ) {
 					$moduleLocationDir = UtilsWpf::getExtModDir( $m['ex_plug_dir'] );
 				}
-				if (is_dir($moduleLocationDir . $code)) {
-					$this->_allModules[$m['code']] = 1;
-					if ((bool) $m['active']) {
-						if (!class_exists($code . woobewoo_pf_str_first_up(WPF_CODE))) {
-							if (file_exists($moduleLocationDir . $code . DS . 'mod.php')) {
-								require $moduleLocationDir . $code . DS . 'mod.php';
+				if ( is_dir( $moduleLocationDir . $code ) ) {
+					$this->_allModules[ $m['code'] ] = 1;
+					if ( (bool) $m['active'] ) {
+						if ( ! class_exists( $code . woobewoo_pf_str_first_up( WPF_CODE ) ) ) {
+							if ( file_exists( $moduleLocationDir . $code . WPF_DS . 'mod.php' ) ) {
+								require $moduleLocationDir . $code . WPF_DS . 'mod.php';
 							}
 						}
 
-						$moduleClass = woobewoo_pf_toe_get_class_name($code);
-						if (class_exists($moduleClass)) {
-							$this->_modules[$code] = new $moduleClass($m);
-							if (is_dir($moduleLocationDir . $code . DS . 'tables')) {
-								$this->_extractTables($moduleLocationDir . $code . DS . 'tables' . DS);
+						$moduleClass = woobewoo_pf_toe_get_class_name( $code );
+						if ( class_exists( $moduleClass ) ) {
+							$this->_modules[ $code ] = new $moduleClass( $m );
+							if ( is_dir( $moduleLocationDir . $code . WPF_DS . 'tables' ) ) {
+								$this->_extractTables( $moduleLocationDir . $code . WPF_DS . 'tables' . WPF_DS );
 							}
 						}
 					}
 				}
 			}
-			if (isset($this->_modules['templates'])) {
+			if ( isset( $this->_modules['templates'] ) ) {
 				$m = $this->_modules['templates'];
-				unset($this->_modules['templates']);
+				unset( $this->_modules['templates'] );
 				$this->_modules['templates'] = $m;
 			}
 		}
@@ -189,9 +189,9 @@ class FrameWpf {
 		add_action( $addAssetsAction, array( $this, 'addScripts' ) );
 		add_action( $addAssetsAction, array( $this, 'addStyles' ) );
 
-		register_activation_hook(WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'activatePlugin') ); //See classes/install.php file
-		register_uninstall_hook( WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deletePlugin' ) );
-		register_deactivation_hook( WPF_DIR . DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
+		register_activation_hook(WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'activatePlugin') ); //See classes/install.php file
+		register_uninstall_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deletePlugin' ) );
+		register_deactivation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
 
 		add_action( 'after_plugin_row_woofilter-pro/woofilter-pro.php', array( $this, 'pluginRow' ), 5, 2 );
 		add_filter('the_content', array('WoofiltersWpf', 'getProductsShortcode'), -99999);

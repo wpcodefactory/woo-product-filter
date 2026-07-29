@@ -6,6 +6,9 @@
  *
  * @author woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
+
 class ModulesModelWpf extends ModelWpf {
 	public function __construct() {
 		$this->_setTbl('modules');

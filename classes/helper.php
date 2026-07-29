@@ -1,16 +1,20 @@
 <?php
 /**
- * Abstract class of module helper
- * Module helper has all the functions that are needed in module workflow
- * Besides it contains the methods to build html elements
+ * Product Filter by WBW - HelperWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
 abstract class HelperWpf {
 	protected $_code = '';
 	protected $_module = '';
 	/**
 	 * Construct helper class
 	 *
-	 * @param string $code 
+	 * @param string $code
 	 */
 	public function __construct( $code ) {
 		$this->setCode($code);
@@ -23,7 +27,7 @@ abstract class HelperWpf {
 	/**
 	 * Set the helper name
 	 *
-	 * @param string $code 
+	 * @param string $code
 	 */
 	public function setCode( $code ) {
 		$this->_code = $code;
@@ -31,7 +35,7 @@ abstract class HelperWpf {
 	/**
 	 * Get the helper name
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getCode() {
 		return $this->_code;

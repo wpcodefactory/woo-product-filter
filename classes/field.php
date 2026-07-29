@@ -6,6 +6,8 @@
  *
  * @author woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
 class FieldWpf {
 	public $name = '';
 	public $html = '';

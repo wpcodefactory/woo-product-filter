@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - ViewWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
 #[\AllowDynamicProperties]
 abstract class ViewWpf extends BaseObjectWpf {
 	/*
@@ -21,12 +30,19 @@ abstract class ViewWpf extends BaseObjectWpf {
 			HtmlWpf::echoEscapedHtml($content);
 		}
 	}
+
+	/**
+	 * getPath.
+	 *
+	 * @version 3.3.0
+	 */
 	public function getPath( $tpl ) {
-		$path = '';
+		$path         = '';
 		$parentModule = FrameWpf::_()->getModule( $this->_code );
-		if (file_exists($parentModule->getModDir() . 'views' . DS . 'tpl' . DS . $tpl . '.php')) { //Then try to find it in module directory
-			$path = $parentModule->getModDir() . DS . 'views' . DS . 'tpl' . DS . $tpl . '.php';
+		if ( file_exists( $parentModule->getModDir() . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php' ) ) { //Then try to find it in module directory
+			$path = $parentModule->getModDir() . WPF_DS . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php';
 		}
+
 		return $path;
 	}
 	public function getModule() {
@@ -42,7 +58,7 @@ abstract class ViewWpf extends BaseObjectWpf {
 		if ($path) {
 			$content = '';
 			ob_start();
-			require $parentModule->getModDir() . DS . 'views' . DS . 'tpl' . DS . $tpl . '.php';
+			require $parentModule->getModDir() . WPF_DS . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php';
 			$content = ob_get_contents();
 			ob_end_clean();
 			return $content;

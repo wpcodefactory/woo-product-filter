@@ -6,6 +6,9 @@
  *
  * @author woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
+
 class UserWpf extends ModuleWpf {
 
 	protected $_data = array();

@@ -1,7 +1,14 @@
 <?php
 /**
- * Class to generate fiels and output them in attachment by http (https) protocol
+ * Product Filter by WBW - FilegeneratorWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
  */
+
+defined( 'ABSPATH' ) || exit;
+
 class FilegeneratorWpf {
 	protected static $_instances = array();
 	protected $_filename = '';

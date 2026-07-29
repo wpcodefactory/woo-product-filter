@@ -7,6 +7,8 @@
  * @author woobewoo
  */
 
+defined( 'ABSPATH' ) || exit;
+
 abstract class TableWpf {
 	/**
 	 * ID column name

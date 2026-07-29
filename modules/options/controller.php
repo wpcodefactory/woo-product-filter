@@ -7,6 +7,8 @@
  * @author woobewoo
  */
 
+defined( 'ABSPATH' ) || exit;
+
 class OptionsControllerWpf extends ControllerWpf {
 
 	/**

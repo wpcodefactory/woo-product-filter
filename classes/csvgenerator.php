@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - CsvgeneratorWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
 class CsvgeneratorWpf {
 	protected $_filename = '';
 	protected $_delimiter = ';';

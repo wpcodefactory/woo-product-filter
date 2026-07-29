@@ -1,4 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - LangWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
 class LangWpf {
 	private static $_codeStorage = array();
 	private static $_data = array();
@@ -10,38 +19,45 @@ class LangWpf {
 	public static function attach( $d ) {
 		self::$_data = array_merge(self::$_data, self::extract($d));
 	}
-	public static function extract( $d = array('dir' => '', 'LangWpf' => '') ) {
+
+	/**
+	 * extract.
+	 *
+	 * @version 3.3.0
+	 */
+	public static function extract( $d = array( 'dir' => '', 'LangWpf' => '' ) ) {
 		$data = array();
-		if (isset($d['dir']) && !empty($d['dir'])) {
+		if ( isset( $d['dir'] ) && ! empty( $d['dir'] ) ) {
 			$langDirPath = $d['dir'];
-		} else if (isset($d['LangWpf']) && !empty($d['LangWpf'])) {
-			$langDirPath = WPF_LANG_DIR . $d['LangWpf'] . DS;
+		} else if ( isset( $d['LangWpf'] ) && ! empty( $d['LangWpf'] ) ) {
+			$langDirPath = WPF_LANG_DIR . $d['LangWpf'] . WPF_DS;
 		} else {
-			$langDirPath = WPF_LANG_DIR . WPF_WPLANG . DS;
+			$langDirPath = WPF_LANG_DIR . WPF_WPLANG . WPF_DS;
 		}
 
-		if (is_dir($langDirPath)) {
-			$dh = opendir($langDirPath);
-			while ( ( $file = readdir($dh) ) !== false ) {
-				if (!in_array($file, array('.', '..')) && !empty($file)) {
-					$fileinfo = pathinfo($langDirPath . $file);
-					if ('ini' == $fileinfo['extension']) {
-						$langArr = parse_ini_file($langDirPath . $file, true);
-						if (is_array($langArr) && !empty($langArr)) {
+		if ( is_dir( $langDirPath ) ) {
+			$dh = opendir( $langDirPath );
+			while ( ( $file = readdir( $dh ) ) !== false ) {
+				if ( ! in_array( $file, array( '.', '..' ) ) && ! empty( $file ) ) {
+					$fileinfo = pathinfo( $langDirPath . $file );
+					if ( 'ini' == $fileinfo['extension'] ) {
+						$langArr = parse_ini_file( $langDirPath . $file, true );
+						if ( is_array( $langArr ) && ! empty( $langArr ) ) {
 							$normalLangArr = array();
-							foreach ($langArr as $k => $v) {
-								$normalLangArr[ self::unEscKey($k) ] = $v;
+							foreach ( $langArr as $k => $v ) {
+								$normalLangArr[ self::unEscKey( $k ) ] = $v;
 							}
-							$data = array_merge($data, $normalLangArr);
+							$data = array_merge( $data, $normalLangArr );
 						}
 					}
 				}
 			}
-			closedir($dh);
+			closedir( $dh );
 		}
-		if (!is_array($data)) {
+		if ( ! is_array( $data ) ) {
 			$data = array();
 		}
+
 		return $data;
 	}
 	/**

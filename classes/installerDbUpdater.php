@@ -1,5 +1,13 @@
 <?php
+/**
+ * Product Filter by WBW - InstallerDbUpdaterWpf Class
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
 
+defined( 'ABSPATH' ) || exit;
 class InstallerDbUpdaterWpf {
 	public static function runUpdate( $current_version ) {
 		if ( DbWpf::get( "SELECT 1 FROM `@__modules` WHERE code='meta'", 'one' ) != 1 ) {

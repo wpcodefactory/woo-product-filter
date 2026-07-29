@@ -52,11 +52,16 @@ abstract class ModuleWpf extends BaseObjectWpf {
 		$this->_isExternal = $newVal;
 	}
 
+	/**
+	 * getModDir.
+	 *
+	 * @version 3.3.0
+	 */
 	public function getModDir() {
-		if (empty($this->_externalDir)) {
-			return WPF_MODULES_DIR . $this->getCode() . DS;
+		if ( empty( $this->_externalDir ) ) {
+			return WPF_MODULES_DIR . $this->getCode() . WPF_DS;
 		} else {
-			return $this->_externalDir . $this->getCode() . DS;
+			return $this->_externalDir . $this->getCode() . WPF_DS;
 		}
 	}
 
@@ -68,8 +73,13 @@ abstract class ModuleWpf extends BaseObjectWpf {
 		}
 	}
 
+	/**
+	 * getModRealDir.
+	 *
+	 * @version 3.3.0
+	 */
 	public function getModRealDir() {
-		return dirname(__FILE__) . DS;
+		return dirname( __FILE__ ) . WPF_DS;
 	}
 
 	public function setExternalDir( $dir ) {
