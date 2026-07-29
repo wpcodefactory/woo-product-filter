@@ -140,7 +140,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 		$idIn     = isset($idIn) ? (int) $idIn : 0;
 		$filter   = $this->getModel('woofilters')->getById($idIn);
-		$settings = unserialize($filter['setting_data']);
+		$settings = maybe_unserialize($filter['setting_data']);
 		$modPath  = $this->getModule()->getModPath();
 		$addWC    = ( FrameWpf::_()->isWCLicense() ? '-wc' : '' );
 		FrameWpf::_()->getModule('templates')->loadChosenSelects();
@@ -3716,7 +3716,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			return false;
 		}
 
-		$settings        = unserialize( $filter['setting_data'] )['settings'];
+		$settings        = maybe_unserialize( $filter['setting_data'] )['settings'];
 		$isDisplayParams = $this->getFilterSetting( $settings, 'display_selected_params', false );
 
 		return $isDisplayParams ? '<div class="wpfSelectedParameters wpfHidden" data-filter="' . $id . '"></div>' : '';

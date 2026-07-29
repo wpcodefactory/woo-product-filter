@@ -13,7 +13,9 @@ defined( 'ABSPATH' ) || exit;
 
 class SettingsModelWpf extends ModelWpf {
 	/**
-	 * Get specific filter block settings
+	 * Get specific filter block settings.
+	 *
+	 * @version 3.3.0
 	 *
 	 * @param int $filterId
 	 *
@@ -27,7 +29,7 @@ class SettingsModelWpf extends ModelWpf {
 			return $settings;
 		}
 
-		$settings = unserialize($filter['setting_data']);
+		$settings = maybe_unserialize($filter['setting_data']);
 
 		return $settings;
 	}

@@ -119,6 +119,8 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 
 	/**
 	 * getFiltersSettings.
+	 *
+	 * @version 3.3.0
 	 */
 	protected function getFiltersSettings() {
 		$filters = FrameWpf::_()->getModule('woofilters')->getModel()->getFromTbl();
@@ -128,7 +130,7 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 		$filtersSettings = array();
 		foreach ($filters as $filter) {
 			$filtersOpts[ $filter['id'] ] = $filter['title'];
-			$filtersSettings[ $filter['id'] ] = unserialize($filter['setting_data']);
+			$filtersSettings[ $filter['id'] ] = maybe_unserialize($filter['setting_data']);
 		}
 
 		return array( $filtersOpts, $filtersSettings );

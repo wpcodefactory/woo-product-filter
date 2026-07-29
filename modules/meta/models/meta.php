@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - MetaModelWpf Class
  *
+ * @version 3.3.0
+ *
  * @author woobewoo
  */
 
@@ -350,7 +352,7 @@ class MetaModelWpf extends ModelWpf {
 									if (5 == $keyType) {
 										$valuesArr = empty($values['meta_value']) ? false : explode($wpfMetaSeparator, $values['meta_value']);
 									} else {
-										$valuesArr = ( 7 == $keyType ? $values['meta_value'] : @unserialize($values['meta_value']) );
+										$valuesArr = ( 7 == $keyType ? $values['meta_value'] : maybe_unserialize($values['meta_value']) );
 									}
 									if (is_array($valuesArr)) {
 										$j++;
@@ -679,6 +681,11 @@ class MetaModelWpf extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * afterCalcMeta_stock_status.
+	 *
+	 * @version 3.3.0
+	 */
 	public function afterCalcMeta_stock_status( $productId, $keyData, $tempTable ) {
 		$groupedTerm = get_term_by('name', 'grouped', 'product_type', ARRAY_A);
 		if ($groupedTerm && !empty( $groupedTerm['term_id'])) {
@@ -709,7 +716,7 @@ class MetaModelWpf extends ModelWpf {
 				$listIdsO = '';
 				$listIdsI = '';
 				foreach ($data as $k => $values) {
-					$valuesArr = @unserialize($values['meta_value']);
+					$valuesArr = maybe_unserialize($values['meta_value']);
 					if (is_array($valuesArr)) {
 						if ($controlBundle) {
 							$vars = array();

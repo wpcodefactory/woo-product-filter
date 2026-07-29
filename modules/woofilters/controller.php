@@ -265,7 +265,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 			$res->addData( 'edit_link', $this->getModule()->getEditLink( $id ) );
 			$filter   = $this->getModel( 'woofilters' )->getById( $id );
-			$settings = unserialize( $filter['setting_data'] );
+			$settings = maybe_unserialize( $filter['setting_data'] );
 			$res->addData( 'filter', $filter );
 			$res->addData( 'filterSettings', $settings );
 		} else {
@@ -333,7 +333,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
 			$res->addData('edit_link', $this->getModule()->getEditLink( $id ));
 			$filter   = $this->getModel('woofilters')->getById($id);
-			$settings = unserialize($filter['setting_data']);
+			$settings = maybe_unserialize($filter['setting_data']);
 			$res->addData('filter', $filter);
 			$res->addData('filterSettings', $settings);
 		} else {

@@ -1099,13 +1099,15 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * getPreselectedParamsForFilter.
+	 *
+	 * @version 3.3.0
 	 */
 	public function getPreselectedParamsForFilter( $filterId ) {
 		if ( ! isset( $this->preFilters[ $filterId ] ) ) {
 			$preselects = array();
 			$filter     = $this->getModel( 'woofilters' )->getById( $filterId );
 			if ( $filter ) {
-				$settings = unserialize( $filter['setting_data'] );
+				$settings = maybe_unserialize( $filter['setting_data'] );
 				$mode     = $this->getRenderMode( $filterId, $settings );
 				if ( $mode > 0 ) {
 					$preselect = ! empty( $settings['settings']['filters']['preselect'] ) ? $settings['settings']['filters']['preselect'] : '';
@@ -1655,7 +1657,7 @@ class WoofiltersWpf extends ModuleWpf {
 		$isUseCategoryFiltration = false;
 		$categoryPageId          = null;
 		foreach ( $filters as $key => $filter ) {
-			$filtersSettings = unserialize( $filter['setting_data'] );
+			$filtersSettings = maybe_unserialize( $filter['setting_data'] );
 			$multiLogic      = $this->getFilterSetting( $filtersSettings['settings'], 'f_multi_logic', 'and' );
 
 			if ( 'or' === $multiLogic ) {
@@ -2118,10 +2120,10 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * loadShortcodeProductsFilter.
 	 *
-	 * @version 2.8.6
+	 * @version 3.0.0
 	 */
 	public function loadShortcodeProductsFilter( $args, $attributes = array(), $type = '' ) {
-		$hash         = md5( serialize( $args ) . serialize( $attributes ) );
+		$hash         = md5( maybe_serialize( $args ) . maybe_serialize( $attributes ) );
 		$isOtherClass = false;
 
 		if ( isset( $attributes['class'] ) && '' !== $attributes['class'] ) {

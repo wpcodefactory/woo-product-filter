@@ -34,20 +34,6 @@ class UtilsWpf {
 	}
 
 	/**
-	 * unserialize.
-	 */
-	public static function unserialize( $data ) {
-		return unserialize($data);
-	}
-
-	/**
-	 * serialize.
-	 */
-	public static function serialize( $data ) {
-		return serialize($data);
-	}
-
-	/**
 	 * createDir.
 	 */
 	public static function createDir( $path, $params = array('chmod' => null, 'httpProtect' => false) ) {

@@ -325,26 +325,26 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * syncSlugFormatRewriteSiteOption.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.0
 	 * @since   3.1.7
 	 */
 	public function syncSlugFormatRewriteSiteOption() {
 		$enabled = 0;
-		$prev    = (int) get_option('wpf_slug_format_rewrite_active', 0);
-		$rows    = $this->setSelectFields('setting_data')->getFromTbl();
-		foreach ((array) $rows as $row) {
-			if (empty($row['setting_data'])) {
+		$prev    = (int) get_option( 'wpf_slug_format_rewrite_active', 0 );
+		$rows    = $this->setSelectFields( 'setting_data' )->getFromTbl();
+		foreach ( (array) $rows as $row ) {
+			if ( empty( $row['setting_data'] ) ) {
 				continue;
 			}
-			$decoded = @unserialize($row['setting_data']);
-			if (is_array($decoded) && !empty($decoded['settings']['slug_format'])) {
+			$decoded = maybe_unserialize( $row['setting_data'] );
+			if ( is_array( $decoded ) && ! empty( $decoded['settings']['slug_format'] ) ) {
 				$enabled = 1;
 				break;
 			}
 		}
-		update_option('wpf_slug_format_rewrite_active', $enabled, false);
-		if ((int) $prev !== (int) $enabled) {
-			flush_rewrite_rules(false);
+		update_option( 'wpf_slug_format_rewrite_active', $enabled, false );
+		if ( (int) $prev !== (int) $enabled ) {
+			flush_rewrite_rules( false );
 		}
 	}
 
@@ -379,7 +379,7 @@ class WoofiltersModelWpf extends ModelWpf {
 			return $idInsert;
 		} elseif ( empty($id) && !empty($title) && !empty($duplicateId) ) {  //duplicate filter
 			$duplicateData                      = $this->getById($duplicateId);
-			$settings                           = unserialize($duplicateData['setting_data']);
+			$settings                           = maybe_unserialize($duplicateData['setting_data']);
 			$duplicateData['settings']          = $settings['settings'];
 			$duplicateData['title']             = isset($title) ? $title : 'untitled';
 			$duplicateData['id']                = '';
@@ -414,7 +414,7 @@ class WoofiltersModelWpf extends ModelWpf {
 		$data['meta_keys'] = count($metaKeys) > 0 ? implode('|', $metaKeys) : '';
 
 		$settingData          = array('settings' => $data['settings']);
-		$data['setting_data'] = addslashes(serialize($settingData));
+		$data['setting_data'] = addslashes(maybe_serialize($settingData));
 
 		$this->translateStrings($data['settings']);
 
@@ -523,6 +523,8 @@ class WoofiltersModelWpf extends ModelWpf {
 
 	/**
 	 * getFiltersMetaKeys.
+	 *
+	 * @version 3.3.0
 	 */
 	public function getFiltersMetaKeys( $id = 0, $deep = false ) {
 		$keys = array();
@@ -547,7 +549,7 @@ class WoofiltersModelWpf extends ModelWpf {
 			}
 			$data = $this->setSelectFields('id, setting_data')->getFromTbl();
 			foreach ($data as $filter) {
-				$settings = unserialize($filter['setting_data']);
+				$settings = maybe_unserialize($filter['setting_data']);
 				$metaKeys = $settings && !empty($settings['settings']['filters']['order']) ? $this->getDataFilterMetaKeys($settings['settings']['filters']['order'], false) : array();
 				$query = "UPDATE `@__filters` SET meta_keys='";
 				if (!empty($metaKeys)) {

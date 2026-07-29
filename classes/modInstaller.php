@@ -172,6 +172,8 @@ class ModInstallerWpf {
 	/**
 	 * Try to parse xml file with module data.
 	 *
+	 * @version 3.3.0
+	 *
 	 * @param string $xmlPath
 	 *
 	 * @return array
@@ -202,7 +204,7 @@ class ModInstallerWpf {
 				ErrorsWpf::push(esc_html__('No XML file were found', 'woo-product-filter'), ErrorsWpf::MOD_INSTALL);
 			}
 		} else {
-			$modDataArr = unserialize(WPF_PRO_MODULES);
+			$modDataArr = maybe_unserialize(WPF_PRO_MODULES);
 		}
 		return $modDataArr;
 	}

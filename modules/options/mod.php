@@ -37,13 +37,15 @@ class OptionsWpf extends ModuleWpf {
 
 	/**
 	 * startSession.
+	 *
+	 * @version 3.3.0
 	 */
 	public function startSession() {
 		$isMultiLogicOr = false;
 		$filters        = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 
 		foreach ( $filters as $filter ) {
-			$filtersSettings = unserialize( $filter['setting_data'] );
+			$filtersSettings = maybe_unserialize( $filter['setting_data'] );
 			$multiLogic      = $this->getFilterSetting( $filtersSettings['settings'], 'f_multi_logic', 'and' );
 
 			if ( 'or' === $multiLogic ) {
