@@ -555,9 +555,9 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		global $wp_query;
 
-		$postPerPage = function_exists( 'wc_get_default_products_per_row' )
-			? apply_filters( 'loop_shop_per_page', wc_get_default_products_per_row() * wc_get_default_product_rows_per_page() )
-			: get_option( 'posts_per_page' );
+		$postPerPage = function_exists( 'wc_get_default_products_per_row' ) ?
+			apply_filters( 'loop_shop_per_page', wc_get_default_products_per_row() * wc_get_default_product_rows_per_page() ) : // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+			get_option( 'posts_per_page' );
 		$options     = FrameWpf::_()->getModule('options')->getModel('options')->getAll();
 		if ( isset($options['count_product_shop']) && isset($options['count_product_shop']['value']) && ! empty($options['count_product_shop']['value']) ) {
 			$postPerPage = $options['count_product_shop']['value'];
@@ -3054,7 +3054,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		list( $tax, $taxSql ) = DispatcherWpf::applyFilters( 'priceTax', array( '', '' ), 'add', $settings );
 		$module               = FrameWpf::_()->getModule('woofilters');
-		$metas                = apply_filters( 'woocommerce_price_filter_meta_keys', array( '_price' ));
+		$metas                = apply_filters( 'woocommerce_price_filter_meta_keys', array( '_price' )); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$metaIds              = array();
 		$wpfMeta              = true;
 
@@ -3441,8 +3441,8 @@ class WoofiltersViewWpf extends ViewWpf {
 
 				// some plugin uses a different hook, use it if the standard one did not change the price
 				if ( is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) {
-					$wc_price[0] = apply_filters( 'woocommerce_product_get_regular_price', $range[0], null );
-					$wc_price[1] = apply_filters( 'woocommerce_product_get_regular_price', $range[1], null );
+					$wc_price[0] = apply_filters( 'woocommerce_product_get_regular_price', $range[0], null ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+					$wc_price[1] = apply_filters( 'woocommerce_product_get_regular_price', $range[1], null ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 				} else {
 					$wc_price = $range;
 				}

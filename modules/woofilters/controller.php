@@ -248,7 +248,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	public function woobewoo_pf_save() {
 
 		if ( is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) ) {
-			do_action( 'litespeed_purge_all' );
+			do_action( 'litespeed_purge_all' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		}
 
 		if ( is_plugin_active( 'wp-rocket/wp-rocket.php' ) && function_exists( 'rocket_clean_domain' ) ) {
@@ -283,8 +283,8 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	 */
 	public function woobewoo_pf_save_category_label() {
 		ReqWpf::verifyRequest();
-		$term_id = isset( $_POST['term_id'] ) ? absint( $_POST['term_id'] ) : 0;
-		$label   = isset( $_POST['label'] ) ? sanitize_text_field( wp_unslash( $_POST['label'] ) ) : '';
+		$term_id = isset( $_POST['term_id'] ) ? absint( $_POST['term_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$label   = isset( $_POST['label'] ) ? sanitize_text_field( wp_unslash( $_POST['label'] ) ) : '';  // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( ! $term_id || $label === '' ) {
 			wp_send_json_error( __( 'Invalid data', 'woo-product-filter' ) );
 		}
@@ -434,9 +434,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 				$customNums = $queryvars['posts_per_row'];
 				global $woocommerce_loop;
 				$woocommerce_loop['columns'] = $customNums; // needed for some themes, that check this property first
-				add_filter('loop_shop_columns', function ( $num ) use ( $customNums ) {
-					return $customNums;
-				}, 999);
+				add_filter(
+					'loop_shop_columns', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+					function ( $num ) use ( $customNums ) {
+						return $customNums;
+					},
+					999
+				);
 			}
 			$args['paged'] = $paged;
 
@@ -548,7 +552,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 		if ( ! $onlyFilterRecount ) {
 			if ( class_exists('qib_settings') ) {
-				do_action('template_redirect');
+				do_action('template_redirect'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			}
 			$categoryIn = isset($filterItems['categories']) ? $filterItems['categories'] : array();
 			if ( count($categoryIn) > 0 && $use_category_filtration ) {

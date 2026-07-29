@@ -999,7 +999,7 @@ class WoofiltersWpf extends ModuleWpf {
 			unset( $sidebars_widgets['array_version'] );
 		}
 
-		return apply_filters( 'sidebars_widgets', $sidebars_widgets );
+		return apply_filters( 'sidebars_widgets', $sidebars_widgets ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	}
 
 	/**
@@ -2958,11 +2958,11 @@ class WoofiltersWpf extends ModuleWpf {
 			$price = wmc_get_price( $raw_price );
 		} else {
 
-			$price = apply_filters( 'raw_woocommerce_price', $raw_price );
+			$price = apply_filters( 'raw_woocommerce_price', $raw_price ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
 			// some plugin uses a different hook, use it if the standard one did not change the price
 			if ( $price === $raw_price && ( is_plugin_active( 'woocommerce-currency-switcher/index.php' ) || is_plugin_active( 'woocommerce-multicurrency/woocommerce-multicurrency.php' ) ) ) {
-				$price = apply_filters( 'woocommerce_product_get_regular_price', $raw_price, null );
+				$price = apply_filters( 'woocommerce_product_get_regular_price', $raw_price, null ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			}
 			if ( $price === $raw_price && class_exists(\Yay_Currency\Helpers\YayCurrencyHelper::class) ) {
 				$apply_currency = \Yay_Currency\Helpers\YayCurrencyHelper::detect_current_currency();
@@ -4101,7 +4101,7 @@ class WoofiltersWpf extends ModuleWpf {
 		 * Author: Damian Góra
 		 */
 		if ( class_exists( 'DGWT_WC_Ajax_Search' ) ) {
-			$searchIds = apply_filters( 'dgwt/wcas/search_page/result_post_ids', array() );
+			$searchIds = apply_filters( 'dgwt/wcas/search_page/result_post_ids', array() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			if ( $searchIds && is_array( $searchIds ) ) {
 				$postIds = isset( $args['post__in'] ) ? $args['post__in'] : '';
 				if ( is_array( $postIds ) && ! empty( $postIds ) ) {

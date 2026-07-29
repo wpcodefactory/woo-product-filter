@@ -289,7 +289,7 @@ class WoofiltersModelWpf extends ModelWpf {
 					'sku'        => esc_html__('SKU ascending', 'woo-product-filter'),
 					'sku-desc'   => esc_html__('SKU descending', 'woo-product-filter'),
 					);
-				$custom = apply_filters('woocommerce_catalog_orderby', array());
+				$custom = apply_filters( 'woocommerce_catalog_orderby', array() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 				if (!empty($custom)) {
 					$labels = array_merge($labels, $custom);
 				}
