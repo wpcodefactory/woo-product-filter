@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -530,3 +531,5 @@ ViewWpf::display( 'woofiltersEditTabCustomTags' );
 		</div>
 	</div>
 </div>
+<?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

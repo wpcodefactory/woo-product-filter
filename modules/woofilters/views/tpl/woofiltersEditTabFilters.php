@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $filtersList = $this->getModel()->getAllFilters();
 ?>
 <div class="woobewoo_row row-tab active" id="row-tab-filters">
@@ -168,3 +169,5 @@ $filtersList = $this->getModel()->getAllFilters();
 		</div>
 	</div>
 </div>
+<?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

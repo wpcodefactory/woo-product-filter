@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $isPro    = FrameWpf::_()->isPro();
 $labelPro = '';
 if ( ! $isPro ) {
@@ -109,3 +110,5 @@ $formLink = FrameWpf::_()->getModule( 'options' )->getTabUrl( FrameWpf::_()->get
 	</form>
 	<div class="woobewoo-clear"></div>
 </div>
+<?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

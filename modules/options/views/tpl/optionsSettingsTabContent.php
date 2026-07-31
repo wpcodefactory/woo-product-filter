@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <section class="woobewoo-bar topBtnsArea">
 	<ul class="woobewoo-bar-controls">
@@ -116,3 +117,5 @@ defined( 'ABSPATH' ) || exit;
 		<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save_group' ) ); ?>
 	</form>
 </section>
+<?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

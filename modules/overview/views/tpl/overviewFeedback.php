@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $isSubscribe = $this->getModule()->getModel()->isSubscribe();
 $isRating    = $this->getModule()->getModel()->isRating();
 if ( ! $isSubscribe || ! $isRating ) {
@@ -101,3 +102,4 @@ if ( ! $isSubscribe || ! $isRating ) {
 	</div>
 	<?php
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
