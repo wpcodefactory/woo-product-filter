@@ -219,8 +219,8 @@ class FrameWpf {
 					<div class="update-message notice inline notice-error notice-alt">
 						<p>
 							<?php
-							/* translators: %1$s: Plugin name, %2$s: Plugin version. */
 							printf(
+								/* translators: %1$s: Plugin name, %2$s: Plugin version. */
 								esc_html__( 'Current version of Free (Base) plugin %1$s requires version of WBW Product Filter PRO plugin at least %2$s.', 'woo-product-filter' ),
 								esc_html__( 'Product Filter by WBW', 'woo-product-filter' ),
 								esc_html( WPF_PRO_REQUIRES )
