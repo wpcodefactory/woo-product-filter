@@ -11,7 +11,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class SettingsModelWpf extends ModelWpf {
+class SettingsModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 	/**
 	 * Get specific filter block settings.
 	 *

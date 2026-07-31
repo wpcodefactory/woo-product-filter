@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WoofiltersViewWpf extends ViewWpf {
+class WoofiltersViewWpf extends ViewWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 	private static $uniqueBlockId  = 0;
 	private static $filterOrderKey = 0;

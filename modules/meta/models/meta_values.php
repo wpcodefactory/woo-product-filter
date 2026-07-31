@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Meta_ValuesModelWpf extends ModelWpf {
+class Meta_ValuesModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 	/**
 	 * keyValueIds.

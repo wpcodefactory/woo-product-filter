@@ -8,7 +8,8 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-class CsvgeneratorWpf {
+
+class CsvgeneratorWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 	protected $_filename  = '';
 	protected $_delimiter = ';';
 	protected $_enclosure = "\n";
@@ -18,7 +19,7 @@ class CsvgeneratorWpf {
 		$this->_filename = $filename;
 	}
 	public function addCell( $x, $y, $value ) {
-		$this->_data[ $x ][ $y ] = '"' . $value . '"';    // If will not do "" then wymbol for example , will broke file
+		$this->_data[ $x ][ $y ] = '"' . $value . '"';    // If will not do "" then symbol for example, will broke file
 	}
 	public function generate() {
 		$strData = '';

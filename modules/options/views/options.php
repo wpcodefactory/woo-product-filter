@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class OptionsViewWpf extends ViewWpf {
+class OptionsViewWpf extends ViewWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 	private $_news = array();
 

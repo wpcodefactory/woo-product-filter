@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class ModulesModelWpf extends ModelWpf {
+class ModulesModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 	public function __construct() {
 		$this->_setTbl( 'modules' );
 	}

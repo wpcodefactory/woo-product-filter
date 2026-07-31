@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class FilegeneratorWpf {
+class FilegeneratorWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 	protected static $_instances = array();
 	protected $_filename         = '';
 	protected $_data             = '';

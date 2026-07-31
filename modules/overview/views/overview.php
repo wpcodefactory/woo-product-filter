@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class OverviewViewWpf extends ViewWpf {
+class OverviewViewWpf extends ViewWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 	/**
 	 * getOverviewTabContent.

@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class MetaModelWpf extends ModelWpf {
+class MetaModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 	private $maxTextLength = 150;
 	private $maxKeyLength  = 32;

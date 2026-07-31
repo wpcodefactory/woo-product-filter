@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Woofilters_WidgetViewWpf extends ViewWpf {
+class Woofilters_WidgetViewWpf extends ViewWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 	/**
 	 * displayWidget.

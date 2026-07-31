@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class OverviewModelWpf extends ModelWpf {
+class OverviewModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 	/**
 	 * _apiUrl.

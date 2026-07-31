@@ -10,6 +10,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Woofilters_WidgetControllerWpf extends ControllerWpf {
+class Woofilters_WidgetControllerWpf extends ControllerWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
 
 }
