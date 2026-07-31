@@ -9,7 +9,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $countBreadcrumbs = count( $this->breadcrumbsList );
 ?>
 <?php if ( $countBreadcrumbs > 0 ) : ?>
@@ -28,4 +27,3 @@ $countBreadcrumbs = count( $this->breadcrumbsList );
 	<?php DispatcherWpf::doAction( 'afterAdminBreadcrumbs' ); ?>
 </nav>
 <?php
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

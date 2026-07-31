@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class OverviewControllerWpf extends ControllerWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+class OverviewControllerWpf extends ControllerWpf {
 
 	/**
 	 * woobewoo_pf_subscribe.

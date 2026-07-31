@@ -10,7 +10,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 ?>
 <div class="row-settings-block">
@@ -50,4 +49,3 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	</div>
 </div>
 <?php
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

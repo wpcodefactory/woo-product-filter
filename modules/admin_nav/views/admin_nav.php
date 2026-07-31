@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Admin_NavViewWpf extends ViewWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+class Admin_NavViewWpf extends ViewWpf {
 	public function getBreadcrumbs() {
 		$this->assign( 'breadcrumbsList', DispatcherWpf::applyFilters( 'mainBreadcrumbs', $this->getModule()->getBreadcrumbsList() ) );
 		return parent::getContent( 'adminNavBreadcrumbs' );

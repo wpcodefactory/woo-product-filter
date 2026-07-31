@@ -160,8 +160,6 @@ abstract class ModuleWpf extends BaseObjectWpf {
 
 	/**
 	 * _createController.
-	 *
-	 * @version 3.3.0
 	 */
 	protected function _createController() {
 		if ( ! file_exists( $this->getModDir() . 'controller.php' ) ) {
@@ -173,7 +171,7 @@ abstract class ModuleWpf extends BaseObjectWpf {
 		if ( file_exists( $this->getModDir() . 'controller.php' ) ) {
 			$className = '';
 			require $this->getModDir() . 'controller.php';
-			$className = woobewoo_pf_toe_get_class_name( $this->getCode() . 'Controller' );
+			$className = toeGetClassNameWpf( $this->getCode() . 'Controller' );
 			if ( ! empty( $className ) ) {
 				$this->_controller = new $className( $this->getCode() );
 				$this->_controller->init();

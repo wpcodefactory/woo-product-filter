@@ -9,7 +9,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 ?>
 <div class="woobewoo_row row-tab" id="row-tab-options">
@@ -1517,4 +1516,3 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 	</div>
 </div>
 <?php
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

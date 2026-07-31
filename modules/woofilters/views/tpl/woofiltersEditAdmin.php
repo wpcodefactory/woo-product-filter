@@ -9,7 +9,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $isPro    = $this->is_pro;
 $labelPro = '';
 if ( ! $isPro ) {
@@ -281,4 +280,3 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 	</section>
 </div>
 <?php
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

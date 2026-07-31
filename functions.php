@@ -12,25 +12,29 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Set first letter in a string as UPPERCASE.
  *
- * @version 3.3.0
- *
  * @param string $str string to modify
  *
  * @return string string with first Uppercase letter
  */
-if ( ! function_exists( 'woobewoo_pf_str_first_up' ) ) {
-	function woobewoo_pf_str_first_up( $str ) {
+if ( ! function_exists( 'strFirstUpWpf' ) ) {
+	function strFirstUpWpf( $str ) {
 		return ucfirst( strtolower( $str ) );
 	}
 }
 
+
 /**
- * Deprecated - class must be created.
+ * Generate random string name.
  *
- * @version 3.3.0
+ * @version 3.1.8
+ *
+ * @param int $lenFrom min len
+ * @param int $lenTo max len
+ *
+ * @return string random string with length from $lenFrom to $lenTo
  */
-if ( ! function_exists( 'woobewoo_pf_date_to_timestamp' ) ) {
-	function woobewoo_pf_date_to_timestamp( $date ) {
+if ( ! function_exists( 'dateToTimestampWpf' ) ) {
+	function dateToTimestampWpf( $date ) {
 		if ( empty( $a ) ) {
 			return false;
 		}
@@ -41,12 +45,10 @@ if ( ! function_exists( 'woobewoo_pf_date_to_timestamp' ) ) {
 }
 
 /**
- * woobewoo_pf_import_class.
- *
- * @version 3.3.0
+ * importClassWpf.
  */
-if ( ! function_exists( 'woobewoo_pf_import_class' ) ) {
-	function woobewoo_pf_import_class( $class, $path = '' ) {
+if ( ! function_exists( 'importClassWpf' ) ) {
+	function importClassWpf( $class, $path = '' ) {
 		if ( ! class_exists( $class ) ) {
 			$classFile = lcfirst( $class );
 			if ( strpos( strtolower( $classFile ), WPF_CODE ) !== false ) {
@@ -68,17 +70,15 @@ if ( ! function_exists( 'woobewoo_pf_import_class' ) ) {
 /**
  * Check if class name exist with prefix or not.
  *
- * @version 3.3.0
- *
  * @param string $class preferred class name
  *
  * @return string existing class name
  */
-if ( ! function_exists( 'woobewoo_pf_toe_get_class_name' ) ) {
-	function woobewoo_pf_toe_get_class_name( $class ) {
+if ( ! function_exists( 'toeGetClassNameWpf' ) ) {
+	function toeGetClassNameWpf( $class ) {
 		$className = '';
-		if ( class_exists( $class . woobewoo_pf_str_first_up( WPF_CODE ) ) ) {
-			$className = $class . woobewoo_pf_str_first_up( WPF_CODE );
+		if ( class_exists( $class . strFirstUpWpf( WPF_CODE ) ) ) {
+			$className = $class . strFirstUpWpf( WPF_CODE );
 		} elseif ( class_exists( WPF_CLASS_PREFIX . $class ) ) {
 			$className = WPF_CLASS_PREFIX . $class;
 		} else {
@@ -92,16 +92,14 @@ if ( ! function_exists( 'woobewoo_pf_toe_get_class_name' ) ) {
 /**
  * Create object of specified class.
  *
- * @version 3.3.0
- *
  * @param string $class  class that you want to create
  * @param array  $params array of arguments for class __construct function
  *
  * @return object new object of specified class
  */
-if ( ! function_exists( 'woobewoo_pf_toe_create_obj' ) ) {
-	function woobewoo_pf_toe_create_obj( $class, $params ) {
-		$className = woobewoo_pf_toe_get_class_name( $class );
+if ( ! function_exists( 'toeCreateObjWpf' ) ) {
+	function toeCreateObjWpf( $class, $params ) {
+		$className = toeGetClassNameWpf( $class );
 		$obj       = null;
 		if ( class_exists( 'ReflectionClass' ) ) {
 			$reflection = new ReflectionClass( $className );
@@ -122,12 +120,10 @@ if ( ! function_exists( 'woobewoo_pf_toe_create_obj' ) ) {
 /**
  * Redirect user to specified location. Be advised that it should redirect even if headers already sent.
  *
- * @version 3.3.0
- *
  * @param string $url where page must be redirected
  */
-if ( ! function_exists( 'woobewoo_pf_redirect' ) ) {
-	function woobewoo_pf_redirect( $url ) {
+if ( ! function_exists( 'redirectWpf' ) ) {
+	function redirectWpf( $url ) {
 		if ( headers_sent() ) {
 			echo '<script type="text/javascript"> document.location.href = "' . esc_url( $url ) . '"; </script>';
 		} else {
@@ -138,12 +134,10 @@ if ( ! function_exists( 'woobewoo_pf_redirect' ) ) {
 }
 
 /**
- * woobewoo_pf_json_encode_utf_normal.
- *
- * @version 3.3.0
+ * jsonEncodeUTFnormalWpf.
  */
-if ( ! function_exists( 'woobewoo_pf_json_encode_utf_normal' ) ) {
-	function woobewoo_pf_json_encode_utf_normal( $value ) {
+if ( ! function_exists( 'jsonEncodeUTFnormalWpf' ) ) {
+	function jsonEncodeUTFnormalWpf( $value ) {
 		if ( is_int( $value ) ) {
 			return (string) $value;
 		} elseif ( is_string( $value ) ) {
@@ -183,13 +177,13 @@ if ( ! function_exists( 'woobewoo_pf_json_encode_utf_normal' ) ) {
 		$result = array();
 		if ( $with_keys ) {
 			foreach ( $value as $key => $v ) {
-				$result[] = woobewoo_pf_json_encode_utf_normal( (string) $key ) . ':' . woobewoo_pf_json_encode_utf_normal( $v );
+				$result[] = jsonEncodeUTFnormalWpf( (string) $key ) . ':' . jsonEncodeUTFnormalWpf( $v );
 			}
 
 			return '{' . implode( ',', $result ) . '}';
 		} else {
 			foreach ( $value as $key => $v ) {
-				$result[] = woobewoo_pf_json_encode_utf_normal( $v );
+				$result[] = jsonEncodeUTFnormalWpf( $v );
 			}
 
 			return '[' . implode( ',', $result ) . ']';
@@ -200,14 +194,14 @@ if ( ! function_exists( 'woobewoo_pf_json_encode_utf_normal' ) ) {
 /**
  * Prepares the params values to store into db.
  *
- * @version 3.3.0
+ * @version 3.1.8
  *
  * @param array $d $_POST array
  *
  * @return array
  */
-if ( ! function_exists( 'woobewoo_pf_prepare_params' ) ) {
-	function woobewoo_pf_prepare_params( &$d = array(), &$options = array() ) {
+if ( ! function_exists( 'prepareParamsWpf' ) ) {
+	function prepareParamsWpf( &$d = array(), &$options = array() ) {
 		if ( ! empty( $d['params'] ) ) {
 			if ( isset( $d['params']['options'] ) ) {
 				$options = $d['params']['options'];
@@ -232,7 +226,7 @@ if ( ! function_exists( 'woobewoo_pf_prepare_params' ) ) {
 		}
 		if ( isset( $d['code'] ) ) {
 			if ( '' == $d['code'] ) {
-				$d['code'] = woobewoo_pf_prepare_field_code( $d['label'] ) . '_' . wp_rand( 0, 9999999 );
+				$d['code'] = prepareFieldCodeWpf( $d['label'] ) . '_' . wp_rand( 0, 9999999 );
 			}
 		}
 
@@ -241,12 +235,10 @@ if ( ! function_exists( 'woobewoo_pf_prepare_params' ) ) {
 }
 
 /**
- * woobewoo_pf_prepare_field_code.
- *
- * @version 3.3.0
+ * prepareFieldCodeWpf.
  */
-if ( ! function_exists( 'woobewoo_pf_prepare_field_code' ) ) {
-	function woobewoo_pf_prepare_field_code( $string ) {
+if ( ! function_exists( 'prepareFieldCodeWpf' ) ) {
+	function prepareFieldCodeWpf( $string ) {
 		$string = preg_replace( '/[^a-zA-Z0-9\s]/', ' ', $string );
 		$string = preg_replace( '/\s+/', ' ', $string );
 		$string = preg_replace( '/ /', '', $string );
@@ -264,22 +256,20 @@ if ( ! function_exists( 'woobewoo_pf_prepare_field_code' ) ) {
 /**
  * Recursive implode of array.
  *
- * @version 3.3.0
- *
  * @param string $glue  imploder
  * @param array  $array array to implode
  *
  * @return string imploded array in string
  */
-if ( ! function_exists( 'woobewoo_pf_recursive_implode' ) ) {
-	function woobewoo_pf_recursive_implode( $glue, $array ) {
+if ( ! function_exists( 'recImplodeWpf' ) ) {
+	function recImplodeWpf( $glue, $array ) {
 		$res   = '';
 		$i     = 0;
 		$count = count( $array );
 		foreach ( $array as $el ) {
 			$str = '';
 			if ( is_array( $el ) ) {
-				$str = woobewoo_pf_recursive_implode( '', $el );
+				$str = recImplodeWpf( '', $el );
 			} else {
 				$str = $el;
 			}
@@ -295,12 +285,12 @@ if ( ! function_exists( 'woobewoo_pf_recursive_implode' ) ) {
 }
 
 /**
- * woobewoo_pf_request.
+ * trueRequestWpf.
  *
- * @version 3.3.0
+ * @version 3.1.8
  */
-if ( ! function_exists( 'woobewoo_pf_request' ) ) {
-	function woobewoo_pf_request() {
+if ( ! function_exists( 'trueRequestWpf' ) ) {
+	function trueRequestWpf() {
 		$request = true;
 		$uri     = (
 		( isset( $_SERVER['REQUEST_URI'] ) && '' !== $_SERVER['REQUEST_URI'] )
@@ -322,13 +312,11 @@ if ( ! function_exists( 'woobewoo_pf_request' ) ) {
 }
 
 /**
- * woobewoo_pf_install_base_msg.
- *
- * @version 3.3.0
+ * woofilterInstallBaseMsg.
  */
-add_action( 'admin_notices', 'woobewoo_pf_install_base_msg' );
-if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
-	function woobewoo_pf_install_base_msg() {
+add_action( 'admin_notices', 'woofilterInstallBaseMsg' );
+if ( ! function_exists( 'woofilterInstallBaseMsg' ) ) {
+	function woofilterInstallBaseMsg() {
 		if ( class_exists( 'FrameWpf' ) ) {
 			if ( ! FrameWpf::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
 				$plugName  = __( 'Product Filter by WBW', 'woo-product-filter' );
@@ -354,13 +342,11 @@ if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
 }
 
 /**
- * woobewoo_pf_pro_deactivate.
- *
- * @version 3.3.0
+ * woofilterProDeactivate.
  */
-add_action( 'admin_init', 'woobewoo_pf_pro_deactivate' );
-if ( ! function_exists( 'woobewoo_pf_pro_deactivate' ) ) {
-	function woobewoo_pf_pro_deactivate() {
+add_action( 'admin_init', 'woofilterProDeactivate' );
+if ( ! function_exists( 'woofilterProDeactivate' ) ) {
+	function woofilterProDeactivate() {
 		if ( class_exists( 'FrameWpf' ) && function_exists( 'getProPlugFullPathWpf' ) ) {
 			$pathPro   = getProPlugFullPathWpf();
 			$proPlugin = plugin_basename( $pathPro );
@@ -381,12 +367,10 @@ if ( ! function_exists( 'woobewoo_pf_pro_deactivate' ) ) {
 }
 
 /**
- * woobewoo_pf_translate_string.
- *
- * @version 3.3.0
+ * wpf_translate_string.
  */
-if ( ! function_exists( 'woobewoo_pf_translate_string' ) ) {
-	function woobewoo_pf_translate_string( $value, $name = '', $context = 'woo-product-filter' ) {
+if ( ! function_exists( 'wpf_translate_string' ) ) {
+	function wpf_translate_string( $value, $name = '', $context = 'woo-product-filter' ) {
 		if ( function_exists( 'icl_register_string' ) ) {
 			return icl_register_string( $context, $name, $value );
 		}

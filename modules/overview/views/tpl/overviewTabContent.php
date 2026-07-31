@@ -9,7 +9,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $modPath = $this->getModule()->getModPath();
 ?>
 <section>
@@ -193,5 +192,3 @@ $modPath = $this->getModule()->getModPath();
 	</div>
 </section>
 <?php
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-

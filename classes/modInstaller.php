@@ -74,8 +74,6 @@ class ModInstallerWpf {
 
 	/**
 	 * _runModuleInstall.
-	 *
-	 * @version 3.3.0
 	 */
 	protected static function _runModuleInstall( $module, $action = 'install' ) {
 		$moduleLocationDir = WPF_MODULES_DIR;
@@ -83,12 +81,12 @@ class ModInstallerWpf {
 			$moduleLocationDir = UtilsWpf::getPluginDir( $module['ex_plug_dir'] );
 		}
 		if ( is_dir( $moduleLocationDir . $module['code'] ) ) {
-			if ( ! class_exists( $module['code'] . woobewoo_pf_str_first_up( WPF_CODE ) ) ) {
+			if ( ! class_exists( $module['code'] . strFirstUpWpf( WPF_CODE ) ) ) {
 				if ( file_exists( $moduleLocationDir . $module['code'] . WPF_DS . 'mod.php' ) ) {
 					require $moduleLocationDir . $module['code'] . WPF_DS . 'mod.php';
 				}
 			}
-			$moduleClass = woobewoo_pf_toe_get_class_name( $module['code'] );
+			$moduleClass = toeGetClassNameWpf( $module['code'] );
 			$moduleObj   = new $moduleClass( $module );
 			if ( $moduleObj ) {
 				$moduleObj->$action();

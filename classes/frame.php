@@ -41,11 +41,9 @@ class FrameWpf {
 
 	/**
 	 * Constructor.
-	 *
-	 * @version 3.3.0
 	 */
 	public function __construct() {
-		$this->_res = woobewoo_pf_toe_create_obj( 'response', array() );
+		$this->_res = toeCreateObjWpf( 'response', array() );
 	}
 
 	/**
@@ -131,13 +129,13 @@ class FrameWpf {
 				if ( is_dir( $moduleLocationDir . $code ) ) {
 					$this->_allModules[ $m['code'] ] = 1;
 					if ( (bool) $m['active'] ) {
-						if ( ! class_exists( $code . woobewoo_pf_str_first_up( WPF_CODE ) ) ) {
+						if ( ! class_exists( $code . strFirstUpWpf( WPF_CODE ) ) ) {
 							if ( file_exists( $moduleLocationDir . $code . WPF_DS . 'mod.php' ) ) {
 								require $moduleLocationDir . $code . WPF_DS . 'mod.php';
 							}
 						}
 
-						$moduleClass = woobewoo_pf_toe_get_class_name( $code );
+						$moduleClass = toeGetClassNameWpf( $code );
 						if ( class_exists( $moduleClass ) ) {
 							$this->_modules[ $code ] = new $moduleClass( $m );
 							if ( is_dir( $moduleLocationDir . $code . WPF_DS . 'tables' ) ) {

@@ -38,43 +38,39 @@ add_action(
 
 /**
  * Connect all required core classes.
- *
- * @version 3.3.0
  */
-if ( woobewoo_pf_request() ) {
+if ( trueRequestWpf() ) {
 
-	woobewoo_pf_import_class( 'DbWpf' );
-	woobewoo_pf_import_class( 'InstallerWpf' );
-	woobewoo_pf_import_class( 'BaseObjectWpf' );
-	woobewoo_pf_import_class( 'ModuleWpf' );
-	woobewoo_pf_import_class( 'ModelWpf' );
-	woobewoo_pf_import_class( 'ViewWpf' );
-	woobewoo_pf_import_class( 'ControllerWpf' );
-	woobewoo_pf_import_class( 'HelperWpf' );
-	woobewoo_pf_import_class( 'DispatcherWpf' );
-	woobewoo_pf_import_class( 'FieldWpf' );
-	woobewoo_pf_import_class( 'TableWpf' );
-	woobewoo_pf_import_class( 'FrameWpf' );
+	importClassWpf( 'DbWpf' );
+	importClassWpf( 'InstallerWpf' );
+	importClassWpf( 'BaseObjectWpf' );
+	importClassWpf( 'ModuleWpf' );
+	importClassWpf( 'ModelWpf' );
+	importClassWpf( 'ViewWpf' );
+	importClassWpf( 'ControllerWpf' );
+	importClassWpf( 'HelperWpf' );
+	importClassWpf( 'DispatcherWpf' );
+	importClassWpf( 'FieldWpf' );
+	importClassWpf( 'TableWpf' );
+	importClassWpf( 'FrameWpf' );
 
 	/**
 	 * Deprecated classes.
 	 *
-	 * @version 3.3.0
-	 *
 	 * @deprecated since version 1.0.1
 	 */
-	woobewoo_pf_import_class( 'LangWpf' );
-	woobewoo_pf_import_class( 'ReqWpf' );
-	woobewoo_pf_import_class( 'UriWpf' );
-	woobewoo_pf_import_class( 'HtmlWpf' );
-	woobewoo_pf_import_class( 'ResponseWpf' );
-	woobewoo_pf_import_class( 'FieldAdapterWpf' );
-	woobewoo_pf_import_class( 'ValidatorWpf' );
-	woobewoo_pf_import_class( 'ErrorsWpf' );
-	woobewoo_pf_import_class( 'UtilsWpf' );
-	woobewoo_pf_import_class( 'ModInstallerWpf' );
-	woobewoo_pf_import_class( 'InstallerDbUpdaterWpf' );
-	woobewoo_pf_import_class( 'DateWpf' );
+	importClassWpf( 'LangWpf' );
+	importClassWpf( 'ReqWpf' );
+	importClassWpf( 'UriWpf' );
+	importClassWpf( 'HtmlWpf' );
+	importClassWpf( 'ResponseWpf' );
+	importClassWpf( 'FieldAdapterWpf' );
+	importClassWpf( 'ValidatorWpf' );
+	importClassWpf( 'ErrorsWpf' );
+	importClassWpf( 'UtilsWpf' );
+	importClassWpf( 'ModInstallerWpf' );
+	importClassWpf( 'InstallerDbUpdaterWpf' );
+	importClassWpf( 'DateWpf' );
 
 	/**
 	 * Check plugin version - maybe we need to update database, and check global errors in request.

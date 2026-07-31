@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WoofiltersControllerWpf extends ControllerWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+class WoofiltersControllerWpf extends ControllerWpf {
 
 	protected $_code = 'woofilters';
 
@@ -434,7 +434,7 @@ class WoofiltersControllerWpf extends ControllerWpf { // phpcs:ignore WordPress.
 				$customNums = $queryvars['posts_per_row'];
 				global $woocommerce_loop;
 				// needed for some themes, that check this property first
-				$woocommerce_loop['columns'] = $customNums; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+				$woocommerce_loop['columns'] = $customNums;
 				add_filter(
 					'loop_shop_columns', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 					function ( $num ) use ( $customNums ) {

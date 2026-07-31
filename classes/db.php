@@ -118,13 +118,11 @@ class DbWpf {
 
 	/**
 	 * timeToDate.
-	 *
-	 * @return 3.3.0
 	 */
 	public static function timeToDate( $timestamp = 0 ) {
 		if ( $timestamp ) {
 			if ( ! is_numeric( $timestamp ) ) {
-				$timestamp = woobewoo_pf_date_to_timestamp( $timestamp );
+				$timestamp = dateToTimestampWpf( $timestamp );
 			}
 			return gmdate( 'Y-m-d', $timestamp );
 		} else {
@@ -134,18 +132,16 @@ class DbWpf {
 
 	/**
 	 * dateToTime.
-	 *
-	 * @version 3.3.0
 	 */
 	public static function dateToTime( $date ) {
 		if ( empty( $date ) ) {
 			return '';
 		}
 		if ( strpos( $date, WPF_DATE_DL ) ) {
-			return woobewoo_pf_date_to_timestamp( $date );
+			return dateToTimestampWpf( $date );
 		}
 		$arr = explode( '-', $date );
-		return woobewoo_pf_date_to_timestamp( $arr[2] . WPF_DATE_DL . $arr[1] . WPF_DATE_DL . $arr[0] );
+		return dateToTimestampWpf( $arr[2] . WPF_DATE_DL . $arr[1] . WPF_DATE_DL . $arr[0] );
 	}
 
 	public static function exist( $table, $column = '', $value = '' ) {

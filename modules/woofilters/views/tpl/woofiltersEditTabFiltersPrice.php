@@ -9,7 +9,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 
 $skins = array(
@@ -180,4 +179,3 @@ else :
 	</div>
 	<?php
 endif;
-// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

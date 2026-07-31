@@ -423,8 +423,6 @@ class WoofiltersModelWpf extends ModelWpf {
 
 	/**
 	 * WPML string translation.
-	 *
-	 * @version 3.3.0
 	 */
 	private function translateStrings( $data_settings ) {
 		$filters_arr = json_decode( $data_settings['filters']['order'], true );
@@ -434,61 +432,61 @@ class WoofiltersModelWpf extends ModelWpf {
 		if ( is_array( $filters_arr ) ) {
 			foreach ( $filters_arr as $key => $filter ) {
 				if ( isset( $filter['settings']['f_dropdown_first_option_text'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_dropdown_first_option_text'] );
+					wpf_translate_string( $filter['settings']['f_dropdown_first_option_text'] );
 				}
 				if ( isset( $filter['settings']['f_title'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_title'] );
+					wpf_translate_string( $filter['settings']['f_title'] );
 				}
 				if ( isset( $filter['settings']['f_description'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_description'] );
+					wpf_translate_string( $filter['settings']['f_description'] );
 				}
 				if ( isset( $filter['settings']['f_custom_title'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_custom_title'] );
+					wpf_translate_string( $filter['settings']['f_custom_title'] );
 				}
 				if ( isset( $filter['settings']['f_search_label'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_search_label'] );
+					wpf_translate_string( $filter['settings']['f_search_label'] );
 				}
 				if ( isset( $filter['settings']['f_stock_statuses[in]'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_stock_statuses[in]'] );
+					wpf_translate_string( $filter['settings']['f_stock_statuses[in]'] );
 				}
 				if ( isset( $filter['settings']['f_stock_statuses[out]'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_stock_statuses[out]'] );
+					wpf_translate_string( $filter['settings']['f_stock_statuses[out]'] );
 				}
 				if ( isset( $filter['settings']['f_stock_statuses[on]'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_stock_statuses[on]'] );
+					wpf_translate_string( $filter['settings']['f_stock_statuses[on]'] );
 				}
 				if ( isset( $filter['settings']['f_add_text'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_add_text'] );
+					wpf_translate_string( $filter['settings']['f_add_text'] );
 				}
 				if ( isset( $filter['settings']['f_add_text5'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_add_text5'] );
+					wpf_translate_string( $filter['settings']['f_add_text5'] );
 				}
 				if ( isset( $filter['settings']['f_checkbox_label'] ) ) {
-					woobewoo_pf_translate_string( $filter['settings']['f_checkbox_label'] );
+					wpf_translate_string( $filter['settings']['f_checkbox_label'] );
 				}
 			}
 		}
 		// here goes other plugin settings strings
 		if ( ! empty( $data_settings['filtering_button_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['filtering_button_word'] ); // ?
+			wpf_translate_string( $data_settings['filtering_button_word'] ); // ?
 		}
 		if ( ! empty( $data_settings['show_clean_button_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['show_clean_button_word'] ); // ?
+			wpf_translate_string( $data_settings['show_clean_button_word'] ); // ?
 		}
 		if ( ! empty( $data_settings['hide_button_hide_text'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['hide_button_hide_text'] ); // ?
+			wpf_translate_string( $data_settings['hide_button_hide_text'] ); // ?
 		}
 		if ( ! empty( $data_settings['hide_button_show_text'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['hide_button_show_text'] ); // ?
+			wpf_translate_string( $data_settings['hide_button_show_text'] ); // ?
 		}
 		if ( ! empty( $data_settings['text_no_products'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['text_no_products'] ); // ?
+			wpf_translate_string( $data_settings['text_no_products'] ); // ?
 		}
 		if ( ! empty( $data_settings['enable_overlay_word'] ) && '1' == $data_settings['enable_overlay_word'] && ! empty( $data_settings['overlay_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['overlay_word'] ); // ?
+			wpf_translate_string( $data_settings['overlay_word'] ); // ?
 		}
 		if ( ! empty( $data_settings['selected_params_clear'] ) && '1' == $data_settings['selected_params_clear'] && ! empty( $data_settings['selected_clean_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['selected_clean_word'] ); // ?
+			wpf_translate_string( $data_settings['selected_clean_word'] ); // ?
 		}
 	}
 

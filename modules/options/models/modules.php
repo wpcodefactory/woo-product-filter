@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class ModulesModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+class ModulesModelWpf extends ModelWpf {
 	public function __construct() {
 		$this->_setTbl( 'modules' );
 	}
@@ -34,13 +34,11 @@ class ModulesModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConvent
 
 	/**
 	 * put.
-	 *
-	 * @version 3.3.0
 	 */
 	public function put( $d = array() ) {
 		$res = new ResponseWpf();
 		$id  = $this->_getIDFromReq( $d );
-		$d   = woobewoo_pf_prepare_params( $d );
+		$d   = prepareParamsWpf( $d );
 		if ( is_numeric( $id ) && $id ) {
 			if ( isset( $d['active'] ) ) {
 				$d['active'] = ( ( is_string( $d['active'] ) && 'true' == $d['active'] ) || 1 == $d['active'] ) ? 1 : 0;           // mmm.... govnokod?....)))

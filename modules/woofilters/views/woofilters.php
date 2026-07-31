@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WoofiltersViewWpf extends ViewWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+class WoofiltersViewWpf extends ViewWpf {
 
 	private static $uniqueBlockId  = 0;
 	private static $filterOrderKey = 0;
@@ -811,6 +811,8 @@ class WoofiltersViewWpf extends ViewWpf { // phpcs:ignore WordPress.NamingConven
 		$html  = DispatcherWpf::applyFilters( 'addHtmlAfterFilter', $html, $settings, $this->filter['id'] );
 		$html .= '</div>';
 		$html .= self::$filterExistsTermsJS;
+
+		$html = '<style type="text/css" id="wpfCustomCss-' . $viewId . '">' . DispatcherWpf::applyFilters( 'addCustomCss', self::$filtersCss, $settings, $filterId ) . '</style>' . $html;
 
 		$this->resetFilterExistsTerms();
 

@@ -60,8 +60,6 @@ abstract class ControllerWpf {
 
 	/**
 	 * _createModel.
-	 *
-	 * @version 3.3.0
 	 */
 	protected function _createModel( $name = '' ) {
 		if ( empty( $name ) ) {
@@ -71,7 +69,7 @@ abstract class ControllerWpf {
 		$className    = '';
 		if ( file_exists( $parentModule->getModDir() . 'models' . WPF_DS . $name . '.php' ) ) {
 			require $parentModule->getModDir() . 'models' . WPF_DS . $name . '.php';
-			$className = woobewoo_pf_toe_get_class_name( $name . 'Model' );
+			$className = toeGetClassNameWpf( $name . 'Model' );
 		}
 
 		if ( $className ) {
@@ -86,8 +84,6 @@ abstract class ControllerWpf {
 
 	/**
 	 * _createView.
-	 *
-	 * @version 3.3.0
 	 */
 	protected function _createView( $name = '' ) {
 		if ( empty( $name ) ) {
@@ -97,7 +93,7 @@ abstract class ControllerWpf {
 		$className    = '';
 		if ( file_exists( $parentModule->getModDir() . 'views' . WPF_DS . $name . '.php' ) ) {
 			require $parentModule->getModDir() . 'views' . WPF_DS . $name . '.php';
-			$className = woobewoo_pf_toe_get_class_name( $name . 'View' );
+			$className = toeGetClassNameWpf( $name . 'View' );
 		}
 
 		if ( $className ) {

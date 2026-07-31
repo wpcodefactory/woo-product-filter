@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Admin_NavControllerWpf extends ControllerWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+class Admin_NavControllerWpf extends ControllerWpf {
 	public function getPermissions() {
 		return array(
 			WPF_USERLEVELS => array(

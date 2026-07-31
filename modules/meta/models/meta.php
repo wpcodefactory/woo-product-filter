@@ -9,8 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class MetaModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
-
+class MetaModelWpf extends ModelWpf {
 	private $maxTextLength = 150;
 	private $maxKeyLength  = 32;
 	public $maxKeySize     = 4;
@@ -158,7 +157,7 @@ class MetaModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConvention
 		$maxCountProducts += 100;
 		DbWpf::query( 'SET session wait_timeout=600' );
 		global $wpfMetaSeparator;
-		$wpfMetaSeparator = ','; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+		$wpfMetaSeparator = ',';
 
 		foreach ( $keys as $key ) {
 			$keyName = $key['meta_key'];

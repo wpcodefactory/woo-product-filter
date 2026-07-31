@@ -12,7 +12,7 @@ use Elementor\Controls_Manager;
 
 defined( 'ABSPATH' ) || exit;
 
-class Woofilters_ElementorWidgetWpf extends Widget_Base { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+class Woofilters_ElementorWidgetWpf extends Widget_Base {
 
 	public static $adPath        = '';
 	public static $labelPro      = '';

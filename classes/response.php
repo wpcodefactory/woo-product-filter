@@ -75,8 +75,6 @@ class ResponseWpf {
 
 	/**
 	 * mainRedirect.
-	 *
-	 * @version 3.3.0
 	 */
 	public function mainRedirect( $redirectUrl = '' ) {
 		$redirectUrl  = empty( $redirectUrl ) ? WPF_SITE_URL : $redirectUrl;
@@ -88,7 +86,7 @@ class ResponseWpf {
 			$redirectData['wpfMsgs'] = $this->messages;
 		}
 
-		return woobewoo_pf_redirect( $redirectUrl . ( strpos( $redirectUrl, '?' ) ? '&' : '?' ) . http_build_query( $redirectData ) );
+		return redirectWpf( $redirectUrl . ( strpos( $redirectUrl, '?' ) ? '&' : '?' ) . http_build_query( $redirectData ) );
 	}
 
 	public function error() {
