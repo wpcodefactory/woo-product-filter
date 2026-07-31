@@ -157,8 +157,8 @@ class MetaModelWpf extends ModelWpf { // phpcs:ignore WordPress.NamingConvention
 
 		$maxCountProducts += 100;
 		DbWpf::query( 'SET session wait_timeout=600' );
-		global $wpfMetaSeparator; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-		$wpfMetaSeparator = ',';
+		global $wpfMetaSeparator;
+		$wpfMetaSeparator = ','; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 		foreach ( $keys as $key ) {
 			$keyName = $key['meta_key'];
