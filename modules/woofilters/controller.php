@@ -433,7 +433,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			if ( ! empty( $queryvars['posts_per_row'] ) ) {
 				$customNums = $queryvars['posts_per_row'];
 				global $woocommerce_loop;
-				$woocommerce_loop['columns'] = $customNums; // needed for some themes, that check this property first
+				$woocommerce_loop['columns'] = $customNums; // needed for some themes, that check this property first // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 				add_filter(
 					'loop_shop_columns', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 					function ( $num ) use ( $customNums ) {

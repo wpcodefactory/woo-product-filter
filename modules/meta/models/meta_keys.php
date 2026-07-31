@@ -128,7 +128,7 @@ class Meta_KeysModelWpf extends ModelWpf {
 				}
 			} elseif ( ! $this->insert(
 				array(
-					'meta_key'  => $key,
+					'meta_key'  => $key, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 					'meta_mode' => 1,
 					'status'    => 0,
 				)
