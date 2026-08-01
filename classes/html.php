@@ -238,10 +238,6 @@ class HtmlWpf {
 		echo wp_kses( $html, self::getAllowedHtmlTags() );
 	}
 
-	public static function skipHtmlEscape( $safe_text, $text ) {
-		return $text;
-	}
-
 	public static function block( $name, $params = array(
 		'attrs' => '',
 		'value' => '',
