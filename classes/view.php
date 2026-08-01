@@ -51,6 +51,12 @@ abstract class ViewWpf extends BaseObjectWpf {
 	public function getModel( $code = '' ) {
 		return FrameWpf::_()->getModule( $this->_code )->getController()->getModel( $code );
 	}
+
+	/**
+	 * getContent.
+	 *
+	 * @version 3.3.0
+	 */
 	public function getContent( $tpl = '' ) {
 		$tpl          = ( empty( $tpl ) ) ? $this->_tpl : $tpl;
 		$path         = $this->getPath( $tpl );

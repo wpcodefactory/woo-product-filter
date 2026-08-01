@@ -9,7 +9,6 @@
  * Requires at least: 5.0
  * Text Domain: woo-product-filter
  * Domain Path: /languages
- * WC requires at least: 3.4
  * WC tested up to: 10.9
  * Requires Plugins: woocommerce
  * License: GPLv2 or later
@@ -20,6 +19,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Base config constants and functions.
+ *
+ * @version 3.3.0
  */
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'config.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
