@@ -3237,7 +3237,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * renderProductsList.
 	 *
-	 * 3.3.0
+	 * @version 3.3.0
 	 */
 	public function render( $params ) {
 		$p = array(
@@ -3250,7 +3250,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * renderProductsList.
 	 *
-	 * 3.3.0
+	 * @version 3.3.0
 	 */
 	public function renderProductsList( $params ) {
 		$params = array();

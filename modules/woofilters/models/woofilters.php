@@ -351,7 +351,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * save.
 	 *
-	 * 3.3.0
+	 * @version 3.3.0
 	 */
 	public function save( $data = array() ) {
 
