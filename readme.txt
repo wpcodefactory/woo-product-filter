@@ -151,8 +151,7 @@ You may help us translate the plugin into your language and get the PRO version 
 = Where do I report security bugs found in this plugin? =
 Please report security bugs found in the source code of the plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fbdb8-8978-4dfd-b6cd-a768233271db). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
-== External Services ==
-
+= External Services =
 This plugin connects to an external server provided by WooBewoo (woobewoo.com) to handle the following admin-side forms. No data is ever sent automatically — these requests only occur when an administrator explicitly submits one of the forms below from within the WordPress admin panel.
 
 **Contact Us form:** Sends the administrator's name, email address, subject, message, site URL, and plugin version to woobewoo.com.
