@@ -335,11 +335,7 @@
 					settValue = settings.styles[name.replace('styles[','').replace(']','')];
 				}
 				if (typeof settValue !== 'undefined') {
-					if ('css_editor' === name || 'js_editor' === name) {
-						elm.value = atob(settValue);
-					} else {
-						elm.value = settValue;
-					}
+					elm.value = settValue;
 				}
 				if ($elm.hasClass('woobewoo-color-result-text')) {
 					$elm.closest('.woobewoo-color-picker').find('.woobewoo-color-result').val(elm.value);

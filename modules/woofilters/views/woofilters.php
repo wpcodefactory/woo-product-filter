@@ -812,8 +812,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html .= '</div>';
 		$html .= self::$filterExistsTermsJS;
 
-		$html = '<style type="text/css" id="wpfCustomCss-' . $viewId . '">' . DispatcherWpf::applyFilters( 'addCustomCss', self::$filtersCss, $settings, $filterId ) . '</style>' . $html;
-
 		$this->resetFilterExistsTerms();
 
 		return $html;
