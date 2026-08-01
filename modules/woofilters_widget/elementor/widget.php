@@ -8,6 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
 class WpfWoofiltersWidget extends WP_Widget {
 	public function __construct() {
 		$widgetOps = array(

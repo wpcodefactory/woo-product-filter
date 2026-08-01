@@ -8,6 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
 abstract class HelperWpf {
 	protected $_code   = '';
 	protected $_module = '';

@@ -19,7 +19,7 @@ class CsvgeneratorWpf {
 		$this->_filename = $filename;
 	}
 	public function addCell( $x, $y, $value ) {
-		$this->_data[ $x ][ $y ] = '"' . $value . '"';    // If will not do "" then symbol for example, will broke file
+		$this->_data[ $x ][ $y ] = '"' . $value . '"'; // If will not do "" then symbol for example, will broke file
 	}
 	public function generate() {
 		$strData = '';
