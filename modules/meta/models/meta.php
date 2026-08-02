@@ -828,7 +828,7 @@ class MetaModelWpf extends ModelWpf {
 					$price     = $settings->get_pricing_rules_maximum_price();
 					$salePrice = $settings->pricing_rules_is_on_sale() ? $settings->get_pricing_rules_maximum_sale_price() : '';
 
-					// quantity calculator with per unit pricing
+				// quantity calculator with per unit pricing
 				} elseif ( $settings->is_quantity_calculator_enabled() && \WC_Price_Calculator_Product::pricing_per_unit_enabled( $product ) ) {
 					$measurement = null;
 

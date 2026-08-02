@@ -117,8 +117,8 @@ class FrameWpf {
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable( 'modules' )
-								->innerJoin( $this->getTable( 'modules_type' ), 'type_id' )
-								->get( $this->getTable( 'modules' )->alias() . '.*, ' . $this->getTable( 'modules_type' )->alias() . '.label as type_name' );
+			->innerJoin( $this->getTable( 'modules_type' ), 'type_id' )
+			->get( $this->getTable( 'modules' )->alias() . '.*, ' . $this->getTable( 'modules_type' )->alias() . '.label as type_name' );
 		if ( $activeModules ) {
 			foreach ( $activeModules as $m ) {
 				$code              = $m['code'];
@@ -235,7 +235,7 @@ class FrameWpf {
 	/**
 	 * Check permissions for action in controller by $code and made corresponding action.
 	 *
-	 * @version 3.3.0
+	 * @version 3.1.3
 	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
@@ -554,6 +554,8 @@ class FrameWpf {
 
 	/**
 	 * Add all scripts from _scripts array to WordPress.
+	 *
+	 * @version 3.3.0
 	 */
 	public function addScripts() {
 		if ( ! empty( $this->_scripts ) ) {

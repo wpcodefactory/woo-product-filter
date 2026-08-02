@@ -25,7 +25,7 @@ class ReqWpf {
 	 * verifyRequest.
 	 *
 	 * @version 3.3.0
-	 * @since 3.3.0
+	 * @since   3.3.0
 	 *
 	 * @return void
 	 */

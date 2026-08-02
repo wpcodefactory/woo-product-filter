@@ -21,6 +21,7 @@ class ResponseWpf {
 	 * records.
 	 *
 	 * @version 3.3.0
+	 * @since   3.3.0
 	 */
 	public $records = array();
 
@@ -28,6 +29,7 @@ class ResponseWpf {
 	 * rows.
 	 *
 	 * @version 3.3.0
+	 * @since   3.3.0
 	 */
 	public $rows = array();
 
@@ -35,6 +37,7 @@ class ResponseWpf {
 	 * total.
 	 *
 	 * @version 3.3.0
+	 * @since   3.3.0
 	 */
 	public $total = 0;
 
@@ -42,6 +45,7 @@ class ResponseWpf {
 	 * page.
 	 *
 	 * @version 3.3.0
+	 * @since   3.3.0
 	 */
 	public $page = 1;
 
@@ -58,6 +62,11 @@ class ResponseWpf {
 		return $this->getReqType() == 'ajax';
 	}
 
+	/**
+	 * ajaxExec.
+	 *
+	 * @version 3.3.0
+	 */
 	public function ajaxExec( $forceAjax = false ) {
 		$isAjax   = $this->isAjax();
 		$redirect = ReqWpf::getVar( 'redirect' );

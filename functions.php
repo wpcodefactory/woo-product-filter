@@ -12,6 +12,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Set first letter in a string as UPPERCASE.
  *
+ * @version 3.3.0
+ *
  * @param string $str string to modify
  *
  * @return string string with first Uppercase letter
@@ -22,16 +24,8 @@ if ( ! function_exists( 'strFirstUpWpf' ) ) {
 	}
 }
 
-
 /**
- * Generate random string name.
- *
- * @version 3.1.8
- *
- * @param int $lenFrom min len
- * @param int $lenTo max len
- *
- * @return string random string with length from $lenFrom to $lenTo
+ * dateToTimestampWpf.
  */
 if ( ! function_exists( 'dateToTimestampWpf' ) ) {
 	function dateToTimestampWpf( $date ) {
@@ -313,6 +307,8 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 
 /**
  * woofilterInstallBaseMsg.
+ *
+ * @version 3.3.0
  */
 add_action( 'admin_notices', 'woofilterInstallBaseMsg' );
 if ( ! function_exists( 'woofilterInstallBaseMsg' ) ) {

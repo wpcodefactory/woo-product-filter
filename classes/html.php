@@ -223,7 +223,8 @@ class HtmlWpf {
 	/**
 	 * Returns HTML sanitized with the plugin's allowed HTML tags.
 	 *
-	 * @since 3.3.0
+	 * @version 3.3.0
+	 * @since   3.3.0
 	 */
 	public static function escapedHtml( $html ) {
 		return wp_kses( $html, self::getAllowedHtmlTags() );
@@ -232,7 +233,8 @@ class HtmlWpf {
 	/**
 	 * Outputs HTML sanitized with the plugin's allowed HTML tags.
 	 *
-	 * @since 3.3.0
+	 * @version 3.3.0
+	 * @since   3.3.0
 	 */
 	public static function echoEscapedHtml( $html ) {
 		echo wp_kses( $html, self::getAllowedHtmlTags() );

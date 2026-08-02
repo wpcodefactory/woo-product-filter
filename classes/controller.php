@@ -60,6 +60,8 @@ abstract class ControllerWpf {
 
 	/**
 	 * _createModel.
+	 *
+	 * @version 3.3.0
 	 */
 	protected function _createModel( $name = '' ) {
 		if ( empty( $name ) ) {
@@ -84,6 +86,8 @@ abstract class ControllerWpf {
 
 	/**
 	 * _createView.
+	 *
+	 * @version 3.3.0
 	 */
 	protected function _createView( $name = '' ) {
 		if ( empty( $name ) ) {

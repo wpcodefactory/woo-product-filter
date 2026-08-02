@@ -439,8 +439,6 @@ abstract class TableWpf {
 	/**
 	 * Add new FieldWpfWpf for children table (@see class field)
 	 *
-	 * @version 3.3.0
-	 *
 	 * @param string $name name of a field
 	 * @param string $html html type of field (text, textarea, etc. @see html class)
 	 * @param string $type database type (int, varcahr, etc.)

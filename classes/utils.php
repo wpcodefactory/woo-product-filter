@@ -382,6 +382,8 @@ class UtilsWpf {
 	/**
 	 * Check if device is mobile.
 	 *
+	 * @version 3.3.0
+	 *
 	 * @return bool true if user are watching this site from mobile device
 	 */
 	public static function isMobile() {

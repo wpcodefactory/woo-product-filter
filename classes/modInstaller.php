@@ -74,6 +74,8 @@ class ModInstallerWpf {
 
 	/**
 	 * _runModuleInstall.
+	 *
+	 * @version 3.3.0
 	 */
 	protected static function _runModuleInstall( $module, $action = 'install' ) {
 		$moduleLocationDir = WPF_MODULES_DIR;
