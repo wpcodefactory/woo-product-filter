@@ -99,6 +99,8 @@ class OptionsWpf extends ModuleWpf {
 
 	/**
 	 * getAdminPage.
+	 *
+	 * @version 3.3.0
 	 */
 	public function getAdminPage() {
 		if ( ! InstallerWpf::isUsed() ) {

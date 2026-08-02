@@ -189,7 +189,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
