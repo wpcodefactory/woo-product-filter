@@ -11,15 +11,9 @@ defined( 'ABSPATH' ) || exit;
 
 class ReqWpf {
 
-	protected static $_requestData;
-
 	protected static $_requestMethod;
 
 	public static $_requestWithNonce = false;
-
-	public static function init() {
-		add_filter( 'sanitize_text_field', array( 'ReqWpf', 'sanitizeData' ), 999, 2 );
-	}
 
 	/**
 	 * verifyRequest.
@@ -189,10 +183,6 @@ class ReqWpf {
 		}
 
 		return implode( '|', $params );
-	}
-
-	public static function sanitizeData( $filtered, $value ) {
-		return is_array( $value ) ? self::sanitizeArray( $value ) : $filtered;
 	}
 
 	/**

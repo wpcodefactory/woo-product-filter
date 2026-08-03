@@ -170,7 +170,6 @@ class FrameWpf {
 	 * @version 3.3.0
 	 */
 	public function init() {
-		ReqWpf::init();
 		$this->_extractTables();
 		$this->_extractModules();
 
