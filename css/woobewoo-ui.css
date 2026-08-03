@@ -976,9 +976,6 @@ select.woobewoo-flat-input option {
 	border: 1px solid #d8dfe3 !important;
 	border-right: none !important;
 }
-.woobewoo-plugin .slimScrollBar{
-	background-color: #b0bec5 !important;
-}
 @media screen and (max-width: 1024px) {
 	.woobewoo-plugin .woobewoo-content .woobewoo-navigation {
 		width: 35px;

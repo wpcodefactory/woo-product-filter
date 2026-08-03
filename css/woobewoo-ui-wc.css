@@ -696,9 +696,6 @@ ul.woobewoo-bar-controls > li.separator {
 .woobewoo-plugin .wp-color-result span.color-alpha {
 	height: 30px!important;
 }
-.woobewoo-plugin .slimScrollBar{
-	background-color: #b0bec5 !important;
-}
 @media screen and (max-width: 1024px) {
 	.woobewoo-plugin .woobewoo-content .woobewoo-navigation {
 		width: 35px;
