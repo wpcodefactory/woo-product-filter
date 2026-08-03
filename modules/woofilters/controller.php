@@ -231,7 +231,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 
 			$html = FrameWpf::_()->getModule( 'woofilters' )->getView()->renderHtml( $data );
 
-			$html .= '<script type="text/javascript">window.wpfFrontendPage.init();' . ( $isPro ? 'window.wpfFrontendPage.eventsFrontendPro();' : '' ) . '</script>';
 			$res->setHtml( $html );
 		} else {
 			$res->pushError( $this->getModule( 'woofilters' )->getErrors() );

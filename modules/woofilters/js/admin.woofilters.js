@@ -622,7 +622,16 @@
 				onSuccess: function ( res ) {
 					if ( !res.error ) {
 						var container = $( '.wpfFiltersBlockPreview' );
-						container.html( res.html );
+						container.html( res.html.html );
+
+						// Add the preview CSS inside the container.
+						container.prepend(
+							$( '<style>', {
+								id: 'woobewoo_pf_draw_filter_ajax',
+								text: res.html.style
+							} )
+						);
+
 						container.find( "input" ).attr( "name", '' );
 						container.find( "select" ).attr( "name", '' );
 						container.find( "input[type=number]" ).attr( "type", '' );
@@ -631,6 +640,12 @@
 							visibility: 'visible'
 						} );
 						container.css( { visibility: container.find( '.wpfFilterWrapper' ).length ? 'visible' : 'hidden' } );
+
+						// Initialize.
+						window.wpfFrontendPage.init();
+
+						// Trigger initialization.
+						$( document ).trigger( 'wpfFrontendInit', [ container ] );
 					}
 					_this.wpfWaitResponse = false;
 				},

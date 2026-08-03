@@ -318,6 +318,10 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$this->assign( 'html', $html );
 
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && is_admin() ) {
+			return $html;
+		}
+
 		return parent::getContent( 'woofiltersHtml' );
 	}
 
@@ -812,7 +816,26 @@ class WoofiltersViewWpf extends ViewWpf {
 		$html .= '</div>';
 		$html .= self::$filterExistsTermsJS;
 
+
+		$custom_css = DispatcherWpf::applyFilters(
+			'addCustomCss',
+			self::$filtersCss,
+			$settings,
+			'wpfMainWrapper-' . $viewId
+		);
+		wp_add_inline_style(
+			'woobewoo-pf-frontend-filters',
+			$custom_css
+		);
+
 		$this->resetFilterExistsTerms();
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && is_admin() ) {
+			return array(
+				'html' => $html,
+				'style' => $custom_css,
+			);
+		}
 
 		return $html;
 	}
