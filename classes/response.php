@@ -82,22 +82,6 @@ class ResponseWpf {
 		return $this;
 	}
 
-	/**
-	 * mainRedirect.
-	 */
-	public function mainRedirect( $redirectUrl = '' ) {
-		$redirectUrl  = empty( $redirectUrl ) ? WPF_SITE_URL : $redirectUrl;
-		$redirectData = array();
-		if ( ! empty( $this->errors ) ) {
-			$redirectData['wpfErrors'] = $this->errors;
-		}
-		if ( ! empty( $this->messages ) ) {
-			$redirectData['wpfMsgs'] = $this->messages;
-		}
-
-		return redirectWpf( $redirectUrl . ( strpos( $redirectUrl, '?' ) ? '&' : '?' ) . http_build_query( $redirectData ) );
-	}
-
 	public function error() {
 		return $this->error;
 	}

@@ -9,7 +9,7 @@
 /**
  * Detect Thrive editor context.
  *
- * @version 3.1.8
+ * @version 3.3.0
  * @since   3.1.8
  */
 function wpfIsThriveEditor() {
@@ -2268,8 +2268,32 @@ function wpfIsThriveEditor() {
 							}
 						});
 					}
-					if ('jscript' in res.data) {
-						_thisObj.setAjaxJScript(res.data['jscript']);
+					if ( res.data.filter_state ) {
+						let state = res.data.filter_state;
+
+						wpfShowHideFiltersAtts(
+							state.exists,
+							state.existsUsers,
+							state.synchroId
+						);
+
+						if ( state.recount ) {
+							wpfChangeFiltersCount(
+								state.exists,
+								state.synchroId
+							);
+						}
+
+						if ( state.fid ) {
+							wpfDoActionsAfterLoad(
+								state.fid,
+								state.havePosts ? 1 : 0
+							);
+						}
+
+						if ( state.prices ) {
+							wpfChangePriceFiltersCount( state.prices );
+						}
 					}
 					if (_thisObj.filterClick) {
 						if (customListSelector !== '' && productListElem.length) {
@@ -2515,12 +2539,32 @@ function wpfIsThriveEditor() {
 						hideFilterLoader(jQuery('#' + filterId));
 					}
 
-					if (!res.error) {
+					if ( ! res.error && res.data && res.data.filter_state ) {
+						const state = res.data.filter_state;
 
-						if ('jscript' in res.data) {
-							_thisObj.setAjaxJScript(res.data['jscript'], filterId);
+						wpfShowHideFiltersAtts(
+							state.exists,
+							state.existsUsers,
+							state.synchroId
+						);
+
+						if ( state.recount ) {
+							wpfChangeFiltersCount(
+								state.exists,
+								state.synchroId
+							);
 						}
 
+						if ( state.fid ) {
+							wpfDoActionsAfterLoad(
+								state.fid,
+								state.havePosts ? 1 : 0
+							);
+						}
+
+						if ( state.prices ) {
+							wpfChangePriceFiltersCount( state.prices );
+						}
 					}
 					_thisObj.removeOverlay();
 				}

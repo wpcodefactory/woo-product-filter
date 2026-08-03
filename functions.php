@@ -112,22 +112,6 @@ if ( ! function_exists( 'toeCreateObjWpf' ) ) {
 }
 
 /**
- * Redirect user to specified location. Be advised that it should redirect even if headers already sent.
- *
- * @param string $url where page must be redirected
- */
-if ( ! function_exists( 'redirectWpf' ) ) {
-	function redirectWpf( $url ) {
-		if ( headers_sent() ) {
-			echo '<script type="text/javascript"> document.location.href = "' . esc_url( $url ) . '"; </script>';
-		} else {
-			header( 'Location: ' . $url );
-		}
-		exit();
-	}
-}
-
-/**
  * jsonEncodeUTFnormalWpf.
  */
 if ( ! function_exists( 'jsonEncodeUTFnormalWpf' ) ) {

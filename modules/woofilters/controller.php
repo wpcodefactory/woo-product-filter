@@ -411,15 +411,13 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$_GET['product_view']     = $urlQuery['product_view'];
 			$_REQUEST['product_view'] = $urlQuery['product_view'];
 		}
-
-		$cacheArgs       = $args;
+		
 		$categoryHtml    = '';
 		$productsHtml    = '';
 		$paginationHtml  = '';
 		$paginationLeer  = '';
 		$resultCountHtml = '';
 		$loopStart       = '';
-		$jscript         = '';
 
 		if ( ! $onlyFilterRecount ) {
 
@@ -540,14 +538,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			if ( $openOneByOne && $displayOnlyChildrenCategory ) {
 				$optionsHtml = $this->getOptionsHtml( $filterItems['exists'], $generalSettings );
 			}
-
-			$jscript .= '<script type="text/javascript">wpfShowHideFiltersAtts(' . json_encode( $filterItems['exists'] ) . ', ' . json_encode( $filterItems['existsUsers'] ) . ', "' . $synchroFilterId . '");</script>';
-			if ( $recount ) {
-				$jscript .= '<script type="text/javascript">wpfChangeFiltersCount(' . json_encode( $filterItems['exists'] ) . ', "' . $synchroFilterId . '");</script>';
-			}
-		}
-		if ( ! empty( $wpfFId ) ) {
-			$jscript .= '<script type="text/javascript">wpfDoActionsAfterLoad(' . $wpfFId . ',' . ( empty( $filterItems ) || empty( $filterItems['have_posts'] ) ? 0 : 1 ) . ');</script>';
 		}
 
 		if ( ! $onlyFilterRecount ) {
@@ -726,10 +716,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$filteredPrices          = $filterItems['existsPrices'];
 			$prices['wpf_max_price'] = $filteredPrices->wpfMaxPrice;
 			$prices['wpf_min_price'] = $filteredPrices->wpfMinPrice;
-
-			if ( ! empty( $prices['wpf_max_price'] ) ) {
-				$jscript .= '<script type="text/javascript">wpfChangePriceFiltersCount(' . json_encode( $prices ) . ');</script>';
-			}
 		}
 
 		$beforeProductHtml = DispatcherWpf::applyFilters( 'productLoopStart', '', $generalSettings, $urlQuery );
@@ -743,8 +729,21 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$res->addData( 'loopStartHtml', $loopStart );
 		$res->addData( 'paginationLeerHtml', $paginationLeer );
 		$res->addData( 'prices', $prices );
-		$res->addData( 'jscript', $jscript );
 		$res->addData( 'fid', $wpfFId );
+
+		// Data required for client-side updates.
+		$state = array(
+			'exists'      => $filterItems['exists'],
+			'existsUsers' => $filterItems['existsUsers'],
+			'recount'     => $recount,
+			'synchroId'   => $synchroFilterId,
+			'fid'         => $wpfFId,
+			'havePosts'   => ! empty( $filterItems['have_posts'] ),
+		);
+		if ( ! empty( $prices['wpf_max_price'] ) ) {
+			$state['prices'] = $prices;
+		}
+		$res->addData( 'filter_state', $state );
 
 		if ( isset( $optionsHtml ) ) {
 			$res->addData( 'optionsHtml', $optionsHtml );
