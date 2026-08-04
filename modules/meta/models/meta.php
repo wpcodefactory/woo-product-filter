@@ -52,6 +52,11 @@ class MetaModelWpf extends ModelWpf {
 		return $result;
 	}
 
+	/**
+	 * doRecalcMetaValues.
+	 *
+	 * @version 3.3.0
+	 */
 	public function doRecalcMetaValues( $productId, $params ) {
 		if ( ! empty( $productId ) && ! is_numeric( $productId ) ) {
 			return false;
@@ -133,12 +138,10 @@ class MetaModelWpf extends ModelWpf {
 		$where = " WHERE p.post_type IN ('product', 'product_variation') AND p.post_status IN('publish','private')" . ( $isAllProducts ? '' : ' AND p.id' . $productList );
 
 		$tempTable  = false;
-		$maxCntTemp = 0;
 		if ( $isAllProducts ) {
 			$tempTable  = FrameWpf::_()->getModule( 'woofilters' )->createTemporaryTable( 'wpf_meta_calc', "SELECT id, post_parent, post_type, IF(p.post_type='product_variation',1,0) as is_var, 0 as for_ins FROM `#__posts` as p" . $where );
 			$from       = ' FROM `#__postmeta` as m  FORCE INDEX (meta_key) INNER JOIN ' . $tempTable . ' as p ON (p.id=m.post_id)';
 			$where      = ' WHERE 1=1';
-			$maxCntTemp = DbWpf::get( 'SELECT count(*) FROM ' . $tempTable, 'one' );
 		}
 
 		$insert        = 'INSERT INTO `@__meta_data` (product_id, is_var, key_id, ';
@@ -165,7 +168,12 @@ class MetaModelWpf extends ModelWpf {
 			$parent  = $key['id'];
 
 			if ( $isLike ) {
-				$keysData = DbWpf::get( 'SELECT DISTINCT meta_key' . ( $isAllProducts ? ' FROM `#__postmeta` as m FORCE INDEX (meta_key) WHERE ' : $from . $where . ' AND ' ) . " m.meta_key LIKE '" . $keyName . "'", 'col' );
+				$keysData = DbWpf::get(
+					'SELECT DISTINCT meta_key' . ( $isAllProducts ? ' FROM `#__postmeta` as m FORCE INDEX (meta_key) WHERE ' : $from . $where . ' AND ' ) . ' m.meta_key LIKE %s',
+					'col',
+					ARRAY_A,
+					array( $keyName )
+				);
 				if ( false === $keysData ) {
 					$this->pushError( DbWpf::getError() );
 					return false;
@@ -251,7 +259,7 @@ class MetaModelWpf extends ModelWpf {
 				$isMetaVar  = strpos( $keyName, $this->metaVarSuf ) != false;
 				$keyNameVar = str_replace( $this->metaVarSuf, '', $keyName );
 				if ( empty( $keyData['taxonomy'] ) ) {
-					if ( ! DbWpf::query( "UPDATE @__meta_keys SET taxonomy='" . $keyNameVar . "' WHERE id=" . $keyId ) ) {
+					if ( ! DbWpf::query( 'UPDATE @__meta_keys SET taxonomy=%s WHERE id=%d', false, array( $keyNameVar, (int) $keyId ) ) ) {
 						return false;
 					}
 				}
@@ -441,7 +449,13 @@ class MetaModelWpf extends ModelWpf {
 				$attrKeyId   = $attrKey['id'];
 				$parentKeyId = $parentKey['id'];
 
-				$attributes = DbWpf::get( 'SELECT key3, id, value FROM @__meta_values WHERE key_id=' . $attrKeyId . " AND key2='is_variation' AND key4=''" );
+				$attributes = DbWpf::get(
+					"SELECT key3, id, value FROM @__meta_values WHERE key_id=%d AND key2='is_variation' AND key4=''",
+					'all',
+					ARRAY_A,
+					array( (int) $attrKeyId )
+				);
+
 				$attrIds    = array();
 				$varIds     = array();
 				foreach ( $attributes as $k => $data ) {
@@ -769,9 +783,15 @@ class MetaModelWpf extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * optimizeMetaTables.
+	 *
+	 * @version 3.3.0
+	 */
 	public function optimizeMetaTables() {
 		$optimizeTables = array( 'meta_data', 'meta_values', 'meta_values_bk' );
 		foreach ( $optimizeTables as $table ) {
+			$table = DbWpf::sanitizeIdentifier( $table );
 			if ( ! DbWpf::query( 'OPTIMIZE TABLE `@__' . $table . '`' ) ) {
 				$this->pushError( DbWpf::getError() );
 				return false;
@@ -781,6 +801,11 @@ class MetaModelWpf extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * addCompatibilities.
+	 *
+	 * @version 3.3.0
+	 */
 	public function addCompatibilities( $productId, $tempTable ) {
 		if ( class_exists( 'WC_Measurement_Price_Calculator' ) ) {
 			$keysModel    = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_keys' );
@@ -793,6 +818,7 @@ class MetaModelWpf extends ModelWpf {
 			}
 			$isOne = false;
 			if ( $tempTable ) {
+				$tempTable = DbWpf::sanitizeIdentifier( $tempTable );
 				$ids = DbWpf::get( 'SELECT id FROM ' . $tempTable, 'col' );
 			} else {
 				$product = wc_get_product( $productId );

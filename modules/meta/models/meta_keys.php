@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - Meta_KeysModelWpf Class
  *
+ * @version 3.3.0
+ *
  * @author woobewoo
  */
 
@@ -45,15 +47,6 @@ class Meta_KeysModelWpf extends ModelWpf {
 
 	public function isOldLock( $lock ) {
 		return is_null( $lock ) || empty( $lock ) || $lock > $this->lockLimit;
-	}
-
-	public function resetLockedKeys() {
-		$query = 'UPDATE @__meta_keys SET status=0, updated=CURRENT_TIMESTAMP WHERE status=2 AND TIMESTAMPDIFF(MINUTE, locked, CURRENT_TIMESTAMP)>' . $this->lockLimit;
-		if ( ! DbWpf::query( $query ) ) {
-			$this->pushError( DbWpf::getError() );
-			return false;
-		}
-		return true;
 	}
 
 	public function getKeysForRecalc( $params ) {

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Meta_ValuesModelWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -239,8 +239,16 @@ class Meta_ValuesModelWpf extends ModelWpf {
 
 	/**
 	 * recalcValuesCount.
+	 *
+	 * @version 3.3.0
 	 */
 	public function recalcValuesCount( $keyIds = array() ) {
+
+		$keyIds = array_map( 'intval', (array) $keyIds );
+		$keyIds = array_filter( $keyIds );
+		if ( empty( $keyIds ) ) {
+			return true;
+		}
 
 		$query = 'UPDATE `@__meta_values` as v SET ' .
 			' product_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var!=1 LIMIT 1),1,0),
@@ -258,8 +266,15 @@ class Meta_ValuesModelWpf extends ModelWpf {
 
 	/**
 	 * backupOldValues.
+	 *
+	 * @version 3.3.0
 	 */
 	public function backupOldValues( $keyIds ) {
+		$keyIds = array_map( 'intval', (array) $keyIds );
+		$keyIds = array_filter( $keyIds );
+		if ( empty( $keyIds ) ) {
+			return true;
+		}
 		$where = ' WHERE key_id' . ( count( $keyIds ) ? ' IN (' . implode( ',', $keyIds ) . ')' : '=' . $keyIds[0] );
 		$query = 'INSERT IGNORE INTO `@__meta_values_bk` SELECT id, key_id, key2, key3, key4, value FROM `@__meta_values`' . $where;
 		if ( ! DbWpf::query( $query ) ) {

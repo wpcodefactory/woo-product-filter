@@ -548,13 +548,16 @@ class WoofiltersModelWpf extends ModelWpf {
 			$data = $this->setSelectFields( 'id, setting_data' )->getFromTbl();
 			foreach ( $data as $filter ) {
 				$settings = maybe_unserialize( $filter['setting_data'] );
-				$metaKeys = $settings && ! empty( $settings['settings']['filters']['order'] ) ? $this->getDataFilterMetaKeys( $settings['settings']['filters']['order'], false ) : array();
-				$query    = "UPDATE `@__filters` SET meta_keys='";
+				$metaKeys = $settings && ! empty( $settings['settings']['filters']['order'] ) ?
+					$this->getDataFilterMetaKeys( $settings['settings']['filters']['order'], false ) :
+					array();
+
+				$metaKeysLine = '';
 				if ( ! empty( $metaKeys ) ) {
-					$query .= implode( '|', $metaKeys );
-					$keys   = array_merge( $keys, $metaKeys );
+					$metaKeysLine = implode( '|', $metaKeys );
+					$keys         = array_merge( $keys, $metaKeys );
 				}
-				if ( ! DbWpf::query( $query . "' WHERE id=" . $filter['id'] ) ) {
+				if ( ! DbWpf::query( 'UPDATE `@__filters` SET meta_keys=%s WHERE id=%d', false, array( $metaKeysLine, (int) $filter['id'] ) ) ) {
 					$this->pushError( DbWpf::getError() );
 					return false;
 				}

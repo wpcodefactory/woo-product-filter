@@ -249,8 +249,14 @@ abstract class ModelWpf extends BaseObjectWpf {
 	public function setSimpleGetFields() {
 		return $this;
 	}
+
+	/**
+	 * dropIndexes.
+	 *
+	 * @version 3.3.0
+	 */
 	public function dropIndexes( $withPrimary = false ) {
-		$table   = $this->_tbl;
+		$table   = DbWpf::sanitizeIdentifier( $this->_tbl );
 		$indexes = DbWpf::get( 'SHOW INDEX FROM `@__' . $table . '`' );
 		if ( ! $indexes ) {
 			$this->pushError( DbWpf::getError() );
@@ -259,9 +265,9 @@ abstract class ModelWpf extends BaseObjectWpf {
 
 		$drop = array();
 		foreach ( $indexes as $index ) {
-			$name = $index['Key_name'];
+			$name = DbWpf::sanitizeIdentifier( $index['Key_name'] );
 			if ( $withPrimary || 'PRIMARY' != $name ) {
-				$drop[] = ' DROP INDEX ' . $name;
+				$drop[] = ' DROP INDEX `' . $name . '`';
 			}
 		}
 		if ( ! empty( $drop ) ) {
@@ -272,11 +278,17 @@ abstract class ModelWpf extends BaseObjectWpf {
 		}
 		return true;
 	}
+
+	/**
+	 * addIndexes.
+	 *
+	 * @version 3.3.0
+	 */
 	public function addIndexes( $delete = true ) {
 		if ( empty( $this->_indexes ) ) {
 			return true;
 		}
-		$table   = $this->_tbl;
+		$table   = DbWpf::sanitizeIdentifier( $this->_tbl );
 		$indexes = DbWpf::get( 'SHOW INDEX FROM `@__' . $table . '`' );
 		if ( ! $indexes ) {
 			$this->pushError( DbWpf::getError() );
@@ -284,7 +296,7 @@ abstract class ModelWpf extends BaseObjectWpf {
 		}
 		$exists = array();
 		foreach ( $indexes as $index ) {
-			$exists[] = $index['Key_name'];
+			$exists[] = DbWpf::sanitizeIdentifier( $index['Key_name'] );
 		}
 
 		$alter = '';

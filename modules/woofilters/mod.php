@@ -3639,6 +3639,8 @@ class WoofiltersWpf extends ModuleWpf {
 
 	/**
 	 * createTemporaryTable.
+	 *
+	 * @version 3.3.0
 	 */
 	public function createTemporaryTable( $table, $sql, $postfix = '' ) {
 
@@ -3646,7 +3648,7 @@ class WoofiltersWpf extends ModuleWpf {
 			$table .= '_' . str_replace( '-', '_', trim( $postfix ) );
 		}
 
-		$resultTable = $table;
+		$resultTable = DbWpf::sanitizeIdentifier( $table );
 
 		if ( isset( $this->clausesByParam['not_for_temporary_table'] ) ) {
 

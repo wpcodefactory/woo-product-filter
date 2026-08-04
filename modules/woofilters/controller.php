@@ -186,11 +186,14 @@ class WoofiltersControllerWpf extends ControllerWpf {
 	}
 
 	protected function _prepareTextLikeSearch( $val ) {
-		$query = '(title LIKE "%' . $val . '%"';
+		global $wpdb;
+		$escaped = esc_sql( $wpdb->esc_like( $val ) );
+		$query   = '(title LIKE "%' . $escaped . '%"';
 		if ( is_numeric( $val ) ) {
 			$query .= ' OR id LIKE "%' . (int) $val . '%"';
 		}
 		$query .= ')';
+
 		return $query;
 	}
 
@@ -411,7 +414,7 @@ class WoofiltersControllerWpf extends ControllerWpf {
 			$_GET['product_view']     = $urlQuery['product_view'];
 			$_REQUEST['product_view'] = $urlQuery['product_view'];
 		}
-		
+
 		$categoryHtml    = '';
 		$productsHtml    = '';
 		$paginationHtml  = '';

@@ -462,11 +462,27 @@ abstract class TableWpf {
 	public function getField( $name ) {
 		return $this->_fields[ $name ];
 	}
+
+	/**
+	 * exists.
+	 *
+	 * @version 3.3.0
+	 */
 	public function exists( $value, $field = '' ) {
 		if ( ! $field ) {
 			$field = $this->_id;
 		}
-		return DbWpf::get( 'SELECT ' . $this->_id . ' FROM ' . $this->_table . ' WHERE ' . $field . ' = "' . $value . '"', 'one' );
+
+		$id    = DbWpf::sanitizeIdentifier( $this->_id );
+		$table = DbWpf::sanitizeIdentifier( DbWpf::prepareQuery( $this->_table ) );
+		$field = DbWpf::sanitizeIdentifier( $field );
+
+		return DbWpf::get(
+			'SELECT `' . $id . '` FROM `' . $table . '` WHERE `' . $field . '` = %s',
+			'one',
+			ARRAY_A,
+			array( $value )
+		);
 	}
 	protected function _addError( $error ) {
 		if ( is_array( $error ) ) {
@@ -540,11 +556,5 @@ abstract class TableWpf {
 	public function uninstall( $d = array() ) {
 	}
 	public function activate() {
-	}
-	public function getLastInsertID() {
-		return DbWpf::get( 'SELECT MAX(' . $this->_id . ') FROM ' . $this->_table, 'one' );
-	}
-	public function adaptHtml( $val ) {
-		return htmlspecialchars( $val, ENT_COMPAT );
 	}
 }
