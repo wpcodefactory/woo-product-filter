@@ -68,7 +68,7 @@ class ReqWpf {
 	/**
 	 * Function getVar.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
@@ -100,34 +100,40 @@ class ReqWpf {
 		switch ( $from ) {
 			case 'get':
 				if ( isset( $_GET[ $name ] ) ) {
-					return sanitize_text_field( wp_unslash( $_GET[ $name ] ) );
+					return map_deep( wp_unslash( $_GET[ $name ] ), 'sanitize_text_field' );
 				}
 				break;
 			case 'post':
 				if ( isset( $_POST[ $name ] ) ) {
-					return sanitize_text_field( wp_unslash( $_POST[ $name ] ) );
+					return map_deep( wp_unslash( $_POST[ $name ] ), 'sanitize_text_field' );
 				}
 				break;
 			case 'file':
 			case 'files':
+
 				if ( isset( $_FILES[ $name ] ) ) {
-					return sanitize_text_field( $_FILES[ $name ] );
+					return self::sanitizeFiles( $_FILES[ $name ] );
 				}
 				break;
 			case 'session':
 				if ( isset( $_SESSION[ $name ] ) ) {
-					return sanitize_text_field( $_SESSION[ $name ] );
+					return map_deep( $_SESSION[ $name ], 'sanitize_text_field' );
 				}
 				break;
 			case 'server':
 				if ( isset( $_SERVER[ $name ] ) ) {
-					return sanitize_text_field( wp_unslash( $_SERVER[ $name ] ) );
+					$value =  map_deep( wp_unslash( $_SERVER[ $name ] ), 'sanitize_text_field' );
+					if ( is_string( $value ) && strpos( $value, '_JSON:' ) === 0 ) {
+						$value = explode( '_JSON:', $value );
+						$value = UtilsWpf::jsonDecode( array_pop( $value ) );
+					}
+					return $value;
 				}
 				break;
 			case 'cookie':
 				if ( isset( $_COOKIE[ $name ] ) ) {
-					$value = sanitize_text_field( wp_unslash( $_COOKIE[ $name ] ) );
-					if ( strpos( $value, '_JSON:' ) === 0 ) {
+					$value = map_deep( wp_unslash( $_COOKIE[ $name ] ), 'sanitize_text_field' );
+					if ( is_string( $value ) && strpos( $value, '_JSON:' ) === 0 ) {
 						$value = explode( '_JSON:', $value );
 						$value = UtilsWpf::jsonDecode( array_pop( $value ) );
 					}
