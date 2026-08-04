@@ -9,7 +9,7 @@
 /**
  * Detect Thrive editor context.
  *
- * @version 3.3.0
+ * @version 3.1.8
  * @since   3.1.8
  */
 function wpfIsThriveEditor() {

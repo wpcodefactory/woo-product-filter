@@ -139,9 +139,9 @@ class MetaModelWpf extends ModelWpf {
 
 		$tempTable  = false;
 		if ( $isAllProducts ) {
-			$tempTable  = FrameWpf::_()->getModule( 'woofilters' )->createTemporaryTable( 'wpf_meta_calc', "SELECT id, post_parent, post_type, IF(p.post_type='product_variation',1,0) as is_var, 0 as for_ins FROM `#__posts` as p" . $where );
-			$from       = ' FROM `#__postmeta` as m  FORCE INDEX (meta_key) INNER JOIN ' . $tempTable . ' as p ON (p.id=m.post_id)';
-			$where      = ' WHERE 1=1';
+			$tempTable = FrameWpf::_()->getModule( 'woofilters' )->createTemporaryTable( 'wpf_meta_calc', "SELECT id, post_parent, post_type, IF(p.post_type='product_variation',1,0) as is_var, 0 as for_ins FROM `#__posts` as p" . $where );
+			$from      = ' FROM `#__postmeta` as m  FORCE INDEX (meta_key) INNER JOIN ' . $tempTable . ' as p ON (p.id=m.post_id)';
+			$where     = ' WHERE 1=1';
 		}
 
 		$insert        = 'INSERT INTO `@__meta_data` (product_id, is_var, key_id, ';

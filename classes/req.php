@@ -110,7 +110,6 @@ class ReqWpf {
 				break;
 			case 'file':
 			case 'files':
-
 				if ( isset( $_FILES[ $name ] ) ) {
 					return self::sanitizeFiles( $_FILES[ $name ] );
 				}

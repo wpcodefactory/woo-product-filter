@@ -185,6 +185,11 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		return $vars;
 	}
 
+	/**
+	 * _prepareTextLikeSearch.
+	 *
+	 * @version 3.3.0
+	 */
 	protected function _prepareTextLikeSearch( $val ) {
 		global $wpdb;
 		$escaped = esc_sql( $wpdb->esc_like( $val ) );
