@@ -31,9 +31,9 @@ class DbWpf {
 	 */
 	public static function get( $query, $get = 'all', $outputType = ARRAY_A, $args = array()  ) {
 		global $wpdb;
-		$get                      = strtolower( $get );
-		$query                    = self::prepareQuery( $query );
-		self::$query              = $query;
+		$get         = strtolower( $get );
+		$query       = self::prepareQuery( $query );
+		self::$query = $query;
 
 		if ( ! is_array( $args ) ) {
 			$args = array( $args );
