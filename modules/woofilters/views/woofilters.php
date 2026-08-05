@@ -822,7 +822,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			'addCustomCss',
 			self::$filtersCss,
 			$settings,
-			'wpfMainWrapper-' . $viewId
+			$filterId
 		);
 		wp_add_inline_style(
 			'woobewoo-pf-frontend-filters',
@@ -831,7 +831,11 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$this->resetFilterExistsTerms();
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && is_admin() ) {
+		if (
+			wp_doing_ajax() &&
+			isset( $_REQUEST['action'] ) &&
+			'woobewoo_pf_draw_filter_ajax' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		) {
 			return array(
 				'html' => $html,
 				'style' => $custom_css,
