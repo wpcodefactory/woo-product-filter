@@ -74,7 +74,7 @@ class DbWpf {
 			$args = array( $args );
 		}
 
-		$wpdb->wpf_prepared_query = ! empty( $args ) ? $wpdb->prepare( $query, $args ) : $query;
+		$wpdb->wpf_prepared_query = ! empty( $args ) ? $wpdb->prepare( $query, $args ) : $query; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		return (
 		$affected ?

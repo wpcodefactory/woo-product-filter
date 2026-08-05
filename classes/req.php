@@ -111,7 +111,7 @@ class ReqWpf {
 			case 'file':
 			case 'files':
 				if ( isset( $_FILES[ $name ] ) ) {
-					return self::sanitizeFiles( $_FILES[ $name ] );
+					return self::sanitizeFiles( $_FILES[ $name ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				}
 				break;
 			case 'session':

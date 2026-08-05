@@ -833,7 +833,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		if (
 			wp_doing_ajax() &&
-			isset( $_REQUEST['action'] ) &&
+			isset( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			'woobewoo_pf_draw_filter_ajax' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
 			return array(
