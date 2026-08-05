@@ -190,45 +190,7 @@ class FrameWpf {
 		register_uninstall_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deletePlugin' ) );
 		register_deactivation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
 
-		add_action( 'after_plugin_row_woofilter-pro/woofilter-pro.php', array( $this, 'pluginRow' ), 5, 2 );
 		add_filter( 'the_content', array( 'WoofiltersWpf', 'getProductsShortcode' ), -99999 );
-	}
-
-	/**
-	 * pluginRow.
-	 *
-	 * @version 3.3.0
-	 */
-	public function pluginRow( $plugin_file, $plugin_data ) {
-		if ( ! version_compare( $plugin_data['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
-			$colspan = version_compare( $GLOBALS['wp_version'], '5.5', '<' ) ? 3 : 4;
-
-			$classes = 'plugin-update-tr wpf-pro-plugin-tr';
-			if ( is_plugin_active( $plugin_file ) ) {
-				$classes .= ' active';
-			}
-			if ( ! empty( $plugin_data['update'] ) ) {
-				$classes .= ' wpf-pro-plugin-update';
-			}
-			?>
-			<tr class="<?php echo esc_attr( $classes ); ?>">
-				<td colspan="<?php echo esc_attr( $colspan ); ?>" class="plugin-update colspanchange">
-					<div class="update-message notice inline notice-error notice-alt">
-						<p>
-							<?php
-							printf(
-								/* translators: %1$s: Plugin name, %2$s: Plugin version. */
-								esc_html__( 'Current version of Free (Base) plugin %1$s requires version of WBW Product Filter PRO plugin at least %2$s.', 'woo-product-filter' ),
-								esc_html__( 'Product Filter by WBW', 'woo-product-filter' ),
-								esc_html( WPF_PRO_REQUIRES )
-							);
-							?>
-						</p>
-					</div>
-				</td>
-			</tr>
-			<?php
-		}
 	}
 
 	/**

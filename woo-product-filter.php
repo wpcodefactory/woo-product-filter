@@ -9,7 +9,7 @@
  * Requires at least: 5.0
  * Text Domain: woo-product-filter
  * Domain Path: /languages
- * WC tested up to: 10.9
+ * WC tested up to: 11.0
  * Requires Plugins: woocommerce
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

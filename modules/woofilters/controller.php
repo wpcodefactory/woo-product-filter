@@ -224,7 +224,6 @@ class WoofiltersControllerWpf extends ControllerWpf {
 		$res  = new ResponseWpf();
 		$data = ReqWpf::get( 'post' );
 		if ( isset( $data ) && $data ) {
-			$isPro = FrameWpf::_()->isPro();
 			if ( ! empty( $data['settings']['filters']['order'] ) ) {
 				$metaKeys = $this->getDataFilterMetaKeys( stripcslashes( $data['settings']['filters']['order'] ) );
 				if ( count( $metaKeys ) > 0 ) {

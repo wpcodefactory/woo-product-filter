@@ -297,26 +297,25 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 add_action( 'admin_notices', 'woofilterInstallBaseMsg' );
 if ( ! function_exists( 'woofilterInstallBaseMsg' ) ) {
 	function woofilterInstallBaseMsg() {
-		if ( class_exists( 'FrameWpf' ) ) {
-			if ( ! FrameWpf::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
-				$plugName  = __( 'Product Filter by WBW', 'woo-product-filter' );
-				$plugWpUrl = 'https://wordpress.org/plugins/woo-product-filter/';
-				echo '<div class="notice error is-dismissible"><p><strong>';
-				/* translators: 1: plugin name 2: plugin version */
-				printf( esc_html__( 'Please install latest PRO version of %1$s plugin (requires at least %2$s). ', 'woo-product-filter' ), esc_html( $plugName ), esc_html( WPF_PRO_REQUIRES ) );
+		if ( ! class_exists( 'FrameWpf' ) ) {
+			return;
+		}
+
+		if ( apply_filters( 'woobee_show_pro_notice', false ) ) {
+			return;
+		}
+		if ( FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
+			$plugName  = __( 'Product Filter by WBW', 'woo-product-filter' );
+
+			echo '<div class="notice error is-dismissible"><p><strong>';
+			printf(
 				/* translators: %s: plugin name */
-				echo sprintf( esc_html__( 'In this way you will have full and upgraded PRO version of %s.', 'woo-product-filter' ), esc_html( $plugName ) ) .
-					'</strong></p></div>';
-			} elseif ( FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
-				$plugName  = __( 'Product Filter by WBW', 'woo-product-filter' );
-				$plugWpUrl = 'https://wordpress.org/plugins/woo-product-filter/';
-				echo '<div class="notice error is-dismissible"><p><strong>';
-				/* translators: %s: plugin name */
-				echo sprintf( esc_html__( 'The plugin %s started indexing the product database metadata. If you have a large database, this may take a while, but in the future it will significantly increase your filtering speed.', 'woo-product-filter' ), esc_html( $plugName ) ) .
-					'</strong></p></div>';
-			} else {
-				FrameWpf::_()->getModule( 'overview' )->getView()->showRestApiInfo();
-			}
+				esc_html__( 'The plugin %s started indexing the product database metadata. If you have a large database, this may take a while, but in the future it will significantly increase your filtering speed.', 'woo-product-filter' ),
+				esc_html( $plugName )
+			);
+			echo '</strong></p></div>';
+		} else {
+			FrameWpf::_()->getModule( 'overview' )->getView()->showRestApiInfo();
 		}
 	}
 }

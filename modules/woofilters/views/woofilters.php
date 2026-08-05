@@ -124,6 +124,8 @@ class WoofiltersViewWpf extends ViewWpf {
 		$this->assign( 'proLink', $proLink );
 		$this->assign( 'addNewLink', FrameWpf::_()->getModule( 'options' )->getTabUrl( 'woofilters#wpfadd' ) );
 
+		DispatcherWpf::doAction( 'woobewoo_pf_admin_woofilters_list_enqueue_script' );
+
 		return parent::getContent( 'woofiltersAdmin' );
 	}
 
@@ -741,9 +743,8 @@ class WoofiltersViewWpf extends ViewWpf {
 		$this->setFilterCss( '#' . $filterId . ' .wpfFilterWrapper {' . $blockStyle . '}' );
 
 		$blockStyle = '';
-		if ( $isPro ) {
-			$proView = FrameWpf::_()->getModule( 'woofilterpro' )->getView();
-		}
+
+		$proView = DispatcherWpf::applyFilters( 'woobewoo_pf_get_pro_view', null );
 
 		$this->setFilterExistsItems( $filtersOrder, $prodCatId, $querySettings, $settings );
 		$useTitleAsSlug = $this->getFilterSetting( $settingsOriginal['settings'], 'use_title_as_slug', false );
@@ -2672,7 +2673,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateAttributeFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	public function generateAttributeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings                              = $this->getFilterSetting( $filter, 'settings', array() );
@@ -2800,18 +2801,21 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 		if ( ! empty( $slugs ) ) {
 			$changeToId = false;
-			$module     = FrameWpf::_()->getModule( 'woofilterpro' );
 
-			if ( isset( $module->acf_prefix ) && 0 === strpos( $filterName, $module->acf_prefix ) ) {
-				$key        = str_replace( $module->acf_prefix, '', $filterName );
-				$keyId      = FrameWpf::_()->getModule( 'woofilters' )->getMetaKeyId( $key );
+			$keyId = DispatcherWpf::applyFilters(
+				'woobewoo_pf_get_acf_meta_key_id',
+				false,
+				$filterName
+			);
+
+			if ( $keyId ) {
 				$changeToId = true;
 			}
 
 			foreach ( $slugs as &$value ) {
-				$value = ( $changeToId && ! is_numeric( $value ) )
-					? FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $keyId, $value )
-					: strtolower( urlencode( $value ) );
+				$value = ( $changeToId && ! is_numeric( $value ) ) ?
+					FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $keyId, $value ) :
+					strtolower( urlencode( $value ) );
 			}
 
 			$attrSelected = $slugs;
@@ -3215,7 +3219,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateTaxonomyOptionsHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	private function generateTaxonomyOptionsHtml( $filterItemList, $selectedElem, $filter = false, $excludeIds = false, $pre = '', $layout = 0, $includeIds = false, $showedTerms = false, $countsTerms = false, $itemLevel = 0, $currentCategoryId = 0 ) {
 		$html     = '';
@@ -3241,15 +3245,14 @@ class WoofiltersViewWpf extends ViewWpf {
 		$type    = $this->getFilterSetting( $filter['settings'], 'f_frontend_type', 'list' );
 		$isMulti = ( 'multi' === $type );
 
-		if ( FrameWpf::_()->isPro() ) {
-			if ( method_exists( FrameWpf::_()->getModule( 'woofilterpro' ), 'getCollapsibleFiltreOptions' ) ) {
-				$collapsibleList = FrameWpf::_()->getModule( 'woofilterpro' )->getCollapsibleFiltreOptions( $filter['id'] );
-			} else {
-				$collapsibleList = array( 'multi' );
-			}
-			if ( in_array( $type, $collapsibleList ) ) {
-				$isCollapsible = $this->getFilterSetting( $filter['settings'], 'f_multi_collapsible', false );
-			}
+		$collapsibleList = DispatcherWpf::applyFilters(
+			'woobewoo_pf_get_collapsible_filter_options',
+			array( 'multi' ),
+			$filter['id']
+		);
+
+		if ( in_array( $type, $collapsibleList ) ) {
+			$isCollapsible = $this->getFilterSetting( $filter['settings'], 'f_multi_collapsible', false );
 		}
 
 		$isHierarchical = $this->getFilterSetting( $filter['settings'], 'f_show_hierarchical', false );

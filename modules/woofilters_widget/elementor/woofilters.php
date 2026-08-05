@@ -85,25 +85,7 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		}
 
 		// addScriptsContent
-		if ( $isPro ) {
-			$modPathPRO = FrameWpf::_()->getModule( 'woofilterpro' )->getModPath();
-			wp_register_script( 'woobewoo-pf-frontend-filters-pro', $modPathPRO . 'js/frontend.woofilters.pro.js', array( 'woobewoo-pf-frontend-filters' ), WPF_VERSION, true );
-			wp_localize_script(
-				'woobewoo-pf-frontend-filters-pro',
-				'wpfTraslate',
-				array(
-					'ShowMore'  => __( 'Show More', 'woo-product-filter' ),
-					'ShowFewer' => __( 'Show Fewer', 'woo-product-filter' ),
-				)
-			);
-			wp_register_style( 'woobewoo-pf-frontend-filters-pro', $modPathPRO . 'css/frontend.woofilters.pro.css', false, WPF_VERSION );
-			wp_register_style( 'woobewoo-pf-custom-filters-pro', $modPathPRO . 'css/custom.woofilters.pro.css', false, WPF_VERSION );
-			wp_register_script( 'woobewoo-pf-jquery-ui-autocomplete', '', false, WPF_VERSION, false );
-			wp_register_style( 'woobewoo-pf-jquery-ui-autocomplete', $modPathPRO . 'css/jquery-ui-autocomplete.css', false, WPF_VERSION );
-			wp_register_script( 'woobewoo-pf-ion-slider', $modPathPRO . 'js/ion.rangeSlider.min.js', false, WPF_VERSION, false );
-			wp_register_style( 'woobewoo-pf-ion-slider', $modPathPRO . 'css/ion.rangeSlider.css', false, WPF_VERSION );
-
-		}
+		DispatcherWpf::doAction( 'woobewoo_pf_register_frontend_pro_assets' );
 
 		if ( ! $isPro ) {
 			static::$adPath   = FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'img/ad/';

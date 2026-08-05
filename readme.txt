@@ -166,7 +166,7 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.3.0 - 29/07/2026 =
+= 3.3.0 - 06/08/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
 * Fix - "Creation of dynamic property is deprecated" notice fixed.
@@ -177,7 +177,7 @@ This plugin may communicate with the following third-party services:
 * Dev - Removed promo, pages, mail modules from the plugin.
 * Dev - Added plugin prefix to CSS/JavaScript handles, AJAX action/object.
 * Dev - Improved coding standards and code cleaned up.
-* WC tested up to: 10.9.
+* WC tested up to: 11.0.
 
 = 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.

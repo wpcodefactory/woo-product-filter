@@ -71,7 +71,6 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 	 */
 	public function woofiltersElementorEditorScripts() {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
-			$isPro    = FrameWpf::_()->isPro();
 			$modPath  = FrameWpf::_()->getModule( 'woofilters' )->getModPath();
 			$modPathW = FrameWpf::_()->getModule( 'woofilters_widget' )->getModPath();
 
@@ -90,22 +89,8 @@ class Woofilters_WidgetWpf extends ModuleWpf {
 			FrameWpf::_()->addStyle( 'woobewoo-pf-frontend-multiselect', $modPath . 'css/frontend.multiselect.css' );
 			FrameWpf::_()->addScript( 'woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js' );
 			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'wpfI18n', array( 'edit_category_label' => esc_html__( 'Enter custom category name', 'woo-product-filter' ) ) );
-			if ( $isPro ) {
-				$modPathPRO = FrameWpf::_()->getModule( 'woofilterpro' )->getModPath();
-				$modDirPRO  = FrameWpf::_()->getModule( 'woofilterpro' )->getModDir();
-				FrameWpf::_()->addScript( 'woobewoo-pf-admin-filters-pro', $modPathPRO . 'js/admin.woofilters.pro.js', array( 'jquery' ) );
-				FrameWpf::_()->addStyle( 'woobewoo-pf-admin-filters-pro', $modPathPRO . 'css/admin.woofilters.pro.css' );
-				$jsData = file_exists( $modDirPRO . 'files/fontAwesomeList.txt' ) ? file( $modDirPRO . 'files/fontAwesomeList.txt' ) : array();
-				if ( ! empty( $jsData ) ) {
-					$jsData = array_map(
-						function ( $item ) {
-							return 'fa-' . trim( $item );
-						},
-						$jsData
-					);
-				}
-				FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters-pro', 'FONT_AWESOME_DATA', $jsData );
-			}
+
+			DispatcherWpf::doAction( 'woobewoo_pf_enqueue_admin_pro_assets' );
 
 			FrameWpf::_()->addStyle( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'css/admin.woofilters.elementor.css', false, WPF_VERSION );
 			FrameWpf::_()->addScript( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'js/admin.woofilters.elementor.js', array( 'woobewoo-pf-admin-filters' ), WPF_VERSION, true );
