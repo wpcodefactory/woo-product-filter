@@ -177,6 +177,7 @@ This plugin may communicate with the following third-party services:
 * Dev - Removed promo, pages, mail modules from the plugin.
 * Dev - Added plugin prefix to CSS/JavaScript handles, AJAX action/object.
 * Dev - Improved coding standards and code cleaned up.
+* Dev - Code refactoring.
 * WC tested up to: 11.0.
 
 = 3.1.8 - 01/06/2026 =
