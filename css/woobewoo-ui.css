@@ -1045,13 +1045,14 @@ a.search-choice-close {
 	background: currentColor !important;
 	border: 1px solid #64808e !important;
 }
-.woobewoo-color-picker .wp-picker-input-wrap {
+.woobewoo-color-picker .wp-picker-open + .wp-picker-input-wrap {
 	display: none;
 }
 .woobewoo-color-picker .wp-picker-holder {
 	left: initial;
 	position: absolute;
 	z-index: 100;
+	padding-top: 10px;
 }
 #chooseIconPopup .items-list {
 	display: block;

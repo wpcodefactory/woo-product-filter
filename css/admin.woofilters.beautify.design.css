@@ -316,17 +316,18 @@
 	margin-right: 4px;
 }
 
-.woobewoo-tooltip {
+#wpfFiltersEditForm .woobewoo-tooltip {
 	border: 0 !important;
 	outline: none !important;
 	height: 18px !important;
 	width: 18px !important;
 	background: transparent !important;
 	background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M8.00016%201.33331C4.32016%201.33331%201.3335%204.31998%201.3335%207.99998C1.3335%2011.68%204.32016%2014.6666%208.00016%2014.6666C11.6802%2014.6666%2014.6668%2011.68%2014.6668%207.99998C14.6668%204.31998%2011.6802%201.33331%208.00016%201.33331ZM8.66683%2012.6666H7.3335V11.3333H8.66683V12.6666ZM10.0468%207.49998L9.44683%208.11331C8.96683%208.59998%208.66683%208.99998%208.66683%209.99998H7.3335V9.66665C7.3335%208.93331%207.6335%208.26665%208.1135%207.77998L8.94016%206.93998C9.18683%206.69998%209.3335%206.36665%209.3335%205.99998C9.3335%205.26665%208.7335%204.66665%208.00016%204.66665C7.26683%204.66665%206.66683%205.26665%206.66683%205.99998H5.3335C5.3335%204.52665%206.52683%203.33331%208.00016%203.33331C9.4735%203.33331%2010.6668%204.52665%2010.6668%205.99998C10.6668%206.58665%2010.4268%207.11998%2010.0468%207.49998Z%22%20fill%3D%22%23636977%22%2F%3E%3C%2Fsvg%3E") !important;
-	background-position: center !important;
+	background-position: left center !important;
 	background-repeat: no-repeat !important;
 	background-size: 18px !important;
-	padding: 0 !important;
+	padding-left: 20px !important;
+	color: #636977;
 	cursor: pointer;
 }
 
@@ -671,19 +672,18 @@
 
 .woobewoo-plugin.ui-dialog .ui-icon-closethick {
 	font-size: 14px;
-	height: 44px;
-	width: 44px;
 	border-radius: 50px;
 	color: #636977 !important;
 	border: 1px solid #dbdce1;
+	position: sticky;
+	height: 19px;
+	width: 19px;
 }
 
 .woobewoo-plugin.ui-dialog .ui-button-icon-only .ui-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	top: 0 !important;
-	margin-left: -31px !important;
 }
 
 .woobewoo-plugin.ui-dialog .button.woobewoo-paginate:hover,

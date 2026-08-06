@@ -113,6 +113,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	public function getTabContent() {
 		$addWC = ( FrameWpf::_()->isWCLicense() ? '-wc' : '' );
 		FrameWpf::_()->getModule( 'templates' )->loadJqGrid();
+		FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
 		FrameWpf::_()->addScript( 'woobewoo-pf-admin-woofilters-list', $this->getModule()->getModPath() . 'js/admin.woofilters.list.js' );
 		FrameWpf::_()->addScript( 'woobewoo-pf-admin-create-table', $this->getModule()->getModPath() . 'js/create-filter.js', array(), false, true );
 		FrameWpf::_()->getModule( 'templates' )->loadFontAwesome();
