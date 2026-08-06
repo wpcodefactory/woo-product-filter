@@ -306,8 +306,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$this->assign( 'viewId', $viewId );
 
 		if (
-			defined( 'DOING_AJAX' ) &&
-			DOING_AJAX &&
+			wp_doing_ajax() &&
 			isset( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
@@ -321,7 +320,7 @@ class WoofiltersViewWpf extends ViewWpf {
 
 		$this->assign( 'html', $html );
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && is_admin() ) {
+		if ( wp_doing_ajax() ) {
 			return $html;
 		}
 
@@ -728,8 +727,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$showImmediately = $this->getFilterSetting( $settingsOriginal['settings'], 'show_filter_immediately' ) == '1';
 		if (
 			! $showImmediately &&
-			defined( 'DOING_AJAX' ) &&
-			DOING_AJAX &&
+			wp_doing_ajax() &&
 			isset( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			'brizy_shortcode_content' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
