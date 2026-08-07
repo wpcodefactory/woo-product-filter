@@ -333,7 +333,6 @@ if ( ! function_exists( 'woofilterProDeactivate' ) ) {
 				$pluginData  = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
 				$isProActive = FrameWpf::_()->moduleActive( 'access' );
 				if ( ! version_compare( $pluginData['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
-					// deactivate_plugins($proPlugin);
 					if ( $isProActive ) {
 						call_user_func_array( array( 'ModInstallerWpf', 'deactivate' ), array( array( 'license' ) ) );
 					}
