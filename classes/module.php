@@ -282,7 +282,7 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	 * pro_label.
 	 *
 	 * @version 3.3.0
-	 * @version 3.3.0
+	 * @since   3.3.0
 	 */
 	public function pro_label() {
 		$pro_link = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
