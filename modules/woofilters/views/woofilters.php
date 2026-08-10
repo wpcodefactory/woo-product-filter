@@ -618,7 +618,7 @@ class WoofiltersViewWpf extends ViewWpf {
 						break;
 					case 'product_brand':
 						$querySettings = DispatcherWpf::applyFilters(
-							'woobewoo_pf__add_product_brand_query',
+							'woobewoo_pf_add_product_brand_query',
 							$querySettings,
 							$value
 						);
