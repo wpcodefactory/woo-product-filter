@@ -94,42 +94,42 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 </div>
 <?php ob_start(); ?>
-	<div class="row-settings-block">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Use Under/Over values', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-		</div>
+<div class="row-settings-block">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Use Under/Over values', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="list">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Show price input fields', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-		</div>
+	<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
-	<div class="row-settings-block" data-value="decimals">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Use custom number of decimals', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'This sets the number of decimal points shown in displayed prices.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-		</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="list">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Show price input fields', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 	</div>
-	<div class="row-settings-block">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Set tax rates', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-		</div>
+	<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
+</div>
+<div class="row-settings-block" data-value="decimals">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Use custom number of decimals', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'This sets the number of decimal points shown in displayed prices.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
+<div class="row-settings-block">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Set tax rates', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
 <?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_pirce_range_set_range_options', ob_get_clean() ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">

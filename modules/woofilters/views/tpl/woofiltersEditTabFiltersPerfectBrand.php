@@ -59,8 +59,8 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 </div>
 <?php
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersButtonsType' );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' );
+DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersButtonsType' );
+DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' );
 ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -331,16 +331,16 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 </div>
 <?php ob_start(); ?>
-	<div class="row-settings-block">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Display brand description', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip"
-				title="<?php echo esc_attr__( 'Display brand description before product list', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+<div class="row-settings-block">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Display brand description', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip"
+			title="<?php echo esc_attr__( 'Display brand description before product list', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() );
+</div>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() );

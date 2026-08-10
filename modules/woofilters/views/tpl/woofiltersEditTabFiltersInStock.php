@@ -133,4 +133,4 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_stock_use_as_default_option', ob_get_clean() );
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_stock_use_as_default_option', ob_get_clean() );

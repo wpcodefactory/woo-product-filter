@@ -31,7 +31,12 @@ $skins = array(
 		<?php esc_html_e( 'Filter skin', 'woo-product-filter' ); ?>
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="
 		<?php
-		echo esc_attr( __( 'Select the price filter skin.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-product-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' );
+		echo esc_attr(
+			__( 'Select the price filter skin.', 'woo-product-filter' ) .
+			' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-product-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' .
+				__( 'Learn More', 'woo-product-filter' ) .
+			'</a>'
+		);
 		?>
 		"></i>
 	</div>
@@ -140,22 +145,22 @@ echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean
 	</div>
 </div>
 <?php ob_start(); ?>
-	<div class="row-settings-block">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Set min/max prices', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Set the price min/max value. Doesn\'t working with recount prices option!', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-		</div>
+<div class="row-settings-block">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Set min/max prices', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Set the price min/max value. Doesn\'t working with recount prices option!', 'woo-product-filter' ); ?>"></i>
 	</div>
-	<div class="row-settings-block">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Set tax rates', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-		</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
-	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() );
+</div>
+<div class="row-settings-block">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Set tax rates', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() );

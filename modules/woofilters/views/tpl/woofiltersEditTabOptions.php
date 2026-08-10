@@ -61,8 +61,11 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 					);
 					?>
 				</div>
-				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>"
-				     data-select="settings[display_on_page]" data-select-value="specific">
+				<div
+					class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>"
+					data-select="settings[display_on_page]"
+					data-select-value="specific"
+				>
 					<?php
 
 					echo DispatcherWpf::applyFilters(
@@ -712,14 +715,14 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 
 		<?php ob_start(); ?>
 
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-lg-3">
-					<?php esc_html_e( 'Display Hide Filters Button', 'woo-product-filter' ); ?>
-				</div>
-				<div class="settings-block-values col-xs-8 col-lg-9">
-					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-				</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'Display Hide Filters Button', 'woo-product-filter' ); ?>
 			</div>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			</div>
+		</div>
 		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_button_options', ob_get_clean(), $this->settings ); ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-options-content">
@@ -1009,52 +1012,52 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 			<?php } ?>
 
 		<?php ob_start(); ?>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-lg-3">
-					<?php esc_html_e( 'Display "Show More"', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'For long vertical lists, "Show more" will be displayed.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-lg-9">
-					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-				</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'Display "Show More"', 'woo-product-filter' ); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'For long vertical lists, "Show more" will be displayed.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-lg-3">
-					<?php esc_html_e( 'Display Selected Parameters Of Filters', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( '<div class="woobewoo-tooltips-wrapper"><div class="woobewoo-tooltips-text">' . __( 'Selected parameters will be displayed in the top/bottom of the filter .', 'woo-product-filter' ) . '</div><img src="' . esc_url( $this->getModule()->getModPath() . 'img/display_selected_parameters_of_filters.png' ) . '" height="193"></div>' ); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-lg-9">
-					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-				</div>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-lg-3">
-					<?php esc_html_e( 'Autoscroll To Products After Filtering', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'After filtration will be scroll to products block', 'woo-product-filter' ) ); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-lg-9">
-					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-				</div>
+		</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'Display Selected Parameters Of Filters', 'woo-product-filter' ); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( '<div class="woobewoo-tooltips-wrapper"><div class="woobewoo-tooltips-text">' . __( 'Selected parameters will be displayed in the top/bottom of the filter .', 'woo-product-filter' ) . '</div><img src="' . esc_url( $this->getModule()->getModPath() . 'img/display_selected_parameters_of_filters.png' ) . '" height="193"></div>' ); ?>"></i>
 			</div>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-lg-3">
-					<?php esc_html_e( 'If One Filter Block Is Open, Other Blocks Are Closed', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'When you click on the block open icon, all other open blocks will be automatically closed', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-lg-9">
-					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-				</div>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-lg-3">
-					<?php esc_html_e( 'Show Category Slugs In URL Instead Of IDs ', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Turn on only when necessary. Please note that "slug" should only contain lowercase Latin letters, numbers and hyphens.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-lg-9">
-					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-				</div>
+		</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'Autoscroll To Products After Filtering', 'woo-product-filter' ); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'After filtration will be scroll to products block', 'woo-product-filter' ) ); ?>"></i>
 			</div>
-			<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_content_options', ob_get_clean(), $this->settings, $this->filter['id'] ); ?>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			</div>
+		</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'If One Filter Block Is Open, Other Blocks Are Closed', 'woo-product-filter' ); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'When you click on the block open icon, all other open blocks will be automatically closed', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
+			</div>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			</div>
+		</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'Show Category Slugs In URL Instead Of IDs ', 'woo-product-filter' ); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Turn on only when necessary. Please note that "slug" should only contain lowercase Latin letters, numbers and hyphens.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
+			</div>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			</div>
+		</div>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_content_options', ob_get_clean(), $this->settings, $this->filter['id'] ); ?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -1385,15 +1388,15 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 
 		<?php ob_start(); ?>
-			<div class="woobewoo_row row-settings-block">
-				<div class="settings-block-label col-xs-4 col-lg-3">
-					<?php esc_html_e( 'Do not remove products while loading', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'To prevent products container from collapsing during ajax.', 'woo-product-filter' ); ?>"></i>
-				</div>
-				<div class="settings-block-values col-xs-8 col-lg-9">
-					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-				</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'Do not remove products while loading', 'woo-product-filter' ); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'To prevent products container from collapsing during ajax.', 'woo-product-filter' ); ?>"></i>
 			</div>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			</div>
+		</div>
 		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_remove_products_while_loading', ob_get_clean(), $this->settings, $this->filter['id'] ); ?>
 	</div>
 	<div class="wpfLoaderIconTemplate wpfHidden">

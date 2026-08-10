@@ -68,146 +68,146 @@ $attributesTypes = array(
 	</div>
 </div>
 <?php
-	ob_start();
-	foreach ( $attributesTypes as $key => $value ) {
-		if ( strpos( $value, $labelPro ) && 'colors' === $key ) {
-			?>
-			<div class="row-settings-block wpfFilterTypePro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
-				<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+ob_start();
+foreach ( $attributesTypes as $key => $value ) {
+	if ( strpos( $value, $labelPro ) && 'colors' === $key ) {
+		?>
+		<div class="row-settings-block wpfFilterTypePro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
+			<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+				<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
+			<?php } else { ?>
+				<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>"
+				   target="_blank">
 					<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
-				<?php } else { ?>
-					<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>"
-					   target="_blank">
-						<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
-					</a>
-				<?php } ?>
-			</div>
-			<?php
-		}
+				</a>
+			<?php } ?>
+		</div>
+		<?php
 	}
-	?>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Single select mode', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip"
-				title="<?php echo esc_attr__( 'Allow only one item from the list to be selected at a time', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+}
+?>
+<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Single select mode', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip"
+			title="<?php echo esc_attr__( 'Allow only one item from the list to be selected at a time', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Hide checkboxes', 'woo-product-filter' ); ?>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Hide checkboxes', 'woo-product-filter' ); ?>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfButtonsTypeBlock wpfTypeSwitchable" data-type="buttons">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Buttons Settings', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Buttons Settings', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfButtonsTypeBlock wpfTypeSwitchable" data-type="buttons">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Buttons Settings', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Buttons Settings', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable dataParentIgnore" data-type="dropdown radio list" data-parent="f_list" data-no-values="custom_meta_field_check">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Select default id', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Selects the default filter value by id', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable dataParentIgnore" data-type="dropdown radio list" data-parent="f_list" data-no-values="custom_meta_field_check">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Select default id', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Selects the default filter value by id', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="list">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Alphabetical index', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show Alphabetical index.', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="list">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Alphabetical index', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show Alphabetical index.', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfSwitchTypeBlock wpfTypeSwitchable" data-type="switch">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Switch Settings', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Switch Settings', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfSwitchTypeBlock wpfTypeSwitchable" data-type="switch">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Switch Settings', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Switch Settings', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_type_options', ob_get_clean() ); ?>
+</div>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_type_options', ob_get_clean() ); ?>
 
-	<?php ob_start(); ?>
-	<div class="row-settings-block wpfSliderTypeBlock wpfTypeSwitchable" data-type="slider">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Slider skin', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Select the attribute slider skin.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/attribute-filter-settings/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+<?php ob_start(); ?>
+<div class="row-settings-block wpfSliderTypeBlock wpfTypeSwitchable" data-type="slider">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Slider skin', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Select the attribute slider skin.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/attribute-filter-settings/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Show attribute input fields', 'woo-product-filter' ); ?>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Show attribute input fields', 'woo-product-filter' ); ?>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Disable number formatting', 'woo-product-filter' ); ?>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Disable number formatting', 'woo-product-filter' ); ?>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Use text tooltip instead of input fields', 'woo-product-filter' ); ?>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Use text tooltip instead of input fields', 'woo-product-filter' ); ?>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Force numeric values', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Transform attribute values to numeric', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<div class="settings-value">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-			</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="slider">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Force numeric values', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Transform attribute values to numeric', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<div class="settings-value">
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_slider_options', ob_get_clean() ); ?>
+</div>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_slider_options', ob_get_clean() ); ?>
 
 <?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -290,7 +290,6 @@ $attributesTypes = array(
 		</div>
 		<?php
 		$attribute_hierarchical_options = ob_get_clean();
-
 		echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_hierarchical_options', $attribute_hierarchical_options );
 		?>
 	</div>
@@ -411,9 +410,7 @@ $attributesTypes = array(
 				);
 				?>
 		</div>
-		<?php
-		ob_start()
-			?>
+		<?php ob_start(); ?>
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
