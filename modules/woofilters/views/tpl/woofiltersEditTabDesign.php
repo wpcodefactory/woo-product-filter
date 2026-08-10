@@ -8,7 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="woobewoo_row row-tab" id="row-tab-design">
 	<div class="sub-tab woobewoo-input-group col-xs-12">
@@ -226,31 +226,23 @@ defined( 'ABSPATH' ) || exit;
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Blocks Styling', 'woo-product-filter' ); ?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabDesignBlocks', $this->settings );
-		} else {
-			?>
+		<?php ob_start(); ?>
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
 					<?php esc_html_e( 'Use Custom Styles', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Choose custom styles for filter blocks. Any settings you leave blank will default.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/filter-block-design/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 				</div>
 				<div class="settings-block-values col-xs-8 col-sm-9">
-					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 				</div>
 			</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_blocks_styling_option', ob_get_clean(), $this->settings ); ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-titles">
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Titles Styling', 'woo-product-filter' ); ?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabDesignTitles', $this->settings );
-		} else {
-			?>
+		<?php ob_start(); ?>
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
 					<?php esc_html_e( 'Use Custom Styles', 'woo-product-filter' ); ?>
@@ -260,17 +252,13 @@ defined( 'ABSPATH' ) || exit;
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 				</div>
 			</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_title_styles_option', ob_get_clean(), $this->settings ); ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-buttons">
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Buttons Styling', 'woo-product-filter' ); ?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabDesignButtons', $this->settings );
-		} else {
-			?>
+		<?php ob_start(); ?>
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
 					<?php esc_html_e( 'Use Custom Styles', 'woo-product-filter' ); ?>
@@ -280,17 +268,13 @@ defined( 'ABSPATH' ) || exit;
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 				</div>
 			</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_buttons_styles_option', ob_get_clean(), $this->settings ); ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-floating">
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Floating Modе Options', 'woo-product-filter' ); ?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabDesignFloating', $this->settings, $this->filter['id'] );
-		} else {
-			?>
+		<?php ob_start(); ?>
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-sm-3">
 					<?php esc_html_e( 'Use Floating Modе', 'woo-product-filter' ); ?>
@@ -300,6 +284,6 @@ defined( 'ABSPATH' ) || exit;
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 				</div>
 			</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_floating_styles_option', ob_get_clean(), $this->settings ); ?>
 	</div>
 </div>

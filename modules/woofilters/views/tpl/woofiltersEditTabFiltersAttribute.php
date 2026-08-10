@@ -419,9 +419,7 @@ $attributesTypes = array(
 				?>
 		</div>
 		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
-		} else {
+		ob_start()
 			?>
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
@@ -429,7 +427,7 @@ $attributesTypes = array(
 				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 			</div>
 		</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_sort_as_numbers_option', ob_get_clean() ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list radio" data-parent="f_list" data-no-values="custom_meta_field_check">

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Tags
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -37,14 +37,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSelectDefaultId', array( 'customFilter' => 'Tag' ) );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect' );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersButtonsType' );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersTagColors' );
-else :
-	?>
+<?php ob_start(); ?>
 	<div class="row-settings-block col-md-12 wpfFilterTypePro wpfTypeSwitchable wpfHidden" data-type="colors" data-parent="f_list">
 		<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
 		<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_colors.png' ); ?>">
@@ -111,10 +104,8 @@ else :
 			</div>
 		</div>
 	</div>
-	<?php
-endif;
-	ViewWpf::display( 'woofiltersEditTabCustomTags' );
-?>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_tags_show_on_frontend_as_select_option', ob_get_clean() ); ?>
+	<?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Dropdown label', 'woo-product-filter' ); ?>
@@ -177,11 +168,7 @@ endif;
 				);
 				?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
-		} else {
-			?>
+		<?php ob_start(); ?>
 			<div class="settings-value settings-w100" data-parent="f_sort_by" data-no-values="default">
 				<div class="settings-value-label">
 					<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
@@ -190,7 +177,7 @@ endif;
 				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 
 			</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_tags_sort_as_numbers_option', ob_get_clean() ); ?>
 	</div>
 </div>
 <div class="row-settings-block">

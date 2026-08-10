@@ -52,28 +52,27 @@ $skins = array(
 	</div>
 </div>
 <?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceSkin' );
-} else {
-	foreach ( $skins as $key => $value ) {
-		if ( strpos( $value, $labelPro ) ) {
-			?>
-			<div class="row-settings-block wpfPriceSkinPro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
-				<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+ob_start();
+foreach ( $skins as $key => $value ) {
+	if ( strpos( $value, $labelPro ) ) {
+		?>
+		<div class="row-settings-block wpfPriceSkinPro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
+			<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+			<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
+			<?php } else { ?>
+			<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">
 				<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
-				<?php } else { ?>
-				<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">
-					<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
-				</a>
-				<?php } ?>
-			</div>
-			<?php
-		}
-		if ( 'square' == $key ) {
-			break;
-		}
+			</a>
+			<?php } ?>
+		</div>
+		<?php
+	}
+	if ( 'square' == $key ) {
+		break;
 	}
 }
+
+echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean() );
 ?>
 
 <div class="row-settings-block">
@@ -128,22 +127,7 @@ if ( $isPro ) {
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) :
-	?>
-	<div class="row-settings-block js-block-show-currency-slider" id="jsBlockShowCurrencySlider">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Show currency in slider', 'woo-product-filter' ); ?>
-		</div>
-		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-			<div class="settings-value settings-w100">
-				<?php HtmlWpf::checkboxToggle( 'f_price_show_currency_slider', array( 'checked' => 0 ) ); ?>
-			</div>
-		</div>
-	</div>
-	<?php
-endif;
-?>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_show_currency_in_slider', '' ); ?>
 <div class="row-settings-block f_show_inputs_enabled_tooltip">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Use text tooltip instead of input fields', 'woo-product-filter' ); ?>
@@ -154,11 +138,7 @@ endif;
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceOptions' );
-else :
-	?>
+<?php ob_start(); ?>
 	<div class="row-settings-block">
 		<div class="settings-block-label col-xs-4 col-sm-3">
 			<?php esc_html_e( 'Set min/max prices', 'woo-product-filter' ); ?>
@@ -177,5 +157,4 @@ else :
 			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 		</div>
 	</div>
-	<?php
-endif;
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() );

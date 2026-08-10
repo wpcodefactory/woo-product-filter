@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="woobewoo_row row-tab" id="row-tab-options">
 	<div class="sub-tab woobewoo-input-group col-xs-12">
@@ -63,16 +64,12 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>"
 				     data-select="settings[display_on_page]" data-select-value="specific">
 					<?php
-					$page_list = '<span class="wpfProLabel">
-						<a href="' . esc_url( $this->proLink ) . '" target="_blank">
-							' . esc_html__( 'PRO Option', 'woo-product-filter' ) . '
-						</a>
-					</span>';
 
 					echo DispatcherWpf::applyFilters(
 						'woobewoo_pf_display_page_list',
-						$page_list,
-						$this->settings['settings']
+						$pro_label,
+						$this->settings['settings'],
+						'display_page_list'
 					);
 					?>
 
@@ -81,92 +78,58 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 				<?php $classHidden = 'custom_cats' != $displayOnPage ? 'wpfHidden' : ''; ?>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_cats">
 					<?php
-					if ( $isPro ) :
-						$catList                 = $this->getFilterSetting( $this->settings['settings'], 'display_cat_list', '' );
-						list( $categoryDisplay ) = FrameWpf::_()->getModule( 'woofilters' )->getCategoriesDisplay();
-						if ( is_array( $catList ) ) {
-							$catList = isset( $catList[0] ) ? $catList[0] : '';
-						}
-						HtmlWpf::selectlist(
-							'settings[display_cat_list][]',
-							array(
-								'options' => $categoryDisplay,
-								'value'   => explode( ',', $catList ),
-							)
-						);
-					else :
-						?>
-						<span class="wpfProLabel "><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-						<?php
-					endif;
+
+					echo DispatcherWpf::applyFilters(
+						'woobewoo_pf_display_page_list',
+						$pro_label,
+						$this->settings['settings'],
+						'display_cat_list'
+					);
 					?>
 				</div>
 
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_cats">
 					<?php
-					if ( $isPro ) :
-						esc_html_e( 'Include Child Categories', 'woo-product-filter' );
-						?>
-						<i class="fa fa-question woobewoo-tooltip no-tooltip"
-							title="<?php echo esc_attr( __( 'The filter will be displayed on all child categories', 'woo-product-filter' ) ); ?>"></i>
-						<?php
-						HtmlWpf::checkboxToggle(
-							'settings[display_child_cat]',
-							array(
-								'checked' => $this->getFilterSetting( $this->settings['settings'], 'display_child_cat', false ),
-							)
-						);
-					else :
-						?>
-						<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-						<?php
-					endif;
+					$display_child_cat = $this->getFilterSetting(
+						$this->settings['settings'],
+						'display_child_cat',
+						false
+					);
+
+					echo DispatcherWpf::applyFilters(
+						'woobewoo_pf_display_child_cat',
+						$pro_label,
+						$display_child_cat
+					);
 					?>
 				</div>
 
 				<?php $classHidden = 'custom_pwb' != $displayOnPage ? 'wpfHidden' : ''; ?>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_pwb">
 					<?php
-					if ( $isPro ) :
-						$brandList            = $this->getFilterSetting( $this->settings['settings'], 'display_pwb_list', '' );
-						list( $brandDisplay ) = FrameWpf::_()->getModule( 'woofilters' )->getCategoriesDisplay( 'pwb-brand' );
-						if ( is_array( $brandList ) ) {
-							$brandList = isset( $brandList[0] ) ? $brandList[0] : '';
-						}
-						HtmlWpf::selectlist(
-							'settings[display_pwb_list][]',
-							array(
-								'options' => $brandDisplay,
-								'value'   => explode( ',', $brandList ),
-							)
-						);
-					else :
-						?>
-						<span class="wpfProLabel "><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-						<?php
-					endif;
+
+					echo DispatcherWpf::applyFilters(
+						'woobewoo_pf_display_page_list',
+						$pro_label,
+						$this->settings['settings'],
+						'display_pwb_list'
+					);
 					?>
 				</div>
 
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_pwb">
 					<?php
-					if ( $isPro ) :
-						esc_html_e( 'Include Child Brands', 'woo-product-filter' );
-						?>
-						<i class="fa fa-question woobewoo-tooltip no-tooltip"
-							title="<?php echo esc_attr( __( 'The filter will be displayed on all child brands', 'woo-product-filter' ) ); ?>"></i>
-						<?php
-						HtmlWpf::checkboxToggle(
-							'settings[display_child_brand]',
-							array(
-								'checked' => $this->getFilterSetting( $this->settings['settings'], 'display_child_brand', false ),
-							)
-						);
-					else :
-						?>
-						<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-						<?php
-					endif;
+					$display_child_brand = $this->getFilterSetting(
+						$this->settings['settings'],
+						'display_child_brand',
+						false
+					);
+
+					echo DispatcherWpf::applyFilters(
+						'woobewoo_pf_display_child_brand',
+						$pro_label,
+						$display_child_brand
+					);
 					?>
 				</div>
 
@@ -192,11 +155,7 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 			</div>
 		</div>
 
-		<?php
-		if ( $isPro ) :
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabOptionsMain', $this->settings );
-		else :
-			?>
+		<?php ob_start(); // woobewoo_pf_additional_options ?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Redirect After Filter Selection', 'woo-product-filter' ); ?>
@@ -227,8 +186,7 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 				<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 			</div>
 		</div>
-
-		<?php endif; ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_additional_options', ob_get_clean(), $this->settings ); ?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -752,20 +710,17 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 			</div>
 		</div>
 
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabOptionsButtons', $this->settings );
-		} else {
-			?>
+		<?php ob_start(); ?>
+
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e( 'Display Hide Filters Button', 'woo-product-filter' ); ?>
 				</div>
 				<div class="settings-block-values col-xs-8 col-lg-9">
-					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 				</div>
 			</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_button_options', ob_get_clean(), $this->settings ); ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-options-content">
 		<div class="settings-block-title">
@@ -1042,28 +997,18 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 							</div>
 
 							<?php
-							if ( $isPro ) :
-								HtmlWpf::checkboxToggle(
-									'settings[display_product_variations]',
-									array(
-										'checked' => ( isset( $this->settings['settings']['display_product_variations'] ) ? (int) $this->settings['settings']['display_product_variations'] : '' ),
-									)
-								);
-							else :
-								?>
-								<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-								<?php
-							endif;
+							echo DispatcherWpf::applyFilters(
+								'woobewoo_pf_display_product_variations',
+								$pro_label,
+								$this->settings
+							);
 							?>
 						</div>
 				</div>
 			</div>
-			<?php
-		}
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabOptionsContent', $this->settings, $this->filter['id'] );
-		} else {
-			?>
+			<?php } ?>
+
+		<?php ob_start(); ?>
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e( 'Display "Show More"', 'woo-product-filter' ); ?>
@@ -1109,7 +1054,8 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 				</div>
 			</div>
-		<?php } ?>
+			<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_content_options', ob_get_clean(), $this->settings, $this->filter['id'] ); ?>
+
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Hide Filter By Title Click', 'woo-product-filter' ); ?>
@@ -1280,25 +1226,27 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 					);
 					?>
 				</div>
-				<div class="settings-value settings-w100">
-					<?php
-					if ( $isPro ) :
-						echo '<div class="settings-value"><div class="button button-mini woobewoo-tooltip applyLoaderIcon" title="' . esc_attr__( 'Apply loader settings to all filters.', 'woo-product-filter' ) . '"><i class="fa fa-share"></i></div></div>';
-					else :
-						?>
-						<div class="settings-value-label">
-							<?php esc_html_e( 'Apply loader settings to all filters', 'woo-product-filter' ); ?>
-						</div>
-						<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-						<?php
-					endif;
-					?>
-				</div>
+			</div>
+		</div>
+		<div class="woobewoo_row row-settings-block">
+			<div class="settings-block-label col-xs-4 col-lg-3">
+				<?php esc_html_e( 'Apply loader settings to all filters', 'woo-product-filter' ); ?>
+				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'Apply loader settings to all filters.', 'woo-product-filter' ); ?>"></i>
+			</div>
+			<div class="settings-block-values col-xs-8 col-lg-9">
+
+				<?php
+				echo DispatcherWpf::applyFilters(
+					'woobewoo_pf_apply_loader_settings_to_all_filters',
+					$pro_label
+				);
+				?>
 			</div>
 		</div>
 		<?php
 		$iconName   = ( isset( $this->settings['settings']['filter_loader_icon_name'] ) ? $this->settings['settings']['filter_loader_icon_name'] : 'default' );
 		$iconNumber = ( isset( $this->settings['settings']['filter_loader_icon_number'] ) ? $this->settings['settings']['filter_loader_icon_number'] : '0' );
+
 		if ( ! $isPro ) {
 			$iconName = 'default';
 		}
@@ -1436,21 +1384,17 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 			</div>
 		</div>
 
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabOptionsLoaderBottom', $this->settings, $this->filter['id'] );
-		} else {
-			?>
+		<?php ob_start(); ?>
 			<div class="woobewoo_row row-settings-block">
 				<div class="settings-block-label col-xs-4 col-lg-3">
 					<?php esc_html_e( 'Do not remove products while loading', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'To prevent products container from collapsing during ajax.', 'woo-product-filter' ); ?>"></i>
 				</div>
 				<div class="settings-block-values col-xs-8 col-lg-9">
-					<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+					<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 				</div>
 			</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_remove_products_while_loading', ob_get_clean(), $this->settings, $this->filter['id'] ); ?>
 	</div>
 	<div class="wpfLoaderIconTemplate wpfHidden">
 		<?php

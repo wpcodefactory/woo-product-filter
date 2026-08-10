@@ -120,11 +120,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersStock' );
-else :
-	?>
+<?php ob_start(); ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Use as default', 'woo-product-filter' ); ?>
@@ -136,5 +132,4 @@ else :
 		</div>
 	</div>
 </div>
-	<?php
-endif;
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_stock_use_as_default_option', ob_get_clean() );

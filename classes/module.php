@@ -277,4 +277,19 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	public function translate( $str ) {
 		return esc_html( $str );
 	}
+
+	/**
+	 * pro_label.
+	 *
+	 * @version 3.3.0
+	 * @version 3.3.0
+	 */
+	public function pro_label() {
+		$pro_link = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
+		return '<span class="wpfProLabel">
+				<a href="' . esc_url( $pro_link ) . '" target="_blank">
+					' . esc_html__( 'PRO Option', 'woo-product-filter' ) . '
+				</a>
+			</span>';
+	}
 }

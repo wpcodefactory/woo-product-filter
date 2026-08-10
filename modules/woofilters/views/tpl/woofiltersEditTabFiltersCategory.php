@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -37,19 +38,14 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSelectDefaultId' );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect' );
-else :
-	?>
+<?php ob_start(); ?>
 	<div class="row-settings-block wpfTypeSwitchable dataParentIgnore" data-type="dropdown radio list" data-parent="f_list" data-no-values="custom_meta_field_check">
 		<div class="settings-block-label col-xs-4 col-sm-3">
 			<?php esc_html_e( 'Select default id', 'woo-product-filter' ); ?>
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Selects the default filter value by id', 'woo-product-filter' ); ?>"></i>
 		</div>
 		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-			<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 	<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
@@ -59,7 +55,7 @@ else :
 				title="<?php echo esc_attr__( 'Allow only one item from the list to be selected at a time', 'woo-product-filter' ); ?>"></i>
 		</div>
 		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-			<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 	<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
@@ -67,12 +63,11 @@ else :
 			<?php esc_html_e( 'Hide checkboxes', 'woo-product-filter' ); ?>
 		</div>
 		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-			<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<?php
-endif;
-?>
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_select_option', ob_get_clean() ); ?>
+
 <div class="row-settings-block wpfTypeSwitchable" data-not-type="buttons">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Show hierarchical', 'woo-product-filter' ); ?>
@@ -89,39 +84,24 @@ endif;
 			</div>
 			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
-		<?php
-		if ( $isPro ) :
-			?>
-			<div class="settings-value wpfDependencyHidden" data-parent-switch="f_hide_parent">
-				<div class="settings-value-label">
-					<?php esc_html_e( 'Hide parents of all levels', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Hides all parent categories of any level, leaving only the end children', 'woo-product-filter' ); ?>"></i>
-				</div>
-				<?php HtmlWpf::checkboxToggle( 'f_hide_all_parent', array() ); ?>
-			</div>
-			<?php
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersHierarchicalOption' );
-		else :
-			?>
+
+		<?php ob_start(); ?>
 			<div class="settings-value wpfTypeSwitchable" data-type="multi list" data-parent-switch="f_show_hierarchical">
 				<div class="settings-value-label">
 					<?php esc_html_e( 'Collapsible', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'If enabled, then show only parent elements, if there are children, they are minimized.', 'woo-product-filter' ); ?>"></i>
 				</div>
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 			<div class="settings-value wpfTypeSwitchable" data-type="multi" data-parent-switch="f_show_hierarchical">
 				<div class="settings-value-label">
 					<?php esc_html_e( 'Extend parent select', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'If parent filter category was selected then extend selection to child categories.', 'woo-product-filter' ); ?>"></i>
 				</div>
-
-					<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
-			<?php
-		endif;
-		?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_collapsible_option', ob_get_clean() ); ?>
+
 		<div class="settings-value wpfTypeSwitchable" data-not-type="buttons list dropdown" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Product selection hierarchically', 'woo-product-filter' ); ?>
@@ -143,23 +123,15 @@ endif;
 		</div>
 	</div>
 </div>
-<?php
 
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCollapseLevel' );
-else :
-	?>
+<?php ob_start(); ?>
 	<div class="row-settings-block wpfTypeSwitchable" data-type="multi list">
 		<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 			<?php esc_html_e( 'Check page category', 'woo-product-filter' ); ?>
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Оn the category page automatically put a check mark for current category', 'woo-product-filter' ) ); ?>"></i>
 		</div>
 		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel">
-				<a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
-					<?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?>
-				</a>
-			</span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 	<div class="row-settings-block">
@@ -168,16 +140,10 @@ else :
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'The category page automatically hides the current category', 'woo-product-filter' ) ); ?>"></i>
 		</div>
 		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel">
-				<a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
-					<?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?>
-				</a>
-			</span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
-	<?php
-endif;
-?>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_check_page_and_current_page_options', ob_get_clean() );  ?>
 
 <div class="row-settings-block wpfTypeSwitchable" data-type="list dropdown">
 	<div class="settings-value settings-w100">
@@ -190,62 +156,58 @@ endif;
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersButtonsType' );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' );
-else :
-	?>
-	<div class="row-settings-block wpfButtonsTypeBlock wpfTypeSwitchable" data-type="buttons">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Buttons Settings', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Buttons Settings', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-		</div>
-	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="multi mul_dropdown buttons text">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Product selection', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Filter products by different categories using and/or logic.', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-		</div>
-	</div>
 
-	<div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Show images', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show element image. Not working with dropdown.', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-		</div>
+<?php ob_start(); ?>
+<div class="row-settings-block wpfButtonsTypeBlock wpfTypeSwitchable" data-type="buttons">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Buttons Settings', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Buttons Settings', 'woo-product-filter' ); ?>"></i>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="list">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Alphabetical index', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show Alphabetical index. Works only for parent elements.', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-		</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Show search for dropdown', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show search field in multiple dropdown box', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-		</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="multi mul_dropdown buttons text">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Product selection', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Filter products by different categories using and/or logic.', 'woo-product-filter' ); ?>"></i>
 	</div>
-	<?php
-endif;
-ViewWpf::display( 'woofiltersEditTabCustomTags' );
-?>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
+
+<div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Show images', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show element image. Not working with dropdown.', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="list">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Alphabetical index', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show Alphabetical index. Works only for parent elements.', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Show search for dropdown', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show search field in multiple dropdown box', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_options', ob_get_clean() );  ?>
+
+
+<?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Dropdown label', 'woo-product-filter' ); ?>
@@ -286,20 +248,16 @@ ViewWpf::display( 'woofiltersEditTabCustomTags' );
 				);
 				?>
 		</div>
-		<?php
-		if ( $isPro ) :
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
-		else :
-			?>
+		<?php ob_start(); ?>
 			<div class="settings-value settings-w100" data-parent="f_sort_by" data-no-values="default">
 				<div class="settings-value-label">
 					<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Turn this on if you want to sort the values as numbers.', 'woo-product-filter' ); ?>"></i>
 				</div>
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 
 			</div>
-		<?php endif; ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_sort_as_numbers_options', ob_get_clean() ); ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -528,29 +486,24 @@ ViewWpf::display( 'woofiltersEditTabCustomTags' );
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMaxShowMore' );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMenuMode' );
-else :
-	?>
-	<div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Max terms show', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The maximum number of terms to be shown before Show more button', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-		</div>
+<?php ob_start(); ?>
+<div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Max terms show', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The maximum number of terms to be shown before Show more button', 'woo-product-filter' ); ?>"></i>
 	</div>
-	<div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
-		<div class="settings-block-label col-xs-4 col-sm-3">
-			<?php esc_html_e( 'Switch to menu mode', 'woo-product-filter' ); ?>
-			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'When this option is activated, this section of categories loses the ability to filter products and works as a navigation menu', 'woo-product-filter' ); ?>"></i>
-		</div>
-		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-		</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
-	<?php
-endif;
+</div>
+<div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
+	<div class="settings-block-label col-xs-4 col-sm-3">
+		<?php esc_html_e( 'Switch to menu mode', 'woo-product-filter' ); ?>
+		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'When this option is activated, this section of categories loses the ability to filter products and works as a navigation menu', 'woo-product-filter' ); ?>"></i>
+	</div>
+	<div class="settings-block-values col-xs-8 col-sm-9">
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+	</div>
+</div>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_max_terms_and_switch_options', ob_get_clean() );
+

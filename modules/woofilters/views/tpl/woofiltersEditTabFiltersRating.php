@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Rating
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -61,9 +61,7 @@ $ratingTypes = array(
 	</div>
 </div>
 <?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersRatingStars' );
-else :
+ ob_start();
 	foreach ( $ratingTypes as $key => $value ) {
 		if ( strpos( $value, $labelPro ) ) {
 			?>
@@ -87,13 +85,11 @@ else :
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
-	<?php
-endif;
-?>
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_rating_use_exact_value_option', ob_get_clean() ); ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Additional text for 1-4', 'woo-product-filter' ); ?>

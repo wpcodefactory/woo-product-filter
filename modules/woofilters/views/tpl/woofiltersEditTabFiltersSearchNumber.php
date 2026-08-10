@@ -2,16 +2,14 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Search Number
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSearchNumber', array( 'attrDisplay' => $attrDisplay ) );
-} else {
+ob_start();
 	?>
 	<div class="row-settings-block col-md-12">
 		<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
@@ -22,5 +20,4 @@ if ( $isPro ) {
 		</a>
 		<?php } ?>
 	</div>
-	<?php
-}
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_search_number_option', ob_get_clean(), $attrDisplay );

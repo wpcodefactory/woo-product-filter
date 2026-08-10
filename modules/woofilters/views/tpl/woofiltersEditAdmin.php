@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) || exit;
 
 $isPro    = $this->is_pro;
 $labelPro = '';
+$adPath   = $this->getModule()->getModPath() . 'img/ad/';
 if ( ! $isPro ) {
-	$adPath   = $this->getModule()->getModPath() . 'img/ad/';
 	$labelPro = ' - Pro feature';
 }
 $isWCLicense = FrameWpf::_()->isWCLicense();

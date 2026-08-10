@@ -9,9 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersBrand' );
-} else {
+ob_start();
 	?>
 	<div class="row-settings-block col-md-12">
 		<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
@@ -22,5 +20,4 @@ if ( $isPro ) {
 		</a>
 		<?php } ?>
 	</div>
-	<?php
-}
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_brand_option', ob_get_clean() ); ?>

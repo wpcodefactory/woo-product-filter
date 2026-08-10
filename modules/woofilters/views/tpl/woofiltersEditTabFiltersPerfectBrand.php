@@ -101,18 +101,14 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 				);
 				?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
-		} else {
-			?>
+		<?php ob_start(); ?>
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
 				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
 			</div>
 		</div>
-		<?php } ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -333,11 +329,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersPerfectBrandDescription' );
-} else {
-	?>
+<?php ob_start(); ?>
 	<div class="row-settings-block">
 		<div class="settings-block-label col-xs-4 col-sm-3">
 			<?php esc_html_e( 'Display brand description', 'woo-product-filter' ); ?>
@@ -350,5 +342,4 @@ if ( $isPro ) {
 			</div>
 		</div>
 	</div>
-	<?php
-}
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() );
