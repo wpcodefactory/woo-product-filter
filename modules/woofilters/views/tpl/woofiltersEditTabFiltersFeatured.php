@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Featured
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -52,7 +52,4 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	</div>
 </div>
 
-<?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSwitchType' );
-}
+<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSwitchType' );

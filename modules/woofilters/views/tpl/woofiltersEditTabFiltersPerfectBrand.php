@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Perfect Brand
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -37,11 +37,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect' );
-}
-?>
+<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect' ); ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3 wpfTypeSwitchable" data-not-type="buttons">
 		<?php esc_html_e( 'Show hierarchical', 'woo-product-filter' ); ?>
@@ -58,18 +54,12 @@ if ( $isPro ) {
 			</div>
 			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersHierarchicalOption' );
-		}
-		?>
+		<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersHierarchicalOption' ); ?>
 	</div>
 </div>
 <?php
-if ( $isPro ) {
 	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersButtonsType' );
 	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' );
-}
 ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">

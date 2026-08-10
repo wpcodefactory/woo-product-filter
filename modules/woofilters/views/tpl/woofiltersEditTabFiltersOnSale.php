@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters On Sale
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -32,11 +32,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSwitchType' );
-}
-?>
+<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSwitchType' ); ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Checkbox label', 'woo-product-filter' ); ?>
@@ -56,7 +52,4 @@ if ( $isPro ) {
 		</div>
 	</div>
 </div>
-<?php
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersOnSale' );
-}
+<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersOnSale' );

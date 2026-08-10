@@ -617,9 +617,11 @@ class WoofiltersViewWpf extends ViewWpf {
 						$querySettings['product_tag'] = $value;
 						break;
 					case 'product_brand':
-						if ( $isPro ) {
-							$querySettings['product_brand'] = $value;
-						}
+						$querySettings = DispatcherWpf::applyFilters(
+							'woobewoo_pf__add_product_brand_query',
+							$querySettings,
+							$value
+						);
 						break;
 					case 'pwb-brand':
 						$querySettings['pwb-brand'] = $value;

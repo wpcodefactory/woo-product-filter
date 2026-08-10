@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Attribute
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -29,11 +29,7 @@ defined( 'ABSPATH' ) || exit;
 			);
 			?>
 		</div>
-		<?php
-		if ( $isPro ) {
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCustomMetaField' );
-		}
-		?>
+		<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCustomMetaField' ); ?>
 	</div>
 </div>
 <?php
@@ -71,20 +67,18 @@ $attributesTypes = array(
 	</div>
 </div>
 <?php
-if ( $isPro ) :
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect' );
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersAttributeColors' );
-else :
+	ob_start();
 	foreach ( $attributesTypes as $key => $value ) {
 		if ( strpos( $value, $labelPro ) && 'colors' === $key ) {
 			?>
-			<div class="row-settings-block col-md-12 wpfFilterTypePro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
+			<div class="row-settings-block wpfFilterTypePro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
 				<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
-				<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
-				<?php } else { ?>
-				<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">
 					<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
-				</a>
+				<?php } else { ?>
+					<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>"
+					   target="_blank">
+						<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
+					</a>
 				<?php } ?>
 			</div>
 			<?php
@@ -157,12 +151,9 @@ else :
 			</div>
 		</div>
 	</div>
-	<?php
-endif;
-if ( $isPro ) {
-	DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersAttributeSlider' );
-} else {
-	?>
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_type_options', ob_get_clean() ); ?>
+
+	<?php ob_start(); ?>
 	<div class="row-settings-block wpfSliderTypeBlock wpfTypeSwitchable" data-type="slider">
 		<div class="settings-block-label col-xs-4 col-sm-3">
 			<?php esc_html_e( 'Slider skin', 'woo-product-filter' ); ?>
@@ -215,10 +206,9 @@ if ( $isPro ) {
 			</div>
 		</div>
 	</div>
-<?php } ?>
-<?php
-ViewWpf::display( 'woofiltersEditTabCustomTags' );
-?>
+	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_slider_options', ob_get_clean() ); ?>
+
+<?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Dropdown label', 'woo-product-filter' ); ?>
@@ -276,36 +266,39 @@ ViewWpf::display( 'woofiltersEditTabCustomTags' );
 			</div>
 			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
+		<?php ob_start(); ?>
+		<div class="settings-value wpfTypeSwitchable" data-type="radio list switch" data-parent-switch="f_show_hierarchical">
+			<div class="settings-value-label">
+				<?php esc_html_e( 'Collapsible', 'woo-product-filter' ); ?>
+				<i
+					class="fa fa-question woobewoo-tooltip no-tooltip"
+					title="<?php echo esc_attr__( 'If enabled, then show only parent elements, if there are children, they are minimized.', 'woo-product-filter' ); ?>"
+				></i>
+			</div>
+			<span class="wpfProLabel">
+				<a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
+					<?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?>
+				</a>
+			</span>
+		</div>
+		<div class="settings-value wpfTypeSwitchable" data-type="multi" data-parent-switch="f_show_hierarchical">
+			<div class="settings-value-label">
+				<?php esc_html_e( 'Extend parent select', 'woo-product-filter' ); ?>
+				<i
+					class="fa fa-question woobewoo-tooltip no-tooltip"
+					title="<?php echo esc_attr__( 'If parent filter attribute was selected then extend selection to child attributes.', 'woo-product-filter' ); ?>"
+				></i>
+			</div>
+			<span class="wpfProLabel">
+				<a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
+					<?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?>
+				</a>
+			</span>
+		</div>
 		<?php
-		if ( $isPro ) :
-			?>
-			<div class="settings-value wpfDependencyHidden" data-parent-switch="f_hide_parent">
-				<div class="settings-value-label">
-					<?php esc_html_e( 'Hide parents of all levels', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Hides all parent attributes of any level, leaving only the end children', 'woo-product-filter' ); ?>"></i>
-				</div>
-				<?php HtmlWpf::checkboxToggle( 'f_hide_all_parent', array() ); ?>
-			</div>
-			<?php
-			DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersHierarchicalOption', array( 'attrDisplay' => true ) );
-		else :
-			?>
-			<div class="settings-value wpfTypeSwitchable" data-type="radio list switch" data-parent-switch="f_show_hierarchical">
-				<div class="settings-value-label">
-					<?php esc_html_e( 'Collapsible', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'If enabled, then show only parent elements, if there are children, they are minimized.', 'woo-product-filter' ); ?>"></i>
-				</div>
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-			</div>
-			<div class="settings-value wpfTypeSwitchable" data-type="multi" data-parent-switch="f_show_hierarchical">
-				<div class="settings-value-label">
-					<?php esc_html_e( 'Extend parent select', 'woo-product-filter' ); ?>
-					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'If parent filter attribute was selected then extend selection to child attributes.', 'woo-product-filter' ); ?>"></i>
-				</div>
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-			</div>
-			<?php
-		endif;
+		$attribute_hierarchical_options = ob_get_clean();
+
+		echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_hierarchical_options', $attribute_hierarchical_options );
 		?>
 	</div>
 </div>

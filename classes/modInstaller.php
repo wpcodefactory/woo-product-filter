@@ -331,24 +331,19 @@ class ModInstallerWpf {
 
 	/**
 	 * uninstall.
+	 *
+	 * @version 3.3.0
 	 */
 	public static function uninstall() {
-		$isPro     = false;
 		$locations = self::_getPluginLocations();
 		$modules   = self::_getModulesFromXml( $locations['xmlPath'] );
 		foreach ( $modules as $modDataArr ) {
 			self::_uninstallTables( $modDataArr );
 			FrameWpf::_()->getModule( 'options' )->getModel( 'modules' )->delete( array( 'code' => $modDataArr['code'] ) );
 			UtilsWpf::deleteDir( WPF_MODULES_DIR . $modDataArr['code'] );
-
-			if ( 'license' == $modDataArr['code'] ) {
-				$isPro = true;
-			}
 		}
 
-		if ( $isPro ) {
-			self::uninstallLicense();
-		}
+		DispatcherWpf::doAction( 'woobewoo_pf_uninstall' );
 	}
 
 	/**

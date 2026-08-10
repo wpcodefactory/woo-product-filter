@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Options
  *
- * @version 3.1.8
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -60,26 +60,22 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 					);
 					?>
 				</div>
-				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="specific">
+				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>"
+				     data-select="settings[display_on_page]" data-select-value="specific">
 					<?php
-					if ( $isPro ) :
-						$pageList = $this->getFilterSetting( $this->settings['settings'], 'display_page_list', '' );
-						if ( is_array( $pageList ) ) {
-							$pageList = isset( $pageList[0] ) ? $pageList[0] : '';
-						}
-						HtmlWpf::selectlist(
-							'settings[display_page_list][]',
-							array(
-								'options' => FrameWpf::_()->getModule( 'woofilters' )->getAllPages(),
-								'value'   => explode( ',', $pageList ),
-							)
-						);
-					else :
-						?>
-						<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
-						<?php
-					endif;
+					$page_list = '<span class="wpfProLabel">
+						<a href="' . esc_url( $this->proLink ) . '" target="_blank">
+							' . esc_html__( 'PRO Option', 'woo-product-filter' ) . '
+						</a>
+					</span>';
+
+					echo DispatcherWpf::applyFilters(
+						'woobewoo_pf_display_page_list',
+						$page_list,
+						$this->settings['settings']
+					);
 					?>
+
 				</div>
 
 				<?php $classHidden = 'custom_cats' != $displayOnPage ? 'wpfHidden' : ''; ?>
@@ -1339,11 +1335,7 @@ $defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
 					);
 					?>
 				</div>
-				<?php
-				if ( $isPro ) {
-					DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabOptionsLoader', $this->settings );
-				}
-				?>
+				<?php DispatcherWpf::doAction( 'addEditTabDesign', 'partEditTabOptionsLoader', $this->settings ); ?>
 				<div class="clear"></div>
 				<div class="settings-value wpfIconPreview">
 					<?php HtmlWpf::echoEscapedHtml( $htmlPreview ); ?>
