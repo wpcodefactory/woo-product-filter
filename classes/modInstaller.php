@@ -347,13 +347,6 @@ class ModInstallerWpf {
 	}
 
 	/**
-	 * uninstallLicense.
-	 */
-	public static function uninstallLicense() {
-		FrameWpf::_()->getModule( 'options' )->getModel()->save( 'license_save_name', '' );
-	}
-
-	/**
 	 * _uninstallTables.
 	 *
 	 * @version 3.3.0
