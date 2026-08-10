@@ -675,7 +675,7 @@
 	font-size: clamp(22px, 5vw, 32px);
 }
 
-.woobewoo-plugin.ui-dialog .ui-icon-closethick {
+body.wp-admin .woobewoo-plugin.ui-dialog .ui-icon-closethick {
 	font-size: 14px;
 	border-radius: 50px;
 	color: #636977 !important;
@@ -683,6 +683,7 @@
 	position: sticky;
 	height: 19px;
 	width: 19px;
+	margin: 0;
 }
 
 .woobewoo-plugin.ui-dialog .ui-button-icon-only .ui-icon {

@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -105,7 +106,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); ?>
@@ -338,7 +339,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>

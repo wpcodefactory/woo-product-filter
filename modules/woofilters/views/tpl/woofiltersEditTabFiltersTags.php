@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -54,7 +55,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -64,11 +65,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Оn the tag page automatically put a check mark for current tag', 'woo-product-filter' ) ); ?>"></i>
 		</div>
 		<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel">
-				<a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
-					<?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?>
-				</a>
-			</span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 	<div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
@@ -79,7 +76,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -89,7 +86,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -100,7 +97,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -174,7 +171,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 					<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Turn this on if you want to sort the values as numbers.', 'woo-product-filter' ); ?>"></i>
 				</div>
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 
 			</div>
 		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_tags_sort_as_numbers_option', ob_get_clean() ); ?>

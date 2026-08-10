@@ -10,6 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 
 $skins = array(
 	'default' => esc_attr__( 'default', 'woo-product-filter' ),
@@ -47,7 +48,7 @@ $skins = array(
 			?>
 		</div>
 
-		<span class="wpfProLabel wpfHidden"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 
 	</div>
 </div>
@@ -145,7 +146,7 @@ echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Set the price min/max value. Doesn\'t working with recount prices option!', 'woo-product-filter' ); ?>"></i>
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 	<div class="row-settings-block">
@@ -154,7 +155,7 @@ echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
-			<span class="settings-value wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 	<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() );

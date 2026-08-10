@@ -8,6 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 
 ?>
 <div class="row-settings-block">
@@ -93,7 +94,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -103,7 +104,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -114,7 +115,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -125,7 +126,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -136,7 +137,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -147,7 +148,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -161,7 +162,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -171,7 +172,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -181,7 +182,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -191,7 +192,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -202,7 +203,7 @@ $attributesTypes = array(
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
 			<div class="settings-value">
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 	</div>
@@ -275,11 +276,7 @@ $attributesTypes = array(
 					title="<?php echo esc_attr__( 'If enabled, then show only parent elements, if there are children, they are minimized.', 'woo-product-filter' ); ?>"
 				></i>
 			</div>
-			<span class="wpfProLabel">
-				<a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
-					<?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?>
-				</a>
-			</span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 		<div class="settings-value wpfTypeSwitchable" data-type="multi" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
@@ -289,11 +286,7 @@ $attributesTypes = array(
 					title="<?php echo esc_attr__( 'If parent filter attribute was selected then extend selection to child attributes.', 'woo-product-filter' ); ?>"
 				></i>
 			</div>
-			<span class="wpfProLabel">
-				<a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
-					<?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?>
-				</a>
-			</span>
+			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 		<?php
 		$attribute_hierarchical_options = ob_get_clean();
@@ -424,7 +417,7 @@ $attributesTypes = array(
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
-				<span class="wpfProLabel"><a href="<?php echo esc_url( $this->proLink ); ?>" target="_blank"><?php esc_html_e( 'PRO Option', 'woo-product-filter' ); ?></a></span>
+				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_sort_as_numbers_option', ob_get_clean() ); ?>
