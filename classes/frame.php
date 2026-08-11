@@ -686,9 +686,11 @@ class FrameWpf {
 
 	/**
 	 * isPro.
+	 *
+	 * @version 3.3.0
 	 */
 	public function isPro() {
-		return $this->moduleExists( 'license' ) && $this->getModule( 'license' ) && $this->getModule( 'access' );
+		return apply_filters( 'woobewoo_pf_is_pro', false );
 	}
 
 	/**
