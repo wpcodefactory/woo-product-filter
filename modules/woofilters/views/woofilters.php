@@ -849,7 +849,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateOverlayHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	public function generateOverlayHtml( $settings ) {
 		$settings          = $this->getFilterSetting( $settings, 'settings', array() );
@@ -869,9 +869,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			$iconName     = $this->getFilterSetting( $settings, 'filter_loader_icon_name', 'default' );
 			$iconNumber   = $this->getFilterSetting( $settings, 'filter_loader_icon_number', '0' );
 
-			if ( ! FrameWpf::_()->isPro() ) {
-				$iconName = 'default';
-			}
+			$iconName = apply_filters( 'woobewoo_pf_icon_name', 'default', $iconName );
 
 			$html .= '<div class="wpfPreview">';
 			if ( 'custom' === $iconName ) {
@@ -1082,7 +1080,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceInputsHtml.
 	 *
-	 * @version 2.8.6
+	 * @version 3.3.0
 	 */
 	public function generatePriceInputsHtml( $settings ) {
 		$dataStep = 1;
@@ -1105,9 +1103,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 
 		$dec = $this->getFilterSetting( $settings, 'decimal', 0, true );
-		if ( FrameWpf::_()->isPro() ) {
-			$settings = DispatcherWpf::applyFilters( 'checkPriceArgs', $settings );
-		}
+		$settings = DispatcherWpf::applyFilters( 'checkPriceArgs', $settings );
 
 		if ( $this->getFilterSetting( $settings, 'f_currency_show_as', '' ) === 'symbol' ) {
 			$currencyShowAs = get_woocommerce_currency_symbol();
@@ -3579,14 +3575,18 @@ class WoofiltersViewWpf extends ViewWpf {
 		return $html;
 	}
 
+	/**
+	 * generateLoaderHtml.
+	 *
+	 * @version 3.3.0
+	 */
 	private function generateLoaderHtml( $filterId, $settings ) {
 		$settings     = $this->getFilterSetting( $settings, 'settings', array() );
 		$colorPreview = $this->getFilterSetting( $settings, 'filter_loader_icon_color', 'black' );
 		$iconName     = $this->getFilterSetting( $settings, 'filter_loader_icon_name', 'default' );
 		$iconNumber   = $this->getFilterSetting( $settings, 'filter_loader_icon_number', '0' );
-		if ( ! FrameWpf::_()->isPro() ) {
-			$iconName = 'default';
-		}
+		$iconName = apply_filters( 'woobewoo_pf_icon_name', 'default', $iconName );
+
 		$htmlPreview = '<div class="wpfPreview wpfPreviewLoader wpfHidden">';
 		if ( 'custom' === $iconName ) {
 			$settings['is_overlay'] = false;

@@ -1250,9 +1250,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		$iconName   = ( isset( $this->settings['settings']['filter_loader_icon_name'] ) ? $this->settings['settings']['filter_loader_icon_name'] : 'default' );
 		$iconNumber = ( isset( $this->settings['settings']['filter_loader_icon_number'] ) ? $this->settings['settings']['filter_loader_icon_number'] : '0' );
 
-		if ( ! $isPro ) {
-			$iconName = 'default';
-		}
+		$iconName = apply_filters( 'woobewoo_pf_icon_name', 'default', $iconName );
 		if ( 'custom' === $iconName ) {
 			$htmlPreview = '<div class="woobewoo-filter-loader wpfCustomLoader"></div>';
 		} elseif ( 'default' === $iconName || 'spinner' === $iconName ) {

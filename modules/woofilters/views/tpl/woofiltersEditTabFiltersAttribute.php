@@ -60,7 +60,7 @@ $attributesTypes = array(
 					'f_frontend_type',
 					array(
 						'options' => $attributesTypes,
-						'attrs'   => 'class="woobewoo-flat-input' . ( $isPro ? '' : ' wpfWithProAd' ) . '"',
+						'attrs'   => 'class="woobewoo-flat-input' . apply_filters( 'woobewoo_pf_pro_ad_class', ' wpfWithProAd' ) . '"',
 					)
 				);
 				?>

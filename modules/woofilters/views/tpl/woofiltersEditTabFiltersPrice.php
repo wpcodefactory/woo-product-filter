@@ -47,14 +47,11 @@ $skins = array(
 				'f_skin_type',
 				array(
 					'options' => $skins,
-					'attrs'   => 'class="woobewoo-flat-input' . ( $isPro ? '' : ' wpfWithProAd' ) . '"',
+					'attrs'   => 'class="woobewoo-flat-input' . apply_filters( 'woobewoo_pf_pro_ad_class', ' wpfWithProAd' ) . '"',
 				)
 			);
 			?>
 		</div>
-
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
-
 	</div>
 </div>
 <?php
@@ -80,7 +77,6 @@ foreach ( $skins as $key => $value ) {
 
 echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean() );
 ?>
-
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Show price input fields', 'woo-product-filter' ); ?>

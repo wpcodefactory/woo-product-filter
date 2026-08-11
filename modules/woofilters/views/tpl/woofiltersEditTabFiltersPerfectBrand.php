@@ -97,7 +97,7 @@ DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' 
 							'desc'    => esc_attr__( 'DESC', 'woo-product-filter' ),
 							'default' => esc_attr__( 'Default', 'woo-product-filter' ) . $labelPro,
 						),
-						'attrs'   => 'class="woobewoo-flat-input' . ( $isPro ? '' : ' wpfWithProAd' ) . '"',
+						'attrs'   => 'class="woobewoo-flat-input' . apply_filters( 'woobewoo_pf_pro_ad_class', ' wpfWithProAd' ) . '"',
 					)
 				);
 				?>

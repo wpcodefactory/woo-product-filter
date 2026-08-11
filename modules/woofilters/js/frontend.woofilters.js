@@ -56,9 +56,12 @@ function wpfIsThriveEditor() {
 		this.$obj = this;
 		this.noWoo = this.$obj.checkNoWooPage();
 		var slugFormatEnable;
-		if (!window.wpfAdminPage){
-			var $fgeneralSettings = this.getFilterMainSettings(jQuery('.wpfMainWrapper'));
-			if (typeof $fgeneralSettings.settings.slug_format !== 'undefined') {
+		if ( ! window.wpfAdminPage ) {
+			var $fgeneralSettings = this.getFilterMainSettings( jQuery( '.wpfMainWrapper' ) );
+			if ( ! $fgeneralSettings ) {
+				return false;
+			}
+			if ( typeof $fgeneralSettings.settings.slug_format !== 'undefined' ) {
 				slugFormatEnable = $fgeneralSettings.settings.slug_format;
 			} else {
 				// Set default value if not found
@@ -1866,23 +1869,28 @@ function wpfIsThriveEditor() {
 		_thisObj.markCheckboxSelected(filter);
 	});
 
-	WpfFrontendPage.prototype.getFilterMainSettings = (function ($selector) {
-		var settingsStr = $selector.attr('data-filter-settings');
-		try{
-			var settings = JSON.parse(settingsStr);
-		}catch(e){
-			var settings = false;
-		}
-		if (settings === false) {
-			settingsStr = settingsStr.replace('}]"', '}]').replace('"[{', '[{');
-			try{
-				settings = JSON.parse(settingsStr);
-			}catch(e){
-				settings = false;
+	WpfFrontendPage.prototype.getFilterMainSettings = (
+		function ( $selector ) {
+			var settingsStr = $selector.attr( 'data-filter-settings' );
+			if ( ! settingsStr ) {
+				return false;
 			}
+			try {
+				var settings = JSON.parse( settingsStr );
+			} catch ( e ) {
+				var settings = false;
+			}
+			if ( settings === false ) {
+				settingsStr = settingsStr.replace( '}]"', '}]' ).replace( '"[{', '[{' );
+				try {
+					settings = JSON.parse( settingsStr );
+				} catch ( e ) {
+					settings = false;
+				}
+			}
+			return settings;
 		}
-		return settings;
-	});
+	);
 
 	WpfFrontendPage.prototype.getFilterParam = (function (paramSlug, mainWrapper, filterWrapper) {
 		var paramValue = null,

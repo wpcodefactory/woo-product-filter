@@ -138,11 +138,8 @@ class OptionsViewWpf extends ViewWpf {
 		FrameWpf::_()->addStyle( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'css/admin.settings.css' );
 		FrameWpf::_()->getModule( 'templates' )->loadJqueryUi();
 		FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-		if ( FrameWpf::_()->isPro() ) {
-			FrameWpf::_()->addJSVar( 'wp-color-picker', 'wpColorPickerL10n', array() );
-			FrameWpf::_()->addScript( 'woobewoo-pf-admin-colorpicker-alhpa', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js' );
-			FrameWpf::_()->addStyle( 'woobewoo-pf-loaders', FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'css/loaders.css' );
-		}
+
+		DispatcherWpf::doAction( 'woobewoo_pf_enqueue_admin_option_pro_assets' );
 
 		$options = FrameWpf::_()->getModule( 'options' )->getAll();
 		$this->assign( 'options', $options );

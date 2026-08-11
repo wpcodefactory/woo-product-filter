@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Admin
  *
- * @version 3.1.7
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -38,11 +38,7 @@ defined( 'ABSPATH' ) || exit;
 						<?php esc_html_e( 'Delete selected', 'woo-product-filter' ); ?>
 					</button>
 				</li>
-				<?php
-				if ( FrameWpf::_()->isPro() ) {
-					DispatcherWpf::doAction( 'addAdminButtonsPro' );
-				} else {
-					?>
+				<?php ob_start(); ?>
 				<li title="<?php echo esc_attr( __( 'Import tables', 'woo-product-filter' ) ); ?>">
 					<a class="woobewoo-relative filterExportImportBtn" href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
 						<span>
@@ -69,7 +65,7 @@ defined( 'ABSPATH' ) || exit;
 						</span>
 					</a>
 				</li>
-				<?php } ?>
+				<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_list_import_export', ob_get_clean(), $this->settings ); ?>
 			</ul>
 		</div>
 		<div id="containerWrapper">

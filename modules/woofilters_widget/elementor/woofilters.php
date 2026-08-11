@@ -39,7 +39,6 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 			return;
 		}
 
-		$isPro    = FrameWpf::_()->isPro();
 		$modPath  = FrameWpf::_()->getModule( 'woofilters' )->getModPath();
 		$tempPath = FrameWpf::_()->getModule( 'templates' )->getModPath();
 
@@ -87,10 +86,10 @@ class Woofilters_ElementorWidgetWpf extends Widget_Base {
 		// addScriptsContent
 		DispatcherWpf::doAction( 'woobewoo_pf_register_frontend_pro_assets' );
 
-		if ( ! $isPro ) {
-			static::$adPath   = FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'img/ad/';
-			static::$labelPro = ' Pro';
-		}
+
+		static::$adPath   = FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'img/ad/';
+		static::$labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
+
 		static::$scriptsLoaded = true;
 	}
 

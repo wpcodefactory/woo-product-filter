@@ -9,12 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$isPro    = FrameWpf::_()->isPro();
-$labelPro = '';
-if ( ! $isPro ) {
-	$adPath   = FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'img/ad/';
-	$labelPro = ' Pro';
-}
+$labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
+
 
 list($categoryDisplay, $parentCategories) = FrameWpf::_()->getModule( 'woofilters' )->getCategoriesDisplay();
 

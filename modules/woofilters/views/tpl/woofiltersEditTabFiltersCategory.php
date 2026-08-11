@@ -242,7 +242,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 							'desc'    => 'DESC',
 							'default' => 'Default' . $labelPro,
 						),
-						'attrs'   => 'class="woobewoo-flat-input' . ( $isPro ? '' : ' wpfWithProAd' ) . '"',
+						'attrs'   => 'class="woobewoo-flat-input' . apply_filters( 'woobewoo_pf_pro_ad_class', ' wpfWithProAd' ) . '"',
 					)
 				);
 				?>
