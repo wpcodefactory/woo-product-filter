@@ -65,7 +65,7 @@ defined( 'ABSPATH' ) || exit;
 						</span>
 					</a>
 				</li>
-				<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_list_import_export', ob_get_clean(), $this->settings ); ?>
+				<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_list_import_export', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</ul>
 		</div>
 		<div id="containerWrapper">

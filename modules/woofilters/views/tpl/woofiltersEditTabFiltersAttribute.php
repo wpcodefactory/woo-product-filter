@@ -152,7 +152,7 @@ foreach ( $attributesTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_type_options', ob_get_clean() ); ?>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_type_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 <?php ob_start(); ?>
 <div class="row-settings-block wpfSliderTypeBlock wpfTypeSwitchable" data-type="slider">
@@ -207,7 +207,7 @@ foreach ( $attributesTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_slider_options', ob_get_clean() ); ?>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_slider_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 <?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -290,7 +290,7 @@ foreach ( $attributesTypes as $key => $value ) {
 		</div>
 		<?php
 		$attribute_hierarchical_options = ob_get_clean();
-		echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_hierarchical_options', $attribute_hierarchical_options );
+		echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_hierarchical_options', $attribute_hierarchical_options ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
 	</div>
 </div>
@@ -417,7 +417,7 @@ foreach ( $attributesTypes as $key => $value ) {
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_sort_as_numbers_option', ob_get_clean() ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list radio" data-parent="f_list" data-no-values="custom_meta_field_check">

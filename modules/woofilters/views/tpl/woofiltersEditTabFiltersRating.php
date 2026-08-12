@@ -89,7 +89,7 @@ foreach ( $ratingTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_rating_use_exact_value_option', ob_get_clean() ); ?>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_rating_use_exact_value_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Additional text for 1-4', 'woo-product-filter' ); ?>

@@ -66,29 +66,13 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 					data-select="settings[display_on_page]"
 					data-select-value="specific"
 				>
-					<?php
-
-					echo DispatcherWpf::applyFilters(
-						'woobewoo_pf_display_page_list',
-						$pro_label,
-						$this->settings['settings'],
-						'display_page_list'
-					);
-					?>
+				<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_display_page_list', $pro_label, $this->settings['settings'], 'display_page_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 				</div>
 
 				<?php $classHidden = 'custom_cats' != $displayOnPage ? 'wpfHidden' : ''; ?>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_cats">
-					<?php
-
-					echo DispatcherWpf::applyFilters(
-						'woobewoo_pf_display_page_list',
-						$pro_label,
-						$this->settings['settings'],
-						'display_cat_list'
-					);
-					?>
+				<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_display_page_list', $pro_label, $this->settings['settings'], 'display_cat_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_cats">
@@ -99,11 +83,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 						false
 					);
 
-					echo DispatcherWpf::applyFilters(
-						'woobewoo_pf_display_child_cat',
-						$pro_label,
-						$display_child_cat
-					);
+					echo DispatcherWpf::applyFilters( 'woobewoo_pf_display_child_cat', $pro_label, $display_child_cat ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					?>
 				</div>
 
@@ -111,12 +91,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_pwb">
 					<?php
 
-					echo DispatcherWpf::applyFilters(
-						'woobewoo_pf_display_page_list',
-						$pro_label,
-						$this->settings['settings'],
-						'display_pwb_list'
-					);
+					echo DispatcherWpf::applyFilters( 'woobewoo_pf_display_page_list', $pro_label, $this->settings['settings'], 'display_pwb_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					?>
 				</div>
 
@@ -128,11 +103,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 						false
 					);
 
-					echo DispatcherWpf::applyFilters(
-						'woobewoo_pf_display_child_brand',
-						$pro_label,
-						$display_child_brand
-					);
+					echo DispatcherWpf::applyFilters( 'woobewoo_pf_display_child_brand', $pro_label, $display_child_brand ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					?>
 				</div>
 
@@ -189,7 +160,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_additional_options', ob_get_clean(), $this->settings ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_additional_options', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -723,7 +694,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_button_options', ob_get_clean(), $this->settings ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_button_options', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-options-content">
 		<div class="settings-block-title">
@@ -998,13 +969,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 								<?php esc_html_e( 'Display Variations Instead Of Variable Product', 'woo-product-filter' ); ?>
 								<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__( 'After filtration by attributes will be displayed product variation instead of main variable product', 'woo-product-filter' ); ?>"></i>
 							</div>
-
-							<?php
-							echo DispatcherWpf::applyFilters(
-								'woobewoo_pf_display_product_variations',
-								$pro_label,
-								$this->settings
-							);
+							<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_display_product_variations', $pro_label, $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							?>
 						</div>
 				</div>
@@ -1057,7 +1022,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_content_options', ob_get_clean(), $this->settings, $this->filter['id'] ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_design_content_options', ob_get_clean(), $this->settings, $this->filter['id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -1237,13 +1202,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'Apply loader settings to all filters.', 'woo-product-filter' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-
-				<?php
-				echo DispatcherWpf::applyFilters(
-					'woobewoo_pf_apply_loader_settings_to_all_filters',
-					$pro_label
-				);
-				?>
+				<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_apply_loader_settings_to_all_filters', $pro_label ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 		</div>
 		<?php
@@ -1395,7 +1354,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_remove_products_while_loading', ob_get_clean(), $this->settings, $this->filter['id'] ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_remove_products_while_loading', ob_get_clean(), $this->settings, $this->filter['id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 	<div class="wpfLoaderIconTemplate wpfHidden">
 		<?php

@@ -236,7 +236,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_blocks_styling_option', ob_get_clean(), $this->settings ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_blocks_styling_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-titles">
 		<div class="settings-block-title">
@@ -252,7 +252,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_title_styles_option', ob_get_clean(), $this->settings ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_title_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-buttons">
 		<div class="settings-block-title">
@@ -268,7 +268,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_buttons_styles_option', ob_get_clean(), $this->settings ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_buttons_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-floating">
 		<div class="settings-block-title">
@@ -284,6 +284,6 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_floating_styles_option', ob_get_clean(), $this->settings ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_custom_floating_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 </div>

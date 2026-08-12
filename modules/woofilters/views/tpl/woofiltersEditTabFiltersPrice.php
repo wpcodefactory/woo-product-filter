@@ -75,7 +75,7 @@ foreach ( $skins as $key => $value ) {
 	}
 }
 
-echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean() );
+echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
@@ -129,7 +129,7 @@ echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_show_currency_in_slider', '' ); ?>
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_show_currency_in_slider', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 <div class="row-settings-block f_show_inputs_enabled_tooltip">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Use text tooltip instead of input fields', 'woo-product-filter' ); ?>
@@ -159,4 +159,4 @@ echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean
 		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() );
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

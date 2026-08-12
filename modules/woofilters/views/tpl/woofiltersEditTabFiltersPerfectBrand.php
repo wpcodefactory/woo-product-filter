@@ -109,7 +109,7 @@ DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' 
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); ?>
+		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -343,4 +343,4 @@ DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' 
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() );
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

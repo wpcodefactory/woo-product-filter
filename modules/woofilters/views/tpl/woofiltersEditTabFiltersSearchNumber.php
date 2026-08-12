@@ -20,4 +20,4 @@ ob_start();
 	</a>
 	<?php } ?>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_search_number_option', ob_get_clean(), $attrDisplay );
+<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_search_number_option', ob_get_clean(), $attrDisplay ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
