@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.1
  *
  * @author woobewoo
  */
@@ -2611,7 +2611,7 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * getRenderMode.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.1
 	 */
 	public function getRenderMode( $id, $settings, $isWidget = true ) {
 		if ( ! isset( $this->renderModes[ $id ] ) || empty( $this->renderModes[ $id ] ) ) {
@@ -2746,18 +2746,13 @@ class WoofiltersWpf extends ModuleWpf {
 				} elseif ( is_product() && $displayProduct && $displayMobile ) {
 					$mode = 8;
 				} elseif (
-					FrameWpf::_()->isPro() &&
 					( is_tax( 'pwb-brand' ) || is_tax( 'product_brand' ) ) &&
 					$displayBrand &&
 					$displayMobile
 				) {
 					$mode = 11;
 				} elseif ( 'all_pages' === $displayOnPage ) {
-					if ( FrameWpf::_()->isPro() ) {
-						$mode = 12;
-					} elseif ( is_shop() ) {
-						$mode = 2; // shop mode if not PRO
-					}
+					$mode = DispatcherWpf::applyFilters( 'woobewoo_pf_all_pages_mode', is_shop() ? 2 : $mode );
 				}
 			}
 			$this->renderModes[ $id ] = $mode;
@@ -3260,13 +3255,14 @@ class WoofiltersWpf extends ModuleWpf {
 	/**
 	 * renderSelectedFilters.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.1
 	 */
 	public function renderSelectedFilters( $params ) {
 		$p = array(
 			'id' => ( isset( $params['id'] ) ? (int) $params['id'] : 0 ),
 		);
-		return FrameWpf::_()->isPro() ? HtmlWpf::escapedHtml( $this->getView()->renderSelectedFiltersHtml( $p ) ) : '';
+
+		return apply_filters( 'woobewoo_pf_render_selected_filters', '', $p );
 	}
 
 	/**

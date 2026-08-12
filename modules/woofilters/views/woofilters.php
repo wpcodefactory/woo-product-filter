@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.1
  *
  * @author woobewoo
  */
@@ -526,7 +526,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.1
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );
@@ -608,7 +608,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		if ( $allProductsFiltering ) {
 			$prodCatId = false;
 		}
-		$isPro = FrameWpf::_()->isPro();
 
 		if ( ! $allProductsFiltering && ! empty( $taxonomies ) ) {
 			foreach ( $taxonomies as $tax => $value ) {
@@ -766,7 +765,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			$method = 'generate' . str_replace( 'wpf', '', $filter['id'] ) . 'FilterHtml';
 			if ( 'wpfCategory' !== $filter['id'] ) {
 				$settingsOriginal['page_taxonomies'] = $taxonomies;
-				if ( $isPro && method_exists( $proView, $method ) ) {
+				if ( $proView && method_exists( $proView, $method ) ) {
 					$html .= $proView->{$method}( $filter, $settingsOriginal, $blockStyle, $key, $viewId );
 				} elseif ( method_exists( $this, $method ) ) {
 					$html .= $this->{$method}( $filter, $settingsOriginal, $blockStyle, $key );
@@ -796,7 +795,8 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 
 		if ( ! $showImmediately ) {
-			if ( $isPro && method_exists( $proView, 'generateLoaderLayoutHtml' ) ) {
+			if ( $proView &&
+			     method_exists( $proView, 'generateLoaderLayoutHtml' ) ) {
 				$html .= $proView->generateLoaderLayoutHtml( $options );
 			} else {
 				$this->setFilterCss( '#' . $filterId . ' .wpfLoaderLayout {position:absolute;top:0;bottom:0;left:0;right:0;background-color: rgba(255, 255, 255, 0.9);z-index: 999;}' );
@@ -1193,7 +1193,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$settings  = $this->getFilterSetting( $filter, 'settings', array() );
 		$layout    = $this->getFilterLayout( $settings, $filterSettings );
 		$type      = $this->getFilterSetting( $settings, 'f_frontend_type', 'list' );
-		$underOver = FrameWpf::_()->isPro() && $this->getFilterSetting( $settings, 'f_under_over', false );
+		$underOver = $this->getFilterSetting( $settings, 'f_under_over', false );
 
 		$defaultRange = '';
 		$module       = FrameWpf::_()->getModule( 'woofilters' );
@@ -2308,13 +2308,14 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateOnSaleFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.0
 	 */
 	public function generateOnSaleFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_onsale';
 		$settings   = $this->getFilterSetting( $filter, 'settings', array() );
 
-		$defaultOnsale = FrameWpf::_()->isPro() ? $this->getFilterSetting( $settings, 'f_default_onsale', false ) : false;
+		$defaultOnsale = $this->getFilterSetting( $settings, 'f_default_onsale', false );
+
 		$hiddenOnsale  = $defaultOnsale && $this->getFilterSetting( $settings, 'f_hidden_onsale', false );
 
 		$layout      = $this->getFilterLayout( $settings, $filterSettings );
@@ -2907,7 +2908,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateSearchFieldList.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.1
 	 */
 	public function generateSearchFieldList( $html, $settings, $labels ) {
 		$type = $this->getFilterSetting( $settings, 'f_frontend_type', 'list' );
@@ -2919,16 +2920,15 @@ class WoofiltersViewWpf extends ViewWpf {
 			) ) {
 			return $html;
 		}
-		$isPro = FrameWpf::_()->isPro();
 
 		$search = '<div class="wpfSearchWrapper"><input class="wpfSearchFieldsFilter passiveFilter" type="text" placeholder="' .
 			esc_html( $this->getFilterSetting( $settings, 'f_search_label', $labels['search'] ) ) . '">';
 
-		if ( $isPro && $this->getFilterSetting( $settings, 'f_show_search_button', false ) ) {
+		if ( $this->getFilterSetting( $settings, 'f_show_search_button', false ) ) {
 			$search .= '<button></button>';
 		}
 		$search .= '</div>';
-		if ( $isPro && $this->getFilterSetting( $settings, 'f_search_position', 'before' ) == 'after' ) {
+		if ( $this->getFilterSetting( $settings, 'f_search_position', 'before' ) == 'after' ) {
 			$html .= $search;
 		} else {
 			$html = $search . $html;
@@ -3234,7 +3234,8 @@ class WoofiltersViewWpf extends ViewWpf {
 			$includeIds = explode( ',', $includeIds );
 		}
 		$showCount            = $this->getFilterSetting( $filter['settings'], 'f_show_count' );
-		$showImage            = FrameWpf::_()->isPro() && $this->getFilterSetting( $filter['settings'], 'f_show_images', false );
+		$showImage            = $this->getFilterSetting( $filter['settings'], 'f_show_images', false );
+		//var_dump($showImage);
 		$allProductsFiltering = $this->getFilterSetting( $settings['settings'], 'all_products_filtering', false );
 		if ( $allProductsFiltering && ( ! empty( $filter['custom_taxonomy'] ) || ! empty( $filter['custom_meta'] ) ) ) {
 			$allProductsFiltering = false;
@@ -3471,18 +3472,19 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceRangeOptionsHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.1
 	 */
 	private function generatePriceRangeOptionsHtml( $filter, $ranges, $layout ) {
 		$html    = '';
-		$isPro   = FrameWpf::_()->isPro();
 		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 
 		$minValue  = ReqWpf::getVar( 'wpf_min_price' );
 		$maxValue  = ReqWpf::getVar( 'wpf_max_price' );
 		$urlRange  = $minValue . ',' . $maxValue;
 		$type      = $filter['settings']['f_frontend_type'];
-		$underOver = $isPro && $this->getFilterSetting( $filter['settings'], 'f_under_over', false );
+		$underOver = $this->getFilterSetting( $filter['settings'], 'f_under_over', false );
+
+
 		if ( $underOver ) {
 			$underText = $this->getFilterSetting( $filter['settings'], 'f_under_text', esc_attr__( 'Under', 'woo-product-filter' ) ) . ' ';
 			$overText  = $this->getFilterSetting( $filter['settings'], 'f_over_text', esc_attr__( 'Over', 'woo-product-filter' ) ) . ' ';
@@ -3558,7 +3560,7 @@ class WoofiltersViewWpf extends ViewWpf {
 			remove_filter( 'raw_woocommerce_price', array( alg_wc_currency_switcher_plugin()->core, 'change_price_by_currency' ) );
 		}
 		if ( $isList ) {
-			if ( $isPro && $this->getFilterSetting( $filter['settings'], 'f_custom_fields', false ) ) {
+			if ( $this->getFilterSetting( $filter['settings'], 'f_custom_fields', false ) ) {
 				$customText = $this->getFilterSetting( $filter['settings'], 'f_custom_text', esc_attr__( 'Custom', 'woo-product-filter' ) ) . ' ';
 				$selected   = ( $isCustom && ( ',' != $urlRange ) );
 				$checkId    = 'wpfPriceRangeCheckbox' . wp_rand( 1, 99999 );
