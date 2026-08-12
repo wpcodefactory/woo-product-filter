@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Admin_NavViewWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 class Admin_NavViewWpf extends ViewWpf {
 	public function getBreadcrumbs() {
-		$this->assign('breadcrumbsList', DispatcherWpf::applyFilters('mainBreadcrumbs', $this->getModule()->getBreadcrumbsList()));
-		return parent::getContent('adminNavBreadcrumbs');
+		$this->assign( 'breadcrumbsList', DispatcherWpf::applyFilters( 'mainBreadcrumbs', $this->getModule()->getBreadcrumbsList() ) );
+		return parent::getContent( 'adminNavBreadcrumbs' );
 	}
 }

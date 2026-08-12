@@ -23,9 +23,9 @@ abstract class BaseObjectWpf {
 	 * pushError.
 	 */
 	public function pushError( $error, $key = '' ) {
-		if (is_array($error)) {
-			$this->_internalErrors = array_merge ($this->_internalErrors, $error);
-		} elseif (empty($key)) {
+		if ( is_array( $error ) ) {
+			$this->_internalErrors = array_merge( $this->_internalErrors, $error );
+		} elseif ( empty( $key ) ) {
 			$this->_internalErrors[] = $error;
 		} else {
 			$this->_internalErrors[ $key ] = $error;
@@ -50,12 +50,12 @@ abstract class BaseObjectWpf {
 	/**
 	 * Get settings in specific filter in filter block.
 	 *
-	 * @param array $settings
+	 * @param array  $settings
 	 * @param string $name
-	 * @param mix $default
-	 * @param bool $num
-	 * @param array $arr Restriction list of setting value can be.
-	 * @param bool $zero
+	 * @param mix    $default
+	 * @param bool   $num
+	 * @param array  $arr Restriction list of setting value can be.
+	 * @param bool   $zero
 	 *
 	 * @return int|string
 	 */
@@ -85,7 +85,6 @@ abstract class BaseObjectWpf {
 			if ( ! is_numeric( $value ) ) {
 				return $default;
 			}
-
 		}
 
 		if ( false !== $arr && ! in_array( $value, $arr, true ) ) {
@@ -94,5 +93,4 @@ abstract class BaseObjectWpf {
 
 		return $value;
 	}
-
 }

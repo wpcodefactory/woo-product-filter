@@ -17,17 +17,17 @@ class OverviewWpf extends ModuleWpf {
 	 * @version 2.8.6
 	 */
 	public function init() {
-		DispatcherWpf::addFilter('mainAdminTabs', array($this, 'addAdminTab'));
+		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 	}
 
 	/**
 	 * addAdminTab.
 	 */
 	public function addAdminTab( $tabs ) {
-		if (!FrameWpf::_()->isWCLicense()) {
+		if ( ! FrameWpf::_()->isWCLicense() ) {
 			$tabs['overview'] = array(
-				'label'      => esc_html__('Overview', 'woo-product-filter'),
-				'callback'   => array($this, 'getOverviewTabContent'),
+				'label'      => esc_html__( 'Overview', 'woo-product-filter' ),
+				'callback'   => array( $this, 'getOverviewTabContent' ),
 				'fa_icon'    => 'fa-info-circle',
 				'sort_order' => 5,
 				'is_main'    => true,
@@ -49,5 +49,4 @@ class OverviewWpf extends ModuleWpf {
 	public function showAdminInfo() {
 		return $this->getView()->showAdminInfo();
 	}
-
 }

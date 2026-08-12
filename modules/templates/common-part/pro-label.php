@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <a
 	class="woobewoo_proLabel woobewoo-ms-2"
-	href="<?php echo esc_url($this->proLink); ?>"
+	href="<?php echo esc_url( $this->proLink ); ?>"
 	target="_blank">
 	<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M8.00016 11.8467L12.1202 14.3334L11.0268 9.64669L14.6668 6.49335L9.8735 6.08669L8.00016 1.66669L6.12683 6.08669L1.3335 6.49335L4.9735 9.64669L3.88016 14.3334L8.00016 11.8467Z" fill="black" />
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
 
 
 	<span>
-		<?php esc_html_e('PRO', 'woo-product-filter'); ?>
+		<?php esc_html_e( 'PRO', 'woo-product-filter' ); ?>
 	</span>
 
 

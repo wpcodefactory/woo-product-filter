@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Block
  *
- * @version 3.2.0
+ * @version 3.3.0
  * @since   3.1.7
  *
  * @author woobewoo
@@ -10,31 +10,30 @@
 
 defined( 'ABSPATH' ) || exit;
 
-add_action('init', function () {
-	register_block_type('wbw/woofilters', array(
-		'attributes' => array(
-			'filter_id' => array(
-				'type'    => 'string',
-				'default' => '',
-			),
-		),
+add_action(
+	'init',
+	function () {
+		register_block_type(
+			'wbw/woofilters',
+			array(
+				'attributes'      => array(
+					'filter_id' => array(
+						'type'    => 'string',
+						'default' => '',
+					),
+				),
 
-		/**
-		 * render_callback.
-		 *
-		 * @version 3.2.0
-		 * @since   3.1.7
-		 */
-		'render_callback' => function ($attributes) {
+				// Dynamic render (same as widget)
+				'render_callback' => function ( $attributes ) {
+					if ( empty( $attributes['filter_id'] ) ) {
+						return '';
+					}
 
-			if (empty($attributes['filter_id'])) {
-				return '';
-			}
-
-			return wp_kses(
-				do_shortcode( '[wpf-filters id="' . esc_attr( $attributes['filter_id'] ) . '"]' ),
-				HtmlWpf::getAllowedHtmlTags()
-			);
-		},
-	));
-});
+					return do_shortcode(
+						'[wpf-filters id="' . absint( $attributes['filter_id'] ) . '"]'
+					);
+				},
+			)
+		);
+	}
+);

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -10,41 +10,43 @@
 defined( 'ABSPATH' ) || exit;
 
 $filtersList = $this->getModel()->getAllFilters();
+$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="woobewoo_row row-tab active" id="row-tab-filters">
 	<div class="col-xs-12 row-settings-block">
 		<div class="woobewoo-input-group" id="wpfChooseFiltersBlock" data-no-preview="1">
 			<div class="woobewoo-group-label">
-				<?php esc_html_e('Select filters to add', 'woo-product-filter'); ?>
+				<?php esc_html_e( 'Select filters to add', 'woo-product-filter' ); ?>
 			</div>
 			<div class="woobewoo-d-flex woobewoo-wdt-100">
-				<select id="wpfChooseFilters" data-added-text="<?php esc_html_e('Added to filter', 'woo-product-filter'); ?>">
+				<select id="wpfChooseFilters" data-added-text="<?php esc_html_e( 'Added to filter', 'woo-product-filter' ); ?>">
 					<?php
-					foreach ($filtersList as $filter => $data) {
-						echo '<option value="' . esc_attr($filter) .
-								'" data-enabled="' . esc_attr((int) $data['enabled']) .
-								'" data-unique-id="' . esc_attr(uniqid('wpf_')) .
-								'" data-unique="' . esc_attr((int) $data['unique']) .
-								'" data-filtername="' . esc_attr($this->getFilterSetting($data, 'filtername', '')) .
-								'" data-group="' . esc_attr($this->getFilterSetting($data, 'group', '')) .
+					foreach ( $filtersList as $filter => $data ) {
+						echo '<option value="' . esc_attr( $filter ) .
+								'" data-enabled="' . esc_attr( (int) $data['enabled'] ) .
+								'" data-unique-id="' . esc_attr( uniqid( 'wpf_' ) ) .
+								'" data-unique="' . esc_attr( (int) $data['unique'] ) .
+								'" data-filtername="' . esc_attr( $this->getFilterSetting( $data, 'filtername', '' ) ) .
+								'" data-group="' . esc_attr( $this->getFilterSetting( $data, 'group', '' ) ) .
 								'">' .
-									esc_html($data['name']) .
+									esc_html( $data['name'] ) .
 							'</option>';
 					}
 					?>
 				</select>
 				<button id="wpfAddFilterButton" data-option='add' class="button button-small">
-					<span><?php esc_html_e('Add', 'woo-product-filter'); ?></span>
+					<span><?php esc_html_e( 'Add', 'woo-product-filter' ); ?></span>
 						<svg class="woobewoo-ms-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M7.33341 13.25L3.83341 9.74999L2.66675 10.9167L7.33341 15.5833L17.3334 5.58332L16.1667 4.41666L7.33341 13.25Z" fill="white" />
 						</svg>
 				</button>
 			</div>
-			<span data-option='uniq' class="wpfProLabel wpfHidden"><?php esc_html_e('Already in the list', 'woo-product-filter'); ?></span>
+			<span data-option='pro' class="wpfProLabel wpfHidden"><?php HtmlWpf::echoEscapedHtml( $pro_label ); ?></span>
+			<span data-option='uniq' class="wpfProLabel wpfHidden"><?php esc_html_e( 'Already in the list', 'woo-product-filter' ); ?></span>
 			<span data-option='group' class="wpfProLabel wpfHidden">
 			<?php
-			echo esc_html__('Оnly one of', 'woo-product-filter') . ' <span class="light">' . esc_html($filtersList['wpfPrice']['name']) .
-				'</span>/<span class="light">' . esc_html($filtersList['wpfPriceRange']['name']) . '</span> ' .	esc_html__('is available', 'woo-product-filter');
+			echo esc_html__( 'Оnly one of', 'woo-product-filter' ) . ' <span class="light">' . esc_html( $filtersList['wpfPrice']['name'] ) .
+				'</span>/<span class="light">' . esc_html( $filtersList['wpfPriceRange']['name'] ) . '</span> ' . esc_html__( 'is available', 'woo-product-filter' );
 			?>
 			</span>
 		</div>
@@ -59,23 +61,23 @@ $filtersList = $this->getModel()->getAllFilters();
 	<div class="wpfTemplates wpfHidden">
 		<div class="wpfAttributesTerms">
 			<?php
-			echo '<input type="hidden" name="attr_types" value="' . esc_attr(UtilsWpf::jsonEncode($attrTypes)) . '">';
-			echo '<input type="hidden" name="attr_filternames" value="' . esc_attr(UtilsWpf::jsonEncode($attrNames)) . '">';
+			echo '<input type="hidden" name="attr_types" value="' . esc_attr( UtilsWpf::jsonEncode( $attrTypes ) ) . '">';
+			echo '<input type="hidden" name="attr_filternames" value="' . esc_attr( UtilsWpf::jsonEncode( $attrNames ) ) . '">';
 
-			if (isset($this->settings['settings']['filters']['order'])) {
-				$filtersOrder = UtilsWpf::jsonDecode($this->settings['settings']['filters']['order']);
-				$module = $this->getModule();
-				$slugs = array();
-				foreach ($filtersOrder as $filter) {
-					if ('wpfAttribute' == $filter['id'] && !empty($filter['settings']['f_list'])) {
+			if ( isset( $this->settings['settings']['filters']['order'] ) ) {
+				$filtersOrder = UtilsWpf::jsonDecode( $this->settings['settings']['filters']['order'] );
+				$module       = $this->getModule();
+				$slugs        = array();
+				foreach ( $filtersOrder as $filter ) {
+					if ( 'wpfAttribute' == $filter['id'] && ! empty( $filter['settings']['f_list'] ) ) {
 						$slug = $filter['settings']['f_list'];
-						if (!in_array($slug, $slugs)) {
+						if ( ! in_array( $slug, $slugs ) ) {
 							$slugs[] = $slug;
-							$terms = $module->getAttributeTerms($slug);
-							$keys = array_keys($terms);
+							$terms   = $module->getAttributeTerms( $slug );
+							$keys    = array_keys( $terms );
 
-							echo '<input type="hidden" name="attr-' . esc_attr($slug) . '" data-order="' . esc_attr(UtilsWpf::jsonEncode($keys)) . '" value="' .
-								esc_attr(UtilsWpf::jsonEncode($terms)) . '">';
+							echo '<input type="hidden" name="attr-' . esc_attr( $slug ) . '" data-order="' . esc_attr( UtilsWpf::jsonEncode( $keys ) ) . '" value="' .
+								esc_attr( UtilsWpf::jsonEncode( $terms ) ) . '">';
 						}
 					}
 				}
@@ -85,11 +87,11 @@ $filtersList = $this->getModel()->getAllFilters();
 		<div class="wpfRangeByHandTemplate">
 			<div class="wpfRangeByHand">
 				<div class="wpfRangeByHandHandlerFrom">
-					<?php esc_html_e('From', 'woo-product-filter'); ?>
+					<?php esc_html_e( 'From', 'woo-product-filter' ); ?>
 					<input type="text" name="from" value="">
 				</div>
 				<div class="wpfRangeByHandHandlerTo">
-					<?php esc_html_e('To', 'woo-product-filter'); ?>
+					<?php esc_html_e( 'To', 'woo-product-filter' ); ?>
 					<input type="text" name="to" value="">
 				</div>
 				<div class="wpfRangeByHandHandler">
@@ -103,34 +105,48 @@ $filtersList = $this->getModel()->getAllFilters();
 
 		<div class="wpfRangeByHandTemplateAddButton">
 			<div class="wpfRangeByHandAddButton">
-				<button class="button wpfAddPriceRange"><?php esc_html_e('Add', 'woo-product-filter'); ?></button>
+				<button class="button wpfAddPriceRange"><?php esc_html_e( 'Add', 'woo-product-filter' ); ?></button>
 			</div>
 		</br>
 			<div>
 				<?php
-					esc_html_e('Do not leave empty fields. Enter `i` if you want the value to be calculated automatically (for From field this will be the minimum price, for field To - the maximum price', 'woo-product-filter');
+					esc_html_e( 'Do not leave empty fields. Enter `i` if you want the value to be calculated automatically (for From field this will be the minimum price, for field To - the maximum price', 'woo-product-filter' );
 				?>
 			</div>
 		</div>
 
 		<div class="wpfFilter wpfFiltersBlockTemplate">
 			<div class="wpfHeaders">
-				<?php HtmlWpf::checkbox('f_enable', array('checked' => 1, 'attrs' => 'class="wpfHidden"')); ?>
+				<?php
+				HtmlWpf::checkbox(
+					'f_enable',
+					array(
+						'checked' => 1,
+						'attrs'   => 'class="wpfHidden"',
+					)
+				);
+				?>
 				<div class="wpfFilterTitle"></div>
 				<a href="#" class="wpfDelete"><i class="fa fa-fw fa-times"></i></a>
 				<a href="#" class="wpfToggle"><i class="fa fa-chevron-down"></i></a>
 				<div class="wpfFilterFrontDescOpt">
 					<?php
-						HtmlWpf::text('f_description', array(
-							'placeholder' => esc_attr__('Description', 'woo-product-filter'),
-						));
+						HtmlWpf::text(
+							'f_description',
+							array(
+								'placeholder' => esc_attr__( 'Description', 'woo-product-filter' ),
+							)
+						);
 						?>
 				</div>
 				<div class="wpfFilterFrontTitleOpt">
 					<?php
-						HtmlWpf::text('f_title', array(
-							'placeholder' => esc_attr__('Title', 'woo-product-filter'),
-						));
+						HtmlWpf::text(
+							'f_title',
+							array(
+								'placeholder' => esc_attr__( 'Title', 'woo-product-filter' ),
+							)
+						);
 						?>
 				</div>
 			</div>
@@ -138,23 +154,19 @@ $filtersList = $this->getModel()->getAllFilters();
 		</div>
 		<div class="wpfOptionsTemplate wpfHidden">
 			<?php
-			foreach ($filtersList as $filter => $data) {
-				if (!$data['enabled']) {
+			foreach ( $filtersList as $filter => $data ) {
+				if ( ! $data['enabled'] ) {
 					continue;
 				}
 				?>
-			<div class="wpfFilterOptions" data-filter="<?php echo esc_attr($filter); ?>">
+			<div class="wpfFilterOptions" data-filter="<?php echo esc_attr( $filter ); ?>">
 				<?php
-				HtmlWpf::hidden('f_name', array('value' => $data['name']));
-				$tplFile = __DIR__ . '/woofiltersEditTabFilters' . substr( $filter, 3 ) . '.php';
-				if ( file_exists( $tplFile ) ) {
-					include_once $tplFile;
-				} else {
-					DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFilters' . substr( $filter, 3 ), $this->settings );
-				}
+				HtmlWpf::hidden( 'f_name', array( 'value' => $data['name'] ) );
+				include_once 'woofiltersEditTabFilters' . substr( $filter, 3 ) . '.php';
 				?>
 			</div>
 			<?php } ?>
 		</div>
 	</div>
 </div>
+<?php

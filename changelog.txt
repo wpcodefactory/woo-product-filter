@@ -1,14 +1,18 @@
 == Changelog ==
 
-= 3.2.0 - 09/07/2026 =
+= 3.3.0 - 12/08/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
-* Fix - Fixed `Mobile_Detect` nullable parameter deprecation warning.
-* Fix - Fixed SQL Injection vulnerability.
-* Dev - Replaced Outdated library `chosen` with `tom-select`.
-* Dev - Removed CSS & JS editor due to repository compliance.
-* Dev - Cleanup pro code.
-* WC tested up to: 10.9.
+* Fix - "Creation of dynamic property is deprecated" notice fixed.
+* Fix - Fixed attribute filter selection issue.
+* Fix - Fixed admin notice dismiss permissions.
+* Dev - Replaced outdated library `chosen` with `tom-select`.
+* Dev - Removed Mobile Detect library and replaced it with `wp_is_mobile()`.
+* Dev - Removed promo, pages, mail modules from the plugin.
+* Dev - Added plugin prefix to CSS/JavaScript handles, AJAX action/object.
+* Dev - Improved coding standards and code cleaned up.
+* Dev - Code refactoring.
+* WC tested up to: 11.0.
 
 = 3.1.8 - 01/06/2026 =
 * Fix - Fixed filter not working with Brizy products widget.

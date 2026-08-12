@@ -1,7 +1,15 @@
+/**
+ * Product Filter by WBW - Core JS
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
+
 "use strict";
 if(typeof(WPF_DATA) == 'undefined')
 	var WPF_DATA = {};
-if(isNumber(WPF_DATA.animationSpeed)) 
+if(isNumber(WPF_DATA.animationSpeed))
     WPF_DATA.animationSpeed = parseInt(WPF_DATA.animationSpeed);
 else if(jQuery.inArray(WPF_DATA.animationSpeed, ['fast', 'slow']) == -1)
     WPF_DATA.animationSpeed = 'fast';
@@ -37,7 +45,7 @@ jQuery.fn.sendFormWpf = function(params) {
         form = jQuery('#'+ fid);
     else
         form = jQuery(this);
-    
+
     /* This method can be used not only from form data sending, it can be used just to send some data and fill in response msg or errors*/
     var sentFromForm = (jQuery(form).tagName() == 'FORM');
     var data = new Array();
@@ -81,7 +89,7 @@ jQuery.fn.sendFormWpf = function(params) {
 		if(!params.btn) {
 			jQuery(msgEl).showLoaderWpf();
 		}
-	} 
+	}
 	if(params.btn) {
 		jQuery(params.btn).attr('disabled', 'disabled');
 		// Font awesome usage
@@ -102,7 +110,7 @@ jQuery.fn.sendFormWpf = function(params) {
         url = WPF_DATA.ajaxurl;
     else
         url = ajaxurl;
-    
+
     jQuery('.wpfErrorForField').hide(WPF_DATA.animationSpeed);
 	var dataType = params.dataType ? params.dataType : 'json';
 	// Set plugin orientation
@@ -347,17 +355,6 @@ function toeSliderMove(event, ui) {
 }
 function wpfCorrectJqueryUsed() {
 	return (typeof(jQuery.fn.sendFormWpf) === 'function');
-}
-function wpfReloadCoreJs(clb, params) {
-	var scriptsHtml = ''
-	,	coreScripts = ['common.js', 'core.js'];
-	for(var i = 0; i < coreScripts.length; i++) {
-		scriptsHtml += '<script type="text/javascript" class="wpfReloadedScript" src="'+ WPF_DATA.jsPath+ coreScripts[ i ]+ '"></script>';
-	}
-	jQuery('head').append( scriptsHtml );
-	if(clb) {
-		_wpfRunClbAfterCoreReload( clb, params );
-	}
 }
 function _wpfRunClbAfterCoreReload(clb, params) {
 	if(wpfCorrectJqueryUsed()) {

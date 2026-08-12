@@ -1,12 +1,12 @@
 /**
  * Product Filter by WBW - Admin Woofilters Elementor JS
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
 
-(function ($) {
+( function ( $ ) {
 	"use strict";
 	function AdminPageElementor() {
 		this.$obj = this;
@@ -269,11 +269,11 @@
 		jQuery.sendFormWpf({
 			data: {
 				mod: 'woofilters',
-				action: 'save',
+				action: 'woobewoo_pf_save',
 				title: filterTitle,
 				duplicateId: typeof duplicateId !== 'undefined' ? duplicateId : ''
 			},
-			appendData: {wpfNonce: window.wpfNonce},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce},
 			onSuccess: function(res) {
 				if (!res.error) {
 					var $panel = $('#elementor-panel');
@@ -291,11 +291,6 @@
 		});
 	});
 
-	/**
-	 * setCurrentSettings.
-	 *
-	 * @version 3.2.0
-	 */
 	AdminPageElementor.prototype.setCurrentSettings = (function () {
 		var _thisObj = this,
 			settings = _thisObj.filtersSettings[_thisObj.filterId].settings;
@@ -401,4 +396,4 @@
 		window.wpfAdminPageElementor = new AdminPageElementor();
 		window.wpfAdminPageElementor.init();
 	});
-}(window.jQuery));
+}( jQuery ) );

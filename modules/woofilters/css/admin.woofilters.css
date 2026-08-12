@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Woofilters CSS
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -557,9 +557,6 @@ input.wpfSmallInput{
 	height: 150px;
 	cursor: pointer;
 }
-.wpfFiltersBlock td .ts-wrapper:nth-child(3){
-	display: none;
-}
 
 @media (max-width: 500px) {
 	.settings-value input, .wpfFiltersBlock .wpfFilter select {
@@ -602,10 +599,7 @@ input.wpfSmallInput{
 	display: table;
 	clear: both;
 }
-#wpfFiltersEditForm .ts-wrapper {
-	width:100% !important;
-	max-width: 400px;
-}
+
 .wpfRightLabel {
 	line-height: 25px;
 	margin-left: 5px;

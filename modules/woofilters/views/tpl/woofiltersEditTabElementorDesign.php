@@ -2,22 +2,27 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Elementor Design
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getModule('woofilters')->getView()->getCode() );
+$labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
+
+$formLink = FrameWpf::_()->getModule( 'options' )->getTabUrl( FrameWpf::_()->getModule( 'woofilters' )->getView()->getCode() );
 ?>
 
 <div class="woobewoo-plugin containerWrapperElementor" id="containerWrapperElementorDesign">
-	<form id="wpfFiltersEditForm" data-href="<?php echo esc_attr($formLink); ?>">
+	<form id="wpfFiltersEditForm" data-href="<?php echo esc_attr( $formLink ); ?>">
 		<?php
-		HtmlWpf::hidden('settings', array(
-			'value' => '',
-		));
+		HtmlWpf::hidden(
+			'settings',
+			array(
+				'value' => '',
+			)
+		);
 		?>
 		<div class="woobewoo_row">
 			<div class="col-md-12">
@@ -29,24 +34,31 @@ $formLink = FrameWpf::_()->getModule('options')->getTabUrl( FrameWpf::_()->getMo
 		<div class="wpfMainTabsContainer">
 			<div class="woobewoo_row">
 				<div class="col-md-12 wpfFiltersTabContents">
-					<?php include 'woofiltersEditTabDesign.php'; ?>
+					<?php require 'woofiltersEditTabDesign.php'; ?>
 					<div class="wpfHidden">
-						<?php include 'woofiltersEditTabOptions.php'; ?>
+						<?php require 'woofiltersEditTabOptions.php'; ?>
 					</div>
 				</div>
 			</div>
 		</div>
 		<?php
-		HtmlWpf::hidden('settings[filters][order]', array(
-			'value' => '',
-		));
-		HtmlWpf::hidden('settings[filters][preselect]', array(
-			'value' => ''
-		));
+		HtmlWpf::hidden(
+			'settings[filters][order]',
+			array(
+				'value' => '',
+			)
+		);
+		HtmlWpf::hidden(
+			'settings[filters][preselect]',
+			array(
+				'value' => '',
+			)
+		);
 		?>
 		<?php HtmlWpf::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
-		<?php HtmlWpf::hidden( 'action', array( 'value' => 'save' ) ); ?>
+		<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
 		<?php HtmlWpf::hidden( 'id', array( 'value' => '' ) ); ?>
 	</form>
 	<div class="woobewoo-clear"></div>
 </div>
+<?php

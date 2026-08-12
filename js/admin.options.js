@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin Options JS
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -127,7 +127,6 @@ jQuery(document).ready(function(){
 		}, 500);
 	}
 	// Check for showing review notice after a week usage
-	wpfInitPlugNotices();
 	jQuery('.woobewoo-plugin-loader').css('display', 'none');
 	jQuery('.woobewoo-main').css('display', 'block');
 	jQuery(".woobewoo-plugin .tooltipstered").removeAttr("title");
@@ -434,44 +433,4 @@ function prepareToPlotDate(data) {
 		}
 	}
 	return data;
-}
-/**
- * wpfInitPlugNotices.
- *
- * @version 3.2.0
- */
-function wpfInitPlugNotices() {
-	var $notices = jQuery('.woobewoo-admin-notice');
-	if($notices && $notices.length) {
-		$notices.each(function(){
-			jQuery(this).find('.notice-dismiss').click(function(){
-				var $notice = jQuery(this).parents('.woobewoo-admin-notice');
-				if(!$notice.data('stats-sent')) {
-					// User closed this message - that is his choise, let's respect this and save it's saved status
-					jQuery.sendFormWpf({
-						data: {mod: 'promo', action: 'addNoticeAction', code: $notice.data('code'), choice: 'hide', wpfNonce: WPF_DATA.wpfNonce}
-					});
-				}
-			});
-			jQuery(this).find('[data-statistic-code]').click(function(){
-				var href = jQuery(this).attr('href')
-				,	$notice = jQuery(this).parents('.woobewoo-admin-notice');
-				jQuery.sendFormWpf({
-					data: {mod: 'promo', action: 'addNoticeAction', code: $notice.data('code'), choice: jQuery(this).data('statistic-code'), wpfNonce: WPF_DATA.wpfNonce}
-				});
-				$notice.data('stats-sent', 1).find('.notice-dismiss').trigger('click');
-				if(!href || href === '' || href === '#')
-					return false;
-			});
-			var $enbStatsBtn = jQuery(this).find('.wpfEnbStatsAdBtn');
-			if($enbStatsBtn && $enbStatsBtn.length) {
-				$enbStatsBtn.click(function(){
-					jQuery.sendFormWpf({
-						data: {mod: 'promo', action: 'enbStatsOpt', wpfNonce: WPF_DATA.wpfNonce}
-					});
-					return false;
-				});
-			}
-		});
-	}
 }

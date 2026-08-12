@@ -6,6 +6,8 @@
  * You can use it in any part of your code with construction
  * FrameWpf::_()->getModule('woofilters')->getModel('settings');
  *
+ * @version 3.3.0
+ *
  * @author woobewoo
  */
 
@@ -13,7 +15,9 @@ defined( 'ABSPATH' ) || exit;
 
 class SettingsModelWpf extends ModelWpf {
 	/**
-	 * Get specific filter block settings
+	 * Get specific filter block settings.
+	 *
+	 * @version 3.3.0
 	 *
 	 * @param int $filterId
 	 *
@@ -21,13 +25,13 @@ class SettingsModelWpf extends ModelWpf {
 	 */
 	public function getFilterBlockSettings( $filterId ) {
 		$settings = array();
-		$filter = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getById($filterId);
+		$filter   = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getById( $filterId );
 
-		if (!$filter) {
+		if ( ! $filter ) {
 			return $settings;
 		}
 
-		$settings = unserialize($filter['setting_data']);
+		$settings = maybe_unserialize( $filter['setting_data'] );
 
 		return $settings;
 	}
@@ -38,23 +42,23 @@ class SettingsModelWpf extends ModelWpf {
 	 * that we keep in order settings too
 	 *
 	 * @param array $filterSettings
-	 * @param int $filterId
+	 * @param int   $filterId
 	 *
 	 * @return array
 	 */
 	public function getFiltersOrder( $filterBlockSettings = array(), $filterId = 0 ) {
 		$order = array();
 
-		if (!$filterBlockSettings) {
-			$filterBlockSettings = $this->getFilterBlockSettings($filterId);
+		if ( ! $filterBlockSettings ) {
+			$filterBlockSettings = $this->getFilterBlockSettings( $filterId );
 		}
 
-		if (!$filterBlockSettings) {
+		if ( ! $filterBlockSettings ) {
 			return $order;
 		}
 
-		if (!empty($filterBlockSettings['settings']['filters']['order'])) {
-			$order = UtilsWpf::jsonDecode($filterBlockSettings['settings']['filters']['order']);
+		if ( ! empty( $filterBlockSettings['settings']['filters']['order'] ) ) {
+			$order = UtilsWpf::jsonDecode( $filterBlockSettings['settings']['filters']['order'] );
 		}
 
 		return $order;
@@ -66,27 +70,27 @@ class SettingsModelWpf extends ModelWpf {
 	 * In such case we return all filters with the same type
 	 *
 	 * @param string $filterType
-	 * @param array $order
-	 * @param array $filterBlockSettings
-	 * @param int $filterId
+	 * @param array  $order
+	 * @param array  $filterBlockSettings
+	 * @param int    $filterId
 	 *
 	 * @return array
 	 */
 	public function getFilterSettings( $filterType, $order = array(), $filterBlockSettings = array(), $filterId = 0, $blockId = -1 ) {
 		$filterSettings = array();
 
-		if (!$order) {
-			$order =  $this->getFiltersOrder($filterBlockSettings, $filterId);
+		if ( ! $order ) {
+			$order = $this->getFiltersOrder( $filterBlockSettings, $filterId );
 		}
 
-		$filterList = FrameWpf::_()->getModule('woofilters')->getModel('woofilters')->getAllFilters();
-		if (!array_key_exists($filterType, $filterList)) {
+		$filterList = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getAllFilters();
+		if ( ! array_key_exists( $filterType, $filterList ) ) {
 			return $filterSettings;
 		}
 
-		foreach ($order as $index => $filterData) {
-			if ($filterData['id'] == $filterType) {
-				if ($blockId < 0 || $index == $blockId) {
+		foreach ( $order as $index => $filterData ) {
+			if ( $filterData['id'] == $filterType ) {
+				if ( $blockId < 0 || $index == $blockId ) {
 					$filterSettings[] = $filterData;
 				}
 			}

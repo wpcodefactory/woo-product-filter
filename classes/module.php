@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ModuleWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -12,12 +12,12 @@ defined( 'ABSPATH' ) || exit;
 abstract class ModuleWpf extends BaseObjectWpf {
 
 	protected $_controller = null;
-	protected $_helper = null;
-	protected $_code = '';
-	protected $_onAdmin = false;
-	protected $_typeID = 0;
-	protected $_type = '';
-	protected $_label = '';
+	protected $_helper     = null;
+	protected $_code       = '';
+	protected $_onAdmin    = false;
+	protected $_typeID     = 0;
+	protected $_type       = '';
+	protected $_label      = '';
 
 	/**
 	 * ID in modules table.
@@ -27,26 +27,26 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	/**
 	 * If module is not in primary package - here will be it's path.
 	 */
-	protected $_externalDir = '';
+	protected $_externalDir  = '';
 	protected $_externalPath = '';
-	protected $_isExternal = false;
+	protected $_isExternal   = false;
 
 	public function __construct( $d ) {
-		$this->setTypeID($d['type_id']);
-		$this->setCode($d['code']);
-		$this->setLabel($d['label']);
-		if (isset($d['id'])) {
-			$this->_setID($d['id']);
+		$this->setTypeID( $d['type_id'] );
+		$this->setCode( $d['code'] );
+		$this->setLabel( $d['label'] );
+		if ( isset( $d['id'] ) ) {
+			$this->_setID( $d['id'] );
 		}
-		if (isset($d['ex_plug_dir']) && !empty($d['ex_plug_dir'])) {
-			$this->isExternal(true);
-			$this->setExternalDir( UtilsWpf::getExtModDir($d['ex_plug_dir']) );
-			$this->setExternalPath( UtilsWpf::getExtModPath($d['ex_plug_dir']) );
+		if ( isset( $d['ex_plug_dir'] ) && ! empty( $d['ex_plug_dir'] ) ) {
+			$this->isExternal( true );
+			$this->setExternalDir( UtilsWpf::getExtModDir( $d['ex_plug_dir'] ) );
+			$this->setExternalPath( UtilsWpf::getExtModPath( $d['ex_plug_dir'] ) );
 		}
 	}
 
 	public function isExternal( $newVal = null ) {
-		if (is_null($newVal)) {
+		if ( is_null( $newVal ) ) {
 			return $this->_isExternal;
 		}
 		$this->_isExternal = $newVal;
@@ -55,10 +55,10 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	/**
 	 * getModDir.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	public function getModDir() {
-		if (empty($this->_externalDir)) {
+		if ( empty( $this->_externalDir ) ) {
 			return WPF_MODULES_DIR . $this->getCode() . WPF_DS;
 		} else {
 			return $this->_externalDir . $this->getCode() . WPF_DS;
@@ -66,7 +66,7 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	}
 
 	public function getModPath() {
-		if (empty($this->_externalPath)) {
+		if ( empty( $this->_externalPath ) ) {
 			return WPF_MODULES_PATH . $this->getCode() . '/';
 		} else {
 			return $this->_externalPath . $this->getCode() . '/';
@@ -76,10 +76,10 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	/**
 	 * getModRealDir.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	public function getModRealDir() {
-		return dirname(__FILE__) . WPF_DS;
+		return __DIR__ . WPF_DS;
 	}
 
 	public function setExternalDir( $dir ) {
@@ -142,35 +142,38 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	}
 
 	public function exec( $task = '' ) {
-		if ($task) {
+		if ( $task ) {
 			$controller = $this->getController();
-			if ($controller) {
-				return $controller->exec($task);
+			if ( $controller ) {
+				return $controller->exec( $task );
 			}
 		}
 		return null;
 	}
 
 	public function getController() {
-		if (!$this->_controller) {
+		if ( ! $this->_controller ) {
 			$this->_createController();
 		}
 		return $this->_controller;
 	}
 
+	/**
+	 * _createController.
+	 */
 	protected function _createController() {
-		if (!file_exists($this->getModDir() . 'controller.php')) {
+		if ( ! file_exists( $this->getModDir() . 'controller.php' ) ) {
 			return false; // EXCEPTION!!!
 		}
-		if ($this->_controller) {
+		if ( $this->_controller ) {
 			return true;
 		}
-		if (file_exists($this->getModDir() . 'controller.php')) {
+		if ( file_exists( $this->getModDir() . 'controller.php' ) ) {
 			$className = '';
 			require $this->getModDir() . 'controller.php';
-			$className = toeGetClassNameWpf($this->getCode() . 'Controller');
-			if (!empty($className)) {
-				$this->_controller = new $className($this->getCode());
+			$className = toeGetClassNameWpf( $this->getCode() . 'Controller' );
+			if ( ! empty( $className ) ) {
+				$this->_controller = new $className( $this->getCode() );
 				$this->_controller->init();
 				return true;
 			}
@@ -184,7 +187,7 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	 * @return class HelperWpf
 	 */
 	public function getHelper() {
-		if (!$this->_helper) {
+		if ( ! $this->_helper ) {
 			$this->_createHelper();
 		}
 		return $this->_helper;
@@ -196,19 +199,19 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	 * @return class HelperWpf
 	 */
 	protected function _createHelper() {
-		if ($this->_helper) {
+		if ( $this->_helper ) {
 			return true;
 		}
-		if (file_exists($this->getModDir() . 'helper.php')) {
+		if ( file_exists( $this->getModDir() . 'helper.php' ) ) {
 			$helper = $this->getCode() . 'Helper';
-			if (!class_exists($helper)) {
-				if (file_exists($this->getModDir() . 'helper.php')) {
+			if ( ! class_exists( $helper ) ) {
+				if ( file_exists( $this->getModDir() . 'helper.php' ) ) {
 					require $this->getModDir() . 'helper.php';
 				}
 			}
 
-			if (class_exists($helper)) {
-				$this->_helper = new $helper($this->_code);
+			if ( class_exists( $helper ) ) {
+				$this->_helper = new $helper( $this->_code );
 				$this->_helper->init();
 				return true;
 			}
@@ -228,11 +231,11 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	}
 
 	public function getModel( $modelName = '' ) {
-		return $this->getController()->getModel($modelName);
+		return $this->getController()->getModel( $modelName );
 	}
 
 	public function getView( $viewName = '' ) {
-		return $this->getController()->getView($viewName);
+		return $this->getController()->getView( $viewName );
 	}
 
 	public function install() {
@@ -254,8 +257,8 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	}
 
 	public function getConstant( $name ) {
-		$thisClassRefl = new ReflectionObject($this);
-		return $thisClassRefl->getConstant($name);
+		$thisClassRefl = new ReflectionObject( $this );
+		return $thisClassRefl->getConstant( $name );
 	}
 
 	public function loadAssets() {
@@ -272,6 +275,21 @@ abstract class ModuleWpf extends BaseObjectWpf {
 	 * @todo (v3.1.8) rename the method?
 	 */
 	public function translate( $str ) {
-		return esc_html($str);
+		return esc_html( $str );
+	}
+
+	/**
+	 * pro_label.
+	 *
+	 * @version 3.3.0
+	 * @since   3.3.0
+	 */
+	public function pro_label() {
+		$pro_link = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
+		return '<span class="wpfProLabel">
+				<a href="' . esc_url( $pro_link ) . '" target="_blank">
+					' . esc_html__( 'PRO Option', 'woo-product-filter' ) . '
+				</a>
+			</span>';
 	}
 }

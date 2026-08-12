@@ -3,13 +3,13 @@
  * Plugin Name: Product Filter for WooCommerce by WBW
  * Plugin URI: https://woobewoo.com/product/woocommerce-filter/
  * Description: Filter products in your store in most efficient way
- * Version: 3.2.0
+ * Version: 3.3.0
  * Author: woobewoo
  * Author URI: https://woobewoo.com/
  * Requires at least: 5.0
  * Text Domain: woo-product-filter
  * Domain Path: /languages
- * WC tested up to: 10.9
+ * WC tested up to: 11.0
  * Requires Plugins: woocommerce
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,18 +19,23 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Base config constants and functions.
+ *
+ * @version 3.3.0
  */
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config.php';
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'functions.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'config.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 
 /**
  * HPOS.
  */
-add_action( 'before_woocommerce_init', function () {
-	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+add_action(
+	'before_woocommerce_init',
+	function () {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
 	}
-} );
+);
 
 /**
  * Connect all required core classes.

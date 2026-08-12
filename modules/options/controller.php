@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - OptionsControllerWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -10,24 +10,34 @@
 defined( 'ABSPATH' ) || exit;
 
 class OptionsControllerWpf extends ControllerWpf {
-	public function saveGroup() {
-		check_ajax_referer('wpf-save-nonce', 'wpfNonce');
-		if (!current_user_can('manage_options')) {
-			wp_die();
-		}
-		
+
+	/**
+	 * woobewoo_pf_save_group.
+	 *
+	 * @version 3.3.0
+	 */
+	public function woobewoo_pf_save_group() {
+		ReqWpf::verifyRequest();
+
 		$res = new ResponseWpf();
-		if ($this->getModel()->saveGroup(ReqWpf::get('post'))) {
-			$res->addMessage(esc_html__('Done', 'woo-product-filter'));
+		if ( $this->getModel()->woobewoo_pf_save_group( ReqWpf::get( 'post' ) ) ) {
+			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
-			$res->pushError ($this->getModel('options')->getErrors());
+			$res->pushError( $this->getModel( 'options' )->getErrors() );
 		}
+
 		return $res->ajaxExec();
 	}
+
+	/**
+	 * getPermissions.
+	 *
+	 * @version 3.3.0
+	 */
 	public function getPermissions() {
 		return array(
 			WPF_USERLEVELS => array(
-				WPF_ADMIN => array('saveGroup')
+				WPF_ADMIN => array( 'woobewoo_pf_save_group' ),
 			),
 		);
 	}

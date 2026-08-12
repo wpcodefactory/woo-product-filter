@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -26,7 +26,7 @@ function wpfIsThriveEditor() {
 /**
  * Main function.
  *
- * @version 3.2.0
+ * @version 3.3.0
  */
 (function ($, app) {
 	"use strict";
@@ -52,13 +52,21 @@ function wpfIsThriveEditor() {
 			parseInt(settings.settings.slug_format, 10) === 1));
 	}
 
+	/**
+	 * WpfFrontendPage.
+	 *
+	 * @version 3.3.0
+	 */
 	function WpfFrontendPage() {
 		this.$obj = this;
 		this.noWoo = this.$obj.checkNoWooPage();
 		var slugFormatEnable;
-		if (!window.wpfAdminPage){
-			var $fgeneralSettings = this.getFilterMainSettings(jQuery('.wpfMainWrapper'));
-			if (typeof $fgeneralSettings.settings.slug_format !== 'undefined') {
+		if ( ! window.wpfAdminPage ) {
+			var $fgeneralSettings = this.getFilterMainSettings( jQuery( '.wpfMainWrapper' ) );
+			if ( ! $fgeneralSettings ) {
+				return false;
+			}
+			if ( typeof $fgeneralSettings.settings.slug_format !== 'undefined' ) {
 				slugFormatEnable = $fgeneralSettings.settings.slug_format;
 			} else {
 				// Set default value if not found
@@ -74,9 +82,9 @@ function wpfIsThriveEditor() {
 	}
 
 	/**
-	 * init.
+	 * WpfFrontendPage.prototype.init.
 	 *
-	 * @version 3.2.0
+	 * @version 3.1.8
 	 */
 	WpfFrontendPage.prototype.init = (function () {
 		var _thisObj = this.$obj;
@@ -95,7 +103,6 @@ function wpfIsThriveEditor() {
 		_thisObj.disableLeerOptions();
 		_thisObj.eventsFrontend();
 		_thisObj.changeSlugByUrl();
-		_thisObj.addCustomCss();
 		_thisObj.chageRangeFieldWidth();
 		_thisObj.addSpecificPluginActions();
 		_thisObj.resizeWindow();
@@ -284,24 +291,6 @@ function wpfIsThriveEditor() {
 
 			hideFilterLoader(wrapper);
 		});
-	});
-
-	WpfFrontendPage.prototype.addCustomCss = (function () {
-		if (jQuery('style#wpfCustomCss').length === 0) {
-			var cssCodeStr = '';
-
-			jQuery('.wpfMainWrapper').each(function () {
-				var wrapper = jQuery(this),
-					customCss = jQuery('style#wpfCustomCss-' + wrapper.attr('data-viewid'));
-				if (customCss.length) {
-					cssCodeStr += customCss.html();
-					customCss.remove();
-				}
-			});
-			if (cssCodeStr.length > 0) {
-				jQuery('<style type="text/css" id="wpfCustomCss">' + cssCodeStr + '</style>').appendTo('head');
-			}
-		}
 	});
 
 	WpfFrontendPage.prototype.chageRangeFieldWidth = (function () {
@@ -565,7 +554,7 @@ function wpfIsThriveEditor() {
 	});
 
 	/**
-	 * eventsFrontend.
+	 * WpfFrontendPage.prototype.eventsFrontend.
 	 *
 	 * @version 3.1.8
 	 */
@@ -1234,17 +1223,12 @@ function wpfIsThriveEditor() {
 		return isExeption;
 	});
 
-	/**
-	 * detectSingleCheckbox.
-	 *
-	 * @version 3.2.0
-	 */
 	WpfFrontendPage.prototype.detectSingleCheckbox = (function (checkedInput) {
 		var filterWrapper = checkedInput.closest('.wpfFilterWrapper'),
 			displayType = filterWrapper.data('display-type'),
 			filterType = filterWrapper.data('filter-type');
 
-		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand') {
+		if (filterType == 'wpfCategory' || filterType == 'wpfPerfectBrand'|| filterType == 'wpfBrand') {
 			var isOne = displayType == 'list';
 		} else {
 			var isOne = displayType == 'radio';
@@ -1288,7 +1272,7 @@ function wpfIsThriveEditor() {
 	});
 
 	/**
-	 * closeFilterToggle.
+	 * WpfFrontendPage.prototype.closeFilterToggle.
 	 *
 	 * @version 3.1.8
 	 */
@@ -1311,7 +1295,7 @@ function wpfIsThriveEditor() {
 	});
 
 	/**
-	 * closeFilterToggle.
+	 * WpfFrontendPage.prototype.closeFilterToggle.
 	 *
 	 * @version 3.1.8
 	 */
@@ -1384,7 +1368,7 @@ function wpfIsThriveEditor() {
 	/**
 	 * filtering.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	WpfFrontendPage.prototype.filtering = (function ($filterWrapper, clearAll, redirectLink, onlyRecalcFilter) {
 		var _thisObj = this.$obj;
@@ -1464,7 +1448,7 @@ function wpfIsThriveEditor() {
 					withChildren = '1';
 				}
 
-				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined') {
+				if (allSettings['backend'].length && typeof allSettings['backend'] !== 'undefined' || filterType === 'wpfSearchText'  || filterType === 'wpfSearchNumber') {
 					valueToPushBackend['id'] = filterType;
 					valueToPushBackend['uniqId'] = uniqId;
 					valueToPushBackend['logic'] = logic;
@@ -1736,7 +1720,7 @@ function wpfIsThriveEditor() {
 
 		return {
 			mod: 'woofilters',
-			action: 'filtersFrontend',
+			action: 'woobewoo_pf_filters_frontend',
 			filtersDataBackend: JSON.stringify($filtersDataBackend),
 			queryvars: $queryVars,
 			filterSettings: JSON.stringify($filterSettings),
@@ -1890,23 +1874,33 @@ function wpfIsThriveEditor() {
 		_thisObj.markCheckboxSelected(filter);
 	});
 
-	WpfFrontendPage.prototype.getFilterMainSettings = (function ($selector) {
-		var settingsStr = $selector.attr('data-filter-settings');
-		try{
-			var settings = JSON.parse(settingsStr);
-		}catch(e){
-			var settings = false;
-		}
-		if (settings === false) {
-			settingsStr = settingsStr.replace('}]"', '}]').replace('"[{', '[{');
-			try{
-				settings = JSON.parse(settingsStr);
-			}catch(e){
-				settings = false;
+	/**
+	 * getFilterMainSettings.
+	 *
+	 * @version 3.3.0
+	 */
+	WpfFrontendPage.prototype.getFilterMainSettings = (
+		function ( $selector ) {
+			var settingsStr = $selector.attr( 'data-filter-settings' );
+			if ( ! settingsStr ) {
+				return false;
 			}
+			try {
+				var settings = JSON.parse( settingsStr );
+			} catch ( e ) {
+				var settings = false;
+			}
+			if ( settings === false ) {
+				settingsStr = settingsStr.replace( '}]"', '}]' ).replace( '"[{', '[{' );
+				try {
+					settings = JSON.parse( settingsStr );
+				} catch ( e ) {
+					settings = false;
+				}
+			}
+			return settings;
 		}
-		return settings;
-	});
+	);
 
 	WpfFrontendPage.prototype.getFilterParam = (function (paramSlug, mainWrapper, filterWrapper) {
 		var paramValue = null,
@@ -2180,11 +2174,6 @@ function wpfIsThriveEditor() {
 
 	});
 
-	/**
-	 * sendFiltersOptionsByAjax.
-	 *
-	 * @version 3.2.0
-	 */
 	WpfFrontendPage.prototype.sendFiltersOptionsByAjax = (function ($filtersDataBackend, $queryVars, $filterSettings, $generalSettings, $woocommerceSettings, $shortcodeAttr) {
 		var _thisObj = this.$obj,
 			$wrapperSettings = [];
@@ -2297,8 +2286,32 @@ function wpfIsThriveEditor() {
 							}
 						});
 					}
-					if ('wpfActions' in res.data) {
-						_thisObj.applyWpfActions(res.data['wpfActions']);
+					if ( res.data.filter_state ) {
+						let state = res.data.filter_state;
+
+						wpfShowHideFiltersAtts(
+							state.exists,
+							state.existsUsers,
+							state.synchroId
+						);
+
+						if ( state.recount ) {
+							wpfChangeFiltersCount(
+								state.exists,
+								state.synchroId
+							);
+						}
+
+						if ( state.fid ) {
+							wpfDoActionsAfterLoad(
+								state.fid,
+								state.havePosts ? 1 : 0
+							);
+						}
+
+						if ( state.prices ) {
+							wpfChangePriceFiltersCount( state.prices );
+						}
 					}
 					if (_thisObj.filterClick) {
 						if (customListSelector !== '' && productListElem.length) {
@@ -2410,11 +2423,6 @@ function wpfIsThriveEditor() {
 		});
 	});
 
-	/**
-	 * ajaxForceThemeTemplates.
-	 *
-	 * @version 3.2.0
-	 */
 	WpfFrontendPage.prototype.ajaxForceThemeTemplates = (function (productContainerSelector, productListSelector, requestData, $wrapperSettings) {
 		var _thisObj = this.$obj,
 			curUrl = window.location.href,
@@ -2450,7 +2458,8 @@ function wpfIsThriveEditor() {
 				var pageBlock = jQuery(isContainer && (foundContainer || block.length == 0) ? productContainerSelector : productListSelector);
 				if (block.length == 0 || pageBlock.length == 0) {
 					if ($wrapperSettings.recalculate_filters === '1') {
-						_thisObj.applyExistsTermsData(jQuery(data).find('.wpfExistsTermsJS'));
+						var existsTermsJS = jQuery(data).find('.wpfExistsTermsJS').html();
+						_thisObj.setAjaxJScript(existsTermsJS);
 					}
 					if ($wrapperSettings.no_redirect_by_no_products === '1' && pageBlock.length > 0) {
 						block = jQuery('<div><div class="wpfNoProducts">' + $wrapperSettings.text_no_products + '</div></div>');
@@ -2518,7 +2527,8 @@ function wpfIsThriveEditor() {
 				_thisObj.afterAjaxFiltering($wrapperSettings);
 				_thisObj.runReadyList();
 				if ($wrapperSettings.recalculate_filters === '1') {
-					_thisObj.applyExistsTermsData(jQuery(data).find('.wpfExistsTermsJS'));
+					var existsTermsJS = jQuery(data).find('.wpfExistsTermsJS').html();
+					_thisObj.setAjaxJScript(existsTermsJS);
 				}
 
 			}
@@ -2527,11 +2537,6 @@ function wpfIsThriveEditor() {
 		return false;
 	});
 
-	/**
-	 * ajaxOnlyRecount.
-	 *
-	 * @version 3.2.0
-	 */
 	WpfFrontendPage.prototype.ajaxOnlyRecount = (function (requestData, filterId, $wrapperSettings) {
 		var _thisObj = this.$obj;
 
@@ -2552,12 +2557,32 @@ function wpfIsThriveEditor() {
 						hideFilterLoader(jQuery('#' + filterId));
 					}
 
-					if (!res.error) {
+					if ( ! res.error && res.data && res.data.filter_state ) {
+						const state = res.data.filter_state;
 
-						if ('wpfActions' in res.data) {
-							_thisObj.applyWpfActions(res.data['wpfActions']);
+						wpfShowHideFiltersAtts(
+							state.exists,
+							state.existsUsers,
+							state.synchroId
+						);
+
+						if ( state.recount ) {
+							wpfChangeFiltersCount(
+								state.exists,
+								state.synchroId
+							);
 						}
 
+						if ( state.fid ) {
+							wpfDoActionsAfterLoad(
+								state.fid,
+								state.havePosts ? 1 : 0
+							);
+						}
+
+						if ( state.prices ) {
+							wpfChangePriceFiltersCount( state.prices );
+						}
 					}
 					_thisObj.removeOverlay();
 				}
@@ -2566,60 +2591,17 @@ function wpfIsThriveEditor() {
 
 	});
 
-	/**
-	 * setAjaxJScript.
-	 *
-	 * @version 3.2.0
-	 */
 	WpfFrontendPage.prototype.setAjaxJScript = (function(jscript, filterId){
-		var _thisObj = this.$obj;
+		var _thisObj = this.$obj,
+			filter = jQuery('#' + (typeof(filterId) == 'undefined' ? _thisObj.currentLoadId : filterId));
+		if (filter.length && jscript != '') {
+			var jsBlock = filter.find('.wpfAjaxJSBlock');
+			if (jsBlock.length == 0) {
+				jQuery('<div class="wpfAjaxJSBlock wpfHidden"></div>').appendTo(filter);
+			}
+			filter.find('.wpfAjaxJSBlock').html(jscript);
+		}
 		_thisObj.currentAjaxJSLoaded = true;
-	});
-
-	/**
-	 * applyExistsTermsData.
-	 *
-	 * @version 3.2.0
-	 * @since   3.2.0
-	 */
-	WpfFrontendPage.prototype.applyExistsTermsData = (function(existsTermsEl) {
-		if (!existsTermsEl || existsTermsEl.length === 0) return;
-		var exists      = existsTermsEl.data('exists'),
-			existsUsers = existsTermsEl.data('existsUsers') || {},
-			havePosts   = existsTermsEl.data('havePosts'),
-			fid         = existsTermsEl.data('fid');
-		if (exists) {
-			wpfShowHideFiltersAtts(exists, existsUsers);
-			wpfChangeFiltersCount(exists);
-		}
-		if (fid) {
-			wpfDoActionsAfterLoad(fid, havePosts ? 1 : 0);
-		}
-	});
-
-	/**
-	 * applyWpfActions.
-	 *
-	 * @version 3.2.0
-	 * @since   3.2.0
-	 */
-	WpfFrontendPage.prototype.applyWpfActions = (function(actions) {
-		if (!actions) return;
-		if ('wpfShowHideFiltersAtts' in actions) {
-			var a = actions.wpfShowHideFiltersAtts;
-			wpfShowHideFiltersAtts(a.exists, a.existsUsers, a.synchroId);
-		}
-		if ('wpfChangeFiltersCount' in actions) {
-			var b = actions.wpfChangeFiltersCount;
-			wpfChangeFiltersCount(b.exists, b.synchroId);
-		}
-		if ('wpfDoActionsAfterLoad' in actions) {
-			var c = actions.wpfDoActionsAfterLoad;
-			wpfDoActionsAfterLoad(c.fid, c.havePosts);
-		}
-		if ('wpfChangePriceFiltersCount' in actions) {
-			wpfChangePriceFiltersCount(actions.wpfChangePriceFiltersCount);
-		}
 	});
 
 	WpfFrontendPage.prototype.afterAjaxFiltering = (function($wrapperSettings){
@@ -3680,7 +3662,7 @@ function wpfIsThriveEditor() {
 					var wpfMainWrapper = $filter.closest('.wpfMainWrapper');
 					wpfMainWrapper.find('.wpfDisplay').css('font-weight', '');
 					wpfMainWrapper.find('.wpfAttrLabel').css('font-weight', '');
-					// console.log(wpfMainWrapper.find('input:checked'))
+
 					wpfMainWrapper.find('input:checked').each(function () {
 						var wpfDisplay = jQuery(this).closest('.wpfLiLabel').find('.wpfDisplay'),
 							wpfAttrLabel = jQuery(this).closest('.wpfColorsColBlock').find('.wpfAttrLabel');
@@ -3979,7 +3961,7 @@ function changeUrl(filterSlug, filterValue, $wooPage, $filterWrapper) {
 /**
  * removePageQString.
  *
- * @version 3.2.0
+ * @version 3.3.0
  */
 function removePageQString() {
 	var curUrl = getCurrentUrlPartsWpf(),

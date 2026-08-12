@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TableWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -13,7 +13,7 @@ abstract class TableWpf {
 	/**
 	 * ID column name
 	 */
-	protected $_id ='';
+	protected $_id = '';
 	/**
 	 * Table name
 	 */
@@ -50,37 +50,40 @@ abstract class TableWpf {
 	 * Escape data before action
 	 */
 	protected $_escape = false;
-	
+
 	protected $_limitFrom = '';
-	protected $_limitTo = '';
-	
+	protected $_limitTo   = '';
+
+	/**
+	 * getInstance.
+	 */
 	public static function getInstance( $table = '' ) {
 		static $instances = array();
-		if (!$table) {
-			throw new Exception('Unknown table [' . esc_html($table) . ']');
+		if ( ! $table ) {
+			throw new Exception( 'Unknown table [' . esc_html( $table ) . ']' );
 		}
-		if (!isset($instances[$table])) {
-			$class = 'table' . strFirstUpWpf($table) . strFirstUpWpf(WPF_CODE);
-			if (class_exists($class)) {
-				$instances[$table] = new $class();
+		if ( ! isset( $instances[ $table ] ) ) {
+			$class = 'table' . strFirstUpWpf( $table ) . strFirstUpWpf( WPF_CODE );
+			if ( class_exists( $class ) ) {
+				$instances[ $table ] = new $class();
 			} else {
-				$instances[$table] = null; 
+				$instances[ $table ] = null;
 			}
 		}
-		return $instances[$table];
+		return $instances[ $table ];
 	}
 	public function setEscape( $f ) {
 		$this->_escape = true;
 	}
 	public static function _( $table = '' ) {
-		return self::getInstance($table);
+		return self::getInstance( $table );
 	}
 	public function innerJoin( $table, $on ) {
 		$this->_join[] = 'INNER JOIN ' . $table->getTable() . ' ' . $table->alias() . ' ON ' . $table->alias() . '.' . $table->getID() . ' = ' . $this->_alias . '.' . $on;
 		return $this;
 	}
 	public function leftJoin( $table, $on ) {
-		if ($this->haveField($on)) {
+		if ( $this->haveField( $on ) ) {
 			$this->_join[] = 'LEFT JOIN ' . $table->getTable() . ' ' . $table->alias() . ' ON ' . $table->alias() . '.' . $table->getID() . ' = ' . $this->_alias . '.' . $on;
 		} else {
 			$this->_join[] = 'LEFT JOIN ' . $table->getTable() . ' ' . $table->alias() . ' ON ' . $table->alias() . '.' . $on . ' = ' . $this->_alias . '.' . $this->getID();
@@ -91,50 +94,66 @@ abstract class TableWpf {
 		$this->_join[] = $join;
 	}
 	public function haveField( $field ) {
-		return isset($this->_fields[$field]);
+		return isset( $this->_fields[ $field ] );
 	}
-	public function addJoin( $params = array('tbl' => '', 'a' => '', 'on' => '', 'joinOnID' => true, 'joinOn' => '') ) {
-		$params['joinOnID'] = isset($params['joinOnID']) ? $params['joinOnID'] : true;
-		$params['joinOn'] = ( $params['joinOnID'] && !isset($params['joinOn']) ) ? $this->_id : $params['joinOn'];
-		$this->_join[] = 'INNER JOIN ' . $params['tbl'] . ' ' . $params['a'] . ' ON ' . $params['a'] . '.' . $params['on'] . ' = ' . $this->_alias . '.' . $params['joinOn'];
+
+	public function addJoin(
+		$params = array(
+			'tbl'      => '',
+			'a'        => '',
+			'on'       => '',
+			'joinOnID' => true,
+			'joinOn'   => '',
+		)
+	) {
+		$params['joinOnID'] = isset( $params['joinOnID'] ) ? $params['joinOnID'] : true;
+		$params['joinOn']   = ( $params['joinOnID'] && ! isset( $params['joinOn'] ) ) ? $this->_id : $params['joinOn'];
+		$this->_join[]      = 'INNER JOIN ' . $params['tbl'] . ' ' . $params['a'] . ' ON ' . $params['a'] . '.' . $params['on'] . ' = ' . $this->_alias . '.' . $params['joinOn'];
 		return $this;
 	}
+
+	/**
+	 * fillFromDB.
+	 */
 	public function fillFromDB( $id = 0, $where = '' ) {
 		$res = $this;
-		if ($id) {
-			$data = $this->getById($id);
-		} elseif ($where) {
-			$data = $this->get('*', $where);
+		if ( $id ) {
+			$data = $this->getById( $id );
+		} elseif ( $where ) {
+			$data = $this->get( '*', $where );
 		} else {
 			$data = $this->getAll();
 		}
-		
-		if ($data) {
-			if ($id) {
-				foreach ($data as $k => $v) {
-					if (isset($this->_fields[$k])) {
-						$this->_fields[$k]->setValue($v, true);
+
+		if ( $data ) {
+			if ( $id ) {
+				foreach ( $data as $k => $v ) {
+					if ( isset( $this->_fields[ $k ] ) ) {
+						$this->_fields[ $k ]->setValue( $v, true );
 					}
 				}
 			} else {
 				$res = array();
-				foreach ($data as $field) {
+				foreach ( $data as $field ) {
 					$row = array();
-					foreach ($field as $k => $v) {
-						if (isset($this->_fields[$k])) {
-							$row[$k] = toeCreateObjWpf('FieldWpf', array(
-								$this->_fields[$k]->name,
-								$this->_fields[$k]->html,
-								$this->_fields[$k]->type,
-								$this->_fields[$k]->default,
-								$this->_fields[$k]->label,
-								$this->_fields[$k]->maxlen,
-								$this->_fields[$k]->description,
-							));
-							$row[$k]->setValue($v, true);
+					foreach ( $field as $k => $v ) {
+						if ( isset( $this->_fields[ $k ] ) ) {
+							$row[ $k ] = toeCreateObjWpf(
+								'FieldWpf',
+								array(
+									$this->_fields[ $k ]->name,
+									$this->_fields[ $k ]->html,
+									$this->_fields[ $k ]->type,
+									$this->_fields[ $k ]->default,
+									$this->_fields[ $k ]->label,
+									$this->_fields[ $k ]->maxlen,
+									$this->_fields[ $k ]->description,
+								)
+							);
+							$row[ $k ]->setValue( $v, true );
 						}
 					}
-					if (!empty($row)) {
+					if ( ! empty( $row ) ) {
 						$res[] = $row;
 					}
 				}
@@ -149,8 +168,8 @@ abstract class TableWpf {
 	 * @return string table name
 	 */
 	public function getTable( $transform = false ) {
-		if ($transform) {
-			return DbWpf::prepareQuery($this->_table);
+		if ( $transform ) {
+			return DbWpf::prepareQuery( $this->_table );
 		} else {
 			return $this->_table;
 		}
@@ -168,18 +187,18 @@ abstract class TableWpf {
 	}
 	public function setID( $id ) {
 		$this->_id = $id;
-	} 
+	}
 	public function getAll( $fields = '*' ) {
-		return $this->get($fields);
+		return $this->get( $fields );
 	}
 	public function getById( $id, $fields = '*', $return = 'row' ) {
 		$condition = 'WHERE ' . $this->_alias . '.' . $this->_id . ' = "' . ( (int) $id ) . '"';
-		return $this->get($fields, $condition, null, $return);
+		return $this->get( $fields, $condition, null, $return );
 	}
 	protected function _addJoin() {
 		$res = '';
-		if (!empty($this->_join)) {
-			$res = ' ' . implode(' ', $this->_join);
+		if ( ! empty( $this->_join ) ) {
+			$res         = ' ' . implode( ' ', $this->_join );
 			$this->_join = array();
 		}
 		return $res;
@@ -188,7 +207,7 @@ abstract class TableWpf {
 	 * Add LIMIT to SQL
 	 */
 	public function limit( $limit = '' ) {
-		if (is_numeric($limit)) {
+		if ( is_numeric( $limit ) ) {
 			$this->_limit = $limit;
 		} else {
 			$this->_limit = '';
@@ -200,26 +219,26 @@ abstract class TableWpf {
 		return $this;
 	}
 	public function limitFrom( $limit = '' ) {
-		if (is_numeric($limit)) {
+		if ( is_numeric( $limit ) ) {
 			$this->_limitFrom = (int) $limit;
 		}
 		return $this;
 	}
 	public function limitTo( $limit = '' ) {
-		if (is_numeric($limit)) {
+		if ( is_numeric( $limit ) ) {
 			$this->_limitTo = (int) $limit;
 		}
 		return $this;
 	}
 	/**
 	 * Add ORDER BY to SQL
-	 * 
-	 * @param mixed $fields 
+	 *
+	 * @param mixed $fields
 	 */
 	public function orderBy( $fields ) {
-		if (is_array($fields)) {
-			$order = implode(',', $fields);
-		} elseif ('' != $fields) {
+		if ( is_array( $fields ) ) {
+			$order = implode( ',', $fields );
+		} elseif ( '' != $fields ) {
 			$order = $fields;
 		}
 		$this->_order = $order;
@@ -227,114 +246,114 @@ abstract class TableWpf {
 	}
 	/**
 	 * Add GROUP BY to SQL
-	 * 
-	 * @param mixed $fields 
+	 *
+	 * @param mixed $fields
 	 */
 	public function groupBy( $fields ) {
-		if (is_array($fields)) {
-			$group = implode(',', $fields);
-		} elseif ('' != $fields) {
+		if ( is_array( $fields ) ) {
+			$group = implode( ',', $fields );
+		} elseif ( '' != $fields ) {
 			$group = $fields;
 		}
 		$this->_group = $group;
 		return $this;
 	}
 	public function get( $fields = '*', $where = '', $tables = '', $return = 'all' ) {
-		if (!$tables) {
+		if ( ! $tables ) {
 			$tables = $this->_table . ' ' . $this->_alias;
 		}
-		if (strpos($this->_alias, $fields)) {
+		if ( strpos( $this->_alias, $fields ) ) {
 			$fields = $this->_alias . '.' . $fields;
 		}
-		$query = 'SELECT ' . $fields . ' FROM ' . $tables;
+		$query  = 'SELECT ' . $fields . ' FROM ' . $tables;
 		$query .= $this->_addJoin();
-		if ($where) {
-			$where = trim($this->_getQueryString($where, 'AND'));
-			if (!empty($where)) {
-				if (!preg_match('/^WHERE/i', $where)) {
+		if ( $where ) {
+			$where = trim( $this->_getQueryString( $where, 'AND' ) );
+			if ( ! empty( $where ) ) {
+				if ( ! preg_match( '/^WHERE/i', $where ) ) {
 					$where = 'WHERE ' . $where;
 				}
 				$query .= ' ' . $where;
 			}
 		}
-		if ('' != $this->_group) {
-			$query .= ' GROUP BY ' . $this->_group;
+		if ( '' != $this->_group ) {
+			$query       .= ' GROUP BY ' . $this->_group;
 			$this->_group = '';
 		}
-		if ('' != $this->_order) {
-			$query .= ' ORDER BY ' . $this->_order;
+		if ( '' != $this->_order ) {
+			$query       .= ' ORDER BY ' . $this->_order;
 			$this->_order = '';
 		}
-		if ('' != $this->_limit) {
-			if (is_numeric($this->_limit)) {
+		if ( '' != $this->_limit ) {
+			if ( is_numeric( $this->_limit ) ) {
 				$query .= ' LIMIT 0,' . $this->_limit;
 			} else {
 				$query .= ' LIMIT ' . $this->_limit;
 			}
-			
+
 			$this->_limit = '';
 		} elseif ( ( '' !== $this->_limitFrom ) && ( '' !== $this->_limitTo ) ) {
-			$query .= ' LIMIT ' . $this->_limitFrom . ',' . $this->_limitTo;
+			$query           .= ' LIMIT ' . $this->_limitFrom . ',' . $this->_limitTo;
 			$this->_limitFrom = '';
-			$this->_limitTo = '';
+			$this->_limitTo   = '';
 		}
-		return DbWpf::get($query, $return);
+		return DbWpf::get( $query, $return );
 	}
 	public function store( $data, $method = 'INSERT', $where = '' ) {
 		$this->_clearErrors();
-		$method = strtoupper($method);
-		if ($this->_escape) {
-			$data = DbWpf::escape($data);
+		$method = strtoupper( $method );
+		if ( $this->_escape ) {
+			$data = DbWpf::escape( $data );
 		}
 		$query = '';
-		switch ($method) {
+		switch ( $method ) {
 			case 'INSERT':
 				$query = 'INSERT INTO ';
-				if (isset($data[$this->_id]) && empty($data[$this->_id])) {
-					unset($data[$this->_id]);
+				if ( isset( $data[ $this->_id ] ) && empty( $data[ $this->_id ] ) ) {
+					unset( $data[ $this->_id ] );
 				}
 				break;
 			case 'UPDATE':
 				$query = 'UPDATE ';
 				break;
 		}
-		
-		$fields = $this->_getQueryString($data, ',', true);
-		if (empty($fields)) {
-			$this->_addError(esc_html__('Nothing to update', 'woo-product-filter'));
+
+		$fields = $this->_getQueryString( $data, ',', true );
+		if ( empty( $fields ) ) {
+			$this->_addError( esc_html__( 'Nothing to update', 'woo-product-filter' ) );
 			return false;
 		}
-		
+
 		$query .= $this->_table . ' SET ' . $fields;
 
-		if (!empty($this->_errors)) {
+		if ( ! empty( $this->_errors ) ) {
 			return false;
 		}
-		if ( ( 'UPDATE' == $method ) && !empty($where) ) {
-			$query .= ' WHERE ' . $this->_getQueryString($where, 'AND'); 
+		if ( ( 'UPDATE' == $method ) && ! empty( $where ) ) {
+			$query .= ' WHERE ' . $this->_getQueryString( $where, 'AND' );
 		}
-		if (DbWpf::query($query)) {
-			if ('INSERT' == $method) {
+		if ( DbWpf::query( $query ) ) {
+			if ( 'INSERT' == $method ) {
 				return DbWpf::lastID();
 			} else {
 				return true;
 			}
 		} else {
-			$this->_addError(WPF_TEST_MODE ? DbWpf::getError() : esc_html__('Database error. Please contact your developer.', 'woo-product-filter'));
+			$this->_addError( WPF_TEST_MODE ? DbWpf::getError() : esc_html__( 'Database error. Please contact your developer.', 'woo-product-filter' ) );
 		}
 		return false;
 	}
 	public function insert( $data ) {
-		return $this->store($data);
+		return $this->store( $data );
 	}
 	public function update( $data, $where ) {
-		if (is_numeric($where)) {
-			$where = array($this->_id => $where);
+		if ( is_numeric( $where ) ) {
+			$where = array( $this->_id => $where );
 		}
-		return $this->store($data, 'UPDATE', $where);
+		return $this->store( $data, 'UPDATE', $where );
 	}
 	public function alias( $alias = null ) {
-		if (!is_null($alias)) {
+		if ( ! is_null( $alias ) ) {
 			$this->_alias = $alias;
 		}
 		return $this->_alias;
@@ -346,47 +365,47 @@ abstract class TableWpf {
 	 * @return query result
 	 */
 	public function delete( $where = '' ) {
-		if ($where) {
+		if ( $where ) {
 			$q = 'DELETE FROM ' . $this->_table;
-			if (is_numeric($where)) {
-				$where = array($this->_id => $where);
+			if ( is_numeric( $where ) ) {
+				$where = array( $this->_id => $where );
 			}
-			$q .= ' WHERE ' . $this->_getQueryString($where, 'AND');
+			$q .= ' WHERE ' . $this->_getQueryString( $where, 'AND' );
 		} else {
 			$q = 'TRUNCATE TABLE ' . $this->_table;
 		}
-		return DbWpf::query($q);
+		return DbWpf::query( $q );
 	}
 	/**
 	 * Convert to database query
 	 *
-	 * @param mixed $data if array given - convert it into string where key - is column name, value - database value to set;
-	 * if key == "additionalCondition" then we will just add value to string
-	 * if string givven - just return it without changes
+	 * @param mixed  $data if array given - convert it into string where key - is column name, value - database value to set;
+	 *  if key == "additionalCondition" then we will just add value to string
+	 *  if string givven - just return it without changes
 	 * @param string $delim delimiter to use in query, recommended - ',', 'AND', 'OR'
 	 * @return string query string
 	 */
 	public function _getQueryString( $data, $delim = ',', $validate = false ) {
 		$res = '';
-		if (is_array($data) && !empty($data)) {
-			foreach ($data as $k => $v) {
-				if (array_key_exists($k, $this->_fields) || $k == $this->_id) {
+		if ( is_array( $data ) && ! empty( $data ) ) {
+			foreach ( $data as $k => $v ) {
+				if ( array_key_exists( $k, $this->_fields ) || $k == $this->_id ) {
 					$val = $v;
-					if (isset($this->_fields[$k]) && $this->_fields[$k]->adapt['dbTo']) {
-						$val = FieldAdapterWpf::_($val, $this->_fields[$k]->adapt['dbTo'], FieldAdapterWpf::DB);
+					if ( isset( $this->_fields[ $k ] ) && $this->_fields[ $k ]->adapt['dbTo'] ) {
+						$val = FieldAdapterWpf::_( $val, $this->_fields[ $k ]->adapt['dbTo'], FieldAdapterWpf::DB );
 					}
-					if ($validate) {
-						if (isset($this->_fields[$k]) && is_object($this->_fields[$k])) {
-							$objForValidation = clone $this->_fields[$k];
-							$objForValidation->setValue($val);
-							$errors = ValidatorWpf::_($objForValidation);
-							if ($errors) {
-								$this->_addError($errors);
+					if ( $validate ) {
+						if ( isset( $this->_fields[ $k ] ) && is_object( $this->_fields[ $k ] ) ) {
+							$objForValidation = clone $this->_fields[ $k ];
+							$objForValidation->setValue( $val );
+							$errors = ValidatorWpf::_( $objForValidation );
+							if ( $errors ) {
+								$this->_addError( $errors );
 							}
 						}
 					}
-					if (isset($this->_fields[$k])) {
-						switch ($this->_fields[$k]->type) {
+					if ( isset( $this->_fields[ $k ] ) ) {
+						switch ( $this->_fields[ $k ]->type ) {
 							case 'int':
 							case 'tinyint':
 								$res .= $k . ' = ' . ( (int) $val ) . ' ' . $delim . ' ';
@@ -397,7 +416,7 @@ abstract class TableWpf {
 							case 'decimal':
 								$res .= $k . ' = ' . ( (float) $val ) . ' ' . $delim . ' ';
 								break;
-							case 'free':    //Just set it as it is
+							case 'free':    // Just set it as it is
 								$res .= $k . ' = ' . $val . ' ' . $delim . ' ';
 								break;
 							default:
@@ -407,12 +426,12 @@ abstract class TableWpf {
 					} else {
 						$res .= $k . ' = \'' . $val . '\' ' . $delim . ' ';
 					}
-				} elseif ('additionalCondition' == $k) {    //just add some string to query
+				} elseif ( 'additionalCondition' == $k ) {    // just add some string to query
 					$res .= $v . ' ' . $delim . ' ';
 				}
 			}
-			$res = substr($res, 0, -( strlen($delim) + 1 ));
-		} elseif (is_string($data)) {
+			$res = substr( $res, 0, -( strlen( $delim ) + 1 ) );
+		} elseif ( is_string( $data ) ) {
 			$res = $data;
 		}
 		return $res;
@@ -423,11 +442,11 @@ abstract class TableWpf {
 	 * @param string $name name of a field
 	 * @param string $html html type of field (text, textarea, etc. @see html class)
 	 * @param string $type database type (int, varcahr, etc.)
-	 * @param mixed $default default value for this field
+	 * @param mixed  $default default value for this field
 	 * @return object $this - pointer to current object
 	 */
 	protected function _addField( $name, $html = 'text', $type = 'other', $default = '', $label = '', $maxlen = 0, $dbAdapt = '', $htmlAdapt = '', $description = '' ) {
-		$this->_fields[$name] = toeCreateObjWpf('FieldWpf', array($name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description));
+		$this->_fields[ $name ] = toeCreateObjWpf( 'FieldWpf', array( $name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description ) );
 		return $this;
 	}
 	/**
@@ -435,23 +454,39 @@ abstract class TableWpf {
 	 */
 	public function addField() {
 		$args = func_get_args();
-		return call_user_func_array(array($this, '_addField'), $args);
+		return call_user_func_array( array( $this, '_addField' ), $args );
 	}
 	public function getFields() {
 		return $this->_fields;
 	}
 	public function getField( $name ) {
-		return $this->_fields[$name];
+		return $this->_fields[ $name ];
 	}
+
+	/**
+	 * exists.
+	 *
+	 * @version 3.3.0
+	 */
 	public function exists( $value, $field = '' ) {
-		if (!$field) {
+		if ( ! $field ) {
 			$field = $this->_id;
 		}
-		return DbWpf::get('SELECT ' . $this->_id . ' FROM ' . $this->_table . ' WHERE ' . $field . ' = "' . $value . '"', 'one');
+
+		$id    = DbWpf::sanitizeIdentifier( $this->_id );
+		$table = DbWpf::sanitizeIdentifier( DbWpf::prepareQuery( $this->_table ) );
+		$field = DbWpf::sanitizeIdentifier( $field );
+
+		return DbWpf::get(
+			'SELECT `' . $id . '` FROM `' . $table . '` WHERE `' . $field . '` = %s',
+			'one',
+			ARRAY_A,
+			array( $value )
+		);
 	}
 	protected function _addError( $error ) {
-		if (is_array($error)) {
-			$this->_errors = array_merge($this->_errors, $error);
+		if ( is_array( $error ) ) {
+			$this->_errors = array_merge( $this->_errors, $error );
 		} else {
 			$this->_errors[] = $error;
 		}
@@ -466,54 +501,54 @@ abstract class TableWpf {
 	 * Prepare data before send it to database
 	 */
 	public function prepareInput( $d = array() ) {
-		$ignore = isset($d['ignore']) ? $d['ignore'] : array();
-		foreach ($this->_fields as $key => $f) {
-			if ('tinyint' == $f->type) {
-				if ('true' == $d[$key]) {
-					$d[$key] = 1;
+		$ignore = isset( $d['ignore'] ) ? $d['ignore'] : array();
+		foreach ( $this->_fields as $key => $f ) {
+			if ( 'tinyint' == $f->type ) {
+				if ( 'true' == $d[ $key ] ) {
+					$d[ $key ] = 1;
 				}
-				if (empty($d[$key]) && !in_array($key, $ignore)) {
-					$d[$key] = 0;
+				if ( empty( $d[ $key ] ) && ! in_array( $key, $ignore ) ) {
+					$d[ $key ] = 0;
 				}
 			}
-			if ('date' == $f->type) {
-				if (empty($d[$key]) && !in_array($key, $ignore)) {
-					$d[$key] = '0000-00-00';
-				} elseif (!empty($d[$key])) {
-					$d[$key] = DbWpf::timeToDate($d[$key]);
+			if ( 'date' == $f->type ) {
+				if ( empty( $d[ $key ] ) && ! in_array( $key, $ignore ) ) {
+					$d[ $key ] = '0000-00-00';
+				} elseif ( ! empty( $d[ $key ] ) ) {
+					$d[ $key ] = DbWpf::timeToDate( $d[ $key ] );
 				}
 			}
 		}
-		$d[$this->_id] = isset($d[$this->_id]) ? intval($d[$this->_id]) : 0;
+		$d[ $this->_id ] = isset( $d[ $this->_id ] ) ? intval( $d[ $this->_id ] ) : 0;
 		return $d;
 	}
 	/**
 	 * Prepare data after extracting it from database
 	 */
 	public function prepareOutput( $d = array() ) {
-		$ignore = isset($d['ignore']) ? $d['ignore'] : array();
-		foreach ($this->_fields as $key => $f) {
-			switch ($f->type) {
+		$ignore = isset( $d['ignore'] ) ? $d['ignore'] : array();
+		foreach ( $this->_fields as $key => $f ) {
+			switch ( $f->type ) {
 				case 'date':
-					if ('0000-00-00' == $d[$key] || empty($d[$key])) {
-						$d[$key] = '';
+					if ( '0000-00-00' == $d[ $key ] || empty( $d[ $key ] ) ) {
+						$d[ $key ] = '';
 					} else {
-						$d[$key] = gmdate(WPF_DATE_FORMAT, DbWpf::dateToTime($d[$key]));
+						$d[ $key ] = gmdate( WPF_DATE_FORMAT, DbWpf::dateToTime( $d[ $key ] ) );
 					}
 					break;
 				case 'int':
 				case 'tinyint':
-					if ('true' == $d[$key]) {
-						$d[$key] = 1;
+					if ( 'true' == $d[ $key ] ) {
+						$d[ $key ] = 1;
 					}
-					if ('false' == $d[$key]) {
-						$d[$key] = 0;
+					if ( 'false' == $d[ $key ] ) {
+						$d[ $key ] = 0;
 					}
-					$d[$key] = (int) $d[$key];
+					$d[ $key ] = (int) $d[ $key ];
 					break;
 			}
 		}
-		$d[$this->_id] = isset($d[$this->_id]) ? intval($d[$this->_id]) : 0;
+		$d[ $this->_id ] = isset( $d[ $this->_id ] ) ? intval( $d[ $this->_id ] ) : 0;
 		return $d;
 	}
 	public function install( $d = array() ) {
@@ -521,11 +556,5 @@ abstract class TableWpf {
 	public function uninstall( $d = array() ) {
 	}
 	public function activate() {
-	}
-	public function getLastInsertID() {
-		return DbWpf::get('SELECT MAX(' . $this->_id . ') FROM ' . $this->_table, 'one');
-	}
-	public function adaptHtml( $val ) {
-		return htmlspecialchars($val, ENT_COMPAT);
 	}
 }

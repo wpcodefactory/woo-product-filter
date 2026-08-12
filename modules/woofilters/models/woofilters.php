@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersModelWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -15,100 +15,114 @@ class WoofiltersModelWpf extends ModelWpf {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->_setTbl('filters');
+		$this->_setTbl( 'filters' );
 	}
 
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 3.2.0
+	 * @version 3.1.7
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
-			'wpfPrice' => array(
-				'name'         => esc_html__('Price', 'woo-product-filter'),
-				'slug'         => esc_attr__('price', 'woo-product-filter'),
+			'wpfPrice'        => array(
+				'name'         => esc_html__( 'Price', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'price', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
 				'group'        => 'wpfPriceRange',
 			),
-			'wpfPriceRange' => array(
-				'name'         => esc_html__('Price range', 'woo-product-filter'),
-				'slug'         => esc_attr__('price range', 'woo-product-filter'),
+			'wpfPriceRange'   => array(
+				'name'         => esc_html__( 'Price range', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'price range', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
-				'group'        => 'wpfPrice'
+				'group'        => 'wpfPrice',
 			),
-			'wpfSortBy' => array(
-				'name'         => esc_html__('Sort by', 'woo-product-filter'),
-				'slug'         => esc_attr__('sort by', 'woo-product-filter'),
+			'wpfSortBy'       => array(
+				'name'         => esc_html__( 'Sort by', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'sort by', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
 			),
-			'wpfCategory' => array(
-				'name'         => esc_html__('Product categories', 'woo-product-filter'),
-				'slug'         => esc_attr__('category', 'woo-product-filter'),
+			'wpfCategory'     => array(
+				'name'         => esc_html__( 'Product categories', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'category', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => false,
 				'content_type' => 'taxonomy',
 				'filtername'   => 'wpf_filter_cat',
 			),
-			'wpfTags' => array(
-				'name'         => esc_html__('Product tags', 'woo-product-filter'),
-				'slug'         => esc_attr__('tag', 'woo-product-filter'),
+			'wpfTags'         => array(
+				'name'         => esc_html__( 'Product tags', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'tag', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => false,
 				'content_type' => 'taxonomy',
 				'filtername'   => 'product_tag',
 			),
-			'wpfAttribute' => array(
-				'name'         => esc_html__('Attribute', 'woo-product-filter'),
+			'wpfAttribute'    => array(
+				'name'         => esc_html__( 'Attribute', 'woo-product-filter' ),
 				'slug'         => '',
 				'enabled'      => true,
 				'unique'       => false,
 				'content_type' => 'taxonomy',
 			),
-			'wpfAuthor' => array(
-				'name'         => esc_html__('Author', 'woo-product-filter'),
-				'slug'         => esc_attr__('author', 'woo-product-filter'),
+			'wpfAuthor'       => array(
+				'name'         => esc_html__( 'Author', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'author', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'user',
 			),
-			'wpfFeatured' => array(
-				'name'         => esc_html__('Featured', 'woo-product-filter'),
-				'slug'         => esc_attr__('featured', 'woo-product-filter'),
+			'wpfFeatured'     => array(
+				'name'         => esc_html__( 'Featured', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'featured', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
 			),
-			'wpfOnSale' => array(
-				'name'         => esc_html__('On sale', 'woo-product-filter'),
-				'slug'         => esc_attr__('on sale', 'woo-product-filter'),
+			'wpfOnSale'       => array(
+				'name'         => esc_html__( 'On sale', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'on sale', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
 			),
-			'wpfInStock' => array(
-				'name'         => esc_html__('Stock status', 'woo-product-filter'),
-				'slug'         => esc_attr__('stock status', 'woo-product-filter'),
+			'wpfInStock'      => array(
+				'name'         => esc_html__( 'Stock status', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'stock status', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
 			),
-			'wpfRating' => array(
-				'name'         => esc_html__('Rating', 'woo-product-filter'),
-				'slug'         => esc_attr__('rating', 'woo-product-filter'),
+			'wpfRating'       => array(
+				'name'         => esc_html__( 'Rating', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'rating', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
 			),
-			'wpfCustomField' => array(
-				'name'         => esc_html__('Custom Field (Allow ACF plugin)', 'woo-product-filter'),
-				'slug'         => esc_attr__('custom_field', 'woo-product-filter'),
+			'wpfSearchText'   => array(
+				'name'         => esc_html__( 'Search by Text', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'text', 'woo-product-filter' ),
+				'enabled'      => false,
+				'unique'       => true,
+				'content_type' => '',
+			),
+			'wpfSearchNumber' => array(
+				'name'         => esc_html__( 'Search by Number', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'number', 'woo-product-filter' ),
+				'enabled'      => false,
+				'unique'       => false,
+				'content_type' => '',
+			),
+			'wpfCustomField'  => array(
+				'name'         => esc_html__( 'Custom Field (Allow ACF plugin)', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'custom_field', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => true,
 				'content_type' => 'meta',
@@ -120,17 +134,50 @@ class WoofiltersModelWpf extends ModelWpf {
 		 *
 		 * @link https://wordpress.org/plugins/perfect-woocommerce-brands
 		 */
-		if (taxonomy_exists('pwb-brand')) {
+		if ( taxonomy_exists( 'pwb-brand' ) ) {
 			$filterTypes['wpfPerfectBrand'] = array(
-				'name'         => esc_html__('Perfect brands', 'woo-product-filter'),
-				'slug'         => esc_attr__('brand', 'woo-product-filter'),
+				'name'         => esc_html__( 'Perfect brands', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'brand', 'woo-product-filter' ),
 				'enabled'      => true,
 				'unique'       => false,
 				'content_type' => 'taxonomy',
 			);
 		}
 
-		return DispatcherWpf::applyFilters('addFilterTypes', $filterTypes);
+		/**
+		 * Plugin compatibility and native WC `product_brand` taxonomy.
+		 *
+		 * @version 2.9.7
+		 *
+		 * @link https://woocommerce.com/products/brands
+		 */
+		if ( taxonomy_exists( 'product_brand' ) ) {
+			$filterTypes['wpfBrand'] = array(
+				'name'         => esc_html__( 'Product brands', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'brand', 'woo-product-filter' ),
+				'enabled'      => false,
+				'unique'       => true,
+				'content_type' => 'taxonomy',
+				'filtername'   => 'product_brand',
+			);
+		}
+
+		/**
+		 * Plugin compatibility.
+		 *
+		 * @link https://wordpress.org/plugins/wc-vendors/
+		 */
+		if ( class_exists( 'WC_Vendors' ) ) {
+			$filterTypes['wpfVendors'] = array(
+				'name'         => esc_html__( 'Vendors', 'woo-product-filter' ),
+				'slug'         => esc_attr__( 'vendors', 'woo-product-filter' ),
+				'enabled'      => false,
+				'unique'       => true,
+				'content_type' => 'user',
+			);
+		}
+
+		return DispatcherWpf::applyFilters( 'addFilterTypes', $filterTypes );
 	}
 
 	/**
@@ -139,45 +186,45 @@ class WoofiltersModelWpf extends ModelWpf {
 	 * @version 3.1.7
 	 * @since   3.1.7
 	 */
-	public function getCustomFieldFilterOptions($post_type) {
+	public function getCustomFieldFilterOptions( $post_type ) {
 		// Check if ACF is installed
-		if (class_exists('ACF')) {
+		if ( class_exists( 'ACF' ) ) {
 			$result = array();
 			// 1. Get all field groups assigned to this post type
-			$field_groups = acf_get_field_groups(array('post_type' => $post_type));
-			if (! $field_groups) {
+			$field_groups = acf_get_field_groups( array( 'post_type' => $post_type ) );
+			if ( ! $field_groups ) {
 				return $result; // No groups → empty
 			}
-			foreach ($field_groups as $group) {
+			foreach ( $field_groups as $group ) {
 				// 2. Get all fields in this group
-				$fields = acf_get_fields($group['key']); // or $group['ID']
+				$fields = acf_get_fields( $group['key'] ); // or $group['ID']
 
-				if (! $fields) {
+				if ( ! $fields ) {
 					continue;
 				}
-				foreach ($fields as $field) {
+				foreach ( $fields as $field ) {
 					// Skip if no name (rare, but safety)
-					if (empty($field['name']) || !in_array($field['type'], ['radio', 'checkbox'])) {
+					if ( empty( $field['name'] ) || ! in_array( $field['type'], array( 'radio', 'checkbox' ) ) ) {
 						continue;
 					}
-					$field_values = isset($field['choices']) ? $field['choices'] : [];
-					if ($field['type'] === 'radio') {
+					$field_values = isset( $field['choices'] ) ? $field['choices'] : array();
+					if ( $field['type'] === 'radio' ) {
 						// If it's a radio field, we'll store the value(s) as an array
-						$result[$field['name']] = array(
-							'value' => array_keys($field_values), // Returns selected values as an array
+						$result[ $field['name'] ] = array(
+							'value' => array_keys( $field_values ), // Returns selected values as an array
 							'type'  => 'radio',
 							'name'  => $field['name'],
-							'label' => $field['label'] // Using the first label as the label
+							'label' => $field['label'], // Using the first label as the label
 						);
 					}
 					// For checkbox fields, we'll store the selected values as an array
-					if ($field['type'] === 'checkbox') {
+					if ( $field['type'] === 'checkbox' ) {
 						// For checkbox fields, we store all selected values and their labels
-						$result[$field['name']] = array(
-							'value' => array_keys($field_values), // Collect all selected checkbox values as an array
+						$result[ $field['name'] ] = array(
+							'value' => array_keys( $field_values ), // Collect all selected checkbox values as an array
 							'type'  => 'checkbox',
 							'name'  => $field['name'],
-							'label' => $field['label'] // Using the first checkbox label for simplicity
+							'label' => $field['label'], // Using the first checkbox label for simplicity
 						);
 					}
 				}
@@ -190,29 +237,29 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * getSortByFilterLabels.
 	 */
-	public function getSortByFilterLabels ( $params = [] ) {
-		$labels = $this->getFilterLabels('SortBy');
+	public function getSortByFilterLabels( $params = array() ) {
+		$labels = $this->getFilterLabels( 'SortBy' );
 
 		if ( $params ) {
-			$newLabels = [];
-			$field = 'f_options[]';
+			$newLabels = array();
+			$field     = 'f_options[]';
 
-			foreach ( $params as $key=>$value ) {
-				if ('wpfSortBy' == $value->id && isset($value->settings) && !empty($value->settings->{$field})) {
-					foreach ( explode(',', $value->settings->{$field}) as $_key=>$_value ) {
-						if ( isset($labels[$_value]) ) {
-							$newLabels[$_value] = $labels[$_value];
+			foreach ( $params as $key => $value ) {
+				if ( 'wpfSortBy' == $value->id && isset( $value->settings ) && ! empty( $value->settings->{$field} ) ) {
+					foreach ( explode( ',', $value->settings->{$field} ) as $_key => $_value ) {
+						if ( isset( $labels[ $_value ] ) ) {
+							$newLabels[ $_value ] = $labels[ $_value ];
 						}
 					}
 					break;
 				}
 			}
 
-			if ($newLabels) {
-				if (count($newLabels) != count($labels) ) {
-					$diff = array_diff($labels, $newLabels);
-					if ($diff) {
-						$newLabels = array_merge($newLabels, $diff);
+			if ( $newLabels ) {
+				if ( count( $newLabels ) != count( $labels ) ) {
+					$diff = array_diff( $labels, $newLabels );
+					if ( $diff ) {
+						$newLabels = array_merge( $newLabels, $diff );
 					}
 				}
 				return $newLabels;
@@ -226,38 +273,38 @@ class WoofiltersModelWpf extends ModelWpf {
 	 * getFilterLabels.
 	 */
 	public function getFilterLabels( $filter ) {
-		switch ($filter) {
+		switch ( $filter ) {
 			case 'SortBy':
 				$labels = array(
-					'default'    => esc_html__('Default', 'woo-product-filter'),
-					'popularity' => esc_html__('Popularity', 'woo-product-filter'),
-					'rating'     => esc_html__('Rating', 'woo-product-filter'),
-					'date'       => esc_html__('Newness', 'woo-product-filter'),
-					'date-asc'   => esc_html__('Oldest first', 'woo-product-filter'),
-					'price'      => esc_html__('Price: low to high', 'woo-product-filter'),
-					'price-desc' => esc_html__('Price: high to low', 'woo-product-filter'),
-					'rand'       => esc_html__('Random', 'woo-product-filter'),
-					'title'      => esc_html__('Name A to Z', 'woo-product-filter'),
-					'title-desc' => esc_html__('Name Z to A', 'woo-product-filter'),
-					'sku'        => esc_html__('SKU ascending', 'woo-product-filter'),
-					'sku-desc'   => esc_html__('SKU descending', 'woo-product-filter'),
-					);
-				$custom = apply_filters('woocommerce_catalog_orderby', array());
-				if (!empty($custom)) {
-					$labels = array_merge($labels, $custom);
+					'default'    => esc_html__( 'Default', 'woo-product-filter' ),
+					'popularity' => esc_html__( 'Popularity', 'woo-product-filter' ),
+					'rating'     => esc_html__( 'Rating', 'woo-product-filter' ),
+					'date'       => esc_html__( 'Newness', 'woo-product-filter' ),
+					'date-asc'   => esc_html__( 'Oldest first', 'woo-product-filter' ),
+					'price'      => esc_html__( 'Price: low to high', 'woo-product-filter' ),
+					'price-desc' => esc_html__( 'Price: high to low', 'woo-product-filter' ),
+					'rand'       => esc_html__( 'Random', 'woo-product-filter' ),
+					'title'      => esc_html__( 'Name A to Z', 'woo-product-filter' ),
+					'title-desc' => esc_html__( 'Name Z to A', 'woo-product-filter' ),
+					'sku'        => esc_html__( 'SKU ascending', 'woo-product-filter' ),
+					'sku-desc'   => esc_html__( 'SKU descending', 'woo-product-filter' ),
+				);
+				$custom = apply_filters( 'woocommerce_catalog_orderby', array() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+				if ( ! empty( $custom ) ) {
+					$labels = array_merge( $labels, $custom );
 				}
 				break;
 			case 'InStock':
 				$labels = array(
-					'instock'     => esc_html__('In Stock', 'woo-product-filter'),
-					'outofstock'  => esc_html__('Out of Stock', 'woo-product-filter'),
-					'onbackorder' => esc_html__('On Backorder', 'woo-product-filter'),
-					);
+					'instock'     => esc_html__( 'In Stock', 'woo-product-filter' ),
+					'outofstock'  => esc_html__( 'Out of Stock', 'woo-product-filter' ),
+					'onbackorder' => esc_html__( 'On Backorder', 'woo-product-filter' ),
+				);
 				break;
 			case 'OnSale':
 				$labels = array(
-					'onsale' => esc_html__('On Sale', 'woo-product-filter')
-					);
+					'onsale' => esc_html__( 'On Sale', 'woo-product-filter' ),
+				);
 				break;
 			case 'Category':
 			case 'PerfectBrand':
@@ -265,8 +312,8 @@ class WoofiltersModelWpf extends ModelWpf {
 			case 'Attribute':
 			case 'Author':
 				$labels = array(
-					'search' => esc_html__('Search ...', 'woo-product-filter')
-					);
+					'search' => esc_html__( 'Search ...', 'woo-product-filter' ),
+				);
 				break;
 			default:
 				$labels = array();
@@ -278,63 +325,63 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * syncSlugFormatRewriteSiteOption.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.0
 	 * @since   3.1.7
 	 */
 	public function syncSlugFormatRewriteSiteOption() {
 		$enabled = 0;
-		$prev    = (int) get_option('wpf_slug_format_rewrite_active', 0);
-		$rows    = $this->setSelectFields('setting_data')->getFromTbl();
-		foreach ((array) $rows as $row) {
-			if (empty($row['setting_data'])) {
+		$prev    = (int) get_option( 'wpf_slug_format_rewrite_active', 0 );
+		$rows    = $this->setSelectFields( 'setting_data' )->getFromTbl();
+		foreach ( (array) $rows as $row ) {
+			if ( empty( $row['setting_data'] ) ) {
 				continue;
 			}
-			$decoded = @unserialize($row['setting_data']);
-			if (is_array($decoded) && !empty($decoded['settings']['slug_format'])) {
+			$decoded = maybe_unserialize( $row['setting_data'] );
+			if ( is_array( $decoded ) && ! empty( $decoded['settings']['slug_format'] ) ) {
 				$enabled = 1;
 				break;
 			}
 		}
-		update_option('wpf_slug_format_rewrite_active', $enabled, false);
-		if ((int) $prev !== (int) $enabled) {
-			flush_rewrite_rules(false);
+		update_option( 'wpf_slug_format_rewrite_active', $enabled, false );
+		if ( (int) $prev !== (int) $enabled ) {
+			flush_rewrite_rules( false );
 		}
 	}
 
 	/**
 	 * save.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	public function save( $data = array() ) {
 
-		$id = isset($data['id']) ? $data['id'] : false;
+		$id = isset( $data['id'] ) ? $data['id'] : false;
 
-		$title         = !empty($data['title']) ? $data['title'] : gmdate('Y-m-d-h-i-s');
+		$title         = ! empty( $data['title'] ) ? $data['title'] : gmdate( 'Y-m-d-h-i-s' );
 		$data['title'] = $title;
-		$duplicateId   = isset($data['duplicateId']) ? $data['duplicateId'] : false;
-		//already created filter
-		if ( !empty($id) && !empty($title) ) {
-			$data['id'] = (string) $id;
-			$statusUpdate = $this->updateById( $data , $id );
-			if ($statusUpdate) {
+		$duplicateId   = isset( $data['duplicateId'] ) ? $data['duplicateId'] : false;
+		// already created filter
+		if ( ! empty( $id ) && ! empty( $title ) ) {
+			$data['id']   = (string) $id;
+			$statusUpdate = $this->updateById( $data, $id );
+			if ( $statusUpdate ) {
 				return $id;
 			}
-		} else if ( empty($id) && !empty($title) && empty($duplicateId) ) {  //empty filter
+		} elseif ( empty( $id ) && ! empty( $title ) && empty( $duplicateId ) ) {  // empty filter
 			$idInsert = $this->insert( $data );
-			if ($idInsert) {
-				if (empty($title)) {
+			if ( $idInsert ) {
+				if ( empty( $title ) ) {
 					$title = (string) $idInsert;
 				}
 				$data['id'] = (string) $idInsert;
-				$this->updateById( $data , $idInsert );
+				$this->updateById( $data, $idInsert );
 			}
 			return $idInsert;
-		} elseif ( empty($id) && !empty($title) && !empty($duplicateId) ) {  //duplicate filter
-			$duplicateData             = $this->getById($duplicateId);
-			$settings                  = unserialize($duplicateData['setting_data']);
+		} elseif ( empty( $id ) && ! empty( $title ) && ! empty( $duplicateId ) ) {  // duplicate filter
+			$duplicateData             = $this->getById( $duplicateId );
+			$settings                  = maybe_unserialize( $duplicateData['setting_data'] );
 			$duplicateData['settings'] = $settings['settings'];
-			$duplicateData['title']    = isset($title) ? $title : 'untitled';
+			$duplicateData['title']    = isset( $title ) ? $title : 'untitled';
 			$duplicateData['id']       = '';
 			$idInsert                  = $this->insert( $duplicateData );
 			return $idInsert;
@@ -345,31 +392,31 @@ class WoofiltersModelWpf extends ModelWpf {
 	/**
 	 * _dataSave.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	protected function _dataSave( $data, $update = false ) {
-		$esettings = isset($data['esettings']) ? UtilsWpf::jsonDecode(stripslashes($data['esettings'])) : array();
-		if (!empty($esettings)) {
-			$data['settings'] = array_merge($esettings, ( isset($data['settings']) && is_array($data['settings']) ? $data['settings'] : array() ));
+		$esettings = isset( $data['esettings'] ) ? UtilsWpf::jsonDecode( stripslashes( $data['esettings'] ) ) : array();
+		if ( ! empty( $esettings ) ) {
+			$data['settings'] = array_merge( $esettings, ( isset( $data['settings'] ) && is_array( $data['settings'] ) ? $data['settings'] : array() ) );
 		}
 
-		$settings                             = isset($data['settings']) ? $data['settings'] : array();
+		$settings = isset( $data['settings'] ) ? $data['settings'] : array();
 
-		$data['settings']['filters']['order'] = isset($settings['filters']) && isset($settings['filters']['order']) ? stripslashes($settings['filters']['order']) : '';
-		$notEdit                              = array('filters');
-		foreach ($data['settings'] as $key => $value) {
-			if (!in_array($key, $notEdit) && is_string($value)) {
-				$v = str_replace('"', '&quot;', str_replace('\"', '"', $value));
-				$data['settings'][$key] = str_replace("'", '&#039;', str_replace("\'", "'", $v));
+		$data['settings']['filters']['order'] = isset( $settings['filters'] ) && isset( $settings['filters']['order'] ) ? stripslashes( $settings['filters']['order'] ) : '';
+		$notEdit                              = array( 'filters' );
+		foreach ( $data['settings'] as $key => $value ) {
+			if ( ! in_array( $key, $notEdit ) && is_string( $value ) ) {
+				$v                        = str_replace( '"', '&quot;', str_replace( '\"', '"', $value ) );
+				$data['settings'][ $key ] = str_replace( "'", '&#039;', str_replace( "\'", "'", $v ) );
 			}
 		}
-		$metaKeys = $this->getDataFilterMetaKeys($data['settings']['filters']['order']);
-		$data['meta_keys'] = count($metaKeys) > 0 ? implode('|', $metaKeys) : '';
+		$metaKeys          = $this->getDataFilterMetaKeys( $data['settings']['filters']['order'] );
+		$data['meta_keys'] = count( $metaKeys ) > 0 ? implode( '|', $metaKeys ) : '';
 
-		$settingData          = array('settings' => $data['settings']);
-		$data['setting_data'] = addslashes(serialize($settingData));
+		$settingData          = array( 'settings' => $data['settings'] );
+		$data['setting_data'] = addslashes( maybe_serialize( $settingData ) );
 
-		$this->translateStrings($data['settings']);
+		$this->translateStrings( $data['settings'] );
 
 		return $data;
 	}
@@ -378,7 +425,7 @@ class WoofiltersModelWpf extends ModelWpf {
 	 * WPML string translation.
 	 */
 	private function translateStrings( $data_settings ) {
-		$filters_arr = json_decode($data_settings['filters']['order'], true);
+		$filters_arr = json_decode( $data_settings['filters']['order'], true );
 		// print_r($filters_arr);
 		// die;
 		// here goes othes filter options strings
@@ -420,26 +467,26 @@ class WoofiltersModelWpf extends ModelWpf {
 			}
 		}
 		// here goes other plugin settings strings
-		if (!empty($data_settings['filtering_button_word'])) {
-			wpf_translate_string($data_settings['filtering_button_word']); // ?
+		if ( ! empty( $data_settings['filtering_button_word'] ) ) {
+			wpf_translate_string( $data_settings['filtering_button_word'] ); // ?
 		}
-		if (!empty($data_settings['show_clean_button_word'])) {
-			wpf_translate_string($data_settings['show_clean_button_word']); // ?
+		if ( ! empty( $data_settings['show_clean_button_word'] ) ) {
+			wpf_translate_string( $data_settings['show_clean_button_word'] ); // ?
 		}
-		if (!empty($data_settings['hide_button_hide_text'])) {
-			wpf_translate_string($data_settings['hide_button_hide_text']); // ?
+		if ( ! empty( $data_settings['hide_button_hide_text'] ) ) {
+			wpf_translate_string( $data_settings['hide_button_hide_text'] ); // ?
 		}
-		if (!empty($data_settings['hide_button_show_text'])) {
-			wpf_translate_string($data_settings['hide_button_show_text']); // ?
+		if ( ! empty( $data_settings['hide_button_show_text'] ) ) {
+			wpf_translate_string( $data_settings['hide_button_show_text'] ); // ?
 		}
-		if (!empty($data_settings['text_no_products'])) {
-			wpf_translate_string($data_settings['text_no_products']); // ?
+		if ( ! empty( $data_settings['text_no_products'] ) ) {
+			wpf_translate_string( $data_settings['text_no_products'] ); // ?
 		}
-		if (!empty($data_settings['enable_overlay_word']) && '1' == $data_settings['enable_overlay_word'] && !empty($data_settings['overlay_word'])) {
-			wpf_translate_string($data_settings['overlay_word']); // ?
+		if ( ! empty( $data_settings['enable_overlay_word'] ) && '1' == $data_settings['enable_overlay_word'] && ! empty( $data_settings['overlay_word'] ) ) {
+			wpf_translate_string( $data_settings['overlay_word'] ); // ?
 		}
-		if (!empty($data_settings['selected_params_clear']) && '1' == $data_settings['selected_params_clear'] && !empty($data_settings['selected_clean_word'])) {
-			wpf_translate_string($data_settings['selected_clean_word']); // ?
+		if ( ! empty( $data_settings['selected_params_clear'] ) && '1' == $data_settings['selected_params_clear'] && ! empty( $data_settings['selected_clean_word'] ) ) {
+			wpf_translate_string( $data_settings['selected_clean_word'] ); // ?
 		}
 	}
 
@@ -447,26 +494,26 @@ class WoofiltersModelWpf extends ModelWpf {
 	 * getDataFilterMetaKeys.
 	 */
 	public function getDataFilterMetaKeys( $filters, $save = true ) {
-		$filters = UtilsWpf::jsonDecode($filters);
+		$filters  = UtilsWpf::jsonDecode( $filters );
 		$metaKeys = array();
-		if (class_exists('WooCommerceB2B') && FrameWpf::_()->getModule('options')->getModel()->get('use_wcb2b_prices') == 1) {
-			foreach ($filters as $filter) {
-				$filterId = $this->getFilterSetting($filter, 'id');
-				if ('wpfPrice' == $filterId || 'wpfPriceRange' == $filterId) {
+		if ( class_exists( 'WooCommerceB2B' ) && FrameWpf::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
+			foreach ( $filters as $filter ) {
+				$filterId = $this->getFilterSetting( $filter, 'id' );
+				if ( 'wpfPrice' == $filterId || 'wpfPriceRange' == $filterId ) {
 					$metaKeys[] = 'wcb2b_product_group_prices';
 					break;
 				}
 			}
 		}
 
-		$metaKeys = DispatcherWpf::applyFilters('addCustomMetaKeys', $metaKeys, $filters);
-		foreach ($metaKeys as $k => $key) {
-			$metaKeys[$k] = strtolower($key);
+		$metaKeys = DispatcherWpf::applyFilters( 'addCustomMetaKeys', $metaKeys, $filters );
+		foreach ( $metaKeys as $k => $key ) {
+			$metaKeys[ $k ] = strtolower( $key );
 		}
-		if ($save && count($metaKeys) > 0) {
-			$keysModel = FrameWpf::_()->getModule('meta')->getModel('meta_keys');
-			if (!$keysModel->addFilterMetaKeys($metaKeys)) {
-				$this->pushError($keysModel->getErrors());
+		if ( $save && count( $metaKeys ) > 0 ) {
+			$keysModel = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_keys' );
+			if ( ! $keysModel->addFilterMetaKeys( $metaKeys ) ) {
+				$this->pushError( $keysModel->getErrors() );
 			}
 		}
 		return $metaKeys;
@@ -474,44 +521,48 @@ class WoofiltersModelWpf extends ModelWpf {
 
 	/**
 	 * getFiltersMetaKeys.
+	 *
+	 * @version 3.3.0
 	 */
 	public function getFiltersMetaKeys( $id = 0, $deep = false ) {
 		$keys = array();
-		if (!$deep) {
-			if (!empty($id)) {
-				$this->addWhere(array('id' => $id));
+		if ( ! $deep ) {
+			if ( ! empty( $id ) ) {
+				$this->addWhere( array( 'id' => $id ) );
 			}
-			$data = $this->setSelectFields('meta_keys')->addWhere("meta_keys is null OR meta_keys!=''")->getFromTbl(array('return' => 'col'));
+			$data = $this->setSelectFields( 'meta_keys' )->addWhere( "meta_keys is null OR meta_keys!=''" )->getFromTbl( array( 'return' => 'col' ) );
 
-			foreach ($data as $str) {
-				if (is_null($str)) {
+			foreach ( $data as $str ) {
+				if ( is_null( $str ) ) {
 					$deep = true;
 					break;
 				}
-				$keys = array_merge($keys, explode('|', $str));
+				$keys = array_merge( $keys, explode( '|', $str ) );
 			}
 		}
-		if ($deep) {
+		if ( $deep ) {
 			$keys = array();
-			if (!empty($id)) {
-				$this->addWhere(array('id' => $id));
+			if ( ! empty( $id ) ) {
+				$this->addWhere( array( 'id' => $id ) );
 			}
-			$data = $this->setSelectFields('id, setting_data')->getFromTbl();
-			foreach ($data as $filter) {
-				$settings = unserialize($filter['setting_data']);
-				$metaKeys = $settings && !empty($settings['settings']['filters']['order']) ? $this->getDataFilterMetaKeys($settings['settings']['filters']['order'], false) : array();
-				$query = "UPDATE `@__filters` SET meta_keys='";
-				if (!empty($metaKeys)) {
-					$query .= implode('|', $metaKeys);
-					$keys = array_merge($keys, $metaKeys);
+			$data = $this->setSelectFields( 'id, setting_data' )->getFromTbl();
+			foreach ( $data as $filter ) {
+				$settings = maybe_unserialize( $filter['setting_data'] );
+				$metaKeys = $settings && ! empty( $settings['settings']['filters']['order'] ) ?
+					$this->getDataFilterMetaKeys( $settings['settings']['filters']['order'], false ) :
+					array();
+
+				$metaKeysLine = '';
+				if ( ! empty( $metaKeys ) ) {
+					$metaKeysLine = implode( '|', $metaKeys );
+					$keys         = array_merge( $keys, $metaKeys );
 				}
-				if (!DbWpf::query($query . "' WHERE id=" . $filter['id'])) {
-					$this->pushError(DbWpf::getError());
+				if ( ! DbWpf::query( 'UPDATE `@__filters` SET meta_keys=%s WHERE id=%d', false, array( $metaKeysLine, (int) $filter['id'] ) ) ) {
+					$this->pushError( DbWpf::getError() );
 					return false;
 				}
 			}
 		}
 		return $keys;
 	}
-
 }

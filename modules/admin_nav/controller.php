@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Admin_NavControllerWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -13,7 +13,7 @@ class Admin_NavControllerWpf extends ControllerWpf {
 	public function getPermissions() {
 		return array(
 			WPF_USERLEVELS => array(
-				WPF_ADMIN => array()
+				WPF_ADMIN => array(),
 			),
 		);
 	}

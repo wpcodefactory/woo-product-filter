@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WpfWoofiltersWidget Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -12,8 +12,8 @@ defined( 'ABSPATH' ) || exit;
 class WpfWoofiltersWidget extends WP_Widget {
 	public function __construct() {
 		$widgetOps = array(
-			'classname' => 'WpfWoofiltersWidget',
-			'description' => 'Displays Filters'
+			'classname'   => 'WpfWoofiltersWidget',
+			'description' => 'Displays Filters',
 		);
 		parent::__construct( 'WpfWoofiltersWidget', WPF_WP_PLUGIN_NAME, $widgetOps );
 	}
@@ -21,12 +21,12 @@ class WpfWoofiltersWidget extends WP_Widget {
 		if ( is_array( $args ) ) {
 			extract( $args );
 		}
-		extract($instance);
-		FrameWpf::_()->getModule('woofilters_widget')->getView()->displayWidget($instance, $args);
+		extract( $instance );
+		FrameWpf::_()->getModule( 'woofilters_widget' )->getView()->displayWidget( $instance, $args );
 	}
 	public function form( $instance ) {
-		extract($instance);
-		FrameWpf::_()->getModule('woofilters_widget')->getView()->displayForm($instance, $this);
+		extract( $instance );
+		FrameWpf::_()->getModule( 'woofilters_widget' )->getView()->displayForm( $instance, $this );
 	}
 	public function update( $new_instance, $old_instance ) {
 		return $new_instance;

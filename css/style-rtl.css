@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Style RTL CSS
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -27,12 +27,10 @@
 #wpfPopupEditors .CodeMirror {
 	direction: ltr;
 }
-
 .woobewoo-plugin select {
 	background: #fff url(images/down.png) no-repeat left 5px top 55% !important;
 	padding-left: 24px !important;
 }
-
 .sub-block-values {
 	direction: ltr;
 }

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - UtilsWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -15,46 +15,38 @@ class UtilsWpf {
 	 * jsonEncode.
 	 */
 	public static function jsonEncode( $arr ) {
-		return ( is_array($arr) || is_object($arr) ) ? jsonEncodeUTFnormalWpf($arr) : jsonEncodeUTFnormalWpf(array());
+		return ( is_array( $arr ) || is_object( $arr ) ) ? jsonEncodeUTFnormalWpf( $arr ) : jsonEncodeUTFnormalWpf( array() );
 	}
 
 	/**
 	 * jsonDecode.
 	 */
 	public static function jsonDecode( $str ) {
-		if (is_array($str)) {
+		if ( is_array( $str ) ) {
 			return $str;
 		}
-		if (is_object($str)) {
+		if ( is_object( $str ) ) {
 			return (array) $str;
 		}
-		return empty($str) ? array() : json_decode($str, true);
-	}
-
-	/**
-	 * unserialize.
-	 */
-	public static function unserialize( $data ) {
-		return unserialize($data);
-	}
-
-	/**
-	 * serialize.
-	 */
-	public static function serialize( $data ) {
-		return serialize($data);
+		return empty( $str ) ? array() : json_decode( $str, true );
 	}
 
 	/**
 	 * createDir.
 	 */
-	public static function createDir( $path, $params = array('chmod' => null, 'httpProtect' => false) ) {
-		if (@mkdir($path)) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
-			if (!is_null($params['chmod'])) {
-				@chmod($path, $params['chmod']); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod
+	public static function createDir(
+		$path,
+		$params = array(
+			'chmod'       => null,
+			'httpProtect' => false,
+		)
+	) {
+		if ( @mkdir( $path ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
+			if ( ! is_null( $params['chmod'] ) ) {
+				@chmod( $path, $params['chmod'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod
 			}
-			if (!empty($params['httpProtect'])) {
-				self::httpProtectDir($path);
+			if ( ! empty( $params['httpProtect'] ) ) {
+				self::httpProtectDir( $path );
 			}
 			return true;
 		}
@@ -64,19 +56,26 @@ class UtilsWpf {
 	/**
 	 * httpProtectDir.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	public static function httpProtectDir( $path ) {
 		$content = 'DENY FROM ALL';
 		if ( strrpos( $path, WPF_DS ) != strlen( $path ) ) {
 			$path .= WPF_DS;
 		}
+
 		global $wp_filesystem;
+
 		if ( empty( $wp_filesystem ) ) {
-			require_once ABSPATH . '/wp-admin/includes/file.php';
+			require_once ABSPATH . 'wp-admin/includes/file.php';
 			WP_Filesystem();
 		}
-		return (bool) $wp_filesystem->put_contents( $path . '.htaccess', $content, FS_CHMOD_FILE );
+
+		return $wp_filesystem->put_contents(
+			$path . '.htaccess',
+			$content,
+			FS_CHMOD_FILE
+		);
 	}
 
 	/**
@@ -86,15 +85,15 @@ class UtilsWpf {
 	 * @param string $destination Path to destination directory.
 	 */
 	public static function copyDirectories( $source, $destination ) {
-		if (is_dir($source)) {
-			@mkdir($destination); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
-			$directory = dir($source);
+		if ( is_dir( $source ) ) {
+			@mkdir( $destination ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
+			$directory = dir( $source );
 			while ( false !== ( $readdirectory = $directory->read() ) ) {
 				if ( ( '.' == $readdirectory ) || ( '..' == $readdirectory ) ) {
 					continue;
 				}
 				$PathDir = $source . '/' . $readdirectory;
-				if (is_dir($PathDir)) {
+				if ( is_dir( $PathDir ) ) {
 					self::copyDirectories( $PathDir, $destination . '/' . $readdirectory );
 					continue;
 				}
@@ -113,22 +112,22 @@ class UtilsWpf {
 	 */
 	public static function getIP() {
 		$res = '';
-		if (!isset($_SERVER['HTTP_CLIENT_IP']) || empty($_SERVER['HTTP_CLIENT_IP'])) {
-			if (!isset($_SERVER['HTTP_X_REAL_IP']) || empty($_SERVER['HTTP_X_REAL_IP'])) {
-				if (!isset($_SERVER['HTTP_X_SUCURI_CLIENTIP']) || empty($_SERVER['HTTP_X_SUCURI_CLIENTIP'])) {
-					if (!isset($_SERVER['HTTP_X_FORWARDED_FOR']) || empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-						$res = empty($_SERVER['REMOTE_ADDR']) ? '' : sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']));
+		if ( ! isset( $_SERVER['HTTP_CLIENT_IP'] ) || empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+			if ( ! isset( $_SERVER['HTTP_X_REAL_IP'] ) || empty( $_SERVER['HTTP_X_REAL_IP'] ) ) {
+				if ( ! isset( $_SERVER['HTTP_X_SUCURI_CLIENTIP'] ) || empty( $_SERVER['HTTP_X_SUCURI_CLIENTIP'] ) ) {
+					if ( ! isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) || empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+						$res = empty( $_SERVER['REMOTE_ADDR'] ) ? '' : sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 					} else {
-						$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_FORWARDED_FOR']));
+						$res = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
 					}
 				} else {
-					$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_SUCURI_CLIENTIP']));
+					$res = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_SUCURI_CLIENTIP'] ) );
 				}
 			} else {
-				$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_X_REAL_IP']));
+				$res = sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_REAL_IP'] ) );
 			}
 		} else {
-			$res = sanitize_text_field(wp_unslash($_SERVER['HTTP_CLIENT_IP']));
+			$res = sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
 		}
 
 		return $res;
@@ -141,8 +140,8 @@ class UtilsWpf {
 	 * @return mixed object SimpleXMLElement if success, else - false
 	 */
 	public static function getXml( $path ) {
-		if (is_file($path)) {
-			return simplexml_load_file($path);
+		if ( is_file( $path ) ) {
+			return simplexml_load_file( $path );
 		}
 		return false;
 	}
@@ -153,9 +152,9 @@ class UtilsWpf {
 	 * @param array $param
 	 */
 	public static function xmlAttrToStr( $param, $element ) {
-		if (isset($param[$element])) {
+		if ( isset( $param[ $element ] ) ) {
 			// convert object element to string
-			return (string) $param[$element];
+			return (string) $param[ $element ];
 		} else {
 			return '';
 		}
@@ -166,8 +165,8 @@ class UtilsWpf {
 	 */
 	public static function xmlNodeAttrsToArr( $node ) {
 		$arr = array();
-		foreach ($node->attributes() as $a => $b) {
-			$arr[$a] = self::xmlAttrToStr($node, $a);
+		foreach ( $node->attributes() as $a => $b ) {
+			$arr[ $a ] = self::xmlAttrToStr( $node, $a );
 		}
 		return $arr;
 	}
@@ -178,61 +177,63 @@ class UtilsWpf {
 	 * @version 3.1.8
 	 */
 	public static function deleteFile( $str ) {
-		return wp_delete_file($str);
+		return wp_delete_file( $str );
 	}
 
 	/**
 	 * deleteDir.
 	 */
 	public static function deleteDir( $str ) {
-		if (is_file($str)) {
-			return self::deleteFile($str);
-		} elseif (is_dir($str)) {
-			$scan = glob(rtrim($str, '/') . '/*');
-			foreach ($scan as $index => $path) {
-				self::deleteDir($path);
+		if ( is_file( $str ) ) {
+			return self::deleteFile( $str );
+		} elseif ( is_dir( $str ) ) {
+			$scan = glob( rtrim( $str, '/' ) . '/*' );
+			foreach ( $scan as $index => $path ) {
+				self::deleteDir( $path );
 			}
-			return @rmdir($str); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
+			return @rmdir( $str ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
 		}
 	}
 
 	/**
 	 * Retrieves list of directories ().
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	public static function getDirList( $path ) {
 		$res = array();
-		if (is_dir($path)) {
-			$files = scandir($path);
-			foreach ($files as $f) {
+		if ( is_dir( $path ) ) {
+			$files = scandir( $path );
+			foreach ( $files as $f ) {
 				if ( ( '.' == $f ) || ( '..' == $f ) || ( '.svn' == $f ) ) {
 					continue;
 				}
-				if (!is_dir($path . $f)) {
+				if ( ! is_dir( $path . $f ) ) {
 					continue;
 				}
-				$res[$f] = array('path' => $path . $f . WPF_DS);
+				$res[ $f ] = array( 'path' => $path . $f . WPF_DS );
 			}
 		}
+
 		return $res;
 	}
 
 	/**
 	 * Retrieves list of files.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	public static function getFilesList( $path ) {
 		$files = array();
-		if (is_dir($path)) {
-			$dirHandle = opendir($path);
-			while ( ( $file = readdir($dirHandle) ) !== false ) {
-				if ( ( '.' != $file ) && ( '..' != $file ) && ( '.svn' != $file ) && is_file($path . WPF_DS . $file) ) {
+		if ( is_dir( $path ) ) {
+			$dirHandle = opendir( $path );
+			while ( ( $file = readdir( $dirHandle ) ) !== false ) {
+				if ( ( '.' != $file ) && ( '..' != $file ) && ( '.svn' != $file ) && is_file( $path . WPF_DS . $file ) ) {
 					$files[] = $file;
 				}
 			}
 		}
+
 		return $files;
 	}
 
@@ -240,10 +241,10 @@ class UtilsWpf {
 	 * Check if $var is object or something another in future.
 	 */
 	public static function is( $var, $what = '' ) {
-		if (!is_object($var)) {
+		if ( ! is_object( $var ) ) {
 			return false;
 		}
-		if (get_class($var) == $what) {
+		if ( get_class( $var ) == $what ) {
 			return true;
 		}
 		return false;
@@ -256,9 +257,9 @@ class UtilsWpf {
 	 * @see checkoutView::getSuccessPage()
 	 */
 	public static function makeVariablesReplacement( $text, $variables ) {
-		if (!empty($text) && !empty($variables) && is_array($variables)) {
-			foreach ($variables as $k => $v) {
-				$text = str_replace(':' . $k, $v, $text);
+		if ( ! empty( $text ) && ! empty( $variables ) && is_array( $variables ) ) {
+			foreach ( $variables as $k => $v ) {
+				$text = str_replace( ':' . $k, $v, $text );
 			}
 			return $text;
 		}
@@ -268,7 +269,7 @@ class UtilsWpf {
 	/**
 	 * Retrieve full directory of plugin.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 *
 	 * @param string $name - plugin name
 	 * @return string full path in file system to plugin directory
@@ -280,7 +281,7 @@ class UtilsWpf {
 	/**
 	 * getPluginPath.
 	 *
-	 * @version 3.2.0
+	 * @version 3.3.0
 	 */
 	public static function getPluginPath( $name = '' ) {
 		return trailingslashit( plugins_url( $name ) );
@@ -290,14 +291,14 @@ class UtilsWpf {
 	 * getExtModDir.
 	 */
 	public static function getExtModDir( $plugName ) {
-		return self::getPluginDir($plugName);
+		return self::getPluginDir( $plugName );
 	}
 
 	/**
 	 * getExtModPath.
 	 */
 	public static function getExtModPath( $plugName ) {
-		return self::getPluginPath($plugName);
+		return self::getPluginPath( $plugName );
 	}
 
 	/**
@@ -311,8 +312,8 @@ class UtilsWpf {
 	 * isThisCommercialEdition.
 	 */
 	public static function isThisCommercialEdition() {
-		foreach (FrameWpf::_()->getModules() as $m) {
-			if (is_object($m) && $m->isExternal()) {
+		foreach ( FrameWpf::_()->getModules() as $m ) {
+			if ( is_object( $m ) && $m->isExternal() ) {
 				return true;
 			}
 		}
@@ -323,7 +324,7 @@ class UtilsWpf {
 	 * checkNum.
 	 */
 	public static function checkNum( $val, $default = 0 ) {
-		if (!empty($val) && is_numeric($val)) {
+		if ( ! empty( $val ) && is_numeric( $val ) ) {
 			return $val;
 		}
 		return $default;
@@ -333,7 +334,7 @@ class UtilsWpf {
 	 * checkString.
 	 */
 	public static function checkString( $val, $default = '' ) {
-		if (!empty($val) && is_string($val)) {
+		if ( ! empty( $val ) && is_string( $val ) ) {
 			return $val;
 		}
 		return $default;
@@ -346,7 +347,7 @@ class UtilsWpf {
 	 * @return string - file extension
 	 */
 	public static function getFileExt( $path ) {
-		return strtolower( pathinfo($path, PATHINFO_EXTENSION) );
+		return strtolower( pathinfo( $path, PATHINFO_EXTENSION ) );
 	}
 
 	/**
@@ -355,13 +356,13 @@ class UtilsWpf {
 	 * @version 3.1.8
 	 */
 	public static function getRandStr( $length = 10, $allowedChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', $params = array() ) {
-		$result = '';
-		$allowedCharsLen = strlen($allowedChars);
-		if (isset($params['only_lowercase']) && $params['only_lowercase']) {
-			$allowedChars = strtolower($allowedChars);
+		$result          = '';
+		$allowedCharsLen = strlen( $allowedChars );
+		if ( isset( $params['only_lowercase'] ) && $params['only_lowercase'] ) {
+			$allowedChars = strtolower( $allowedChars );
 		}
-		while (strlen($result) < $length) {
-			$result .= substr($allowedChars, wp_rand(0, $allowedCharsLen), 1);
+		while ( strlen( $result ) < $length ) {
+			$result .= substr( $allowedChars, wp_rand( 0, $allowedCharsLen ), 1 );
 		}
 
 		return $result;
@@ -375,37 +376,18 @@ class UtilsWpf {
 	 * @return string host string
 	 */
 	public static function getHost() {
-		return empty($_SERVER['HTTP_HOST']) ? '' : sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST']));
+		return empty( $_SERVER['HTTP_HOST'] ) ? '' : sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
 	}
 
 	/**
 	 * Check if device is mobile.
 	 *
+	 * @version 3.3.0
+	 *
 	 * @return bool true if user are watching this site from mobile device
 	 */
 	public static function isMobile() {
-		if (!class_exists('Mobile_Detect')) {
-			if (file_exists(WPF_HELPERS_DIR . 'mobileDetect.php')) {
-				require WPF_HELPERS_DIR . 'mobileDetect.php';
-			}
-		}
-		$mobileDetect = new Mobile_Detect();
-		return $mobileDetect->isMobile();
-	}
-
-	/**
-	 * Check if device is tablet.
-	 *
-	 * @return bool true if user are watching this site from tablet device
-	 */
-	public static function isTablet() {
-		if (!class_exists('Mobile_Detect')) {
-			if (file_exists(WPF_HELPERS_DIR . 'mobileDetect.php')) {
-				require WPF_HELPERS_DIR . 'mobileDetect.php';
-			}
-		}
-		$mobileDetect = new Mobile_Detect();
-		return $mobileDetect->isTablet();
+		return wp_is_mobile();
 	}
 
 	/**
@@ -429,8 +411,8 @@ class UtilsWpf {
 	 */
 	public static function arrToCss( $data ) {
 		$res = '';
-		if (!empty($data)) {
-			foreach ($data as $k => $v) {
+		if ( ! empty( $data ) ) {
+			foreach ( $data as $k => $v ) {
 				$res .= $k . ':' . $v . ';';
 			}
 		}
@@ -446,23 +428,23 @@ class UtilsWpf {
 	 */
 	public static function activatePlugin( $networkwide ) {
 		global $wpdb;
-		if (WPF_TEST_MODE) {
-			add_action('activated_plugin', array(FrameWpf::_(), 'savePluginActivationErrors'));
+		if ( WPF_TEST_MODE ) {
+			add_action( 'activated_plugin', array( FrameWpf::_(), 'savePluginActivationErrors' ) );
 		}
 		delete_option( 'wpf_slug_format_rewrite_option_bootstrapped' ); // Re-run slug rewrite bootstrap logic after each activation.
-		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			foreach ($blog_id as $id) {
-				if (switch_to_blog($id)) {
+		if ( function_exists( 'is_multisite' ) && is_multisite() && $networkwide ) {
+			$blog_id = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			foreach ( $blog_id as $id ) {
+				if ( switch_to_blog( $id ) ) {
 					InstallerWpf::init();
-					flush_rewrite_rules(false);
+					flush_rewrite_rules( false );
 				}
 			}
 			restore_current_blog();
 			return;
 		} else {
 			InstallerWpf::init();
-			flush_rewrite_rules(false);
+			flush_rewrite_rules( false );
 		}
 	}
 
@@ -473,10 +455,10 @@ class UtilsWpf {
 	 */
 	public static function deletePlugin() {
 		global $wpdb;
-		if (function_exists('is_multisite') && is_multisite()) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			foreach ($blog_id as $id) {
-				if (switch_to_blog($id)) {
+		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+			$blog_id = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			foreach ( $blog_id as $id ) {
+				if ( switch_to_blog( $id ) ) {
 					InstallerWpf::delete();
 				}
 			}
@@ -490,23 +472,21 @@ class UtilsWpf {
 	/**
 	 * deactivatePlugin.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.0
 	 */
 	public static function deactivatePlugin( $networkwide ) {
 		global $wpdb;
-		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
-			$blog_id = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			foreach ($blog_id as $id) {
-				if (switch_to_blog($id)) {
-					InstallerWpf::deactivate();
+
+		if ( function_exists( 'is_multisite' ) && is_multisite() && $networkwide ) {
+			$blog_id = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			foreach ( $blog_id as $id ) {
+				if ( switch_to_blog( $id ) ) {
 					delete_option( 'wpf_slug_format_rewrite_flush_needed' );
 					delete_option( 'rewrite_rules' );
 				}
 			}
 			restore_current_blog();
-			return;
 		} else {
-			InstallerWpf::deactivate();
 			delete_option( 'wpf_slug_format_rewrite_flush_needed' );
 			delete_option( 'rewrite_rules' );
 		}
@@ -516,38 +496,38 @@ class UtilsWpf {
 	 * isWritable.
 	 */
 	public static function isWritable( $filename ) {
-		return is_writable($filename); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
+		return is_writable( $filename ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 	}
 
 	/**
 	 * isReadable.
 	 */
 	public static function isReadable( $filename ) {
-		return is_readable($filename);
+		return is_readable( $filename );
 	}
 
 	/**
 	 * fileExists.
 	 */
 	public static function fileExists( $filename ) {
-		return file_exists($filename);
+		return file_exists( $filename );
 	}
 
 	/**
 	 * isPluginsPage.
 	 */
 	public static function isPluginsPage() {
-		return ( basename(ReqWpf::getVar('SCRIPT_NAME', 'server')) === 'plugins.php' );
+		return ( basename( ReqWpf::getVar( 'SCRIPT_NAME', 'server' ) ) === 'plugins.php' );
 	}
 
 	/**
 	 * isSessionStarted.
 	 */
 	public static function isSessionStarted() {
-		if (version_compare(PHP_VERSION, '5.4.0') >= 0 && function_exists('session_status')) {
-			return !( session_status() == PHP_SESSION_NONE );
+		if ( version_compare( PHP_VERSION, '5.4.0' ) >= 0 && function_exists( 'session_status' ) ) {
+			return ! ( session_status() == PHP_SESSION_NONE );
 		} else {
-			return !( session_id() == '' );
+			return ! ( session_id() == '' );
 		}
 	}
 
@@ -556,15 +536,15 @@ class UtilsWpf {
 	 */
 	public static function generateBgStyle( $data ) {
 		$stageBgStyles = array();
-		$stageBgStyle = '';
-		switch ($data['type']) {
+		$stageBgStyle  = '';
+		switch ( $data['type'] ) {
 			case 'color':
 				$stageBgStyles[] = 'background-color: ' . $data['color'];
 				$stageBgStyles[] = 'opacity: ' . $data['opacity'];
 				break;
 			case 'img':
 				$stageBgStyles[] = 'background-image: url(' . $data['img'] . ')';
-				switch ($data['img_pos']) {
+				switch ( $data['img_pos'] ) {
 					case 'center':
 						$stageBgStyles[] = 'background-repeat: no-repeat';
 						$stageBgStyles[] = 'background-position: center center';
@@ -582,22 +562,22 @@ class UtilsWpf {
 				}
 				break;
 		}
-		if (!empty($stageBgStyles)) {
-			$stageBgStyle = implode(';', $stageBgStyles);
+		if ( ! empty( $stageBgStyles ) ) {
+			$stageBgStyle = implode( ';', $stageBgStyles );
 		}
 		return $stageBgStyle;
 	}
 
 	/**
-	 * Parse wordpress post/page/custom post type content for images and return it's IDs if there are images.
+	 * Parse WordPress post/page/custom post type content for images and return it's IDs if there are images.
 	 *
 	 * @param string $content Post/page/custom post type content
 	 * @return array List of images IDs from content
 	 */
 	public static function parseImgIds( $content ) {
 		$res = array();
-		preg_match_all('/wp-image-(?<ID>\d+)/', $content, $matches);
-		if ($matches && isset($matches['ID']) && !empty($matches['ID'])) {
+		preg_match_all( '/wp-image-(?<ID>\d+)/', $content, $matches );
+		if ( $matches && isset( $matches['ID'] ) && ! empty( $matches['ID'] ) ) {
 			$res = $matches['ID'];
 		}
 		return $res;
@@ -611,8 +591,8 @@ class UtilsWpf {
 	 */
 	public static function getUploadFilePathFromUrl( $url ) {
 		$uploadsPath = self::getUploadsPath();
-		$uploadsDir = self::getUploadsDir();
-		return str_replace($uploadsPath, $uploadsDir, $url);
+		$uploadsDir  = self::getUploadsDir();
+		return str_replace( $uploadsPath, $uploadsDir, $url );
 	}
 
 	/**
@@ -623,8 +603,8 @@ class UtilsWpf {
 	 */
 	public static function getUploadUrlFromFilePath( $path ) {
 		$uploadsPath = self::getUploadsPath();
-		$uploadsDir = self::getUploadsDir();
-		return str_replace($uploadsDir, $uploadsPath, $path);
+		$uploadsDir  = self::getUploadsDir();
+		return str_replace( $uploadsDir, $uploadsPath, $path );
 	}
 
 	/**
@@ -633,59 +613,59 @@ class UtilsWpf {
 	 * @version 3.1.8
 	 */
 	public static function getUserBrowserString() {
-		return isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : false;
+		return isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : false;
 	}
 
 	/**
 	 * getBrowser.
 	 */
 	public static function getBrowser() {
-		$u_agent = self::getUserBrowserString();
-		$bname = 'Unknown';
+		$u_agent  = self::getUserBrowserString();
+		$bname    = 'Unknown';
 		$platform = 'Unknown';
-		$version = '';
-		$pattern = '';
+		$version  = '';
+		$pattern  = '';
 
-		if ($u_agent) {
-			//First get the platform?
-			if (preg_match('/linux/i', $u_agent)) {
+		if ( $u_agent ) {
+			// First get the platform?
+			if ( preg_match( '/linux/i', $u_agent ) ) {
 				$platform = 'linux';
-			} elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
+			} elseif ( preg_match( '/macintosh|mac os x/i', $u_agent ) ) {
 				$platform = 'mac';
-			} elseif (preg_match('/windows|win32/i', $u_agent)) {
+			} elseif ( preg_match( '/windows|win32/i', $u_agent ) ) {
 				$platform = 'windows';
 			}
 			// Next get the name of the useragent yes separately and for good reason
-			if ( ( preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent) ) || ( strpos($u_agent, 'Trident/7.0; rv:11.0') !== false ) ) {
+			if ( ( preg_match( '/MSIE/i', $u_agent ) && ! preg_match( '/Opera/i', $u_agent ) ) || ( strpos( $u_agent, 'Trident/7.0; rv:11.0' ) !== false ) ) {
 				$bname = 'Internet Explorer';
-				$ub = 'MSIE';
-			} elseif (preg_match('/Firefox/i', $u_agent)) {
+				$ub    = 'MSIE';
+			} elseif ( preg_match( '/Firefox/i', $u_agent ) ) {
 				$bname = 'Mozilla Firefox';
-				$ub = 'Firefox';
-			} elseif (preg_match('/Chrome/i', $u_agent)) {
+				$ub    = 'Firefox';
+			} elseif ( preg_match( '/Chrome/i', $u_agent ) ) {
 				$bname = 'Google Chrome';
-				$ub = 'Chrome';
-			} elseif (preg_match('/Safari/i', $u_agent)) {
+				$ub    = 'Chrome';
+			} elseif ( preg_match( '/Safari/i', $u_agent ) ) {
 				$bname = 'Apple Safari';
-				$ub = 'Safari';
-			} elseif (preg_match('/Opera/i', $u_agent)) {
+				$ub    = 'Safari';
+			} elseif ( preg_match( '/Opera/i', $u_agent ) ) {
 				$bname = 'Opera';
-				$ub = 'Opera';
-			} elseif (preg_match('/Netscape/i', $u_agent)) {
+				$ub    = 'Opera';
+			} elseif ( preg_match( '/Netscape/i', $u_agent ) ) {
 				$bname = 'Netscape';
-				$ub = 'Netscape';
+				$ub    = 'Netscape';
 			}
 
 			// finally get the correct version number
-			$known = array('Version', $ub, 'other');
-			$pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+			$known   = array( 'Version', $ub, 'other' );
+			$pattern = '#(?<browser>' . join( '|', $known ) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
 
 			// see how many we have
-			$i = count($matches['browser']);
-			if (1 != $i) {
-				//we will have two since we are not using 'other' argument yet
-				//see if version is before or after the name
-				if ( strripos($u_agent, 'Version') < strripos($u_agent, $ub) ) {
+			$i = count( $matches['browser'] );
+			if ( 1 != $i ) {
+				// we will have two since we are not using 'other' argument yet
+				// see if version is before or after the name
+				if ( strripos( $u_agent, 'Version' ) < strripos( $u_agent, $ub ) ) {
 					$version = $matches['version'][0];
 				} else {
 					$version = $matches['version'][1];
@@ -705,7 +685,7 @@ class UtilsWpf {
 			'name'      => $bname,
 			'version'   => $version,
 			'platform'  => $platform,
-			'pattern'    => $pattern,
+			'pattern'   => $pattern,
 		);
 	}
 
@@ -713,7 +693,7 @@ class UtilsWpf {
 	 * getBrowsersList.
 	 */
 	public static function getBrowsersList() {
-		return array('Unknown', 'Internet Explorer', 'Mozilla Firefox', 'Google Chrome', 'Apple Safari', 'Opera', 'Netscape');
+		return array( 'Unknown', 'Internet Explorer', 'Mozilla Firefox', 'Google Chrome', 'Apple Safari', 'Opera', 'Netscape' );
 	}
 
 	/**
@@ -721,7 +701,7 @@ class UtilsWpf {
 	 */
 	public static function getLangCode2Letter() {
 		$langCode = self::getLangCode();
-		return strlen($langCode) > 2 ? substr($langCode, 0, 2) : $langCode;
+		return strlen( $langCode ) > 2 ? substr( $langCode, 0, 2 ) : $langCode;
 	}
 
 	/**
@@ -737,8 +717,8 @@ class UtilsWpf {
 	 * @version 3.1.8
 	 */
 	public static function getBrowserLangCode() {
-		return !empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])
-			? strtolower(substr(sanitize_text_field(wp_unslash($_SERVER['HTTP_ACCEPT_LANGUAGE'])), 0, 2))
+		return ! empty( $_SERVER['HTTP_ACCEPT_LANGUAGE'] )
+			? strtolower( substr( sanitize_text_field( wp_unslash( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ), 0, 2 ) )
 			: self::getLangCode2Letter();
 	}
 
@@ -746,24 +726,24 @@ class UtilsWpf {
 	 * getTimeRange.
 	 */
 	public static function getTimeRange() {
-		$time = array();
-		$hours = range(1, 11);
-		array_unshift($hours, 12);
-		$k = 0;
-		$count = count($hours);
-		for ($i = 0; $i < 4 * $count; $i++) {
-			$newItem = $hours[ $k ];
+		$time  = array();
+		$hours = range( 1, 11 );
+		array_unshift( $hours, 12 );
+		$k     = 0;
+		$count = count( $hours );
+		for ( $i = 0; $i < 4 * $count; $i++ ) {
+			$newItem  = $hours[ $k ];
 			$newItem .= ':' . ( ( $i % 2 ) ? '30' : '00' );
 			$newItem .= ( $i < $count * 2 ) ? 'am' : 'pm';
-			if ($i % 2) {
-				$k++;
+			if ( $i % 2 ) {
+				++$k;
 			}
-			if ($i == $count * 2 - 1) {
+			if ( $i == $count * 2 - 1 ) {
 				$k = 0;
 			}
 			$time[] = $newItem;
 		}
-		return array_combine($time, $time);
+		return array_combine( $time, $time );
 	}
 
 	/**
@@ -771,14 +751,14 @@ class UtilsWpf {
 	 */
 	public static function getSearchEnginesList() {
 		return array(
-			'google.com' => array('label' => 'Google'),
-			'yahoo.com' => array('label' => 'Yahoo!'),
-			'youdao.com' => array('label' => 'Youdao'),
-			'yandex' => array('label' => 'Yandex'),
-			'sogou.com' => array('label' => 'Sogou'),
-			'qwant.com' => array('label' => 'Qwant'),
-			'bing.com' => array('label' => 'Bing'),
-			'munax.com' => array('label' => 'Munax'),
+			'google.com' => array( 'label' => 'Google' ),
+			'yahoo.com'  => array( 'label' => 'Yahoo!' ),
+			'youdao.com' => array( 'label' => 'Youdao' ),
+			'yandex'     => array( 'label' => 'Yandex' ),
+			'sogou.com'  => array( 'label' => 'Sogou' ),
+			'qwant.com'  => array( 'label' => 'Qwant' ),
+			'bing.com'   => array( 'label' => 'Bing' ),
+			'munax.com'  => array( 'label' => 'Munax' ),
 		);
 	}
 
@@ -787,15 +767,15 @@ class UtilsWpf {
 	 */
 	public static function getSocialList() {
 		return array(
-			'facebook.com' => array('label' => 'Facebook'),
-			'pinterest.com' => array('label' => 'Pinterest'),
-			'instagram.com' => array('label' => 'Instagram'),
-			'yelp.com' => array('label' => 'Yelp'),
-			'vk.com' => array('label' => 'VKontakte'),
-			'myspace.com' => array('label' => 'Myspace'),
-			'linkedin.com' => array('label' => 'LinkedIn'),
-			'plus.google.com' => array('label' => 'Google+'),
-			'google.com' => array('label' => 'Google'),
+			'facebook.com'    => array( 'label' => 'Facebook' ),
+			'pinterest.com'   => array( 'label' => 'Pinterest' ),
+			'instagram.com'   => array( 'label' => 'Instagram' ),
+			'yelp.com'        => array( 'label' => 'Yelp' ),
+			'vk.com'          => array( 'label' => 'VKontakte' ),
+			'myspace.com'     => array( 'label' => 'Myspace' ),
+			'linkedin.com'    => array( 'label' => 'LinkedIn' ),
+			'plus.google.com' => array( 'label' => 'Google+' ),
+			'google.com'      => array( 'label' => 'Google' ),
 		);
 	}
 
@@ -804,7 +784,7 @@ class UtilsWpf {
 	 */
 	public static function getReferalUrl() {
 		// Simple for now
-		return ReqWpf::getVar('HTTP_REFERER', 'server');
+		return ReqWpf::getVar( 'HTTP_REFERER', 'server' );
 	}
 
 	/**
@@ -814,9 +794,9 @@ class UtilsWpf {
 	 */
 	public static function getReferalHost() {
 		$refUrl = self::getReferalUrl();
-		if (!empty($refUrl)) {
+		if ( ! empty( $refUrl ) ) {
 			$refer = wp_parse_url( $refUrl );
-			if ($refer && isset($refer['host']) && !empty($refer['host'])) {
+			if ( $refer && isset( $refer['host'] ) && ! empty( $refer['host'] ) ) {
 				return $refer['host'];
 			}
 		}
@@ -828,9 +808,9 @@ class UtilsWpf {
 	 */
 	public static function getCurrentUserRole() {
 		$roles = self::getCurrentUserRoleList();
-		if ($roles) {
-			$ncaps = count($roles);
-			$role = $roles[$ncaps - 1];
+		if ( $roles ) {
+			$ncaps = count( $roles );
+			$role  = $roles[ $ncaps - 1 ];
 			return $role;
 		}
 		return false;
@@ -841,10 +821,10 @@ class UtilsWpf {
 	 */
 	public static function getCurrentUserRoleList() {
 		global $current_user, $wpdb;
-		if ($current_user) {
+		if ( $current_user ) {
 			$roleKey = $wpdb->prefix . 'capabilities';
-			if (isset($current_user->$roleKey) && !empty($current_user->$roleKey)) {
-				return array_keys($current_user->$roleKey);
+			if ( isset( $current_user->$roleKey ) && ! empty( $current_user->$roleKey ) ) {
+				return array_keys( $current_user->$roleKey );
 			}
 		}
 		return false;
@@ -861,10 +841,10 @@ class UtilsWpf {
 	 * getAllUserRolesList.
 	 */
 	public static function getAllUserRolesList() {
-		$res = array();
+		$res   = array();
 		$roles = self::getAllUserRoles();
-		if (!empty($roles)) {
-			foreach ($roles as $k => $data) {
+		if ( ! empty( $roles ) ) {
+			foreach ( $roles as $k => $data ) {
 				$res[ $k ] = $data['name'];
 			}
 		}
@@ -875,7 +855,7 @@ class UtilsWpf {
 	 * rgbToArray.
 	 */
 	public static function rgbToArray( $rgb ) {
-		$rgb = array_map('trim', explode(',', trim(str_replace(array('rgb', 'a', '(', ')'), '', $rgb))));
+		$rgb = array_map( 'trim', explode( ',', trim( str_replace( array( 'rgb', 'a', '(', ')' ), '', $rgb ) ) ) );
 		return $rgb;
 	}
 
@@ -883,21 +863,21 @@ class UtilsWpf {
 	 * hexToRgb.
 	 */
 	public static function hexToRgb( $hex ) {
-		if (strpos($hex, 'rgb') !== false) { // Maybe it's already in rgb format - just return it as array
-			return self::rgbToArray($hex);
+		if ( strpos( $hex, 'rgb' ) !== false ) { // Maybe it's already in rgb format - just return it as array
+			return self::rgbToArray( $hex );
 		}
-		$hex = str_replace('#', '', $hex);
+		$hex = str_replace( '#', '', $hex );
 
-		if (strlen($hex) == 3) {
-			$r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
-			$g = hexdec(substr($hex, 1, 1) . substr($hex, 1, 1));
-			$b = hexdec(substr($hex, 2, 1) . substr($hex, 2, 1));
+		if ( strlen( $hex ) == 3 ) {
+			$r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
+			$g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
+			$b = hexdec( substr( $hex, 2, 1 ) . substr( $hex, 2, 1 ) );
 		} else {
-			$r = hexdec(substr($hex, 0, 2));
-			$g = hexdec(substr($hex, 2, 2));
-			$b = hexdec(substr($hex, 4, 2));
+			$r = hexdec( substr( $hex, 0, 2 ) );
+			$g = hexdec( substr( $hex, 2, 2 ) );
+			$b = hexdec( substr( $hex, 4, 2 ) );
 		}
-		$rgb = array($r, $g, $b);
+		$rgb = array( $r, $g, $b );
 		return $rgb; // returns an array with the rgb values
 	}
 
@@ -905,16 +885,16 @@ class UtilsWpf {
 	 * hexToRgbaStr.
 	 */
 	public static function hexToRgbaStr( $hex, $alpha = 1 ) {
-		$rgbArr = self::hexToRgb($hex);
-		return 'rgba(' . implode(',', $rgbArr) . ',' . $alpha . ')';
+		$rgbArr = self::hexToRgb( $hex );
+		return 'rgba(' . implode( ',', $rgbArr ) . ',' . $alpha . ')';
 	}
 
 	/**
 	 * controlNumericValues.
 	 */
 	public static function controlNumericValues( $values, $field ) {
-		foreach ($values as $k => $val) {
-			$values[$k] = ( 'dec' == $field ? (float) $val : (int) $val );
+		foreach ( $values as $k => $val ) {
+			$values[ $k ] = ( 'dec' == $field ? (float) $val : (int) $val );
 		}
 		return $values;
 	}

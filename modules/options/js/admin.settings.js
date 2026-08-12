@@ -1,3 +1,11 @@
+/**
+ * Product Filter by WBW - Admin Setting JS
+ *
+ * @version 3.3.0
+ *
+ * @author woobewoo
+ */
+
 "use strict";
 jQuery(document).ready(function(){
 	jQuery('#wpfSettingsSaveBtn').click(function(){
@@ -7,7 +15,7 @@ jQuery(document).ready(function(){
 	jQuery('#wpfSettingsForm').submit(function(){
 		jQuery(this).sendFormWpf({
 			btn: jQuery('#wpfSettingsSaveBtn'),
-			appendData: {wpfNonce: window.wpfNonce},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce},
 
 			onSuccess: function(res) {
 				if(res['messages'][0]) {
@@ -42,7 +50,7 @@ jQuery(document).ready(function(){
 							if(connected[ connectVal ] && connected[ connectVal ].length) {
 								var show = connectVal == value;
 								for(var i = 0; i < connected[ connectVal ].length; i++) {
-									show 
+									show
 									? jQuery(connected[ connectVal ][ i ]).removeClass('woobewoo-hidden')
 									: jQuery(connected[ connectVal ][ i ]).addClass('woobewoo-hidden');
 								}
@@ -82,7 +90,7 @@ jQuery(document).ready(function(){
 	});
 	jQuery('.woobewoo-color-result-text').on('change', function() {
 		var $this = jQuery(this);
-		$this.closest('.woobewoo-color-picker').find('.woobewoo-color-result').wpColorPicker('color', $this.val());		
+		$this.closest('.woobewoo-color-picker').find('.woobewoo-color-result').wpColorPicker('color', $this.val());
 	}).trigger('change');
 
 	function wpfChooseIconPopup() {
@@ -145,10 +153,10 @@ jQuery(document).ready(function(){
 		jQuery.sendFormWpf({
 			data: {
 			mod: 'meta',
-			action: 'doMetaIndexing',
+			action: 'woobewoo_pf_do_meta_indexing',
 			},
 			btn: jQuery('#wpfStartMetaIndexing'),
-			appendData: {wpfNonce: window.wpfNonce, inCron: jQuery('#wpfStartIndexingCron').is(':checked') ? 1 : 0},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce, inCron: jQuery('#wpfStartIndexingCron').is(':checked') ? 1 : 0},
 			onSuccess: function(res) {
 				if (!res.error && res['messages'] && res['messages'].length) {
 					jQuery.sNotify({
@@ -165,10 +173,10 @@ jQuery(document).ready(function(){
 		jQuery.sendFormWpf({
 			data: {
 			mod: 'meta',
-			action: 'doMetaOptimizing',
+			action: 'woobewoo_pf_do_meta_optimizing',
 			},
 			btn: jQuery('#wpfStartOptimizing'),
-			appendData: {wpfNonce: window.wpfNonce},
+			appendData: {wpfNonce: woobewoo_pf_admin_ajax_object.nonce},
 			onSuccess: function(res) {
 				if (!res.error && res['messages'] && res['messages'].length) {
 					jQuery.sNotify({

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - CsvgeneratorWpf Class
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -10,27 +10,27 @@
 defined( 'ABSPATH' ) || exit;
 
 class CsvgeneratorWpf {
-	protected $_filename = '';
+	protected $_filename  = '';
 	protected $_delimiter = ';';
 	protected $_enclosure = "\n";
-	protected $_data = array();
-	protected $_escape = '\\';
+	protected $_data      = array();
+	protected $_escape    = '\\';
 	public function __construct( $filename ) {
 		$this->_filename = $filename;
 	}
 	public function addCell( $x, $y, $value ) {
-		$this->_data[ $x ][ $y ] = '"' . $value . '"';    //If will not do "" then wymbol for example , will broke file
+		$this->_data[ $x ][ $y ] = '"' . $value . '"'; // If will not do "" then symbol for example, will broke file
 	}
 	public function generate() {
 		$strData = '';
-		if (!empty($this->_data)) {
+		if ( ! empty( $this->_data ) ) {
 			$rows = array();
-			foreach ($this->_data as $cells) {
-				$rows[] = implode($this->_delimiter, $cells);
+			foreach ( $this->_data as $cells ) {
+				$rows[] = implode( $this->_delimiter, $cells );
 			}
-			$strData = implode($this->_enclosure, $rows);
+			$strData = implode( $this->_enclosure, $rows );
 		}
-		FilegeneratorWpf::_($this->_filename, $strData, 'csv')->generate();
+		FilegeneratorWpf::_( $this->_filename, $strData, 'csv' )->generate();
 	}
 	public function getDelimiter() {
 		return $this->_delimiter;

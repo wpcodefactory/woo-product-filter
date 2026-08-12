@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Admin WooFilters WC CSS
  *
- * @version 3.2.0
+ * @version 3.3.0
  *
  * @author woobewoo
  */
@@ -50,7 +50,7 @@
 
 /* Tabs */
 .wpfSub{
-	margin: 0px;
+	margin: 0;
 }
 .wpfSub li{
 	display: inline-block;
@@ -87,7 +87,6 @@
 	background-color: transparent !important;
 	outline: none !important;
 	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
 	box-shadow: none;
 	color: #2271b1;
 }
@@ -156,7 +155,6 @@
 	border-bottom: transparent;
 	background-color: #f8fafb;
 	box-shadow: none;
-}
 }
 @media (min-width: 992px) {
 	.woobewoo-content .no-md-lr-padding {
@@ -322,7 +320,7 @@
 	padding-left: 5px;
 }
 .wpfProperties label input{
-	margin: 0px;
+	margin: 0;
 }
 
 table thead th i{
@@ -355,16 +353,10 @@ table thead th{
 	text-align: center;
 	float: left;
 	-webkit-transition: all 250ms linear;
-	-moz-transition: all 250ms linear;
-	-o-transition: all 250ms linear;
 	transition: all 250ms linear;
 }
 #chooseIconPopup .items-list .item .item-inner {
 	position: relative;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -moz-box;
-	display: -ms-flexbox;
 	display: flex;
 	width: 100%;
 	height: 100%;
@@ -407,7 +399,7 @@ label{
 	margin-bottom: 6px;
 }
 input[type=checkbox]{
-	margin: 0px;
+	margin: 0;
 }
 .wpfCheckColumns label{
 	padding-left: 10px;
@@ -423,15 +415,15 @@ input[type=checkbox]{
 	margin-top: 1px;
 }
 .wpfControlButtons{
-	margin-top: 0px;
-	padding: 20px 0px;
+	margin-top: 0;
+	padding: 20px 0;
 }
 .wpfControlButtons #wpfAddProducts.active{
 	background-color: #eee;
 }
 .wpfPropertiesWrapp .wpfOptions{
 	display: inline-block;
-	padding: 0px 25px;
+	padding: 0 25px;
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -512,7 +504,7 @@ input[type=checkbox]{
 	display: inline-block;
 }
 .wpfRangeByHandHandler{
-	padding: 0px 8px;
+	padding: 0 8px;
 }
 .wpfRangeByHandAddButton{
 	padding-top: 15px;
@@ -561,9 +553,6 @@ input.wpfSmallInput{
 	height: 150px;
 	cursor: pointer;
 }
-.wpfFiltersBlock td .ts-wrapper:nth-child(3){
-	display: none;
-}
 
 @media (max-width: 500px) {
 	.settings-value input, .wpfFiltersBlock .wpfFilter select {
@@ -607,10 +596,7 @@ input.wpfSmallInput{
 	display: table;
 	clear: both;
 }
-#wpfFiltersEditForm .ts-wrapper {
-	width:100% !important;
-	max-width: 400px;
-}
+
 .wpfRightLabel {
 	line-height: 25px;
 	margin-left: 5px;
@@ -688,7 +674,7 @@ input.wpfSmallInput{
 	content: 'PRO';
 	position: absolute;
 	display: block;
-	right: 0px;
+	right: 0;
 	top: -9px;
 	color: #03a9f4;
 	font-size: 10px;
