@@ -11,7 +11,6 @@ defined( 'ABSPATH' ) || exit;
 
 $labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
 
-
 list($categoryDisplay, $parentCategories) = FrameWpf::_()->getModule( 'woofilters' )->getCategoriesDisplay();
 
 list($tagsDisplay) = FrameWpf::_()->getModule( 'woofilters' )->getTagsDisplay();

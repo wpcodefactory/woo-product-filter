@@ -52,6 +52,11 @@ function wpfIsThriveEditor() {
 			parseInt(settings.settings.slug_format, 10) === 1));
 	}
 
+	/**
+	 * WpfFrontendPage.
+	 *
+	 * @version 3.3.0
+	 */
 	function WpfFrontendPage() {
 		this.$obj = this;
 		this.noWoo = this.$obj.checkNoWooPage();
@@ -1869,6 +1874,11 @@ function wpfIsThriveEditor() {
 		_thisObj.markCheckboxSelected(filter);
 	});
 
+	/**
+	 * getFilterMainSettings.
+	 *
+	 * @version 3.3.0
+	 */
 	WpfFrontendPage.prototype.getFilterMainSettings = (
 		function ( $selector ) {
 			var settingsStr = $selector.attr( 'data-filter-settings' );
