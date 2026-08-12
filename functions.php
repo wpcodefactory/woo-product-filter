@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Functions
  *
- * @version 3.3.0
+ * @version 3.3.1
  *
  * @author woobewoo
  */
@@ -346,11 +346,29 @@ if ( ! function_exists( 'woofilterProDeactivate' ) ) {
 
 /**
  * wpf_translate_string.
+ *
+ * @version 3.3.1
  */
 if ( ! function_exists( 'wpf_translate_string' ) ) {
 	function wpf_translate_string( $value, $name = '', $context = 'woo-product-filter' ) {
-		if ( function_exists( 'icl_register_string' ) ) {
-			return icl_register_string( $context, $name, $value );
+		if ( has_action( 'wpml_register_single_string' ) ) {
+			// Register the string.
+			do_action(
+				'wpml_register_single_string',
+				$context,
+				$name,
+				$value
+			);
+
+			// Get the translated value.
+			return apply_filters(
+				'wpml_translate_single_string',
+				$value,
+				$context,
+				$value
+			);
 		}
+
+		return $value;
 	}
 }

@@ -2,6 +2,8 @@
 /**
  * Product Filter by WBW - BaseObjectWpf Class
  *
+ * @version 3.3.1
+ *
  * @author woobewoo
  */
 
@@ -50,6 +52,8 @@ abstract class BaseObjectWpf {
 	/**
 	 * Get settings in specific filter in filter block.
 	 *
+	 * @version 3.3.1
+	 *
 	 * @param array  $settings
 	 * @param string $name
 	 * @param mix    $default
@@ -90,6 +94,31 @@ abstract class BaseObjectWpf {
 		if ( false !== $arr && ! in_array( $value, $arr, true ) ) {
 			return $default;
 		}
+
+		$translatable_names = array(
+			'f_dropdown_first_option_text',
+			'f_title',
+			'f_description',
+			'f_custom_title',
+			'f_search_label',
+			'f_stock_statuses[in]',
+			'f_stock_statuses[out]',
+			'f_stock_statuses[on]',
+			'f_add_text',
+			'f_add_text5',
+			'f_checkbox_label',
+			'filtering_button_word',
+			'show_clean_button_word',
+			'hide_button_hide_text',
+			'hide_button_show_text',
+			'text_no_products',
+			'overlay_word',
+			'selected_clean_word',
+		);
+		if ( in_array( $name, $translatable_names, true ) ) {
+			$value = wpf_translate_string( $value );
+		}
+
 
 		return $value;
 	}

@@ -167,6 +167,7 @@ This plugin may communicate with the following third-party services:
 == Changelog ==
 
 = 3.3.1 - 12/08/2026 =
+* Fix - Fixed WPML translation issues.
 * Dev - Fixed Plugin Check OutputNotEscaped warnings.
 
 = 3.3.0 - 12/08/2026 =
