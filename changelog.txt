@@ -1,6 +1,6 @@
 == Changelog ==
 
-= 3.3.0 - 06/08/2026 =
+= 3.3.0 - 12/08/2026 =
 * Fix - Fixed subcategories filter bug on page load.
 * Fix - Fixed Brizy builder pagination reset issue.
 * Fix - "Creation of dynamic property is deprecated" notice fixed.
