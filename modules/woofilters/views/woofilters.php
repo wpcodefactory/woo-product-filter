@@ -795,8 +795,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 
 		if ( ! $showImmediately ) {
-			if ( $proView &&
-			     method_exists( $proView, 'generateLoaderLayoutHtml' ) ) {
+			if ( $proView && method_exists( $proView, 'generateLoaderLayoutHtml' ) ) {
 				$html .= $proView->generateLoaderLayoutHtml( $options );
 			} else {
 				$this->setFilterCss( '#' . $filterId . ' .wpfLoaderLayout {position:absolute;top:0;bottom:0;left:0;right:0;background-color: rgba(255, 255, 255, 0.9);z-index: 999;}' );
@@ -1187,7 +1186,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generatePriceRangeFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.1
 	 */
 	public function generatePriceRangeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings  = $this->getFilterSetting( $filter, 'settings', array() );
@@ -2308,14 +2307,13 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateOnSaleFilterHtml.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.1
 	 */
 	public function generateOnSaleFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_onsale';
 		$settings   = $this->getFilterSetting( $filter, 'settings', array() );
 
 		$defaultOnsale = $this->getFilterSetting( $settings, 'f_default_onsale', false );
-
 		$hiddenOnsale  = $defaultOnsale && $this->getFilterSetting( $settings, 'f_hidden_onsale', false );
 
 		$layout      = $this->getFilterLayout( $settings, $filterSettings );
@@ -3220,7 +3218,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateTaxonomyOptionsHtml.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.1
 	 */
 	private function generateTaxonomyOptionsHtml( $filterItemList, $selectedElem, $filter = false, $excludeIds = false, $pre = '', $layout = 0, $includeIds = false, $showedTerms = false, $countsTerms = false, $itemLevel = 0, $currentCategoryId = 0 ) {
 		$html     = '';
@@ -3235,7 +3233,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		}
 		$showCount            = $this->getFilterSetting( $filter['settings'], 'f_show_count' );
 		$showImage            = $this->getFilterSetting( $filter['settings'], 'f_show_images', false );
-		//var_dump($showImage);
 		$allProductsFiltering = $this->getFilterSetting( $settings['settings'], 'all_products_filtering', false );
 		if ( $allProductsFiltering && ( ! empty( $filter['custom_taxonomy'] ) || ! empty( $filter['custom_meta'] ) ) ) {
 			$allProductsFiltering = false;
@@ -3483,7 +3480,6 @@ class WoofiltersViewWpf extends ViewWpf {
 		$urlRange  = $minValue . ',' . $maxValue;
 		$type      = $filter['settings']['f_frontend_type'];
 		$underOver = $this->getFilterSetting( $filter['settings'], 'f_under_over', false );
-
 
 		if ( $underOver ) {
 			$underText = $this->getFilterSetting( $filter['settings'], 'f_under_text', esc_attr__( 'Under', 'woo-product-filter' ) ) . ' ';

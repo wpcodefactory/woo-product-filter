@@ -2758,7 +2758,6 @@ class WoofiltersWpf extends ModuleWpf {
 				);
 			}
 
-			var_dump($mode);
 			$this->renderModes[ $id ] = $mode;
 		}
 
