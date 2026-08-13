@@ -2745,16 +2745,20 @@ class WoofiltersWpf extends ModuleWpf {
 					$mode = 10;
 				} elseif ( is_product() && $displayProduct && $displayMobile ) {
 					$mode = 8;
-				} elseif (
-					( is_tax( 'pwb-brand' ) || is_tax( 'product_brand' ) ) &&
-					$displayBrand &&
-					$displayMobile
-				) {
-					$mode = 11;
 				} elseif ( 'all_pages' === $displayOnPage ) {
 					$mode = DispatcherWpf::applyFilters( 'woobewoo_pf_all_pages_mode', is_shop() ? 2 : $mode );
 				}
+
+				$mode = DispatcherWpf::applyFilters(
+					'woobewoo_pf_display_mode',
+					$mode,
+					$displayOnPage,
+					$displayBrand,
+					$displayMobile
+				);
 			}
+
+			var_dump($mode);
 			$this->renderModes[ $id ] = $mode;
 		}
 
