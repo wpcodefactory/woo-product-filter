@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Attribute
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -67,8 +67,7 @@ $attributesTypes = array(
 		</div>
 	</div>
 </div>
-<?php
-ob_start();
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 foreach ( $attributesTypes as $key => $value ) {
 	if ( strpos( $value, $labelPro ) && 'colors' === $key ) {
 		?>
@@ -152,9 +151,11 @@ foreach ( $attributesTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_type_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php } else {
+	DispatcherWpf::doAction( 'woobewoo_pf_attribute_type_options' );
+} ?>
 
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block wpfSliderTypeBlock wpfTypeSwitchable" data-type="slider">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Slider skin', 'woo-product-filter' ); ?>
@@ -207,7 +208,9 @@ foreach ( $attributesTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_slider_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php } else {
+	DispatcherWpf::doAction( 'woobewoo_pf_attribute_slider_options' );
+} ?>
 
 <?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -267,7 +270,7 @@ foreach ( $attributesTypes as $key => $value ) {
 			</div>
 			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="settings-value wpfTypeSwitchable" data-type="radio list switch" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Collapsible', 'woo-product-filter' ); ?>
@@ -288,10 +291,9 @@ foreach ( $attributesTypes as $key => $value ) {
 			</div>
 			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
-		<?php
-		$attribute_hierarchical_options = ob_get_clean();
-		echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_hierarchical_options', $attribute_hierarchical_options ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		?>
+		<?php } else {
+			DispatcherWpf::doAction( 'woobewoo_pf_attribute_hierarchical_options' );
+		} ?>
 	</div>
 </div>
 <div class="row-settings-block" data-parent="f_list" data-no-values="custom_meta_field_check">
@@ -410,14 +412,16 @@ foreach ( $attributesTypes as $key => $value ) {
 				);
 				?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_attribute_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			DispatcherWpf::doAction( 'woobewoo_pf_attribute_sort_as_numbers_option' );
+		} ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list radio" data-parent="f_list" data-no-values="custom_meta_field_check">
