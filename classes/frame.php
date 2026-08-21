@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - FrameWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -167,7 +167,7 @@ class FrameWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function init() {
 		$this->_extractTables();
@@ -190,7 +190,7 @@ class FrameWpf {
 		register_uninstall_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deletePlugin' ) );
 		register_deactivation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
 
-		add_filter( 'the_content', array( 'WoofiltersWpf', 'getProductsShortcode' ), -99999 );
+		add_filter( 'the_content', array( 'WooBeWoo_PF_Woofilters', 'getProductsShortcode' ), -99999 );
 	}
 
 	/**

@@ -39,12 +39,14 @@ add_action(
 
 /**
  * Connect all required core classes.
+ *
+ * @version 3.3.2
  */
 if ( trueRequestWpf() ) {
 
 	importClassWpf( 'DbWpf' );
 	importClassWpf( 'InstallerWpf' );
-	importClassWpf( 'BaseObjectWpf' );
+	importClassWpf( 'WooBeWoo_PF_Base_Object' );
 	importClassWpf( 'ModuleWpf' );
 	importClassWpf( 'ModelWpf' );
 	importClassWpf( 'ViewWpf' );

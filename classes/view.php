@@ -2,14 +2,14 @@
 /**
  * Product Filter by WBW - ViewWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 #[\AllowDynamicProperties]
-abstract class ViewWpf extends BaseObjectWpf {
+abstract class ViewWpf extends WooBeWoo_PF_Base_Object {
 	/*
 	 * @deprecated
 	 */

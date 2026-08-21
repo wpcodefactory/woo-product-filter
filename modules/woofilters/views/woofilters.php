@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WoofiltersViewWpf Class
  *
- * @version 3.3.1
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -526,7 +526,7 @@ class WoofiltersViewWpf extends ViewWpf {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.3.1
+	 * @version 3.3.2
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );
@@ -552,7 +552,7 @@ class WoofiltersViewWpf extends ViewWpf {
 		$buttonsOrder           = ( ! empty( $filterSettings['settings']['main_buttons_order'] ) ) ? $filterSettings['settings']['main_buttons_order'] : 'left';
 		$showCleanButton        = ( ! empty( $filterSettings['settings']['show_clean_button'] ) ) ? $filterSettings['settings']['show_clean_button'] : false;
 		$showFilteringButton    = ( ! empty( $filterSettings['settings']['show_filtering_button'] ) ) ? $filterSettings['settings']['show_filtering_button'] : false;
-		$filterButtonWord       = ( ! empty( $filterSettings['settings']['filtering_button_word'] ) ) ? $filterSettings['settings']['filtering_button_word'] : 'Filter';
+		$filterButtonWord       = ( ! empty( $filterSettings['settings']['filtering_button_word'] ) ) ? $filterSettings['settings']['filtering_button_word'] : esc_html__( 'Filter', 'woo-product-filter' );
 		$clearButtonWord        = ( $showCleanButton && ! empty( $filterSettings['settings']['show_clean_button_word'] ) ) ? $filterSettings['settings']['show_clean_button_word'] : 'Clear';
 		$enableAjax             = ( ! empty( $filterSettings['settings']['enable_ajax'] ) ) ? $filterSettings['settings']['enable_ajax'] : 0;
 		$forceShowCurrentFilter = ( isset( $filterSettings['settings']['force_show_current'] ) ) ? $filterSettings['settings']['force_show_current'] : 0;

@@ -2,13 +2,13 @@
 /**
  * Product Filter by WBW - ModelWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
-abstract class ModelWpf extends BaseObjectWpf {
+abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 	protected $_data = array();
 	protected $_code = '';
 

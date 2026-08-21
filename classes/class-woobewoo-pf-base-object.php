@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - BaseObjectWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Base_Object Class
  *
- * @version 3.3.1
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-abstract class BaseObjectWpf {
+abstract class WooBeWoo_PF_Base_Object {
 
 	/**
 	 * _internalErrors.

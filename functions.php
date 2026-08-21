@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Functions
  *
- * @version 3.3.1
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -40,6 +40,8 @@ if ( ! function_exists( 'dateToTimestampWpf' ) ) {
 
 /**
  * importClassWpf.
+ *
+ * @version 3.3.2
  */
 if ( ! function_exists( 'importClassWpf' ) ) {
 	function importClassWpf( $class, $path = '' ) {
@@ -47,7 +49,11 @@ if ( ! function_exists( 'importClassWpf' ) ) {
 			$classFile = lcfirst( $class );
 			if ( strpos( strtolower( $classFile ), WPF_CODE ) !== false ) {
 				$classFile = preg_replace( '/' . WPF_CODE . '/i', '', $classFile );
+			} else if ( strpos( $class, WPF_CLASS_PREFIX ) !== false ) {
+				$classFile = str_replace( '_', '-', $classFile );
+				$classFile = 'class-' . strtolower( $classFile );
 			}
+
 			$path = WPF_CLASSES_DIR . $classFile . '.php';
 			if ( file_exists( $path ) ) {
 				require WPF_CLASSES_DIR . $classFile . '.php';
@@ -64,17 +70,18 @@ if ( ! function_exists( 'importClassWpf' ) ) {
 /**
  * Check if class name exist with prefix or not.
  *
+ * @version 3.3.2
+ *
  * @param string $class preferred class name
  *
  * @return string existing class name
  */
 if ( ! function_exists( 'toeGetClassNameWpf' ) ) {
 	function toeGetClassNameWpf( $class ) {
-		$className = '';
 		if ( class_exists( $class . strFirstUpWpf( WPF_CODE ) ) ) {
 			$className = $class . strFirstUpWpf( WPF_CODE );
-		} elseif ( class_exists( WPF_CLASS_PREFIX . $class ) ) {
-			$className = WPF_CLASS_PREFIX . $class;
+		} elseif ( class_exists( WPF_CLASS_PREFIX . ucwords( $class ) ) ) {
+			$className = WPF_CLASS_PREFIX . ucwords( $class );
 		} else {
 			$className = $class;
 		}

@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - OverviewWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Overview Class
  *
- * @version 2.8.6
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class OverviewWpf extends ModuleWpf {
+class WooBeWoo_PF_Overview extends ModuleWpf {
 
 	/**
 	 * init.

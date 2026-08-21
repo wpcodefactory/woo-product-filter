@@ -2,14 +2,14 @@
 /**
  * Product Filter by WBW - ModuleWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-abstract class ModuleWpf extends BaseObjectWpf {
+abstract class ModuleWpf extends WooBeWoo_PF_Base_Object {
 
 	protected $_controller = null;
 	protected $_helper     = null;
