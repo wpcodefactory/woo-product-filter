@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - OptionsControllerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Options_Controller Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class OptionsControllerWpf extends ControllerWpf {
+class WooBeWoo_PF_Options_Controller extends ControllerWpf {
 
 	/**
 	 * woobewoo_pf_save_group.

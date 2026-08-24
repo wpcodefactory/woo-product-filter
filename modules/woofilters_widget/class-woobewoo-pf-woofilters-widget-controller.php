@@ -1,0 +1,14 @@
+<?php
+/**
+ * Product Filter by WBW - WooBeWoo_PF_Woofilters_Widget_Controller Class
+ *
+ * @version 3.3.2
+ *
+ * @author woobewoo
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+class WooBeWoo_PF_Woofilters_Widget_Controller extends ControllerWpf {
+
+}

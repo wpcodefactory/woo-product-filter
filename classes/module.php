@@ -160,18 +160,24 @@ abstract class ModuleWpf extends WooBeWoo_PF_Base_Object {
 
 	/**
 	 * _createController.
+	 *
+	 * @version 3.3.2
 	 */
 	protected function _createController() {
-		if ( ! file_exists( $this->getModDir() . 'controller.php' ) ) {
+		$controller_class_name = WPF_CLASS_PREFIX . ucwords( $this->getCode() ) . '_Controller';
+		$controller_class_file     = strtolower( str_replace( '_', '-', $controller_class_name ) ) . '.php';
+		$controller_class_location = $this->getModDir() . 'class-' . $controller_class_file;
+
+		if ( ! file_exists( $controller_class_location ) ) {
 			return false; // EXCEPTION!!!
 		}
 		if ( $this->_controller ) {
 			return true;
 		}
-		if ( file_exists( $this->getModDir() . 'controller.php' ) ) {
+		if ( file_exists( $controller_class_location ) ) {
 			$className = '';
-			require $this->getModDir() . 'controller.php';
-			$className = toeGetClassNameWpf( $this->getCode() . 'Controller' );
+			require $controller_class_location;
+			$className = toeGetClassNameWpf( $controller_class_name );
 			if ( ! empty( $className ) ) {
 				$this->_controller = new $className( $this->getCode() );
 				$this->_controller->init();

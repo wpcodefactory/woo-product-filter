@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - OverviewControllerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Overview_Controller Class
  *
  * @version 3.3.0
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class OverviewControllerWpf extends ControllerWpf {
+class WooBeWoo_PF_Overview_Controller extends ControllerWpf {
 
 	/**
 	 * woobewoo_pf_subscribe.

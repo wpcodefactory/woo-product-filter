@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - Admin_NavControllerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Admin_Nav_Controller Class
  *
  * @version 3.3.0
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Admin_NavControllerWpf extends ControllerWpf {
+class WooBeWoo_PF_Admin_Nav_Controller extends ControllerWpf {
 	public function getPermissions() {
 		return array(
 			WPF_USERLEVELS => array(

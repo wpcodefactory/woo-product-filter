@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - MetaControllerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Meta_Controller Class
  *
  * @version 3.3.0
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class MetaControllerWpf extends ControllerWpf {
+class WooBeWoo_PF_Meta_Controller extends ControllerWpf {
 
 	protected $_code = 'meta';
 

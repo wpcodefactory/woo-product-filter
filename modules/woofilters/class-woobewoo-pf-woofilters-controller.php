@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - WoofiltersControllerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Woofilters_Controller Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class WoofiltersControllerWpf extends ControllerWpf {
+class WooBeWoo_PF_Woofilters_Controller extends ControllerWpf {
 
 	protected $_code = 'woofilters';
 
