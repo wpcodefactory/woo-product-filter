@@ -19,7 +19,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::selectbox(
+			WooBeWoo_PF_Html::selectbox(
 				'f_frontend_type',
 				array(
 					'options' => array(
@@ -43,7 +43,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_dropdown_first_option_text',
 					array(
 						'placeholder' => esc_attr__( 'Select all', 'woo-product-filter' ),
@@ -72,7 +72,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 					'text'    => $value,
 				);
 			}
-			HtmlWpf::checkboxlist( 'f_options', array( 'options' => $options ), '</div><div class="settings-value settings-value-elementor-row-revert">' );
+			WooBeWoo_PF_Html::checkboxlist( 'f_options', array( 'options' => $options ), '</div><div class="settings-value settings-value-elementor-row-revert">' );
 			?>
 		</div>
 	</div>
@@ -84,11 +84,11 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="sub-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_status_names', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_status_names', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_status_names">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_stock_statuses[in]',
 				array(
 					'placeholder' => esc_attr( $labels['instock'] ),
@@ -99,7 +99,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_status_names">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_stock_statuses[out]',
 				array(
 					'placeholder' => esc_attr( $labels['outofstock'] ),
@@ -110,7 +110,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_status_names">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_stock_statuses[on]',
 				array(
 					'placeholder' => esc_attr( $labels['onbackorder'] ),
@@ -129,7 +129,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>

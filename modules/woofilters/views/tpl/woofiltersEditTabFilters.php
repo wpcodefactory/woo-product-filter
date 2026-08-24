@@ -41,7 +41,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						</svg>
 				</button>
 			</div>
-			<span data-option='pro' class="wpfProLabel wpfHidden"><?php HtmlWpf::echoEscapedHtml( $pro_label ); ?></span>
+			<span data-option='pro' class="wpfProLabel wpfHidden"><?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?></span>
 			<span data-option='uniq' class="wpfProLabel wpfHidden"><?php esc_html_e( 'Already in the list', 'woo-product-filter' ); ?></span>
 			<span data-option='group' class="wpfProLabel wpfHidden">
 			<?php
@@ -118,7 +118,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<div class="wpfFilter wpfFiltersBlockTemplate">
 			<div class="wpfHeaders">
 				<?php
-				HtmlWpf::checkbox(
+				WooBeWoo_PF_Html::checkbox(
 					'f_enable',
 					array(
 						'checked' => 1,
@@ -131,7 +131,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<a href="#" class="wpfToggle"><i class="fa fa-chevron-down"></i></a>
 				<div class="wpfFilterFrontDescOpt">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'f_description',
 							array(
 								'placeholder' => esc_attr__( 'Description', 'woo-product-filter' ),
@@ -141,7 +141,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="wpfFilterFrontTitleOpt">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'f_title',
 							array(
 								'placeholder' => esc_attr__( 'Title', 'woo-product-filter' ),
@@ -161,7 +161,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				?>
 			<div class="wpfFilterOptions" data-filter="<?php echo esc_attr( $filter ); ?>">
 				<?php
-				HtmlWpf::hidden( 'f_name', array( 'value' => $data['name'] ) );
+				WooBeWoo_PF_Html::hidden( 'f_name', array( 'value' => $data['name'] ) );
 				include_once 'woofiltersEditTabFilters' . substr( $filter, 3 ) . '.php';
 				?>
 			</div>

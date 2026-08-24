@@ -30,7 +30,7 @@ $ratingTypes = array(
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => $ratingTypes,
@@ -49,7 +49,7 @@ $ratingTypes = array(
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_dropdown_first_option_text',
 					array(
 						'placeholder' => esc_attr__( 'Select all', 'woo-product-filter' ),
@@ -85,7 +85,7 @@ foreach ( $ratingTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -98,7 +98,7 @@ foreach ( $ratingTypes as $key => $value ) {
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_add_text',
 					array(
 						'placeholder' => esc_attr__( 'and up', 'woo-product-filter' ),
@@ -117,7 +117,7 @@ foreach ( $ratingTypes as $key => $value ) {
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_add_text5',
 					array(
 						'placeholder' => esc_attr__( '5 only', 'woo-product-filter' ),

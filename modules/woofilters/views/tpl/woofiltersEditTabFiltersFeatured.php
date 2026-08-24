@@ -18,7 +18,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => array(
@@ -40,7 +40,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_custom_title',
 				array(
 					'placeholder' => esc_attr__( 'Featured', 'woo-product-filter' ),

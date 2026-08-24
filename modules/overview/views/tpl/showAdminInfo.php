@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Overview - Show Admin Info
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -14,5 +14,5 @@ defined( 'ABSPATH' ) || exit;
 	class="wpf-notice-dismis notice notice-info is-dismissible"
 	<?php echo empty( $this->msgSlug ) ? '' : ' data-disslug="' . esc_attr( $this->msgSlug ) . '"'; ?>
 >
-	<p><?php HtmlWpf::echoEscapedHtml( $this->message ); ?></p>
+	<p><?php WooBeWoo_PF_Html::echoEscapedHtml( $this->message ); ?></p>
 </div>

@@ -54,9 +54,9 @@ defined( 'ABSPATH' ) || exit;
 				</nav>
 				<div class="contantArea woobewoo-container woobewoo-wdt-100 woobewoo-relative woobewoo-<?php echo esc_attr( $this->activeTab ); ?>">
 					<div class="breadcrumb_heading">
-						<?php HtmlWpf::echoEscapedHtml( $this->breadcrumbs ); ?>
+						<?php WooBeWoo_PF_Html::echoEscapedHtml( $this->breadcrumbs ); ?>
 					</div>
-					<?php HtmlWpf::echoEscapedHtml( $this->content ); ?>
+					<?php WooBeWoo_PF_Html::echoEscapedHtml( $this->content ); ?>
 					<div class="clear"></div>
 				</div>
 			</section>

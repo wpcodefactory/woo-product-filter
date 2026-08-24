@@ -43,7 +43,7 @@ $skins = array(
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::selectbox(
+			WooBeWoo_PF_Html::selectbox(
 				'f_skin_type',
 				array(
 					'options' => $skins,
@@ -83,7 +83,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_inputs', array( 'checked' => 1 ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_inputs', array( 'checked' => 1 ) ); ?>
 		</div>
 	</div>
 </div>
@@ -94,7 +94,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_currency_position',
 					array(
 						'options' => array(
@@ -115,7 +115,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_currency_show_as',
 					array(
 						'options' => array(
@@ -136,7 +136,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_price_tooltip_show_as', array( 'checked' => 1 ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_price_tooltip_show_as', array( 'checked' => 1 ) ); ?>
 		</div>
 	</div>
 </div>
@@ -147,7 +147,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Set the price min/max value. Doesn\'t working with recount prices option!', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -156,7 +156,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

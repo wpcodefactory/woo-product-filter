@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Options Pro Tab Content
  *
- * @version 3.1.7
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="wpf-gopro-switch">
 			<div class="wpf-gopro-text"><?php esc_html_e( 'Yearly', 'woo-product-filter' ); ?></div>
 			<?php
-			HtmlWpf::checkboxToggle(
+			WooBeWoo_PF_Html::checkboxToggle(
 				'wpf-toggle-license',
 				array(
 					'checked' => 1,
@@ -191,7 +191,7 @@ defined( 'ABSPATH' ) || exit;
 		<div class="wpf-gopro-switch">
 			<div class="wpf-gopro-text"><?php esc_html_e( 'Yearly', 'woo-product-filter' ); ?></div>
 			<?php
-			HtmlWpf::checkboxToggle(
+			WooBeWoo_PF_Html::checkboxToggle(
 				'wpf-toggle-license',
 				array(
 					'checked' => 1,

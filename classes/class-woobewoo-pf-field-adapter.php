@@ -20,7 +20,7 @@ class WooBeWoo_PF_Field_Adapter {
 	 * Constants.
 	 */
 	const DB   = 'WooBeWoo_PF_Db';
-	const HTML = 'HtmlWpf';
+	const HTML = 'WooBeWoo_PF_Html';
 	const STR  = 'str';
 
 	/**
@@ -191,7 +191,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * Function to get field params.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 *
 	 * @param object $params
 	 */
@@ -200,13 +200,13 @@ class WooBeWoo_PF_Field_Adapter {
 		if ( ! empty( $params->attr ) ) {
 			foreach ( $params->attr as $key => $value ) {
 				$output .= esc_html( $key ) . ':<br />';
-				$output .= HtmlWpf::text( 'params[attr][' . $key . ']', array( 'value' => $value ) ) . '<br />';
+				$output .= WooBeWoo_PF_Html::text( 'params[attr][' . $key . ']', array( 'value' => $value ) ) . '<br />';
 			}
 		} else {
 			$output .= esc_html__( 'class', 'woo-product-filter' ) . ':<br />';
-			$output .= HtmlWpf::text( 'params[attr][class]', array( 'value' => '' ) ) . '<br />';
+			$output .= WooBeWoo_PF_Html::text( 'params[attr][class]', array( 'value' => '' ) ) . '<br />';
 			$output .= esc_html__( 'id', 'woo-product-filter' ) . ':<br />';
-			$output .= HtmlWpf::text( 'params[attr][id]', array( 'value' => '' ) ) . '<br />';
+			$output .= WooBeWoo_PF_Html::text( 'params[attr][id]', array( 'value' => '' ) ) . '<br />';
 		}
 		return $output;
 	}

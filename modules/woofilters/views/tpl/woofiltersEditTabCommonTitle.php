@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Common Title
  *
- * @version 3.1.7
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
 				<?php esc_html_e( 'desktop', 'woo-product-filter' ); ?>
 			</div>
 			<?php
-			HtmlWpf::selectbox(
+			WooBeWoo_PF_Html::selectbox(
 				'f_enable_title',
 				array(
 					'options' => array(
@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 				<?php esc_html_e( 'mobile', 'woo-product-filter' ); ?>
 			</div>
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_enable_title_mobile',
 					array(
 						'options' => array(

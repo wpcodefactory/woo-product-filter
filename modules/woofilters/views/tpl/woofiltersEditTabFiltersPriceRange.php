@@ -20,7 +20,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => array(
@@ -42,7 +42,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_dropdown_first_option_text',
 					array(
 						'placeholder' => esc_attr__( 'Select all', 'woo-product-filter' ),
@@ -60,7 +60,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_range_automatic', array( 'checked' => 1 ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_range_automatic', array( 'checked' => 1 ) ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_range_automatic">
 			<div class="settings-value-label">
@@ -68,7 +68,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Set the value of prise increase step. The default value is set to 20. All the steps are equal. When setting the step, please note that the number of elements in the list should not exceed 100, otherwise the step setting will be reset and automatically calculated.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_step',
 					array(
 						'value' => 20,
@@ -86,7 +86,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_range_by_hands', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_range_by_hands', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_range_by_hands">
 			<button class="button button-mini wpfRangeByHandSetup"><?php echo esc_html__( 'Setup', 'woo-product-filter' ); ?></button>
@@ -100,7 +100,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list">
@@ -109,7 +109,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Use Under/Over label instead of minimum and maximum values.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block" data-value="decimals">
@@ -118,7 +118,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'This sets the number of decimal points shown in displayed prices.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/price-range-filter/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -127,7 +127,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The values will be changed by the specified percentage', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_pirce_range_set_range_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -139,7 +139,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w50">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_layout',
 					array(
 						'options' => array(
@@ -156,7 +156,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php esc_html_e( 'Columns', 'woo-product-filter' ); ?>
 			</div>
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_ver_columns',
 				array(
 					'value' => 1,
@@ -175,7 +175,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_max_height',
 				array(
 					'value' => '200',
@@ -187,7 +187,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php HtmlWpf::hidden( 'f_range_by_hands_values', array() ); ?>
-<?php HtmlWpf::hidden( 'f_range_by_hands_default', array() ); ?>
+<?php WooBeWoo_PF_Html::hidden( 'f_range_by_hands_values', array() ); ?>
+<?php WooBeWoo_PF_Html::hidden( 'f_range_by_hands_default', array() ); ?>
 <?php
-HtmlWpf::hidden( 'f_preselect', array() );
+WooBeWoo_PF_Html::hidden( 'f_preselect', array() );

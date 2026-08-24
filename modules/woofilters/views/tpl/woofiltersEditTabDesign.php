@@ -35,14 +35,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w50">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[filter_width]',
 							array(
 								'value' => isset( $this->settings['settings']['filter_width'] ) ? $this->settings['settings']['filter_width'] : '100',
 								'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"',
 							)
 						);
-						HtmlWpf::selectbox(
+						WooBeWoo_PF_Html::selectbox(
 							'settings[filter_width_in]',
 							array(
 								'options' => array(
@@ -62,14 +62,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w50">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[filter_width_mobile]',
 							array(
 								'value' => isset( $this->settings['settings']['filter_width_mobile'] ) ? $this->settings['settings']['filter_width_mobile'] : '100',
 								'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"',
 							)
 						);
-						HtmlWpf::selectbox(
+						WooBeWoo_PF_Html::selectbox(
 							'settings[filter_width_in_mobile]',
 							array(
 								'options' => array(
@@ -97,14 +97,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w50">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[filter_block_width]',
 							array(
 								'value' => isset( $this->settings['settings']['filter_block_width'] ) ? $this->settings['settings']['filter_block_width'] : '100',
 								'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"',
 							)
 						);
-						HtmlWpf::selectbox(
+						WooBeWoo_PF_Html::selectbox(
 							'settings[filter_block_width_in]',
 							array(
 								'options' => array(
@@ -124,14 +124,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w50">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[filter_block_width_mobile]',
 							array(
 								'value' => isset( $this->settings['settings']['filter_block_width_mobile'] ) ? $this->settings['settings']['filter_block_width_mobile'] : '100',
 								'attrs' => 'class="woobewoo-flat-input woobewoo-number woobewoo-width60"',
 							)
 						);
-						HtmlWpf::selectbox(
+						WooBeWoo_PF_Html::selectbox(
 							'settings[filter_block_width_in_mobile]',
 							array(
 								'options' => array(
@@ -154,7 +154,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-sm-9">
 				<div class="settings-value">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[filter_block_height]',
 							array(
 								'value' => isset( $this->settings['settings']['filter_block_height'] ) ? $this->settings['settings']['filter_block_height'] : '',
@@ -173,7 +173,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-sm-9">
 				<div class="settings-value">
 					<?php
-					HtmlWpf::text(
+					WooBeWoo_PF_Html::text(
 						'settings[padding_child_list]',
 						array(
 							'value' => isset( $this->settings['settings']['padding_child_list'] ) ? $this->settings['settings']['padding_child_list'] : '',
@@ -193,7 +193,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-sm-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[disable_fontawesome_loading]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['disable_fontawesome_loading'] ) ? (int) $this->settings['settings']['disable_fontawesome_loading'] : '' ),
@@ -211,7 +211,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-sm-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[disable_plugin_styles]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['disable_plugin_styles'] ) ? (int) $this->settings['settings']['disable_plugin_styles'] : '' ),
@@ -233,7 +233,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Choose custom styles for filter blocks. Any settings you leave blank will default.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/filter-block-design/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-sm-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_blocks_styling_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -249,7 +249,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Choose custom styles for filter titles. Any settings you leave blank will default.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/filter-title-design/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-sm-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_title_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -265,7 +265,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Choose custom styles for filter buttons. Any settings you leave blank will default.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/buttons-design/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-sm-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_buttons_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
@@ -281,7 +281,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'The filter will be located in a popup.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/buttons-design/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-sm-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_floating_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

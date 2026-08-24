@@ -62,6 +62,6 @@ class WooBeWoo_PF_Overview_View extends ViewWpf {
 			' <a href="#" class="button button-dismiss">' . esc_html__( 'No, thanks', 'woo-product-filter' ) . '</a>'
 		);
 		$this->assign( 'msgSlug', 'wpf-rest-api' );
-		HtmlWpf::echoEscapedHtml( $this->getContent( 'showAdminInfo' ) );
+		WooBeWoo_PF_Html::echoEscapedHtml( $this->getContent( 'showAdminInfo' ) );
 	}
 }

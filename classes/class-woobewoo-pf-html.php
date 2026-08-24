@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - HtmlWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Html Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class HtmlWpf {
+class WooBeWoo_PF_Html {
 
 	public static $categoriesOptions = array();
 	public static $productsOptions   = array();

@@ -664,14 +664,14 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 						$args['after_page_number']  = '</span>';
 						unset( $args['type'] );
 						$links = paginate_links( $args );
-						HtmlWpf::echoEscapedHtml( _navigation_markup( $links, 'pagination', '' ) );
+						WooBeWoo_PF_Html::echoEscapedHtml( _navigation_markup( $links, 'pagination', '' ) );
 						break;
 					case 'Themify Ultra':
 						$args['before_page_number'] = '<span>';
 						$args['after_page_number']  = '</span>';
 						unset( $args['type'] );
 						$links = paginate_links( $args );
-						HtmlWpf::echoEscapedHtml( '<div class="pagenav tf_clear tf_box tf_textr tf_clearfix">' . $links . '</div>' );
+						WooBeWoo_PF_Html::echoEscapedHtml( '<div class="pagenav tf_clear tf_box tf_textr tf_clearfix">' . $links . '</div>' );
 						break;
 					default:
 						wc_get_template( 'loop/pagination.php', $args );

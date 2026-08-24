@@ -76,7 +76,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 									<?php $filterTitle = isset( $this->filter['title'] ) ? $this->filter['title'] : 'empty'; ?>
 									<span id="wpfFilterTitleLabel"><?php echo esc_html( $filterTitle ); ?></span>
 									<?php
-									HtmlWpf::text(
+									WooBeWoo_PF_Html::text(
 										'title',
 										array(
 											'value'    => $filterTitle,
@@ -118,7 +118,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 										<?php echo esc_html__( 'Shortcode', 'woo-product-filter' ); ?>
 									</label>
 									<?php
-									HtmlWpf::text(
+									WooBeWoo_PF_Html::text(
 										'',
 										array(
 											'value'    => '[' . WPF_SHORTCODE . ' id=' . absint( $fid ) . ']',
@@ -130,7 +130,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 								</div>
 								<div class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode phpcode wpfHidden woobewoo-flex-column">
 									<?php
-									HtmlWpf::text(
+									WooBeWoo_PF_Html::text(
 										'',
 										array(
 											'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE . ' id=' . absint( $fid ) . "]') ?>",
@@ -143,7 +143,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 								<div
 									class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode shortcode_product wpfHidden woobewoo-flex-column">
 									<?php
-									HtmlWpf::text(
+									WooBeWoo_PF_Html::text(
 										'',
 										array(
 											'value'    => '[' . WPF_SHORTCODE_PRODUCTS . ']',
@@ -156,7 +156,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 								<div
 									class="col-md-4 wpfCopyTextCodeShowBlock wpfShortcode phpcode_product wpfHidden woobewoo-flex-column">
 									<?php
-									HtmlWpf::text(
+									WooBeWoo_PF_Html::text(
 										'',
 										array(
 											'value'    => "<?php echo do_shortcode('[" . WPF_SHORTCODE_PRODUCTS . "]') ?>",
@@ -253,13 +253,13 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 						$orderTab = '';
 					}
 
-					HtmlWpf::hidden(
+					WooBeWoo_PF_Html::hidden(
 						'settings[filters][order]',
 						array(
 							'value' => $orderTab,
 						)
 					);
-					HtmlWpf::hidden(
+					WooBeWoo_PF_Html::hidden(
 						'settings[filters][preselect]',
 						array(
 							'value' => ( isset( $this->settings['settings']['filters']['preselect'] ) ? htmlentities( $this->settings['settings']['filters']['preselect'], ENT_COMPAT ) : '' ),
@@ -267,9 +267,9 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 					);
 					?>
 
-					<?php HtmlWpf::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
-					<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
-					<?php HtmlWpf::hidden( 'id', array( 'value' => $this->filter['id'] ) ); ?>
+					<?php WooBeWoo_PF_Html::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
+					<?php WooBeWoo_PF_Html::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
+					<?php WooBeWoo_PF_Html::hidden( 'id', array( 'value' => $this->filter['id'] ) ); ?>
 				</form>
 				<div class="woobewoo-clear"></div>
 			</div>

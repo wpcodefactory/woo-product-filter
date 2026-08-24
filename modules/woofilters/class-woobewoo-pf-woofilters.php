@@ -3255,24 +3255,24 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * renderProductsList.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function render( $params ) {
 		$p = array(
 			'id'   => ( isset( $params['id'] ) ? (int) $params['id'] : 0 ),
 			'mode' => ( isset( $params['mode'] ) && 'widget' == $params['mode'] ? 'widget' : '' ),
 		);
-		return HtmlWpf::escapedHtml( $this->getView()->renderHtml( $p ) );
+		return WooBeWoo_PF_Html::escapedHtml( $this->getView()->renderHtml( $p ) );
 	}
 
 	/**
 	 * renderProductsList.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function renderProductsList( $params ) {
 		$params = array();
-		return HtmlWpf::escapedHtml( $this->getView()->renderProductsListHtml( $params ) );
+		return WooBeWoo_PF_Html::escapedHtml( $this->getView()->renderProductsListHtml( $params ) );
 	}
 
 	/**
@@ -3313,7 +3313,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			// check current module
 			if ( ReqWpf::getVar( 'page' ) == WPF_SHORTCODE || WooBeWoo_PF_Frame::_()->isWCLicense() ) {
 				// show message
-				HtmlWpf::echoEscapedHtml( $tableView->getContent( 'showAdminNotice' ) );
+				WooBeWoo_PF_Html::echoEscapedHtml( $tableView->getContent( 'showAdminNotice' ) );
 			}
 		}
 	}

@@ -21,7 +21,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<?php
 			$attrDisplay['custom_meta_field_check'] = 'Custom meta field' . $labelPro;
 			// $attrDisplay['custom_local_attribute_check'] = 'Custom product attribute' . $labelPro;
-			HtmlWpf::selectbox(
+			WooBeWoo_PF_Html::selectbox(
 				'f_list',
 				array(
 					'options' => $attrDisplay,
@@ -56,7 +56,7 @@ $attributesTypes = array(
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => $attributesTypes,
@@ -93,7 +93,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -103,7 +103,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -114,7 +114,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -125,7 +125,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -136,7 +136,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -147,7 +147,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -163,7 +163,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -173,7 +173,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -183,7 +183,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -193,7 +193,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -204,7 +204,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>
@@ -221,7 +221,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_dropdown_first_option_text',
 				array(
 					'placeholder' => esc_attr__( 'Select all', 'woo-product-filter' ),
@@ -239,11 +239,11 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_dropdown_search', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_dropdown_search', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_dropdown_search">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_dropdown_search_text',
 				array(
 					'placeholder' => esc_attr__( 'Search', 'woo-product-filter' ),
@@ -261,14 +261,14 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="sub-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_hierarchical', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_hierarchical', array() ); ?>
 		</div>
 		<div class="settings-value" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Hide attributes parent', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show only attributes children.', 'woo-product-filter' ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
 		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="settings-value wpfTypeSwitchable" data-type="radio list switch" data-parent-switch="f_show_hierarchical">
@@ -279,7 +279,7 @@ foreach ( $attributesTypes as $key => $value ) {
 					title="<?php echo esc_attr__( 'If enabled, then show only parent elements, if there are children, they are minimized.', 'woo-product-filter' ); ?>"
 				></i>
 			</div>
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 		<div class="settings-value wpfTypeSwitchable" data-type="multi" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
@@ -289,7 +289,7 @@ foreach ( $attributesTypes as $key => $value ) {
 					title="<?php echo esc_attr__( 'If parent filter attribute was selected then extend selection to child attributes.', 'woo-product-filter' ); ?>"
 				></i>
 			</div>
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 		<?php } else {
 			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_hierarchical_options' );
@@ -303,7 +303,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_order_custom', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_order_custom', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -314,21 +314,21 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hide_empty', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_empty', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_hide_empty">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Same behavior for active filter', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'By default if a value is selected in the filter, items without products will still be displayed (this was done on purpose so that you can quickly switch between items).If the option is enabled, empty elements will be hidden regardless of the filter activity (this also applies to loading via ajax and when reloading the page with the parameters specified in the url).', 'woo-product-filter' ) ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_hide_empty_active', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_empty_active', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_hide_empty">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Hide filter with single item', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Option allows you to hide the filter section if previously set filters result in only one element in the section.', 'woo-product-filter' ) ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_hide_by_single', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_by_single', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -339,7 +339,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_count', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_count', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -351,7 +351,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full wpf-multi-select">
 			<?php
-				HtmlWpf::selectlist(
+				WooBeWoo_PF_Html::selectlist(
 					'f_mlist',
 					array(
 						'options' => array(),
@@ -368,7 +368,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hidden_attributes', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hidden_attributes', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
 		</div>
 	</div>
 </div>
@@ -379,7 +379,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_query_logic',
 					array(
 						'options' => $this->getModule()->getAttrFilterLogic( 'display' ),
@@ -399,7 +399,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_sort_by',
 					array(
 						'options' => array(
@@ -416,7 +416,7 @@ foreach ( $attributesTypes as $key => $value ) {
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php } else {
@@ -431,12 +431,12 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_search_input', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_search_input', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_search_input">
 			<?php
 				$labels = $this->getModel( 'woofilters' )->getFilterLabels( 'Attribute' );
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_search_label',
 					array(
 						'placeholder' => esc_html( $labels['search'] ),
@@ -455,7 +455,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_all_attributes', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_all_attributes', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -467,7 +467,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_layout',
 					array(
 						'options' => array(
@@ -484,7 +484,7 @@ foreach ( $attributesTypes as $key => $value ) {
 				<?php esc_html_e( 'Columns', 'woo-product-filter' ); ?>
 			</div>
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_ver_columns',
 				array(
 					'value' => 1,
@@ -503,7 +503,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_max_height',
 				array(
 					'value' => '200',

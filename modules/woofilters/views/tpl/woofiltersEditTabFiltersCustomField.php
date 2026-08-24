@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Edit Tab Filters Custom Field
  *
- * @version 3.1.7
+ * @version 3.3.2
  * @since   3.1.7
  *
  * @author woobewoo
@@ -43,7 +43,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 					'text'    => '<div><input type="text" readonly class="woobewoo-flat-input js-sortby-item" name="f_option_labels[' . $key . ']" data-name="' . $key . '" placeholder="' . esc_attr( $label['label'] ) . '"/></div>' . $strMove,
 				);
 			}
-			HtmlWpf::checkboxlist( 'f_options', array( 'options' => $options ), '</div><div class="settings-value settings-value-elementor-row-revert js-wpf-row-move">' );
+			WooBeWoo_PF_Html::checkboxlist( 'f_options', array( 'options' => $options ), '</div><div class="settings-value settings-value-elementor-row-revert js-wpf-row-move">' );
 			?>
 		</div>
 	</div>

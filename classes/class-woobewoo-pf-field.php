@@ -30,7 +30,7 @@ class WooBeWoo_PF_Field {
 	 * Name of method in table object to prepare data before insert / update operations
 	 */
 	public $adapt = array(
-		'HtmlWpf' => '',
+		'WooBeWoo_PF_Html' => '',
 		'dbFrom'  => '',
 		'dbTo'    => '',
 	);
@@ -187,8 +187,14 @@ class WooBeWoo_PF_Field {
 		}
 		return $value;
 	}
+
+	/**
+	 * showValue.
+	 *
+	 * @version 3.3.2
+	 */
 	public function showValue() {
-		HtmlWpf::echoEscapedHtml( $this->displayValue() );
+		WooBeWoo_PF_Html::echoEscapedHtml( $this->displayValue() );
 	}
 	public function addHtmlParam( $name, $value ) {
 		$this->htmlParams[ $name ] = $value;
@@ -217,6 +223,8 @@ class WooBeWoo_PF_Field {
 	/**
 	 * Prepares configuration options
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param file $xml
 	 * @return array $config_params
 	 */
@@ -229,7 +237,7 @@ class WooBeWoo_PF_Field {
 			$name        = $this->checkVarFromParam( $param, 'name' );
 			$type        = $this->checkVarFromParam( $param, 'type' );
 			$label       = $this->checkVarFromParam( $param, 'label' );
-			$helper      = $this->checkVarFromParam( $param, 'HelperWpf' );
+			$helper      = $this->checkVarFromParam( $param, 'WooBeWoo_PF_Helper' );
 			$module      = $this->checkVarFromParam( $param, 'ModuleWpf' );
 			$values      = $this->checkVarFromParam( $param, 'values' );
 			$default     = $this->checkVarFromParam( $param, 'default' );
@@ -241,7 +249,7 @@ class WooBeWoo_PF_Field {
 			$config_params[ $name ] = array(
 				'type'        => $type,
 				'label'       => $label,
-				'HelperWpf'   => $helper,
+				'WooBeWoo_PF_Helper'   => $helper,
 				'ModuleWpf'   => $module,
 				'values'      => $values,
 				'default'     => $default,

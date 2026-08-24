@@ -89,16 +89,16 @@ defined( 'ABSPATH' ) || exit;
 										<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( $opt['desc'] ); ?>"></i>
 									</td>
 									<td class="col-w-1perc">
-										<?php HtmlWpf::$htmlType( 'opt_values[' . $optKey . ']', $htmlOpts ); ?>
+										<?php WooBeWoo_PF_Html::$htmlType( 'opt_values[' . $optKey . ']', $htmlOpts ); ?>
 									</td>
 									<td class="col-w-60perc">
 										<div id="wpfFormOptDetails_<?php echo esc_attr( $optKey ); ?>" class="wpfOptDetailsShell">
 											<?php
 											if ( isset( $opt['add_sub_opts'] ) && ! empty( $opt['add_sub_opts'] ) ) {
 												if ( is_string( $opt['add_sub_opts'] ) ) {
-													HtmlWpf::echoEscapedHtml( $opt['add_sub_opts'] );
+													WooBeWoo_PF_Html::echoEscapedHtml( $opt['add_sub_opts'] );
 												} elseif ( is_callable( $opt['add_sub_opts'] ) ) {
-													HtmlWpf::echoEscapedHtml( call_user_func_array( $opt['add_sub_opts'], array( $this->options ) ) );
+													WooBeWoo_PF_Html::echoEscapedHtml( call_user_func_array( $opt['add_sub_opts'], array( $this->options ) ) );
 												}
 											}
 											?>
@@ -112,8 +112,8 @@ defined( 'ABSPATH' ) || exit;
 				<div class="woobewoo-clear"></div>
 			</div>
 		</div>
-		<?php HtmlWpf::hidden( 'mod', array( 'value' => 'options' ) ); ?>
-		<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save_group' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'mod', array( 'value' => 'options' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'action', array( 'value' => 'woobewoo_pf_save_group' ) ); ?>
 	</form>
 </section>
 <?php

@@ -51,7 +51,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						$selectOptions['custom_pwb'] = esc_attr__( 'Specific Brand Page', 'woo-product-filter' ) . $labelPro;
 					}
 
-					HtmlWpf::selectbox(
+					WooBeWoo_PF_Html::selectbox(
 						'settings[display_on_page]',
 						array(
 							'options' => $selectOptions,
@@ -118,7 +118,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[display_on_page_shortcode]',
 						array(
 							'checked' => $this->getFilterSetting( $this->settings['settings'], 'display_on_page_shortcode', false ),
@@ -136,7 +136,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'You can select one of the available pages to redirect to it after selecting a filter', 'woo-product-filter' ) ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 
@@ -146,7 +146,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Only when a selection is made in the current filter show the next one', 'woo-product-filter' ) ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 
@@ -157,7 +157,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'The filter will be located in a popup', 'woo-product-filter' ) ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_additional_options', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -170,7 +170,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::selectbox(
+					WooBeWoo_PF_Html::selectbox(
 						'settings[display_for]',
 						array(
 							'options' => array(
@@ -194,7 +194,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[force_show_current]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['force_show_current'] ) ? (int) $this->settings['settings']['force_show_current'] : '' ),
@@ -216,7 +216,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[desctop_mobile_breakpoint_switcher]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['desctop_mobile_breakpoint_switcher'] ) ? (int) $this->settings['settings']['desctop_mobile_breakpoint_switcher'] : '' ),
@@ -226,7 +226,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $hiddenStyle ); ?>" data-parent="settings[desctop_mobile_breakpoint_switcher]">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[desctop_mobile_breakpoint_width]',
 							array(
 								'value' => ( isset( $this->settings['settings']['desctop_mobile_breakpoint_width'] ) ? intval( $this->settings['settings']['desctop_mobile_breakpoint_width'] ) : '' ),
@@ -246,7 +246,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[hide_without_products]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['hide_without_products'] ) ? (int) $this->settings['settings']['hide_without_products'] : '' ),
@@ -264,7 +264,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[show_filter_immediately]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['show_filter_immediately'] ) ? (int) $this->settings['settings']['show_filter_immediately'] : '' ),
@@ -282,7 +282,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[initialise_immediately]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['initialise_immediately'] ) ? (int) $this->settings['settings']['initialise_immediately'] : '' ),
@@ -305,7 +305,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[count_product_shop]',
 							array(
 								'value' => ( isset( $this->settings['settings']['count_product_shop'] ) ? intval( $this->settings['settings']['count_product_shop'] ) : '' ),
@@ -324,7 +324,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[columns_product_shop]',
 							array(
 								'value' => ( isset( $this->settings['settings']['columns_product_shop'] ) ? intval( $this->settings['settings']['columns_product_shop'] ) : '' ),
@@ -344,7 +344,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[ajax_pagination]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['ajax_pagination'] ) ? (int) $this->settings['settings']['ajax_pagination'] : '' ),
@@ -364,7 +364,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[slug_format]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['slug_format'] ) ? (int) $this->settings['settings']['slug_format'] : '' ),
@@ -386,7 +386,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-6 col-sm-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[enable_ajax]',
 							array(
 								'checked' => $settingValue,
@@ -400,7 +400,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Enable this option when ajax filtering does not work as expected. For example, sorting does not work. Removes filters such as posts_orderby and pre_get_posts.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/options-main-tab/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 					</div>
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[remove_actions]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['remove_actions'] ) ? (int) $this->settings['settings']['remove_actions'] : '' ),
@@ -414,7 +414,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'When filtering, products will be displayed not only with the "publish" status, but also with the "private" status', 'woo-product-filter' ) ); ?>"></i>
 					</div>
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[display_status_private]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['display_status_private'] ) ? (int) $this->settings['settings']['display_status_private'] : '' ),
@@ -432,7 +432,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value">
 					<?php
-						HtmlWpf::input(
+						WooBeWoo_PF_Html::input(
 							'settings[product_list_selector]',
 							array(
 								'value' => $this->getFilterSetting( $this->settings['settings'], 'product_list_selector', '' ),
@@ -452,7 +452,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value">
 					<?php
-						HtmlWpf::input(
+						WooBeWoo_PF_Html::input(
 							'settings[product_container_selector]',
 							array(
 								'value' => $this->getFilterSetting( $this->settings['settings'], 'product_container_selector', '' ),
@@ -474,7 +474,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[force_theme_templates]',
 							array(
 								'checked' => $settingValue,
@@ -488,7 +488,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'This option recalculates all filters, taking into account third-party filters from other plugins on the page. For example, if the products on the page with the woobewoo filter were already pre-filtered by some third-party plugin filter, as a result of which the counters do not work correctly. But be careful, when the option is enabled, the filter may work slowly if the product base is large.', 'woo-product-filter' ) ); ?>"></i>
 					</div>
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[recalculate_filters]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['recalculate_filters'] ) ? (int) $this->settings['settings']['recalculate_filters'] : '' ),
@@ -502,7 +502,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__( 'In some themes, if the product is not found, the system redirects to a special page. This option will not allow to make a redirect in this case, but will display a phrase stating that the products were not found.', 'woo-product-filter' ); ?>"></i>
 					</div>
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[no_redirect_by_no_products]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['no_redirect_by_no_products'] ) ? (int) $this->settings['settings']['no_redirect_by_no_products'] : '' ),
@@ -520,7 +520,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[do_not_use_shortcut]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['do_not_use_shortcut'] ) ? (int) $this->settings['settings']['do_not_use_shortcut'] : '' ),
@@ -549,7 +549,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values settings-w100 settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w50">
 					<?php
-						HtmlWpf::selectbox(
+						WooBeWoo_PF_Html::selectbox(
 							'settings[show_filtering_button]',
 							array(
 								'options' => array(
@@ -564,7 +564,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w50 <?php echo esc_attr( $hiddenStyle ); ?>" data-select="settings[show_filtering_button]" data-select-value="1">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[filtering_button_word]',
 							array(
 								'value' => ( isset( $this->settings['settings']['filtering_button_word'] ) ? $this->settings['settings']['filtering_button_word'] : esc_attr__( 'Filter', 'woo-product-filter' ) ),
@@ -582,7 +582,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 					<?php esc_html_e( 'Automatically Update The Filter', 'woo-product-filter' ); ?>
 					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'When you select one filter element, the rest of the elements will be updated based on its', 'woo-product-filter' ) ); ?>"></i>
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[auto_update_filter]',
 						array(
 							'checked' => $settingValue,
@@ -604,7 +604,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[show_clean_button]',
 							array(
 								'checked' => $settingValue,
@@ -614,7 +614,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $hiddenStyle ); ?>" data-parent="settings[show_clean_button]">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[show_clean_button_word]',
 							array(
 								'value' => ( isset( $this->settings['settings']['show_clean_button_word'] ) ? $this->settings['settings']['show_clean_button_word'] : esc_attr__( 'Clear', 'woo-product-filter' ) ),
@@ -626,7 +626,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<div class="settings-value settings-w100 <?php echo esc_attr( $hiddenStyle ); ?>" data-parent="settings[show_clean_button]">
 					<div class="settings-value-label"><?php esc_html_e( 'Reset All Filters On Page', 'woo-product-filter' ); ?></div>
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[reset_all_filters]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['reset_all_filters'] ) ? (int) $this->settings['settings']['reset_all_filters'] : '' ),
@@ -644,7 +644,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::selectbox(
+						WooBeWoo_PF_Html::selectbox(
 							'settings[main_buttons_position]',
 							array(
 								'options' => array(
@@ -668,7 +668,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::selectbox(
+					WooBeWoo_PF_Html::selectbox(
 						'settings[main_buttons_order]',
 						array(
 							'options' => array(
@@ -691,7 +691,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php esc_html_e( 'Display Hide Filters Button', 'woo-product-filter' ); ?>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_design_button_options', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -712,7 +712,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[all_products_filtering]',
 							array(
 								'checked' => $settingValue,
@@ -726,7 +726,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__( 'When forming filter blocks by loading the page without filtering, all products will be analyzed.', 'woo-product-filter' ); ?>"></i>
 					</div>
 						<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[form_filter_by_all_products]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['form_filter_by_all_products'] ) ? (int) $this->settings['settings']['form_filter_by_all_products'] : '' ),
@@ -748,7 +748,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[show_clean_block]',
 							array(
 								'checked' => $settingValue,
@@ -758,7 +758,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $hiddenStyle ); ?>" data-parent="settings[show_clean_block]">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[show_clean_block_word]',
 							array(
 								'value' => ( isset( $this->settings['settings']['show_clean_block_word'] ) ? $this->settings['settings']['show_clean_block_word'] : esc_attr__( 'Clear', 'woo-product-filter' ) ),
@@ -777,7 +777,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[filter_recount]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['filter_recount'] ) ? (int) $this->settings['settings']['filter_recount'] : '' ),
@@ -799,7 +799,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[filter_recount_price]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['filter_recount_price'] ) ? (int) $this->settings['settings']['filter_recount_price'] : '' ),
@@ -812,7 +812,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<?php esc_html_e( 'Keep Min/Max Price By Reload', 'woo-product-filter' ); ?>
 					</div>
 						<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[keep_recount_price]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['keep_recount_price'] ) ? (int) $this->settings['settings']['keep_recount_price'] : '' ),
@@ -830,7 +830,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[filter_null_disabled]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['filter_null_disabled'] ) ? (int) $this->settings['settings']['filter_null_disabled'] : '' ),
@@ -848,7 +848,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[sort_by_title]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['sort_by_title'] ) ? (int) $this->settings['settings']['sort_by_title'] : '' ),
@@ -866,7 +866,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[checked_items_top]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['checked_items_top'] ) ? (int) $this->settings['settings']['checked_items_top'] : '' ),
@@ -884,7 +884,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[checked_items_bold]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['checked_items_bold'] ) ? (int) $this->settings['settings']['checked_items_bold'] : '' ),
@@ -903,7 +903,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[text_no_products]',
 							array(
 								'value' => ( isset( $this->settings['settings']['text_no_products'] ) ? $this->settings['settings']['text_no_products'] : __( 'No products found', 'woo-product-filter' ) ),
@@ -927,7 +927,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 					<div class="settings-value settings-w100">
 						<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[filtering_by_variations]',
 							array(
 								'checked' => $settingValue,
@@ -941,7 +941,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 							<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__( 'When forming filter blocks with attributes for variable products, only variation attributes will be taken into account. This will affect the displayed number of products in the filter elements and hiding elements without products.', 'woo-product-filter' ); ?>"></i>
 						</div>
 							<?php
-							HtmlWpf::checkboxToggle(
+							WooBeWoo_PF_Html::checkboxToggle(
 								'settings[form_filter_by_variations]',
 								array(
 									'checked' => ( isset( $this->settings['settings']['form_filter_by_variations'] ) ? (int) $this->settings['settings']['form_filter_by_variations'] : '' ),
@@ -955,7 +955,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 							<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__( 'If the option "Hide out of stock items from the catalog" is enabled, out of stock products will not be filtered. If this option is also enabled, on backorder products will also be excluded.', 'woo-product-filter' ); ?>"></i>
 						</div>
 							<?php
-							HtmlWpf::checkboxToggle(
+							WooBeWoo_PF_Html::checkboxToggle(
 								'settings[exclude_backorder_variations]',
 								array(
 									'checked' => ( isset( $this->settings['settings']['exclude_backorder_variations'] ) ? (int) $this->settings['settings']['exclude_backorder_variations'] : '' ),
@@ -983,7 +983,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'For long vertical lists, "Show more" will be displayed.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<div class="woobewoo_row row-settings-block">
@@ -992,7 +992,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( '<div class="woobewoo-tooltips-wrapper"><div class="woobewoo-tooltips-text">' . __( 'Selected parameters will be displayed in the top/bottom of the filter .', 'woo-product-filter' ) . '</div><img src="' . esc_url( $this->getModule()->getModPath() . 'img/display_selected_parameters_of_filters.png' ) . '" height="193"></div>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<div class="woobewoo_row row-settings-block">
@@ -1001,7 +1001,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'After filtration will be scroll to products block', 'woo-product-filter' ) ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<div class="woobewoo_row row-settings-block">
@@ -1010,7 +1010,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'When you click on the block open icon, all other open blocks will be automatically closed', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<div class="woobewoo_row row-settings-block">
@@ -1019,7 +1019,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Turn on only when necessary. Please note that "slug" should only contain lowercase Latin letters, numbers and hyphens.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/content-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_design_content_options', ob_get_clean(), $this->settings, $this->filter['id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -1032,7 +1032,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[hide_filter_icon]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['hide_filter_icon'] ) ? (int) $this->settings['settings']['hide_filter_icon'] : 1 ),
@@ -1049,7 +1049,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[use_title_as_slug]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['use_title_as_slug'] ) ? (int) $this->settings['settings']['use_title_as_slug'] : 0 ),
@@ -1067,7 +1067,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[use_category_filtration]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['use_category_filtration'] ) ? (int) $this->settings['settings']['use_category_filtration'] : 1 ),
@@ -1089,7 +1089,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[display_only_descendants_category]',
 						array(
 							'checked' => $settingValue,
@@ -1103,7 +1103,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<?php esc_html_e( 'Display Only Children Of Current Category', 'woo-product-filter' ); ?>
 					</div>
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[display_only_children_category]',
 						array(
 							'checked' => $this->getFilterSetting( $this->settings['settings'], 'display_only_children_category', 0 ),
@@ -1121,7 +1121,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[check_get_names]',
 						array(
 							'checked' => $this->getFilterSetting( $this->settings['settings'], 'check_get_names', 0 ),
@@ -1139,7 +1139,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::selectbox(
+					WooBeWoo_PF_Html::selectbox(
 						'settings[f_multi_logic]',
 						array(
 							'options' => array(
@@ -1162,7 +1162,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-6 col-sm-7 col-xl-8">
 				<div class="settings-value settings-w100" data-no-preview="1">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[third_party_prefilter]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['third_party_prefilter'] ) ? (int) $this->settings['settings']['third_party_prefilter'] : '' ),
@@ -1185,7 +1185,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-					HtmlWpf::checkboxToggle(
+					WooBeWoo_PF_Html::checkboxToggle(
 						'settings[filter_loader_icon_onload_enable]',
 						array(
 							'checked' => ( isset( $this->settings['settings']['filter_loader_icon_onload_enable'] ) ? (int) $this->settings['settings']['filter_loader_icon_onload_enable'] : 1 ),
@@ -1225,7 +1225,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<div class="woobewoo_row row-settings-block wpfLoader">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Filter Loader Icon', 'woo-product-filter' ); ?>
-				&nbsp; <?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				&nbsp; <?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Select the animated loader, which appears when filtering results are loading.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/loader-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
@@ -1234,7 +1234,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value settings-w50">
 					<?php
-					HtmlWpf::colorpicker(
+					WooBeWoo_PF_Html::colorpicker(
 						'settings[filter_loader_icon_color]',
 						array(
 							'value' => ( isset( $this->settings['settings']['filter_loader_icon_color'] ) ? $this->settings['settings']['filter_loader_icon_color'] : '#000000' ),
@@ -1246,17 +1246,17 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsLoader', $this->settings ); ?>
 				<div class="clear"></div>
 				<div class="settings-value wpfIconPreview">
-					<?php HtmlWpf::echoEscapedHtml( $htmlPreview ); ?>
+					<?php WooBeWoo_PF_Html::echoEscapedHtml( $htmlPreview ); ?>
 				</div>
 				<?php
-					HtmlWpf::hidden(
+					WooBeWoo_PF_Html::hidden(
 						'settings[filter_loader_icon_name]',
 						array(
 							'value' => ( isset( $this->settings['settings']['filter_loader_icon_name'] ) ? $this->settings['settings']['filter_loader_icon_name'] : 'default' ),
 							'attrs' => ' data-loader-settings="1"',
 						)
 					);
-					HtmlWpf::hidden(
+					WooBeWoo_PF_Html::hidden(
 						'settings[filter_loader_icon_number]',
 						array(
 							'value' => ( isset( $this->settings['settings']['filter_loader_icon_number'] ) ? $this->settings['settings']['filter_loader_icon_number'] : '0' ),
@@ -1280,7 +1280,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-block-values col-xs-8 col-lg-9">
 				<div class="settings-value settings-w100">
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[enable_overlay]',
 							array(
 								'checked' => $settingValue,
@@ -1291,7 +1291,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value <?php echo esc_attr( $hiddenStyle ); ?>" data-parent="settings[enable_overlay]">
 					<?php
-						HtmlWpf::colorpicker(
+						WooBeWoo_PF_Html::colorpicker(
 							'settings[overlay_background]',
 							array(
 								'value' => ( isset( $this->settings['settings']['overlay_background'] ) ? $this->settings['settings']['overlay_background'] : 'black' ),
@@ -1306,7 +1306,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<?php esc_html_e( 'loader Icon', 'woo-product-filter' ); ?>
 					</div>
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[enable_overlay_icon]',
 							array(
 								'checked' => ( isset( $this->settings['settings']['enable_overlay_icon'] ) ? (int) $this->settings['settings']['enable_overlay_icon'] : '' ),
@@ -1321,7 +1321,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<?php esc_html_e( 'loader Word', 'woo-product-filter' ); ?>
 					</div>
 					<?php
-						HtmlWpf::checkboxToggle(
+						WooBeWoo_PF_Html::checkboxToggle(
 							'settings[enable_overlay_word]',
 							array(
 								'checked' => $settingWordValue,
@@ -1332,7 +1332,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				</div>
 				<div class="settings-value <?php echo esc_attr( $hiddenWordStyle ); ?>" data-parent="settings[enable_overlay_word]">
 					<?php
-						HtmlWpf::text(
+						WooBeWoo_PF_Html::text(
 							'settings[overlay_word]',
 							array(
 								'value' => ( isset( $this->settings['settings']['overlay_word'] ) ? $this->settings['settings']['overlay_word'] : 'WooBeWoo' ),
@@ -1351,7 +1351,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'To prevent products container from collapsing during ajax.', 'woo-product-filter' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_remove_products_while_loading', ob_get_clean(), $this->settings, $this->filter['id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

@@ -9,4 +9,4 @@
 
 defined( 'ABSPATH' ) || exit;
 
-HtmlWpf::echoEscapedHtml( WooBeWoo_PF_Dispatcher::applyFilters( 'filtersHtml', $this->html ) );
+WooBeWoo_PF_Html::echoEscapedHtml( WooBeWoo_PF_Dispatcher::applyFilters( 'filtersHtml', $this->html ) );

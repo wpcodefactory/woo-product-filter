@@ -24,7 +24,7 @@ class WooBeWoo_PF_Woofilters_Widget_View extends ViewWpf {
 				if ( isset( $args['before_widget'] ) && isset( $args['after_widget'] ) ) {
 					$widget = $args['before_widget'] . $widget . $args['after_widget'];
 				}
-				HtmlWpf::echoEscapedHtml( $widget );
+				WooBeWoo_PF_Html::echoEscapedHtml( $widget );
 			}
 		}
 	}

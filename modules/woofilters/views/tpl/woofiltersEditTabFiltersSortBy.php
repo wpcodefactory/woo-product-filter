@@ -19,7 +19,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => array(
@@ -63,7 +63,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 					'text'    => '<div><input type="text" class="woobewoo-flat-input js-sortby-item" name="f_option_labels[' . $key . ']" data-name="' . $key . '" placeholder="' . esc_attr( $value ) . '"/></div>' . $strMove,
 				);
 			}
-			HtmlWpf::checkboxlist( 'f_options', array( 'options' => $options ), '</div><div class="settings-value settings-value-elementor-row-revert js-wpf-row-move">' );
+			WooBeWoo_PF_Html::checkboxlist( 'f_options', array( 'options' => $options ), '</div><div class="settings-value settings-value-elementor-row-revert js-wpf-row-move">' );
 			?>
 		</div>
 	</div>

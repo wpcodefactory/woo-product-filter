@@ -17,7 +17,7 @@ $formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_
 <div class="woobewoo-plugin containerWrapperElementor" id="containerWrapperElementorDesign">
 	<form id="wpfFiltersEditForm" data-href="<?php echo esc_attr( $formLink ); ?>">
 		<?php
-		HtmlWpf::hidden(
+		WooBeWoo_PF_Html::hidden(
 			'settings',
 			array(
 				'value' => '',
@@ -27,7 +27,7 @@ $formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_
 		<div class="woobewoo_row">
 			<div class="col-md-12">
 				<div class="woobewoo-input-group" id="wpfChooseFiltersBlock" data-no-preview="1">
-					<?php HtmlWpf::hidden( 'title', array( 'value' => '' ) ); ?>
+					<?php WooBeWoo_PF_Html::hidden( 'title', array( 'value' => '' ) ); ?>
 				</div>
 			</div>
 		</div>
@@ -42,22 +42,22 @@ $formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_
 			</div>
 		</div>
 		<?php
-		HtmlWpf::hidden(
+		WooBeWoo_PF_Html::hidden(
 			'settings[filters][order]',
 			array(
 				'value' => '',
 			)
 		);
-		HtmlWpf::hidden(
+		WooBeWoo_PF_Html::hidden(
 			'settings[filters][preselect]',
 			array(
 				'value' => '',
 			)
 		);
 		?>
-		<?php HtmlWpf::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
-		<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
-		<?php HtmlWpf::hidden( 'id', array( 'value' => '' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'id', array( 'value' => '' ) ); ?>
 	</form>
 	<div class="woobewoo-clear"></div>
 </div>

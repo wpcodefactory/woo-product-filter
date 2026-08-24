@@ -20,7 +20,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => array(
@@ -46,14 +46,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 wpfTypeSwitchable" data-not-type="buttons">
-			<?php HtmlWpf::checkboxToggle( 'f_show_hierarchical', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_hierarchical', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100 wpfTypeSwitchable" data-not-type="buttons" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Hide categories parent', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show only categories children.', 'woo-product-filter' ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
 		<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersHierarchicalOption' ); ?>
 	</div>
@@ -70,7 +70,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_dropdown_first_option_text',
 					array(
 						'placeholder' => esc_attr__( 'Select all', 'woo-product-filter' ),
@@ -89,7 +89,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_sort_by',
 					array(
 						'options' => array(
@@ -106,7 +106,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
-				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -119,7 +119,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_order_custom', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_order_custom', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -130,7 +130,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -141,7 +141,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_count', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_count', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -152,14 +152,14 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hide_empty', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_empty', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_hide_empty">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Same behavior for active filter', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'By default if a value is selected in the filter, items without products will still be displayed (this was done on purpose so that you can quickly switch between items).If the option is enabled, empty elements will be hidden regardless of the filter activity (this also applies to loading via ajax and when reloading the page with the parameters specified in the url).', 'woo-product-filter' ) ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_hide_empty_active', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_empty_active', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -171,7 +171,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full">
 			<?php
-				HtmlWpf::selectlist(
+				WooBeWoo_PF_Html::selectlist(
 					'f_mlist',
 					array(
 						'options'      => $brandDisplay,
@@ -184,7 +184,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Include children', 'woo-product-filter' ); ?>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_mlist_with_children', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_mlist_with_children', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -195,7 +195,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hidden_brands', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hidden_brands', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
 		</div>
 	</div>
 </div>
@@ -206,7 +206,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_filtered_by_selected', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_filtered_by_selected', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -218,7 +218,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::selectlist(
+			WooBeWoo_PF_Html::selectlist(
 				'f_exclude_terms',
 				array(
 					'options'      => $brandDisplay,
@@ -236,12 +236,12 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_search_input', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_search_input', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_search_input">
 			<?php
 			$labels = $this->getModel( 'woofilters' )->getFilterLabels( 'Category' );
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_search_label',
 				array(
 					'placeholder' => esc_html( $labels['search'] ),
@@ -259,7 +259,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hide_taxonomy', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_taxonomy', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -270,7 +270,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_all_brands', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_all_brands', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -282,7 +282,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w50">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_layout',
 					array(
 						'options' => array(
@@ -299,7 +299,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 				<?php esc_html_e( 'Columns', 'woo-product-filter' ); ?>
 			</div>
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_ver_columns',
 				array(
 					'value' => 1,
@@ -318,7 +318,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_max_height',
 				array(
 					'value' => '200',
@@ -339,7 +339,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value">
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 	</div>
 </div>

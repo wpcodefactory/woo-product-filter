@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - HelperWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Helper Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-abstract class HelperWpf {
+abstract class WooBeWoo_PF_Helper {
 	protected $_code   = '';
 	protected $_module = '';
 	/**

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Widget Form
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<div class="wpfWidgetRowCell wpfLastCell">
 		<?php
-		HtmlWpf::selectbox(
+		WooBeWoo_PF_Html::selectbox(
 			$this->widget->get_field_name( 'id' ),
 			array(
 				'attrs'   => 'id="' . $this->widget->get_field_id( 'id' ) . '"',

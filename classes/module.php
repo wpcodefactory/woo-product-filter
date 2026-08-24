@@ -190,7 +190,9 @@ abstract class ModuleWpf extends WooBeWoo_PF_Base_Object {
 	/**
 	 * Method to call module helper if it exists.
 	 *
-	 * @return class HelperWpf
+	 * @version 3.3.2
+	 *
+	 * @return class WooBeWoo_PF_Helper
 	 */
 	public function getHelper() {
 		if ( ! $this->_helper ) {
@@ -202,7 +204,7 @@ abstract class ModuleWpf extends WooBeWoo_PF_Base_Object {
 	/**
 	 * Method to create class of module helper.
 	 *
-	 * @return class HelperWpf
+	 * @return class WooBeWoo_PF_Helper
 	 */
 	protected function _createHelper() {
 		if ( $this->_helper ) {

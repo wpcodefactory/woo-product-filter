@@ -23,11 +23,16 @@ abstract class ViewWpf extends WooBeWoo_PF_Base_Object {
 	 */
 	protected $_code = '';
 
+	/**
+	 * display.
+	 *
+	 * @version 3.3.2
+	 */
 	public function display( $tpl = '' ) {
 		$tpl     = ( empty( $tpl ) ) ? $this->_tpl : $tpl;
 		$content = $this->getContent( $tpl );
 		if ( false !== $content ) {
-			HtmlWpf::echoEscapedHtml( $content );
+			WooBeWoo_PF_Html::echoEscapedHtml( $content );
 		}
 	}
 

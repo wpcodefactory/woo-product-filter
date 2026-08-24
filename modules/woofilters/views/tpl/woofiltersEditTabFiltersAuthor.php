@@ -19,7 +19,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100 woobewoo-width-full">
 			<?php
-				HtmlWpf::selectlist(
+				WooBeWoo_PF_Html::selectlist(
 					'f_mlist',
 					array(
 						'options' => $roles,
@@ -37,7 +37,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => array(
@@ -61,7 +61,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_dropdown_first_option_text',
 					array(
 						'placeholder' => esc_attr__( 'Select all', 'woo-product-filter' ),
@@ -79,11 +79,11 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_dropdown_search', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_dropdown_search', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_dropdown_search">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_dropdown_search_text',
 				array(
 					'placeholder' => esc_attr__( 'Search', 'woo-product-filter' ),
@@ -102,12 +102,12 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	</div>
 	<div class="settings-block-values settings-values-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_search_input', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_search_input', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_search_input">
 			<?php
 			$labels = $this->getModel( 'woofilters' )->getFilterLabels( 'Author' );
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_search_label',
 				array(
 					'placeholder' => esc_attr( $labels['search'] ),
@@ -126,7 +126,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_layout',
 					array(
 						'options' => array(
@@ -143,7 +143,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 				<?php esc_html_e( 'Columns', 'woo-product-filter' ); ?>
 			</div>
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_ver_columns',
 				array(
 					'value' => 1,
@@ -162,7 +162,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_max_height',
 				array(
 					'value' => '200',

@@ -34,6 +34,12 @@ class WooBeWoo_PF_File_Generator {
 	public static function _( $filename, $data, $type ) {
 		return self::getInstance( $filename, $data, $type );
 	}
+
+	/**
+	 * generate.
+	 *
+	 * @version 3.3.2
+	 */
 	public function generate() {
 		switch ( $this->_type ) {
 			case 'txt':
@@ -46,7 +52,7 @@ class WooBeWoo_PF_File_Generator {
 				$this->_getDefaultHeader();
 				break;
 		}
-		HtmlWpf::echoEscapedHtml( $this->_data );
+		WooBeWoo_PF_Html::echoEscapedHtml( $this->_data );
 		exit();
 	}
 	protected function _getTxtHeader() {

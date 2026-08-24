@@ -20,7 +20,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_frontend_type',
 					array(
 						'options' => array(
@@ -45,7 +45,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Selects the default filter value by id', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
@@ -55,7 +55,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			title="<?php echo esc_attr__( 'Allow only one item from the list to be selected at a time', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
@@ -63,7 +63,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php esc_html_e( 'Hide checkboxes', 'woo-product-filter' ); ?>
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_select_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -75,14 +75,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="sub-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_hierarchical', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_hierarchical', array() ); ?>
 		</div>
 		<div class="settings-value" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Hide categories parent', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show only categories children.', 'woo-product-filter' ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
 
 		<?php ob_start(); ?>
@@ -91,14 +91,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php esc_html_e( 'Collapsible', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'If enabled, then show only parent elements, if there are children, they are minimized.', 'woo-product-filter' ); ?>"></i>
 			</div>
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 		<div class="settings-value wpfTypeSwitchable" data-type="multi" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Extend parent select', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'If parent filter category was selected then extend selection to child categories.', 'woo-product-filter' ); ?>"></i>
 			</div>
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_collapsible_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
@@ -108,7 +108,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Restrict filtering result only to child categories or only to parent if both of them selected in the same time.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/product-categories/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_multi_logic_hierarchical',
 					array(
 						'options' => array(
@@ -131,7 +131,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Оn the category page automatically put a check mark for current category', 'woo-product-filter' ) ); ?>"></i>
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -140,7 +140,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'The category page automatically hides the current category', 'woo-product-filter' ) ); ?>"></i>
 	</div>
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_check_page_and_current_page_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
@@ -152,7 +152,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'If parent filter category was selected then extend filter result to child categories.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/product-categories/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 		</div>
 		<div class="settings-block-values col-xs-8 col-sm-9">
-			<?php HtmlWpf::checkboxToggle( 'f_extend_parent_filtering', array( 'checked' => 1 ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_extend_parent_filtering', array( 'checked' => 1 ) ); ?>
 		</div>
 	</div>
 </div>
@@ -164,7 +164,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Buttons Settings', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="multi mul_dropdown buttons text">
@@ -173,7 +173,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Filter products by different categories using and/or logic.', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 
@@ -183,7 +183,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show element image. Not working with dropdown.', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list">
@@ -192,7 +192,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show Alphabetical index. Works only for parent elements.', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="mul_dropdown">
@@ -201,7 +201,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Show search field in multiple dropdown box', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
@@ -215,7 +215,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::text(
+				WooBeWoo_PF_Html::text(
 					'f_dropdown_first_option_text',
 					array(
 						'placeholder' => esc_attr__( 'Select all', 'woo-product-filter' ),
@@ -234,7 +234,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_sort_by',
 					array(
 						'options' => array(
@@ -253,7 +253,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'Turn this on if you want to sort the values as numbers.', 'woo-product-filter' ); ?>"></i>
 			</div>
-			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 
 		</div>
 		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_sort_as_numbers_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -266,7 +266,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_order_custom', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_order_custom', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -277,14 +277,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_count', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_count', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_count">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Count parents with children', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'Count for parent category also her children count. <strong>Warning!</strong> If filtering will slow do uncheck this option.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/show-count-option/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_show_count_parent_with_children', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_count_parent_with_children', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -295,14 +295,14 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hide_empty', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_empty', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_hide_empty">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Same behavior for active filter', 'woo-product-filter' ); ?>
 				<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr( __( 'By default if a value is selected in the filter, items without products will still be displayed (this was done on purpose so that you can quickly switch between items).If the option is enabled, empty elements will be hidden regardless of the filter activity (this also applies to loading via ajax and when reloading the page with the parameters specified in the url).', 'woo-product-filter' ) ); ?>"></i>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_hide_empty_active', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_empty_active', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -314,7 +314,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value woobewoo-width-full wpf-multi-select">
 			<?php
-				HtmlWpf::selectlist(
+				WooBeWoo_PF_Html::selectlist(
 					'f_mlist',
 					array(
 						'options'      => $categoryDisplay,
@@ -327,7 +327,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Include children', 'woo-product-filter' ); ?>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_mlist_with_children', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_mlist_with_children', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -338,7 +338,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hidden_categories', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hidden_categories', array( 'attrs' => 'data-preselect-flag="1"' ) ); ?>
 		</div>
 	</div>
 </div>
@@ -349,7 +349,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_filtered_by_selected', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_filtered_by_selected', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -361,7 +361,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::selectlist(
+			WooBeWoo_PF_Html::selectlist(
 				'f_exclude_terms',
 				array(
 					'options'      => $categoryDisplay,
@@ -379,12 +379,12 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_search_input', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_search_input', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_search_input">
 			<?php
 			$labels = $this->getModel( 'woofilters' )->getFilterLabels( 'Category' );
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_search_label',
 				array(
 					'placeholder' => esc_html( $labels['search'] ),
@@ -397,13 +397,13 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<div class="settings-value-label" >
 				<?php esc_html_e( 'Unfolding collapsed', 'woo-product-filter' ); ?>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_unfolding_by_search', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_unfolding_by_search', array() ); ?>
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_search_input">
 			<div class="settings-value-label" >
 				<?php esc_html_e( 'Сollapse all when deleting', 'woo-product-filter' ); ?>
 			</div>
-			<?php HtmlWpf::checkboxToggle( 'f_collapse_by_delete', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_collapse_by_delete', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -414,7 +414,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_hide_taxonomy', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_taxonomy', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -425,7 +425,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
-			<?php HtmlWpf::checkboxToggle( 'f_show_all_categories', array() ); ?>
+			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_show_all_categories', array() ); ?>
 		</div>
 	</div>
 </div>
@@ -437,7 +437,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				HtmlWpf::selectbox(
+				WooBeWoo_PF_Html::selectbox(
 					'f_layout',
 					array(
 						'options' => array(
@@ -454,7 +454,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php esc_html_e( 'Columns', 'woo-product-filter' ); ?>
 			</div>
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_ver_columns',
 				array(
 					'value' => 1,
@@ -473,7 +473,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-			HtmlWpf::text(
+			WooBeWoo_PF_Html::text(
 				'f_max_height',
 				array(
 					'value' => '200',
@@ -492,7 +492,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'The maximum number of terms to be shown before Show more button', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
@@ -501,7 +501,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<i class="fa fa-question woobewoo-tooltip no-tooltip" title="<?php echo esc_attr__( 'When this option is activated, this section of categories loses the ability to filter products and works as a navigation menu', 'woo-product-filter' ); ?>"></i>
 	</div>
 	<div class="settings-block-values col-xs-8 col-sm-9">
-		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
+		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
 <?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_max_terms_and_switch_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

@@ -53,7 +53,7 @@ $formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_
 						<?php echo esc_html__( 'Filter name:', 'woo-product-filter' ); ?>
 					</div>
 					<?php
-					HtmlWpf::text(
+					WooBeWoo_PF_Html::text(
 						'title',
 						array(
 							'value' => '',
@@ -71,25 +71,25 @@ $formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_
 			</div>
 		</div>
 		<?php
-		HtmlWpf::hidden(
+		WooBeWoo_PF_Html::hidden(
 			'settings',
 			array(
 				'value' => '',
 			)
 		);
-		HtmlWpf::hidden(
+		WooBeWoo_PF_Html::hidden(
 			'settings[filters][order]',
 			array(
 				'value' => '',
 			)
 		);
-		HtmlWpf::hidden(
+		WooBeWoo_PF_Html::hidden(
 			'settings[filters][preselect]',
 			array(
 				'value' => '',
 			)
 		);
-		HtmlWpf::hidden(
+		WooBeWoo_PF_Html::hidden(
 			'esettings',
 			array(
 				'value' => '',
@@ -98,9 +98,9 @@ $formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_
 		?>
 
 
-		<?php HtmlWpf::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
-		<?php HtmlWpf::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
-		<?php HtmlWpf::hidden( 'id', array( 'value' => '' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'mod', array( 'value' => 'woofilters' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'action', array( 'value' => 'woobewoo_pf_save' ) ); ?>
+		<?php WooBeWoo_PF_Html::hidden( 'id', array( 'value' => '' ) ); ?>
 	</form>
 	<div class="woobewoo-clear"></div>
 </div>
