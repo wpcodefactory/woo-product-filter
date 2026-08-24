@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - WoofiltersViewWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WoofiltersViewWpf extends ViewWpf {
+class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 
 	private static $uniqueBlockId  = 0;
 	private static $filterOrderKey = 0;

@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - OptionsViewWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Options_View Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class OptionsViewWpf extends ViewWpf {
+class WooBeWoo_PF_Options_View extends ViewWpf {
 
 	private $_news = array();
 

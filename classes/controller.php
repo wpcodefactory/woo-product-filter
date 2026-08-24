@@ -87,7 +87,7 @@ abstract class ControllerWpf {
 	/**
 	 * _createView.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function _createView( $name = '' ) {
 		if ( empty( $name ) ) {
@@ -95,9 +95,14 @@ abstract class ControllerWpf {
 		}
 		$parentModule = FrameWpf::_()->getModule( $this->getCode() );
 		$className    = '';
-		if ( file_exists( $parentModule->getModDir() . 'views' . WPF_DS . $name . '.php' ) ) {
-			require $parentModule->getModDir() . 'views' . WPF_DS . $name . '.php';
-			$className = toeGetClassNameWpf( $name . 'View' );
+
+		$view_class_name = WPF_CLASS_PREFIX . ucwords( $name ) . '_View';
+		$view_class_file     = strtolower( str_replace( '_', '-', $view_class_name ) ) . '.php';
+		$view_class_location = $parentModule->getModDir() . 'views'  . WPF_DS . 'class-' . $view_class_file;
+
+		if ( file_exists( $view_class_location ) ) {
+			require $view_class_location;
+			$className = toeGetClassNameWpf( $view_class_name );
 		}
 
 		if ( $className ) {

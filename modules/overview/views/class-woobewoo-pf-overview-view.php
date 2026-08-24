@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - OverviewViewWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Overview_View Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class OverviewViewWpf extends ViewWpf {
+class WooBeWoo_PF_Overview_View extends ViewWpf {
 
 	/**
 	 * getOverviewTabContent.
