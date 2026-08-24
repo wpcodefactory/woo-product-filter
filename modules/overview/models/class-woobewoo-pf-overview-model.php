@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - OverviewModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Overview_Model Class
  *
- * @version 3.0.1
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class OverviewModelWpf extends ModelWpf {
+class WooBeWoo_PF_Overview_Model extends ModelWpf {
 
 	/**
 	 * _apiUrl.

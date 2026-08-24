@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - OptionsModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Options_Model Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class OptionsModelWpf extends ModelWpf {
+class WooBeWoo_PF_Options_Model extends ModelWpf {
 
 	private $_values       = array();
 	private $_valuesLoaded = false;

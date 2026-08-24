@@ -1,13 +1,13 @@
 <?php
 /**
- * Product Filter by WBW - Meta_ValuesModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Meta_Values_Model Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class Meta_ValuesModelWpf extends ModelWpf {
+class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 
 	/**
 	 * keyValueIds.

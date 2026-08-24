@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - ModulesModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Modules_Model Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class ModulesModelWpf extends ModelWpf {
+class WooBeWoo_PF_Modules_Model extends ModelWpf {
 	public function __construct() {
 		$this->_setTbl( 'modules' );
 	}

@@ -1,19 +1,19 @@
 <?php
 /**
- * Product Filter by WBW - SettingsModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Settings_Model Class
  *
  * Class contain filters settings api
  * You can use it in any part of your code with construction
  * FrameWpf::_()->getModule('woofilters')->getModel('settings');
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class SettingsModelWpf extends ModelWpf {
+class WooBeWoo_PF_Settings_Model extends ModelWpf {
 	/**
 	 * Get specific filter block settings.
 	 *

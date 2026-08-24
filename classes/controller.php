@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ControllerWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -69,9 +69,14 @@ abstract class ControllerWpf {
 		}
 		$parentModule = FrameWpf::_()->getModule( $this->getCode() );
 		$className    = '';
-		if ( file_exists( $parentModule->getModDir() . 'models' . WPF_DS . $name . '.php' ) ) {
-			require $parentModule->getModDir() . 'models' . WPF_DS . $name . '.php';
-			$className = toeGetClassNameWpf( $name . 'Model' );
+
+		$modal_class_name = WPF_CLASS_PREFIX . ucwords( $name, '_' ) . '_Model';
+		$modal_class_file     = strtolower( str_replace( '_', '-', $modal_class_name ) ) . '.php';
+		$modal_class_location = $parentModule->getModDir() . 'models' . WPF_DS . 'class-' . $modal_class_file;
+
+		if ( file_exists( $modal_class_location ) ) {
+			require $modal_class_location;
+			$className = toeGetClassNameWpf( $modal_class_name );
 		}
 
 		if ( $className ) {

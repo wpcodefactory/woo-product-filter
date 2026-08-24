@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - MetaModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Meta_Model Class
  *
  * @version 3.3.0
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class MetaModelWpf extends ModelWpf {
+class WooBeWoo_PF_Meta_Model extends ModelWpf {
 	private $maxTextLength = 150;
 	private $maxKeyLength  = 32;
 	public $maxKeySize     = 4;

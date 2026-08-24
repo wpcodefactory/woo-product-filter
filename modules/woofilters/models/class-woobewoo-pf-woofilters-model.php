@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - WoofiltersModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Woofilters_Model Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class WoofiltersModelWpf extends ModelWpf {
+class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 
 	/**
 	 * Constructor.

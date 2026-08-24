@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - Meta_KeysModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Meta_Keys_Model Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class Meta_KeysModelWpf extends ModelWpf {
+class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
 
 	// meta_mode:  0-global, 1-filter
 	// meta_type:  0-text, 1-decimal, 2-int, 3-decimal+int, 7-array json, 8-serialised array, 9-list, 5-list with custom separator
