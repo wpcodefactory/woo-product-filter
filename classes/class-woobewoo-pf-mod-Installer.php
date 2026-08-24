@@ -75,12 +75,12 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * _runModuleInstall.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected static function _runModuleInstall( $module, $action = 'install' ) {
 		$moduleLocationDir = WPF_MODULES_DIR;
 		if ( ! empty( $module['ex_plug_dir'] ) ) {
-			$moduleLocationDir = UtilsWpf::getPluginDir( $module['ex_plug_dir'] );
+			$moduleLocationDir = WooBeWoo_PF_Utils::getPluginDir( $module['ex_plug_dir'] );
 		}
 		if ( is_dir( $moduleLocationDir . $module['code'] ) ) {
 			if ( ! class_exists( $module['code'] . strFirstUpWpf( WPF_CODE ) ) ) {
@@ -119,7 +119,7 @@ class WooBeWoo_PF_Mod_Installer {
 	public static function moveFiles( $code, $path ) {
 		if ( ! is_dir( WPF_MODULES_DIR . $code ) ) {
 			if ( mkdir( WPF_MODULES_DIR . $code ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
-				UtilsWpf::copyDirectories( $path, WPF_MODULES_DIR . $code );
+				WooBeWoo_PF_Utils::copyDirectories( $path, WPF_MODULES_DIR . $code );
 				return true;
 			} else {
 				WooBeWoo_PF_Errors::push(
@@ -182,7 +182,7 @@ class WooBeWoo_PF_Mod_Installer {
 		$modDataArr = array();
 
 		if ( function_exists( 'simplexml_load_file' ) ) {
-			$xml = UtilsWpf::getXml( $xmlPath );
+			$xml = WooBeWoo_PF_Utils::getXml( $xmlPath );
 			if ( $xml ) {
 				if ( isset( $xml->modules ) && isset( $xml->modules->mod ) ) {
 					$modules = array();
@@ -194,7 +194,7 @@ class WooBeWoo_PF_Mod_Installer {
 						WooBeWoo_PF_Errors::push( esc_html__( 'No modules were found in XML file', 'woo-product-filter' ), WooBeWoo_PF_Errors::MOD_INSTALL );
 					} else {
 						foreach ( $modules as $m ) {
-							$modDataArr[] = UtilsWpf::xmlNodeAttrsToArr( $m );
+							$modDataArr[] = WooBeWoo_PF_Utils::xmlNodeAttrsToArr( $m );
 						}
 					}
 				} else {
@@ -346,7 +346,7 @@ class WooBeWoo_PF_Mod_Installer {
 		foreach ( $modules as $modDataArr ) {
 			self::_uninstallTables( $modDataArr );
 			WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'modules' )->delete( array( 'code' => $modDataArr['code'] ) );
-			UtilsWpf::deleteDir( WPF_MODULES_DIR . $modDataArr['code'] );
+			WooBeWoo_PF_Utils::deleteDir( WPF_MODULES_DIR . $modDataArr['code'] );
 		}
 
 		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_uninstall' );
@@ -359,7 +359,7 @@ class WooBeWoo_PF_Mod_Installer {
 	 */
 	protected static function _uninstallTables( $module ) {
 		if ( is_dir( WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables' ) ) {
-			$tableFiles = UtilsWpf::getFilesList( WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables' );
+			$tableFiles = WooBeWoo_PF_Utils::getFilesList( WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables' );
 			if ( ! empty( $tableNames ) ) {
 				foreach ( $tableFiles as $file ) {
 					$tableName = str_replace( '.php', '', $file );
@@ -377,9 +377,9 @@ class WooBeWoo_PF_Mod_Installer {
 	 * @vertion 3.3.2
 	 */
 	public static function _installTables( $module, $action = 'install' ) {
-		$modDir = empty( $module['ex_plug_dir'] ) ? WPF_MODULES_DIR . $module['code'] . WPF_DS : UtilsWpf::getPluginDir( $module['ex_plug_dir'] ) . $module['code'] . WPF_DS;
+		$modDir = empty( $module['ex_plug_dir'] ) ? WPF_MODULES_DIR . $module['code'] . WPF_DS : WooBeWoo_PF_Utils::getPluginDir( $module['ex_plug_dir'] ) . $module['code'] . WPF_DS;
 		if ( is_dir( $modDir . 'tables' ) ) {
-			$tableFiles = UtilsWpf::getFilesList( $modDir . 'tables' );
+			$tableFiles = WooBeWoo_PF_Utils::getFilesList( $modDir . 'tables' );
 			if ( ! empty( $tableFiles ) ) {
 				WooBeWoo_PF_Frame::_()->extractTables( $modDir . 'tables' . WPF_DS );
 				foreach ( $tableFiles as $file ) {

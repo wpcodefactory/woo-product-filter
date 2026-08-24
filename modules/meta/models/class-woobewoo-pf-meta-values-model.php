@@ -102,7 +102,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 		if ( empty( $keys['ids'] ) ) {
 			$this->addWhere( 'product_cnt>0' );
 		} else {
-			$this->addWhere( 'id IN (' . implode( ',', UtilsWpf::controlNumericValues( $keys['ids'], 'id' ) ) . ')' );
+			$this->addWhere( 'id IN (' . implode( ',', WooBeWoo_PF_Utils::controlNumericValues( $keys['ids'], 'id' ) ) . ')' );
 		}
 		$list = $this->setSelectFields( ( $group ? ' DISTINCT ' : '' ) . $field )->addWhere( $where )->getFromTbl( array( 'return' => 'col' ) );
 		return empty( $list ) ? array() : $list;
@@ -132,7 +132,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 			$this->addWhere( 'product_cnt > 0' . $cntVariation );
 
 			if ( ! empty( $keys['include'] ) && is_array( $keys['include'] ) ) {
-				$this->addWhere( 'id IN (' . implode( ',', UtilsWpf::controlNumericValues( $keys['include'], 'id' ) ) . ')' );
+				$this->addWhere( 'id IN (' . implode( ',', WooBeWoo_PF_Utils::controlNumericValues( $keys['include'], 'id' ) ) . ')' );
 			}
 			if ( isset( $keys['order'] ) ) {
 				$this->setOrderBy( 'value' );

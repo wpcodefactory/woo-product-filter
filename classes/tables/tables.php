@@ -2,12 +2,14 @@
 /**
  * Product Filter by WBW - TableFiltersWpf Class
  *
+ * @version 3.3.2
+ *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class TableFiltersWpf extends TableWpf {
+class TableFiltersWpf extends WooBeWoo_PF_Table {
 
 	/**
 	 * Constructor.

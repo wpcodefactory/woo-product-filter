@@ -51,7 +51,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 		if ( ! $result && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'logging' ) == 1 ) {
 			$logger = wc_get_logger();
 			if ( $logger ) {
-				$logger->warning( UtilsWpf::jsonEncode( $this->getErrors() ), array( 'source' => 'wpf-meta-indexing' ) );
+				$logger->warning( WooBeWoo_PF_Utils::jsonEncode( $this->getErrors() ), array( 'source' => 'wpf-meta-indexing' ) );
 			}
 		}
 		return $result;
@@ -757,7 +757,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 							continue;
 						}
 
-						$q     = $query . '(' . implode( ',', UtilsWpf::controlNumericValues( $vars, 'id' ) ) . ') LIMIT 1';
+						$q     = $query . '(' . implode( ',', WooBeWoo_PF_Utils::controlNumericValues( $vars, 'id' ) ) . ') LIMIT 1';
 						$exist = WooBeWoo_PF_Db::get( $q, 'one' );
 						if ( false === $exist ) {
 							$this->pushError( WooBeWoo_PF_Db::getError() );

@@ -41,6 +41,8 @@ class WooBeWoo_PF_Settings_Model extends WooBeWoo_PF_Model {
 	 * Except filters order we have some settings specific to individual filters
 	 * that we keep in order settings too
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param array $filterSettings
 	 * @param int   $filterId
 	 *
@@ -58,7 +60,7 @@ class WooBeWoo_PF_Settings_Model extends WooBeWoo_PF_Model {
 		}
 
 		if ( ! empty( $filterBlockSettings['settings']['filters']['order'] ) ) {
-			$order = UtilsWpf::jsonDecode( $filterBlockSettings['settings']['filters']['order'] );
+			$order = WooBeWoo_PF_Utils::jsonDecode( $filterBlockSettings['settings']['filters']['order'] );
 		}
 
 		return $order;

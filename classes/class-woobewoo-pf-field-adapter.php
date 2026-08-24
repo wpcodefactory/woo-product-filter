@@ -77,16 +77,20 @@ class WooBeWoo_PF_Field_Adapter {
 
 	/**
 	 * userFieldDestToDB.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function userFieldDestToDB( $value ) {
-		return UtilsWpf::jsonEncode( $value );
+		return WooBeWoo_PF_Utils::jsonEncode( $value );
 	}
 
 	/**
 	 * userFieldDestFromDB.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function userFieldDestFromDB( $value ) {
-		return UtilsWpf::jsonDecode( $value );
+		return WooBeWoo_PF_Utils::jsonDecode( $value );
 	}
 
 	/**

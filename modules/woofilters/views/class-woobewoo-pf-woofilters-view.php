@@ -538,7 +538,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$this->resetFiltersCss();
 
 		$settingsOriginal = $filterSettings;
-		$filtersOrder     = UtilsWpf::jsonDecode( $filterSettings['settings']['filters']['order'] );
+		$filtersOrder     = WooBeWoo_PF_Utils::jsonDecode( $filterSettings['settings']['filters']['order'] );
 
 		// determines if there are identical names of blocks that need to be added an index
 		$filterName = array();
@@ -644,15 +644,15 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 				}
 			}
 		}
-		$querySettingsStr = htmlentities( UtilsWpf::jsonEncode( $querySettings ), ENT_COMPAT );
+		$querySettingsStr = htmlentities( WooBeWoo_PF_Utils::jsonEncode( $querySettings ), ENT_COMPAT );
 		unset( $filterSettings['settings']['styles'] );
-		$filterSettings = htmlentities( UtilsWpf::jsonEncode( $filterSettings ), ENT_COMPAT );
+		$filterSettings = htmlentities( WooBeWoo_PF_Utils::jsonEncode( $filterSettings ), ENT_COMPAT );
 		$noWooPageData  = '';
 		if ( $noWooPage ) {
 			$noWooPageData = 'data-nowoo="true"';
 		}
 
-		$isMobile = UtilsWpf::isMobile();
+		$isMobile = WooBeWoo_PF_Utils::isMobile();
 		$filterId = 'wpfMainWrapper-' . $viewId;
 
 		if ( 'right' === $buttonsOrder ) {
@@ -673,7 +673,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 				'" data-filter="' . explode( '_', $viewId )[0] .
 				( $forceShowCurrentFilter ? '" data-force="' . $forceShowCurrentFilter : '' ) .
 				'" data-settings="' . $querySettingsStr .
-				'" data-default-query="' . ( empty( $defaultWCQuery ) || is_null( $defaultWCQuery ) ? '' : htmlentities( UtilsWpf::jsonEncode( $defaultWCQuery ), ENT_COMPAT ) ) .
+				'" data-default-query="' . ( empty( $defaultWCQuery ) || is_null( $defaultWCQuery ) ? '' : htmlentities( WooBeWoo_PF_Utils::jsonEncode( $defaultWCQuery ), ENT_COMPAT ) ) .
 				'" data-filter-settings="' . $filterSettings . '" ' . $noWooPageData . $proAttributes .
 				'>';
 
@@ -914,7 +914,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			return '';
 		}
 
-		if ( UtilsWpf::isMobile() && empty( $showTitle ) ) {
+		if ( WooBeWoo_PF_Utils::isMobile() && empty( $showTitle ) ) {
 			$showTitle = $this->getFilterSetting( $filter['settings'], 'f_enable_title' );
 		}
 
@@ -963,13 +963,13 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 */
 	public function generateFilterHeaderHtml( $filter, $filterSettings, $noActive = true, $customFieldLabel = '' ) {
 
-		$showTitle = $this->getFilterSetting( $filter['settings'], 'f_enable_title' . ( UtilsWpf::isMobile() ? '_mobile' : '' ) );
+		$showTitle = $this->getFilterSetting( $filter['settings'], 'f_enable_title' . ( WooBeWoo_PF_Utils::isMobile() ? '_mobile' : '' ) );
 		if ( ! $noActive && 'yes_close' === $showTitle ) {
 			$showTitle = 'yes_open';
 		}
 
 		// deprecated fallback for previous settings
-		if ( UtilsWpf::isMobile() && empty( $showTitle ) ) {
+		if ( WooBeWoo_PF_Utils::isMobile() && empty( $showTitle ) ) {
 			$showTitle =
 				$this->getFilterSetting( $filter['settings'], 'f_enable_title' );
 		}

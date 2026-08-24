@@ -211,7 +211,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 				'woobewoo-pf-jq-grid',
 				WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/jqgrid/ui.jqgrid.css'
 			);
-			$langToLoad = UtilsWpf::getLangCode2Letter();
+			$langToLoad = WooBeWoo_PF_Utils::getLangCode2Letter();
 
 			$availableLocales = array( 'ar', 'bg', 'bg1251', 'cat', 'cn', 'cs', 'da', 'de', 'dk', 'el', 'en', 'es', 'fa', 'fi', 'fr', 'gl', 'he', 'hr', 'hr1250', 'hu', 'id', 'is', 'it', 'ja', 'kr', 'lt', 'mne', 'nl', 'no', 'pl', 'pt', 'pt', 'ro', 'ru', 'sk', 'sr', 'sr', 'sv', 'th', 'tr', 'tw', 'ua', 'vi' );
 			if ( ! in_array( $langToLoad, $availableLocales ) ) {

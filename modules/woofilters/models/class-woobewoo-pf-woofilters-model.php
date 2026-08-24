@@ -392,10 +392,10 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * _dataSave.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function _dataSave( $data, $update = false ) {
-		$esettings = isset( $data['esettings'] ) ? UtilsWpf::jsonDecode( stripslashes( $data['esettings'] ) ) : array();
+		$esettings = isset( $data['esettings'] ) ? WooBeWoo_PF_Utils::jsonDecode( stripslashes( $data['esettings'] ) ) : array();
 		if ( ! empty( $esettings ) ) {
 			$data['settings'] = array_merge( $esettings, ( isset( $data['settings'] ) && is_array( $data['settings'] ) ? $data['settings'] : array() ) );
 		}
@@ -496,7 +496,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	 * @version 3.3.2
 	 */
 	public function getDataFilterMetaKeys( $filters, $save = true ) {
-		$filters  = UtilsWpf::jsonDecode( $filters );
+		$filters  = WooBeWoo_PF_Utils::jsonDecode( $filters );
 		$metaKeys = array();
 		if ( class_exists( 'WooCommerceB2B' ) && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
 			foreach ( $filters as $filter ) {

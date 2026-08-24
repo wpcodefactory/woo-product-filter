@@ -49,8 +49,13 @@ class WooBeWoo_PF_Req {
 		}
 	}
 
+	/**
+	 * startSession.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function startSession() {
-		if ( ! UtilsWpf::isSessionStarted() ) {
+		if ( ! WooBeWoo_PF_Utils::isSessionStarted() ) {
 			if ( version_compare( phpversion(), '5.7.0', '<' ) ) {
 				session_start();
 			} else {
@@ -59,8 +64,13 @@ class WooBeWoo_PF_Req {
 		}
 	}
 
+	/**
+	 * endSession.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function endSession() {
-		if ( UtilsWpf::isSessionStarted() ) {
+		if ( WooBeWoo_PF_Utils::isSessionStarted() ) {
 			session_write_close();
 		}
 	}
@@ -68,7 +78,7 @@ class WooBeWoo_PF_Req {
 	/**
 	 * Function getVar.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
@@ -124,7 +134,7 @@ class WooBeWoo_PF_Req {
 					$value =  map_deep( wp_unslash( $_SERVER[ $name ] ), 'sanitize_text_field' );
 					if ( is_string( $value ) && strpos( $value, '_JSON:' ) === 0 ) {
 						$value = explode( '_JSON:', $value );
-						$value = UtilsWpf::jsonDecode( array_pop( $value ) );
+						$value = WooBeWoo_PF_Utils::jsonDecode( array_pop( $value ) );
 					}
 					return $value;
 				}
@@ -134,7 +144,7 @@ class WooBeWoo_PF_Req {
 					$value = map_deep( wp_unslash( $_COOKIE[ $name ] ), 'sanitize_text_field' );
 					if ( is_string( $value ) && strpos( $value, '_JSON:' ) === 0 ) {
 						$value = explode( '_JSON:', $value );
-						$value = UtilsWpf::jsonDecode( array_pop( $value ) );
+						$value = WooBeWoo_PF_Utils::jsonDecode( array_pop( $value ) );
 					}
 
 					return $value;
@@ -210,6 +220,11 @@ class WooBeWoo_PF_Req {
 		return empty( $val );
 	}
 
+	/**
+	 * setVar.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function setVar( $name, $val, $in = 'input', $params = array() ) {
 		$in = strtolower( $in );
 		switch ( $in ) {
@@ -226,7 +241,7 @@ class WooBeWoo_PF_Req {
 				$expire = isset( $params['expire'] ) ? time() + $params['expire'] : 0;
 				$path   = isset( $params['path'] ) ? $params['path'] : '/';
 				if ( is_array( $val ) || is_object( $val ) ) {
-					$saveVal = '_JSON:' . UtilsWpf::jsonEncode( $val );
+					$saveVal = '_JSON:' . WooBeWoo_PF_Utils::jsonEncode( $val );
 				} else {
 					$saveVal = $val;
 				}

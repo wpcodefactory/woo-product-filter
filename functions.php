@@ -179,7 +179,7 @@ if ( ! function_exists( 'jsonEncodeUTFnormalWpf' ) ) {
 /**
  * Prepares the params values to store into db.
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @param array $d $_POST array
  *
@@ -192,7 +192,7 @@ if ( ! function_exists( 'prepareParamsWpf' ) ) {
 				$options = $d['params']['options'];
 			}
 			if ( is_array( $d['params'] ) ) {
-				$params      = UtilsWpf::jsonEncode( $d['params'] );
+				$params      = WooBeWoo_PF_Utils::jsonEncode( $d['params'] );
 				$params      = str_replace( array( '\n\r', "\n\r", '\n', "\r", '\r', "\r" ), '<br />', $params );
 				$params      = str_replace( array( '<br /><br />', '<br /><br /><br />' ), '<br />', $params );
 				$d['params'] = $params;
@@ -200,7 +200,7 @@ if ( ! function_exists( 'prepareParamsWpf' ) ) {
 		} elseif ( isset( $d['params'] ) ) {
 			$d['params']['attr']['class'] = '';
 			$d['params']['attr']['id']    = '';
-			$params                       = UtilsWpf::jsonEncode( $d['params'] );
+			$params                       = WooBeWoo_PF_Utils::jsonEncode( $d['params'] );
 			$d['params']                  = $params;
 		}
 		if ( empty( $options ) ) {

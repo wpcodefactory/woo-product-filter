@@ -95,8 +95,13 @@ class WooBeWoo_PF_Adminmenu extends WooBeWoo_PF_Module {
 		remove_submenu_page( $mainSlug, $mainSlug );
 	}
 
+	/**
+	 * getMainLink.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getMainLink() {
-		return UriWpf::_(
+		return WooBeWoo_PF_Uri::_(
 			array(
 				'baseUrl' => admin_url( 'admin.php' ),
 				'page'    => $this->getMainSlug(),

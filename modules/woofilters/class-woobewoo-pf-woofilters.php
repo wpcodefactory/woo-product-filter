@@ -2739,11 +2739,11 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 					$displayFor = 'both';
 				}
 				if ( 'mobile' === $displayFor ) {
-					$displayMobile = UtilsWpf::isMobile();
+					$displayMobile = WooBeWoo_PF_Utils::isMobile();
 				} elseif ( 'both' === $displayFor ) {
 					$displayMobile = true;
 				} elseif ( 'desktop' === $displayFor ) {
-					$displayMobile = ! UtilsWpf::isMobile();
+					$displayMobile = ! WooBeWoo_PF_Utils::isMobile();
 				}
 			}
 			$hideWithoutProducts = ! empty( $settings['hide_without_products'] ) && $settings['hide_without_products'];
@@ -4009,7 +4009,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 							}
 
 							if ( is_array( $param['only_children_category'] ) && ! empty( $param['only_children_category'] ) ) {
-								$param['only_children_category'] = UtilsWpf::controlNumericValues( $param['only_children_category'], '' );
+								$param['only_children_category'] = WooBeWoo_PF_Utils::controlNumericValues( $param['only_children_category'], '' );
 							}
 						}
 					}
@@ -5134,10 +5134,12 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Add shortcode attributes to additional html data attributes.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param array $attributes
 	 */
 	public function addWoocommerceShortcodeQuerySettings( $attributes ) {
-		$shortcodeAttr = htmlentities( UtilsWpf::jsonEncode( $attributes ), ENT_COMPAT );
+		$shortcodeAttr = htmlentities( WooBeWoo_PF_Utils::jsonEncode( $attributes ), ENT_COMPAT );
 
 		echo '<span class="wpfHidden" data-shortcode-attribute="' . esc_html( $shortcodeAttr ) . '"></span>';
 	}
@@ -5283,7 +5285,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		$keyId     = $params['keyId'];
 
 		$field  = empty( $params['field'] ) ? 'id' : $params['field'];
-		$values = UtilsWpf::controlNumericValues( $params['values'], $field );
+		$values = WooBeWoo_PF_Utils::controlNumericValues( $params['values'], $field );
 
 		$i       = 0;
 		$clauses = array(

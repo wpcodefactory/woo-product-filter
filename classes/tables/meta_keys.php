@@ -2,12 +2,14 @@
 /**
  * Product Filter by WBW - TableMeta_KeysWpf Class
  *
+ * @version 3.3.2
+ *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class TableMeta_KeysWpf extends TableWpf {
+class TableMeta_KeysWpf extends WooBeWoo_PF_Table {
 
 	/**
 	 * Constructor.

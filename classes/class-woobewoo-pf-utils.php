@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - UtilsWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Utils Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class UtilsWpf {
+class WooBeWoo_PF_Utils {
 
 	/**
 	 * jsonEncode.

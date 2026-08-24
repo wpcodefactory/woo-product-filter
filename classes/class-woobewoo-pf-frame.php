@@ -117,7 +117,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * _extractModules.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable( 'modules' )
@@ -128,7 +128,7 @@ class WooBeWoo_PF_Frame {
 				$code              = $m['code'];
 				$moduleLocationDir = WPF_MODULES_DIR;
 				if ( ! empty( $m['ex_plug_dir'] ) ) {
-					$moduleLocationDir = UtilsWpf::getExtModDir( $m['ex_plug_dir'] );
+					$moduleLocationDir = WooBeWoo_PF_Utils::getExtModDir( $m['ex_plug_dir'] );
 				}
 				if ( is_dir( $moduleLocationDir . $code ) ) {
 					$this->_allModules[ $m['code'] ] = 1;
@@ -195,9 +195,9 @@ class WooBeWoo_PF_Frame {
 		add_action( $addAssetsAction, array( $this, 'addScripts' ) );
 		add_action( $addAssetsAction, array( $this, 'addStyles' ) );
 
-		register_activation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'activatePlugin' ) ); // See classes/install.php file
-		register_uninstall_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deletePlugin' ) );
-		register_deactivation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'UtilsWpf', 'deactivatePlugin' ) );
+		register_activation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'WooBeWoo_PF_Utils', 'activatePlugin' ) ); // See classes/install.php file
+		register_uninstall_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'WooBeWoo_PF_Utils', 'deletePlugin' ) );
+		register_deactivation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'WooBeWoo_PF_Utils', 'deactivatePlugin' ) );
 
 		add_filter( 'the_content', array( 'WooBeWoo_PF_Woofilters', 'getProductsShortcode' ), -99999 );
 	}
@@ -404,6 +404,8 @@ class WooBeWoo_PF_Frame {
 
 	/**
 	 * _extractTable.
+	 *
+	 * @version 3.3.2
 	 */
 	protected function _extractTable( $tableName, $tablesDir = WPF_TABLES_DIR ) {
 		if ( ! class_exists( 'noClassNameHere' ) ) {
@@ -411,7 +413,7 @@ class WooBeWoo_PF_Frame {
 				require $tablesDir . $tableName . '.php';
 			}
 		}
-		$this->_tables[ $tableName ] = TableWpf::_( $tableName );
+		$this->_tables[ $tableName ] = WooBeWoo_PF_Table::_( $tableName );
 	}
 
 	/**
@@ -503,10 +505,12 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Push data to script array to use it all in addScripts method.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @see wp_enqueue_script definition
 	 */
 	public function addScript( $handle, $src = '', $deps = array(), $ver = false, $in_footer = false, $vars = array() ) {
-		$src = empty( $src ) ? $src : UriWpf::_( $src );
+		$src = empty( $src ) ? $src : WooBeWoo_PF_Uri::_( $src );
 		if ( ! $ver ) {
 			$ver = WPF_VERSION;
 		}
@@ -592,9 +596,11 @@ class WooBeWoo_PF_Frame {
 
 	/**
 	 * addStyle.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addStyle( $handle, $src = false, $deps = array(), $ver = false, $media = 'all' ) {
-		$src = empty( $src ) ? $src : UriWpf::_( $src );
+		$src = empty( $src ) ? $src : WooBeWoo_PF_Uri::_( $src );
 		if ( ! $ver ) {
 			$ver = WPF_VERSION;
 		}

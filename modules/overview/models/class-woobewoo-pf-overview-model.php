@@ -177,7 +177,7 @@ class WooBeWoo_PF_Overview_Model extends WooBeWoo_PF_Model {
 	/**
 	 * _req.
 	 *
-	 * @version 3.0.1
+	 * @version 3.3.2
 	 */
 	private function _req( $action, $data = array() ) {
 		add_filter( 'http_api_curl', array( $this, 'overviewHttpRequestTimeout' ), 100, 1 );
@@ -201,7 +201,7 @@ class WooBeWoo_PF_Overview_Model extends WooBeWoo_PF_Model {
 
 		remove_filter( 'http_api_curl', array( $this, 'overviewHttpRequestTimeout' ) );
 		if ( ! is_wp_error( $response ) ) {
-			$resArr = UtilsWpf::jsonDecode( $response['body'] );
+			$resArr = WooBeWoo_PF_Utils::jsonDecode( $response['body'] );
 			if ( isset( $response['body'] ) && ! empty( $response['body'] ) && $resArr ) {
 				if ( ! $resArr['error'] ) {
 					return $resArr;

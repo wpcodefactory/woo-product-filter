@@ -61,11 +61,11 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	<div class="wpfTemplates wpfHidden">
 		<div class="wpfAttributesTerms">
 			<?php
-			echo '<input type="hidden" name="attr_types" value="' . esc_attr( UtilsWpf::jsonEncode( $attrTypes ) ) . '">';
-			echo '<input type="hidden" name="attr_filternames" value="' . esc_attr( UtilsWpf::jsonEncode( $attrNames ) ) . '">';
+			echo '<input type="hidden" name="attr_types" value="' . esc_attr( WooBeWoo_PF_Utils::jsonEncode( $attrTypes ) ) . '">';
+			echo '<input type="hidden" name="attr_filternames" value="' . esc_attr( WooBeWoo_PF_Utils::jsonEncode( $attrNames ) ) . '">';
 
 			if ( isset( $this->settings['settings']['filters']['order'] ) ) {
-				$filtersOrder = UtilsWpf::jsonDecode( $this->settings['settings']['filters']['order'] );
+				$filtersOrder = WooBeWoo_PF_Utils::jsonDecode( $this->settings['settings']['filters']['order'] );
 				$module       = $this->getModule();
 				$slugs        = array();
 				foreach ( $filtersOrder as $filter ) {
@@ -76,8 +76,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 							$terms   = $module->getAttributeTerms( $slug );
 							$keys    = array_keys( $terms );
 
-							echo '<input type="hidden" name="attr-' . esc_attr( $slug ) . '" data-order="' . esc_attr( UtilsWpf::jsonEncode( $keys ) ) . '" value="' .
-								esc_attr( UtilsWpf::jsonEncode( $terms ) ) . '">';
+							echo '<input type="hidden" name="attr-' . esc_attr( $slug ) . '" data-order="' . esc_attr( WooBeWoo_PF_Utils::jsonEncode( $keys ) ) . '" value="' .
+								esc_attr( WooBeWoo_PF_Utils::jsonEncode( $terms ) ) . '">';
 						}
 					}
 				}

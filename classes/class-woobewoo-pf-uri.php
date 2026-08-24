@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - UriWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Uri Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class UriWpf {
+class WooBeWoo_PF_Uri {
 
 	/**
 	 * Tell link form method to replace symbols for special html characters only for ONE output.

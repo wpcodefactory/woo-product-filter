@@ -41,7 +41,7 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	</div>
 	<div class="sub-block-values settings-w100 col-xs-8 col-sm-9" id="wpfContainerSortBy">
 		<?php
-			$classMobile = ( UtilsWpf::isMobile() ) ? ' wpfMoveWrapMobile' : '';
+			$classMobile = ( WooBeWoo_PF_Utils::isMobile() ) ? ' wpfMoveWrapMobile' : '';
 		?>
 		<div class="settings-value settings-value-elementor-row-revert js-wpf-row-move">
 			<?php

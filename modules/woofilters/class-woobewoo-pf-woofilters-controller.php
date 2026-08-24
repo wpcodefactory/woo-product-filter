@@ -358,12 +358,12 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 
 		$params = WooBeWoo_PF_Req::get( 'post' );
 
-		$filtersDataBackend          = UtilsWpf::jsonDecode( stripslashes( $params['filtersDataBackend'] ) );
-		$queryvars                   = UtilsWpf::jsonDecode( stripslashes( $params['queryvars'] ) );
-		$filterSettings              = UtilsWpf::jsonDecode( stripslashes( $params['filterSettings'] ) );
-		$generalSettings             = UtilsWpf::jsonDecode( stripslashes( $params['generalSettings'] ) );
-		$woocommerceSettings         = UtilsWpf::jsonDecode( stripslashes( $params['woocommerceSettings'] ) );
-		$shortcodeAttr               = isset( $params['shortcodeAttr'] ) ? UtilsWpf::jsonDecode( stripslashes( $params['shortcodeAttr'] ) ) : array();
+		$filtersDataBackend          = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['filtersDataBackend'] ) );
+		$queryvars                   = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['queryvars'] ) );
+		$filterSettings              = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['filterSettings'] ) );
+		$generalSettings             = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['generalSettings'] ) );
+		$woocommerceSettings         = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['woocommerceSettings'] ) );
+		$shortcodeAttr               = isset( $params['shortcodeAttr'] ) ? WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['shortcodeAttr'] ) ) : array();
 		$curUrl                      = $params['currenturl'];
 		$queryvars['posts_per_page'] = isset( $filterSettings['count_product_shop'] ) && ! empty( $filterSettings['count_product_shop'] ) ? $filterSettings['count_product_shop'] : $queryvars['posts_per_page'];
 		$use_category_filtration     = isset( $filterSettings['use_category_filtration'] ) ? $filterSettings['use_category_filtration'] : 1;
@@ -842,8 +842,8 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			$terms = $this->getModule()->getAttributeTerms( $slug );
 			$keys  = array_keys( $terms );
 		}
-		$res->addData( 'terms', htmlentities( UtilsWpf::jsonEncode( $terms ), ENT_COMPAT ) );
-		$res->addData( 'keys', htmlentities( UtilsWpf::jsonEncode( $keys ), ENT_COMPAT ) );
+		$res->addData( 'terms', htmlentities( WooBeWoo_PF_Utils::jsonEncode( $terms ), ENT_COMPAT ) );
+		$res->addData( 'keys', htmlentities( WooBeWoo_PF_Utils::jsonEncode( $keys ), ENT_COMPAT ) );
 		return $res->ajaxExec();
 	}
 

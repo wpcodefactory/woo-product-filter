@@ -70,7 +70,7 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 			array(
 				'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
 				'nonce'         => wp_create_nonce( 'woobewoo-pf-save-nonce' ),
-				'wpfTblDataUrl' => UriWpf::mod(
+				'wpfTblDataUrl' => WooBeWoo_PF_Uri::mod(
 					'woofilters',
 					'woobewoo_pf_get_list_for_table',
 					array(
@@ -143,7 +143,7 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 
 		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getAll();
 		$this->assign( 'options', $options );
-		$this->assign( 'exportAllSubscribersUrl', UriWpf::mod( 'subscribe', 'getWpCsvList' ) );
+		$this->assign( 'exportAllSubscribersUrl', WooBeWoo_PF_Uri::mod( 'subscribe', 'getWpCsvList' ) );
 		return parent::getContent( 'optionsSettingsTabContent' );
 	}
 

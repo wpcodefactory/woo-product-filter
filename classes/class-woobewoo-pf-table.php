@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - TableWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Table Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-abstract class TableWpf {
+abstract class WooBeWoo_PF_Table {
 	/**
 	 * ID column name
 	 */

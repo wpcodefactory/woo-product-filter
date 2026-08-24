@@ -214,10 +214,12 @@ class WooBeWoo_PF_Field {
 	/**
 	 * Check if the element exists in array
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param array $param
 	 */
 	public function checkVarFromParam( $param, $element ) {
-		return UtilsWpf::xmlAttrToStr( $param, $element );
+		return WooBeWoo_PF_Utils::xmlAttrToStr( $param, $element );
 	}
 
 	/**

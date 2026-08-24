@@ -54,7 +54,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'WooBeWoo_PF_Helper' );
 	importClassWpf( 'WooBeWoo_PF_Dispatcher' );
 	importClassWpf( 'WooBeWoo_PF_Field' );
-	importClassWpf( 'TableWpf' );
+	importClassWpf( 'WooBeWoo_PF_Table' );
 	importClassWpf( 'WooBeWoo_PF_Frame' );
 
 	/**
@@ -64,13 +64,13 @@ if ( trueRequestWpf() ) {
 	 */
 	importClassWpf( 'WooBeWoo_PF_Lang' );
 	importClassWpf( 'WooBeWoo_PF_Req' );
-	importClassWpf( 'UriWpf' );
+	importClassWpf( 'WooBeWoo_PF_Uri' );
 	importClassWpf( 'WooBeWoo_PF_Html' );
 	importClassWpf( 'WooBeWoo_PF_Response' );
 	importClassWpf( 'WooBeWoo_PF_Field_Adapter' );
 	importClassWpf( 'ValidatorWpf' );
 	importClassWpf( 'WooBeWoo_PF_Errors' );
-	importClassWpf( 'UtilsWpf' );
+	importClassWpf( 'WooBeWoo_PF_Utils' );
 	importClassWpf( 'WooBeWoo_PF_Mod_Installer' );
 	importClassWpf( 'WooBeWoo_PF_Installer_Db_Updater' );
 	importClassWpf( 'WooBeWoo_PF_Date' );

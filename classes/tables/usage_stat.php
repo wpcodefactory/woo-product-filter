@@ -2,12 +2,14 @@
 /**
  * Product Filter by WBW - TableUsage_StatWpf Class
  *
+ * @version 3.3.2
+ *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class TableUsage_StatWpf extends TableWpf {
+class TableUsage_StatWpf extends WooBeWoo_PF_Table {
 
 	/**
 	 * Constructor.

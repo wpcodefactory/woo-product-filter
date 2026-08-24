@@ -31,6 +31,11 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 	protected $_externalPath = '';
 	protected $_isExternal   = false;
 
+	/**
+	 * __construct.
+	 *
+	 * @version 3.3.2
+	 */
 	public function __construct( $d ) {
 		$this->setTypeID( $d['type_id'] );
 		$this->setCode( $d['code'] );
@@ -40,8 +45,8 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 		}
 		if ( isset( $d['ex_plug_dir'] ) && ! empty( $d['ex_plug_dir'] ) ) {
 			$this->isExternal( true );
-			$this->setExternalDir( UtilsWpf::getExtModDir( $d['ex_plug_dir'] ) );
-			$this->setExternalPath( UtilsWpf::getExtModPath( $d['ex_plug_dir'] ) );
+			$this->setExternalDir( WooBeWoo_PF_Utils::getExtModDir( $d['ex_plug_dir'] ) );
+			$this->setExternalPath( WooBeWoo_PF_Utils::getExtModPath( $d['ex_plug_dir'] ) );
 		}
 	}
 
