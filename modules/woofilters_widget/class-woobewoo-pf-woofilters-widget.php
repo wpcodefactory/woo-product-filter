@@ -45,23 +45,27 @@ class WooBeWoo_PF_Woofilters_Widget extends ModuleWpf {
 	 * registerWidget.
 	 */
 	public function registerWidget() {
-		require_once __DIR__ . '/elementor/widget.php';
-		return register_widget( 'WpfWoofiltersWidget' );
+		require_once __DIR__ . '/elementor/class-woobewoo-pf-woofilters-default-widget.php';
+		return register_widget( 'WooBeWoo_PF_Woofilters_Default_Widget' );
 	}
 
 	/**
 	 * includeElementorWidgetsFiles.
+	 *
+	 * @version 3.3.0
 	 */
 	private function includeElementorWidgetsFiles() {
-		require_once __DIR__ . '/elementor/woofilters.php';
+		require_once __DIR__ . '/elementor/class-woobewoo-pf-woofilters-elementor-widget.php';
 	}
 
 	/**
 	 * registerElementorWidget.
+	 *
+	 * @version 3.3.2
 	 */
 	public function registerElementorWidget() {
 		$this->includeElementorWidgetsFiles();
-		\Elementor\Plugin::instance()->widgets_manager->register( new Woofilters_ElementorWidgetWpf() );
+		\Elementor\Plugin::instance()->widgets_manager->register( new WooBeWoo_PF_Woofilters_Elementor_Widget() );
 	}
 
 	/**

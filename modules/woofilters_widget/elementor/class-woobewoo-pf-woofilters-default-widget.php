@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - WpfWoofiltersWidget Class
+ * Product Filter by WBW - WooBeWoo_PF_Woofilters_Default_Widget Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class WpfWoofiltersWidget extends WP_Widget {
+class WooBeWoo_PF_Woofilters_Default_Widget extends WP_Widget {
 	public function __construct() {
 		$widgetOps = array(
 			'classname'   => 'WpfWoofiltersWidget',

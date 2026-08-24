@@ -2611,7 +2611,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * getRenderMode.
 	 *
-	 * @version 3.3.1
+	 * @version 3.3.2
 	 */
 	public function getRenderMode( $id, $settings, $isWidget = true ) {
 		if ( ! isset( $this->renderModes[ $id ] ) || empty( $this->renderModes[ $id ] ) ) {
@@ -2631,10 +2631,10 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				! empty( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			);
+			$displayOnPage = empty( $settings['display_on_page'] ) ? 'shop' : $settings['display_on_page'];
 			if ( is_admin() || $isBrizyEditContext ) {
 				$displayShop = true;
 			} else {
-				$displayOnPage = empty( $settings['display_on_page'] ) ? 'shop' : $settings['display_on_page'];
 
 				if ( 'specific' === $displayOnPage ) {
 					$pageList = empty( $settings['display_page_list'] ) ? '' : $settings['display_page_list'];

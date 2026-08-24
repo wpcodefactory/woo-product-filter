@@ -1,8 +1,8 @@
 <?php
 /**
- * Product Filter by WBW - Woofilters_ElementorWidgetWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Woofilters_Elementor_Widget Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -12,7 +12,7 @@ use Elementor\Controls_Manager;
 
 defined( 'ABSPATH' ) || exit;
 
-class Woofilters_ElementorWidgetWpf extends Widget_Base {
+class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 
 	public static $adPath        = '';
 	public static $labelPro      = '';
