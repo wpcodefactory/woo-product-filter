@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - InstallerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Installer Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class InstallerWpf {
+class WooBeWoo_PF_Installer {
 
 	/**
 	 * update_to_version_method.

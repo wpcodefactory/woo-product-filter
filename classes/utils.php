@@ -438,14 +438,14 @@ class UtilsWpf {
 			$blog_id = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ( $blog_id as $id ) {
 				if ( switch_to_blog( $id ) ) {
-					InstallerWpf::init();
+					WooBeWoo_PF_Installer::init();
 					flush_rewrite_rules( false );
 				}
 			}
 			restore_current_blog();
 			return;
 		} else {
-			InstallerWpf::init();
+			WooBeWoo_PF_Installer::init();
 			flush_rewrite_rules( false );
 		}
 	}
@@ -461,13 +461,13 @@ class UtilsWpf {
 			$blog_id = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			foreach ( $blog_id as $id ) {
 				if ( switch_to_blog( $id ) ) {
-					InstallerWpf::delete();
+					WooBeWoo_PF_Installer::delete();
 				}
 			}
 			restore_current_blog();
 			return;
 		} else {
-			InstallerWpf::delete();
+			WooBeWoo_PF_Installer::delete();
 		}
 	}
 

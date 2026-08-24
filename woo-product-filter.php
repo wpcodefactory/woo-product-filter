@@ -45,7 +45,7 @@ add_action(
 if ( trueRequestWpf() ) {
 
 	importClassWpf( 'WooBeWoo_PF_Db' );
-	importClassWpf( 'InstallerWpf' );
+	importClassWpf( 'WooBeWoo_PF_Installer' );
 	importClassWpf( 'WooBeWoo_PF_Base_Object' );
 	importClassWpf( 'ModuleWpf' );
 	importClassWpf( 'ModelWpf' );
@@ -78,7 +78,7 @@ if ( trueRequestWpf() ) {
 	/**
 	 * Check plugin version - maybe we need to update database, and check global errors in request.
 	 */
-	InstallerWpf::update();
+	WooBeWoo_PF_Installer::update();
 	WooBeWoo_PF_Errors::init();
 
 	/**

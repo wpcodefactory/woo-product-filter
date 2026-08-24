@@ -105,8 +105,8 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 	 * @version 3.3.2
 	 */
 	public function getAdminPage() {
-		if ( ! InstallerWpf::isUsed() ) {
-			InstallerWpf::setUsed(); // Show this welcome page - only one time
+		if ( ! WooBeWoo_PF_Installer::isUsed() ) {
+			WooBeWoo_PF_Installer::setUsed(); // Show this welcome page - only one time
 			WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->save( 'plug_welcome_show', time() ); // Remember this
 		}
 		return $this->getView()->getAdminPage();
