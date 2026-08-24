@@ -2,14 +2,14 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Overview_Controller Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Overview_Controller extends ControllerWpf {
+class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 
 	/**
 	 * woobewoo_pf_subscribe.

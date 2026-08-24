@@ -253,26 +253,26 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 	/**
 	 * dropIndexes.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function dropIndexes( $withPrimary = false ) {
-		$table   = DbWpf::sanitizeIdentifier( $this->_tbl );
-		$indexes = DbWpf::get( 'SHOW INDEX FROM `@__' . $table . '`' );
+		$table   = WooBeWoo_PF_Db::sanitizeIdentifier( $this->_tbl );
+		$indexes = WooBeWoo_PF_Db::get( 'SHOW INDEX FROM `@__' . $table . '`' );
 		if ( ! $indexes ) {
-			$this->pushError( DbWpf::getError() );
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 
 		$drop = array();
 		foreach ( $indexes as $index ) {
-			$name = DbWpf::sanitizeIdentifier( $index['Key_name'] );
+			$name = WooBeWoo_PF_Db::sanitizeIdentifier( $index['Key_name'] );
 			if ( $withPrimary || 'PRIMARY' != $name ) {
 				$drop[] = ' DROP INDEX `' . $name . '`';
 			}
 		}
 		if ( ! empty( $drop ) ) {
-			if ( ! DbWpf::query( 'ALTER TABLE `@__' . $table . '`' . implode( ',', array_unique( $drop ) ) ) ) {
-				$this->pushError( DbWpf::getError() );
+			if ( ! WooBeWoo_PF_Db::query( 'ALTER TABLE `@__' . $table . '`' . implode( ',', array_unique( $drop ) ) ) ) {
+				$this->pushError( WooBeWoo_PF_Db::getError() );
 				return false;
 			}
 		}
@@ -282,21 +282,21 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 	/**
 	 * addIndexes.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function addIndexes( $delete = true ) {
 		if ( empty( $this->_indexes ) ) {
 			return true;
 		}
-		$table   = DbWpf::sanitizeIdentifier( $this->_tbl );
-		$indexes = DbWpf::get( 'SHOW INDEX FROM `@__' . $table . '`' );
+		$table   = WooBeWoo_PF_Db::sanitizeIdentifier( $this->_tbl );
+		$indexes = WooBeWoo_PF_Db::get( 'SHOW INDEX FROM `@__' . $table . '`' );
 		if ( ! $indexes ) {
-			$this->pushError( DbWpf::getError() );
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 		$exists = array();
 		foreach ( $indexes as $index ) {
-			$exists[] = DbWpf::sanitizeIdentifier( $index['Key_name'] );
+			$exists[] = WooBeWoo_PF_Db::sanitizeIdentifier( $index['Key_name'] );
 		}
 
 		$alter = '';
@@ -306,8 +306,8 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 			}
 		}
 		if ( ! empty( $alter ) ) {
-			if ( ! DbWpf::query( 'ALTER TABLE `@__' . $table . '`' . substr( $alter, 0, -1 ) ) ) {
-				$this->pushError( DbWpf::getError() );
+			if ( ! WooBeWoo_PF_Db::query( 'ALTER TABLE `@__' . $table . '`' . substr( $alter, 0, -1 ) ) ) {
+				$this->pushError( WooBeWoo_PF_Db::getError() );
 				if ( $delete ) {
 					$this->delete();
 				}

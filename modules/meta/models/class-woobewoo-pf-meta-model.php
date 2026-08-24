@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Model Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -55,7 +55,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 	/**
 	 * doRecalcMetaValues.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function doRecalcMetaValues( $productId, $params ) {
 		if ( ! empty( $productId ) && ! is_numeric( $productId ) ) {
@@ -151,14 +151,14 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 		$keyRecalc = array();
 
 		$limit            = 1000;
-		$maxCountProducts = DbWpf::get( 'SELECT count(*) FROM `#__posts` as p ' . $where, 'one' );
+		$maxCountProducts = WooBeWoo_PF_Db::get( 'SELECT count(*) FROM `#__posts` as p ' . $where, 'one' );
 		if ( false === $maxCountProducts ) {
-			$this->pushError( DbWpf::getError() );
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 
 		$maxCountProducts += 100;
-		DbWpf::query( 'SET session wait_timeout=600' );
+		WooBeWoo_PF_Db::query( 'SET session wait_timeout=600' );
 		global $wpfMetaSeparator;
 		$wpfMetaSeparator = ',';
 
@@ -168,14 +168,14 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 			$parent  = $key['id'];
 
 			if ( $isLike ) {
-				$keysData = DbWpf::get(
+				$keysData = WooBeWoo_PF_Db::get(
 					'SELECT DISTINCT meta_key' . ( $isAllProducts ? ' FROM `#__postmeta` as m FORCE INDEX (meta_key) WHERE ' : $from . $where . ' AND ' ) . ' m.meta_key LIKE %s',
 					'col',
 					ARRAY_A,
 					array( $keyName )
 				);
 				if ( false === $keysData ) {
-					$this->pushError( DbWpf::getError() );
+					$this->pushError( WooBeWoo_PF_Db::getError() );
 					return false;
 				}
 				if ( empty( $keysData ) && $isAllProducts ) {
@@ -259,7 +259,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 				$isMetaVar  = strpos( $keyName, $this->metaVarSuf ) != false;
 				$keyNameVar = str_replace( $this->metaVarSuf, '', $keyName );
 				if ( empty( $keyData['taxonomy'] ) ) {
-					if ( ! DbWpf::query( 'UPDATE @__meta_keys SET taxonomy=%s WHERE id=%d', false, array( $keyNameVar, (int) $keyId ) ) ) {
+					if ( ! WooBeWoo_PF_Db::query( 'UPDATE @__meta_keys SET taxonomy=%s WHERE id=%d', false, array( $keyNameVar, (int) $keyId ) ) ) {
 						return false;
 					}
 				}
@@ -301,7 +301,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 								$query = $insert . 'val_id) SELECT DISTINCT post_parent,0,' . $keyId . ',v.id' . $from . ' INNER ' . $join . $where . " AND m.meta_key='" . $keyNameVar . "' AND p.post_type='product_variation'";
 							} else {
 								set_time_limit( 300 ); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
-								DbWpf::query( 'SET session wait_timeout=600' );
+								WooBeWoo_PF_Db::query( 'SET session wait_timeout=600' );
 
 								if ( $isAllProducts ) {
 									$query = 'SELECT m.meta_id as id, m.post_id, ' . $selectType . ' CAST(meta_value AS CHAR(' . $maxTextLength . ')) as meta_value' .
@@ -318,14 +318,14 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 										$from . ' LEFT ' . $join .
 										$whereMeta . ' AND ISNULL(v.id)' . ( strpos( $keyName, 'attribute_' ) === 0 ? '' : " AND m.meta_value!=''" );
 								}
-								if ( DbWpf::query( $query ) ) {
+								if ( WooBeWoo_PF_Db::query( $query ) ) {
 									if ( $isAllProducts ) {
 										$query = $insert . 'val_id) SELECT post_id, is_var, ' . $keyId . ',v.id FROM ' . $tempTableAttr . ' as m INNER ' . $join;
 									} else {
 										$query = $insert . 'val_id) SELECT post_id,' . $selectType . $keyId . ',v.id' . $from . ' INNER ' . $join . $whereMeta;
 									}
 								} else {
-									$this->pushError( DbWpf::getError() );
+									$this->pushError( WooBeWoo_PF_Db::getError() );
 									return false;
 								}
 							}
@@ -354,9 +354,9 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 
 							$limitQuery = 'SELECT post_id, ' . $selectType . ' meta_value' . $from . $whereMeta . ' ORDER BY meta_id LIMIT ';
 							do {
-								$data = DbWpf::get( $limitQuery . $offset . ',' . $limit );
+								$data = WooBeWoo_PF_Db::get( $limitQuery . $offset . ',' . $limit );
 								if ( false === $data ) {
-									$this->pushError( DbWpf::getError() );
+									$this->pushError( WooBeWoo_PF_Db::getError() );
 									return false;
 								}
 								$j            = 0;
@@ -385,8 +385,8 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 									}
 									if ( $j >= 10 || $k >= $lastData ) {
 										if ( ! empty( $insertValues ) ) {
-											if ( ! DbWpf::query( $insert . ' val_id) VALUES ' . substr( $insertValues, 0, -1 ) ) ) {
-												$this->pushError( DbWpf::getError() );
+											if ( ! WooBeWoo_PF_Db::query( $insert . ' val_id) VALUES ' . substr( $insertValues, 0, -1 ) ) ) {
+												$this->pushError( WooBeWoo_PF_Db::getError() );
 												return false;
 											}
 										}
@@ -409,10 +409,10 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 							break;
 					}
 					if ( ! empty( $query ) ) {
-						if ( DbWpf::query( $query ) ) {
+						if ( WooBeWoo_PF_Db::query( $query ) ) {
 							$status = 1;
 						} else {
-							$this->pushError( DbWpf::getError() );
+							$this->pushError( WooBeWoo_PF_Db::getError() );
 							$this->pushError( $query );
 							return false;
 						}
@@ -449,7 +449,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 				$attrKeyId   = $attrKey['id'];
 				$parentKeyId = $parentKey['id'];
 
-				$attributes = DbWpf::get(
+				$attributes = WooBeWoo_PF_Db::get(
 					"SELECT key3, id, value FROM @__meta_values WHERE key_id=%d AND key2='is_variation' AND key4=''",
 					'all',
 					ARRAY_A,
@@ -507,8 +507,8 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 							' INNER JOIN ' . ( $tempTable ? $tempTable : ' `#__posts` ' ) . ' as p ON (p.id=d.product_id)' .
 							$where . " AND p.post_type='product_variation' AND d.key_id=" . $keyId . ' AND d.is_var=1';
 					}
-					if ( ! DbWpf::query( $query ) ) {
-						$this->pushError( DbWpf::getError() );
+					if ( ! WooBeWoo_PF_Db::query( $query ) ) {
+						$this->pushError( WooBeWoo_PF_Db::getError() );
 						return false;
 					}
 
@@ -518,13 +518,13 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 						' INNER JOIN @__meta_data as mp ON (mp.product_id=pp.id AND mp.key_id=' . $attrKeyId . ' AND mp.val_id IN (' . implode( ',', $ids ) . '))' .
 						' LEFT JOIN @__meta_data as m ON (m.product_id=p.id AND m.key_id=' . $keyId . ')' .
 						$where . " AND p.post_type='product_variation' AND ISNULL(m.id)";
-					if ( DbWpf::query( $query ) ) {
+					if ( WooBeWoo_PF_Db::query( $query ) ) {
 						if ( $isNew && ! $keysModel->updateKeyData( $keyId, array( 'status' => 1 ) ) ) {
 							$this->pushError( $keysModel->getErrors() );
 							return false;
 						}
 					} else {
-						$this->pushError( DbWpf::getError() );
+						$this->pushError( WooBeWoo_PF_Db::getError() );
 						return false;
 					}
 				}
@@ -539,7 +539,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 		if ( $fullRecalc ) {
 			$optimizeTables = array( 'meta_data', 'meta_values', 'meta_values_bk' );
 			foreach ( $optimizeTables as $table ) {
-				DbWpf::query( 'OPTIMIZE TABLE `@__' . $table . '`' );
+				WooBeWoo_PF_Db::query( 'OPTIMIZE TABLE `@__' . $table . '`' );
 			}
 			$optModel->save( 'start_indexing', 1 );
 		}
@@ -660,6 +660,11 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 		return $str;
 	}
 
+	/**
+	 * saveMeta_wpf_product_type.
+	 *
+	 * @version 3.3.2
+	 */
 	public function saveMeta_wpf_product_type( $productId, $keyData, $tempTable ) {
 		$keyId = $keyData['id'];
 		$keys  = array();
@@ -688,8 +693,8 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 			' FROM ' . ( $tempTable ? $tempTable : ' `#__posts` ' ) . ' as p' .
 			' WHERE ' . ( $tempTable ? '1=1' : " p.post_type IN ('product','product_variation') AND p.post_status IN('publish', 'private')" ) . ( empty( $productId ) ? '' : ' AND p.id=' . $productId );
 
-		if ( ! DbWpf::query( $query ) ) {
-			$this->pushError( DbWpf::getError() );
+		if ( ! WooBeWoo_PF_Db::query( $query ) ) {
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 		return true;
@@ -698,7 +703,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 	/**
 	 * afterCalcMeta_stock_status.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function afterCalcMeta_stock_status( $productId, $keyData, $tempTable ) {
 		$groupedTerm = get_term_by( 'name', 'grouped', 'product_type', ARRAY_A );
@@ -721,9 +726,9 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 				' ORDER BY meta_id LIMIT ';
 			do {
 				$q    = $limitQuery . $offset . ',' . $limit;
-				$data = DbWpf::get( $q, 0 );
+				$data = WooBeWoo_PF_Db::get( $q, 0 );
 				if ( false === $data ) {
-					$this->pushError( DbWpf::getError() );
+					$this->pushError( WooBeWoo_PF_Db::getError() );
 					$this->pushError( $q );
 					return false;
 				}
@@ -748,9 +753,9 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 						}
 
 						$q     = $query . '(' . implode( ',', UtilsWpf::controlNumericValues( $vars, 'id' ) ) . ') LIMIT 1';
-						$exist = DbWpf::get( $q, 'one' );
+						$exist = WooBeWoo_PF_Db::get( $q, 'one' );
 						if ( false === $exist ) {
-							$this->pushError( DbWpf::getError() );
+							$this->pushError( WooBeWoo_PF_Db::getError() );
 							$this->pushError( $q );
 							return false;
 						}
@@ -763,16 +768,16 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 				}
 				if ( ! empty( $listIdsO ) ) {
 					$q = $updateO . '(' . substr( $listIdsO, 0, -1 ) . ')';
-					if ( ! DbWpf::query( $q ) ) {
-						$this->pushError( DbWpf::getError() );
+					if ( ! WooBeWoo_PF_Db::query( $q ) ) {
+						$this->pushError( WooBeWoo_PF_Db::getError() );
 						$this->pushError( $q );
 						return false;
 					}
 				}
 				if ( ! empty( $listIdsI ) ) {
 					$q = $updateI . '(' . substr( $listIdsI, 0, -1 ) . ')';
-					if ( ! DbWpf::query( $q ) ) {
-						$this->pushError( DbWpf::getError() );
+					if ( ! WooBeWoo_PF_Db::query( $q ) ) {
+						$this->pushError( WooBeWoo_PF_Db::getError() );
 						$this->pushError( $q );
 						return false;
 					}
@@ -786,14 +791,14 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 	/**
 	 * optimizeMetaTables.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function optimizeMetaTables() {
 		$optimizeTables = array( 'meta_data', 'meta_values', 'meta_values_bk' );
 		foreach ( $optimizeTables as $table ) {
-			$table = DbWpf::sanitizeIdentifier( $table );
-			if ( ! DbWpf::query( 'OPTIMIZE TABLE `@__' . $table . '`' ) ) {
-				$this->pushError( DbWpf::getError() );
+			$table = WooBeWoo_PF_Db::sanitizeIdentifier( $table );
+			if ( ! WooBeWoo_PF_Db::query( 'OPTIMIZE TABLE `@__' . $table . '`' ) ) {
+				$this->pushError( WooBeWoo_PF_Db::getError() );
 				return false;
 			}
 		}
@@ -804,7 +809,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 	/**
 	 * addCompatibilities.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function addCompatibilities( $productId, $tempTable ) {
 		if ( class_exists( 'WC_Measurement_Price_Calculator' ) ) {
@@ -818,8 +823,8 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 			}
 			$isOne = false;
 			if ( $tempTable ) {
-				$tempTable = DbWpf::sanitizeIdentifier( $tempTable );
-				$ids = DbWpf::get( 'SELECT id FROM ' . $tempTable, 'col' );
+				$tempTable = WooBeWoo_PF_Db::sanitizeIdentifier( $tempTable );
+				$ids = WooBeWoo_PF_Db::get( 'SELECT id FROM ' . $tempTable, 'col' );
 			} else {
 				$product = wc_get_product( $productId );
 				if ( ! $product ) {
@@ -887,16 +892,16 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 				}
 				if ( ! empty( $price ) ) {
 					$q = $query . round( $price, 4 ) . $whPrice . $id;
-					if ( ! DbWpf::query( $q ) ) {
-						$this->pushError( DbWpf::getError() );
+					if ( ! WooBeWoo_PF_Db::query( $q ) ) {
+						$this->pushError( WooBeWoo_PF_Db::getError() );
 						$this->pushError( $q );
 						return false;
 					}
 				}
 				if ( ! empty( $salePrice ) ) {
 					$q = $query . round( $salePrice, 4 ) . $whSalePrice . $id;
-					if ( ! DbWpf::query( $q ) ) {
-						$this->pushError( DbWpf::getError() );
+					if ( ! WooBeWoo_PF_Db::query( $q ) ) {
+						$this->pushError( WooBeWoo_PF_Db::getError() );
 						$this->pushError( $q );
 						return false;
 					}

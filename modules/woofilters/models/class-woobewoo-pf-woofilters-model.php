@@ -522,7 +522,7 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 	/**
 	 * getFiltersMetaKeys.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getFiltersMetaKeys( $id = 0, $deep = false ) {
 		$keys = array();
@@ -557,8 +557,8 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 					$metaKeysLine = implode( '|', $metaKeys );
 					$keys         = array_merge( $keys, $metaKeys );
 				}
-				if ( ! DbWpf::query( 'UPDATE `@__filters` SET meta_keys=%s WHERE id=%d', false, array( $metaKeysLine, (int) $filter['id'] ) ) ) {
-					$this->pushError( DbWpf::getError() );
+				if ( ! WooBeWoo_PF_Db::query( 'UPDATE `@__filters` SET meta_keys=%s WHERE id=%d', false, array( $metaKeysLine, (int) $filter['id'] ) ) ) {
+					$this->pushError( WooBeWoo_PF_Db::getError() );
 					return false;
 				}
 			}

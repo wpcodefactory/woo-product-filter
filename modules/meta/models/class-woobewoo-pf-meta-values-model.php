@@ -104,6 +104,8 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 
 	/**
 	 * getMetaValueTerms.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getMetaValueTerms( $keyId, $keys = array() ) {
 		$cntField = ( empty( $keys['fbv'] ) ? 'product_cnt' : 'variation_cnt' );
@@ -140,7 +142,7 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 			if ( isset( $keys['order'] ) ) {
 				$query .= ' ORDER BY value ' . ( 'desc' == $keys['order'] ? 'desc' : 'asc' );
 			}
-			$data = DbWpf::get( $query );
+			$data = WooBeWoo_PF_Db::get( $query );
 		}
 		$terms = array();
 
@@ -199,7 +201,7 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 	/**
 	 * getMetaValueIds.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 *
 	 * @param $keyId
 	 * @param $values
@@ -216,7 +218,7 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 				if ( false === strpos( $value, '%' ) ) {
 					$value = strtolower( rawurlencode( $value ) );
 				}
-				$value = DbWpf::escape( $value );
+				$value = WooBeWoo_PF_Db::escape( $value );
 			}
 
 			$valueStr = implode( "','", $values );
@@ -240,7 +242,7 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 	/**
 	 * recalcValuesCount.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function recalcValuesCount( $keyIds = array() ) {
 
@@ -256,8 +258,8 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 		if ( ! empty( $keyIds ) ) {
 			$query .= ' WHERE v.key_id IN (' . implode( ',', $keyIds ) . ')';
 		}
-		if ( ! DbWpf::query( $query ) ) {
-			$this->pushError( DbWpf::getError() );
+		if ( ! WooBeWoo_PF_Db::query( $query ) ) {
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 
@@ -267,7 +269,7 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 	/**
 	 * backupOldValues.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function backupOldValues( $keyIds ) {
 		$keyIds = array_map( 'intval', (array) $keyIds );
@@ -277,12 +279,12 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 		}
 		$where = ' WHERE key_id' . ( count( $keyIds ) ? ' IN (' . implode( ',', $keyIds ) . ')' : '=' . $keyIds[0] );
 		$query = 'INSERT IGNORE INTO `@__meta_values_bk` SELECT id, key_id, key2, key3, key4, value FROM `@__meta_values`' . $where;
-		if ( ! DbWpf::query( $query ) ) {
-			$this->pushError( DbWpf::getError() );
+		if ( ! WooBeWoo_PF_Db::query( $query ) ) {
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
-		if ( ! DbWpf::query( 'DELETE FROM `@__meta_values`' . $where ) ) {
-			$this->pushError( DbWpf::getError() );
+		if ( ! WooBeWoo_PF_Db::query( 'DELETE FROM `@__meta_values`' . $where ) ) {
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 		return true;
@@ -290,12 +292,14 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 
 	/**
 	 * restoreOldValues.
+	 *
+	 * @version 3.3.2
 	 */
 	public function restoreOldValues( $keyIds ) {
 		$where = ' WHERE key_id' . ( count( $keyIds ) ? ' IN (' . implode( ',', $keyIds ) . ')' : '=' . $keyIds[0] );
 		$query = 'INSERT IGNORE INTO `@__meta_values` SELECT id, key_id, key2, key3, key4, value, 0, 0 FROM `@__meta_values_bk`' . $where;
-		if ( ! DbWpf::query( $query ) ) {
-			$this->pushError( DbWpf::getError() );
+		if ( ! WooBeWoo_PF_Db::query( $query ) ) {
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 		return true;

@@ -9,6 +9,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Woofilters_Widget_Controller extends ControllerWpf {
+class WooBeWoo_PF_Woofilters_Widget_Controller extends WooBeWoo_PF_Controller {
 
 }

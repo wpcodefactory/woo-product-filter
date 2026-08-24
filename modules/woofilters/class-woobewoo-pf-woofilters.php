@@ -1978,6 +1978,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * addPriceOrder.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addPriceOrder( $args ) {
 		global $wpdb;
@@ -1992,7 +1994,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		} else {
 			$metaKeyId = $this->getMetaKeyId( '_price' );
 			if ( $metaKeyId ) {
-				$metaDataTable   = DbWpf::getTableName( 'meta_data' );
+				$metaDataTable   = WooBeWoo_PF_Db::getTableName( 'meta_data' );
 				$func            = ( FrameWpf::_()->getModule( 'options' )->get( 'use_max_price' ) == 1 ? 'max' : 'min' );
 				$args['join']   .= ' LEFT JOIN (SELECT wpf_t.product_id, ' . $func . '(wpf_t.val_dec) as wpf_price FROM ' . $metaDataTable . ' as wpf_t WHERE wpf_t.key_id=' . $metaKeyId . ' GROUP BY wpf_t.product_id) as wpf_price_order ON (wpf_price_order.product_id=' . $wpdb->posts . '.ID)';
 				$args['orderby'] = ' wpf_price_order.wpf_price ASC, ' . $wpdb->posts . '.ID ';
@@ -2009,6 +2011,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * addPriceOrderDesc.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addPriceOrderDesc( $args ) {
 		global $wpdb;
@@ -2023,7 +2027,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		} else {
 			$metaKeyId = $this->getMetaKeyId( '_price' );
 			if ( $metaKeyId ) {
-				$metaDataTable   = DbWpf::getTableName( 'meta_data' );
+				$metaDataTable   = WooBeWoo_PF_Db::getTableName( 'meta_data' );
 				$args['join']   .= ' LEFT JOIN (SELECT wpf_t.product_id, max(wpf_t.val_dec) as wpf_price FROM ' . $metaDataTable . ' as wpf_t WHERE wpf_t.key_id=' . $metaKeyId . ' GROUP BY wpf_t.product_id) as wpf_price_order ON (wpf_price_order.product_id=' . $wpdb->posts . '.ID)';
 				$args['orderby'] = ' wpf_price_order.wpf_price DESC, ' . $wpdb->posts . '.ID ';
 			} else {
@@ -2338,7 +2342,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * addBeforeFiltersFrontendArgs.
 	 *
-	 * @version 2.9.8
+	 * @version 3.3.2
 	 */
 	public function addBeforeFiltersFrontendArgs( $args, $filterSettings = array(), $urlQuery = array() ) {
 
@@ -2359,8 +2363,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$this->clausesByParam['variation'] = array();
 
 				if ( isset( $args['tax_query'] ) && ! empty( $args['tax_query'] ) ) {
-					$metaDataTable  = DbWpf::getTableName( 'meta_data' );
-					$metaDataValues = DbWpf::getTableName( 'meta_values' );
+					$metaDataTable  = WooBeWoo_PF_Db::getTableName( 'meta_data' );
+					$metaDataValues = WooBeWoo_PF_Db::getTableName( 'meta_values' );
 
 					foreach ( $args['tax_query'] as $keyTax => &$tax_query ) {
 						if ( ! is_array( $tax_query ) ) {
@@ -3057,6 +3061,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * preparePriceFilter.
+	 *
+	 * @version 3.3.2
 	 */
 	public function preparePriceFilter( $minPrice = null, $maxPrice = null, $rate = null ) {
 		if ( ! is_null( $minPrice ) ) {
@@ -3128,7 +3134,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$metaKeyId = $this->getMetaKeyId( '_price' );
 			if ( $metaKeyId ) {
 				global $wpdb;
-				$metaDataTable = DbWpf::getTableName( 'meta_data' );
+				$metaDataTable = WooBeWoo_PF_Db::getTableName( 'meta_data' );
 				$value         = $metaQuery['compare'] .
 					( is_array( $metaQuery['value'] ) ? " '" . $metaQuery['value'][0] . "' AND '" . $metaQuery['value'][1] . "'" : "'" . $metaQuery['value'] . "'" );
 
@@ -3153,8 +3159,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 							( is_array( $metaQuery['value'] ) ? " '" . $metaQuery['value'][0] . "' AND '" . $metaQuery['value'][1] . "'" : "'" . $metaQuery['value'] . "'" );
 						$clauses = array(
 							'join'  => array(
-								' INNER JOIN ' . DbWpf::getTableName( 'meta_data' ) . ' as wpf_mdata ON (wpf_mdata.key_id=' . $metaKeyId . ' AND wpf_mdata.product_id=' . $wpdb->posts . '.ID)',
-								' INNER JOIN ' . DbWpf::getTableName( 'meta_values' ) . ' as wpf_vdata ON (wpf_vdata.key_id=' . $metaKeyId . ' AND wpf_vdata.id=wpf_mdata.val_id)',
+								' INNER JOIN ' . WooBeWoo_PF_Db::getTableName( 'meta_data' ) . ' as wpf_mdata ON (wpf_mdata.key_id=' . $metaKeyId . ' AND wpf_mdata.product_id=' . $wpdb->posts . '.ID)',
+								' INNER JOIN ' . WooBeWoo_PF_Db::getTableName( 'meta_values' ) . ' as wpf_vdata ON (wpf_vdata.key_id=' . $metaKeyId . ' AND wpf_vdata.id=wpf_mdata.val_id)',
 							),
 							'where' => array( ' AND ROUND(wpf_vdata.value,2) ' . $value . " AND wpf_vdata.key2='" . $groupId . "'" ),
 						);
@@ -3639,7 +3645,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * createTemporaryTable.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function createTemporaryTable( $table, $sql, $postfix = '' ) {
 
@@ -3647,7 +3653,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$table .= '_' . str_replace( '-', '_', trim( $postfix ) );
 		}
 
-		$resultTable = DbWpf::sanitizeIdentifier( $table );
+		$resultTable = WooBeWoo_PF_Db::sanitizeIdentifier( $table );
 
 		if ( isset( $this->clausesByParam['not_for_temporary_table'] ) ) {
 
@@ -3668,15 +3674,15 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$sql = substr( $sql, 0, $limitPos );
 			}
 		}
-		$needPrimaryKey = DbWpf::get( "SHOW SESSION variables like 'sql_require_primary_key'" );
+		$needPrimaryKey = WooBeWoo_PF_Db::get( "SHOW SESSION variables like 'sql_require_primary_key'" );
 		if ( ! empty( $needPrimaryKey ) && isset( $needPrimaryKey[0]['Value'] ) && 'ON' == $needPrimaryKey[0]['Value'] ) {
-			DbWpf::query( 'SET SESSION sql_require_primary_key=0' );
+			WooBeWoo_PF_Db::query( 'SET SESSION sql_require_primary_key=0' );
 		}
-		if ( ! DbWpf::query( "DROP TEMPORARY TABLE IF EXISTS `{$table}`" ) ) {
+		if ( ! WooBeWoo_PF_Db::query( "DROP TEMPORARY TABLE IF EXISTS `{$table}`" ) ) {
 			return false;
 		}
 
-		if ( DbWpf::query( "CREATE TEMPORARY TABLE IF NOT EXISTS `{$table}` (index my_pkey (id)) AS {$sql}", true ) === false ) {
+		if ( WooBeWoo_PF_Db::query( "CREATE TEMPORARY TABLE IF NOT EXISTS `{$table}` (index my_pkey (id)) AS {$sql}", true ) === false ) {
 			$resultTable = '(' . $sql . ')';
 		}
 
@@ -4252,7 +4258,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4400,7 +4406,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		}
 
 		if ( FrameWpf::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
-			$termProducts = ! isset( $sql['main'] ) ? array() : DbWpf::get( $sql['main'] );
+			$termProducts = ! isset( $sql['main'] ) ? array() : WooBeWoo_PF_Db::get( $sql['main'] );
 
 			if ( false === $termProducts ) {
 				$termProducts = array();
@@ -4523,7 +4529,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 						INNER JOIN {$wpdb->term_relationships} AS tr ON (tr.`object_id`=wpf_temp.`ID`)
 						INNER JOIN {$wpdb->term_taxonomy} AS wtf ON tr.`term_taxonomy_id` = wtf.`term_taxonomy_id`
 						WHERE wtf.`term_id` IN (" . implode( ',', $termIds ) . ')';
-					$cnt                                = intval( DbWpf::get( $sqlTemp, 'one' ) );
+					$cnt                                = intval( WooBeWoo_PF_Db::get( $sqlTemp, 'one' ) );
 					$existTerms[ $taxonomy ][ $termId ] = $cnt;
 					if ( isset( $calcCategories[ $termId ] ) ) {
 						$calcCategories[ $termId ] = $cnt;
@@ -4533,7 +4539,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		}
 
 		if ( ! empty( $colorGroup ) && isset( $sql['color'] ) ) {
-			$termProducts = DbWpf::get( $sql['color'] );
+			$termProducts = WooBeWoo_PF_Db::get( $sql['color'] );
 			$existTerms   = DispatcherWpf::applyFilters( 'getExistTermsColor', $existTerms, $colorGroup, $termProducts );
 		}
 
@@ -4812,7 +4818,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 										' INNER JOIN ' . $wpdb->posts . ' p ON (p.ID=wpf_temp.ID)' .
 										' JOIN ' . $wpdb->users . ' ON p.post_author = ' . $wpdb->users . '.ID';
 
-								$result['existsUsers'] = dbWpf::get( $query );
+								$result['existsUsers'] = WooBeWoo_PF_Db::get( $query );
 							}
 							break;
 
@@ -4873,10 +4879,12 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getAllPages.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getAllPages() {
 		global $wpdb;
-		$allPages = dbWpf::get( "SELECT ID, post_title FROM $wpdb->posts WHERE post_type = 'page' AND post_status IN ('publish','draft') ORDER BY post_title" );
+		$allPages = WooBeWoo_PF_Db::get( "SELECT ID, post_title FROM $wpdb->posts WHERE post_type = 'page' AND post_status IN ('publish','draft') ORDER BY post_title" );
 		$pages    = array();
 		if ( ! empty( $allPages ) ) {
 			foreach ( $allPages as $p ) {
@@ -5213,6 +5221,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * addWpfMetaClauses.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addWpfMetaClauses( $params ) {
 		if ( empty( $params['values'] || $params['keyId'] ) ) {
@@ -5236,7 +5246,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		if ( empty( $params['searchLogic'] ) ) {
 			foreach ( $values as $val ) {
 				++$i;
-				$clauses['join'][ $i ]  = ' INNER JOIN ' . DbWpf::getTableName( 'meta_data' ) . ' AS wpf_meta__#i ON (wpf_meta__#i.product_id=' . $wpdb->posts . '.ID AND wpf_meta__#i.key_id' . ( is_array( $keyId ) ? ' IN (' . implode( ',', $keyId ) . ')' : '=' . $keyId ) . ')';
+				$clauses['join'][ $i ]  = ' INNER JOIN ' . WooBeWoo_PF_Db::getTableName( 'meta_data' ) . ' AS wpf_meta__#i ON (wpf_meta__#i.product_id=' . $wpdb->posts . '.ID AND wpf_meta__#i.key_id' . ( is_array( $keyId ) ? ' IN (' . implode( ',', $keyId ) . ')' : '=' . $keyId ) . ')';
 				$clauses['where'][ $i ] = ' AND wpf_meta__#i.val_' . $field .
 											( $isAnd ? '=' . $val : ( $isBetween ? ' BETWEEN ' . ( empty( $values[0] ) ? 0 : $values[0] ) . ' AND ' . ( empty( $values[1] ) ? 0 : $values[1] ) : ' IN (' . implode( ',', $values ) . ')' ) );
 				if ( ! $isAnd ) {
@@ -5247,11 +5257,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			++$i;
 			$keyDec = ! empty( $params['keyName'] ) && $this->getMetaKeyId( $params['keyName'], 'meta_type' ) == 1;
 
-			$clauses['join'][ $i ] = ' INNER JOIN ' . DbWpf::getTableName( 'meta_data' ) . ' AS wpf_meta__#i ON (wpf_meta__#i.product_id=' . $wpdb->posts . '.ID AND wpf_meta__#i.key_id' . ( is_array( $keyId ) ? ' IN (' . implode( ',', $keyId ) . ')' : '=' . $keyId ) . ')';
+			$clauses['join'][ $i ] = ' INNER JOIN ' . WooBeWoo_PF_Db::getTableName( 'meta_data' ) . ' AS wpf_meta__#i ON (wpf_meta__#i.product_id=' . $wpdb->posts . '.ID AND wpf_meta__#i.key_id' . ( is_array( $keyId ) ? ' IN (' . implode( ',', $keyId ) . ')' : '=' . $keyId ) . ')';
 			if ( $keyDec ) {
 				$clauses['where'][ $i ] = ' AND wpf_meta__#i.val_dec' . $params['searchLogic'] . $params['values'][0];
 			} else {
-				$clauses['join'][ $i ] .= ' INNER JOIN ' . DbWpf::getTableName( 'meta_values' ) . ' AS wpf_meta_values__#i ON (wpf_meta_values__#i.id=wpf_meta__#i.val_id)';
+				$clauses['join'][ $i ] .= ' INNER JOIN ' . WooBeWoo_PF_Db::getTableName( 'meta_values' ) . ' AS wpf_meta_values__#i ON (wpf_meta_values__#i.id=wpf_meta__#i.val_id)';
 				$clauses['where'][ $i ] = ' AND wpf_meta_values__#i.value+0' . $params['searchLogic'] . $params['values'][0];
 			}
 		}

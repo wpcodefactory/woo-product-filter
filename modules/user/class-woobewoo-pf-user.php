@@ -62,9 +62,14 @@ class WooBeWoo_PF_User extends ModuleWpf {
 		}
 	}
 
+	/**
+	 * getAdminsList.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getAdminsList() {
 		global $wpdb;
-		$admins = DbWpf::get(
+		$admins = WooBeWoo_PF_Db::get(
 			'SELECT * FROM #__users
 			INNER JOIN #__usermeta ON #__users.ID = #__usermeta.user_id
 			WHERE #__usermeta.meta_key = "#__capabilities" AND #__usermeta.meta_value LIKE "%administrator%"'

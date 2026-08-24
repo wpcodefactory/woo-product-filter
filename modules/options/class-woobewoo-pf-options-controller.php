@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Options_Controller extends ControllerWpf {
+class WooBeWoo_PF_Options_Controller extends WooBeWoo_PF_Controller {
 
 	/**
 	 * woobewoo_pf_save_group.

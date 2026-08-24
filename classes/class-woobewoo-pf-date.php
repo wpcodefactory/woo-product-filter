@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - DateWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Date Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class DateWpf {
+class WooBeWoo_PF_Date {
 	public static function _( $time = null ) {
 		if ( is_null( $time ) ) {
 			$time = time();

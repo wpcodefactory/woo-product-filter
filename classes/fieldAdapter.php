@@ -5,7 +5,7 @@
  * Class to adapt field before display
  * return ONLY htmlParams property
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  *
@@ -19,7 +19,7 @@ class FieldAdapterWpf {
 	/**
 	 * Constants.
 	 */
-	const DB   = 'DbWpf';
+	const DB   = 'WooBeWoo_PF_Db';
 	const HTML = 'HtmlWpf';
 	const STR  = 'str';
 

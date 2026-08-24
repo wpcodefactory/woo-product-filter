@@ -78,10 +78,15 @@ class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
 		return $this->insert( $data );
 	}
 
+	/**
+	 * updateKeyData
+	 *
+	 * @version 3.3.2
+	 */
 	public function updateKeyData( $id, $data ) {
-		$now = DbWpf::get( 'SELECT CURRENT_TIMESTAMP', 'one' );
+		$now = WooBeWoo_PF_Db::get( 'SELECT CURRENT_TIMESTAMP', 'one' );
 		if ( ! $now ) {
-			$this->pushError( DbWpf::getError() );
+			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;
 		}
 		$data['updated'] = $now;

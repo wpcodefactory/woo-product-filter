@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - ControllerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Controller Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-abstract class ControllerWpf {
+abstract class WooBeWoo_PF_Controller {
 	protected $_models      = array();
 	protected $_views       = array();
 	protected $_task        = '';

@@ -2,14 +2,14 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Controller Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Meta_Controller extends ControllerWpf {
+class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 
 	protected $_code = 'meta';
 

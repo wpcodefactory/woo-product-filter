@@ -1,17 +1,17 @@
 <?php
 /**
- * Product Filter by WBW - DbWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Db Class
  *
  * Shell - class to work with $wpdb global object.
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class DbWpf {
+class WooBeWoo_PF_Db {
 
 	/**
 	 * Execute query and return results.

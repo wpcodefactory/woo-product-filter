@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - InstallerWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -24,7 +24,7 @@ class InstallerWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public static function init( $isUpdate = false ) {
 		global $wpdb;
@@ -40,12 +40,10 @@ class InstallerWpf {
 
 		/**
 		 * Table modules.
-		 *
-		 * @version 3.3.0
 		 */
-		if ( ! DbWpf::exist( '@__modules' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__modules' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					"CREATE TABLE IF NOT EXISTS `@__modules` (
 					  `id` smallint(3) NOT NULL AUTO_INCREMENT,
 					  `code` varchar(32) NOT NULL,
@@ -58,7 +56,7 @@ class InstallerWpf {
 					) DEFAULT CHARSET=utf8;"
 				)
 			);
-			DbWpf::query(
+			WooBeWoo_PF_Db::query(
 				"INSERT INTO `@__modules` (id, code, active, type_id, label) VALUES
 				(NULL, 'adminmenu',1,1,'Admin Menu'),
 				(NULL, 'options',1,1,'Options'),
@@ -74,9 +72,9 @@ class InstallerWpf {
 		/**
 		 *  Table modules_type.
 		 */
-		if ( ! DbWpf::exist( '@__modules_type' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__modules_type' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					'CREATE TABLE IF NOT EXISTS `@__modules_type` (
 					  `id` smallint(3) NOT NULL AUTO_INCREMENT,
 					  `label` varchar(32) NOT NULL,
@@ -84,7 +82,7 @@ class InstallerWpf {
 					) AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;'
 				)
 			);
-			DbWpf::query(
+			WooBeWoo_PF_Db::query(
 				"INSERT INTO `@__modules_type` VALUES
 				(1,'system'),
 				(6,'addons');"
@@ -93,9 +91,9 @@ class InstallerWpf {
 		/**
 		 * Table filters.
 		 */
-		if ( ! DbWpf::exist( '@__filters' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__filters' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					'CREATE TABLE IF NOT EXISTS `@__filters` (
 						`id` INT(11) NOT NULL AUTO_INCREMENT,
 						`title` VARCHAR(128) NULL DEFAULT NULL,
@@ -107,14 +105,14 @@ class InstallerWpf {
 		}
 
 		if ( version_compare( $current_version, '1.3.6' ) != 1 ) {
-			DbWpf::query( 'ALTER TABLE `@__filters` MODIFY setting_data MEDIUMTEXT;' );
+			WooBeWoo_PF_Db::query( 'ALTER TABLE `@__filters` MODIFY setting_data MEDIUMTEXT;' );
 		}
 		/**
 		 * Plugin usage statistwpf.
 		 */
-		if ( ! DbWpf::exist( '@__usage_stat' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__usage_stat' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					"CREATE TABLE `@__usage_stat` (
 					  `id` int(11) NOT NULL AUTO_INCREMENT,
 					  `code` varchar(64) NOT NULL,
@@ -126,14 +124,14 @@ class InstallerWpf {
 					) DEFAULT CHARSET=utf8;"
 				)
 			);
-			DbWpf::query( "INSERT INTO `@__usage_stat` (code, visits) VALUES ('installed', 1)" );
+			WooBeWoo_PF_Db::query( "INSERT INTO `@__usage_stat` (code, visits) VALUES ('installed', 1)" );
 		}
 		/**
 		 *  Table meta_keys.
 		 */
-		if ( ! DbWpf::exist( '@__meta_keys' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__meta_keys' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					'CREATE TABLE IF NOT EXISTS `@__meta_keys` (
 					  `id` INT(11) NOT NULL AUTO_INCREMENT,
 					  `meta_mode` smallint(3) NOT NULL,
@@ -152,7 +150,7 @@ class InstallerWpf {
 					) DEFAULT CHARSET=utf8;'
 				)
 			);
-			DbWpf::query(
+			WooBeWoo_PF_Db::query(
 				"INSERT INTO `@__meta_keys` VALUES
 				(NULL,0,'_wpf_product_type','',0,0,0,0,CURRENT_TIMESTAMP,NULL,NULL,NULL),
 				(NULL,0,'_product_attributes','',0,0,8,0,CURRENT_TIMESTAMP,NULL,NULL,NULL),
@@ -166,9 +164,9 @@ class InstallerWpf {
 		/**
 		 *  Table meta_data.
 		 */
-		if ( ! DbWpf::exist( '@__meta_data' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__meta_data' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					'CREATE TABLE IF NOT EXISTS `@__meta_data` (
 					  `id` bigint NOT NULL AUTO_INCREMENT,
 					  `product_id` bigint NOT NULL,
@@ -186,9 +184,9 @@ class InstallerWpf {
 		/**
 		 *  Table meta_values.
 		 */
-		if ( ! DbWpf::exist( '@__meta_values' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__meta_values' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					'CREATE TABLE IF NOT EXISTS `@__meta_values` (
 					  `id` bigint NOT NULL AUTO_INCREMENT,
 					  `key_id` INT(11) NOT NULL,
@@ -206,9 +204,9 @@ class InstallerWpf {
 		/**
 		 *  Table meta_values_bk.
 		 */
-		if ( ! DbWpf::exist( '@__meta_values_bk' ) ) {
+		if ( ! WooBeWoo_PF_Db::exist( '@__meta_values_bk' ) ) {
 			dbDelta(
-				DbWpf::prepareQuery(
+				WooBeWoo_PF_Db::prepareQuery(
 					'CREATE TABLE IF NOT EXISTS `@__meta_values_bk` (
 					  `id` bigint NOT NULL,
 					  `key_id` INT(11) NOT NULL,

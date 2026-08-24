@@ -3128,6 +3128,11 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		return $children;
 	}
 
+	/**
+	 * wpfGetFilteredPriceFromProductList.
+	 *
+	 * @version 3.3.2
+	 */
 	public function wpfGetFilteredPriceFromProductList( $settings, $listTable, $convert = true, $dec = 0, $tax = '' ) {
 		global $wpdb;
 
@@ -3192,7 +3197,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			}
 		}
 
-		$price = DbWpf::get( $query, 'row', OBJECT );
+		$price = WooBeWoo_PF_Db::get( $query, 'row', OBJECT );
 
 		if ( $price && $convert ) {
 			$price->wpfMaxPrice = $module->getCurrencyPrice( (float) $price->wpfMaxPrice, $dec );

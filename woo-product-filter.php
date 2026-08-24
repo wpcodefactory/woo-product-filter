@@ -44,13 +44,13 @@ add_action(
  */
 if ( trueRequestWpf() ) {
 
-	importClassWpf( 'DbWpf' );
+	importClassWpf( 'WooBeWoo_PF_Db' );
 	importClassWpf( 'InstallerWpf' );
 	importClassWpf( 'WooBeWoo_PF_Base_Object' );
 	importClassWpf( 'ModuleWpf' );
 	importClassWpf( 'ModelWpf' );
 	importClassWpf( 'ViewWpf' );
-	importClassWpf( 'ControllerWpf' );
+	importClassWpf( 'WooBeWoo_PF_Controller' );
 	importClassWpf( 'HelperWpf' );
 	importClassWpf( 'DispatcherWpf' );
 	importClassWpf( 'FieldWpf' );
@@ -73,7 +73,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'UtilsWpf' );
 	importClassWpf( 'ModInstallerWpf' );
 	importClassWpf( 'InstallerDbUpdaterWpf' );
-	importClassWpf( 'DateWpf' );
+	importClassWpf( 'WooBeWoo_PF_Date' );
 
 	/**
 	 * Check plugin version - maybe we need to update database, and check global errors in request.

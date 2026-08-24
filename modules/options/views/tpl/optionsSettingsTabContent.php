@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Options Settings Tab Content
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -69,10 +69,10 @@ defined( 'ABSPATH' ) || exit;
 												<?php
 												if ( $opt['value'] ) {
 													/* translators: %s: label */
-													echo esc_html( sprintf( __( 'Turned On %s', 'woo-product-filter' ), DateWpf::_( $opt['changed_on'] ) ) );
+													echo esc_html( sprintf( __( 'Turned On %s', 'woo-product-filter' ), WooBeWoo_PF_Date::_( $opt['changed_on'] ) ) );
 												} else {
 													/* translators: %s: label */
-													echo esc_html( sprintf( __( 'Turned Off %s', 'woo-product-filter' ), DateWpf::_( $opt['changed_on'] ) ) );
+													echo esc_html( sprintf( __( 'Turned Off %s', 'woo-product-filter' ), WooBeWoo_PF_Date::_( $opt['changed_on'] ) ) );
 												}
 												?>
 											</span>

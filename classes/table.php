@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - TableWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -164,12 +164,14 @@ abstract class TableWpf {
 	/**
 	 * Return table name
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param bool $transform need to transform to standard WP tables view or not
 	 * @return string table name
 	 */
 	public function getTable( $transform = false ) {
 		if ( $transform ) {
-			return DbWpf::prepareQuery( $this->_table );
+			return WooBeWoo_PF_Db::prepareQuery( $this->_table );
 		} else {
 			return $this->_table;
 		}
@@ -258,6 +260,12 @@ abstract class TableWpf {
 		$this->_group = $group;
 		return $this;
 	}
+
+	/**
+	 * get.
+	 *
+	 * @version 3.3.2
+	 */
 	public function get( $fields = '*', $where = '', $tables = '', $return = 'all' ) {
 		if ( ! $tables ) {
 			$tables = $this->_table . ' ' . $this->_alias;
@@ -297,13 +305,19 @@ abstract class TableWpf {
 			$this->_limitFrom = '';
 			$this->_limitTo   = '';
 		}
-		return DbWpf::get( $query, $return );
+		return WooBeWoo_PF_Db::get( $query, $return );
 	}
+
+	/**
+	 * store.
+	 *
+	 * @version 3.3.2
+	 */
 	public function store( $data, $method = 'INSERT', $where = '' ) {
 		$this->_clearErrors();
 		$method = strtoupper( $method );
 		if ( $this->_escape ) {
-			$data = DbWpf::escape( $data );
+			$data = WooBeWoo_PF_Db::escape( $data );
 		}
 		$query = '';
 		switch ( $method ) {
@@ -332,14 +346,14 @@ abstract class TableWpf {
 		if ( ( 'UPDATE' == $method ) && ! empty( $where ) ) {
 			$query .= ' WHERE ' . $this->_getQueryString( $where, 'AND' );
 		}
-		if ( DbWpf::query( $query ) ) {
+		if ( WooBeWoo_PF_Db::query( $query ) ) {
 			if ( 'INSERT' == $method ) {
-				return DbWpf::lastID();
+				return WooBeWoo_PF_Db::lastID();
 			} else {
 				return true;
 			}
 		} else {
-			$this->_addError( WPF_TEST_MODE ? DbWpf::getError() : esc_html__( 'Database error. Please contact your developer.', 'woo-product-filter' ) );
+			$this->_addError( WPF_TEST_MODE ? WooBeWoo_PF_Db::getError() : esc_html__( 'Database error. Please contact your developer.', 'woo-product-filter' ) );
 		}
 		return false;
 	}
@@ -361,6 +375,8 @@ abstract class TableWpf {
 	/**
 	 * Delete record(s)
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param mixed $where condition to use in query, if numeric givven - use delete by ID column
 	 * @return query result
 	 */
@@ -374,7 +390,7 @@ abstract class TableWpf {
 		} else {
 			$q = 'TRUNCATE TABLE ' . $this->_table;
 		}
-		return DbWpf::query( $q );
+		return WooBeWoo_PF_Db::query( $q );
 	}
 	/**
 	 * Convert to database query
@@ -466,18 +482,18 @@ abstract class TableWpf {
 	/**
 	 * exists.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function exists( $value, $field = '' ) {
 		if ( ! $field ) {
 			$field = $this->_id;
 		}
 
-		$id    = DbWpf::sanitizeIdentifier( $this->_id );
-		$table = DbWpf::sanitizeIdentifier( DbWpf::prepareQuery( $this->_table ) );
-		$field = DbWpf::sanitizeIdentifier( $field );
+		$id    = WooBeWoo_PF_Db::sanitizeIdentifier( $this->_id );
+		$table = WooBeWoo_PF_Db::sanitizeIdentifier( WooBeWoo_PF_Db::prepareQuery( $this->_table ) );
+		$field = WooBeWoo_PF_Db::sanitizeIdentifier( $field );
 
-		return DbWpf::get(
+		return WooBeWoo_PF_Db::get(
 			'SELECT `' . $id . '` FROM `' . $table . '` WHERE `' . $field . '` = %s',
 			'one',
 			ARRAY_A,
@@ -499,6 +515,8 @@ abstract class TableWpf {
 	}
 	/**
 	 * Prepare data before send it to database
+	 *
+	 * @version 3.3.2
 	 */
 	public function prepareInput( $d = array() ) {
 		$ignore = isset( $d['ignore'] ) ? $d['ignore'] : array();
@@ -515,7 +533,7 @@ abstract class TableWpf {
 				if ( empty( $d[ $key ] ) && ! in_array( $key, $ignore ) ) {
 					$d[ $key ] = '0000-00-00';
 				} elseif ( ! empty( $d[ $key ] ) ) {
-					$d[ $key ] = DbWpf::timeToDate( $d[ $key ] );
+					$d[ $key ] = WooBeWoo_PF_Db::timeToDate( $d[ $key ] );
 				}
 			}
 		}
@@ -524,6 +542,8 @@ abstract class TableWpf {
 	}
 	/**
 	 * Prepare data after extracting it from database
+	 *
+	 * @version 3.3.2
 	 */
 	public function prepareOutput( $d = array() ) {
 		$ignore = isset( $d['ignore'] ) ? $d['ignore'] : array();
@@ -533,7 +553,7 @@ abstract class TableWpf {
 					if ( '0000-00-00' == $d[ $key ] || empty( $d[ $key ] ) ) {
 						$d[ $key ] = '';
 					} else {
-						$d[ $key ] = gmdate( WPF_DATE_FORMAT, DbWpf::dateToTime( $d[ $key ] ) );
+						$d[ $key ] = gmdate( WPF_DATE_FORMAT, WooBeWoo_PF_Db::dateToTime( $d[ $key ] ) );
 					}
 					break;
 				case 'int':

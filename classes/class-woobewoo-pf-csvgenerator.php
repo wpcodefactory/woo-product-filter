@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - CsvgeneratorWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Csvgenerator Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class CsvgeneratorWpf {
+class WooBeWoo_PF_Csvgenerator {
 	protected $_filename  = '';
 	protected $_delimiter = ';';
 	protected $_enclosure = "\n";
