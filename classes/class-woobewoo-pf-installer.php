@@ -221,7 +221,7 @@ class WooBeWoo_PF_Installer {
 			);
 		}
 
-		InstallerDbUpdaterWpf::runUpdate( $current_version );
+		WooBeWoo_PF_Installer_Db_Updater::runUpdate( $current_version );
 		if ( $current_version && ! self::$_firstTimeActivated ) {
 			self::setUsed();
 			// For users that just updated our plugin - don't need to show step-by-step tutorial

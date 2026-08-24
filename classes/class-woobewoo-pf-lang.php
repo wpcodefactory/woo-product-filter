@@ -1,14 +1,14 @@
 <?php
 /**
- * Product Filter by WBW - LangWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Lang Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
-class LangWpf {
+class WooBeWoo_PF_Lang {
 	private static $_codeStorage = array();
 	private static $_data        = array();
 	/**
@@ -23,19 +23,19 @@ class LangWpf {
 	/**
 	 * extract.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public static function extract(
 		$d = array(
 			'dir'     => '',
-			'LangWpf' => '',
+			'WooBeWoo_PF_Lang' => '',
 		)
 	) {
 		$data = array();
 		if ( isset( $d['dir'] ) && ! empty( $d['dir'] ) ) {
 			$langDirPath = $d['dir'];
-		} elseif ( isset( $d['LangWpf'] ) && ! empty( $d['LangWpf'] ) ) {
-			$langDirPath = WPF_LANG_DIR . $d['LangWpf'] . WPF_DS;
+		} elseif ( isset( $d['WooBeWoo_PF_Lang'] ) && ! empty( $d['WooBeWoo_PF_Lang'] ) ) {
+			$langDirPath = WPF_LANG_DIR . $d['WooBeWoo_PF_Lang'] . WPF_DS;
 		} else {
 			$langDirPath = WPF_LANG_DIR . WPF_WPLANG . WPF_DS;
 		}

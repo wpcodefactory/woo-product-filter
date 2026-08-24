@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - InstallerDbUpdaterWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Installer_Db_Updater Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class InstallerDbUpdaterWpf {
+class WooBeWoo_PF_Installer_Db_Updater {
 
 	/**
 	 * runUpdate.
