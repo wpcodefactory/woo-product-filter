@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
+class WooBeWoo_PF_Meta_Keys_Model extends WooBeWoo_PF_Model {
 
 	// meta_mode:  0-global, 1-filter
 	// meta_type:  0-text, 1-decimal, 2-int, 3-decimal+int, 7-array json, 8-serialised array, 9-list, 5-list with custom separator

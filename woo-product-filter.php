@@ -48,7 +48,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'WooBeWoo_PF_Installer' );
 	importClassWpf( 'WooBeWoo_PF_Base_Object' );
 	importClassWpf( 'ModuleWpf' );
-	importClassWpf( 'ModelWpf' );
+	importClassWpf( 'WooBeWoo_PF_Model' );
 	importClassWpf( 'ViewWpf' );
 	importClassWpf( 'WooBeWoo_PF_Controller' );
 	importClassWpf( 'WooBeWoo_PF_Helper' );
@@ -71,7 +71,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'ValidatorWpf' );
 	importClassWpf( 'WooBeWoo_PF_Errors' );
 	importClassWpf( 'UtilsWpf' );
-	importClassWpf( 'ModInstallerWpf' );
+	importClassWpf( 'WooBeWoo_PF_Mod_Installer' );
 	importClassWpf( 'WooBeWoo_PF_Installer_Db_Updater' );
 	importClassWpf( 'WooBeWoo_PF_Date' );
 

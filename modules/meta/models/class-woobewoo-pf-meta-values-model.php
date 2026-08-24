@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
+class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 
 	/**
 	 * keyValueIds.

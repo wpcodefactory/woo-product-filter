@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Settings_Model extends ModelWpf {
+class WooBeWoo_PF_Settings_Model extends WooBeWoo_PF_Model {
 	/**
 	 * Get specific filter block settings.
 	 *

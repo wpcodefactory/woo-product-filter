@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Meta_Model extends ModelWpf {
+class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	private $maxTextLength = 150;
 	private $maxKeyLength  = 32;
 	public $maxKeySize     = 4;

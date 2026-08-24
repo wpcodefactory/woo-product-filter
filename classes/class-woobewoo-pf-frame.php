@@ -184,7 +184,7 @@ class WooBeWoo_PF_Frame {
 
 		WooBeWoo_PF_Dispatcher::doAction( 'afterModulesInit' );
 
-		ModInstallerWpf::checkActivationMessages();
+		WooBeWoo_PF_Mod_Installer::checkActivationMessages();
 
 		$this->_execModules();
 

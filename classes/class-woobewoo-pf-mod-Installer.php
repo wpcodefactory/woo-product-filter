@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - ModInstallerWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Mod_Installer Class
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
@@ -11,7 +11,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class ModInstallerWpf {
+class WooBeWoo_PF_Mod_Installer {
 
 	/**
 	 * _current.

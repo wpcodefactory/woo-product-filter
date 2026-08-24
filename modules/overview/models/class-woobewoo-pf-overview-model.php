@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Overview_Model extends ModelWpf {
+class WooBeWoo_PF_Overview_Model extends WooBeWoo_PF_Model {
 
 	/**
 	 * _apiUrl.

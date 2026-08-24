@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - ModelWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Model Class
  *
  * @version 3.3.2
  *
@@ -8,7 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
+abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	protected $_data = array();
 	protected $_code = '';
 

@@ -343,10 +343,10 @@ if ( ! function_exists( 'woofilterProDeactivate' ) ) {
 				$isProActive = WooBeWoo_PF_Frame::_()->moduleActive( 'access' );
 				if ( ! version_compare( $pluginData['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
 					if ( $isProActive ) {
-						call_user_func_array( array( 'ModInstallerWpf', 'deactivate' ), array( array( 'license' ) ) );
+						call_user_func_array( array( 'WooBeWoo_PF_Mod_Installer', 'deactivate' ), array( array( 'license' ) ) );
 					}
 				} elseif ( ! $isProActive ) {
-					call_user_func_array( array( 'ModInstallerWpf', 'activate' ), array( true ) );
+					call_user_func_array( array( 'WooBeWoo_PF_Mod_Installer', 'activate' ), array( true ) );
 				}
 			}
 		}
