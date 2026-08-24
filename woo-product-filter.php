@@ -53,9 +53,9 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'WooBeWoo_PF_Controller' );
 	importClassWpf( 'HelperWpf' );
 	importClassWpf( 'WooBeWoo_PF_Dispatcher' );
-	importClassWpf( 'FieldWpf' );
+	importClassWpf( 'WooBeWoo_PF_Field' );
 	importClassWpf( 'TableWpf' );
-	importClassWpf( 'FrameWpf' );
+	importClassWpf( 'WooBeWoo_PF_Frame' );
 
 	/**
 	 * Deprecated classes.
@@ -67,9 +67,9 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'UriWpf' );
 	importClassWpf( 'HtmlWpf' );
 	importClassWpf( 'ResponseWpf' );
-	importClassWpf( 'FieldAdapterWpf' );
+	importClassWpf( 'WooBeWoo_PF_Field_Adapter' );
 	importClassWpf( 'ValidatorWpf' );
-	importClassWpf( 'ErrorsWpf' );
+	importClassWpf( 'WooBeWoo_PF_Errors' );
 	importClassWpf( 'UtilsWpf' );
 	importClassWpf( 'ModInstallerWpf' );
 	importClassWpf( 'InstallerDbUpdaterWpf' );
@@ -79,13 +79,13 @@ if ( trueRequestWpf() ) {
 	 * Check plugin version - maybe we need to update database, and check global errors in request.
 	 */
 	InstallerWpf::update();
-	ErrorsWpf::init();
+	WooBeWoo_PF_Errors::init();
 
 	/**
 	 * Start application.
 	 */
-	FrameWpf::_()->parseRoute();
-	FrameWpf::_()->init();
-	FrameWpf::_()->exec();
+	WooBeWoo_PF_Frame::_()->parseRoute();
+	WooBeWoo_PF_Frame::_()->init();
+	WooBeWoo_PF_Frame::_()->exec();
 
 }

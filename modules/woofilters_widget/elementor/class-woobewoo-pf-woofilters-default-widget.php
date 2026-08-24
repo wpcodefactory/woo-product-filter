@@ -17,16 +17,28 @@ class WooBeWoo_PF_Woofilters_Default_Widget extends WP_Widget {
 		);
 		parent::__construct( 'WpfWoofiltersWidget', WPF_WP_PLUGIN_NAME, $widgetOps );
 	}
+
+	/**
+	 * widget.
+	 *
+	 * @version 3.3.2
+	 */
 	public function widget( $args, $instance ) {
 		if ( is_array( $args ) ) {
 			extract( $args );
 		}
 		extract( $instance );
-		FrameWpf::_()->getModule( 'woofilters_widget' )->getView()->displayWidget( $instance, $args );
+		WooBeWoo_PF_Frame::_()->getModule( 'woofilters_widget' )->getView()->displayWidget( $instance, $args );
 	}
+
+	/**
+	 * form.
+	 *
+	 * @version 3.3.2
+	 */
 	public function form( $instance ) {
 		extract( $instance );
-		FrameWpf::_()->getModule( 'woofilters_widget' )->getView()->displayForm( $instance, $this );
+		WooBeWoo_PF_Frame::_()->getModule( 'woofilters_widget' )->getView()->displayForm( $instance, $this );
 	}
 	public function update( $new_instance, $old_instance ) {
 		return $new_instance;

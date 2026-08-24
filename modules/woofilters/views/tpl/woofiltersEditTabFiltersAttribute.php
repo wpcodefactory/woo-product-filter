@@ -8,7 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 
 ?>
 <div class="row-settings-block">
@@ -72,7 +72,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	if ( strpos( $value, $labelPro ) && 'colors' === $key ) {
 		?>
 		<div class="row-settings-block wpfFilterTypePro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
-			<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+			<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
 				<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_' . $key . '.png' ); ?>">
 			<?php } else { ?>
 				<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>"

@@ -14,19 +14,19 @@ class WooBeWoo_PF_Admin_Nav extends ModuleWpf {
 	/**
 	 * getBreadcrumbsList.
 	 *
-	 * @version 3.0.4
+	 * @version 3.3.2
 	 */
 	public function getBreadcrumbsList() {
 		$res = array(
 			array(
 				'label' => WPF_WP_PLUGIN_NAME,
-				'url'   => FrameWpf::_()->getModule( 'adminmenu' )->getMainLink(),
+				'url'   => WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainLink(),
 			),
 		);
 		// Try to get current tab breadcrumb
-		$activeTab = FrameWpf::_()->getModule( 'options' )->getActiveTab();
+		$activeTab = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getActiveTab();
 		if ( ! empty( $activeTab ) && 'main_page' != $activeTab ) {
-			$tabs = FrameWpf::_()->getModule( 'options' )->getTabs();
+			$tabs = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabs();
 			if ( ! empty( $tabs ) && isset( $tabs[ $activeTab ] ) ) {
 				if ( isset( $tabs[ $activeTab ]['add_bread'] ) && ! empty( $tabs[ $activeTab ]['add_bread'] ) ) {
 					if ( ! is_array( $tabs[ $activeTab ]['add_bread'] ) ) {
@@ -50,8 +50,8 @@ class WooBeWoo_PF_Admin_Nav extends ModuleWpf {
 					'url'   => $tabs[ $activeTab ]['url'],
 				);
 				if ( 'statistwpf' == $activeTab ) {
-					$statTabs       = FrameWpf::_()->getModule( 'statistwpf' )->getStatTabs();
-					$currentStatTab = FrameWpf::_()->getModule( 'statistwpf' )->getCurrentStatTab();
+					$statTabs       = WooBeWoo_PF_Frame::_()->getModule( 'statistwpf' )->getStatTabs();
+					$currentStatTab = WooBeWoo_PF_Frame::_()->getModule( 'statistwpf' )->getCurrentStatTab();
 					if ( isset( $statTabs[ $currentStatTab ] ) ) {
 						$res[] = array(
 							'label' => $statTabs[ $currentStatTab ]['label'],

@@ -38,8 +38,13 @@ class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
 		return $keys;
 	}
 
+	/**
+	 * getKeysWithCalcControl.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getKeysWithCalcControl( $params = array() ) {
-		if ( FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
+		if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
 			return array();
 		}
 		return $this->getAllKeys( $params );
@@ -71,10 +76,15 @@ class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
 		return $this->setSelectFields( $select )->addWhere( array( 'meta_key' => $key ) )->getFromTbl( array( 'return' => 'row' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 	}
 
+	/**
+	 * saveKeyData.
+	 *
+	 * @version 3.3.2
+	 */
 	public function saveKeyData( $data ) {
 		unset( $data['id'], $data['added'], $data['calculated'] );
 		$data['status'] = 0;
-		FrameWpf::_()->getModule( 'woofilters' )->resetMetaKeys();
+		WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->resetMetaKeys();
 		return $this->insert( $data );
 	}
 
@@ -97,7 +107,7 @@ class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
 			} elseif ( 2 == $data['status'] ) {
 				$data['locked'] = $now;
 			}
-			FrameWpf::_()->getModule( 'woofilters' )->resetMetaKeys();
+			WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->resetMetaKeys();
 		}
 		if ( ! $this->updateById( $data, $id ) ) {
 			return false;
@@ -105,12 +115,17 @@ class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
 		return true;
 	}
 
+	/**
+	 * addFilterMetaKeys.
+	 *
+	 * @version 3.3.2
+	 */
 	public function addFilterMetaKeys( $filterKeys, $remove = false ) {
 		if ( ! is_array( $filterKeys ) ) {
 			return false;
 		}
 		$filterKeys = array_unique( $filterKeys );
-		$valuesMeta = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' );
+		$valuesMeta = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' );
 
 		$allKeys = $this->getAllKeys();
 		$keyIds  = array();
@@ -152,12 +167,17 @@ class WooBeWoo_PF_Meta_Keys_Model extends ModelWpf {
 				$valuesMeta->backupOldValues( $keyIds );
 			}
 		}
-		FrameWpf::_()->getModule( 'woofilters' )->resetMetaKeys();
+		WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->resetMetaKeys();
 		return true;
 	}
 
+	/**
+	 * controlFiltersMetaKeys.
+	 *
+	 * @version 3.3.2
+	 */
 	public function controlFiltersMetaKeys( $deep = false ) {
-		$filtersModel = FrameWpf::_()->getModule( 'woofilters' )->getModel();
+		$filtersModel = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel();
 		$filterKeys   = $filtersModel->getFiltersMetaKeys( 0, $deep );
 		if ( false === $filterKeys ) {
 			$this->pushError( $filtersModel->getErrors() );

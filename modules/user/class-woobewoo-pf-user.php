@@ -22,10 +22,10 @@ class WooBeWoo_PF_User extends ModuleWpf {
 	/**
 	 * isAdmin.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function isAdmin() {
-		return current_user_can( FrameWpf::_()->getModule( 'adminmenu' )->getMainCap() );
+		return current_user_can( WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainCap() );
 	}
 
 	public function getCurrentUserPosition() {

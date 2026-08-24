@@ -8,7 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="woobewoo_row row-tab" id="row-tab-design">
 	<div class="sub-tab woobewoo-input-group col-xs-12">

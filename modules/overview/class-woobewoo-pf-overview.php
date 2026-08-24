@@ -22,9 +22,11 @@ class WooBeWoo_PF_Overview extends ModuleWpf {
 
 	/**
 	 * addAdminTab.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addAdminTab( $tabs ) {
-		if ( ! FrameWpf::_()->isWCLicense() ) {
+		if ( ! WooBeWoo_PF_Frame::_()->isWCLicense() ) {
 			$tabs['overview'] = array(
 				'label'      => esc_html__( 'Overview', 'woo-product-filter' ),
 				'callback'   => array( $this, 'getOverviewTabContent' ),

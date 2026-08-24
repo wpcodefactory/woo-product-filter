@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
-$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -40,7 +40,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 </div>
 <?php ob_start(); ?>
 <div class="row-settings-block col-md-12 wpfFilterTypePro wpfTypeSwitchable wpfHidden" data-type="colors" data-parent="f_list">
-	<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+	<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
 	<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_colors.png' ); ?>">
 	<?php } else { ?>
 	<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">

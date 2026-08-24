@@ -114,6 +114,8 @@ abstract class TableWpf {
 
 	/**
 	 * fillFromDB.
+	 *
+	 * @version 3.3.2
 	 */
 	public function fillFromDB( $id = 0, $where = '' ) {
 		$res = $this;
@@ -139,7 +141,7 @@ abstract class TableWpf {
 					foreach ( $field as $k => $v ) {
 						if ( isset( $this->_fields[ $k ] ) ) {
 							$row[ $k ] = toeCreateObjWpf(
-								'FieldWpf',
+								'WooBeWoo_PF_Field',
 								array(
 									$this->_fields[ $k ]->name,
 									$this->_fields[ $k ]->html,
@@ -395,6 +397,8 @@ abstract class TableWpf {
 	/**
 	 * Convert to database query
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param mixed  $data if array given - convert it into string where key - is column name, value - database value to set;
 	 *  if key == "additionalCondition" then we will just add value to string
 	 *  if string givven - just return it without changes
@@ -408,7 +412,7 @@ abstract class TableWpf {
 				if ( array_key_exists( $k, $this->_fields ) || $k == $this->_id ) {
 					$val = $v;
 					if ( isset( $this->_fields[ $k ] ) && $this->_fields[ $k ]->adapt['dbTo'] ) {
-						$val = FieldAdapterWpf::_( $val, $this->_fields[ $k ]->adapt['dbTo'], FieldAdapterWpf::DB );
+						$val = WooBeWoo_PF_Field_Adapter::_( $val, $this->_fields[ $k ]->adapt['dbTo'], WooBeWoo_PF_Field_Adapter::DB );
 					}
 					if ( $validate ) {
 						if ( isset( $this->_fields[ $k ] ) && is_object( $this->_fields[ $k ] ) ) {
@@ -453,7 +457,9 @@ abstract class TableWpf {
 		return $res;
 	}
 	/**
-	 * Add new FieldWpfWpf for children table (@see class field)
+	 * Add new WooBeWoo_PF_Field for children table (@see class field)
+	 *
+	 * @version 3.3.2
 	 *
 	 * @param string $name name of a field
 	 * @param string $html html type of field (text, textarea, etc. @see html class)
@@ -462,7 +468,7 @@ abstract class TableWpf {
 	 * @return object $this - pointer to current object
 	 */
 	protected function _addField( $name, $html = 'text', $type = 'other', $default = '', $label = '', $maxlen = 0, $dbAdapt = '', $htmlAdapt = '', $description = '' ) {
-		$this->_fields[ $name ] = toeCreateObjWpf( 'FieldWpf', array( $name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description ) );
+		$this->_fields[ $name ] = toeCreateObjWpf( 'WooBeWoo_PF_Field', array( $name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description ) );
 		return $this;
 	}
 	/**

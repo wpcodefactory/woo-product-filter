@@ -40,11 +40,11 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 	/**
 	 * startSession.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function startSession() {
 		$isMultiLogicOr = false;
-		$filters        = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
+		$filters        = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 
 		foreach ( $filters as $filter ) {
 			$filtersSettings = maybe_unserialize( $filter['setting_data'] );
@@ -102,18 +102,20 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 	/**
 	 * getAdminPage.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getAdminPage() {
 		if ( ! InstallerWpf::isUsed() ) {
 			InstallerWpf::setUsed(); // Show this welcome page - only one time
-			FrameWpf::_()->getModule( 'options' )->getModel()->save( 'plug_welcome_show', time() ); // Remember this
+			WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->save( 'plug_welcome_show', time() ); // Remember this
 		}
 		return $this->getView()->getAdminPage();
 	}
 
 	/**
 	 * addAdminTab.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addAdminTab( $tabs ) {
 		$tabs['settings'] = array(
@@ -123,8 +125,8 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 			'sort_order' => 30,
 		);
 		if (
-			! ( FrameWpf::_()->moduleExists( 'license' ) && FrameWpf::_()->getModule( 'license' ) ) &&
-			! FrameWpf::_()->isWCLicense()
+			! ( WooBeWoo_PF_Frame::_()->moduleExists( 'license' ) && WooBeWoo_PF_Frame::_()->getModule( 'license' ) ) &&
+			! WooBeWoo_PF_Frame::_()->isWCLicense()
 		) {
 			$tabs['gopro'] = array(
 				'label'      => esc_html__( 'Go PRO', 'woo-product-filter' ),
@@ -202,11 +204,13 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 
 	/**
 	 * getTabUrl.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getTabUrl( $tab = '' ) {
 		static $mainUrl;
 		if ( empty( $mainUrl ) ) {
-			$mainUrl = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink();
+			$mainUrl = WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainLink();
 		}
 		return empty( $tab ) ? $mainUrl : $mainUrl . '&tab=' . $tab;
 	}

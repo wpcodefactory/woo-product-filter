@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $filtersList = $this->getModel()->getAllFilters();
-$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="woobewoo_row row-tab active" id="row-tab-filters">
 	<div class="col-xs-12 row-settings-block">

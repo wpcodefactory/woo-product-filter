@@ -34,33 +34,45 @@ abstract class ViewWpf extends WooBeWoo_PF_Base_Object {
 	/**
 	 * getPath.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getPath( $tpl ) {
 		$path         = '';
-		$parentModule = FrameWpf::_()->getModule( $this->_code );
+		$parentModule = WooBeWoo_PF_Frame::_()->getModule( $this->_code );
 		if ( file_exists( $parentModule->getModDir() . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php' ) ) { // Then try to find it in module directory
 			$path = $parentModule->getModDir() . WPF_DS . 'views' . WPF_DS . 'tpl' . WPF_DS . $tpl . '.php';
 		}
 
 		return $path;
 	}
+
+	/**
+	 * getModule.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getModule() {
-		return FrameWpf::_()->getModule( $this->_code );
+		return WooBeWoo_PF_Frame::_()->getModule( $this->_code );
 	}
+
+	/**
+	 * getModel.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getModel( $code = '' ) {
-		return FrameWpf::_()->getModule( $this->_code )->getController()->getModel( $code );
+		return WooBeWoo_PF_Frame::_()->getModule( $this->_code )->getController()->getModel( $code );
 	}
 
 	/**
 	 * getContent.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getContent( $tpl = '' ) {
 		$tpl          = ( empty( $tpl ) ) ? $this->_tpl : $tpl;
 		$path         = $this->getPath( $tpl );
-		$parentModule = FrameWpf::_()->getModule( $this->_code );
+		$parentModule = WooBeWoo_PF_Frame::_()->getModule( $this->_code );
 		if ( $path ) {
 			$content = '';
 			ob_start();
@@ -97,11 +109,13 @@ abstract class ViewWpf extends WooBeWoo_PF_Base_Object {
 
 	/**
 	 * This will display form for our widgets
+	 *
+	 * @version 3.3.2
 	 */
 	public function displayWidgetForm( $data = array(), $widget = array(), $formTpl = 'form' ) {
 		$this->assign( 'data', $data );
 		$this->assign( 'widget', $widget );
-		if ( FrameWpf::_()->isTplEditor() ) {
+		if ( WooBeWoo_PF_Frame::_()->isTplEditor() ) {
 			if ( $this->getPath( $formTpl . '_ext' ) ) {
 				$formTpl .= '_ext';
 			}

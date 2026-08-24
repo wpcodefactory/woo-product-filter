@@ -4,7 +4,7 @@
  *
  * Class contain filters settings api
  * You can use it in any part of your code with construction
- * FrameWpf::_()->getModule('woofilters')->getModel('settings');
+ * WooBeWoo_PF_Frame::_()->getModule('woofilters')->getModel('settings');
  *
  * @version 3.3.2
  *
@@ -17,7 +17,7 @@ class WooBeWoo_PF_Settings_Model extends ModelWpf {
 	/**
 	 * Get specific filter block settings.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 *
 	 * @param int $filterId
 	 *
@@ -25,7 +25,7 @@ class WooBeWoo_PF_Settings_Model extends ModelWpf {
 	 */
 	public function getFilterBlockSettings( $filterId ) {
 		$settings = array();
-		$filter   = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getById( $filterId );
+		$filter   = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getById( $filterId );
 
 		if ( ! $filter ) {
 			return $settings;
@@ -69,6 +69,8 @@ class WooBeWoo_PF_Settings_Model extends ModelWpf {
 	 * We can have many filters in the filter block with the same type
 	 * In such case we return all filters with the same type
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param string $filterType
 	 * @param array  $order
 	 * @param array  $filterBlockSettings
@@ -83,7 +85,7 @@ class WooBeWoo_PF_Settings_Model extends ModelWpf {
 			$order = $this->getFiltersOrder( $filterBlockSettings, $filterId );
 		}
 
-		$filterList = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getAllFilters();
+		$filterList = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getAllFilters();
 		if ( ! array_key_exists( $filterType, $filterList ) ) {
 			return $filterSettings;
 		}

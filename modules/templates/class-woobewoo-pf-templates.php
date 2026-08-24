@@ -28,22 +28,22 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function init() {
 		if ( is_admin() ) {
-			$isAdminPlugOptsPage = FrameWpf::_()->isAdminPlugOptsPage();
+			$isAdminPlugOptsPage = WooBeWoo_PF_Frame::_()->isAdminPlugOptsPage();
 			if ( $isAdminPlugOptsPage ) {
 				$this->loadCoreJs();
 				$this->loadAdminCoreJs();
 				$this->loadCoreCss();
 				$this->loadChosenSelects();
-				FrameWpf::_()->addScript( 'woobewoo-pf-admin-options', WPF_JS_PATH . 'admin.options.js', array(), false, true );
+				WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-options', WPF_JS_PATH . 'admin.options.js', array(), false, true );
 				add_action( 'admin_enqueue_scripts', array( $this, 'loadMediaScripts' ) );
 				add_action( 'init', array( $this, 'connectAdditionalAdminAssets' ) );
 			}
 			// Some common styles - that need to be on all admin pages - be careful with them
-			FrameWpf::_()->addStyle( 'woobewoo-pf-for-all-admin-' . WPF_CODE, WPF_CSS_PATH . 'woobewoo-for-all-admin.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-for-all-admin-' . WPF_CODE, WPF_CSS_PATH . 'woobewoo-for-all-admin.css' );
 		}
 		parent::init();
 	}
@@ -51,11 +51,11 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	/**
 	 * connectAdditionalAdminAssets.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function connectAdditionalAdminAssets() {
 		if ( is_rtl() ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-style-rtl', WPF_CSS_PATH . 'style-rtl.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-style-rtl', WPF_CSS_PATH . 'style-rtl.css' );
 		}
 	}
 
@@ -71,12 +71,12 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	/**
 	 * loadAdminCoreJs.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadAdminCoreJs() {
-		FrameWpf::_()->addScript( 'jquery-ui-dialog' );
-		FrameWpf::_()->addScript( 'jquery-ui-slider' );
-		FrameWpf::_()->addScript(
+		WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-dialog' );
+		WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-slider' );
+		WooBeWoo_PF_Frame::_()->addScript(
 			'woobewoo-pf-icheck',
 			WPF_JS_PATH . 'icheck.min.js',
 			array(
@@ -85,7 +85,7 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 				'iris',
 			)
 		);
-		FrameWpf::_()->addScript( 'wp-color-picker' );
+		WooBeWoo_PF_Frame::_()->addScript( 'wp-color-picker' );
 	}
 
 	/**
@@ -94,17 +94,17 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	 * @version 3.3.2
 	 */
 	public function loadCoreJs() {
-		FrameWpf::_()->addScript( 'jquery' );
+		WooBeWoo_PF_Frame::_()->addScript( 'jquery' );
 
-		FrameWpf::_()->addScript( 'woobewoo-pf-common', WPF_JS_PATH . 'common.js', array( 'jquery' ) );
-		FrameWpf::_()->addScript( 'woobewoo-pf-core', WPF_JS_PATH . 'core.js', array( 'jquery' ) );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-common', WPF_JS_PATH . 'common.js', array( 'jquery' ) );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-core', WPF_JS_PATH . 'core.js', array( 'jquery' ) );
 
-		if ( 1 == FrameWpf::_()->getModule( 'options' )->getModel()->get( 'price_thousands_sep' ) ) {
-			FrameWpf::_()->addScript( 'woobewoo-pf-price-thousands-sep', WPF_JS_PATH . 'price-thousands-sep.js', array( 'jquery' ) );
+		if ( 1 == WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'price_thousands_sep' ) ) {
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-price-thousands-sep', WPF_JS_PATH . 'price-thousands-sep.js', array( 'jquery' ) );
 		}
 
-		if ( 1 == FrameWpf::_()->getModule( 'options' )->getModel()->get( 'browser_compatibility' ) ) {
-			FrameWpf::_()->addScript( 'woobewoo-pf-browser-compatibility', WPF_JS_PATH . 'browser-compatibility.js', array( 'jquery' ) );
+		if ( 1 == WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'browser_compatibility' ) ) {
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-browser-compatibility', WPF_JS_PATH . 'browser-compatibility.js', array( 'jquery' ) );
 		}
 
 		$ajaxurl = admin_url( 'admin-ajax.php' );
@@ -115,32 +115,32 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 			'loader'   => WPF_LOADER_IMG,
 			'close'    => WPF_IMG_PATH . 'cross.gif',
 			'ajaxurl'  => $ajaxurl,
-			'options'  => FrameWpf::_()->getModule( 'options' )->getAllowedPublicOptions(),
+			'options'  => WooBeWoo_PF_Frame::_()->getModule( 'options' )->getAllowedPublicOptions(),
 			'WPF_CODE' => WPF_CODE,
 			'jsPath'   => WPF_JS_PATH,
 		);
 		if ( is_admin() ) {
-			$jsData['isWCLicense'] = FrameWpf::_()->isWCLicense();
+			$jsData['isWCLicense'] = WooBeWoo_PF_Frame::_()->isWCLicense();
 		}
 		$jsData = WooBeWoo_PF_Dispatcher::applyFilters( 'jsInitVariables', $jsData );
-		FrameWpf::_()->addJSVar( 'woobewoo-pf-core', 'WPF_DATA', $jsData );
+		WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-core', 'WPF_DATA', $jsData );
 		$this->loadTooltipster();
 	}
 
 	/**
 	 * loadTooltipster.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadTooltipster() {
-		FrameWpf::_()->addScript( 'woobewoo-pf-tooltipster', FrameWpf::_()->getModule( 'templates' )->getModPath() . 'lib/tooltipster/jquery.tooltipster.min.js' );
-		FrameWpf::_()->addStyle( 'woobewoo-pf-tooltipster', FrameWpf::_()->getModule( 'templates' )->getModPath() . 'lib/tooltipster/tooltipster.css' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-tooltipster', WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/tooltipster/jquery.tooltipster.min.js' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-tooltipster', WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/tooltipster/tooltipster.css' );
 	}
 
 	/**
 	 * loadCoreCss.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadCoreCss( $isElementorEditor = false ) {
 		$this->_styles = array(
@@ -149,7 +149,7 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 				'for'  => 'admin',
 			),
 			'woobewoo-pf-ui'               => array(
-				'path' => WPF_CSS_PATH . 'woobewoo-ui' . ( FrameWpf::_()->isWCLicense() ? '-wc' : '' ) . '.css',
+				'path' => WPF_CSS_PATH . 'woobewoo-ui' . ( WooBeWoo_PF_Frame::_()->isWCLicense() ? '-wc' : '' ) . '.css',
 				'for'  => 'admin',
 			),
 			'dashicons'                    => array( 'for' => 'admin' ),
@@ -172,9 +172,9 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 				$sInfo['for'] = '';
 			}
 			if ( ! empty( $sInfo['path'] ) ) {
-				FrameWpf::_()->addStyle( $s, $sInfo['path'] );
+				WooBeWoo_PF_Frame::_()->addStyle( $s, $sInfo['path'] );
 			} else {
-				FrameWpf::_()->addStyle( $s );
+				WooBeWoo_PF_Frame::_()->addStyle( $s );
 			}
 		}
 		$this->loadFontAwesome();
@@ -183,33 +183,33 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	/**
 	 * loadJqueryUi.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadJqueryUi( $slider = true ) {
-		FrameWpf::_()->addStyle( 'woobewoo-pf-jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css' );
-		FrameWpf::_()->addStyle( 'woobewoo-pf-jquery-ui-structure', WPF_CSS_PATH . 'jquery-ui.structure.min.css' );
-		FrameWpf::_()->addStyle( 'woobewoo-pf-jquery-ui-theme', WPF_CSS_PATH . 'jquery-ui.theme.min.css' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-jquery-ui-structure', WPF_CSS_PATH . 'jquery-ui.structure.min.css' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-jquery-ui-theme', WPF_CSS_PATH . 'jquery-ui.theme.min.css' );
 		if ( $slider ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-jquery-slider', WPF_CSS_PATH . 'jquery-slider.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-jquery-slider', WPF_CSS_PATH . 'jquery-slider.css' );
 		}
 	}
 
 	/**
 	 * loadJqGrid.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadJqGrid() {
 		static $loaded = false;
 		if ( ! $loaded ) {
 			$this->loadJqueryUi();
-			FrameWpf::_()->addScript(
+			WooBeWoo_PF_Frame::_()->addScript(
 				'woobewoo-pf-jq-grid',
-				FrameWpf::_()->getModule( 'templates' )->getModPath() . 'lib/jqgrid/jquery.jqGrid.min.js'
+				WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/jqgrid/jquery.jqGrid.min.js'
 			);
-			FrameWpf::_()->addStyle(
+			WooBeWoo_PF_Frame::_()->addStyle(
 				'woobewoo-pf-jq-grid',
-				FrameWpf::_()->getModule( 'templates' )->getModPath() . 'lib/jqgrid/ui.jqgrid.css'
+				WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/jqgrid/ui.jqgrid.css'
 			);
 			$langToLoad = UtilsWpf::getLangCode2Letter();
 
@@ -217,9 +217,9 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 			if ( ! in_array( $langToLoad, $availableLocales ) ) {
 				$langToLoad = 'en';
 			}
-			FrameWpf::_()->addScript(
+			WooBeWoo_PF_Frame::_()->addScript(
 				'woobewoo-pf-jq-grid-lang',
-				FrameWpf::_()->getModule( 'templates' )->getModPath() . 'lib/jqgrid/i18n/grid.locale-' . $langToLoad . '.js'
+				WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/jqgrid/i18n/grid.locale-' . $langToLoad . '.js'
 			);
 
 			$loaded = true;
@@ -229,42 +229,46 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	/**
 	 * loadFontAwesome.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadFontAwesome() {
-		FrameWpf::_()->addStyle( 'woobewoo-pf-font-awesome', FrameWpf::_()->getModule( 'templates' )->getModPath() . 'css/font-awesome.min.css' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-font-awesome', WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'css/font-awesome.min.css' );
 	}
 
 	/**
 	 * loadChosenSelects.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadChosenSelects() {
-		$modPath = FrameWpf::_()->getModule( 'templates' )->getModPath() . 'lib/tom-select/';
-		FrameWpf::_()->addStyle( 'woobewoo-pf-tom-select', $modPath . 'tom-select.min.css' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-tom-select', $modPath . 'tom-select.complete.min.js' );
+		$modPath = WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/tom-select/';
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-tom-select', $modPath . 'tom-select.min.css' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-tom-select', $modPath . 'tom-select.complete.min.js' );
 	}
 
 	/**
 	 * loadDatePicker.
+	 *
+	 * @version 3.3.2
 	 */
 	public function loadDatePicker() {
-		FrameWpf::_()->addScript( 'jquery-ui-datepicker' );
+		WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-datepicker' );
 	}
 
 	/**
 	 * loadSortable.
+	 *
+	 * @version 3.3.2
 	 */
 	public function loadSortable() {
 		static $loaded = false;
 		if ( ! $loaded ) {
-			FrameWpf::_()->addScript( 'jquery-ui-core' );
-			FrameWpf::_()->addScript( 'jquery-ui-widget' );
-			FrameWpf::_()->addScript( 'jquery-ui-mouse' );
+			WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-core' );
+			WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-widget' );
+			WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-mouse' );
 
-			FrameWpf::_()->addScript( 'jquery-ui-draggable' );
-			FrameWpf::_()->addScript( 'jquery-ui-sortable' );
+			WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-draggable' );
+			WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-sortable' );
 			$loaded = true;
 		}
 	}
@@ -272,12 +276,12 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	/**
 	 * loadBootstrap.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadBootstrap() {
 		static $loaded = false;
 		if ( ! $loaded ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-bootstrap', WPF_CSS_PATH . 'bootstrap.min.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-bootstrap', WPF_CSS_PATH . 'bootstrap.min.css' );
 			$loaded = true;
 		}
 	}

@@ -13,27 +13,35 @@ class WooBeWoo_PF_Modules_Model extends ModelWpf {
 	public function __construct() {
 		$this->_setTbl( 'modules' );
 	}
+
+	/**
+	 * get.
+	 *
+	 * @version 3.3.2
+	 */
 	public function get( $d = array() ) {
 		if ( isset( $d['id'] ) && $d['id'] && is_numeric( $d['id'] ) ) {
-			$fields          = FrameWpf::_()->getTable( 'modules' )->fillFromDB( $d['id'] )->getFields();
+			$fields          = WooBeWoo_PF_Frame::_()->getTable( 'modules' )->fillFromDB( $d['id'] )->getFields();
 			$fields['types'] = array();
-			$types           = FrameWpf::_()->getTable( 'modules_type' )->fillFromDB();
+			$types           = WooBeWoo_PF_Frame::_()->getTable( 'modules_type' )->fillFromDB();
 			foreach ( $types as $t ) {
 				$fields['types'][ $t['id']->value ] = $t['label']->value;
 			}
 			return $fields;
 		} elseif ( ! empty( $d ) ) {
-			$data = FrameWpf::_()->getTable( 'modules' )->get( '*', $d );
+			$data = WooBeWoo_PF_Frame::_()->getTable( 'modules' )->get( '*', $d );
 			return $data;
 		} else {
-			return FrameWpf::_()->getTable( 'modules' )
-				->innerJoin( FrameWpf::_()->getTable( 'modules_type' ), 'type_id' )
-				->getAll( FrameWpf::_()->getTable( 'modules' )->alias() . '.*, ' . FrameWpf::_()->getTable( 'modules_type' )->alias() . '.label as type' );
+			return WooBeWoo_PF_Frame::_()->getTable( 'modules' )
+				->innerJoin( WooBeWoo_PF_Frame::_()->getTable( 'modules_type' ), 'type_id' )
+				->getAll( WooBeWoo_PF_Frame::_()->getTable( 'modules' )->alias() . '.*, ' . WooBeWoo_PF_Frame::_()->getTable( 'modules_type' )->alias() . '.label as type' );
 		}
 	}
 
 	/**
 	 * put.
+	 *
+	 * @version 3.3.2
 	 */
 	public function put( $d = array() ) {
 		$res = new ResponseWpf();
@@ -43,10 +51,10 @@ class WooBeWoo_PF_Modules_Model extends ModelWpf {
 			if ( isset( $d['active'] ) ) {
 				$d['active'] = ( ( is_string( $d['active'] ) && 'true' == $d['active'] ) || 1 == $d['active'] ) ? 1 : 0;           // mmm.... govnokod?....)))
 			}
-			if ( FrameWpf::_()->getTable( 'modules' )->update( $d, array( 'id' => $id ) ) ) {
+			if ( WooBeWoo_PF_Frame::_()->getTable( 'modules' )->update( $d, array( 'id' => $id ) ) ) {
 				$res->messages[] = esc_html__( 'Module Updated', 'woo-product-filter' );
-				$mod             = FrameWpf::_()->getTable( 'modules' )->getById( $id );
-				$newType         = FrameWpf::_()->getTable( 'modules_type' )->getById( $mod['type_id'], 'label' );
+				$mod             = WooBeWoo_PF_Frame::_()->getTable( 'modules' )->getById( $id );
+				$newType         = WooBeWoo_PF_Frame::_()->getTable( 'modules_type' )->getById( $mod['type_id'], 'label' );
 				$newType         = $newType['label'];
 				$res->data       = array(
 					'id'     => $id,
@@ -56,7 +64,7 @@ class WooBeWoo_PF_Modules_Model extends ModelWpf {
 					'active' => $mod['active'],
 				);
 			} else {
-				$tableErrors = FrameWpf::_()->getTable( 'modules' )->getErrors();
+				$tableErrors = WooBeWoo_PF_Frame::_()->getTable( 'modules' )->getErrors();
 				if ( $tableErrors ) {
 					$res->errors = array_merge( $res->errors, $tableErrors );
 				} else {

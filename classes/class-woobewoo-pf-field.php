@@ -1,14 +1,14 @@
 <?php
 /**
- * Product Filter by WBW - FieldWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Field Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
-class FieldWpf {
+class WooBeWoo_PF_Field {
 	public $name        = '';
 	public $html        = '';
 	public $type        = '';
@@ -91,11 +91,13 @@ class FieldWpf {
 	 * Sure - it is public and can be set directly, but it can be more
 	 * comfortable to use this method in future
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param mixed $value value to be set
 	 */
 	public function setValue( $value, $fromDB = false ) {
 		if ( isset( $this->adapt['dbFrom'] ) && $this->adapt['dbFrom'] && $fromDB ) {
-			$value = FieldAdapterWpf::_( $value, $this->adapt['dbFrom'], FieldAdapterWpf::DB );
+			$value = WooBeWoo_PF_Field_Adapter::_( $value, $this->adapt['dbFrom'], WooBeWoo_PF_Field_Adapter::DB );
 		}
 		$this->value = $value;
 	}

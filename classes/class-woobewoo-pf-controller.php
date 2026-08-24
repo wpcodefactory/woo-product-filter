@@ -61,13 +61,13 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * _createModel.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function _createModel( $name = '' ) {
 		if ( empty( $name ) ) {
 			$name = $this->getCode();
 		}
-		$parentModule = FrameWpf::_()->getModule( $this->getCode() );
+		$parentModule = WooBeWoo_PF_Frame::_()->getModule( $this->getCode() );
 		$className    = '';
 
 		$modal_class_name = WPF_CLASS_PREFIX . ucwords( $name, '_' ) . '_Model';
@@ -98,7 +98,7 @@ abstract class WooBeWoo_PF_Controller {
 		if ( empty( $name ) ) {
 			$name = $this->getCode();
 		}
-		$parentModule = FrameWpf::_()->getModule( $this->getCode() );
+		$parentModule = WooBeWoo_PF_Frame::_()->getModule( $this->getCode() );
 		$className    = '';
 
 		$view_class_name = WPF_CLASS_PREFIX . ucwords( $name ) . '_View';
@@ -170,8 +170,14 @@ abstract class WooBeWoo_PF_Controller {
 	public function getNoncedMethods() {
 		return array();
 	}
+
+	/**
+	 * getModule.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getModule() {
-		return FrameWpf::_()->getModule( $this->getCode() );
+		return WooBeWoo_PF_Frame::_()->getModule( $this->getCode() );
 	}
 	protected function _prepareTextLikeSearch( $val ) {
 		return ''; // Should be re-defined for each type
@@ -239,7 +245,7 @@ abstract class WooBeWoo_PF_Controller {
 		if ( $limitStart < 0 ) {
 			$limitStart = 0;
 		}
-		$tbl = FrameWpf::_()->getTable( $model->getTbl() );
+		$tbl = WooBeWoo_PF_Frame::_()->getTable( $model->getTbl() );
 		if ( is_null( $tbl ) || ! $tbl->haveField( $orderBy ) ) {
 			$orderBy = 'id';
 		}

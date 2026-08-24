@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Elementor Filters
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -11,13 +11,13 @@ defined( 'ABSPATH' ) || exit;
 
 $labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
 
-list($categoryDisplay, $parentCategories) = FrameWpf::_()->getModule( 'woofilters' )->getCategoriesDisplay();
+list($categoryDisplay, $parentCategories) = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getCategoriesDisplay();
 
-list($tagsDisplay) = FrameWpf::_()->getModule( 'woofilters' )->getTagsDisplay();
+list($tagsDisplay) = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getTagsDisplay();
 
-list($attrDisplay, $attrTypes, $attrNames) = FrameWpf::_()->getModule( 'woofilters' )->getAttributesDisplay();
+list($attrDisplay, $attrTypes, $attrNames) = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getAttributesDisplay();
 
-list($roles) = FrameWpf::_()->getModule( 'woofilters' )->getRolesDisplay();
+list($roles) = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getRolesDisplay();
 
 $wpfBrand = array(
 	'exist' => taxonomy_exists( 'product_brand' ),
@@ -41,7 +41,7 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 	}
 }
 
-$formLink = FrameWpf::_()->getModule( 'options' )->getTabUrl( FrameWpf::_()->getModule( 'woofilters' )->getView()->getCode() );
+$formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->getCode() );
 ?>
 
 <div class="woobewoo-plugin" id="containerWrapperElementor">

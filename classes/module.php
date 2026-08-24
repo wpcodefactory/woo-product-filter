@@ -287,11 +287,11 @@ abstract class ModuleWpf extends WooBeWoo_PF_Base_Object {
 	/**
 	 * pro_label.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 * @since   3.3.0
 	 */
 	public function pro_label() {
-		$pro_link = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
+		$pro_link = WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
 		return '<span class="wpfProLabel">
 				<a href="' . esc_url( $pro_link ) . '" target="_blank">
 					' . esc_html__( 'PRO Option', 'woo-product-filter' ) . '

@@ -41,9 +41,14 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 		}
 	}
 
+	/**
+	 * recalcMetaValues.
+	 *
+	 * @version 3.3.2
+	 */
 	public function recalcMetaValues( $productId = 0, $params = array() ) {
 		$result = $this->doRecalcMetaValues( $productId, $params );
-		if ( ! $result && FrameWpf::_()->getModule( 'options' )->getModel()->get( 'logging' ) == 1 ) {
+		if ( ! $result && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'logging' ) == 1 ) {
 			$logger = wc_get_logger();
 			if ( $logger ) {
 				$logger->warning( UtilsWpf::jsonEncode( $this->getErrors() ), array( 'source' => 'wpf-meta-indexing' ) );
@@ -64,8 +69,8 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 		$isAllProducts = empty( $productId );
 		$isAllKeys     = empty( $params );
 		$fullRecalc    = $isAllProducts && $isAllKeys;
-		$keysModel     = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_keys' );
-		$optModel      = FrameWpf::_()->getModule( 'options' )->getModel();
+		$keysModel     = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_keys' );
+		$optModel      = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel();
 
 		if ( $fullRecalc && $optModel->get( 'start_indexing' ) == 2 ) {
 			if ( microtime( true ) - $optModel->getChanged( 'start_indexing' ) > $this->startLockLimit * 60 ) {
@@ -131,7 +136,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 				return false;
 			}
 		}
-		$valsModel       = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' );
+		$valsModel       = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' );
 		$this->valsModel = $valsModel;
 
 		$from  = ' FROM `#__postmeta` as m INNER JOIN `#__posts` as p ON (p.id=m.post_id)';
@@ -139,7 +144,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 
 		$tempTable  = false;
 		if ( $isAllProducts ) {
-			$tempTable = FrameWpf::_()->getModule( 'woofilters' )->createTemporaryTable( 'wpf_meta_calc', "SELECT id, post_parent, post_type, IF(p.post_type='product_variation',1,0) as is_var, 0 as for_ins FROM `#__posts` as p" . $where );
+			$tempTable = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->createTemporaryTable( 'wpf_meta_calc', "SELECT id, post_parent, post_type, IF(p.post_type='product_variation',1,0) as is_var, 0 as for_ins FROM `#__posts` as p" . $where );
 			$from      = ' FROM `#__postmeta` as m  FORCE INDEX (meta_key) INNER JOIN ' . $tempTable . ' as p ON (p.id=m.post_id)';
 			$where     = ' WHERE 1=1';
 		}
@@ -307,7 +312,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 									$query = 'SELECT m.meta_id as id, m.post_id, ' . $selectType . ' CAST(meta_value AS CHAR(' . $maxTextLength . ')) as meta_value' .
 										$from . $whereMeta . ( strpos( $keyName, 'attribute_' ) === 0 ? '' : " AND m.meta_value!=''" );
 
-									$tempTableAttr = FrameWpf::_()->getModule( 'woofilters' )->createTemporaryTable( 'wpf_meta_calc_attr', $query );
+									$tempTableAttr = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->createTemporaryTable( 'wpf_meta_calc_attr', $query );
 									$query         = 'INSERT IGNORE INTO @__meta_values (key_id, value)' .
 										' SELECT DISTINCT ' . $keyId . ',m.meta_value' .
 										' FROM ' . $tempTableAttr . ' m LEFT ' . $join .
@@ -715,7 +720,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 			$query         = 'SELECT 1 FROM @__meta_data WHERE key_id=' . $keyId . ' AND val_id!=' . $outofstockId . ' AND product_id IN ';
 			$updateO       = 'UPDATE @__meta_data SET val_id=' . $outofstockId . ' WHERE key_id=' . $keyId . ' AND val_id!=' . $outofstockId . ' AND product_id IN ';
 			$updateI       = 'UPDATE @__meta_data SET val_id=' . $instockId . ' WHERE key_id=' . $keyId . ' AND val_id!=' . $instockId . ' AND product_id IN ';
-			$controlBundle = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'index_group_bundle' ) == 1;
+			$controlBundle = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'index_group_bundle' ) == 1;
 
 			$limit      = 500;
 			$offset     = 0;
@@ -813,7 +818,7 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 	 */
 	public function addCompatibilities( $productId, $tempTable ) {
 		if ( class_exists( 'WC_Measurement_Price_Calculator' ) ) {
-			$keysModel    = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_keys' );
+			$keysModel    = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_keys' );
 			$keyData      = $keysModel->getKeyData( '_price', false );
 			$keyPrice     = empty( $keyData ) ? false : $keyData['id'];
 			$keyData      = $keysModel->getKeyData( '_sale_price', false );

@@ -16,10 +16,12 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 
 	/**
 	 * Constructor.
+	 *
+	 * @version 3.3.2
 	 */
 	public function __construct() {
 		$this->_setTbl( 'meta_values' );
-		FrameWpf::_()->getTable( 'meta_values' )->setEscape( true );
+		WooBeWoo_PF_Frame::_()->getTable( 'meta_values' )->setEscape( true );
 		$this->setIndexes(
 			array(
 				'uniq_key' => 'UNIQUE INDEX `uniq_key` (`key_id`, `key2`, `key3`, `key4`, `value`)',
@@ -44,10 +46,12 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 
 	/**
 	 * getKeyValueIds.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getKeyValueIds( $keyId, $keys = array(), $reverse = false ) {
 		$this->addIndexes();
-		$metaModel  = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta' );
+		$metaModel  = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta' );
 		$maxKeySize = $metaModel->maxKeySize;
 		$select     = 'id,value';
 		$where      = array( 'key_id' => $keyId );
@@ -82,9 +86,11 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 
 	/**
 	 * getFieldValuesList.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {
-		$metaModel  = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta' );
+		$metaModel  = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta' );
 		$maxKeySize = $metaModel->maxKeySize;
 		$where      = array( 'key_id' => $keyId );
 		for ( $k = $maxKeySize; $k >= 2; $k-- ) {
@@ -111,7 +117,7 @@ class WooBeWoo_PF_Meta_Values_Model extends ModelWpf {
 		$cntField = ( empty( $keys['fbv'] ) ? 'product_cnt' : 'variation_cnt' );
 
 		if ( ! isset( $keys['field'] ) || ( 'id' == $keys['field'] ) ) {
-			$metaModel  = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta' );
+			$metaModel  = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta' );
 			$maxKeySize = $metaModel->maxKeySize;
 			$select     = 'id,value,' . $cntField . ' as cnt';
 			$where      = array( 'key_id' => $keyId );

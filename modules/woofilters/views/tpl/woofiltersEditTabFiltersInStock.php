@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
-$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">

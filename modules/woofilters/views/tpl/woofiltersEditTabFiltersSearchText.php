@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 ob_start();
 ?>
 <div class="row-settings-block col-md-12">
-	<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+	<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
 	<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'search_text.png' ); ?>">
 	<?php } else { ?>
 	<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">

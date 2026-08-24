@@ -66,7 +66,7 @@ foreach ( $ratingTypes as $key => $value ) {
 	if ( strpos( $value, $labelPro ) ) {
 		?>
 		<div class="row-settings-block col-md-12 wpfFilterTypePro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
-			<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+			<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
 			<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'rating_' . $key . '.png' ); ?>">
 			<?php } else { ?>
 			<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">

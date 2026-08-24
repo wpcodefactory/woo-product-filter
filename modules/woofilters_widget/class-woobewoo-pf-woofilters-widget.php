@@ -75,46 +75,46 @@ class WooBeWoo_PF_Woofilters_Widget extends ModuleWpf {
 	 */
 	public function woofiltersElementorEditorScripts() {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
-			$modPath  = FrameWpf::_()->getModule( 'woofilters' )->getModPath();
-			$modPathW = FrameWpf::_()->getModule( 'woofilters_widget' )->getModPath();
+			$modPath  = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModPath();
+			$modPathW = WooBeWoo_PF_Frame::_()->getModule( 'woofilters_widget' )->getModPath();
 
-			FrameWpf::_()->getModule( 'templates' )->loadCoreJs();
-			FrameWpf::_()->getModule( 'templates' )->loadAdminCoreJs();
+			WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadCoreJs();
+			WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadAdminCoreJs();
 			wp_enqueue_style( 'wp-color-picker' );
 
-			FrameWpf::_()->getModule( 'templates' )->loadCoreCss();
-			FrameWpf::_()->getModule( 'templates' )->loadChosenSelects();
-			FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-			FrameWpf::_()->addJSVar( 'wp-color-picker', 'wpColorPickerL10n', array() );
-			FrameWpf::_()->addScript( 'woobewoo-pf-admin-filters', $modPath . 'js/admin.woofilters.js', array( 'wp-color-picker' ) );
-			FrameWpf::_()->addScript( 'woobewoo-pf-admin-colorpicker-alhpa', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array( 'wp-color-picker' ), WPF_VERSION );
+			WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadCoreCss();
+			WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadChosenSelects();
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'wp-color-picker', 'wpColorPickerL10n', array() );
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-filters', $modPath . 'js/admin.woofilters.js', array( 'wp-color-picker' ) );
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-colorpicker-alhpa', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array( 'wp-color-picker' ), WPF_VERSION );
 
-			FrameWpf::_()->addStyle( 'woobewoo-pf-admin-filters', $modPath . 'css/admin.woofilters.css' );
-			FrameWpf::_()->addStyle( 'woobewoo-pf-frontend-multiselect', $modPath . 'css/frontend.multiselect.css' );
-			FrameWpf::_()->addScript( 'woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js' );
-			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'wpfI18n', array( 'edit_category_label' => esc_html__( 'Enter custom category name', 'woo-product-filter' ) ) );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-filters', $modPath . 'css/admin.woofilters.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-frontend-multiselect', $modPath . 'css/frontend.multiselect.css' );
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js' );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-filters', 'wpfI18n', array( 'edit_category_label' => esc_html__( 'Enter custom category name', 'woo-product-filter' ) ) );
 
 			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_enqueue_admin_pro_assets' );
 
-			FrameWpf::_()->addStyle( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'css/admin.woofilters.elementor.css', false, WPF_VERSION );
-			FrameWpf::_()->addScript( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'js/admin.woofilters.elementor.js', array( 'woobewoo-pf-admin-filters' ), WPF_VERSION, true );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'css/admin.woofilters.elementor.css', false, WPF_VERSION );
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'js/admin.woofilters.elementor.js', array( 'woobewoo-pf-admin-filters' ), WPF_VERSION, true );
 
-			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'isElementorEditMode', '1' );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-filters', 'isElementorEditMode', '1' );
 
-			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'url', admin_url( 'admin-ajax.php' ) );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-filters', 'url', admin_url( 'admin-ajax.php' ) );
 			list( $filtersOpts, $filtersSettings ) = $this->getFiltersSettings();
-			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'filtersSettings', $filtersSettings );
-			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'woobewoo_pf_admin_ajax_object', array( 'nonce' => wp_create_nonce( 'woobewoo-pf-save-nonce' ) ) );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-filters', 'filtersSettings', $filtersSettings );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-filters', 'woobewoo_pf_admin_ajax_object', array( 'nonce' => wp_create_nonce( 'woobewoo-pf-save-nonce' ) ) );
 		}
 	}
 
 	/**
 	 * getFiltersSettings.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function getFiltersSettings() {
-		$filters            = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
+		$filters            = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 		$filtersOpts        = array();
 		$filtersOpts[0]     = 'Select';
 		$filtersOpts['new'] = 'Create New';
@@ -130,7 +130,7 @@ class WooBeWoo_PF_Woofilters_Widget extends ModuleWpf {
 	/**
 	 * gutenberg block.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.2
 	 * @since   3.1.7
 	 */
 	public function enqueueGutenbergEditorAssets() {
@@ -151,7 +151,7 @@ class WooBeWoo_PF_Woofilters_Widget extends ModuleWpf {
 		if ( empty( $screen->post_type ) || $screen->base !== 'post' ) {
 			return;
 		}
-		$modPath = FrameWpf::_()->getModule( 'woofilters_widget' )->getModPath();
+		$modPath = WooBeWoo_PF_Frame::_()->getModule( 'woofilters_widget' )->getModPath();
 
 		wp_enqueue_script(
 			'woobewoo-pf-admin-woofilters-block',

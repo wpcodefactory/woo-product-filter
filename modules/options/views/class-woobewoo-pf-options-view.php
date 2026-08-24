@@ -37,7 +37,7 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 	/**
 	 * getAdminPage.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getAdminPage() {
 		$tabs      = $this->getModule()->getTabs();
@@ -55,16 +55,16 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 			}
 		}
 
-		FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-options', 'wpfActiveTab', $activeTab );
+		WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-options', 'wpfActiveTab', $activeTab );
 		$this->assign( 'tabs', $tabs );
 		$this->assign( 'activeTab', $activeTab );
 		$this->assign( 'content', $content );
 		$this->assign( 'mainUrl', $this->getModule()->getTabUrl() );
 		$this->assign( 'activeParentTabs', $activeParentTabs );
-		$this->assign( 'breadcrumbs', FrameWpf::_()->getModule( 'admin_nav' )->getView()->getBreadcrumbs() );
+		$this->assign( 'breadcrumbs', WooBeWoo_PF_Frame::_()->getModule( 'admin_nav' )->getView()->getBreadcrumbs() );
 
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-create-table', FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'js/create-filter.js', array(), false, true );
-		FrameWpf::_()->addJSVar(
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-create-table', WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModPath() . 'js/create-filter.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addJSVar(
 			'woobewoo-pf-admin-create-table',
 			'woobewoo_pf_admin_ajax_object',
 			array(
@@ -134,14 +134,14 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 	 * @version 3.3.2
 	 */
 	public function getSettingsTabContent() {
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
-		FrameWpf::_()->addStyle( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'css/admin.settings.css' );
-		FrameWpf::_()->getModule( 'templates' )->loadJqueryUi();
-		FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'css/admin.settings.css' );
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadJqueryUi();
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
 
 		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_enqueue_admin_option_pro_assets' );
 
-		$options = FrameWpf::_()->getModule( 'options' )->getAll();
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getAll();
 		$this->assign( 'options', $options );
 		$this->assign( 'exportAllSubscribersUrl', UriWpf::mod( 'subscribe', 'getWpCsvList' ) );
 		return parent::getContent( 'optionsSettingsTabContent' );
@@ -150,14 +150,14 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 	/**
 	 * getProTabContent.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getProTabContent() {
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
-		FrameWpf::_()->addStyle( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'css/admin.settings.css' );
-		FrameWpf::_()->getModule( 'templates' )->loadBootstrap();
-		FrameWpf::_()->getModule( 'templates' )->loadJqueryUi();
-		FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'css/admin.settings.css' );
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadBootstrap();
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadJqueryUi();
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
 
 		return parent::getContent( 'optionsProTabContent' );
 	}

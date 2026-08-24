@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - FieldAdapterWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Field_Adapter Class
  *
  * Class to adapt field before display
  * return ONLY htmlParams property
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class FieldAdapterWpf {
+class WooBeWoo_PF_Field_Adapter {
 
 	/**
 	 * Constants.
@@ -33,10 +33,12 @@ class FieldAdapterWpf {
 	/**
 	 * Executes field Adaption process.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param object type field or value $fieldOrValue if DB adaption - this must be a value of field, else if html - field object.
 	 */
 	public static function _( $fieldOrValue, $method, $type ) {
-		if ( method_exists( 'FieldAdapterWpf', $method ) ) {
+		if ( method_exists( 'WooBeWoo_PF_Field_Adapter', $method ) ) {
 			switch ( $type ) {
 				case self::DB:
 					return self::$method( $fieldOrValue );
@@ -166,6 +168,8 @@ class FieldAdapterWpf {
 	/**
 	 * Function to get extra field options.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param object $field
 	 *
 	 * @return string
@@ -175,7 +179,7 @@ class FieldAdapterWpf {
 		if ( 0 == $field_id ) {
 			return '';
 		}
-		$options = FrameWpf::_()->getModule( 'OptionsWpf' )->getHelper()->getOptions( $field_id );
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'OptionsWpf' )->getHelper()->getOptions( $field_id );
 		if ( ! empty( $options ) ) {
 			foreach ( $options as $key => $value ) {
 				$output .= '<p>' . $value . '<span class="delete_option" rel="' . $key . '"></span></p>';
@@ -235,11 +239,13 @@ class FieldAdapterWpf {
 	/**
 	 * Save this in static var - to further usage.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @return array with countries.
 	 */
 	public static function getCachedCountries( $clearCache = false ) {
 		if ( empty( self::$countries ) || $clearCache ) {
-			self::$countries = FrameWpf::_()->getTable( 'countries' )->getAll( 'id, name, iso_code_2, iso_code_3' );
+			self::$countries = WooBeWoo_PF_Frame::_()->getTable( 'countries' )->getAll( 'id, name, iso_code_2, iso_code_3' );
 		}
 		return self::$countries;
 	}
@@ -247,12 +253,14 @@ class FieldAdapterWpf {
 	/**
 	 * Save this in static var - to further usage.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @return array with states.
 	 */
 	public static function getCachedStates( $clearCache = false ) {
 		if ( empty( self::$states ) || $clearCache ) {
-			self::$states = FrameWpf::_()->getTable( 'states' )
-				->leftJoin( FrameWpf::_()->getTable( 'countries' ), 'country_id' )
+			self::$states = WooBeWoo_PF_Frame::_()->getTable( 'states' )
+				->leftJoin( WooBeWoo_PF_Frame::_()->getTable( 'countries' ), 'country_id' )
 				->getAll(
 					'toe_states.id,
 					toe_states.name,

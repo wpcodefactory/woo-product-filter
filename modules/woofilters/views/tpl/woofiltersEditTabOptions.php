@@ -9,8 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$defaults = FrameWpf::_()->getModule( 'woofilters' )->getDefaultSettings();
-$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
+$defaults = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getDefaultSettings();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="woobewoo_row row-tab" id="row-tab-options">
 	<div class="sub-tab woobewoo-input-group col-xs-12">
@@ -915,7 +915,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 		</div>
 		<?php
-		if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
+		if ( WooBeWoo_PF_Frame::_()->proVersionCompare( '1.4.8' ) ) {
 			$settingValue = ( isset( $this->settings['settings']['filtering_by_variations'] ) ? (int) $this->settings['settings']['filtering_by_variations'] : 1 );
 			$hiddenStyle  = $settingValue ? '' : 'wpfHidden';
 			?>

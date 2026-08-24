@@ -94,9 +94,14 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		self::$currentSettings = $settings;
 	}
 
+	/**
+	 * getCurrentSettings.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getCurrentSettings( $id = 0 ) {
 		if ( ! empty( $id ) ) {
-			$settings = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'settings' )->getFilterBlockSettings( $id );
+			$settings = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'settings' )->getFilterBlockSettings( $id );
 			if ( ! isset( $settings['settings'] ) ) {
 				$settings['settings'] = array();
 			}
@@ -111,19 +116,19 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 * @version 3.3.2
 	 */
 	public function getTabContent() {
-		$addWC = ( FrameWpf::_()->isWCLicense() ? '-wc' : '' );
-		FrameWpf::_()->getModule( 'templates' )->loadJqGrid();
-		FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-woofilters-list', $this->getModule()->getModPath() . 'js/admin.woofilters.list.js' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-create-table', $this->getModule()->getModPath() . 'js/create-filter.js', array(), false, true );
-		FrameWpf::_()->getModule( 'templates' )->loadFontAwesome();
+		$addWC = ( WooBeWoo_PF_Frame::_()->isWCLicense() ? '-wc' : '' );
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadJqGrid();
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-woofilters-list', $this->getModule()->getModPath() . 'js/admin.woofilters.list.js' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-create-table', $this->getModule()->getModPath() . 'js/create-filter.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadFontAwesome();
 
-		FrameWpf::_()->getModule( 'templates' )->loadBootstrap();
-		FrameWpf::_()->addStyle( 'woobewoo-pf-admin-filters', $this->getModule()->getModPath() . 'css/admin.woofilters' . $addWC . '.css' );
-		$proLink = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadBootstrap();
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-filters', $this->getModule()->getModPath() . 'css/admin.woofilters' . $addWC . '.css' );
+		$proLink = WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
 
 		$this->assign( 'proLink', $proLink );
-		$this->assign( 'addNewLink', FrameWpf::_()->getModule( 'options' )->getTabUrl( 'woofilters#wpfadd' ) );
+		$this->assign( 'addNewLink', WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( 'woofilters#wpfadd' ) );
 
 		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_admin_woofilters_list_enqueue_script' );
 
@@ -145,46 +150,46 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$filter   = $this->getModel( 'woofilters' )->getById( $idIn );
 		$settings = maybe_unserialize( $filter['setting_data'] );
 		$modPath  = $this->getModule()->getModPath();
-		$addWC    = ( FrameWpf::_()->isWCLicense() ? '-wc' : '' );
-		FrameWpf::_()->getModule( 'templates' )->loadChosenSelects();
-		FrameWpf::_()->getModule( 'templates' )->loadBootstrap();
-		FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-filters', $modPath . 'js/admin.woofilters.js' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-colorpicker-alhpa', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array( 'wp-color-picker' ) );
-		FrameWpf::_()->addJSVar( 'wp-color-picker', 'wpColorPickerL10n', array() );
-		FrameWpf::_()->addScript( 'woobewoo-pf-admin-create-table', $modPath . 'js/create-filter.js', array(), false, true );
-		FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'url', admin_url( 'admin-ajax.php' ) );
-		FrameWpf::_()->addJSVar(
+		$addWC    = ( WooBeWoo_PF_Frame::_()->isWCLicense() ? '-wc' : '' );
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadChosenSelects();
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadBootstrap();
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-filters', $modPath . 'js/admin.woofilters.js' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-colorpicker-alhpa', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array( 'wp-color-picker' ) );
+		WooBeWoo_PF_Frame::_()->addJSVar( 'wp-color-picker', 'wpColorPickerL10n', array() );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-create-table', $modPath . 'js/create-filter.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-filters', 'url', admin_url( 'admin-ajax.php' ) );
+		WooBeWoo_PF_Frame::_()->addJSVar(
 			'woobewoo-pf-admin-filters',
 			'wpfI18n',
 			array( 'edit_category_label' => esc_html__( 'Enter custom category name', 'woo-product-filter' ) )
 		);
-		FrameWpf::_()->addStyle( 'woobewoo-pf-admin-filters', $modPath . 'css/admin.woofilters' . $addWC . '.css' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-filters', $modPath . 'css/admin.woofilters' . $addWC . '.css' );
 
 		$this->addCommonAssets( $modPath );
 		$this->addPluginCustomStyles( $modPath, true );
 
-		FrameWpf::_()->addScript( 'woobewoo-pf-jquery-hash-table', $modPath . 'js/jquery_slider/jshashtable-2.1_src.js' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-jquery-number-formatter', $modPath . 'js/jquery_slider/jquery.numberformatter-1.2.3.js' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-jquery-slider-depend-class', $modPath . 'js/jquery_slider/jquery.dependClass-0.1.js' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-jquery-slider-draggable', $modPath . 'js/jquery_slider/draggable-0.1.js' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-jquery-slider', $modPath . 'js/jquery_slider/jquery.slider.js' );
-		FrameWpf::_()->addStyle( 'woobewoo-pf-jquery-slider', $modPath . 'css/jquery.slider.min.css' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-hash-table', $modPath . 'js/jquery_slider/jshashtable-2.1_src.js' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-number-formatter', $modPath . 'js/jquery_slider/jquery.numberformatter-1.2.3.js' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-slider-depend-class', $modPath . 'js/jquery_slider/jquery.dependClass-0.1.js' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-slider-draggable', $modPath . 'js/jquery_slider/draggable-0.1.js' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-slider', $modPath . 'js/jquery_slider/jquery.slider.js' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-jquery-slider', $modPath . 'css/jquery.slider.min.css' );
 
-		FrameWpf::_()->addStyle( 'woobewoo-pf-loaders', $modPath . 'css/loaders.css' );
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-loaders', $modPath . 'css/loaders.css' );
 
 		WooBeWoo_PF_Dispatcher::doAction( 'addScriptsContent', true, $settings );
 
-		$link        = FrameWpf::_()->getModule( 'options' )->getTabUrl( $this->getCode() );
-		$linkSetting = FrameWpf::_()->getModule( 'options' )->getTabUrl( 'settings' );
-		$proLink     = FrameWpf::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
+		$link        = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( $this->getCode() );
+		$linkSetting = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( 'settings' );
+		$proLink     = WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
 
 		$this->assign( 'proLink', $proLink );
 		$this->assign( 'link', $link );
 		$this->assign( 'linkSetting', $linkSetting );
 		$this->assign( 'settings', $settings );
 		$this->assign( 'filter', $filter );
-		$this->assign( 'is_pro', FrameWpf::_()->isPro() );
+		$this->assign( 'is_pro', WooBeWoo_PF_Frame::_()->isPro() );
 
 		return parent::getContent( 'woofiltersEditAdmin' );
 	}
@@ -206,7 +211,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			return false;
 		}
 
-		FrameWpf::_()->getModule( 'meta' )->calcNeededMetaValues( true );
+		WooBeWoo_PF_Frame::_()->getModule( 'meta' )->calcNeededMetaValues( true );
 
 		$this->assign( 'filterId', $id );
 		$this->filter['id'] = $id;
@@ -364,78 +369,78 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	/**
 	 * Add common styles and scripts.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 *
 	 * @param string $modPath
 	 */
 	public function addCommonAssets( $modPath, $settings = array() ) {
-		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
-		FrameWpf::_()->addStyle( 'woobewoo-pf-frontend-filters', $modPath . 'css/frontend.woofilters.css' );
-		FrameWpf::_()->addScript( 'woobewoo-pf-frontend-filters', $modPath . 'js/frontend.woofilters.js' );
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-frontend-filters', $modPath . 'css/frontend.woofilters.css' );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-frontend-filters', $modPath . 'js/frontend.woofilters.js' );
 
 		if ( isset( $options['content_accessibility'] ) && '1' === $options['content_accessibility']['value'] ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-frontend-filters-accessibility', $modPath . 'css/frontend.woofilters.accessibility.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-frontend-filters-accessibility', $modPath . 'css/frontend.woofilters.accessibility.css' );
 		}
 
 		$forFilter = ! empty( $settings );
 		$order     = empty( $settings['filters']['order'] ) ? '' : $settings['filters']['order'];
 
 		if ( is_admin() || ! $forFilter || strpos( $order, 'mul_dropdown' ) ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-frontend-multiselect', $modPath . 'css/frontend.multiselect.css' );
-			FrameWpf::_()->addScript( 'woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-frontend-multiselect', $modPath . 'css/frontend.multiselect.css' );
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js' );
 			$selectedTitle = ( isset( $options['selected_title']['value'] ) && '' !== $options['selected_title']['value'] ) ? $options['selected_title']['value'] : 'selected';
-			FrameWpf::_()->addJSVar( 'woobewoo-pf-frontend-multiselect', 'wpfMultySelectedTraslate', ' ' . esc_attr( $selectedTitle ) );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-frontend-multiselect', 'wpfMultySelectedTraslate', ' ' . esc_attr( $selectedTitle ) );
 		}
 
 		$slider = ( is_admin() || ! $forFilter || ( strpos( $order, '"wpfPrice"' ) || strpos( $order, '"slider"' ) ) );
-		FrameWpf::_()->getModule( 'templates' )->loadJqueryUi( $slider );
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadJqueryUi( $slider );
 		if ( $forFilter && $this->getFilterSetting( $settings, 'initialise_immediately', false, 1 ) == 1 ) {
-			FrameWpf::_()->addJSVar( 'woobewoo-pf-frontend-filters', 'wpIinitialiseImmediately', '1' );
+			WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-frontend-filters', 'wpIinitialiseImmediately', '1' );
 		}
 	}
 
 	/**
 	 * Add assets  to render html(shortcode and widget).
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 *
 	 * @param string $modPath
 	 */
 	public function addRenderHtmlAssets( $modPath, $settings = array() ) {
-		FrameWpf::_()->getModule( 'templates' )->loadCoreJs();
+		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadCoreJs();
 
 		$settings = $this->getFilterSetting( $settings, 'settings', array() );
 		$order    = empty( $settings['filters']['order'] ) ? '' : $settings['filters']['order'];
 
 		$forFilter = ! empty( $settings );
 		if ( is_admin() || ! $forFilter || ( strpos( $order, '"wpfPrice"' ) || strpos( $order, '"slider"' ) ) ) {
-			FrameWpf::_()->addScript( 'jquery-ui-slider' );
+			WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-slider' );
 		}
-		FrameWpf::_()->addScript( 'jquery-touch-punch' );
+		WooBeWoo_PF_Frame::_()->addScript( 'jquery-touch-punch' );
 
 		$this->addCommonAssets( $modPath, $settings );
 
-		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 		$loader  = ( ( isset( $options['loader_enable'] ) && isset( $options['loader_enable']['value'] ) && ! empty( $options['loader_enable']['value'] ) )
 			|| ( $this->getFilterSetting( $settings, 'filter_loader_icon_onload_enable' ) == 1 )
 			|| ( ( $this->getFilterSetting( $settings, 'enable_overlay' ) == 1 ) && ( $this->getFilterSetting( $settings, 'enable_overlay_icon' ) == 1 ) ) );
 		if ( $loader ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-loaders', $modPath . 'css/loaders.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-loaders', $modPath . 'css/loaders.css' );
 		}
-		FrameWpf::_()->addJSVar( 'woobewoo-pf-frontend-filters', 'url', admin_url( 'admin-ajax.php' ) );
+		WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-frontend-filters', 'url', admin_url( 'admin-ajax.php' ) );
 		if ( $this->getFilterSetting( $settings, 'disable_fontawesome_loading', false, 1 ) != 1 ) {
-			FrameWpf::_()->getModule( 'templates' )->loadFontAwesome();
+			WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadFontAwesome();
 		}
 
 		if ( isset( $options['move_sidebar'] ) && isset( $options['move_sidebar']['value'] ) && ! empty( $options['move_sidebar']['value'] ) ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-move-sidebar', $modPath . 'css/move.sidebar.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-move-sidebar', $modPath . 'css/move.sidebar.css' );
 		}
 	}
 
 	/**
 	 * Add plugin custom styles.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 *
 	 * @param string $modPath
 	 * @param bool   $isCustomStyle
@@ -445,7 +450,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	public function addPluginCustomStyles( $modPath, $isCustomStyle ) {
 		$params = ReqWpf::get( 'get' );
 		if ( $isCustomStyle && ( ! is_admin() || ( isset( $params['page'] ) && 'wpf-filters' === $params['page'] ) ) ) {
-			FrameWpf::_()->addStyle( 'woobewoo-pf-custom-filters', $modPath . 'css/custom.woofilters.css' );
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-custom-filters', $modPath . 'css/custom.woofilters.css' );
 		}
 	}
 
@@ -564,7 +569,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$postPerPage = function_exists( 'wc_get_default_products_per_row' ) ?
 			apply_filters( 'loop_shop_per_page', wc_get_default_products_per_row() * wc_get_default_product_rows_per_page() ) : // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			get_option( 'posts_per_page' );
-		$options     = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		$options     = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 		if ( isset( $options['count_product_shop'] ) && isset( $options['count_product_shop']['value'] ) && ! empty( $options['count_product_shop']['value'] ) ) {
 			$postPerPage = $options['count_product_shop']['value'];
 		}
@@ -954,7 +959,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	/**
 	 * generateFilterHeaderHtml.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.2
 	 */
 	public function generateFilterHeaderHtml( $filter, $filterSettings, $noActive = true, $customFieldLabel = '' ) {
 
@@ -971,7 +976,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 
 		$showCustomTags = $this->getFilterSetting( $filter['settings'], 'f_custom_tags', false );
 		$headerTag      = $this->getFilterSetting( $filter['settings'], 'f_custom_tags_settings[header]', 0 );
-		$headerTag      = $headerTag && $showCustomTags ? FrameWpf::_()->getModule( 'woofilters' )->getFilterTagsList()[ $headerTag ] : 'div';
+		$headerTag      = $headerTag && $showCustomTags ? WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getFilterTagsList()[ $headerTag ] : 'div';
 
 		$titleMobileBreakpointData = $this->getMobileBreakpointOptionData( $filter, $filterSettings );
 		if ( $titleMobileBreakpointData ) {
@@ -1186,7 +1191,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	/**
 	 * generatePriceRangeFilterHtml.
 	 *
-	 * @version 3.3.1
+	 * @version 3.3.2
 	 */
 	public function generatePriceRangeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings  = $this->getFilterSetting( $filter, 'settings', array() );
@@ -1195,7 +1200,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$underOver = $this->getFilterSetting( $settings, 'f_under_over', false );
 
 		$defaultRange = '';
-		$module       = FrameWpf::_()->getModule( 'woofilters' );
+		$module       = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' );
 
 		if ( $filter['settings']['f_range_by_hands'] ) {
 			$ranges  = array_chunk( explode( ',', $this->getFilterSetting( $settings, 'f_range_by_hands_values', '' ) ), 2 );
@@ -1282,7 +1287,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 * @version 3.3.2
 	 */
 	public function generateSortByFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
-		$optionsAll = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'SortBy' );
+		$optionsAll = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'SortBy' );
 		$settings   = $this->getFilterSetting( $filter, 'settings', array() );
 		foreach ( $optionsAll as $key => $value ) {
 			$optionsAll[ $key ] = $this->getFilterSetting( $settings, 'f_option_labels[' . $key . ']', $value );
@@ -1417,7 +1422,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 */
 	public function generateCategoryFilterHtml( $filter, $filterSettings, $blockStyle, $prodCatId = false, $key = 1, $viewId = '' ) {
 		$settings                = $this->getFilterSetting( $filter, 'settings', array() );
-		$labels                  = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Category' );
+		$labels                  = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Category' );
 		$hidden_categories       = isset( $settings['f_hidden_categories'] ) ? $settings['f_hidden_categories'] : false;
 		$includeCategoryId       = ( ! empty( $settings['f_mlist[]'] ) ) ? explode( ',', $settings['f_mlist[]'] ) : false;
 		$includeCategoryChildren = $this->getFilterSetting( $settings, 'f_mlist_with_children', false );
@@ -1730,7 +1735,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 */
 	public function generatePerfectBrandFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings             = $this->getFilterSetting( $filter, 'settings', array() );
-		$labels               = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'PerfectBrand' );
+		$labels               = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'PerfectBrand' );
 		$hiddenBrands         = $this->getFilterSetting( $settings, 'f_hidden_brands', false );
 		$includeBrandId       = ( ! empty( $settings['f_mlist[]'] ) ) ? explode( ',', $settings['f_mlist[]'] ) : false;
 		$includeBrandChildren = $this->getFilterSetting( $settings, 'f_mlist_with_children', false );
@@ -1925,7 +1930,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 */
 	public function generateTagsFilterHtml( $filter, $filterSettings, $blockStyle, $key = 0, $viewId = '' ) {
 		$settings = $this->getFilterSetting( $filter, 'settings', array() );
-		$labels   = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Tags' );
+		$labels   = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Tags' );
 
 		$hidden_tags     = isset( $filter['settings']['f_hidden_tags'] ) ? $filter['settings']['f_hidden_tags'] : false;
 		$includeTagsId   = ! empty( $filter['settings']['f_mlist[]'] ) ? explode( ',', $filter['settings']['f_mlist[]'] ) : false;
@@ -2109,11 +2114,11 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	/**
 	 * generateAuthorFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public function generateAuthorFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings = $this->getFilterSetting( $filter, 'settings', array() );
-		$labels   = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Author' );
+		$labels   = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Author' );
 
 		$roleNames  = ! empty( $filter['settings']['f_mlist[]'] ) ? explode( ',', $filter['settings']['f_mlist[]'] ) : false;
 		$filterName = 'pr_author';
@@ -2323,7 +2328,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			$this->setFilterCss( '#' . self::$blockId . ' {display: inline-block; min-width: auto;}' );
 		}
 
-		$labels = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'OnSale' );
+		$labels = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'OnSale' );
 
 		$label = $this->getFilterSetting( $settings, 'f_checkbox_label', $labels['onsale'] );
 
@@ -2390,7 +2395,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	public function generateCustomFieldFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'custom_field';
 		// Fetch custom field filter options (checkbox/radio) for the 'product' post type
-		$CustomOptions = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getCustomFieldFilterOptions( 'product' );
+		$CustomOptions = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getCustomFieldFilterOptions( 'product' );
 		$settings      = $this->getFilterSetting( $filter, 'settings', array() );
 		$options       = $this->getFilterSetting( $settings, 'f_options[]', '' );
 		$options       = explode( ',', $options );  // Convert string to array
@@ -2486,7 +2491,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 * @version 3.3.2
 	 */
 	public function generateInStockFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
-		$optionsAll = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'InStock' );
+		$optionsAll = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'InStock' );
 
 		$settings = $this->getFilterSetting( $filter, 'settings', array() );
 		$options  = $this->getFilterSetting( $settings, 'f_options[]', '' );
@@ -2677,7 +2682,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 */
 	public function generateAttributeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings                              = $this->getFilterSetting( $filter, 'settings', array() );
-		$labels                                = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Attribute' );
+		$labels                                = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'Attribute' );
 		$frontendTypes                         = array( 'list', 'radio', 'dropdown', 'mul_dropdown' );
 		$hidden_atts                           = $this->getFilterSetting( $settings, 'f_hidden_attributes', false );
 		$type                                  = $hidden_atts ? 'list' : $this->getFilterSetting( $settings, 'f_frontend_type', 'list', null, WooBeWoo_PF_Dispatcher::applyFilters( 'getFrontendFilterTypes', $frontendTypes, $filter['id'] ) );
@@ -2711,7 +2716,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			);
 		}
 
-		$needIndex = FrameWpf::_()->getModule( 'woofilters' )->getView()->needIndex;
+		$needIndex = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->needIndex;
 		$index     = ( in_array( $filter['name'], $needIndex ) ) ? "_{$key}" : '';
 
 		$isCustom = ! empty( $filter['custom_taxonomy'] );
@@ -2730,7 +2735,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		}
 		$attrLabel = wp_strip_all_tags( $attrLabel );
 
-		$logic     = FrameWpf::_()->getModule( 'woofilters' )->getAttrFilterLogic();
+		$logic     = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getAttrFilterLogic();
 		$logicSlug = $this->getFilterSetting( $settings, 'f_query_logic', 'or', false, array_keys( $logic['loop'] ) );
 		$notIds    = '';
 		$notValues = '';
@@ -2814,7 +2819,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 
 			foreach ( $slugs as &$value ) {
 				$value = ( $changeToId && ! is_numeric( $value ) ) ?
-					FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $keyId, $value ) :
+					WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $keyId, $value ) :
 					strtolower( urlencode( $value ) );
 			}
 
@@ -3139,13 +3144,13 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		global $wpdb;
 
 		list( $tax, $taxSql ) = WooBeWoo_PF_Dispatcher::applyFilters( 'priceTax', array( '', '' ), 'add', $settings );
-		$module               = FrameWpf::_()->getModule( 'woofilters' );
+		$module               = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' );
 		$metas                = apply_filters( 'woocommerce_price_filter_meta_keys', array( '_price' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$metaIds              = array();
 		$wpfMeta              = true;
 
 		$query = false;
-		if ( class_exists( 'WooCommerceB2B' ) && FrameWpf::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
+		if ( class_exists( 'WooCommerceB2B' ) && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
 			$user   = wp_get_current_user();
 			$userId = $user ? $user->ID : 0;
 			if ( $userId ) {
@@ -3230,7 +3235,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	private function generateTaxonomyOptionsHtml( $filterItemList, $selectedElem, $filter = false, $excludeIds = false, $pre = '', $layout = 0, $includeIds = false, $showedTerms = false, $countsTerms = false, $itemLevel = 0, $currentCategoryId = 0 ) {
 		$html     = '';
 		$settings = $this->getCurrentSettings();
-		$options  = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		$options  = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 
 		if ( $excludeIds && ! is_array( $excludeIds ) ) {
 			$excludeIds = explode( ',', $excludeIds );
@@ -3280,7 +3285,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 
 			$titleTag = $this->getFilterSetting( $filter['settings'], 'f_custom_tags_settings[title_' . $preCount . ']', 0 );
 		}
-		$titleTag = $titleTag && $showCustomTags ? FrameWpf::_()->getModule( 'woofilters' )->getFilterTagsList()[ $titleTag ] : 'span';
+		$titleTag = $titleTag && $showCustomTags ? WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getFilterTagsList()[ $titleTag ] : 'span';
 
 		if ( is_array( $layout ) && 'dropdown' != $type && 'mul_dropdown' != $type ) {
 			if ( $layout['is_ver'] ) {
@@ -3480,7 +3485,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 */
 	private function generatePriceRangeOptionsHtml( $filter, $ranges, $layout ) {
 		$html    = '';
-		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 
 		$minValue  = ReqWpf::getVar( 'wpf_min_price' );
 		$maxValue  = ReqWpf::getVar( 'wpf_max_price' );
@@ -3514,7 +3519,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			return '';
 		}
 
-		$module   = FrameWpf::_()->getModule( 'woofilters' );
+		$module   = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' );
 		$isCustom = true;
 		if ( function_exists( 'alg_wc_currency_switcher_plugin' ) ) {
 			add_filter( 'raw_woocommerce_price', array( alg_wc_currency_switcher_plugin()->core, 'change_price_by_currency' ) );
@@ -3927,6 +3932,8 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	/**
 	 * Set filter common data attributes.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param array  $filter
 	 * @param string $filterName
 	 * @param string $displayType
@@ -3935,7 +3942,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 * @return void
 	 */
 	public function setCommonFitlerDataAttr( $filter, $filterName, $displayType, $filterSlug = '' ) {
-		$filerList         = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getAllFilters();
+		$filerList         = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getAllFilters();
 		$filterSlug        = $filterSlug ? $filterSlug : $filerList[ $filter['id'] ]['slug'];
 		$filterContentType = $filerList[ $filter['id'] ]['content_type'];
 

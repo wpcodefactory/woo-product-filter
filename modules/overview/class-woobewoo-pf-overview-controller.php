@@ -59,7 +59,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_dismiss_notice.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_dismiss_notice() {
 		$res  = new ResponseWpf();
@@ -69,7 +69,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 			! is_null( $slug ) &&
 			current_user_can( 'manage_woocommerce' )
 		) {
-			FrameWpf::_()->getModule( 'options' )->getModel()->save( 'dismiss_' . $slug, 1 );
+			WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->save( 'dismiss_' . $slug, 1 );
 		}
 		$res->ajaxExec();
 	}
@@ -77,7 +77,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_approve_notice.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_approve_notice() {
 		$res  = new ResponseWpf();
@@ -92,13 +92,13 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 					'disable_autoindexing_by_ss' => 1,
 				),
 			);
-			if ( FrameWpf::_()->getModule( 'options' )->get( 'indexing_schedule' ) != 1 ) {
+			if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'indexing_schedule' ) != 1 ) {
 				$opts['opt_values']['indexing_schedule'] = 1;
 				$opts['opt_values']['shedule_hour']      = 1;
 				$opts['opt_values']['shedule_day']       = 0;
 			}
-			if ( FrameWpf::_()->getModule( 'options' )->getModel()->woobewoo_pf_save_group( $opts ) ) {
-				FrameWpf::_()->getModule( 'options' )->getModel()->save( 'dismiss_' . $slug, 1 );
+			if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->woobewoo_pf_save_group( $opts ) ) {
+				WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->save( 'dismiss_' . $slug, 1 );
 			}
 		}
 		$res->ajaxExec();

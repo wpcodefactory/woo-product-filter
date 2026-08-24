@@ -498,7 +498,7 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 	public function getDataFilterMetaKeys( $filters, $save = true ) {
 		$filters  = UtilsWpf::jsonDecode( $filters );
 		$metaKeys = array();
-		if ( class_exists( 'WooCommerceB2B' ) && FrameWpf::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
+		if ( class_exists( 'WooCommerceB2B' ) && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
 			foreach ( $filters as $filter ) {
 				$filterId = $this->getFilterSetting( $filter, 'id' );
 				if ( 'wpfPrice' == $filterId || 'wpfPriceRange' == $filterId ) {
@@ -513,7 +513,7 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 			$metaKeys[ $k ] = strtolower( $key );
 		}
 		if ( $save && count( $metaKeys ) > 0 ) {
-			$keysModel = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_keys' );
+			$keysModel = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_keys' );
 			if ( ! $keysModel->addFilterMetaKeys( $metaKeys ) ) {
 				$this->pushError( $keysModel->getErrors() );
 			}

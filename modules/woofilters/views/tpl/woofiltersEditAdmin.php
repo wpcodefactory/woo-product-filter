@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Admin
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 $adPath   = $this->getModule()->getModPath() . 'img/ad/';
 $labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
 
-$isWCLicense = FrameWpf::_()->isWCLicense();
+$isWCLicense = WooBeWoo_PF_Frame::_()->isWCLicense();
 
 list( $categoryDisplay, $parentCategories ) = $this->getModule()->getCategoriesDisplay();
 

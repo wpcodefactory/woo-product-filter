@@ -32,11 +32,11 @@ class WooBeWoo_PF_Woofilters_Widget_View extends ViewWpf {
 	/**
 	 * displayForm.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function displayForm( $data, $widget ) {
-		FrameWpf::_()->addStyle( 'woofilters_widget', $this->getModule()->getModPath() . 'css/gmap_widget.css' );
-		$filters     = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
+		WooBeWoo_PF_Frame::_()->addStyle( 'woofilters_widget', $this->getModule()->getModPath() . 'css/gmap_widget.css' );
+		$filters     = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 		$filtersOpts = array();
 		if ( empty( $filters ) ) {
 			$filtersOpts[0] = esc_html__( 'You have no filters', 'woo-product-filter' );

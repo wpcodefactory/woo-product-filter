@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - ErrorsWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Errors Class
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class ErrorsWpf {
+class WooBeWoo_PF_Errors {
 	const FATAL                = 'fatal';
 	const MOD_INSTALL          = 'mod_install';
 	private static $errors     = array();
@@ -45,6 +45,12 @@ class ErrorsWpf {
 		}
 		ReqWpf::setVar( 'sesErrors', $sesErrors, 'session' );
 	}
+
+	/**
+	 * init.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function init() {
 		$wpfErrors = ReqWpf::getVar( 'wpfErrors' );
 		if ( ! empty( $wpfErrors ) ) {
@@ -55,9 +61,9 @@ class ErrorsWpf {
 			if ( ! empty( $wpfErrors ) ) {
 				self::$current = $wpfErrors;
 				if ( is_admin() ) {
-					add_action( 'admin_notices', array( 'ErrorsWpf', 'showAdminErrors' ) );
+					add_action( 'admin_notices', array( 'WooBeWoo_PF_Errors', 'showAdminErrors' ) );
 				} else {
-					add_filter( 'the_content', array( 'ErrorsWpf', 'appendErrorsContent' ), 99999 );
+					add_filter( 'the_content', array( 'WooBeWoo_PF_Errors', 'appendErrorsContent' ), 99999 );
 				}
 			}
 		}

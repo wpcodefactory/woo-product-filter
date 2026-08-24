@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Elementor Design
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 
 $labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
 
-$formLink = FrameWpf::_()->getModule( 'options' )->getTabUrl( FrameWpf::_()->getModule( 'woofilters' )->getView()->getCode() );
+$formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->getCode() );
 ?>
 
 <div class="woobewoo-plugin containerWrapperElementor" id="containerWrapperElementorDesign">

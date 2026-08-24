@@ -30,8 +30,14 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 	public function getCode() {
 		return $this->_code;
 	}
+
+	/**
+	 * isEnableStatistics.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getModule() {
-		return FrameWpf::_()->getModule( $this->_code );
+		return WooBeWoo_PF_Frame::_()->getModule( $this->_code );
 	}
 
 	protected function _setTbl( $tbl ) {
@@ -89,10 +95,16 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 	public function getLastGetCount() {
 		return $this->_lastGetCount;
 	}
+
+	/**
+	 * isEnableStatistics.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getFromTbl( $params = array() ) {
 		$this->_lastGetCount = 0;
 		$tbl                 = isset( $params['tbl'] ) ? $params['tbl'] : $this->_tbl;
-		$table               = FrameWpf::_()->getTable( $tbl );
+		$table               = WooBeWoo_PF_Frame::_()->getTable( $tbl );
 		$this->_buildQuery( $table );
 		$return = isset( $params['return'] ) ? $params['return'] : 'all';
 		$data   = $table->get( $this->_selectFields, $this->_where, '', $return );
@@ -140,9 +152,15 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 			$this->_groupBy = '';
 		}
 	}
+
+	/**
+	 * getCount.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getCount( $params = array() ) {
 		$tbl   = isset( $params['tbl'] ) ? $params['tbl'] : $this->_tbl;
-		$table = FrameWpf::_()->getTable( $tbl );
+		$table = WooBeWoo_PF_Frame::_()->getTable( $tbl );
 		$this->setSelectFields( 'COUNT(*) AS total' );
 		$this->_buildQuery( $table );
 		$data = (int) $table->get( $this->_selectFields, $this->_where, '', 'one' );
@@ -153,9 +171,15 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 		// You can re-define this method in your own model
 		return $row;
 	}
+
+	/**
+	 * _buildQuery.
+	 *
+	 * @version 3.3.2
+	 */
 	protected function _buildQuery( $table = null ) {
 		if ( ! $table ) {
-			$table = FrameWpf::_()->getTable( $this->_tbl );
+			$table = WooBeWoo_PF_Frame::_()->getTable( $this->_tbl );
 		}
 		if ( ! empty( $this->_orderBy ) ) {
 			$order = $this->_orderBy;
@@ -175,7 +199,7 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 	/**
 	 * woobewoo_pf_remove_group.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_remove_group( $ids ) {
 		if ( ! is_array( $ids ) ) {
@@ -184,7 +208,7 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 		// Remove all empty values
 		$ids = array_filter( array_map( 'intval', $ids ) );
 		if ( ! empty( $ids ) ) {
-			if ( FrameWpf::_()->getTable( $this->_tbl )->delete( array( 'additionalCondition' => 'id IN (' . implode( ',', $ids ) . ')' ) ) ) {
+			if ( WooBeWoo_PF_Frame::_()->getTable( $this->_tbl )->delete( array( 'additionalCondition' => 'id IN (' . implode( ',', $ids ) . ')' ) ) ) {
 				return true;
 			} else {
 				$this->pushError( esc_html__( 'Database error detected', 'woo-product-filter' ) );
@@ -197,8 +221,14 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 	public function clear() {
 		return $this->delete(); // Just delete all
 	}
+
+	/**
+	 * delete.
+	 *
+	 * @version 3.3.2
+	 */
 	public function delete( $params = array() ) {
-		if ( FrameWpf::_()->getTable( $this->_tbl )->delete( $params ) ) {
+		if ( WooBeWoo_PF_Frame::_()->getTable( $this->_tbl )->delete( $params ) ) {
 			return true;
 		} else {
 			$this->pushError( esc_html__( 'Database error detected', 'woo-product-filter' ) );
@@ -209,13 +239,19 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 		$data = $this->setWhere( array( $this->_idField => $id ) )->getFromTbl();
 		return empty( $data ) ? false : array_shift( $data );
 	}
+
+	/**
+	 * insert.
+	 *
+	 * @version 3.3.2
+	 */
 	public function insert( $data ) {
 		$data = $this->_dataSave( $data, false );
-		$id   = FrameWpf::_()->getTable( $this->_tbl )->insert( $data );
+		$id   = WooBeWoo_PF_Frame::_()->getTable( $this->_tbl )->insert( $data );
 		if ( $id ) {
 			return $id;
 		}
-		$this->pushError( FrameWpf::_()->getTable( $this->_tbl )->getErrors() );
+		$this->pushError( WooBeWoo_PF_Frame::_()->getTable( $this->_tbl )->getErrors() );
 		return false;
 	}
 	public function updateById( $data, $id = 0 ) {
@@ -229,12 +265,18 @@ abstract class ModelWpf extends WooBeWoo_PF_Base_Object {
 		}
 		return false;
 	}
+
+	/**
+	 * update.
+	 *
+	 * @version 3.3.2
+	 */
 	public function update( $data, $where ) {
 		$data = $this->_dataSave( $data, true );
-		if ( FrameWpf::_()->getTable( $this->_tbl )->update( $data, $where ) ) {
+		if ( WooBeWoo_PF_Frame::_()->getTable( $this->_tbl )->update( $data, $where ) ) {
 			return true;
 		}
-		$this->pushError( FrameWpf::_()->getTable( $this->_tbl )->getErrors() );
+		$this->pushError( WooBeWoo_PF_Frame::_()->getTable( $this->_tbl )->getErrors() );
 		return false;
 	}
 	protected function _dataSave( $data, $update = false ) {

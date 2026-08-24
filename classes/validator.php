@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ValidatorWpf Class
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -13,11 +13,16 @@ class ValidatorWpf {
 
 	public static $errors = array();
 
+	/**
+	 * validate.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function validate( $field, $label = '', $validate = array() ) {
 		self::$errors = array();
-		if ( is_object( $field ) && get_class( $field ) != 'FieldWpf' ) {
+		if ( is_object( $field ) && get_class( $field ) != 'WooBeWoo_PF_Field' ) {
 			$value        = $field;
-			$field        = new FieldWpf( 'noMatter' );
+			$field        = new WooBeWoo_PF_Field( 'noMatter' );
 			$field->label = $label;
 			$field->setValue( $value );
 			$field->setValidation( $validate );

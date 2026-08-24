@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - HtmlWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -759,9 +759,14 @@ class HtmlWpf {
 		return false;
 	}
 
+	/**
+	 * _loadCategoriesOptions.
+	 *
+	 * @version 3.3.2
+	 */
 	protected static function _loadCategoriesOptions() {
 		if ( empty( self::$categoriesOptions ) ) {
-			$categories = FrameWpf::_()->getModule( 'products' )->getCategories();
+			$categories = WooBeWoo_PF_Frame::_()->getModule( 'products' )->getCategories();
 			if ( ! empty( $categories ) ) {
 				foreach ( $categories as $c ) {
 					self::$categoriesOptions[ $c->term_taxonomy_id ] = $c->cat_name;
@@ -770,9 +775,14 @@ class HtmlWpf {
 		}
 	}
 
+	/**
+	 * _loadProductsOptions.
+	 *
+	 * @version 3.3.2
+	 */
 	protected static function _loadProductsOptions() {
 		if ( empty( self::$productsOptions ) ) {
-			$products = FrameWpf::_()->getModule( 'products' )->getModel()->get( array( 'getFields' => 'post.ID, post.post_title' ) );
+			$products = WooBeWoo_PF_Frame::_()->getModule( 'products' )->getModel()->get( array( 'getFields' => 'post.ID, post.post_title' ) );
 			if ( ! empty( $products ) ) {
 				foreach ( $products as $p ) {
 					self::$productsOptions[ $p['ID'] ] = $p['post_title'];

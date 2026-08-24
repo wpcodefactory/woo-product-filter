@@ -61,7 +61,7 @@ defined( 'ABSPATH' ) || exit;
 				</div>
 			</section>
 			<?php
-			$filtersList = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getAllFilters();
+			$filtersList = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getAllFilters();
 			?>
 			<div
 				id="wpfAddDialog"

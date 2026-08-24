@@ -94,9 +94,9 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			);
 		}
 
-		FrameWpf::_()->addScript( 'woobewoo-pf-jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
 
-		$loadProductsFilterWCProductQueryPriority = (int) FrameWpf::_()->getModule( 'options' )->getModel()->get( 'load_products_filter_wc_product_query_priority' );
+		$loadProductsFilterWCProductQueryPriority = (int) WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'load_products_filter_wc_product_query_priority' );
 		if ( 0 == $loadProductsFilterWCProductQueryPriority ) {
 			$loadProductsFilterWCProductQueryPriority = 999;
 		}
@@ -276,7 +276,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * Discourages search engines from indexing if the current URL has params starting with `wpf_`.
 	 *
-	 * @version 2.9.9
+	 * @version 3.3.2
 	 * @since   2.9.9
 	 *
 	 * @param $robots
@@ -285,7 +285,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	 */
 	function discourage_search_engines_from_indexing( $robots ) {
 		if (
-			FrameWpf::_()->getModule( 'options' )->getModel()->get( 'discourage_search_engines_from_indexing' ) &&
+			WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'discourage_search_engines_from_indexing' ) &&
 			! empty( preg_grep( '/^wpf_/', array_keys( $_GET ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		) {
 			$robots['noindex'] = true;
@@ -910,11 +910,13 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getMetaKeyId.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getMetaKeyId( $key, $field = 'id' ) {
 		$key = strtolower( $key );
 		if ( is_null( $this->metaKeys ) ) {
-			$this->metaKeys = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_keys' )->getKeysWithCalcControl();
+			$this->metaKeys = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_keys' )->getKeysWithCalcControl();
 		}
 
 		return isset( $this->metaKeys[ $key ] ) && ( 1 == $this->metaKeys[ $key ]['status'] ) ? $this->metaKeys[ $key ][ $field ] : false;
@@ -967,9 +969,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * newLoopShopPerPage.
+	 *
+	 * @version 3.3.2
 	 */
 	public function newLoopShopPerPage( $count ) {
-		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 		if ( isset( $options['count_product_shop'] ) && isset( $options['count_product_shop']['value'] ) && ! empty( $options['count_product_shop']['value'] ) ) {
 			$count = $options['count_product_shop']['value'];
 		}
@@ -979,6 +983,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * addWooOptions.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addWooOptions( $args ) {
 		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
@@ -989,7 +995,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			);
 		}
 
-		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 		if ( isset( $options['hide_without_price'] ) && '1' === $options['hide_without_price']['value'] ) {
 			$args['meta_query'][] = array(
 				'key'     => '_price',
@@ -1290,7 +1296,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			if ( empty( $values ) ) {
 				continue;
 			}
-			$CustomOptions = FrameWpf::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getCustomFieldFilterOptions( 'product' );
+			$CustomOptions = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getCustomFieldFilterOptions( 'product' );
 			$clauses       = array();
 			$fieldtype     = $CustomOptions[ $meta_key ]['type'] ?? '';
 			foreach ( $values as $single_value ) {
@@ -1332,7 +1338,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$metaQuery = $this->searchValueQuery( $metaQuery, 'key', '_stock_status', true );
 				$metaKeyId = $this->getMetaKeyId( '_stock_status' );
 				if ( $metaKeyId && empty( $metaQuery['wpf_not_clauses'] ) ) {
-					$values = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueIds( $metaKeyId, $slugs );
+					$values = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueIds( $metaKeyId, $slugs );
 					$this->addWpfMetaClauses(
 						array(
 							'keyId'    => $metaKeyId,
@@ -1714,7 +1720,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		$this->mainWCQuery = $q->query_vars;
 
 		$isMultiLogicOr = false;
-		$filters        = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
+		$filters        = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 
 		$isUseCategoryFiltration = false;
 		$categoryPageId          = null;
@@ -1765,7 +1771,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$orderby = $args['wpf_default']['pr_sortby'];
 			}
 		}
-		if ( $orderby && FrameWpf::_()->getModule( 'options' )->get( 'disable_plugin_sorting' ) != 1 ) {
+		if ( $orderby && WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'disable_plugin_sorting' ) != 1 ) {
 			switch ( $orderby ) {
 				case 'price':
 					add_filter( 'posts_clauses', array( $this, 'addPriceOrder' ), 99999 );
@@ -1796,7 +1802,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					break;
 			}
 		}
-		if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
+		if ( WooBeWoo_PF_Frame::_()->proVersionCompare( '1.4.8' ) ) {
 			$filterSettings = array();
 			$params         = array();
 			if ( ReqWpf::getVar( 'wpf_fbv' ) ) {
@@ -2001,7 +2007,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$metaKeyId = $this->getMetaKeyId( '_price' );
 			if ( $metaKeyId ) {
 				$metaDataTable   = WooBeWoo_PF_Db::getTableName( 'meta_data' );
-				$func            = ( FrameWpf::_()->getModule( 'options' )->get( 'use_max_price' ) == 1 ? 'max' : 'min' );
+				$func            = ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'use_max_price' ) == 1 ? 'max' : 'min' );
 				$args['join']   .= ' LEFT JOIN (SELECT wpf_t.product_id, ' . $func . '(wpf_t.val_dec) as wpf_price FROM ' . $metaDataTable . ' as wpf_t WHERE wpf_t.key_id=' . $metaKeyId . ' GROUP BY wpf_t.product_id) as wpf_price_order ON (wpf_price_order.product_id=' . $wpdb->posts . '.ID)';
 				$args['orderby'] = ' wpf_price_order.wpf_price ASC, ' . $wpdb->posts . '.ID ';
 
@@ -2291,7 +2297,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
 					$filterSettings['display_product_variations'] = 1;
 				}
-				if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
+				if ( WooBeWoo_PF_Frame::_()->proVersionCompare( '1.4.8' ) ) {
 					$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
 				} else {
 					$args = WooBeWoo_PF_Dispatcher::applyFilters( 'checkBeforeFiltersFrontendArgs', $args, $filterSettings, $params );
@@ -2300,7 +2306,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					$this->shortcodeWCQueryFiltered[ $filterKey ] = $args;
 				}
 
-				if ( ReqWpf::getVar( 'orderby' ) && FrameWpf::_()->getModule( 'options' )->get( 'disable_plugin_sorting' ) != 1 ) {
+				if ( ReqWpf::getVar( 'orderby' ) && WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'disable_plugin_sorting' ) != 1 ) {
 					$orderby = ReqWpf::getVar( 'orderby' );
 					switch ( $orderby ) {
 						case 'price':
@@ -2365,7 +2371,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$whereNot                          = '';
 				$i                                 = 0;
 				$whAnd                             = ' AND ';
-				$modelMetaValues                   = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' );
+				$modelMetaValues                   = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' );
 				$this->clausesByParam['variation'] = array();
 
 				if ( isset( $args['tax_query'] ) && ! empty( $args['tax_query'] ) ) {
@@ -2518,7 +2524,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 						}
 					}
 
-					$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+					$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 
 					if ( isset( $options['hide_without_price'] ) && '1' === $options['hide_without_price']['value'] ) {
 						$metaKeyId = $this->getMetaKeyId( '_price' );
@@ -2577,7 +2583,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 						$metaKeyId = $this->getMetaKeyId( '_wpf_product_type' );
 						if ( $metaKeyId ) {
 
-							$metaValueId = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $metaKeyId, 'variable' );
+							$metaValueId = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $metaKeyId, 'variable' );
 							if ( $metaValueId ) {
 								$whereNot = empty( $clauses['whereNot'] ) ? '' : ' AND ' . $clauses['whereNot'];
 								$clauses  = array(
@@ -3152,7 +3158,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				return array();
 			}
 		}
-		if ( class_exists( 'WooCommerceB2B' ) && FrameWpf::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
+		if ( class_exists( 'WooCommerceB2B' ) && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'use_wcb2b_prices' ) == 1 ) {
 			$user   = wp_get_current_user();
 			$userId = $user ? $user->ID : 0;
 			if ( $userId ) {
@@ -3233,9 +3239,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getEditLink.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getEditLink( $id, $tableTab = '' ) {
-		$link  = FrameWpf::_()->getModule( 'options' )->getTabUrl( $this->getCode() . '_edit' );
+		$link  = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( $this->getCode() . '_edit' );
 		$link .= '&id=' . $id;
 		if ( ! empty( $tableTab ) ) {
 			$link .= '#' . $tableTab;
@@ -3282,6 +3290,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * showAdminErrors.
+	 *
+	 * @version 3.3.2
 	 */
 	public function showAdminErrors() {
 		// check WooCommerce is installed and activated
@@ -3301,7 +3311,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$this->translate( 'For work with "' ) . WPF_WP_PLUGIN_NAME . $this->translate( '" plugin, You need to install and activate WooCommerce plugin.' )
 			);
 			// check current module
-			if ( ReqWpf::getVar( 'page' ) == WPF_SHORTCODE || FrameWpf::_()->isWCLicense() ) {
+			if ( ReqWpf::getVar( 'page' ) == WPF_SHORTCODE || WooBeWoo_PF_Frame::_()->isWCLicense() ) {
 				// show message
 				HtmlWpf::echoEscapedHtml( $tableView->getContent( 'showAdminNotice' ) );
 			}
@@ -4317,7 +4327,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		if ( $param['isInStockOnly'] ) {
 			$metaKeyId = $this->getMetaKeyId( '_stock_status' );
 			if ( $metaKeyId ) {
-				$valueId   = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $metaKeyId, 'outofstock' );
+				$valueId   = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $metaKeyId, 'outofstock' );
 				$stockJoin = ' INNER JOIN @__meta_data pm ON (pm.product_id=wpf_temp.ID AND pm.key_id=' . $metaKeyId . ' AND pm.val_id!=' . $valueId . ')';
 			} else {
 				$stockJoin = ' INNER JOIN ' . $wpdb->postmeta . " pm ON (pm.post_id=wpf_temp.ID AND pm.meta_key='_stock_status' AND pm.meta_value!='outofstock')";
@@ -4340,7 +4350,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 						if ( strpos( $tax, 'pa_' ) === 0 ) {
 							$metaKeyId = $this->getMetaKeyId( 'attribute_' . $tax );
 							if ( $metaKeyId ) {
-								$isForVars = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId(
+								$isForVars = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId(
 									$mainAttrId,
 									'1',
 									array(
@@ -4369,7 +4379,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					$typeJoin  = '';
 					$metaKeyId = $this->getMetaKeyId( '_wpf_product_type' );
 					if ( $metaKeyId ) {
-						$variableMetaId = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $metaKeyId, 'variable' );
+						$variableMetaId = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' )->getMetaValueId( $metaKeyId, 'variable' );
 						if ( $variableMetaId ) {
 							$typeJoin = ' INNER JOIN @__meta_data md_type ON (md_type.product_id=wpf_temp.ID AND md_type.key_id=' . $metaKeyId . ')';
 						}
@@ -4421,7 +4431,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 		}
 
-		if ( FrameWpf::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
+		if ( WooBeWoo_PF_Frame::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
 			$termProducts = ! isset( $sql['main'] ) ? array() : WooBeWoo_PF_Db::get( $sql['main'] );
 
 			if ( false === $termProducts ) {
@@ -5206,11 +5216,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * queryResults.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public function queryResults( $result ) {
 		if ( 0 === $result->total && $this->isFiltered( false ) ) {
-			$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+			$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 			if ( isset( $options['not_found_products_message'] ) && '1' === $options['not_found_products_message']['value'] ) {
 				echo '<p class="woocommerce-info">' . esc_html__( 'No products were found matching your selection.', 'woo-product-filter' ) . '</p>';
 			}

@@ -154,13 +154,15 @@ class WooBeWoo_PF_Overview_Model extends ModelWpf {
 
 	/**
 	 * getPluginData.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getPluginData() {
 		return array(
-			'license_type'  => FrameWpf::_()->getModule( 'options' )->get( 'license_type' ),
-			'license_email' => FrameWpf::_()->getModule( 'options' )->get( 'license_email' ),
-			'license_key'   => FrameWpf::_()->getModule( 'options' )->get( 'license_key' ),
-			'license_name'  => FrameWpf::_()->getModule( 'options' )->get( 'license_name' ),
+			'license_type'  => WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'license_type' ),
+			'license_email' => WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'license_email' ),
+			'license_key'   => WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'license_key' ),
+			'license_name'  => WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'license_name' ),
 		);
 	}
 

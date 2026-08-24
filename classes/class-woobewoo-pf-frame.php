@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - FrameWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Frame Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class FrameWpf {
+class WooBeWoo_PF_Frame {
 
 	private $_modules    = array();
 	private $_tables     = array();
@@ -48,11 +48,13 @@ class FrameWpf {
 
 	/**
 	 * getInstance.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function getInstance() {
 		static $instance;
 		if ( ! $instance ) {
-			$instance = new FrameWpf();
+			$instance = new WooBeWoo_PF_Frame();
 		}
 		return $instance;
 	}
@@ -438,9 +440,11 @@ class FrameWpf {
 	/**
 	 * Return table by name.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param string $tableName table name in database
 	 * @return object table
-	 * @example FrameWpf::_()->getTable('products')->getAll()
+	 * @example WooBeWoo_PF_Frame::_()->getTable('products')->getAll()
 	 */
 	public function getTable( $tableName ) {
 		if ( empty( $this->_tables[ $tableName ] ) ) {

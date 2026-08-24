@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - FilegeneratorWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_File_Generator Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class FilegeneratorWpf {
+class WooBeWoo_PF_File_Generator {
 	protected static $_instances = array();
 	protected $_filename         = '';
 	protected $_data             = '';
@@ -19,10 +19,15 @@ class FilegeneratorWpf {
 		$this->_data     = $data;
 		$this->_type     = strtolower( $type );
 	}
+	/**
+	 * getInstance.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function getInstance( $filename, $data, $type ) {
 		$name = md5( $filename . $data . $type );
 		if ( ! isset( self::$_instances[ $name ] ) ) {
-			self::$_instances[ $name ] = new FilegeneratorWpf( $filename, $data, $type );
+			self::$_instances[ $name ] = new WooBeWoo_PF_File_Generator( $filename, $data, $type );
 		}
 		return self::$_instances[ $name ];
 	}

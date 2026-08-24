@@ -223,7 +223,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_draw_filter_ajax.
 	 *
-	 * @since 3.3.0
+	 * @since 3.3.2
 	 */
 	public function woobewoo_pf_draw_filter_ajax() {
 		$res  = new ResponseWpf();
@@ -232,11 +232,11 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			if ( ! empty( $data['settings']['filters']['order'] ) ) {
 				$metaKeys = $this->getDataFilterMetaKeys( stripcslashes( $data['settings']['filters']['order'] ) );
 				if ( count( $metaKeys ) > 0 ) {
-					FrameWpf::_()->getModule( 'meta' )->calcNeededMetaValues();
+					WooBeWoo_PF_Frame::_()->getModule( 'meta' )->calcNeededMetaValues();
 				}
 			}
 
-			$html = FrameWpf::_()->getModule( 'woofilters' )->getView()->renderHtml( $data );
+			$html = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->renderHtml( $data );
 
 			$res->setHtml( $html );
 		} else {
@@ -249,7 +249,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_save.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_save() {
 
@@ -258,7 +258,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		}
 
 		if ( is_plugin_active( 'wp-rocket/wp-rocket.php' ) && function_exists( 'rocket_clean_domain' ) ) {
-			if ( FrameWpf::_()->getModule( 'options' )->get( 'disable_clean_rocket_cache' ) != 1 ) {
+			if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'disable_clean_rocket_cache' ) != 1 ) {
 				rocket_clean_domain();
 			}
 		}
@@ -526,7 +526,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		if ( ! $recount ) {
 			$taxonomies['count'] = array();
 		}
-		if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
+		if ( WooBeWoo_PF_Frame::_()->proVersionCompare( '1.4.8' ) ) {
 			$args = $module->addBeforeFiltersFrontendArgs( $args, $filterSettings, $urlQuery );
 		} else {
 			$args = WooBeWoo_PF_Dispatcher::applyFilters( 'beforeFilterExistsTerms', $args, $filterSettings, $urlQuery );
@@ -573,7 +573,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			if ( $showProducts || empty( $categoryHtml ) ) {
 
 				// get products
-				if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
+				if ( WooBeWoo_PF_Frame::_()->proVersionCompare( '1.4.8' ) ) {
 					// $loop = new WP_Query($module->addBeforeFiltersFrontendArgs($args, $filterSettings));
 					$loop = new WP_Query( $args );
 				} else {
@@ -1059,10 +1059,10 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 								);
 								break;
 							case 'sku':
-								add_filter( 'posts_clauses', array( FrameWpf::_()->getModule( 'woofilters' ), 'addSKUOrder' ) );
+								add_filter( 'posts_clauses', array( WooBeWoo_PF_Frame::_()->getModule( 'woofilters' ), 'addSKUOrder' ) );
 								break;
 							case 'sku-desc':
-								add_filter( 'posts_clauses', array( FrameWpf::_()->getModule( 'woofilters' ), 'addSKUOrderDesc' ) );
+								add_filter( 'posts_clauses', array( WooBeWoo_PF_Frame::_()->getModule( 'woofilters' ), 'addSKUOrderDesc' ) );
 								break;
 						}
 						break;
@@ -1153,7 +1153,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 						if ( $stockstatus ) {
 							$metaKeyId = $module->getMetaKeyId( '_stock_status' );
 							if ( $metaKeyId ) {
-								$stockValues = FrameWpf::_()->getModule( 'meta' )->getModel( 'meta_values' )->getKeyValueIds( $metaKeyId, array(), true );
+								$stockValues = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_values' )->getKeyValueIds( $metaKeyId, array(), true );
 								if ( ! is_array( $stockstatus ) ) {
 									$stockstatus = array( $stockstatus );
 								}
@@ -1235,7 +1235,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 							break;
 						}
 
-						$customOptions = FrameWpf::_()
+						$customOptions = WooBeWoo_PF_Frame::_()
 							->getModule( 'woofilters' )
 							->getModel( 'woofilters' )
 							->getCustomFieldFilterOptions( 'product' );

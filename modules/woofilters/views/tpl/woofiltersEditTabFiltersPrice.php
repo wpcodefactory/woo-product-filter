@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 ViewWpf::display( 'woofiltersEditTabCommonTitle' );
-$pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 
 $skins = array(
 	'default' => esc_attr__( 'default', 'woo-product-filter' ),
@@ -60,7 +60,7 @@ foreach ( $skins as $key => $value ) {
 	if ( strpos( $value, $labelPro ) ) {
 		?>
 		<div class="row-settings-block wpfPriceSkinPro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
-			<?php if ( FrameWpf::_()->isWCLicense() ) { ?>
+			<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
 			<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
 			<?php } else { ?>
 			<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">

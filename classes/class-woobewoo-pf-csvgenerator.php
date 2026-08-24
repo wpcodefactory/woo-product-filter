@@ -21,6 +21,11 @@ class WooBeWoo_PF_Csvgenerator {
 	public function addCell( $x, $y, $value ) {
 		$this->_data[ $x ][ $y ] = '"' . $value . '"'; // If will not do "" then symbol for example, will broke file
 	}
+	/**
+	 * generate.
+	 *
+	 * @version 3.3.2
+	 */
 	public function generate() {
 		$strData = '';
 		if ( ! empty( $this->_data ) ) {
@@ -30,7 +35,7 @@ class WooBeWoo_PF_Csvgenerator {
 			}
 			$strData = implode( $this->_enclosure, $rows );
 		}
-		FilegeneratorWpf::_( $this->_filename, $strData, 'csv' )->generate();
+		WooBeWoo_PF_File_Generator::_( $this->_filename, $strData, 'csv' )->generate();
 	}
 	public function getDelimiter() {
 		return $this->_delimiter;

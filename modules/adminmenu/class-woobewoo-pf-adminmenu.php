@@ -47,10 +47,10 @@ class WooBeWoo_PF_Adminmenu extends ModuleWpf {
 			'menu_title' => WPF_WP_PLUGIN_NAME,
 			'capability' => $mainCap,
 			'menu_slug'  => $mainSlug,
-			'function'   => array( FrameWpf::_()->getModule( 'options' ), 'getAdminPage' ),
+			'function'   => array( WooBeWoo_PF_Frame::_()->getModule( 'options' ), 'getAdminPage' ),
 		);
 		$mainMenuPageOptions = WooBeWoo_PF_Dispatcher::applyFilters( 'adminMenuMainOption', $mainMenuPageOptions );
-		if ( FrameWpf::_()->isWCLicense() ) {
+		if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) {
 			add_submenu_page( 'woocommerce', $mainMenuPageOptions['menu_title'], $mainMenuPageOptions['menu_title'], $mainMenuPageOptions['capability'], $mainMenuPageOptions['menu_slug'], $mainMenuPageOptions['function'] );
 			return;
 		}
@@ -58,7 +58,7 @@ class WooBeWoo_PF_Adminmenu extends ModuleWpf {
 		add_menu_page( $mainMenuPageOptions['page_title'], $mainMenuPageOptions['menu_title'], $mainMenuPageOptions['capability'], $mainMenuPageOptions['menu_slug'], $mainMenuPageOptions['function'], 'dashicons-list-view' );
 
 		// remove duplicated WP menu item
-		$tabs     = FrameWpf::_()->getModule( 'options' )->getTabs();
+		$tabs     = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabs();
 		$subMenus = array();
 		foreach ( $tabs as $tKey => $tab ) {
 			if ( 'main_page' == $tKey ) {

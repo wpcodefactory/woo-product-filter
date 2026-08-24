@@ -21,12 +21,12 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function __construct( $data = array(), $args = null ) {
 		parent::__construct( $data, $args );
 
-		$isWooCommercePluginActivated = FrameWpf::_()->getModule( 'woofilters' )->isWooCommercePluginActivated();
+		$isWooCommercePluginActivated = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->isWooCommercePluginActivated();
 		if ( ! $isWooCommercePluginActivated ) {
 			return;
 		}
@@ -39,8 +39,8 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 			return;
 		}
 
-		$modPath  = FrameWpf::_()->getModule( 'woofilters' )->getModPath();
-		$tempPath = FrameWpf::_()->getModule( 'templates' )->getModPath();
+		$modPath  = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModPath();
+		$tempPath = WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath();
 
 		wp_register_script( 'woobewoo-pf-common', WPF_JS_PATH . 'common.js', array( 'jquery' ), WPF_VERSION, false );
 		wp_register_script( 'woobewoo-pf-core', WPF_JS_PATH . 'core.js', array( 'jquery' ), WPF_VERSION, false );
@@ -49,7 +49,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 		wp_register_style( 'woobewoo-pf-tooltipster', $tempPath . 'lib/tooltipster/tooltipster.css', false, WPF_VERSION );
 
 		// addCommonAssets
-		$options = FrameWpf::_()->getModule( 'options' )->getModel( 'options' )->getAll();
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 		wp_register_style( 'woobewoo-pf-frontend-filters', $modPath . 'css/frontend.woofilters.css', false, WPF_VERSION );
 		wp_register_script( 'woobewoo-pf-frontend-filters', $modPath . 'js/frontend.woofilters.js', false, WPF_VERSION, false );
 		if ( \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
@@ -86,7 +86,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 		// addScriptsContent
 		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_register_frontend_pro_assets' );
 
-		static::$adPath   = FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'img/ad/';
+		static::$adPath   = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModPath() . 'img/ad/';
 		static::$labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
 
 		static::$scriptsLoaded = true;
@@ -95,10 +95,10 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * getFiltersSettings.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function getFiltersSettings() {
-		$filters            = FrameWpf::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
+		$filters            = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 		$filtersOpts        = array();
 		$filtersOpts[0]     = 'Select';
 		$filtersOpts['new'] = 'Create New';
@@ -269,6 +269,11 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 
 	protected function content_template() {}
 
+	/**
+	 * addWooFilterContentTabControls.
+	 *
+	 * @version 3.3.2
+	 */
 	public function addWooFilterContentTabControls() {
 		$this->start_controls_section(
 			'section_filters',
@@ -291,7 +296,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 			'filters_raw',
 			array(
 				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => FrameWpf::_()->getModule( 'woofilters' )->getView()->getContent( 'woofiltersEditTabElementorFilters' ),
+				'raw'  => WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->getContent( 'woofiltersEditTabElementorFilters' ),
 			)
 		);
 
@@ -336,7 +341,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 			'filters_raw_options',
 			array(
 				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => FrameWpf::_()->getModule( 'woofilters' )->getView()->getContent( 'woofiltersEditTabElementorOptions' ),
+				'raw'  => WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->getContent( 'woofiltersEditTabElementorOptions' ),
 			)
 		);
 
@@ -380,7 +385,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 			'filters_raw_design',
 			array(
 				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => FrameWpf::_()->getModule( 'woofilters' )->getView()->getContent( 'woofiltersEditTabElementorDesign' ),
+				'raw'  => WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->getContent( 'woofiltersEditTabElementorDesign' ),
 			)
 		);
 

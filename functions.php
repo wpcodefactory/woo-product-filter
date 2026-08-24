@@ -299,19 +299,19 @@ if ( ! function_exists( 'trueRequestWpf' ) ) {
 /**
  * woofilterInstallBaseMsg.
  *
- * @version 3.3.0
+ * @version 3.3.2
  */
 add_action( 'admin_notices', 'woofilterInstallBaseMsg' );
 if ( ! function_exists( 'woofilterInstallBaseMsg' ) ) {
 	function woofilterInstallBaseMsg() {
-		if ( ! class_exists( 'FrameWpf' ) ) {
+		if ( ! class_exists( 'WooBeWoo_PF_Frame' ) ) {
 			return;
 		}
 
 		if ( apply_filters( 'woobee_show_pro_notice', false ) ) {
 			return;
 		}
-		if ( FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
+		if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
 			$plugName  = __( 'Product Filter by WBW', 'woo-product-filter' );
 
 			echo '<div class="notice error is-dismissible"><p><strong>';
@@ -322,23 +322,25 @@ if ( ! function_exists( 'woofilterInstallBaseMsg' ) ) {
 			);
 			echo '</strong></p></div>';
 		} else {
-			FrameWpf::_()->getModule( 'overview' )->getView()->showRestApiInfo();
+			WooBeWoo_PF_Frame::_()->getModule( 'overview' )->getView()->showRestApiInfo();
 		}
 	}
 }
 
 /**
  * woofilterProDeactivate.
+ *
+ * @version 3.3.2
  */
 add_action( 'admin_init', 'woofilterProDeactivate' );
 if ( ! function_exists( 'woofilterProDeactivate' ) ) {
 	function woofilterProDeactivate() {
-		if ( class_exists( 'FrameWpf' ) && function_exists( 'getProPlugFullPathWpf' ) ) {
+		if ( class_exists( 'WooBeWoo_PF_Frame' ) && function_exists( 'getProPlugFullPathWpf' ) ) {
 			$pathPro   = getProPlugFullPathWpf();
 			$proPlugin = plugin_basename( $pathPro );
 			if ( is_plugin_active( $proPlugin ) ) {
 				$pluginData  = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
-				$isProActive = FrameWpf::_()->moduleActive( 'access' );
+				$isProActive = WooBeWoo_PF_Frame::_()->moduleActive( 'access' );
 				if ( ! version_compare( $pluginData['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
 					if ( $isProActive ) {
 						call_user_func_array( array( 'ModInstallerWpf', 'deactivate' ), array( array( 'license' ) ) );

@@ -310,9 +310,11 @@ class UtilsWpf {
 
 	/**
 	 * isThisCommercialEdition.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function isThisCommercialEdition() {
-		foreach ( FrameWpf::_()->getModules() as $m ) {
+		foreach ( WooBeWoo_PF_Frame::_()->getModules() as $m ) {
 			if ( is_object( $m ) && $m->isExternal() ) {
 				return true;
 			}
@@ -422,14 +424,14 @@ class UtilsWpf {
 	/**
 	 * Activate all CSP Plugins.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.2
 	 *
 	 * @return NULL Check if it's site or multisite and activate.
 	 */
 	public static function activatePlugin( $networkwide ) {
 		global $wpdb;
 		if ( WPF_TEST_MODE ) {
-			add_action( 'activated_plugin', array( FrameWpf::_(), 'savePluginActivationErrors' ) );
+			add_action( 'activated_plugin', array( WooBeWoo_PF_Frame::_(), 'savePluginActivationErrors' ) );
 		}
 		delete_option( 'wpf_slug_format_rewrite_option_bootstrapped' ); // Re-run slug rewrite bootstrap logic after each activation.
 		if ( function_exists( 'is_multisite' ) && is_multisite() && $networkwide ) {

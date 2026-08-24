@@ -39,24 +39,30 @@ class WooBeWoo_PF_Meta extends ModuleWpf {
 
 	/**
 	 * isGlobalCalcRunning.
+	 *
+	 * @version 3.3.2
 	 */
 	public function isGlobalCalcRunning() {
-		return FrameWpf::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2;
+		return WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2;
 	}
 
 	/**
 	 * isDisabledAutoindexing.
+	 *
+	 * @version 3.3.2
 	 */
 	public function isDisabledAutoindexing() {
-		$param = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing' );
+		$param = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing' );
 		return false === $param ? 0 : ( (int) $param );
 	}
 
 	/**
 	 * isDisabledAutoindexingBySS.
+	 *
+	 * @version 3.3.2
 	 */
 	public function isDisabledAutoindexingBySS() {
-		$param = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing_by_ss' );
+		$param = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing_by_ss' );
 		return false === $param ? 0 : ( (int) $param );
 	}
 
@@ -162,9 +168,11 @@ class WooBeWoo_PF_Meta extends ModuleWpf {
 
 	/**
 	 * getSettingsIndexingSchedule.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getSettingsIndexingSchedule( $options, $addName = '' ) {
-		$hourSelect = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_hour' . $addName );
+		$hourSelect = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_hour' . $addName );
 		$hours      = array(
 			'00',
 			'01',
@@ -197,7 +205,7 @@ class WooBeWoo_PF_Meta extends ModuleWpf {
 			$hoursHtml .= "<option value=\"{$value}\" {$selected}>{$name}</option>";
 		}
 
-		$daySelect = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_day' . $addName );
+		$daySelect = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_day' . $addName );
 		$days      = array(
 			__( 'Everyday', 'woo-product-filter' ),
 			__( 'Monday', 'woo-product-filter' ),
@@ -267,21 +275,23 @@ class WooBeWoo_PF_Meta extends ModuleWpf {
 
 	/**
 	 * recalcMetaIndexingShedule.
+	 *
+	 * @version 3.3.2
 	 */
 	public function recalcMetaIndexingShedule() {
-		$daySelect = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_day' );
+		$daySelect = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_day' );
 
 		if ( '0' !== $daySelect && gmdate( 'N' ) !== $daySelect ) {
 			return false;
 		}
 
-		$hourSelect       = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_hour' );
+		$hourSelect       = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_hour' );
 		$timestampShedule = mktime( $hourSelect, 0, 0 );
 		if ( time() < $timestampShedule ) {
 			return false;
 		}
 
-		$timestampLastIndexing = FrameWpf::_()->getModule( 'options' )->getModel()->getChanged( 'start_indexing' );
+		$timestampLastIndexing = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->getChanged( 'start_indexing' );
 		if ( $timestampLastIndexing > $timestampShedule ) {
 			return false;
 		}
@@ -291,13 +301,15 @@ class WooBeWoo_PF_Meta extends ModuleWpf {
 
 	/**
 	 * recalcMetaOptimizingShedule.
+	 *
+	 * @version 3.3.2
 	 */
 	public function recalcMetaOptimizingShedule() {
-		$daySelect = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_day_optimizing' );
+		$daySelect = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_day_optimizing' );
 		if ( '0' !== $daySelect && gmdate( 'N' ) !== $daySelect ) {
 			return false;
 		}
-		$hourSelect       = FrameWpf::_()->getModule( 'options' )->getModel()->get( 'shedule_hour_optimizing' );
+		$hourSelect       = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_hour_optimizing' );
 		$timestampShedule = mktime( $hourSelect, 0, 0 );
 		if ( time() < $timestampShedule ) {
 			return false;
