@@ -226,7 +226,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	 * @since 3.3.2
 	 */
 	public function woobewoo_pf_draw_filter_ajax() {
-		$res  = new ResponseWpf();
+		$res  = new WooBeWoo_PF_Response();
 		$data = WooBeWoo_PF_Req::get( 'post' );
 		if ( isset( $data ) && $data ) {
 			if ( ! empty( $data['settings']['filters']['order'] ) ) {
@@ -265,7 +265,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 
 		WooBeWoo_PF_Req::verifyRequest();
 
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		$id  = $this->getModel( 'woofilters' )->save( WooBeWoo_PF_Req::get( 'post' ) );
 		if ( false != $id ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -314,7 +314,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	public function woobewoo_pf_delete_by_id() {
 		WooBeWoo_PF_Req::verifyRequest();
 
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 
 		if ( $this->getModel( 'woofilters' )->delete( WooBeWoo_PF_Req::get( 'post' ) ) != false ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -333,7 +333,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	public function createTable() {
 		WooBeWoo_PF_Req::verifyRequest();
 
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		$id  = $this->getModel( 'woofilters' )->save( WooBeWoo_PF_Req::get( 'post' ) );
 		if ( false != $id ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -354,7 +354,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_filters_frontend() {
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 
 		$params = WooBeWoo_PF_Req::get( 'post' );
 
@@ -834,7 +834,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	 */
 	public function woobewoo_pf_get_taxonomy_terms() {
 
-		$res   = new ResponseWpf();
+		$res   = new WooBeWoo_PF_Response();
 		$slug  = WooBeWoo_PF_Req::getVar( 'slug' );
 		$terms = array();
 		$keys  = array();

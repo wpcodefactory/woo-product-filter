@@ -39,7 +39,7 @@ class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 			);
 		}
 
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 
 		if ( WooBeWoo_PF_Req::getVar( 'inCron' ) ) {
 			if ( ! wp_next_scheduled( 'wpf_calc_meta_indexing' ) ) {
@@ -66,7 +66,7 @@ class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 	public function woobewoo_pf_do_meta_optimizing() {
 		WooBeWoo_PF_Req::verifyRequest();
 
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->optimizeMetaTables() ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - ResponseWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Response Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class ResponseWpf {
+class WooBeWoo_PF_Response {
 	public $code     = 0;
 	public $error    = false;
 	public $errors   = array();
@@ -109,7 +109,7 @@ class ResponseWpf {
 	}
 
 	/**
-	 * Alias for ResponseWpf::addError, @see addError method
+	 * Alias for WooBeWoo_PF_Response::addError, @see addError method
 	 */
 	public function pushError( $error, $key = '' ) {
 		return $this->addError( $error, $key );

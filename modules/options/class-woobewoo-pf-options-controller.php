@@ -19,7 +19,7 @@ class WooBeWoo_PF_Options_Controller extends WooBeWoo_PF_Controller {
 	public function woobewoo_pf_save_group() {
 		WooBeWoo_PF_Req::verifyRequest();
 
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->woobewoo_pf_save_group( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {

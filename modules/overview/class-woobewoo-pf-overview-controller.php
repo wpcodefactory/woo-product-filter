@@ -17,7 +17,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_subscribe() {
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->subscribe( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
@@ -32,7 +32,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_contactus() {
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->contactus( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
@@ -47,7 +47,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_rating() {
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->rating( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
@@ -62,7 +62,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_dismiss_notice() {
-		$res  = new ResponseWpf();
+		$res  = new WooBeWoo_PF_Response();
 		$slug = WooBeWoo_PF_Req::getVar( 'slug' );
 		if (
 			! empty( $slug ) &&
@@ -80,7 +80,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_approve_notice() {
-		$res  = new ResponseWpf();
+		$res  = new WooBeWoo_PF_Response();
 		$slug = WooBeWoo_PF_Req::getVar( 'slug' );
 		if (
 			'wpf-rest-api' == $slug &&

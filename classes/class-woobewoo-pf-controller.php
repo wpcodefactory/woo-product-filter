@@ -192,7 +192,7 @@ abstract class WooBeWoo_PF_Controller {
 	 */
 	public function woobewoo_pf_get_list_for_table() {
 		WooBeWoo_PF_Req::verifyRequest();
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		$res->ignoreShellData();
 		$model = $this->getModel();
 
@@ -274,7 +274,7 @@ abstract class WooBeWoo_PF_Controller {
 	public function woobewoo_pf_remove_group() {
 		WooBeWoo_PF_Req::verifyRequest();
 
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		if (
 			$this->getModel()->woobewoo_pf_remove_group( WooBeWoo_PF_Req::getVar( 'listIds', 'post' ) )
 		) {
@@ -285,8 +285,13 @@ abstract class WooBeWoo_PF_Controller {
 		$res->ajaxExec();
 	}
 
+	/**
+	 * clear.
+	 *
+	 * @version 3.3.2
+	 */
 	public function clear() {
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->clear() ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {

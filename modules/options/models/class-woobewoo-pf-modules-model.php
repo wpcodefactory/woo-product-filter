@@ -44,7 +44,7 @@ class WooBeWoo_PF_Modules_Model extends WooBeWoo_PF_Model {
 	 * @version 3.3.2
 	 */
 	public function put( $d = array() ) {
-		$res = new ResponseWpf();
+		$res = new WooBeWoo_PF_Response();
 		$id  = $this->_getIDFromReq( $d );
 		$d   = prepareParamsWpf( $d );
 		if ( is_numeric( $id ) && $id ) {

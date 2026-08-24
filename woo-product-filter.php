@@ -66,7 +66,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'WooBeWoo_PF_Req' );
 	importClassWpf( 'UriWpf' );
 	importClassWpf( 'WooBeWoo_PF_Html' );
-	importClassWpf( 'ResponseWpf' );
+	importClassWpf( 'WooBeWoo_PF_Response' );
 	importClassWpf( 'WooBeWoo_PF_Field_Adapter' );
 	importClassWpf( 'ValidatorWpf' );
 	importClassWpf( 'WooBeWoo_PF_Errors' );
