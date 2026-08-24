@@ -2,11 +2,11 @@
 /**
  * Product Filter by WBW - Woofilters HTML
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-HtmlWpf::echoEscapedHtml( DispatcherWpf::applyFilters( 'filtersHtml', $this->html ) );
+HtmlWpf::echoEscapedHtml( WooBeWoo_PF_Dispatcher::applyFilters( 'filtersHtml', $this->html ) );

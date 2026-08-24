@@ -28,11 +28,13 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 
 	/**
 	 * init.
+	 *
+	 * @version 3.3.2
 	 */
 	public function init() {
 		add_action( 'init', array( $this, 'startSession' ), -1 );
 		add_action( 'init', array( $this, 'initAllOptValues' ), 99 ); // It should be init after all languages was inited
-		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
+		WooBeWoo_PF_Dispatcher::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 	}
 
 	/**
@@ -151,11 +153,11 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 	/**
 	 * getTabs.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getTabs() {
 		if ( empty( $this->_tabs ) ) {
-			$this->_tabs = DispatcherWpf::applyFilters( 'mainAdminTabs', array() );
+			$this->_tabs = WooBeWoo_PF_Dispatcher::applyFilters( 'mainAdminTabs', array() );
 			foreach ( $this->_tabs as $tabKey => $tab ) {
 				if ( ! isset( $this->_tabs[ $tabKey ]['url'] ) ) {
 					$this->_tabs[ $tabKey ]['url'] = is_array( $tab['callback'] ) ? $this->getTabUrl( $tabKey ) : $tab['callback'];
@@ -234,7 +236,7 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 	/**
 	 * getAll.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getAll() {
 		if ( empty( $this->_options ) ) {
@@ -242,7 +244,7 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 			if ( empty( $defSendmailPath ) && ! stristr( $defSendmailPath, 'sendmail' ) ) {
 				$defSendmailPath = '/usr/sbin/sendmail';
 			}
-			$this->_options = DispatcherWpf::applyFilters(
+			$this->_options = WooBeWoo_PF_Dispatcher::applyFilters(
 				'optionsDefine',
 				array(
 					'general' => array(

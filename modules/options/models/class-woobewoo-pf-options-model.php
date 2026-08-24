@@ -76,11 +76,11 @@ class WooBeWoo_PF_Options_Model extends ModelWpf {
 	/**
 	 * woobewoo_pf_save_group.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_save_group( $d = array() ) {
 		if ( isset( $d['opt_values'] ) && is_array( $d['opt_values'] ) && ! empty( $d['opt_values'] ) ) {
-			DispatcherWpf::doAction( 'beforeSaveOpts', $d );
+			WooBeWoo_PF_Dispatcher::doAction( 'beforeSaveOpts', $d );
 			foreach ( $d['opt_values'] as $code => $val ) {
 				if ( 'indexing_schedule' === $code ) {
 					if ( '1' === $val ) {

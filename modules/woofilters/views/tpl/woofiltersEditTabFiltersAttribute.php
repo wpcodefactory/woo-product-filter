@@ -30,7 +30,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 			);
 			?>
 		</div>
-		<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCustomMetaField' ); ?>
+		<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCustomMetaField' ); ?>
 	</div>
 </div>
 <?php
@@ -152,7 +152,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 </div>
 <?php } else {
-	DispatcherWpf::doAction( 'woobewoo_pf_attribute_type_options' );
+	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_type_options' );
 } ?>
 
 <?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
@@ -209,7 +209,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	</div>
 </div>
 <?php } else {
-	DispatcherWpf::doAction( 'woobewoo_pf_attribute_slider_options' );
+	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_slider_options' );
 } ?>
 
 <?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
@@ -292,7 +292,7 @@ foreach ( $attributesTypes as $key => $value ) {
 			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
 		<?php } else {
-			DispatcherWpf::doAction( 'woobewoo_pf_attribute_hierarchical_options' );
+			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_hierarchical_options' );
 		} ?>
 	</div>
 </div>
@@ -420,7 +420,7 @@ foreach ( $attributesTypes as $key => $value ) {
 			</div>
 		</div>
 		<?php } else {
-			DispatcherWpf::doAction( 'woobewoo_pf_attribute_sort_as_numbers_option' );
+			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_sort_as_numbers_option' );
 		} ?>
 	</div>
 </div>
@@ -445,7 +445,7 @@ foreach ( $attributesTypes as $key => $value ) {
 				);
 				?>
 		</div>
-		<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSearchList' ); ?>
+		<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSearchList' ); ?>
 	</div>
 </div>
 <div class="row-settings-block" data-parent="f_list" data-no-values="custom_meta_field_check">

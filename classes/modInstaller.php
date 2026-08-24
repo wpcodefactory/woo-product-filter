@@ -4,7 +4,7 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -332,7 +332,7 @@ class ModInstallerWpf {
 	/**
 	 * uninstall.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public static function uninstall() {
 		$locations = self::_getPluginLocations();
@@ -343,7 +343,7 @@ class ModInstallerWpf {
 			UtilsWpf::deleteDir( WPF_MODULES_DIR . $modDataArr['code'] );
 		}
 
-		DispatcherWpf::doAction( 'woobewoo_pf_uninstall' );
+		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_uninstall' );
 	}
 
 	/**

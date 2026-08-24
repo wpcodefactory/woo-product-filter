@@ -45,7 +45,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function init() {
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
@@ -70,7 +70,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			return;
 		}
 
-		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
+		WooBeWoo_PF_Dispatcher::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 
 		if ( is_admin() ) {
 			add_action( 'admin_notices', array( $this, 'showAdminErrors' ) );
@@ -322,6 +322,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * my_aws_search_results_products_ids.
+	 *
+	 * @version 3.3.2
 	 */
 	public function my_aws_search_results_products_ids( $ids ) {
 		if ( ! $this->isFiltered( false ) ) {
@@ -329,7 +331,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		}
 
 		$q = new WP_Query(
-			DispatcherWpf::applyFilters(
+			WooBeWoo_PF_Dispatcher::applyFilters(
 				'beforeFilterExistsTermsWithEmptyArgs',
 				array(
 					'post_type'  => 'product',
@@ -1154,7 +1156,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * getPreselectedParamsForFilter.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getPreselectedParamsForFilter( $filterId ) {
 		if ( ! isset( $this->preFilters[ $filterId ] ) ) {
@@ -1169,9 +1171,9 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 						$preselects = explode( ';', $preselect );
 					}
 					if ( defined( 'WPF_FREE_REQUIRES' ) && version_compare( '1.4.9', WPF_FREE_REQUIRES, '==' ) ) {
-						$preselects = DispatcherWpf::applyFilters( 'addDefaultFilterData', $preselects, $filterId, $settings );
+						$preselects = WooBeWoo_PF_Dispatcher::applyFilters( 'addDefaultFilterData', $preselects, $filterId, $settings );
 					} else {
-						DispatcherWpf::doAction( 'addDefaultFilterData', $filterId, $settings );
+						WooBeWoo_PF_Dispatcher::doAction( 'addDefaultFilterData', $filterId, $settings );
 					}
 				}
 			}
@@ -1202,6 +1204,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * addCustomFieldsQuery.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addCustomFieldsQuery( $data, $mode ) {
 		$fields = array();
@@ -1244,7 +1248,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$fields['posts_per_page'] = $data['wpf_count'];
 		}
 
-		$fields = DispatcherWpf::applyFilters( 'addCustomFieldsQueryPro', $fields, $data, $mode );
+		$fields = WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomFieldsQueryPro', $fields, $data, $mode );
 
 		return $fields;
 	}
@@ -1252,7 +1256,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * addCustomMetaQuery.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.2
 	 */
 	public function addCustomMetaQuery( $metaQuery, $data, $mode ) {
 		if ( ! is_array( $metaQuery ) ) {
@@ -1386,7 +1390,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				}
 			}
 		}
-		$metaQuery = DispatcherWpf::applyFilters( 'addCustomMetaQueryPro', $metaQuery, $data, $mode );
+		$metaQuery = WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomMetaQueryPro', $metaQuery, $data, $mode );
 
 		return $metaQuery;
 	}
@@ -1394,7 +1398,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * addCustomTaxQuery.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public function addCustomTaxQuery( $taxQuery, $data, $mode ) {
 
@@ -1608,7 +1612,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				'terms'    => 'featured',
 			);
 		}
-		$taxQuery = DispatcherWpf::applyFilters( 'addCustomTaxQueryPro', $taxQuery, $data, $mode );
+		$taxQuery = WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomTaxQueryPro', $taxQuery, $data, $mode );
 
 		return $taxQuery;
 	}
@@ -1641,7 +1645,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * loadProductsFilter.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
@@ -1735,7 +1739,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			ReqWpf::setVar( 'wpf_light', $q->query_vars, 'session' );
 		}
 
-		if ( DispatcherWpf::applyFilters( 'notFilterMainWCQuery', false ) ) {
+		if ( WooBeWoo_PF_Dispatcher::applyFilters( 'notFilterMainWCQuery', false ) ) {
 			return;
 		}
 
@@ -1815,7 +1819,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$q->set( 'tax_query', $args['tax_query'] );
 		}
 
-		$q = DispatcherWpf::applyFilters( 'loadProductsFilterPro', $q );
+		$q = WooBeWoo_PF_Dispatcher::applyFilters( 'loadProductsFilterPro', $q );
 
 		if ( $this->mainWCQuery !== $q->query_vars ) {
 			$this->mainWCQueryFiltered = $q->query_vars;
@@ -1930,6 +1934,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getQueryVars.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getQueryVars( $args, $exludeParam = array(), $params = array() ) {
 		// set url params
@@ -1944,7 +1950,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 		if ( count( $params ) === 0 || ( empty( $params['isFiltered'] ) && ! $this->isFiltered( false ) ) ) {
 			$mode   = 'default';
-			$params = DispatcherWpf::applyFilters( 'getDefaultFilterParams', $params );
+			$params = WooBeWoo_PF_Dispatcher::applyFilters( 'getDefaultFilterParams', $params );
 			if ( count( $params ) > 0 ) {
 				$args['wpf_default'] = $params;
 			}
@@ -2185,7 +2191,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * loadShortcodeProductsFilter.
 	 *
-	 * @version 3.0.0
+	 * @version 3.3.2
 	 */
 	public function loadShortcodeProductsFilter( $args, $attributes = array(), $type = '' ) {
 		$hash         = md5( maybe_serialize( $args ) . maybe_serialize( $attributes ) );
@@ -2288,7 +2294,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				if ( FrameWpf::_()->proVersionCompare( '1.4.8' ) ) {
 					$args = $this->addBeforeFiltersFrontendArgs( $args, $filterSettings, $params );
 				} else {
-					$args = DispatcherWpf::applyFilters( 'checkBeforeFiltersFrontendArgs', $args, $filterSettings, $params );
+					$args = WooBeWoo_PF_Dispatcher::applyFilters( 'checkBeforeFiltersFrontendArgs', $args, $filterSettings, $params );
 				}
 				if ( $this->shortcodeWCQuery[ $filterKey ] !== $args ) {
 					$this->shortcodeWCQueryFiltered[ $filterKey ] = $args;
@@ -2330,7 +2336,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					}
 				}
 			}
-			$args                         = DispatcherWpf::applyFilters( 'loadShortcodeProductsFilterPro', $args );
+			$args                         = WooBeWoo_PF_Dispatcher::applyFilters( 'loadShortcodeProductsFilterPro', $args );
 			self::$loadShortcode[ $hash ] = $args;
 		} else {
 			$args = self::$loadShortcode[ $hash ];
@@ -2346,7 +2352,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	 */
 	public function addBeforeFiltersFrontendArgs( $args, $filterSettings = array(), $urlQuery = array() ) {
 
-		$args = DispatcherWpf::applyFilters( 'checkBeforeFiltersFrontendArgs', $args, $filterSettings, $urlQuery );
+		$args = WooBeWoo_PF_Dispatcher::applyFilters( 'checkBeforeFiltersFrontendArgs', $args, $filterSettings, $urlQuery );
 		if ( ! empty( $args ) ) {
 			global $wpdb;
 			$args['post_type']             = array( 'product' );
@@ -2476,7 +2482,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					}
 				}
 
-				$clauses = DispatcherWpf::applyFilters(
+				$clauses = WooBeWoo_PF_Dispatcher::applyFilters(
 					'addVariationQueryPro',
 					array(
 						'join'     => $join,
@@ -2750,10 +2756,10 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				} elseif ( is_product() && $displayProduct && $displayMobile ) {
 					$mode = 8;
 				} elseif ( 'all_pages' === $displayOnPage ) {
-					$mode = DispatcherWpf::applyFilters( 'woobewoo_pf_all_pages_mode', is_shop() ? 2 : $mode );
+					$mode = WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_all_pages_mode', is_shop() ? 2 : $mode );
 				}
 
-				$mode = DispatcherWpf::applyFilters(
+				$mode = WooBeWoo_PF_Dispatcher::applyFilters(
 					'woobewoo_pf_display_mode',
 					$mode,
 					$displayOnPage,
@@ -3087,7 +3093,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			'price_filter' => true,
 			'type'         => 'DECIMAL(20,3)',
 		);
-		list( $minPrice, $maxPrice ) = DispatcherWpf::applyFilters(
+		list( $minPrice, $maxPrice ) = WooBeWoo_PF_Dispatcher::applyFilters(
 			'priceTax',
 			array(
 				$minPrice,
@@ -3389,6 +3395,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getAttributeTerms.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getAttributeTerms( $slug ) {
 		$terms = array();
@@ -3400,7 +3408,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$args['taxonomy'] = wc_attribute_taxonomy_name_by_id( (int) $slug );
 			$values           = get_terms( $args );
 		} else {
-			$values = DispatcherWpf::applyFilters( 'getCustomTerms', array(), $slug, $args );
+			$values = WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomTerms', array(), $slug, $args );
 			$values = $this->addChildrenAttributeTerms( $values );
 		}
 
@@ -3417,6 +3425,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getFilterTaxonomies.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getFilterTaxonomies( $settings, $calcCategories = false, $filterSettings = array(), $ajax = false, $urlQuery = array() ) {
 
@@ -3460,7 +3470,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 						$slug     = $filter['settings']['f_list'];
 						$taxonomy = ( is_numeric( $slug ) )
 							? wc_attribute_taxonomy_name_by_id( (int) $slug )
-							: DispatcherWpf::applyFilters( 'getCustomAttributeName', $slug, $filter );
+							: WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomAttributeName', $slug, $filter );
 					}
 
 					$frontendType = $this->getFilterSetting( $filter['settings'], 'f_frontend_type', '' );
@@ -3499,9 +3509,9 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				case 'wpfSearchNumber':
 					if ( ! empty( $filter['settings']['f_conrol_products'] ) && ! empty( $filter['settings']['f_list'] ) ) {
 						$slug     = $filter['settings']['f_list'];
-						$taxonomy = ( is_numeric( $slug ) )
-							? wc_attribute_taxonomy_name_by_id( (int) $slug )
-							: DispatcherWpf::applyFilters( 'getCustomAttributeName', $slug, $filter );
+						$taxonomy = ( is_numeric( $slug ) ) ?
+							wc_attribute_taxonomy_name_by_id( (int) $slug ) :
+							WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomAttributeName', $slug, $filter );
 					}
 					break;
 				default:
@@ -3565,7 +3575,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			'multi_logic'         => $multiLogic,
 			'check_get_names'     => $checkGetNames,
 			'keep_recount_price'  => $this->getFilterSetting( $filterSettings, 'filter_recount_price', '0' ) && $this->getFilterSetting( $filterSettings, 'keep_recount_price', '0' ),
-			'cat_only_children'   => DispatcherWpf::applyFilters( 'getOneByOneCategoryHierarchy', array(), $urlQuery, $filterSettings ),
+			'cat_only_children'   => WooBeWoo_PF_Dispatcher::applyFilters( 'getOneByOneCategoryHierarchy', array(), $urlQuery, $filterSettings ),
 		);
 	}
 
@@ -3752,6 +3762,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * Get filter existing individual filters items.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param int | null $args wp_query args
 	 * @param array      $taxonomies
 	 * @param int | null $calcCategory
@@ -3861,7 +3873,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 			$isModeStandart = in_array( $mode, array( 'full', 'light' ), true );
 
-			$args = DispatcherWpf::applyFilters( 'addExistFilterArgs', $args );
+			$args = WooBeWoo_PF_Dispatcher::applyFilters( 'addExistFilterArgs', $args );
 
 			if ( ! empty( $this->clauses ) && ( ( ! $multiLogicOr && ! $isModeStandart ) || ( $multiLogicOr && $isModeStandart ) ) ) {
 				$filterLoop = $this->getFilterLoopFromMode( $mode, $args );
@@ -4035,6 +4047,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * Returns previously stored arguments in an object.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param $args
 	 *
 	 * @return array
@@ -4047,7 +4061,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		if ( $doNotUseShortcode ) {
 			if ( empty( $this->mainWCQuery ) ) {
 				$q = new WP_Query(
-					DispatcherWpf::applyFilters(
+					WooBeWoo_PF_Dispatcher::applyFilters(
 						'beforeFilterExistsTermsWithEmptyArgs',
 						array(
 							'post_type'  => 'product',
@@ -4090,7 +4104,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 			if ( 'product' !== $postType && ( ! is_array( $postType ) || ! in_array( 'product', $postType, true ) ) ) {
 				$q = new WP_Query(
-					DispatcherWpf::applyFilters(
+					WooBeWoo_PF_Dispatcher::applyFilters(
 						'beforeFilterExistsTermsWithEmptyArgs',
 						array(
 							'post_type'  => 'product',
@@ -4131,6 +4145,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * Adds arguments to $args array.
+	 *
+	 * @version 3.3.2
 	 *
 	 * @param $args
 	 * @param $param
@@ -4252,7 +4268,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				}
 			}
 		}
-		return DispatcherWpf::applyFilters( 'addFilterExistsItemsArgs', $args );
+		return WooBeWoo_PF_Dispatcher::applyFilters( 'addFilterExistsItemsArgs', $args );
 	}
 
 	/**
@@ -4281,7 +4297,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$isHierarchicalTaxonomy = array();
 		}
 
-		$customPrefixes = DispatcherWpf::applyFilters( 'getCustomPrefixes', array(), false );
+		$customPrefixes = WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomPrefixes', array(), false );
 		if ( empty( $customPrefixes ) ) {
 			$taxonomyList = $param['taxonomy'];
 		} else {
@@ -4368,7 +4384,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		}
 
 		$taxonomyList = array();
-		$colorGroup   = DispatcherWpf::applyFilters( 'getColorGroupForExistTerms', array(), $param );
+		$colorGroup   = WooBeWoo_PF_Dispatcher::applyFilters( 'getColorGroupForExistTerms', array(), $param );
 		if ( ! empty( $colorGroup ) ) {
 			foreach ( $param['taxonomy'] as $key => $tax ) {
 				if ( key_exists( $tax, $colorGroup ) ) {
@@ -4412,7 +4428,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$termProducts = array();
 			}
 
-			$termProducts = DispatcherWpf::applyFilters(
+			$termProducts = WooBeWoo_PF_Dispatcher::applyFilters(
 				'addCustomAttributesSql',
 				$termProducts,
 				array(
@@ -4424,7 +4440,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				)
 			);
 		} else {
-			$sql['main']              = DispatcherWpf::applyFilters(
+			$sql['main']              = WooBeWoo_PF_Dispatcher::applyFilters(
 				'addCustomAttributesSql',
 				$sql['main'],
 				array(
@@ -4540,7 +4556,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 		if ( ! empty( $colorGroup ) && isset( $sql['color'] ) ) {
 			$termProducts = WooBeWoo_PF_Db::get( $sql['color'] );
-			$existTerms   = DispatcherWpf::applyFilters( 'getExistTermsColor', $existTerms, $colorGroup, $termProducts );
+			$existTerms   = WooBeWoo_PF_Dispatcher::applyFilters( 'getExistTermsColor', $existTerms, $colorGroup, $termProducts );
 		}
 
 		if ( isset( $isHierarchicalTaxonomy ) && ! empty( $isHierarchicalTaxonomy ) ) {
@@ -4734,6 +4750,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * Returns additional data on minimum and maximum prices and users.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param $args
 	 * @param $param
 	 *
@@ -4787,7 +4805,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 									}
 								}
 							}
-							list( $result['existsPrices']->decimal, $result['existsPrices']->dataStep ) = DispatcherWpf::applyFilters(
+							list( $result['existsPrices']->decimal, $result['existsPrices']->dataStep ) = WooBeWoo_PF_Dispatcher::applyFilters(
 								'getDecimal',
 								array(
 									0,
@@ -4834,7 +4852,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 										$name          = $setting['name'];
 										$data          = ReqWpf::get( 'get' );
 										unset( $data[ $name ] );
-										$args['meta_query'] = DispatcherWpf::applyFilters( 'addCustomMetaQueryPro', $args['meta_query'], $data, 'url' ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+										$args['meta_query'] = WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomMetaQueryPro', $args['meta_query'], $data, 'url' ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 										$filterLoop         = new WP_Query( $args );
 
 										if ( $filterLoop->have_posts() ) {
@@ -4842,7 +4860,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 											if ( ! empty( $listTable ) ) {
 												list( $existsTerms, $calcCategories ) = $this->getTerms( $listTable, $param, $result['exists'] );
-												$customPrefixes                       = DispatcherWpf::applyFilters( 'getCustomPrefixes', array(), false );
+												$customPrefixes                       = WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomPrefixes', array(), false );
 
 												foreach ( $customPrefixes as $prefix ) {
 
@@ -4905,6 +4923,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * Get logic for filtering.
 	 *
+	 * @version 3.3.2
+	 *
 	 * @return array
 	 */
 	public function getAttrFilterLogic( $mode = '' ) {
@@ -4923,7 +4943,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			),
 		);
 
-		$logic = DispatcherWpf::applyFilters( 'getAttrFilterLogic', $logic );
+		$logic = WooBeWoo_PF_Dispatcher::applyFilters( 'getAttrFilterLogic', $logic );
 
 		return empty( $mode ) ? $logic : ( isset( $logic[ $mode ] ) ? $logic[ $mode ] : array() );
 	}
@@ -4993,12 +5013,14 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getAttributesDisplay.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getAttributesDisplay( $withCustom = true ) {
 		$productAttr = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_get_attribute_taxonomies() : array();
 
 		if ( $withCustom ) {
-			$productAttr = DispatcherWpf::applyFilters( 'addCustomAttributes', $productAttr );
+			$productAttr = WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomAttributes', $productAttr );
 		}
 
 		$attrDisplay = array( 0 => esc_html__( 'Select...', 'woo-product-filter' ) );
@@ -5341,12 +5363,14 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getDefaultSettings.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getDefaultSettings() {
 		$defaults = array(
 			'force_theme_templates' => '',
 		);
-		return DispatcherWpf::applyFilters( 'getDefaultSettings', $defaults );
+		return WooBeWoo_PF_Dispatcher::applyFilters( 'getDefaultSettings', $defaults );
 	}
 
 	/**

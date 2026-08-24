@@ -91,7 +91,7 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 	/**
 	 * loadCoreJs.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function loadCoreJs() {
 		FrameWpf::_()->addScript( 'jquery' );
@@ -122,7 +122,7 @@ class WooBeWoo_PF_Templates extends ModuleWpf {
 		if ( is_admin() ) {
 			$jsData['isWCLicense'] = FrameWpf::_()->isWCLicense();
 		}
-		$jsData = DispatcherWpf::applyFilters( 'jsInitVariables', $jsData );
+		$jsData = WooBeWoo_PF_Dispatcher::applyFilters( 'jsInitVariables', $jsData );
 		FrameWpf::_()->addJSVar( 'woobewoo-pf-core', 'WPF_DATA', $jsData );
 		$this->loadTooltipster();
 	}

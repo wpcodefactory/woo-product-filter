@@ -71,7 +71,7 @@ class WooBeWoo_PF_Woofilters_Widget extends ModuleWpf {
 	/**
 	 * woofiltersElementorEditorScripts.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woofiltersElementorEditorScripts() {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
@@ -94,7 +94,7 @@ class WooBeWoo_PF_Woofilters_Widget extends ModuleWpf {
 			FrameWpf::_()->addScript( 'woobewoo-pf-frontend-multiselect', $modPath . 'js/frontend.multiselect.js' );
 			FrameWpf::_()->addJSVar( 'woobewoo-pf-admin-filters', 'wpfI18n', array( 'edit_category_label' => esc_html__( 'Enter custom category name', 'woo-product-filter' ) ) );
 
-			DispatcherWpf::doAction( 'woobewoo_pf_enqueue_admin_pro_assets' );
+			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_enqueue_admin_pro_assets' );
 
 			FrameWpf::_()->addStyle( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'css/admin.woofilters.elementor.css', false, WPF_VERSION );
 			FrameWpf::_()->addScript( 'woobewoo-pf-admin-woofilters-elementor', $modPathW . 'js/admin.woofilters.elementor.js', array( 'woobewoo-pf-admin-filters' ), WPF_VERSION, true );

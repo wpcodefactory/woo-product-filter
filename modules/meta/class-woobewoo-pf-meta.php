@@ -20,10 +20,12 @@ class WooBeWoo_PF_Meta extends ModuleWpf {
 
 	/**
 	 * init.
+	 *
+	 * @version 3.3.2
 	 */
 	public function init() {
 		parent::init();
-		DispatcherWpf::addFilter( 'optionsDefine', array( $this, 'addOptions' ) );
+		WooBeWoo_PF_Dispatcher::addFilter( 'optionsDefine', array( $this, 'addOptions' ) );
 		add_action( 'woocommerce_update_product', array( $this, 'recalcProductMetaValues' ), 99999, 1 );
 		add_action( 'acf/save_post', array( $this, 'recalcProductMetaValuesAcf' ), 99999, 1 );
 		add_action( 'woocommerce_product_set_stock_status', array( $this, 'recalcProductStockStatus' ), 100, 1 );

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Category
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -66,7 +66,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_select_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_select_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 <div class="row-settings-block wpfTypeSwitchable" data-not-type="buttons">
 	<div class="settings-block-label col-xs-4 col-sm-3">
@@ -100,7 +100,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_collapsible_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_collapsible_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 		<div class="settings-value wpfTypeSwitchable" data-not-type="buttons list dropdown" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
@@ -143,7 +143,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_check_page_and_current_page_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_check_page_and_current_page_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
 
 <div class="row-settings-block wpfTypeSwitchable" data-type="list dropdown">
 	<div class="settings-value settings-w100">
@@ -204,7 +204,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
 
 <?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -256,7 +256,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_sort_as_numbers_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_sort_as_numbers_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -504,4 +504,4 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_category_max_terms_and_switch_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_max_terms_and_switch_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

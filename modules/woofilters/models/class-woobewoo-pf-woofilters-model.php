@@ -21,7 +21,7 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 3.1.7
+	 * @version 3.3.2
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
@@ -177,7 +177,7 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 			);
 		}
 
-		return DispatcherWpf::applyFilters( 'addFilterTypes', $filterTypes );
+		return WooBeWoo_PF_Dispatcher::applyFilters( 'addFilterTypes', $filterTypes );
 	}
 
 	/**
@@ -492,6 +492,8 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 
 	/**
 	 * getDataFilterMetaKeys.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getDataFilterMetaKeys( $filters, $save = true ) {
 		$filters  = UtilsWpf::jsonDecode( $filters );
@@ -506,7 +508,7 @@ class WooBeWoo_PF_Woofilters_Model extends ModelWpf {
 			}
 		}
 
-		$metaKeys = DispatcherWpf::applyFilters( 'addCustomMetaKeys', $metaKeys, $filters );
+		$metaKeys = WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomMetaKeys', $metaKeys, $filters );
 		foreach ( $metaKeys as $k => $key ) {
 			$metaKeys[ $k ] = strtolower( $key );
 		}

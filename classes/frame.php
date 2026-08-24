@@ -180,7 +180,7 @@ class FrameWpf {
 
 		$this->_initModules();
 
-		DispatcherWpf::doAction( 'afterModulesInit' );
+		WooBeWoo_PF_Dispatcher::doAction( 'afterModulesInit' );
 
 		ModInstallerWpf::checkActivationMessages();
 

@@ -917,12 +917,17 @@ class WooBeWoo_PF_Meta_Model extends ModelWpf {
 		return ( empty( $matches ) ? false : true );
 	}
 
+	/**
+	 * controlMetaFieldType.
+	 *
+	 * @version 3.3.2
+	 */
 	public function controlMetaFieldType( $metaType, $keyName ) {
 		if ( 'wcb2b_product_group_prices' == $keyName ) {
 			$metaType = 8;
 		}
 
-		return DispatcherWpf::applyFilters( 'getMetaFieldType', $metaType, $keyName );
+		return WooBeWoo_PF_Dispatcher::applyFilters( 'getMetaFieldType', $metaType, $keyName );
 	}
 
 	public function saveMetaArraywcb2b_product_group_prices( $keyId, $productId, $isVar, $data ) {

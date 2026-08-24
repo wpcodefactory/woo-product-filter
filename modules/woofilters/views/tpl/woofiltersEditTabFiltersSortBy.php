@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Sort By
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -69,4 +69,4 @@ ViewWpf::display( 'woofiltersEditTabCommonTitle' );
 	</div>
 </div>
 
-<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSortBy' );
+<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortBy' );

@@ -52,7 +52,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'ViewWpf' );
 	importClassWpf( 'WooBeWoo_PF_Controller' );
 	importClassWpf( 'HelperWpf' );
-	importClassWpf( 'DispatcherWpf' );
+	importClassWpf( 'WooBeWoo_PF_Dispatcher' );
 	importClassWpf( 'FieldWpf' );
 	importClassWpf( 'TableWpf' );
 	importClassWpf( 'FrameWpf' );

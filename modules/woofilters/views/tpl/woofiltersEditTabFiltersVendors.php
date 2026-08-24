@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Vendors
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -23,4 +23,4 @@ ob_start();
 		</a>
 	<?php } ?>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_vendors_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_vendors_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

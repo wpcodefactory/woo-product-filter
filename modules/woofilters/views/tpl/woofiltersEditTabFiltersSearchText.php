@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Search Text
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -20,4 +20,4 @@ ob_start();
 	</a>
 	<?php } ?>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_search_text_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_search_text_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

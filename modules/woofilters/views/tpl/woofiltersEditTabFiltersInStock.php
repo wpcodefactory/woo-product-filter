@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters in Stock
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -34,7 +34,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersSwitchType' ); ?>
+<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSwitchType' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Dropdown label', 'woo-product-filter' ); ?>
@@ -133,4 +133,4 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_stock_use_as_default_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_stock_use_as_default_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

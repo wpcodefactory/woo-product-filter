@@ -10,8 +10,14 @@
 defined( 'ABSPATH' ) || exit;
 
 class WooBeWoo_PF_Admin_Nav_View extends ViewWpf {
+
+	/**
+	 * getBreadcrumbs.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getBreadcrumbs() {
-		$this->assign( 'breadcrumbsList', DispatcherWpf::applyFilters( 'mainBreadcrumbs', $this->getModule()->getBreadcrumbsList() ) );
+		$this->assign( 'breadcrumbsList', WooBeWoo_PF_Dispatcher::applyFilters( 'mainBreadcrumbs', $this->getModule()->getBreadcrumbsList() ) );
 		return parent::getContent( 'adminNavBreadcrumbs' );
 	}
 }

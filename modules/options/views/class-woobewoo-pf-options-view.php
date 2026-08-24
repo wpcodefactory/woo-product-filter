@@ -131,7 +131,7 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 	/**
 	 * getSettingsTabContent.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function getSettingsTabContent() {
 		FrameWpf::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
@@ -139,7 +139,7 @@ class WooBeWoo_PF_Options_View extends ViewWpf {
 		FrameWpf::_()->getModule( 'templates' )->loadJqueryUi();
 		FrameWpf::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
 
-		DispatcherWpf::doAction( 'woobewoo_pf_enqueue_admin_option_pro_assets' );
+		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_enqueue_admin_option_pro_assets' );
 
 		$options = FrameWpf::_()->getModule( 'options' )->getAll();
 		$this->assign( 'options', $options );

@@ -34,9 +34,14 @@ class WooBeWoo_PF_Adminmenu extends ModuleWpf {
 		return $links;
 	}
 
+	/**
+	 * initMenu.
+	 *
+	 * @version 3.3.2
+	 */
 	public function initMenu() {
 		$mainCap             = $this->getMainCap();
-		$mainSlug            = DispatcherWpf::applyFilters( 'adminMenuMainSlug', $this->_mainSlug );
+		$mainSlug            = WooBeWoo_PF_Dispatcher::applyFilters( 'adminMenuMainSlug', $this->_mainSlug );
 		$mainMenuPageOptions = array(
 			'page_title' => WPF_WP_PLUGIN_NAME,
 			'menu_title' => WPF_WP_PLUGIN_NAME,
@@ -44,7 +49,7 @@ class WooBeWoo_PF_Adminmenu extends ModuleWpf {
 			'menu_slug'  => $mainSlug,
 			'function'   => array( FrameWpf::_()->getModule( 'options' ), 'getAdminPage' ),
 		);
-		$mainMenuPageOptions = DispatcherWpf::applyFilters( 'adminMenuMainOption', $mainMenuPageOptions );
+		$mainMenuPageOptions = WooBeWoo_PF_Dispatcher::applyFilters( 'adminMenuMainOption', $mainMenuPageOptions );
 		if ( FrameWpf::_()->isWCLicense() ) {
 			add_submenu_page( 'woocommerce', $mainMenuPageOptions['menu_title'], $mainMenuPageOptions['menu_title'], $mainMenuPageOptions['capability'], $mainMenuPageOptions['menu_slug'], $mainMenuPageOptions['function'] );
 			return;
@@ -83,7 +88,7 @@ class WooBeWoo_PF_Adminmenu extends ModuleWpf {
 				);
 			}
 		}
-		$subMenus = DispatcherWpf::applyFilters( 'adminMenuOptions', $subMenus );
+		$subMenus = WooBeWoo_PF_Dispatcher::applyFilters( 'adminMenuOptions', $subMenus );
 		foreach ( $subMenus as $opt ) {
 			add_submenu_page( $mainSlug, $opt['title'], $opt['title'], $opt['capability'], $opt['menu_slug'], $opt['function'] );
 		}
@@ -103,7 +108,12 @@ class WooBeWoo_PF_Adminmenu extends ModuleWpf {
 		return $this->_mainSlug;
 	}
 
+	/**
+	 * getMainCap.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getMainCap() {
-		return DispatcherWpf::applyFilters( 'adminMenuAccessCap', $this->_mainCap );
+		return WooBeWoo_PF_Dispatcher::applyFilters( 'adminMenuAccessCap', $this->_mainCap );
 	}
 }

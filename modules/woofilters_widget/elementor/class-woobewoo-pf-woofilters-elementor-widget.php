@@ -84,7 +84,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 		}
 
 		// addScriptsContent
-		DispatcherWpf::doAction( 'woobewoo_pf_register_frontend_pro_assets' );
+		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_register_frontend_pro_assets' );
 
 		static::$adPath   = FrameWpf::_()->getModule( 'woofilters' )->getModPath() . 'img/ad/';
 		static::$labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );

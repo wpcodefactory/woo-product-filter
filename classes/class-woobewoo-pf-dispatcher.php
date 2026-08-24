@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - DispatcherWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Dispatcher Class
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class DispatcherWpf {
+class WooBeWoo_PF_Dispatcher {
 	protected static $_pref = 'wpf_';
 
 	public static function addAction( $tag, $function_to_add, $priority = 10, $accepted_args = 1 ) {

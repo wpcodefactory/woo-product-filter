@@ -14,10 +14,10 @@ class WooBeWoo_PF_Overview extends ModuleWpf {
 	/**
 	 * init.
 	 *
-	 * @version 2.8.6
+	 * @version 3.3.2
 	 */
 	public function init() {
-		DispatcherWpf::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
+		WooBeWoo_PF_Dispatcher::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 	}
 
 	/**

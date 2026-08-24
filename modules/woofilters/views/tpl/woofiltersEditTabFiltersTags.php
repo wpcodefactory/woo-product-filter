@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Tags
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -101,7 +101,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_tags_show_on_frontend_as_select_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_tags_show_on_frontend_as_select_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 <?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -174,7 +174,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 			<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_tags_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_tags_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 </div>
 <div class="row-settings-block">

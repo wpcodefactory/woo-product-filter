@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Price Range
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -130,7 +130,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_pirce_range_set_range_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_pirce_range_set_range_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Layout', 'woo-product-filter' ); ?>

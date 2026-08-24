@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters Perfect Brand
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -38,7 +38,7 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect' ); ?>
+<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersMultiSelect' ); ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3 wpfTypeSwitchable" data-not-type="buttons">
 		<?php esc_html_e( 'Show hierarchical', 'woo-product-filter' ); ?>
@@ -55,12 +55,12 @@ $pro_label = FrameWpf::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 			<?php HtmlWpf::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
-		<?php DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersHierarchicalOption' ); ?>
+		<?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersHierarchicalOption' ); ?>
 	</div>
 </div>
 <?php
-DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersButtonsType' );
-DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' );
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersButtonsType' );
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' );
 ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -109,7 +109,7 @@ DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' 
 				<?php HtmlWpf::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -343,4 +343,4 @@ DispatcherWpf::doAction( 'addEditTabFilters', 'partEditTabFiltersCategoryMulti' 
 		</div>
 	</div>
 </div>
-<?php echo DispatcherWpf::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

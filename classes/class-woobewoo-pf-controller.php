@@ -182,7 +182,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * Common method for list table data
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_get_list_for_table() {
 		ReqWpf::verifyRequest();
@@ -256,7 +256,7 @@ abstract class WooBeWoo_PF_Controller {
 		$res->addData( 'total', $totalPages );
 		$res->addData( 'rows', $data );
 		$res->addData( 'records', $model->getLastGetCount() );
-		$res = DispatcherWpf::applyFilters( $this->getCode() . '_getListForTblResults', $res );
+		$res = WooBeWoo_PF_Dispatcher::applyFilters( $this->getCode() . '_getListForTblResults', $res );
 		$res->ajaxExec();
 	}
 
