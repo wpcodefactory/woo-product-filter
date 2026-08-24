@@ -191,18 +191,18 @@ abstract class WooBeWoo_PF_Controller {
 	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_get_list_for_table() {
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 		$res = new ResponseWpf();
 		$res->ignoreShellData();
 		$model = $this->getModel();
 
-		$page      = (int) ReqWpf::getVar( 'page' );
-		$rowsLimit = (int) ReqWpf::getVar( 'rows' );
-		$orderBy   = ReqWpf::getVar( 'sidx' );
-		$sortOrder = ReqWpf::getVar( 'sord' ) == 'asc' ? 'asc' : 'desc';
+		$page      = (int) WooBeWoo_PF_Req::getVar( 'page' );
+		$rowsLimit = (int) WooBeWoo_PF_Req::getVar( 'rows' );
+		$orderBy   = WooBeWoo_PF_Req::getVar( 'sidx' );
+		$sortOrder = WooBeWoo_PF_Req::getVar( 'sord' ) == 'asc' ? 'asc' : 'desc';
 
 		// Our custom search
-		$search = ReqWpf::getVar( 'search' );
+		$search = WooBeWoo_PF_Req::getVar( 'search' );
 		if ( $search && ! empty( $search ) && is_array( $search ) ) {
 			foreach ( $search as $k => $v ) {
 				$v = trim( $v );
@@ -220,10 +220,10 @@ abstract class WooBeWoo_PF_Controller {
 			}
 		}
 		// jqGrid search
-		$isSearch = ReqWpf::getVar( '_search' );
+		$isSearch = WooBeWoo_PF_Req::getVar( '_search' );
 		if ( $isSearch ) {
-			$searchField  = trim( ReqWpf::getVar( 'searchField', 'all', '' ) );
-			$searchString = trim( ReqWpf::getVar( 'searchString', 'all', '' ) );
+			$searchField  = trim( WooBeWoo_PF_Req::getVar( 'searchField', 'all', '' ) );
+			$searchString = trim( WooBeWoo_PF_Req::getVar( 'searchString', 'all', '' ) );
 			if ( ! empty( $searchField ) && ! empty( $searchString ) ) {
 				// For some cases - we will need to modify search keys and/or values before put it to the model
 				$model->addWhere( array( $this->_prepareSearchField( $searchField ) => $this->_prepareSearchString( $searchString ) ) );
@@ -269,14 +269,14 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_remove_group.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_remove_group() {
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 
 		$res = new ResponseWpf();
 		if (
-			$this->getModel()->woobewoo_pf_remove_group( ReqWpf::getVar( 'listIds', 'post' ) )
+			$this->getModel()->woobewoo_pf_remove_group( WooBeWoo_PF_Req::getVar( 'listIds', 'post' ) )
 		) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {

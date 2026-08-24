@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_User extends ModuleWpf {
+class WooBeWoo_PF_User extends WooBeWoo_PF_Module {
 
 	protected $_data       = array();
 	protected $_curentID   = 0;

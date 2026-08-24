@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - ResponseWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -54,8 +54,13 @@ class ResponseWpf {
 	 */
 	private $_ignoreShellData = false;
 
+	/**
+	 * getReqType.
+	 *
+	 * @version 3.3.2
+	 */
 	public function getReqType() {
-		return ReqWpf::getVar( 'reqType' );
+		return WooBeWoo_PF_Req::getVar( 'reqType' );
 	}
 
 	public function isAjax() {
@@ -65,17 +70,17 @@ class ResponseWpf {
 	/**
 	 * ajaxExec.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function ajaxExec( $forceAjax = false ) {
 		$isAjax   = $this->isAjax();
-		$redirect = ReqWpf::getVar( 'redirect' );
+		$redirect = WooBeWoo_PF_Req::getVar( 'redirect' );
 		if ( count( $this->errors ) > 0 ) {
 			$this->error = true;
 		}
 		if ( $isAjax || $forceAjax ) {
 			echo wp_json_encode( $this );
-			ReqWpf::endSession();
+			WooBeWoo_PF_Req::endSession();
 			exit();
 		}
 

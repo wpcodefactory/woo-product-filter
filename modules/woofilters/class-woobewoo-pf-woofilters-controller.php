@@ -227,7 +227,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	 */
 	public function woobewoo_pf_draw_filter_ajax() {
 		$res  = new ResponseWpf();
-		$data = ReqWpf::get( 'post' );
+		$data = WooBeWoo_PF_Req::get( 'post' );
 		if ( isset( $data ) && $data ) {
 			if ( ! empty( $data['settings']['filters']['order'] ) ) {
 				$metaKeys = $this->getDataFilterMetaKeys( stripcslashes( $data['settings']['filters']['order'] ) );
@@ -263,10 +263,10 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			}
 		}
 
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 
 		$res = new ResponseWpf();
-		$id  = $this->getModel( 'woofilters' )->save( ReqWpf::get( 'post' ) );
+		$id  = $this->getModel( 'woofilters' )->save( WooBeWoo_PF_Req::get( 'post' ) );
 		if ( false != $id ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 			$res->addData( 'edit_link', $this->getModule()->getEditLink( $id ) );
@@ -284,11 +284,11 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_save_category_label.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 * @since   3.1.7
 	 */
 	public function woobewoo_pf_save_category_label() {
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 		$term_id = isset( $_POST['term_id'] ) ? absint( $_POST['term_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$label   = isset( $_POST['label'] ) ? sanitize_text_field( wp_unslash( $_POST['label'] ) ) : '';  // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( ! $term_id || $label === '' ) {
@@ -309,14 +309,14 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_delete_by_id.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_delete_by_id() {
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 
 		$res = new ResponseWpf();
 
-		if ( $this->getModel( 'woofilters' )->delete( ReqWpf::get( 'post' ) ) != false ) {
+		if ( $this->getModel( 'woofilters' )->delete( WooBeWoo_PF_Req::get( 'post' ) ) != false ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
 			$res->pushError( $this->getModel( 'woofilters' )->getErrors() );
@@ -328,13 +328,13 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * createTable.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function createTable() {
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 
 		$res = new ResponseWpf();
-		$id  = $this->getModel( 'woofilters' )->save( ReqWpf::get( 'post' ) );
+		$id  = $this->getModel( 'woofilters' )->save( WooBeWoo_PF_Req::get( 'post' ) );
 		if ( false != $id ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 			$res->addData( 'edit_link', $this->getModule()->getEditLink( $id ) );
@@ -356,7 +356,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	public function woobewoo_pf_filters_frontend() {
 		$res = new ResponseWpf();
 
-		$params = ReqWpf::get( 'post' );
+		$params = WooBeWoo_PF_Req::get( 'post' );
 
 		$filtersDataBackend          = UtilsWpf::jsonDecode( stripslashes( $params['filtersDataBackend'] ) );
 		$queryvars                   = UtilsWpf::jsonDecode( stripslashes( $params['queryvars'] ) );
@@ -830,12 +830,12 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_get_taxonomy_terms.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_get_taxonomy_terms() {
 
 		$res   = new ResponseWpf();
-		$slug  = ReqWpf::getVar( 'slug' );
+		$slug  = WooBeWoo_PF_Req::getVar( 'slug' );
 		$terms = array();
 		$keys  = array();
 		if ( ! is_null( $slug ) ) {

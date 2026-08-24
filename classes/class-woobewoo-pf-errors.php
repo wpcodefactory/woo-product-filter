@@ -43,7 +43,7 @@ class WooBeWoo_PF_Errors {
 		} else {
 			$sesErrors[] = $error;
 		}
-		ReqWpf::setVar( 'sesErrors', $sesErrors, 'session' );
+		WooBeWoo_PF_Req::setVar( 'sesErrors', $sesErrors, 'session' );
 	}
 
 	/**
@@ -52,7 +52,7 @@ class WooBeWoo_PF_Errors {
 	 * @version 3.3.2
 	 */
 	public static function init() {
-		$wpfErrors = ReqWpf::getVar( 'wpfErrors' );
+		$wpfErrors = WooBeWoo_PF_Req::getVar( 'wpfErrors' );
 		if ( ! empty( $wpfErrors ) ) {
 			if ( ! is_array( $wpfErrors ) ) {
 				$wpfErrors = array( $wpfErrors );
@@ -82,11 +82,23 @@ class WooBeWoo_PF_Errors {
 		}
 		return $content;
 	}
+
+	/**
+	 * getSession.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function getSession() {
-		return ReqWpf::getVar( 'sesErrors', 'session' );
+		return WooBeWoo_PF_Req::getVar( 'sesErrors', 'session' );
 	}
+
+	/**
+	 * clearSession.
+	 *
+	 * @version 3.3.2
+	 */
 	public static function clearSession() {
-		ReqWpf::clearVar( 'sesErrors', 'session' );
+		WooBeWoo_PF_Req::clearVar( 'sesErrors', 'session' );
 	}
 	public static function get( $type = '' ) {
 		$res = array();

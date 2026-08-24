@@ -232,8 +232,8 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		}
 
 		$recalculateFilters = $this->getFilterSetting( $settings['settings'], 'recalculate_filters', false );
-		if ( '1' === ReqWpf::getVar( 'wpf_skip' ) && ! $recalculateFilters ) {
-			$fid = ReqWpf::getVar( 'wpf_fid' );
+		if ( '1' === WooBeWoo_PF_Req::getVar( 'wpf_skip' ) && ! $recalculateFilters ) {
+			$fid = WooBeWoo_PF_Req::getVar( 'wpf_fid' );
 			if ( $fid ) {
 				$this->assign( 'html', '<div class="wpfExistsTermsJS" data-fid="' . esc_attr( $fid ) . '"></div>' );
 				return parent::getContent( 'woofiltersHtml' );
@@ -448,7 +448,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 * @return void
 	 */
 	public function addPluginCustomStyles( $modPath, $isCustomStyle ) {
-		$params = ReqWpf::get( 'get' );
+		$params = WooBeWoo_PF_Req::get( 'get' );
 		if ( $isCustomStyle && ( ! is_admin() || ( isset( $params['page'] ) && 'wpf-filters' === $params['page'] ) ) ) {
 			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-custom-filters', $modPath . 'css/custom.woofilters.css' );
 		}
@@ -470,7 +470,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$html .= '<p class="woocommerce-result-count"></p>';
 		$html .= '<ul class="products columns-4"></ul>';
 		$html .= '<nav class="woocommerce-pagination"></nav>';
-		if ( ReqWpf::getVar( 'wpf_skip' ) != '1' ) {
+		if ( WooBeWoo_PF_Req::getVar( 'wpf_skip' ) != '1' ) {
 			wp_add_inline_script(
 				'woobewoo-pf-frontend-filters',
 				'jQuery(function($){
@@ -1042,7 +1042,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	/**
 	 * generatePriceFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public function generatePriceFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		// Find min and max price in current result set.
@@ -1054,7 +1054,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 
 		$settings['minPrice'] = '0' === $prices->wpfMinPrice ? '0.01' : $prices->wpfMinPrice;
 		$settings['maxPrice'] = $prices->wpfMaxPrice;
-		$noActive             = ( ReqWpf::getVar( 'wpf_min_price', 'all', -1 ) >= 0 && ReqWpf::getVar( 'wpf_max_price', 'all', -1 ) >= 0 ) ? '' : 'wpfNotActive';
+		$noActive             = ( WooBeWoo_PF_Req::getVar( 'wpf_min_price', 'all', -1 ) >= 0 && WooBeWoo_PF_Req::getVar( 'wpf_max_price', 'all', -1 ) >= 0 ) ? '' : 'wpfNotActive';
 
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
@@ -1246,7 +1246,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		if ( ! $htmlOpt ) {
 			$htmlOpt = esc_html__( 'Price range filter is empty. Please setup filter correctly.', 'woo-product-filter' );
 		}
-		$noActive = ReqWpf::getVar( 'wpf_min_price' ) && ReqWpf::getVar( 'wpf_max_price' ) ? '' : 'wpfNotActive';
+		$noActive = WooBeWoo_PF_Req::getVar( 'wpf_min_price' ) && WooBeWoo_PF_Req::getVar( 'wpf_max_price' ) ? '' : 'wpfNotActive';
 
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . ( empty( $defaultRange ) ? '' : ' wpfPreselected' ) . '"' .
@@ -1295,8 +1295,8 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$options = $this->getFilterSetting( $settings, 'f_options[]', false );
 		$options = explode( ',', $options );
 
-		if ( ReqWpf::getVar( 'orderby' ) ) {
-			$optionsSelected = ReqWpf::getVar( 'orderby' );
+		if ( WooBeWoo_PF_Req::getVar( 'orderby' ) ) {
+			$optionsSelected = WooBeWoo_PF_Req::getVar( 'orderby' );
 		} else {
 			$optionsSelected = $this->getFilterUrlData( 'pr_sortby' );
 		}
@@ -1339,8 +1339,8 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			$perPageList = explode( ',', $this->getFilterSetting( $settings, 'f_per_page_list', '48,24,12' ) );
 			$perPageLeft = $this->getFilterSetting( $settings, 'f_per_page_position', 'left' ) == 'left';
 			$perPage     = '<select class="wpfPerPageDD">';
-			if ( ReqWpf::getVar( 'wpf_count' ) ) {
-				$countSelected = ReqWpf::getVar( 'wpf_count' );
+			if ( WooBeWoo_PF_Req::getVar( 'wpf_count' ) ) {
+				$countSelected = WooBeWoo_PF_Req::getVar( 'wpf_count' );
 			} else {
 				$countSelected = empty( $perPageList ) ? 0 : $perPageList[0];
 			}
@@ -1535,7 +1535,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 
 		$currentCategoryId = 0;
 		if ( $this->getFilterSetting( $settings, 'f_hide_page_category', false ) ) {
-			$path     = wp_parse_url( ReqWpf::getVar( 'REQUEST_URI', 'server' ), PHP_URL_PATH );
+			$path     = wp_parse_url( WooBeWoo_PF_Req::getVar( 'REQUEST_URI', 'server' ), PHP_URL_PATH );
 			$parts    = explode( '/', $path );
 			$slug     = $parts[ count( $parts ) - 1 ];
 			$category = get_term_by( 'slug', $slug, 'product_cat' );
@@ -2167,7 +2167,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 
 			$users[] = $u;
 
-			if ( strpos( ReqWpf::getVar( 'pr_author', 'all', '' ), $user->user_nicename ) !== false ) {
+			if ( strpos( WooBeWoo_PF_Req::getVar( 'pr_author', 'all', '' ), $user->user_nicename ) !== false ) {
 				$userSelectedSlugs[] = $user->user_nicename;
 				$filter['is_slugs']  = true;
 			}
@@ -2204,7 +2204,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			$htmlOpt      = $this->getMultiSelectHtml( $htmlOpt, $settings );
 		}
 
-		$noActive = ReqWpf::getVar( 'pr_author' ) ? '' : 'wpfNotActive';
+		$noActive = WooBeWoo_PF_Req::getVar( 'pr_author' ) ? '' : 'wpfNotActive';
 
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
@@ -2256,7 +2256,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$u->slug    = '1';
 		$feature[]  = $u;
 
-		$featureSelected = array( ReqWpf::getVar( $filterName ) );
+		$featureSelected = array( WooBeWoo_PF_Req::getVar( $filterName ) );
 
 		$frontendTypes                         = array( 'list' );
 		$type                                  = $this->getFilterSetting( $filter['settings'], 'f_frontend_type', 'list', null, WooBeWoo_PF_Dispatcher::applyFilters( 'getFrontendFilterTypes', $frontendTypes, $filter['id'] ) );
@@ -2288,7 +2288,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			);
 		}
 
-		$noActive = ReqWpf::getVar( 'pr_featured' ) ? '' : 'wpfNotActive';
+		$noActive = WooBeWoo_PF_Req::getVar( 'pr_featured' ) ? '' : 'wpfNotActive';
 		$html     =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
 
@@ -2581,11 +2581,11 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	/**
 	 * generateRatingFilterHtml.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public function generateRatingFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName     = 'pr_rating';
-		$ratingSelected = ReqWpf::getVar( $filterName );
+		$ratingSelected = WooBeWoo_PF_Req::getVar( $filterName );
 
 		$settings                              = $this->getFilterSetting( $filter, 'settings', array() );
 		$type                                  = $this->getFilterSetting( $settings, 'f_frontend_type', 'list', null, array( 'list', 'dropdown', 'mul_dropdown' ) );
@@ -2651,7 +2651,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 			$wrapperEnd   = '</select>';
 		}
 
-		$noActive = ReqWpf::getVar( $filterName ) ? '' : 'wpfNotActive';
+		$noActive = WooBeWoo_PF_Req::getVar( $filterName ) ? '' : 'wpfNotActive';
 
 		$html =
 			'<div class="wpfFilterWrapper ' . $noActive . '"' .
@@ -3487,8 +3487,8 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 		$html    = '';
 		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
 
-		$minValue  = ReqWpf::getVar( 'wpf_min_price' );
-		$maxValue  = ReqWpf::getVar( 'wpf_max_price' );
+		$minValue  = WooBeWoo_PF_Req::getVar( 'wpf_min_price' );
+		$maxValue  = WooBeWoo_PF_Req::getVar( 'wpf_max_price' );
 		$urlRange  = $minValue . ',' . $maxValue;
 		$type      = $filter['settings']['f_frontend_type'];
 		$underOver = $this->getFilterSetting( $filter['settings'], 'f_under_over', false );
@@ -3575,7 +3575,7 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 				$html      .= '<li data-range="' . ( $selected ? $urlRange : '' ) . '"><' . $tagWrapper . ' class="wpfLiLabel">';
 				$html      .= '<span class="wpfCheckbox wpfPriceCheckboxCustom"><input type="checkbox" id="' . $checkId . '"' . ( $selected ? ' checked' : '' ) . '><label aria-label="' . esc_attr( $customText ) . '" for="' . $checkId . '"></label></span>';
 				$html      .= '<span class="wpfDisplay"><span class="wpfValue">' . $customText . '</span></span>';
-				$html      .= '<span class="wpfPriceRangeCustom"><input class="passiveFilter" type="text" name="wpf_custom_min" value="' . ( $selected ? ReqWpf::getVar( 'wpf_min_price' ) : '' ) . '" aria-label="' . esc_html__( 'Minimum Price', 'woo-product-filter' ) . '"> - <input class="passiveFilter" type="text" name="wpf_custom_max"  value="' . ( $selected ? ReqWpf::getVar( 'wpf_max_price' ) : '' ) . '" aria-label="' . esc_html__( 'Maximum Price', 'woo-product-filter' ) . '"><i class="fa fa-chevron-right"></i></span>';
+				$html      .= '<span class="wpfPriceRangeCustom"><input class="passiveFilter" type="text" name="wpf_custom_min" value="' . ( $selected ? WooBeWoo_PF_Req::getVar( 'wpf_min_price' ) : '' ) . '" aria-label="' . esc_html__( 'Minimum Price', 'woo-product-filter' ) . '"> - <input class="passiveFilter" type="text" name="wpf_custom_max"  value="' . ( $selected ? WooBeWoo_PF_Req::getVar( 'wpf_max_price' ) : '' ) . '" aria-label="' . esc_html__( 'Maximum Price', 'woo-product-filter' ) . '"><i class="fa fa-chevron-right"></i></span>';
 				$html      .= '</' . $tagWrapper . '></li>';
 			}
 		} else {
@@ -3960,11 +3960,11 @@ class WooBeWoo_PF_Woofilters_View extends ViewWpf {
 	 * @version 3.3.2
 	 */
 	public function getFilterUrlData( $filterName, $defFilterName = '' ) {
-		$data = ReqWpf::getVar( $filterName );
+		$data = WooBeWoo_PF_Req::getVar( $filterName );
 		if ( is_null( $data ) ) {
 			preg_match( '/(filter_cat|filter_pwb|product_tag|wpf_filter_cat|wpf_filter_pwb).*/', $filterName, $matches );
 			if ( isset( $matches[1] ) ) {
-				$data = ReqWpf::getFilterRedirect( $matches[1] );
+				$data = WooBeWoo_PF_Req::getFilterRedirect( $matches[1] );
 			}
 		}
 		if ( empty( $data ) || is_null( $data ) ) {

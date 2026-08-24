@@ -238,7 +238,7 @@ class WooBeWoo_PF_Field {
 			$type        = $this->checkVarFromParam( $param, 'type' );
 			$label       = $this->checkVarFromParam( $param, 'label' );
 			$helper      = $this->checkVarFromParam( $param, 'WooBeWoo_PF_Helper' );
-			$module      = $this->checkVarFromParam( $param, 'ModuleWpf' );
+			$module      = $this->checkVarFromParam( $param, 'WooBeWoo_PF_Module' );
 			$values      = $this->checkVarFromParam( $param, 'values' );
 			$default     = $this->checkVarFromParam( $param, 'default' );
 			$description = $this->checkVarFromParam( $param, 'description' );
@@ -250,7 +250,7 @@ class WooBeWoo_PF_Field {
 				'type'        => $type,
 				'label'       => $label,
 				'WooBeWoo_PF_Helper'   => $helper,
-				'ModuleWpf'   => $module,
+				'WooBeWoo_PF_Module'   => $module,
 				'values'      => $values,
 				'default'     => $default,
 				'description' => $description,

@@ -47,7 +47,7 @@ if ( trueRequestWpf() ) {
 	importClassWpf( 'WooBeWoo_PF_Db' );
 	importClassWpf( 'WooBeWoo_PF_Installer' );
 	importClassWpf( 'WooBeWoo_PF_Base_Object' );
-	importClassWpf( 'ModuleWpf' );
+	importClassWpf( 'WooBeWoo_PF_Module' );
 	importClassWpf( 'WooBeWoo_PF_Model' );
 	importClassWpf( 'ViewWpf' );
 	importClassWpf( 'WooBeWoo_PF_Controller' );
@@ -63,7 +63,7 @@ if ( trueRequestWpf() ) {
 	 * @deprecated since version 1.0.1
 	 */
 	importClassWpf( 'WooBeWoo_PF_Lang' );
-	importClassWpf( 'ReqWpf' );
+	importClassWpf( 'WooBeWoo_PF_Req' );
 	importClassWpf( 'UriWpf' );
 	importClassWpf( 'WooBeWoo_PF_Html' );
 	importClassWpf( 'ResponseWpf' );

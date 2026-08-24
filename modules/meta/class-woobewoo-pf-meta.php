@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Meta extends ModuleWpf {
+class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 
 	/**
 	 * Properties.
@@ -68,9 +68,11 @@ class WooBeWoo_PF_Meta extends ModuleWpf {
 
 	/**
 	 * recalcAfterImporting.
+	 *
+	 * @version 3.3.2
 	 */
 	public function recalcAfterImporting( $steps ) {
-		$step = ReqWpf::getVar( 'step' );
+		$step = WooBeWoo_PF_Req::getVar( 'step' );
 		if ( ! is_null( $step ) && 'done' == $step && ! $this->isDisabledAutoindexing() ) {
 			wp_schedule_single_event( time() + 1, 'wpf_calc_meta_indexing' );
 		}

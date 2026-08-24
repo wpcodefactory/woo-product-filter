@@ -25,11 +25,11 @@ class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_do_meta_indexing.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_do_meta_indexing( $realAjax = true ) {
 		if ( $realAjax ) {
-			ReqWpf::verifyRequest();
+			WooBeWoo_PF_Req::verifyRequest();
 		} elseif ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error(
 				array(
@@ -41,7 +41,7 @@ class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 
 		$res = new ResponseWpf();
 
-		if ( ReqWpf::getVar( 'inCron' ) ) {
+		if ( WooBeWoo_PF_Req::getVar( 'inCron' ) ) {
 			if ( ! wp_next_scheduled( 'wpf_calc_meta_indexing' ) ) {
 				wp_schedule_single_event( time() + 3, 'wpf_calc_meta_indexing' );
 			}
@@ -61,10 +61,10 @@ class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_do_meta_optimizing.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_do_meta_optimizing() {
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 
 		$res = new ResponseWpf();
 		if ( $this->getModel()->optimizeMetaTables() ) {

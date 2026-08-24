@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - UtilsWpf Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
@@ -517,9 +517,11 @@ class UtilsWpf {
 
 	/**
 	 * isPluginsPage.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function isPluginsPage() {
-		return ( basename( ReqWpf::getVar( 'SCRIPT_NAME', 'server' ) ) === 'plugins.php' );
+		return ( basename( WooBeWoo_PF_Req::getVar( 'SCRIPT_NAME', 'server' ) ) === 'plugins.php' );
 	}
 
 	/**
@@ -783,10 +785,12 @@ class UtilsWpf {
 
 	/**
 	 * getReferalUrl.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function getReferalUrl() {
 		// Simple for now
-		return ReqWpf::getVar( 'HTTP_REFERER', 'server' );
+		return WooBeWoo_PF_Req::getVar( 'HTTP_REFERER', 'server' );
 	}
 
 	/**

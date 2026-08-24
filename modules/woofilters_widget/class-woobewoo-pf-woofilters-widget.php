@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Woofilters_Widget extends ModuleWpf {
+class WooBeWoo_PF_Woofilters_Widget extends WooBeWoo_PF_Module {
 
 	/**
 	 * Init.

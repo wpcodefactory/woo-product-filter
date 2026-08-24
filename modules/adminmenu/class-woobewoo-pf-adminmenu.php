@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Adminmenu extends ModuleWpf {
+class WooBeWoo_PF_Adminmenu extends WooBeWoo_PF_Module {
 
 	protected $_mainSlug = 'wpf-filters';
 

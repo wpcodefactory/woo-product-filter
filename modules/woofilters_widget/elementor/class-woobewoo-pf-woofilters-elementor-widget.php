@@ -78,7 +78,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 		wp_register_script( 'jquery-ui-slider', '', false, WPF_VERSION, false );
 
 		// addPluginCustomStyles
-		$params = ReqWpf::get( 'get' );
+		$params = WooBeWoo_PF_Req::get( 'get' );
 		if ( ! is_admin() || ( isset( $params['page'] ) && 'wpf-filters' === $params['page'] ) ) {
 			wp_register_style( 'woobewoo-pf-custom-filters', $modPath . 'css/custom.woofilters.css', false, WPF_VERSION );
 		}

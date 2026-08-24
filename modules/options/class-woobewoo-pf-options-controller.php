@@ -14,13 +14,13 @@ class WooBeWoo_PF_Options_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_save_group.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_save_group() {
-		ReqWpf::verifyRequest();
+		WooBeWoo_PF_Req::verifyRequest();
 
 		$res = new ResponseWpf();
-		if ( $this->getModel()->woobewoo_pf_save_group( ReqWpf::get( 'post' ) ) ) {
+		if ( $this->getModel()->woobewoo_pf_save_group( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
 			$res->pushError( $this->getModel( 'options' )->getErrors() );

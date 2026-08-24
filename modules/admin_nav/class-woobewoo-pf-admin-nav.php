@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Admin_Nav extends ModuleWpf {
+class WooBeWoo_PF_Admin_Nav extends WooBeWoo_PF_Module {
 
 	/**
 	 * getBreadcrumbsList.
@@ -40,7 +40,7 @@ class WooBeWoo_PF_Admin_Nav extends ModuleWpf {
 					}
 				}
 				if ( 'comparison_edit' == $activeTab || 'woofilters_edit' == $activeTab ) {
-					$id = (int) ReqWpf::getVar( 'id', 'get' );
+					$id = (int) WooBeWoo_PF_Req::getVar( 'id', 'get' );
 					if ( $id ) {
 						$tabs[ $activeTab ]['url'] .= '&id=' . $id;
 					}

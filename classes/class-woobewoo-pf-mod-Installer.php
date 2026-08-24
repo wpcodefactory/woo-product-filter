@@ -24,11 +24,11 @@ class WooBeWoo_PF_Mod_Installer {
 	private static $extPlugName = '';
 
 	/**
-	 * Install new ModuleWpf into plugin.
+	 * Install new WooBeWoo_PF_Module into plugin.
 	 *
 	 * @version 3.3.2
 	 *
-	 * @param string $module new ModuleWpf data (@see classes/tables/modules.php)
+	 * @param string $module new WooBeWoo_PF_Module data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
 	 * @return bool true - if install success, else - false
 	 */
@@ -142,17 +142,17 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * _getPluginLocations.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	private static function _getPluginLocations() {
 		$locations = array();
-		$plug      = ReqWpf::getVar( 'plugin' );
+		$plug      = WooBeWoo_PF_Req::getVar( 'plugin' );
 		if ( ( empty( $plug ) || is_array( $plug ) ) && ! empty( self::$extPlugName ) ) {
 			$plug = self::$extPlugName;
 		}
 
 		if ( empty( $plug ) ) {
-			$plug = ReqWpf::getVar( 'checked' );
+			$plug = WooBeWoo_PF_Req::getVar( 'checked' );
 			if ( isset( $plug[0] ) ) {
 				$plug = $plug[0];
 			}

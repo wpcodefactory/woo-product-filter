@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Options extends ModuleWpf {
+class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 
 	/**
 	 * _tabs.
@@ -57,7 +57,7 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 		}
 
 		if ( $isMultiLogicOr ) {
-			ReqWpf::startSession();
+			WooBeWoo_PF_Req::startSession();
 		}
 	}
 
@@ -196,9 +196,11 @@ class WooBeWoo_PF_Options extends ModuleWpf {
 
 	/**
 	 * getActiveTab.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getActiveTab() {
-		$reqTab = sanitize_text_field( ReqWpf::getVar( 'tab' ) );
+		$reqTab = sanitize_text_field( WooBeWoo_PF_Req::getVar( 'tab' ) );
 		return empty( $reqTab ) ? 'woofilters' : $reqTab;
 	}
 

@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Woofilters extends ModuleWpf {
+class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 
 	/**
 	 * Properties.
@@ -74,7 +74,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 		if ( is_admin() ) {
 			add_action( 'admin_notices', array( $this, 'showAdminErrors' ) );
-		} elseif ( '1' !== ReqWpf::getVar( 'wpf_skip' ) ) {
+		} elseif ( '1' !== WooBeWoo_PF_Req::getVar( 'wpf_skip' ) ) {
 			if ( ! class_exists( 'Popup_Maker' ) ) {
 				add_action( 'wp_enqueue_scripts', array( $this, 'addScriptsLisener' ), 999 );
 			}
@@ -167,7 +167,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			);
 		}
 		if ( ! is_admin() ) {
-			if ( ReqWpf::getVar( 'customize_theme', 'get' ) != 'sydney' || ReqWpf::getVar( 'customize_messenger_channel', 'get' ) != 'preview-0' ) {
+			if ( WooBeWoo_PF_Req::getVar( 'customize_theme', 'get' ) != 'sydney' || WooBeWoo_PF_Req::getVar( 'customize_messenger_channel', 'get' ) != 'preview-0' ) {
 				add_filter( 'loop_shop_per_page', array( $this, 'newLoopShopPerPage' ), 99999 );
 			}
 		}
@@ -239,7 +239,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			99
 		);
 		if ( isset( $_GET['type_aws'] ) && isset( $_GET['aws_filter'] ) && $this->isFiltered( false ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			ReqWpf::clearVar( 'type_aws', 'get' );
+			WooBeWoo_PF_Req::clearVar( 'type_aws', 'get' );
 		}
 
 		// Qi Addons For Elementor
@@ -251,11 +251,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		add_filter( 'pre_do_shortcode_tag', array( $this, 'getOtherShortcodeAttr' ), 10, 3 );
 
 		$actions = array( 'woo_product_pagination', 'woo_product_pagination_product', 'get_woo_products', 'uael_get_products' );
-		if ( in_array( ReqWpf::getVar( 'action', 'post' ), $actions ) && ReqWpf::getVar( 'with_wpf_filter', 'post' ) ) {
-			parse_str( ReqWpf::getVar( 'with_wpf_filter', 'post' ), $addParams );
+		if ( in_array( WooBeWoo_PF_Req::getVar( 'action', 'post' ), $actions ) && WooBeWoo_PF_Req::getVar( 'with_wpf_filter', 'post' ) ) {
+			parse_str( WooBeWoo_PF_Req::getVar( 'with_wpf_filter', 'post' ), $addParams );
 			if ( is_array( $addParams ) ) {
 				foreach ( $addParams as $k => $v ) {
-					ReqWpf::setVar( $k, urldecode( $v ), 'get' );
+					WooBeWoo_PF_Req::setVar( $k, urldecode( $v ), 'get' );
 				}
 			}
 		}
@@ -306,15 +306,17 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * addFilterAgrsToQuery.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addFilterAgrsToQuery( $args ) {
-		$data   = ReqWpf::get( 'post' );
+		$data   = WooBeWoo_PF_Req::get( 'post' );
 		$params = array();
 		if ( is_array( $data ) && isset( $data['action'] ) && ( 'dipl_get_woo_products' == $data['action'] ) && ! empty( $data['query_vars'] ) ) {
 			$params = $data['query_vars'];
 		}
 		foreach ( $params as $k => $v ) {
-			ReqWpf::setVar( $k, urldecode( $v ), 'get' );
+			WooBeWoo_PF_Req::setVar( $k, urldecode( $v ), 'get' );
 		}
 		$args = $this->loadShortcodeProductsFilter( $args, array( 'wpf-compatibility' => 1 ) );
 		return $args;
@@ -360,7 +362,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$args = $this->mainWCQuery;
 		}
 
-		if ( ! ReqWpf::getVar( 'wpf_count' ) ) {
+		if ( ! WooBeWoo_PF_Req::getVar( 'wpf_count' ) ) {
 			$args['posts_per_page'] = count( $ids );
 		}
 
@@ -417,7 +419,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * addElementorParamsToPagenationLinks.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public function addElementorParamsToPagenationLinks( $widget_content ) {
 		$pattern = '/<a\s+[^>]*class=["\'][^"\']*page-numbers[^"\']*["\'][^>]*href=["\']([^"\']+)["\'][^>]*>/i';
@@ -433,7 +435,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					parse_str( $urlParts['query'], $existingParams );
 				}
 
-				$get = ReqWpf::get( 'get' );
+				$get = WooBeWoo_PF_Req::get( 'get' );
 				foreach ( $get as $key => $value ) {
 					if ( strpos( $key, 'e-page-' ) === 0 || 'product-page' === $key ) {
 						unset( $get[ $key ] );
@@ -470,7 +472,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * forceProductFilter.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public function forceProductFilter( $query ) {
 
@@ -497,15 +499,15 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$blocksApi = strpos( $uri, 'wp-json/wc/store/' ) && strpos( $uri, '/products?' );
 		}
 		if ( ! $existFilter ) {
-			if ( ReqWpf::existGetVar( 'wpf_' ) ) {
+			if ( WooBeWoo_PF_Req::existGetVar( 'wpf_' ) ) {
 				$existFilter = true;
 			}
-			if ( ReqWpf::getVar( 'action', 'post' ) == 'divi_filter_loadmore_ajax_handler' && ReqWpf::getVar( 'with_wpf_filter', 'post' ) ) {
+			if ( WooBeWoo_PF_Req::getVar( 'action', 'post' ) == 'divi_filter_loadmore_ajax_handler' && WooBeWoo_PF_Req::getVar( 'with_wpf_filter', 'post' ) ) {
 				if ( isset( $query->query_vars['post_type'] ) && 'product' == $query->query_vars['post_type'] ) {
-					parse_str( ReqWpf::getVar( 'with_wpf_filter', 'post' ), $addParams );
+					parse_str( WooBeWoo_PF_Req::getVar( 'with_wpf_filter', 'post' ), $addParams );
 					if ( is_array( $addParams ) ) {
 						foreach ( $addParams as $k => $v ) {
-							ReqWpf::setVar( $k, urldecode( $v ), 'get' );
+							WooBeWoo_PF_Req::setVar( $k, urldecode( $v ), 'get' );
 						}
 						$this->loadProductsFilter( $query );
 						return $query;
@@ -626,8 +628,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					$this->loadProductsFilter( $query );
 					$forced = true;
 				}
-				if ( ReqWpf::getVar( 'wpf_count', 'get' ) ) {
-					$query->set( 'posts_per_page', (int) ReqWpf::getVar( 'wpf_count', 'get' ) );
+				if ( WooBeWoo_PF_Req::getVar( 'wpf_count', 'get' ) ) {
+					$query->set( 'posts_per_page', (int) WooBeWoo_PF_Req::getVar( 'wpf_count', 'get' ) );
 				}
 			}
 		}
@@ -666,6 +668,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * replaceArgsIfBuilderGridUsed.
+	 *
+	 * @version 3.3.2
 	 */
 	public function replaceArgsIfBuilderGridUsed( $args ) {
 
@@ -699,7 +703,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		}
 
 		// For TI WooCommerce Merkzettel
-		if ( ReqWpf::getVar( 'wc-ajax' ) == 'tinvwl' ) {
+		if ( WooBeWoo_PF_Req::getVar( 'wc-ajax' ) == 'tinvwl' ) {
 			return $args;
 		}
 
@@ -709,7 +713,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		}
 
 		// Skip filtering if FiboSearch is active with Divi theme to maintain compatibility
-		if ( ReqWpf::getVar( 'dgwt_wcas' ) == 1 ) {
+		if ( WooBeWoo_PF_Req::getVar( 'dgwt_wcas' ) == 1 ) {
 			return $args;
 		}
 
@@ -931,12 +935,14 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * isFiltered.
+	 *
+	 * @version 3.3.2
 	 */
 	public function isFiltered( $filtered ) {
 		$ignoreKey = array( 'wpf_count', 'wpf_fbv', 'wpf_dpv', 'wpf_skip', '_' );
 
 		if ( ! $filtered ) {
-			$get = ReqWpf::get( 'get' );
+			$get = WooBeWoo_PF_Req::get( 'get' );
 			foreach ( $get as $key => $val ) {
 				if ( ! in_array( $key, $ignoreKey, true ) && ( 'orderby' === $key || strpos( $key, 'wpf_' ) === 0 || strpos( $key, 'product_tag' ) === 0 || strpos( $key, 'pr_' ) === 0 ) ) {
 					return true;
@@ -950,12 +956,12 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	/**
 	 * existsWpfParams.
 	 *
-	 * @version 2.8.6
+	 * @version 3.3.2
 	 * @since   2.8.6
 	 */
 	public function existsWpfParams( $get = false ) {
 		if ( ! is_array( $get ) ) {
-			$get = ReqWpf::get( 'get' );
+			$get = WooBeWoo_PF_Req::get( 'get' );
 		}
 		if ( is_array( $get ) ) {
 			foreach ( $get as $key => $val ) {
@@ -1241,7 +1247,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 		}
 		if ( ! empty( $data['vendors'] ) ) {
-			$vendor = ReqWpf::getVar( 'vendors' );
+			$vendor = WooBeWoo_PF_Req::getVar( 'vendors' );
 			if ( empty( $vendor ) ) {
 				$vendor = $data['vendors'];
 			}
@@ -1324,7 +1330,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 		}
 		// meta query custom field
-		if ( ! empty( $data['pr_onsale'] ) && ReqWpf::getVar( 'dgwt_wcas' ) ) {
+		if ( ! empty( $data['pr_onsale'] ) && WooBeWoo_PF_Req::getVar( 'dgwt_wcas' ) ) {
 			$metaQuery[] = array(
 				'key'     => '_sale_price',
 				'value'   => 0,
@@ -1412,7 +1418,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			$taxQuery = array();
 		}
 
-		$isPreselect = ( 'preselect' == $mode || ReqWpf::getVar( 'wpf_preselects' ) == '1' );
+		$isPreselect = ( 'preselect' == $mode || WooBeWoo_PF_Req::getVar( 'wpf_preselects' ) == '1' );
 		$isSlugs     = ( 'url' == $mode && ! $isPreselect );
 
 		// custom taxonomy attr block
@@ -1420,7 +1426,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			foreach ( $taxQuery as $i => $tax ) {
 				if ( is_array( $tax ) && isset( $tax['field'] ) && 'slug' == $tax['field'] ) {
 					$name = str_replace( 'pa_', 'wpf_filter_', $tax['taxonomy'] );
-					if ( $isPreselect && ReqWpf::getVar( $name ) && strpos( $name, 'wpf_filter_' ) !== false ) {
+					if ( $isPreselect && WooBeWoo_PF_Req::getVar( $name ) && strpos( $name, 'wpf_filter_' ) !== false ) {
 						unset( $taxQuery[ $i ] );
 						continue;
 					}
@@ -1656,7 +1662,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
 
-		if ( ReqWpf::getVar( 'all_products_filtering' ) ) {
+		if ( WooBeWoo_PF_Req::getVar( 'all_products_filtering' ) ) {
 
 			$this->originalWCQuery = $q;
 			add_action( 'the_widget', array( $this, 'restoreOriginalQuery' ) );
@@ -1684,7 +1690,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$q->set( 'tax_query', $taxQ );
 			}
 		} else {
-			$search = ReqWpf::getVar( 's' );
+			$search = WooBeWoo_PF_Req::getVar( 's' );
 			if ( ! is_admin() && ! is_null( $search ) && ! empty( $search ) ) {
 				$q->set( 's', $search );
 			}
@@ -1736,13 +1742,13 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			if ( $this->getFilterSetting( $filtersSettings['settings'], 'use_category_filtration' ) ) {
 				$isUseCategoryFiltration = true;
 				if ( is_null( $categoryPageId ) ) {
-					$categoryPageId = ReqWpf::getVar( 'wpf_filter_cat_' . $key );
+					$categoryPageId = WooBeWoo_PF_Req::getVar( 'wpf_filter_cat_' . $key );
 				}
 			}
 		}
 
 		if ( $isMultiLogicOr ) {
-			ReqWpf::setVar( 'wpf_light', $q->query_vars, 'session' );
+			WooBeWoo_PF_Req::setVar( 'wpf_light', $q->query_vars, 'session' );
 		}
 
 		if ( WooBeWoo_PF_Dispatcher::applyFilters( 'notFilterMainWCQuery', false ) ) {
@@ -1761,11 +1767,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 		}
 
-		if ( ReqWpf::getVar( 'wpf_order' ) ) {
+		if ( WooBeWoo_PF_Req::getVar( 'wpf_order' ) ) {
 			add_filter( 'posts_clauses', array( $this, 'addClausesTitleOrder' ) );
 		}
 
-		$orderby = ReqWpf::getVar( 'orderby' );
+		$orderby = WooBeWoo_PF_Req::getVar( 'orderby' );
 		if ( is_null( $orderby ) || empty( $orderby ) ) {
 			if ( isset( $args['wpf_default'] ) && ! empty( $args['wpf_default']['pr_sortby'] ) ) {
 				$orderby = $args['wpf_default']['pr_sortby'];
@@ -1805,14 +1811,14 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		if ( WooBeWoo_PF_Frame::_()->proVersionCompare( '1.4.8' ) ) {
 			$filterSettings = array();
 			$params         = array();
-			if ( ReqWpf::getVar( 'wpf_fbv' ) ) {
+			if ( WooBeWoo_PF_Req::getVar( 'wpf_fbv' ) ) {
 				$filterSettings['filtering_by_variations'] = 1;
-				$params                                    = ReqWpf::get( 'get' );
+				$params                                    = WooBeWoo_PF_Req::get( 'get' );
 			}
-			if ( ReqWpf::getVar( 'wpf_ebv' ) ) {
+			if ( WooBeWoo_PF_Req::getVar( 'wpf_ebv' ) ) {
 				$filterSettings['exclude_backorder_variations'] = 1;
 			}
-			if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
+			if ( WooBeWoo_PF_Req::getVar( 'wpf_dpv' ) ) {
 				$filterSettings['display_product_variations'] = 1;
 			}
 			$args = array(
@@ -1947,7 +1953,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 		// set url params
 		$mode = 'url';
 		if ( empty( $params ) ) {
-			$params = ReqWpf::get( 'get' );
+			$params = WooBeWoo_PF_Req::get( 'get' );
 		}
 
 		if ( ! empty( $exludeParam ) && isset( $params[ $exludeParam ] ) ) {
@@ -2174,9 +2180,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * loadProductsFilterForProductGrid.
+	 *
+	 * @version 3.3.2
 	 */
 	public function loadProductsFilterForProductGrid( $q ) {
-		$action = ReqWpf::getVar( 'action' );
+		$action = WooBeWoo_PF_Req::getVar( 'action' );
 		$ignore = array( 'woocommerce_load_variations', 'woocommerce_do_ajax_product_export', 'phone-orders-for-woocommerce' );
 
 		if ( $this->isProductQuery( $q->get( 'post_type' ) ) && ( is_null( $action ) || empty( $action ) || ! in_array( $action, $ignore ) ) ) {
@@ -2232,7 +2240,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 			$this->addPreselectedParams();
 
-			if ( ReqWpf::getVar( 'all_products_filtering' ) && ( ( '-' != $filterKey ) || ! empty( $attributes['wpf-compatibility'] ) ) ) {
+			if ( WooBeWoo_PF_Req::getVar( 'all_products_filtering' ) && ( ( '-' != $filterKey ) || ! empty( $attributes['wpf-compatibility'] ) ) ) {
 				$exclude = array( 'paged', 'posts_per_page', 'post_type', 'wc_query', 'orderby', 'order', 'fields' );
 				foreach ( $args as $queryVarKey => $queryVarValue ) {
 					if ( ! in_array( $queryVarKey, $exclude ) ) {
@@ -2279,22 +2287,22 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 			$this->shortcodeWCQuery[ $filterKey ] = $args;
 
-			$params = ReqWpf::get( 'get' );
+			$params = WooBeWoo_PF_Req::get( 'get' );
 			if ( ! $isClassFilterId || ( isset( $params['wpf_id'] ) && $filterId === $params['wpf_id'] ) || ( $isOtherClass && ! $this->isFiltered( false ) ) ) {
 				$args = $this->getQueryVars( $args );
 
-				if ( ReqWpf::getVar( 'wpf_order' ) ) {
-					$args['order']   = $this->getWpfOrderParam( ReqWpf::getVar( 'wpf_order' ) );
+				if ( WooBeWoo_PF_Req::getVar( 'wpf_order' ) ) {
+					$args['order']   = $this->getWpfOrderParam( WooBeWoo_PF_Req::getVar( 'wpf_order' ) );
 					$args['orderby'] = 'title';
 				}
 				$filterSettings = array();
-				if ( ReqWpf::getVar( 'wpf_fbv' ) ) {
+				if ( WooBeWoo_PF_Req::getVar( 'wpf_fbv' ) ) {
 					$filterSettings['filtering_by_variations'] = 1;
 				}
-				if ( ReqWpf::getVar( 'wpf_ebv' ) ) {
+				if ( WooBeWoo_PF_Req::getVar( 'wpf_ebv' ) ) {
 					$filterSettings['exclude_backorder_variations'] = 1;
 				}
-				if ( ReqWpf::getVar( 'wpf_dpv' ) ) {
+				if ( WooBeWoo_PF_Req::getVar( 'wpf_dpv' ) ) {
 					$filterSettings['display_product_variations'] = 1;
 				}
 				if ( WooBeWoo_PF_Frame::_()->proVersionCompare( '1.4.8' ) ) {
@@ -2306,8 +2314,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 					$this->shortcodeWCQueryFiltered[ $filterKey ] = $args;
 				}
 
-				if ( ReqWpf::getVar( 'orderby' ) && WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'disable_plugin_sorting' ) != 1 ) {
-					$orderby = ReqWpf::getVar( 'orderby' );
+				if ( WooBeWoo_PF_Req::getVar( 'orderby' ) && WooBeWoo_PF_Frame::_()->getModule( 'options' )->get( 'disable_plugin_sorting' ) != 1 ) {
+					$orderby = WooBeWoo_PF_Req::getVar( 'orderby' );
 					switch ( $orderby ) {
 						case 'price':
 							add_filter( 'posts_clauses', array( $this, 'addPriceOrder' ), 99999 );
@@ -2867,7 +2875,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 		}
 
-		$order           = $this->getWpfOrderParam( ReqWpf::getVar( 'wpf_order' ) );
+		$order           = $this->getWpfOrderParam( WooBeWoo_PF_Req::getVar( 'wpf_order' ) );
 		$orderByTitle    = "$wpdb->posts.post_title $order";
 		$args['orderby'] = ( empty( $args['orderby'] ) ? $orderByTitle : $orderByTitle . ', ' . $args['orderby'] );
 		remove_filter( 'posts_clauses', array( $this, 'addClausesTitleOrder' ) );
@@ -2911,6 +2919,8 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * Group together wp_query taxonomies params args with the same taxonomy name.
+	 *
+	 * @version 3.3.2
 	 *
 	 * @param array $taxQuery
 	 *
@@ -2984,7 +2994,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 			}
 		}
 		if ( $groupedTaxQueryVal ) {
-			$logic = ReqWpf::getVar( 'wpf_filter_tax_block_logic' );
+			$logic = WooBeWoo_PF_Req::getVar( 'wpf_filter_tax_block_logic' );
 			$logic = is_null( $logic ) ? 'AND' : strtoupper( $logic );
 			foreach ( $groupedTaxQueryVal as $group => $values ) {
 				if ( count( $values ) > 1 ) {
@@ -3230,9 +3240,11 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * getEditTabContent.
+	 *
+	 * @version 3.3.2
 	 */
 	public function getEditTabContent() {
-		$id = ReqWpf::getVar( 'id', 'get' );
+		$id = WooBeWoo_PF_Req::getVar( 'id', 'get' );
 
 		return $this->getView()->getEditTabContent( $id );
 	}
@@ -3311,7 +3323,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$this->translate( 'For work with "' ) . WPF_WP_PLUGIN_NAME . $this->translate( '" plugin, You need to install and activate WooCommerce plugin.' )
 			);
 			// check current module
-			if ( ReqWpf::getVar( 'page' ) == WPF_SHORTCODE || WooBeWoo_PF_Frame::_()->isWCLicense() ) {
+			if ( WooBeWoo_PF_Req::getVar( 'page' ) == WPF_SHORTCODE || WooBeWoo_PF_Frame::_()->isWCLicense() ) {
 				// show message
 				WooBeWoo_PF_Html::echoEscapedHtml( $tableView->getContent( 'showAdminNotice' ) );
 			}
@@ -3441,7 +3453,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 	public function getFilterTaxonomies( $settings, $calcCategories = false, $filterSettings = array(), $ajax = false, $urlQuery = array() ) {
 
 		if ( empty( $urlQuery ) ) {
-			$urlQuery = ReqWpf::get( 'get' );
+			$urlQuery = WooBeWoo_PF_Req::get( 'get' );
 		}
 
 		$multiLogic           = $this->getFilterSetting( $filterSettings, 'f_multi_logic', 'and' );
@@ -3750,12 +3762,14 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * addToArgsForLogicAnd.
+	 *
+	 * @version 3.3.2
 	 */
 	public function addToArgsForLogicAnd( $addArgs, $args, $urlQuery = array() ) {
 		$calc = array();
 
 		if ( empty( $urlQuery ) ) {
-			$urlQuery = ReqWpf::get( 'get' );
+			$urlQuery = WooBeWoo_PF_Req::get( 'get' );
 		}
 
 		foreach ( $addArgs as $taxonomy => $param ) {
@@ -3809,7 +3823,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 				$calc['full'] = $calc['light'];
 				unset( $calc['light'] );
 			} elseif ( $ajax ) {
-				$lightFromSession = ReqWpf::getVar( 'wpf_light', 'session' );
+				$lightFromSession = WooBeWoo_PF_Req::getVar( 'wpf_light', 'session' );
 
 				if ( isset( $lightFromSession ) ) {
 					$calc['full'] = $lightFromSession;
@@ -4043,10 +4057,10 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 		$this->isLightMode = false;
 
-		if ( '1' === ReqWpf::getVar( 'wpf_skip' ) ) {
+		if ( '1' === WooBeWoo_PF_Req::getVar( 'wpf_skip' ) ) {
 			$recalculateFilters = $this->getFilterSetting( $settings, 'recalculate_filters', false );
 			if ( $recalculateFilters ) {
-				$fid                     = ReqWpf::getVar( 'wpf_fid' );
+				$fid                     = WooBeWoo_PF_Req::getVar( 'wpf_fid' );
 				$jsFound                 = ( ! is_null( $fid ) && ! empty( $fid ) ? 'wpfDoActionsAfterLoad(' . $fid . ',' . ( empty( $result['have_posts'] ) ? 0 : 1 ) . ');' : '' );
 				$result['existsTermsJS'] = '<div class="wpfExistsTermsJS" data-fid="' . esc_attr( $fid ) . '"><script type="text/javascript">' . $jsFound . 'wpfShowHideFiltersAtts(' . wp_json_encode( $result['exists'] ) . ', ' . wp_json_encode( $result['existsUsers'] ) . ');</script><script type="text/javascript">wpfChangeFiltersCount(' . wp_json_encode( $result['exists'] ) . ');</script></div>';
 			}
@@ -4578,11 +4592,13 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 
 	/**
 	 * filterToOnlyChildrenOfSelectedParent.
+	 *
+	 * @version 3.3.2
 	 */
 	public function filterToOnlyChildrenOfSelectedParent( $existTerms, $isHierarchicalTaxonomy ) {
-		$urlQuery = ReqWpf::get( 'get' );
+		$urlQuery = WooBeWoo_PF_Req::get( 'get' );
 		if ( empty( $urlQuery ) ) {
-			$params = ReqWpf::get( 'post' );
+			$params = WooBeWoo_PF_Req::get( 'post' );
 			if ( ! empty( $params ) && isset( $params['currenturl'] ) ) {
 				$curUrl = $params['currenturl'];
 				$parts  = wp_parse_url( $curUrl );
@@ -4860,7 +4876,7 @@ class WooBeWoo_PF_Woofilters extends ModuleWpf {
 									if ( $showAllSliderAttributes ) {
 										$this->clauses = array();
 										$name          = $setting['name'];
-										$data          = ReqWpf::get( 'get' );
+										$data          = WooBeWoo_PF_Req::get( 'get' );
 										unset( $data[ $name ] );
 										$args['meta_query'] = WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomMetaQueryPro', $args['meta_query'], $data, 'url' ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 										$filterLoop         = new WP_Query( $args );

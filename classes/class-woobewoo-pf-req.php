@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - ReqWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Req Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class ReqWpf {
+class WooBeWoo_PF_Req {
 
 	protected static $_requestMethod;
 

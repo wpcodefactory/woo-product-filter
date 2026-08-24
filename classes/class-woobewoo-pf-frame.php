@@ -68,16 +68,18 @@ class WooBeWoo_PF_Frame {
 
 	/**
 	 * parseRoute.
+	 *
+	 * @version 3.3.2
 	 */
 	public function parseRoute() {
 		// Check plugin
-		$pl = ReqWpf::getVar( 'pl' );
+		$pl = WooBeWoo_PF_Req::getVar( 'pl' );
 		if ( WPF_CODE == $pl ) {
-			$mod = ReqWpf::getMode();
+			$mod = WooBeWoo_PF_Req::getMode();
 			if ( $mod ) {
 				$this->_mod = $mod;
 			}
-			$action = ReqWpf::getVar( 'action' );
+			$action = WooBeWoo_PF_Req::getVar( 'action' );
 			if ( $action ) {
 				$this->_action = $action;
 			}
@@ -223,7 +225,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Check permissions for action in controller by $code.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 *
 	 * @param string $code Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
@@ -289,7 +291,7 @@ class WooBeWoo_PF_Frame {
 					if ( in_array( $action, $noncedMethods ) ) {
 						$nonce = ( isset( $_REQUEST['_wpnonce'] ) ?
 							sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) :
-							ReqWpf::getVar( '_wpnonce' )
+							WooBeWoo_PF_Req::getVar( '_wpnonce' )
 						);
 
 						if ( ! wp_verify_nonce( $nonce, $action ) ) {
@@ -364,12 +366,12 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * _doExec.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function _doExec() {
 		$mod = $this->getModule( $this->_mod );
 		if ( $mod && $this->checkPermissions( $this->_mod, $this->_action ) ) {
-			switch ( ReqWpf::getVar( 'reqType' ) ) {
+			switch ( WooBeWoo_PF_Req::getVar( 'reqType' ) ) {
 				case 'ajax':
 					add_action( 'wp_ajax_' . $this->_action, array( $mod->getController(), $this->_action ) );
 					$noprivActions = array( 'woobewoo_pf_filters_frontend', 'saveStatistics' );
@@ -640,17 +642,21 @@ class WooBeWoo_PF_Frame {
 
 	/**
 	 * isTplEditor.
+	 *
+	 * @version 3.3.2
 	 */
 	public function isTplEditor() {
-		$tplEditor = ReqWpf::getVar( 'tplEditor' );
+		$tplEditor = WooBeWoo_PF_Req::getVar( 'tplEditor' );
 		return (bool) $tplEditor;
 	}
 
 	/**
 	 * This is custom method for each plugin and should be modified if you create copy from this instance.
+	 *
+	 * @version 3.3.2
 	 */
 	public function isAdminPlugOptsPage() {
-		$page = ReqWpf::getVar( 'page' );
+		$page = WooBeWoo_PF_Req::getVar( 'page' );
 		if (
 			is_admin() &&
 			! empty( $page ) &&

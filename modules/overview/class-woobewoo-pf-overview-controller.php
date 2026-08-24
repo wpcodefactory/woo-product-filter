@@ -14,11 +14,11 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_subscribe.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_subscribe() {
 		$res = new ResponseWpf();
-		if ( $this->getModel()->subscribe( ReqWpf::get( 'post' ) ) ) {
+		if ( $this->getModel()->subscribe( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
 			$res->pushError( $this->getModel()->getErrors() );
@@ -29,11 +29,11 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_contactus.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_contactus() {
 		$res = new ResponseWpf();
-		if ( $this->getModel()->contactus( ReqWpf::get( 'post' ) ) ) {
+		if ( $this->getModel()->contactus( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
 			$res->pushError( $this->getModel()->getErrors() );
@@ -44,11 +44,11 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_rating.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function woobewoo_pf_rating() {
 		$res = new ResponseWpf();
-		if ( $this->getModel()->rating( ReqWpf::get( 'post' ) ) ) {
+		if ( $this->getModel()->rating( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 		} else {
 			$res->pushError( $this->getModel()->getErrors() );
@@ -63,7 +63,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 */
 	public function woobewoo_pf_dismiss_notice() {
 		$res  = new ResponseWpf();
-		$slug = ReqWpf::getVar( 'slug' );
+		$slug = WooBeWoo_PF_Req::getVar( 'slug' );
 		if (
 			! empty( $slug ) &&
 			! is_null( $slug ) &&
@@ -81,7 +81,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 */
 	public function woobewoo_pf_approve_notice() {
 		$res  = new ResponseWpf();
-		$slug = ReqWpf::getVar( 'slug' );
+		$slug = WooBeWoo_PF_Req::getVar( 'slug' );
 		if (
 			'wpf-rest-api' == $slug &&
 			current_user_can( 'manage_woocommerce' )

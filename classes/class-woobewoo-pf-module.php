@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - ModuleWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Module Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-abstract class ModuleWpf extends WooBeWoo_PF_Base_Object {
+abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 
 	protected $_controller = null;
 	protected $_helper     = null;
