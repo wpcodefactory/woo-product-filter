@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - MetaWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Meta Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class MetaWpf extends ModuleWpf {
+class WooBeWoo_PF_Meta extends ModuleWpf {
 
 	/**
 	 * Properties.

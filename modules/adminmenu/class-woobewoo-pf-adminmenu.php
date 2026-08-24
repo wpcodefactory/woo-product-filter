@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - Admin Menu
+ * Product Filter by WBW - WooBeWoo_PF_Adminmenu Class
  *
- * @version 3.1.8
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class AdminmenuWpf extends ModuleWpf {
+class WooBeWoo_PF_Adminmenu extends ModuleWpf {
 
 	protected $_mainSlug = 'wpf-filters';
 

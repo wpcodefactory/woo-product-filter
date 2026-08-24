@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - UserWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_User Class
  *
- * @version 3.3.0
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class UserWpf extends ModuleWpf {
+class WooBeWoo_PF_User extends ModuleWpf {
 
 	protected $_data       = array();
 	protected $_curentID   = 0;

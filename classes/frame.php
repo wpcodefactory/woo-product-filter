@@ -129,9 +129,14 @@ class FrameWpf {
 				if ( is_dir( $moduleLocationDir . $code ) ) {
 					$this->_allModules[ $m['code'] ] = 1;
 					if ( (bool) $m['active'] ) {
-						if ( ! class_exists( $code . strFirstUpWpf( WPF_CODE ) ) ) {
-							if ( file_exists( $moduleLocationDir . $code . WPF_DS . 'mod.php' ) ) {
-								require $moduleLocationDir . $code . WPF_DS . 'mod.php';
+
+						$mod_class_name = WPF_CLASS_PREFIX . ucwords( $code );
+						if ( ! class_exists( $mod_class_name ) ) {
+							$mod_class_file     = strtolower( str_replace( '_', '-', $mod_class_name ) ) . '.php';
+							$mod_class_location = $moduleLocationDir . $code . WPF_DS . 'class-' . $mod_class_file;
+
+							if ( file_exists( $mod_class_location ) ) {
+								require $mod_class_location;
 							}
 						}
 

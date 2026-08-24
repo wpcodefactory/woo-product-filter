@@ -1,15 +1,15 @@
 <?php
 /**
- * Product Filter by WBW - Admin_NavWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Admin_Nav Class
  *
- * @version 3.0.4
+ * @version 3.3.2
  *
  * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class Admin_NavWpf extends ModuleWpf {
+class WooBeWoo_PF_Admin_Nav extends ModuleWpf {
 
 	/**
 	 * getBreadcrumbsList.
