@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Block
  *
- * @version 3.3.0
+ * @version 3.3.2
  * @since   3.1.7
  *
  * @author woobewoo
@@ -29,8 +29,8 @@ add_action(
 						return '';
 					}
 
-					return do_shortcode(
-						'[wpf-filters id="' . absint( $attributes['filter_id'] ) . '"]'
+					return WooBeWoo_PF_Html::escapedHtml(
+						do_shortcode( '[wpf-filters id="' . absint( $attributes['filter_id'] ) . '"]' )
 					);
 				},
 			)

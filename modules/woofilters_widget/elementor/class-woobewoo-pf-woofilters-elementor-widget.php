@@ -242,16 +242,18 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * render.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	protected function render() {
-		$shortcode = $this->get_settings_for_display( 'filter_id' );
+		$filter_id = absint( $this->get_settings_for_display( 'filter_id' ) );
 		?>
 		<div class="elementor-woofilters">
 			<?php
-			echo $shortcode ?
-				do_shortcode( '[wpf-filters id="' . absint( $shortcode ) . '"]' ) :
-				'';
+			if ( $filter_id ) {
+				WooBeWoo_PF_Html::echoEscapedHtml(
+					do_shortcode( '[wpf-filters id="' . $filter_id . '"]' )
+				);
+			}
 			?>
 		</div>
 		<?php
@@ -260,11 +262,18 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * render_plain_content.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 */
 	public function render_plain_content() {
-		$shortcode = $this->get_settings_for_display( 'filter_id' );
-		echo $shortcode ? do_shortcode( '[wpf-filters id="' . absint( $shortcode ) . '"]' ) : '';
+		$filter_id = absint( $this->get_settings_for_display( 'filter_id' ) );
+
+		if ( ! $filter_id ) {
+			return;
+		}
+
+		WooBeWoo_PF_Html::echoEscapedHtml(
+			do_shortcode( '[wpf-filters id="' . $filter_id . '"]' )
+		);
 	}
 
 	protected function content_template() {}
