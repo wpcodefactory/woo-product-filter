@@ -32,13 +32,6 @@ abstract class WooBeWoo_PF_Controller {
 	public function getCode() {
 		return $this->_code;
 	}
-	public function exec( $task = '' ) {
-		if ( method_exists( $this, $task ) ) {
-			$this->_task = $task;   // For multicontrollers module version - who know, maybe that's will be?))
-			return $this->$task();
-		}
-		return null;
-	}
 	public function getView( $name = '' ) {
 		if ( empty( $name ) ) {
 			$name = $this->getCode();

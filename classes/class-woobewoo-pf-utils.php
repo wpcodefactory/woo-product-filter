@@ -81,27 +81,48 @@ class WooBeWoo_PF_Utils {
 	/**
 	 * Copy all files from one directory ($source) to another ($destination).
 	 *
+	 * @version 3.3.2
+	 *
 	 * @param string $source      Path to source directory.
 	 * @param string $destination Path to destination directory.
 	 */
 	public static function copyDirectories( $source, $destination ) {
+		global $wp_filesystem;
+
+		if ( ! $wp_filesystem ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+
+			if ( ! WP_Filesystem() ) {
+				return false;
+			}
+		}
 		if ( is_dir( $source ) ) {
-			@mkdir( $destination ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
+			if ( ! $wp_filesystem->is_dir( $destination ) ) {
+				$wp_filesystem->mkdir( $destination );
+			}
+
 			$directory = dir( $source );
+
 			while ( false !== ( $readdirectory = $directory->read() ) ) {
 				if ( ( '.' == $readdirectory ) || ( '..' == $readdirectory ) ) {
 					continue;
 				}
-				$PathDir = $source . '/' . $readdirectory;
-				if ( is_dir( $PathDir ) ) {
-					self::copyDirectories( $PathDir, $destination . '/' . $readdirectory );
+				$path_dir = $source . '/' . $readdirectory;
+				if ( is_dir( $path_dir ) ) {
+					self::copyDirectories(
+						$path_dir,
+						$destination . '/' . $readdirectory
+					);
 					continue;
 				}
-				copy( $PathDir, $destination . '/' . $readdirectory );
+				$wp_filesystem->copy(
+					$path_dir,
+					$destination . '/' . $readdirectory
+				);
 			}
 			$directory->close();
 		} else {
-			copy( $source, $destination );
+			$wp_filesystem->copy( $source, $destination );
 		}
 	}
 
