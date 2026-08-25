@@ -83,11 +83,16 @@ class WooBeWoo_PF_Mod_Installer {
 			$moduleLocationDir = WooBeWoo_PF_Utils::getPluginDir( $module['ex_plug_dir'] );
 		}
 		if ( is_dir( $moduleLocationDir . $module['code'] ) ) {
-			if ( ! class_exists( $module['code'] . strFirstUpWpf( WPF_CODE ) ) ) {
-				if ( file_exists( $moduleLocationDir . $module['code'] . WPF_DS . 'mod.php' ) ) {
-					require $moduleLocationDir . $module['code'] . WPF_DS . 'mod.php';
+			$mod_class_name = WPF_CLASS_PREFIX . ucwords( $module['code']  );
+			if ( ! class_exists( $mod_class_name ) ) {
+				$mod_class_file     = strtolower( str_replace( '_', '-', $mod_class_name ) ) . '.php';
+				$mod_class_location = $moduleLocationDir . $module['code']  . WPF_DS . 'class-' . $mod_class_file;
+
+				if ( file_exists( $mod_class_location ) ) {
+					require $mod_class_location;
 				}
 			}
+
 			$moduleClass = toeGetClassNameWpf( $module['code'] );
 			$moduleObj   = new $moduleClass( $module );
 			if ( $moduleObj ) {
