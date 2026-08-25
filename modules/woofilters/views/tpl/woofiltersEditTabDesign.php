@@ -226,7 +226,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Blocks Styling', 'woo-product-filter' ); ?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-sm-3">
 				<?php esc_html_e( 'Use Custom Styles', 'woo-product-filter' ); ?>
@@ -236,13 +236,15 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_blocks_styling_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignBlocks', $this->settings );
+		} ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-titles">
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Titles Styling', 'woo-product-filter' ); ?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-sm-3">
 				<?php esc_html_e( 'Use Custom Styles', 'woo-product-filter' ); ?>
@@ -252,13 +254,15 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_title_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignTitles', $this->settings );
+		} ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-buttons">
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Buttons Styling', 'woo-product-filter' ); ?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-sm-3">
 				<?php esc_html_e( 'Use Custom Styles', 'woo-product-filter' ); ?>
@@ -268,13 +272,15 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_buttons_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignButtons', $this->settings );
+		} ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-floating">
 		<div class="settings-block-title">
 			<?php esc_html_e( 'Floating Modе Options', 'woo-product-filter' ); ?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-sm-3">
 				<?php esc_html_e( 'Use Floating Modе', 'woo-product-filter' ); ?>
@@ -284,6 +290,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_custom_floating_styles_option', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignFloating', $this->settings );
+		} ?>
 	</div>
 </div>

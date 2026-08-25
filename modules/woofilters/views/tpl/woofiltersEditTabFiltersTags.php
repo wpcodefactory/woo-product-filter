@@ -38,7 +38,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block col-md-12 wpfFilterTypePro wpfTypeSwitchable wpfHidden" data-type="colors" data-parent="f_list">
 	<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
 	<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'attributes_colors.png' ); ?>">
@@ -101,7 +101,10 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_tags_show_on_frontend_as_select_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_tags_show_on_frontend_as_select_option' );
+} ?>
+
 <?php WooBeWoo_PF_View::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -165,7 +168,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				);
 				?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="settings-value settings-w100" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
@@ -174,7 +177,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_tags_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
+		} ?>
 	</div>
 </div>
 <div class="row-settings-block">

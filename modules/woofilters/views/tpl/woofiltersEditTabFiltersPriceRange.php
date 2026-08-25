@@ -93,7 +93,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Use Under/Over values', 'woo-product-filter' ); ?>
@@ -130,7 +130,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_pirce_range_set_range_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceRange' );
+} ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Layout', 'woo-product-filter' ); ?>

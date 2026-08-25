@@ -66,13 +66,25 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 					data-select="settings[display_on_page]"
 					data-select-value="specific"
 				>
-				<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_display_page_list', $pro_label, $this->settings['settings'], 'display_page_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php
+					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+					} else {
+						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_page_list' );
+					}
+					?>
 
 				</div>
 
 				<?php $classHidden = 'custom_cats' != $displayOnPage ? 'wpfHidden' : ''; ?>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_cats">
-				<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_display_page_list', $pro_label, $this->settings['settings'], 'display_cat_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php
+					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+					} else {
+						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_cat_list' );
+					}
+					?>
 				</div>
 
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_cats">
@@ -83,15 +95,24 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						false
 					);
 
-					echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_display_child_cat', $pro_label, $display_child_cat ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+					} else {
+						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_child_cat', $display_child_cat );
+					}
 					?>
+
 				</div>
 
 				<?php $classHidden = 'custom_pwb' != $displayOnPage ? 'wpfHidden' : ''; ?>
 				<div class="settings-value settings-w100 <?php echo esc_attr( $classHidden ); ?>" data-select="settings[display_on_page]" data-select-value="custom_pwb">
-					<?php
 
-					echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_display_page_list', $pro_label, $this->settings['settings'], 'display_pwb_list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					<?php
+					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+					} else {
+						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_pwb_list' );
+					}
 					?>
 				</div>
 
@@ -103,7 +124,11 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						false
 					);
 
-					echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_display_child_brand', $pro_label, $display_child_brand ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+					} else {
+						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_child_brand', $display_child_brand );
+					}
 					?>
 				</div>
 
@@ -129,7 +154,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 		</div>
 
-		<?php ob_start(); // woobewoo_pf_additional_options ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Redirect After Filter Selection', 'woo-product-filter' ); ?>
@@ -160,7 +185,10 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_additional_options', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsMain',  $this->settings );
+		} ?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -684,7 +712,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 		</div>
 
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -694,7 +722,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_design_button_options', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsButtons', $this->settings );
+		} ?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-options-content">
 		<div class="settings-block-title">
@@ -964,19 +994,24 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 							?>
 					</div>
 
-						<div class="settings-value settings-w100 <?php echo esc_attr( $hiddenStyle ); ?>"  data-parent="settings[filtering_by_variations]">
-							<div class="settings-value-label">
-								<?php esc_html_e( 'Display Variations Instead Of Variable Product', 'woo-product-filter' ); ?>
-								<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__( 'After filtration by attributes will be displayed product variation instead of main variable product', 'woo-product-filter' ); ?>"></i>
-							</div>
-							<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_display_product_variations', $pro_label, $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							?>
+					<div class="settings-value settings-w100 <?php echo esc_attr( $hiddenStyle ); ?>"  data-parent="settings[filtering_by_variations]">
+						<div class="settings-value-label">
+							<?php esc_html_e( 'Display Variations Instead Of Variable Product', 'woo-product-filter' ); ?>
+							<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr__( 'After filtration by attributes will be displayed product variation instead of main variable product', 'woo-product-filter' ); ?>"></i>
 						</div>
+						<?php
+						if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+							WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+						} else {
+							WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_product_variations', $this->settings );
+						}
+						?>
+					</div>
 				</div>
 			</div>
 			<?php } ?>
 
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Display "Show More"', 'woo-product-filter' ); ?>
@@ -1022,7 +1057,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_design_content_options', ob_get_clean(), $this->settings, $this->filter['id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else{
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsContent', $this->filter['id'], $this->filter['id'] );
+		} ?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -1202,7 +1239,13 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'Apply loader settings to all filters.', 'woo-product-filter' ); ?>"></i>
 			</div>
 			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_apply_loader_settings_to_all_filters', $pro_label ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php
+				if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+					WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+				} else {
+					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_apply_loader_settings_to_all_filters' );
+				}
+				?>
 			</div>
 		</div>
 		<?php
@@ -1225,7 +1268,11 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<div class="woobewoo_row row-settings-block wpfLoader">
 			<div class="settings-block-label col-xs-4 col-lg-3">
 				<?php esc_html_e( 'Filter Loader Icon', 'woo-product-filter' ); ?>
-				&nbsp; <?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
+				<?php
+				if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+					WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
+				}
+				?>
 				<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Select the animated loader, which appears when filtering results are loading.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/loader-options/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
 			</div>
 			<div class="settings-block-values settings-w100 col-xs-8 col-lg-9">
@@ -1344,17 +1391,20 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 		</div>
 
-		<?php ob_start(); ?>
-		<div class="woobewoo_row row-settings-block">
-			<div class="settings-block-label col-xs-4 col-lg-3">
-				<?php esc_html_e( 'Do not remove products while loading', 'woo-product-filter' ); ?>
-				<i class="fa fa-question woobewoo-tooltip" title="<?php esc_attr_e( 'To prevent products container from collapsing during ajax.', 'woo-product-filter' ); ?>"></i>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
+			<div class="woobewoo_row row-settings-block">
+				<div class="settings-block-label col-xs-4 col-lg-3">
+					<?php esc_html_e( 'Do not remove products while loading', 'woo-product-filter' ); ?>
+					<i class="fa fa-question woobewoo-tooltip"
+					   title="<?php esc_attr_e( 'To prevent products container from collapsing during ajax.', 'woo-product-filter' ); ?>"></i>
+				</div>
+				<div class="settings-block-values col-xs-8 col-lg-9">
+					<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
+				</div>
 			</div>
-			<div class="settings-block-values col-xs-8 col-lg-9">
-				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
-			</div>
-		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_remove_products_while_loading', ob_get_clean(), $this->settings, $this->filter['id'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsLoaderBottom', $this->settings, $this->filter['id'] );
+		} ?>
 	</div>
 	<div class="wpfLoaderIconTemplate wpfHidden">
 		<?php

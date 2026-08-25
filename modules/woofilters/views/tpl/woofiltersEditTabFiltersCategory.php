@@ -38,7 +38,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block wpfTypeSwitchable dataParentIgnore" data-type="dropdown radio list" data-parent="f_list" data-no-values="custom_meta_field_check">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Select default id', 'woo-product-filter' ); ?>
@@ -66,7 +66,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_select_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_show_on_frontend_as_select_option' );
+} ?>
 
 <div class="row-settings-block wpfTypeSwitchable" data-not-type="buttons">
 	<div class="settings-block-label col-xs-4 col-sm-3">
@@ -85,7 +87,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<?php WooBeWoo_PF_Html::checkboxToggle( 'f_hide_parent', array() ); ?>
 		</div>
 
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="settings-value wpfTypeSwitchable" data-type="multi list" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Collapsible', 'woo-product-filter' ); ?>
@@ -100,7 +102,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_collapsible_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_collapsible_option' );
+		} ?>
 
 		<div class="settings-value wpfTypeSwitchable" data-not-type="buttons list dropdown" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
@@ -124,7 +128,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 </div>
 
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="multi list">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Check page category', 'woo-product-filter' ); ?>
@@ -143,7 +147,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_check_page_and_current_page_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCollapseLevel' );
+} ?>
 
 <div class="row-settings-block wpfTypeSwitchable" data-type="list dropdown">
 	<div class="settings-value settings-w100">
@@ -157,7 +163,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 </div>
 
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block wpfButtonsTypeBlock wpfTypeSwitchable" data-type="buttons">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Buttons Settings', 'woo-product-filter' ); ?>
@@ -204,7 +210,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_show_on_frontend_as_options' );
+} ?>
 
 <?php WooBeWoo_PF_View::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -247,7 +255,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				);
 				?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="settings-value settings-w100" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-value-label">
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
@@ -256,7 +264,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_sort_as_numbers_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
+		} ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -485,7 +495,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block wpfTypeSwitchable" data-not-type="dropdown mul_dropdown">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Max terms show', 'woo-product-filter' ); ?>
@@ -504,4 +514,6 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_max_terms_and_switch_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_max_terms_and_switch_options' );
+}

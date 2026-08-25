@@ -38,7 +38,7 @@ defined( 'ABSPATH' ) || exit;
 						<?php esc_html_e( 'Delete selected', 'woo-product-filter' ); ?>
 					</button>
 				</li>
-				<?php ob_start(); ?>
+				<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 				<li title="<?php echo esc_attr( __( 'Import tables', 'woo-product-filter' ) ); ?>">
 					<a class="woobewoo-relative filterExportImportBtn" href="<?php echo esc_url( $this->proLink ); ?>" target="_blank">
 						<span>
@@ -65,7 +65,9 @@ defined( 'ABSPATH' ) || exit;
 						</span>
 					</a>
 				</li>
-				<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_list_import_export', ob_get_clean(), $this->settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php } else {
+					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_list_import_export', $this->settings );
+				} ?>
 			</ul>
 		</div>
 		<div id="containerWrapper">

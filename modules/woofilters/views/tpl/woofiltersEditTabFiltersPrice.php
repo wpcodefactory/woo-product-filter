@@ -55,27 +55,29 @@ $skins = array(
 	</div>
 </div>
 <?php
-ob_start();
-foreach ( $skins as $key => $value ) {
-	if ( strpos( $value, $labelPro ) ) {
-		?>
-		<div class="row-settings-block wpfPriceSkinPro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
-			<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
-			<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
-			<?php } else { ?>
-			<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>" target="_blank">
-				<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
-			</a>
-			<?php } ?>
-		</div>
-		<?php
+if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
+	foreach ( $skins as $key => $value ) {
+		if ( strpos( $value, $labelPro ) ) {
+			?>
+			<div class="row-settings-block wpfPriceSkinPro wpfHidden" data-type="<?php echo esc_attr( $key ); ?>">
+				<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
+					<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
+				<?php } else { ?>
+					<a href="<?php echo esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/plugins/woocommerce-filter/' ); ?>"
+					   target="_blank">
+						<img class="wpfProAd" src="<?php echo esc_url( $adPath . 'price_skin_' . $key . '.png' ); ?>">
+					</a>
+				<?php } ?>
+			</div>
+			<?php
+		}
+		if ( 'square' == $key ) {
+			break;
+		}
 	}
-	if ( 'square' == $key ) {
-		break;
-	}
+} else {
+	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceSkin' );
 }
-
-echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
@@ -129,7 +131,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 		</div>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_show_currency_in_slider', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+<?php WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_price_show_currency_in_slider' ); ?>
 <div class="row-settings-block f_show_inputs_enabled_tooltip">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Use text tooltip instead of input fields', 'woo-product-filter' ); ?>
@@ -140,7 +142,7 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 		</div>
 	</div>
 </div>
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Set min/max prices', 'woo-product-filter' ); ?>
@@ -159,4 +161,6 @@ echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_skin_options', ob_
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_price_set_tax_and_min_max_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceOptions' );
+} ?>

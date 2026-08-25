@@ -121,7 +121,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Use as default', 'woo-product-filter' ); ?>
@@ -133,4 +133,6 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_stock_use_as_default_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersStock' );
+} ?>

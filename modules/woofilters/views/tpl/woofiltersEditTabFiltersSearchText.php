@@ -8,8 +8,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
-ob_start();
+if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 ?>
 <div class="row-settings-block col-md-12">
 	<?php if ( WooBeWoo_PF_Frame::_()->isWCLicense() ) { ?>
@@ -20,4 +19,6 @@ ob_start();
 	</a>
 	<?php } ?>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_search_text_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSearchText' );
+}

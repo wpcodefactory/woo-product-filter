@@ -102,14 +102,16 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 				);
 				?>
 		</div>
-		<?php ob_start(); ?>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 		<div class="row-settings-block" data-parent="f_sort_by" data-no-values="default">
 			<div class="settings-block-label col-xs-8 col-sm-6" >
 				<?php esc_html_e( 'Sort as numbers', 'woo-product-filter' ); ?>
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_perfect_brand_sort_as_numbers_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php } else {
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
+		} ?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -330,7 +332,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 		</div>
 	</div>
 </div>
-<?php ob_start(); ?>
+<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Display brand description', 'woo-product-filter' ); ?>
@@ -343,4 +345,6 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 		</div>
 	</div>
 </div>
-<?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_perfect_brand_description_option', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+<?php } else {
+	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPerfectBrandDescription' );
+}
