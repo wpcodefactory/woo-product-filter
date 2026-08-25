@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
@@ -517,3 +518,4 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 <?php } else {
 	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_max_terms_and_switch_options' );
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 
 $ratingTypes = array(
@@ -131,3 +132,4 @@ foreach ( $ratingTypes as $key => $value ) {
 	</div>
 </div>
 <?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

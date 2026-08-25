@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 	<div class="wrap woobewoo-wrap">
 		<div class="woobewoo-plugin woobewoo-main">
@@ -126,3 +127,4 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 <?php
 WooBeWoo_PF_Dispatcher::doAction( 'afterWoobewooWrap' );
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

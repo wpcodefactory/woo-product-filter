@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 /**
  * Set first letter in a string as UPPERCASE.
  *
@@ -308,7 +309,7 @@ if ( ! function_exists( 'woofilterInstallBaseMsg' ) ) {
 			return;
 		}
 
-		if ( apply_filters( 'woobee_show_pro_notice', false ) ) {
+		if ( apply_filters( 'woobee_show_pro_notice', false ) ) { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			return;
 		}
 		if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
@@ -363,7 +364,7 @@ if ( ! function_exists( 'wpf_translate_string' ) ) {
 		if ( has_action( 'wpml_register_single_string' ) ) {
 			// Register the string.
 			do_action(
-				'wpml_register_single_string',
+				'wpml_register_single_string', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 				$context,
 				$name,
 				$value
@@ -371,7 +372,7 @@ if ( ! function_exists( 'wpf_translate_string' ) ) {
 
 			// Get the translated value.
 			return apply_filters(
-				'wpml_translate_single_string',
+				'wpml_translate_single_string', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 				$value,
 				$context,
 				$value
@@ -381,3 +382,4 @@ if ( ! function_exists( 'wpf_translate_string' ) ) {
 		return $value;
 	}
 }
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound

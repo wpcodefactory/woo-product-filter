@@ -106,11 +106,10 @@ WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_search_input">
 			<?php
-			$labels = $this->getModel( 'woofilters' )->getFilterLabels( 'Author' );
 			WooBeWoo_PF_Html::text(
 				'f_search_label',
 				array(
-					'placeholder' => esc_attr( $labels['search'] ),
+					'placeholder' => esc_attr( $this->getModel( 'woofilters' )->getFilterLabels( 'Author' ) ),
 					'attrs'       => 'class="woobewoo-flat-input"',
 				)
 			);

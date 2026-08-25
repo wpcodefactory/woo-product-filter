@@ -438,7 +438,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 				$customNums = $queryvars['posts_per_row'];
 				global $woocommerce_loop;
 				// needed for some themes, that check this property first
-				$woocommerce_loop['columns'] = $customNums;
+				$woocommerce_loop['columns'] = $customNums; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 				add_filter(
 					'loop_shop_columns', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 					function ( $num ) use ( $customNums ) {

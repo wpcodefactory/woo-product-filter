@@ -9,9 +9,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
+$labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
-$formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->getCode() );
+$formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->getCode() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 
 <div class="woobewoo-plugin containerWrapperElementor" id="containerWrapperElementorDesign">

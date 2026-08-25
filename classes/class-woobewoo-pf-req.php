@@ -121,7 +121,7 @@ class WooBeWoo_PF_Req {
 			case 'file':
 			case 'files':
 				if ( isset( $_FILES[ $name ] ) ) {
-					return self::sanitizeFiles( $_FILES[ $name ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+					return self::sanitizeFiles( $_FILES[ $name ] );
 				}
 				break;
 			case 'session':

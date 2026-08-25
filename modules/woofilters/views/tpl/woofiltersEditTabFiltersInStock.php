@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
@@ -135,4 +136,5 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 </div>
 <?php } else {
 	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersStock' );
-} ?>
+}
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

@@ -165,7 +165,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 		$maxCountProducts += 100;
 		WooBeWoo_PF_Db::query( 'SET session wait_timeout=600' );
 		global $wpfMetaSeparator;
-		$wpfMetaSeparator = ',';
+		$wpfMetaSeparator = ','; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
 		foreach ( $keys as $key ) {
 			$keyName = $key['meta_key'];

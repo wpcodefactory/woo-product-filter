@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $adPath   = $this->getModule()->getModPath() . 'img/ad/';
 $labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
 
@@ -277,3 +278,4 @@ if ( taxonomy_exists( 'pwb-brand' ) ) {
 	</section>
 </div>
 <?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

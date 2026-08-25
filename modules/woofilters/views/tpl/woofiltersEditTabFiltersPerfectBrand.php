@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
-$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
@@ -242,11 +242,10 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 		</div>
 		<div class="settings-value settings-w100" data-parent="f_show_search_input">
 			<?php
-			$labels = $this->getModel( 'woofilters' )->getFilterLabels( 'Category' );
 			WooBeWoo_PF_Html::text(
 				'f_search_label',
 				array(
-					'placeholder' => esc_html( $labels['search'] ),
+					'placeholder' => esc_html( $this->getModel( 'woofilters' )->getFilterLabels( 'Category' ) ),
 					'attrs'       => 'class="woobewoo-flat-input"',
 				)
 			);

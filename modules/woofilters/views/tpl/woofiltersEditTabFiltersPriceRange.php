@@ -10,7 +10,7 @@
 defined( 'ABSPATH' ) || exit;
 
 WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
-$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
+$pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">

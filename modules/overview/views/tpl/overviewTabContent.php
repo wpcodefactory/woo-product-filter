@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$modPath = $this->getModule()->getModPath();
+$modPath = $this->getModule()->getModPath(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <section>
 	<div class="woobewoo-item woobewoo-panel wpf-overview-panel">

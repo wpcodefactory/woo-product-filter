@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $labelPro = apply_filters( 'woobewoo_pf_pro_label', ' - Pro feature' );
 
 list($categoryDisplay, $parentCategories) = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getCategoriesDisplay();
@@ -105,3 +106,4 @@ $formLink = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( WooBeWoo_
 	<div class="woobewoo-clear"></div>
 </div>
 <?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

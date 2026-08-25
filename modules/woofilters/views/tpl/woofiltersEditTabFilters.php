@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $filtersList = $this->getModel()->getAllFilters();
 $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
@@ -170,3 +171,4 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 </div>
 <?php
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

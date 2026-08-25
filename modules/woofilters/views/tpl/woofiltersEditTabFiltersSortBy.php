@@ -9,6 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 ?>
 <div class="row-settings-block">
@@ -70,3 +71,4 @@ WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 </div>
 
 <?php WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortBy' );
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

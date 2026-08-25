@@ -40,11 +40,12 @@ WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 	<div class="settings-block-values settings-w100 col-xs-8 col-sm-9">
 		<div class="settings-value settings-w100">
 			<?php
-				$labels = $this->getModel( 'woofilters' )->getFilterLabels( 'OnSale' );
 				WooBeWoo_PF_Html::text(
 					'f_checkbox_label',
 					array(
-						'placeholder' => esc_attr( $labels['onsale'] ),
+						'placeholder' => esc_attr(
+							$this->getModel( 'woofilters' )->getFilterLabels( 'OnSale' )
+						),
 						'attrs'       => 'class="woobewoo-flat-input"',
 					)
 				);

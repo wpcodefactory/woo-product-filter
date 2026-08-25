@@ -9,8 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$isSubscribe = $this->getModule()->getModel()->isSubscribe();
-$isRating    = $this->getModule()->getModel()->isRating();
+$isSubscribe = $this->getModule()->getModel()->isSubscribe(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+$isRating    = $this->getModule()->getModel()->isRating(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 if ( ! $isSubscribe || ! $isRating ) {
 	?>
 	<div class="wpf-overview-block-row">
