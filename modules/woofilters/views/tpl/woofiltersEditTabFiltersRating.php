@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 
 $ratingTypes = array(
 	'list'      => esc_attr__( 'Radiobuttons list', 'woo-product-filter' ),

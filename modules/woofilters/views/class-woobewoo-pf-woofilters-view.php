@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Woofilters_View extends ViewWpf {
+class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 
 	private static $uniqueBlockId  = 0;
 	private static $filterOrderKey = 0;

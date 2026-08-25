@@ -418,7 +418,7 @@ abstract class WooBeWoo_PF_Table {
 						if ( isset( $this->_fields[ $k ] ) && is_object( $this->_fields[ $k ] ) ) {
 							$objForValidation = clone $this->_fields[ $k ];
 							$objForValidation->setValue( $val );
-							$errors = ValidatorWpf::_( $objForValidation );
+							$errors = WooBeWoo_PF_Validator::_( $objForValidation );
 							if ( $errors ) {
 								$this->_addError( $errors );
 							}

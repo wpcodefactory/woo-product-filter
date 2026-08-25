@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - ValidatorWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_Validator Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class ValidatorWpf {
+class WooBeWoo_PF_Validator {
 
 	public static $errors = array();
 
@@ -29,12 +29,12 @@ class ValidatorWpf {
 		}
 		if ( ! empty( $field->validate ) ) {
 			foreach ( $field->validate as $v ) {
-				if ( method_exists( 'ValidatorWpf', $v ) ) {
+				if ( method_exists( 'WooBeWoo_PF_Validator', $v ) ) {
 					self::$v( $field );
 				}
 			}
 		}
-		if ( method_exists( 'ValidatorWpf', $field->type ) ) {
+		if ( method_exists( 'WooBeWoo_PF_Validator', $field->type ) ) {
 			$validate = $field->type;
 			self::$validate( $field );
 		}
@@ -177,11 +177,11 @@ class ValidatorWpf {
 	/**
 	 * getProductValidationMethods.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public static function getProductValidationMethods() {
 		$res = array();
-		$all = get_class_methods( 'ValidatorWpf' );
+		$all = get_class_methods( 'WooBeWoo_PF_Validator' );
 		foreach ( $all as $m ) {
 			if ( in_array( $m, array( 'int', 'none', 'string' ) ) ) {
 				$res[ $m ] = esc_html( $m );
@@ -193,12 +193,12 @@ class ValidatorWpf {
 	/**
 	 * getUserValidationMethods.
 	 *
-	 * @version 3.1.8
+	 * @version 3.3.2
 	 */
 	public static function getUserValidationMethods() {
 		// here validation for user fields
 		$res = array();
-		$all = get_class_methods( 'ValidatorWpf' );
+		$all = get_class_methods( 'WooBeWoo_PF_Validator' );
 		foreach ( $all as $m ) {
 			if ( in_array( $m, array( 'int', 'none', 'string', 'email', 'validLen' ) ) ) {
 				$res[ $m ] = esc_html( $m );

@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="row-settings-block">
@@ -206,7 +206,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 </div>
 <?php echo WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_category_show_on_frontend_as_options', ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped  ?>
 
-<?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
+<?php WooBeWoo_PF_View::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Dropdown label', 'woo-product-filter' ); ?>

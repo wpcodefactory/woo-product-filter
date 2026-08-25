@@ -34,7 +34,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 	</div>
 </div>
 <?php
-ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 
 $attributesTypes = array(
 	'list'         => esc_attr__( 'Checkbox list (multiple select)', 'woo-product-filter' ),
@@ -212,7 +212,7 @@ foreach ( $attributesTypes as $key => $value ) {
 	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_slider_options' );
 } ?>
 
-<?php ViewWpf::display( 'woofiltersEditTabCustomTags' ); ?>
+<?php WooBeWoo_PF_View::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Dropdown label', 'woo-product-filter' ); ?>

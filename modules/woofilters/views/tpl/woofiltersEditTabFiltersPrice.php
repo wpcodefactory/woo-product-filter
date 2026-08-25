@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 
 $skins = array(

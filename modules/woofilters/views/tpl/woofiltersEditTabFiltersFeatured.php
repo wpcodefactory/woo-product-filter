@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-ViewWpf::display( 'woofiltersEditTabCommonTitle' );
+WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">

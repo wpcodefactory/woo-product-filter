@@ -1,6 +1,6 @@
 <?php
 /**
- * Product Filter by WBW - ViewWpf Class
+ * Product Filter by WBW - WooBeWoo_PF_View Class
  *
  * @version 3.3.2
  *
@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 #[\AllowDynamicProperties]
-abstract class ViewWpf extends WooBeWoo_PF_Base_Object {
+abstract class WooBeWoo_PF_View extends WooBeWoo_PF_Base_Object {
 	/*
 	 * @deprecated
 	 */

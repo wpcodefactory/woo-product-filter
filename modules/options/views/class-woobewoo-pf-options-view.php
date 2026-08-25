@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class WooBeWoo_PF_Options_View extends ViewWpf {
+class WooBeWoo_PF_Options_View extends WooBeWoo_PF_View {
 
 	private $_news = array();
 
