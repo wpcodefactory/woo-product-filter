@@ -65,22 +65,6 @@ class WooBeWoo_PF_Uri {
 	}
 
 	/**
-	 * getGetParams.
-	 */
-	public static function getGetParams( $exclude = array() ) {
-		$res = array();
-		if ( isset( $_GET ) && ! empty( $_GET ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			foreach ( $_GET as $key => $val ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				if ( in_array( $key, $exclude ) ) {
-					continue;
-				}
-				$res[ $key ] = $val;
-			}
-		}
-		return $res;
-	}
-
-	/**
 	 * mod.
 	 */
 	public static function mod( $name, $action = '', $data = null ) {
@@ -98,21 +82,6 @@ class WooBeWoo_PF_Uri {
 			} elseif ( is_string( $data ) ) {
 				$params  = http_build_query( $params );
 				$params .= '&' . $data;
-			}
-		}
-		return self::_( $params );
-	}
-
-	/**
-	 * atach.
-	 */
-	public static function atach( $params ) {
-		$getData = self::getGetParams();
-		if ( ! empty( $getData ) ) {
-			if ( is_array( $params ) ) {
-				$params = array_merge( $getData, $params );
-			} else {
-				$params = http_build_query( $getData ) . '&' . $params;
 			}
 		}
 		return self::_( $params );

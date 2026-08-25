@@ -324,7 +324,7 @@ class WooBeWoo_PF_Req {
 	 * Sanitizes a $_FILES array: file names and MIME types are cleaned;
 	 * tmp_name is server-generated and left as-is.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.2
 	 * @since   3.3.0
 	 *
 	 * @param array $files Raw $_FILES array.
@@ -332,34 +332,38 @@ class WooBeWoo_PF_Req {
 	 * @return array
 	 */
 	private static function sanitizeFiles( $files ) {
-		foreach ( $files as $key => $value ) {
-			if ( is_array( $value ) ) {
-				$files[ $key ] = self::sanitizeFiles( $value );
-				continue;
-			}
-
-			switch ( $key ) {
-				case 'name':
-					$files[ $key ] = sanitize_file_name( $value );
-					break;
-
-				case 'type':
-					$files[ $key ] = sanitize_mime_type( $value );
-					break;
-
-				case 'size':
-				case 'error':
-					$files[ $key ] = absint( $value );
-					break;
-
-				case 'tmp_name':
-				default:
-					// Leave unchanged.
-					break;
-			}
+		// Single file.
+		if ( isset( $files['name'] ) && ! is_array( $files['name'] ) ) {
+			return array(
+				'name'     => isset( $files['name'] ) ? sanitize_file_name( $files['name'] ) : '',
+				'type'     => isset( $files['type'] ) ? sanitize_mime_type( $files['type'] ) : '',
+				'tmp_name' => isset( $files['tmp_name'] ) ? $files['tmp_name'] : '',
+				'size'     => isset( $files['size'] ) ? absint( $files['size'] ) : 0,
+				'error'    => isset( $files['error'] ) ? absint( $files['error'] ) : UPLOAD_ERR_NO_FILE,
+			);
 		}
 
-		return $files;
+		// Multi-file input.
+		if ( isset( $files['name'] ) && is_array( $files['name'] ) ) {
+			$sanitized = array();
+			foreach ( array_keys( $files['name'] ) as $i ) {
+				$sanitized['name'][ $i ]     = sanitize_file_name( $files['name'][ $i ] );
+				$sanitized['type'][ $i ]     = sanitize_mime_type( $files['type'][ $i ] );
+				$sanitized['tmp_name'][ $i ] = $files['tmp_name'][ $i ];
+				$sanitized['size'][ $i ]     = absint( $files['size'][ $i ] );
+				$sanitized['error'][ $i ]    = absint( $files['error'][ $i ] );
+			}
+
+			return $sanitized;
+		}
+
+		// Nested field groups.
+		$sanitized = array();
+		foreach ( $files as $key => $value ) {
+			$sanitized[ $key ] = is_array( $value ) ? self::sanitizeFiles( $value ) : $value;
+		}
+
+		return $sanitized;
 	}
 
 	/**
