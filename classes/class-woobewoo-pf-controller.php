@@ -32,6 +32,25 @@ abstract class WooBeWoo_PF_Controller {
 	public function getCode() {
 		return $this->_code;
 	}
+
+	/**
+	 * exec.
+	 *
+	 * @version 3.3.2
+	 */
+	public function exec( $task = '' ) {
+		$permissions = $this->getPermissions();
+
+		$allowed_methods = $permissions[ WPF_METHODS ] ?? array();
+
+		if ( isset( $allowed_methods[ $task ] ) && method_exists( $this, $task ) ) {
+			$this->_task = $task;
+
+			return $this->$task();
+		}
+
+		return null;
+	}
 	public function getView( $name = '' ) {
 		if ( empty( $name ) ) {
 			$name = $this->getCode();
