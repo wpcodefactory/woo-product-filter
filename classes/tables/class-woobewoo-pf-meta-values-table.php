@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class TableMeta_ValuesWpf extends WooBeWoo_PF_Table {
+class WooBeWoo_PF_Meta_Values_Table extends WooBeWoo_PF_Table {
 
 	/**
 	 * Constructor.

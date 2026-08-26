@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class TableModules_TypeWpf extends WooBeWoo_PF_Table {
+class WooBeWoo_PF_Modules_Type_Table extends WooBeWoo_PF_Table {
 
 	/**
 	 * Constructor.

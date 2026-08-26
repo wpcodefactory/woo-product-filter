@@ -4,15 +4,15 @@
  *
  * @version 3.3.2
  *
- * @author woobewoo
+ * @author  woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
 class WooBeWoo_PF_Frame {
 
-	private $_modules    = array();
-	private $_tables     = array();
+	private $_modules = array();
+	private $_tables = array();
 	private $_allModules = array();
 
 	/**
@@ -23,16 +23,16 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Array to hold all scripts and add them in one time in addScripts method.
 	 */
-	private $_scripts            = array();
+	private $_scripts = array();
 	private $_scriptsInitialized = false;
-	private $_styles             = array();
-	private $_stylesInitialized  = false;
-	private $_useFootAssets      = false;
+	private $_styles = array();
+	private $_stylesInitialized = false;
+	private $_useFootAssets = false;
 
 	private $_scriptsVars = array();
-	private $_mod         = '';
-	private $_action      = '';
-	private $_proVersion  = null;
+	private $_mod = '';
+	private $_action = '';
+	private $_proVersion = null;
 
 	/**
 	 * Object with result of executing non-ajax module request.
@@ -56,6 +56,7 @@ class WooBeWoo_PF_Frame {
 		if ( ! $instance ) {
 			$instance = new WooBeWoo_PF_Frame();
 		}
+
 		return $instance;
 	}
 
@@ -121,8 +122,8 @@ class WooBeWoo_PF_Frame {
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable( 'modules' )
-			->innerJoin( $this->getTable( 'modules_type' ), 'type_id' )
-			->get( $this->getTable( 'modules' )->alias() . '.*, ' . $this->getTable( 'modules_type' )->alias() . '.label as type_name' );
+		                      ->innerJoin( $this->getTable( 'modules_type' ), 'type_id' )
+		                      ->get( $this->getTable( 'modules' )->alias() . '.*, ' . $this->getTable( 'modules_type' )->alias() . '.label as type_name' );
 		if ( $activeModules ) {
 			foreach ( $activeModules as $m ) {
 				$code              = $m['code'];
@@ -133,7 +134,6 @@ class WooBeWoo_PF_Frame {
 				if ( is_dir( $moduleLocationDir . $code ) ) {
 					$this->_allModules[ $m['code'] ] = 1;
 					if ( (bool) $m['active'] ) {
-
 						$mod_class_name = WPF_CLASS_PREFIX . ucwords( $code );
 						if ( ! class_exists( $mod_class_name ) ) {
 							$mod_class_file     = strtolower( str_replace( '_', '-', $mod_class_name ) ) . '.php';
@@ -195,11 +195,17 @@ class WooBeWoo_PF_Frame {
 		add_action( $addAssetsAction, array( $this, 'addScripts' ) );
 		add_action( $addAssetsAction, array( $this, 'addStyles' ) );
 
-		register_activation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'WooBeWoo_PF_Utils', 'activatePlugin' ) ); // See classes/install.php file
+		register_activation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array(
+			'WooBeWoo_PF_Utils',
+			'activatePlugin'
+		) ); // See classes/install.php file
 		register_uninstall_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'WooBeWoo_PF_Utils', 'deletePlugin' ) );
-		register_deactivation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array( 'WooBeWoo_PF_Utils', 'deactivatePlugin' ) );
+		register_deactivation_hook( WPF_DIR . WPF_DS . WPF_MAIN_FILE, array(
+			'WooBeWoo_PF_Utils',
+			'deactivatePlugin'
+		) );
 
-		add_filter( 'the_content', array( 'WooBeWoo_PF_Woofilters', 'getProductsShortcode' ), -99999 );
+		add_filter( 'the_content', array( 'WooBeWoo_PF_Woofilters', 'getProductsShortcode' ), - 99999 );
 	}
 
 	/**
@@ -207,8 +213,9 @@ class WooBeWoo_PF_Frame {
 	 *
 	 * @version 3.1.3
 	 *
-	 * @param string $code Code of controller that need to be checked
+	 * @param string $code   Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
+	 *
 	 * @return bool true if ok, else - should exit from application
 	 */
 	public function checkPermissions( $code, $action ) {
@@ -227,7 +234,7 @@ class WooBeWoo_PF_Frame {
 	 *
 	 * @version 3.3.2
 	 *
-	 * @param string $code Code of controller that need to be checked
+	 * @param string $code   Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
 	 *
 	 * @return bool true if ok, else - false
@@ -301,6 +308,7 @@ class WooBeWoo_PF_Frame {
 				}
 			}
 		}
+
 		return $res;
 	}
 
@@ -343,6 +351,7 @@ class WooBeWoo_PF_Frame {
 				}
 			}
 		}
+
 		return $res;
 	}
 
@@ -413,6 +422,9 @@ class WooBeWoo_PF_Frame {
 				require $tablesDir . $tableName . '.php';
 			}
 		}
+		$tableName = str_replace( 'class-woobewoo-pf-', '', $tableName );
+		$tableName = str_replace( '-table', '', $tableName );
+		$tableName = str_replace( '-', '_', $tableName );
 		$this->_tables[ $tableName ] = WooBeWoo_PF_Table::_( $tableName );
 	}
 
@@ -447,6 +459,7 @@ class WooBeWoo_PF_Frame {
 	 * @version 3.3.2
 	 *
 	 * @param string $tableName table name in database
+	 *
 	 * @return object table
 	 * @example WooBeWoo_PF_Frame::_()->getTable('products')->getAll()
 	 */
@@ -454,6 +467,7 @@ class WooBeWoo_PF_Frame {
 		if ( empty( $this->_tables[ $tableName ] ) ) {
 			$this->_extractTable( $tableName );
 		}
+
 		return $this->_tables[ $tableName ];
 	}
 
@@ -475,6 +489,7 @@ class WooBeWoo_PF_Frame {
 				}
 			}
 		}
+
 		return $res;
 	}
 
@@ -499,6 +514,7 @@ class WooBeWoo_PF_Frame {
 		if ( ! $this->_useFootAssets && $this->getModule( 'options' ) && $this->getModule( 'options' )->get( 'foot_assets' ) ) {
 			$this->_useFootAssets = true;
 		}
+
 		return $this->_useFootAssets;
 	}
 
@@ -507,7 +523,7 @@ class WooBeWoo_PF_Frame {
 	 *
 	 * @version 3.3.2
 	 *
-	 * @see wp_enqueue_script definition
+	 * @see     wp_enqueue_script definition
 	 */
 	public function addScript( $handle, $src = '', $deps = array(), $ver = false, $in_footer = false, $vars = array() ) {
 		$src = empty( $src ) ? $src : WooBeWoo_PF_Uri::_( $src );
@@ -536,7 +552,6 @@ class WooBeWoo_PF_Frame {
 	public function addScripts() {
 		if ( ! empty( $this->_scripts ) ) {
 			foreach ( $this->_scripts as $s ) {
-
 				if ( ! function_exists( 'is_plugin_active' ) ) {
 					require_once ABSPATH . 'wp-admin/includes/plugin.php';
 				}
@@ -643,6 +658,7 @@ class WooBeWoo_PF_Frame {
 		if ( $this->moduleActive( $code ) ) {
 			return true;
 		}
+
 		return isset( $this->_allModules[ $code ] );
 	}
 
@@ -653,6 +669,7 @@ class WooBeWoo_PF_Frame {
 	 */
 	public function isTplEditor() {
 		$tplEditor = WooBeWoo_PF_Req::getVar( 'tplEditor' );
+
 		return (bool) $tplEditor;
 	}
 
@@ -671,6 +688,7 @@ class WooBeWoo_PF_Frame {
 		) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -681,6 +699,7 @@ class WooBeWoo_PF_Frame {
 		if ( $this->isAdminPlugOptsPage() ) {
 			return true;
 		}
+
 		return false;
 	}
 

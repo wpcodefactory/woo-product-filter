@@ -63,7 +63,7 @@ abstract class WooBeWoo_PF_Table {
 			throw new Exception( 'Unknown table [' . esc_html( $table ) . ']' );
 		}
 		if ( ! isset( $instances[ $table ] ) ) {
-			$class = 'table' . strFirstUpWpf( $table ) . strFirstUpWpf( WPF_CODE );
+			$class = WPF_CLASS_PREFIX . strFirstUpWpf( $table ) . '_Table';
 			if ( class_exists( $class ) ) {
 				$instances[ $table ] = new $class();
 			} else {

@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class TableFiltersWpf extends WooBeWoo_PF_Table {
+class WooBeWoo_PF_Filters_Table extends WooBeWoo_PF_Table {
 
 	/**
 	 * Constructor.
