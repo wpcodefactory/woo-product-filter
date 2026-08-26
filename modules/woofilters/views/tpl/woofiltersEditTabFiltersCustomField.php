@@ -11,7 +11,6 @@
 defined( 'ABSPATH' ) || exit;
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-
 WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 ?>
 <div class="row-settings-block">
@@ -51,4 +50,4 @@ WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 	</div>
 </div>
 <?php
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
