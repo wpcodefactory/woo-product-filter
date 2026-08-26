@@ -56,6 +56,8 @@ abstract class WooBeWoo_PF_Table {
 
 	/**
 	 * getInstance.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function getInstance( $table = '' ) {
 		static $instances = array();

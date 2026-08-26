@@ -166,6 +166,13 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
+= 3.3.2 - 26/08/2026 =
+* Dev - Fixed `Filter` text translation.
+* Dev - Security - Escaped shortcode output.
+* Dev - Prefixed PHP class names with `WooBeWoo_PF_`.
+* Dev - Prefixed class file names with `class-woobewoo-pf-`.
+* Dev - Code refactoring.
+
 = 3.3.1 - 13/08/2026 =
 * Fix - Fixed WPML translation issues.
 * Dev - Fixed Plugin Check OutputNotEscaped warnings.
