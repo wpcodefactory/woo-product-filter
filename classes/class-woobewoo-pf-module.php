@@ -169,7 +169,7 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 	 * @version 3.3.2
 	 */
 	protected function _createController() {
-		$controller_class_name = WPF_CLASS_PREFIX . ucwords( $this->getCode() ) . '_Controller';
+		$controller_class_name     = WPF_CLASS_PREFIX . ucwords( $this->getCode() ) . '_Controller';
 		$controller_class_file     = strtolower( str_replace( '_', '-', $controller_class_name ) ) . '.php';
 		$controller_class_location = $this->getModDir() . 'class-' . $controller_class_file;
 

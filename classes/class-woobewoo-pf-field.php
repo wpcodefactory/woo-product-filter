@@ -31,8 +31,8 @@ class WooBeWoo_PF_Field {
 	 */
 	public $adapt = array(
 		'WooBeWoo_PF_Html' => '',
-		'dbFrom'  => '',
-		'dbTo'    => '',
+		'dbFrom'           => '',
+		'dbTo'             => '',
 	);
 	/**
 	 * Init database field representation

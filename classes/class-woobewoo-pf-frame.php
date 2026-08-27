@@ -4,15 +4,15 @@
  *
  * @version 3.3.2
  *
- * @author  woobewoo
+ * @author woobewoo
  */
 
 defined( 'ABSPATH' ) || exit;
 
 class WooBeWoo_PF_Frame {
 
-	private $_modules = array();
-	private $_tables = array();
+	private $_modules    = array();
+	private $_tables     = array();
 	private $_allModules = array();
 
 	/**
@@ -23,16 +23,16 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Array to hold all scripts and add them in one time in addScripts method.
 	 */
-	private $_scripts = array();
+	private $_scripts            = array();
 	private $_scriptsInitialized = false;
-	private $_styles = array();
-	private $_stylesInitialized = false;
-	private $_useFootAssets = false;
+	private $_styles             = array();
+	private $_stylesInitialized  = false;
+	private $_useFootAssets      = false;
 
 	private $_scriptsVars = array();
-	private $_mod = '';
-	private $_action = '';
-	private $_proVersion = null;
+	private $_mod         = '';
+	private $_action      = '';
+	private $_proVersion  = null;
 
 	/**
 	 * Object with result of executing non-ajax module request.
@@ -122,8 +122,8 @@ class WooBeWoo_PF_Frame {
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable( 'modules' )
-		                      ->innerJoin( $this->getTable( 'modules_type' ), 'type_id' )
-		                      ->get( $this->getTable( 'modules' )->alias() . '.*, ' . $this->getTable( 'modules_type' )->alias() . '.label as type_name' );
+			->innerJoin( $this->getTable( 'modules_type' ), 'type_id' )
+			->get( $this->getTable( 'modules' )->alias() . '.*, ' . $this->getTable( 'modules_type' )->alias() . '.label as type_name' );
 		if ( $activeModules ) {
 			foreach ( $activeModules as $m ) {
 				$code              = $m['code'];

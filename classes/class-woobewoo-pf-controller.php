@@ -82,7 +82,7 @@ abstract class WooBeWoo_PF_Controller {
 		$parentModule = WooBeWoo_PF_Frame::_()->getModule( $this->getCode() );
 		$className    = '';
 
-		$modal_class_name = WPF_CLASS_PREFIX . ucwords( $name, '_' ) . '_Model';
+		$modal_class_name     = WPF_CLASS_PREFIX . ucwords( $name, '_' ) . '_Model';
 		$modal_class_file     = strtolower( str_replace( '_', '-', $modal_class_name ) ) . '.php';
 		$modal_class_location = $parentModule->getModDir() . 'models' . WPF_DS . 'class-' . $modal_class_file;
 
@@ -113,7 +113,7 @@ abstract class WooBeWoo_PF_Controller {
 		$parentModule = WooBeWoo_PF_Frame::_()->getModule( $this->getCode() );
 		$className    = '';
 
-		$view_class_name = WPF_CLASS_PREFIX . ucwords( $name ) . '_View';
+		$view_class_name     = WPF_CLASS_PREFIX . ucwords( $name ) . '_View';
 		$view_class_file     = strtolower( str_replace( '_', '-', $view_class_name ) ) . '.php';
 		$view_class_location = $parentModule->getModDir() . 'views'  . WPF_DS . 'class-' . $view_class_file;
 
