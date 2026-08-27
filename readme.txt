@@ -3,7 +3,7 @@ Contributors: woobewoo
 Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 3.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -166,12 +166,13 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.3.2 - 26/08/2026 =
+= 3.3.2 - 27/08/2026 =
 * Dev - Fixed "Filter" text translation.
 * Dev - Security - Escaped shortcode output.
 * Dev - Prefixed PHP class names with `WooBeWoo_PF_`.
 * Dev - Prefixed class file names with `class-woobewoo-pf-`.
 * Dev - Code refactoring.
+* Tested up to: 7.1.
 
 = 3.3.1 - 13/08/2026 =
 * Fix - Fixed WPML translation issues.
