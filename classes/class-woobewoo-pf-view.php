@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_View Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -26,7 +26,7 @@ abstract class WooBeWoo_PF_View extends WooBeWoo_PF_Base_Object {
 	/**
 	 * display.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function display( $tpl = '' ) {
 		$tpl     = ( empty( $tpl ) ) ? $this->_tpl : $tpl;
@@ -39,7 +39,7 @@ abstract class WooBeWoo_PF_View extends WooBeWoo_PF_Base_Object {
 	/**
 	 * getPath.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getPath( $tpl ) {
 		$path         = '';
@@ -54,7 +54,7 @@ abstract class WooBeWoo_PF_View extends WooBeWoo_PF_Base_Object {
 	/**
 	 * getModule.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getModule() {
 		return WooBeWoo_PF_Frame::_()->getModule( $this->_code );
@@ -63,7 +63,7 @@ abstract class WooBeWoo_PF_View extends WooBeWoo_PF_Base_Object {
 	/**
 	 * getModel.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getModel( $code = '' ) {
 		return WooBeWoo_PF_Frame::_()->getModule( $this->_code )->getController()->getModel( $code );
@@ -72,7 +72,7 @@ abstract class WooBeWoo_PF_View extends WooBeWoo_PF_Base_Object {
 	/**
 	 * getContent.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getContent( $tpl = '' ) {
 		$tpl          = ( empty( $tpl ) ) ? $this->_tpl : $tpl;
@@ -115,7 +115,7 @@ abstract class WooBeWoo_PF_View extends WooBeWoo_PF_Base_Object {
 	/**
 	 * This will display form for our widgets
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function displayWidgetForm( $data = array(), $widget = array(), $formTpl = 'form' ) {
 		$this->assign( 'data', $data );

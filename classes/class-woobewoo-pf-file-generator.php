@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_File_Generator Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -22,7 +22,7 @@ class WooBeWoo_PF_File_Generator {
 	/**
 	 * getInstance.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function getInstance( $filename, $data, $type ) {
 		$name = md5( $filename . $data . $type );
@@ -38,7 +38,7 @@ class WooBeWoo_PF_File_Generator {
 	/**
 	 * generate.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generate() {
 		switch ( $this->_type ) {

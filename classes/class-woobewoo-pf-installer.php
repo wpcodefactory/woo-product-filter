@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Installer Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -24,7 +24,7 @@ class WooBeWoo_PF_Installer {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function init( $isUpdate = false ) {
 		global $wpdb;

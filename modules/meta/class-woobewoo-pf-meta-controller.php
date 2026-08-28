@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Controller Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -25,7 +25,7 @@ class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_do_meta_indexing.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_do_meta_indexing( $realAjax = true ) {
 		if ( $realAjax ) {
@@ -61,7 +61,7 @@ class WooBeWoo_PF_Meta_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_do_meta_optimizing.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_do_meta_optimizing() {
 		WooBeWoo_PF_Req::verifyRequest();

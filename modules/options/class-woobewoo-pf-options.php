@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Options Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -29,7 +29,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function init() {
 		add_action( 'init', array( $this, 'startSession' ), -1 );
@@ -40,7 +40,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * startSession.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function startSession() {
 		$isMultiLogicOr = false;
@@ -102,7 +102,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * getAdminPage.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAdminPage() {
 		if ( ! WooBeWoo_PF_Installer::isUsed() ) {
@@ -115,7 +115,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * addAdminTab.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addAdminTab( $tabs ) {
 		$tabs['settings'] = array(
@@ -155,7 +155,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * getTabs.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getTabs() {
 		if ( empty( $this->_tabs ) ) {
@@ -197,7 +197,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * getActiveTab.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getActiveTab() {
 		$reqTab = sanitize_text_field( WooBeWoo_PF_Req::getVar( 'tab' ) );
@@ -207,7 +207,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * getTabUrl.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getTabUrl( $tab = '' ) {
 		static $mainUrl;
@@ -242,7 +242,7 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	/**
 	 * getAll.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAll() {
 		if ( empty( $this->_options ) ) {

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Functions
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Set first letter in a string as UPPERCASE.
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @param string $str string to modify
  *
@@ -27,7 +27,7 @@ if ( ! function_exists( 'woobewoo_pf_str_first_up' ) ) {
 /**
  * woobewoo_pf_date_to_timestamp.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 if ( ! function_exists( 'woobewoo_pf_date_to_timestamp' ) ) {
 	function woobewoo_pf_date_to_timestamp( $date ) {
@@ -43,7 +43,7 @@ if ( ! function_exists( 'woobewoo_pf_date_to_timestamp' ) ) {
 /**
  * woobewoo_pf_import_class.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 if ( ! function_exists( 'woobewoo_pf_import_class' ) ) {
 	function woobewoo_pf_import_class( $class, $path = '' ) {
@@ -72,7 +72,7 @@ if ( ! function_exists( 'woobewoo_pf_import_class' ) ) {
 /**
  * Check if class name exist with prefix or not.
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @param string $class preferred class name
  *
@@ -95,7 +95,7 @@ if ( ! function_exists( 'woobewoo_pf_toe_get_class_name' ) ) {
 /**
  * Create object of specified class.
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @param string $class  class that you want to create
  * @param array  $params array of arguments for class __construct function
@@ -125,7 +125,7 @@ if ( ! function_exists( 'woobewoo_pf_toe_create_obj' ) ) {
 /**
  * woobewoo_pf_json_encode_utf_normal.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 if ( ! function_exists( 'woobewoo_pf_json_encode_utf_normal' ) ) {
 	function woobewoo_pf_json_encode_utf_normal( $value ) {
@@ -185,7 +185,7 @@ if ( ! function_exists( 'woobewoo_pf_json_encode_utf_normal' ) ) {
 /**
  * Prepares the params values to store into db.
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @param array $d $_POST array
  *
@@ -228,7 +228,7 @@ if ( ! function_exists( 'woobewoo_pf_prepare_params' ) ) {
 /**
  * woobewoo_pf_prepare_field_code.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 if ( ! function_exists( 'woobewoo_pf_prepare_field_code' ) ) {
 	function woobewoo_pf_prepare_field_code( $string ) {
@@ -249,7 +249,7 @@ if ( ! function_exists( 'woobewoo_pf_prepare_field_code' ) ) {
 /**
  * Recursive implode of array.
  *
- * @verson 3.3.2
+ * @verson 3.4.0
  *
  * @param string $glue  imploder
  * @param array  $array array to implode
@@ -282,7 +282,7 @@ if ( ! function_exists( 'woobewoo_pf_recursive_implode' ) ) {
 /**
  * woobewoo_pf_request.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 if ( ! function_exists( 'woobewoo_pf_request' ) ) {
 	function woobewoo_pf_request() {
@@ -309,7 +309,7 @@ if ( ! function_exists( 'woobewoo_pf_request' ) ) {
 /**
  * woobewoo_pf_install_base_msg.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 add_action( 'admin_notices', 'woobewoo_pf_install_base_msg' );
 if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
@@ -340,7 +340,7 @@ if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
 /**
  * woobewoo_pf_deactivate.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 add_action( 'admin_init', 'woobewoo_pf_deactivate' );
 if ( ! function_exists( 'woobewoo_pf_deactivate' ) ) {
@@ -366,7 +366,7 @@ if ( ! function_exists( 'woobewoo_pf_deactivate' ) ) {
 /**
  * woobewoo_pf_translate_string.
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 if ( ! function_exists( 'woobewoo_pf_translate_string' ) ) {
 	function woobewoo_pf_translate_string( $value, $name = '', $context = 'woo-product-filter' ) {

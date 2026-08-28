@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Config
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -59,8 +59,8 @@ define( 'WPF_CURRENT', 'current' );
 define( 'WPF_EOL', "\n" );
 
 define( 'WPF_PLUGIN_INSTALLED', true );
-define( 'WPF_VERSION', '3.3.2-dev-20260828-1730' );
-define( 'WPF_PRO_REQUIRES', '3.3.2' );
+define( 'WPF_VERSION', '3.4.0-dev-20260828-1745' );
+define( 'WPF_PRO_REQUIRES', '3.4.0' );
 define( 'WPF_USER', 'user' );
 
 define( 'WPF_CLASS_PREFIX', 'WooBeWoo_PF_' );

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function init() {
 		parent::init();
@@ -40,7 +40,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * isGlobalCalcRunning.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function isGlobalCalcRunning() {
 		return WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2;
@@ -49,7 +49,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * isDisabledAutoindexing.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function isDisabledAutoindexing() {
 		$param = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing' );
@@ -59,7 +59,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * isDisabledAutoindexingBySS.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function isDisabledAutoindexingBySS() {
 		$param = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'disable_autoindexing_by_ss' );
@@ -69,7 +69,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * recalcAfterImporting.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function recalcAfterImporting( $steps ) {
 		$step = WooBeWoo_PF_Req::getVar( 'step' );
@@ -171,7 +171,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * getSettingsIndexingSchedule.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getSettingsIndexingSchedule( $options, $addName = '' ) {
 		$hourSelect = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_hour' . $addName );
@@ -278,7 +278,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * recalcMetaIndexingShedule.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function recalcMetaIndexingShedule() {
 		$daySelect = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_day' );
@@ -304,7 +304,7 @@ class WooBeWoo_PF_Meta extends WooBeWoo_PF_Module {
 	/**
 	 * recalcMetaOptimizingShedule.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function recalcMetaOptimizingShedule() {
 		$daySelect = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'shedule_day_optimizing' );

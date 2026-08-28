@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Widget_View Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -32,7 +32,7 @@ class WooBeWoo_PF_Woofilters_Widget_View extends WooBeWoo_PF_View {
 	/**
 	 * displayForm.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function displayForm( $data, $widget ) {
 		WooBeWoo_PF_Frame::_()->addStyle( 'woofilters_widget', $this->getModule()->getModPath() . 'css/gmap_widget.css' );

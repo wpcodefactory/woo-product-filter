@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Admin_Nav Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -14,7 +14,7 @@ class WooBeWoo_PF_Admin_Nav extends WooBeWoo_PF_Module {
 	/**
 	 * getBreadcrumbsList.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getBreadcrumbsList() {
 		$res = array(

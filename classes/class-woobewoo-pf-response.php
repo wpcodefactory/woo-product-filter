@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Response Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -57,7 +57,7 @@ class WooBeWoo_PF_Response {
 	/**
 	 * getReqType.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getReqType() {
 		return WooBeWoo_PF_Req::getVar( 'reqType' );
@@ -70,7 +70,7 @@ class WooBeWoo_PF_Response {
 	/**
 	 * ajaxExec.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function ajaxExec( $forceAjax = false ) {
 		$isAjax   = $this->isAjax();

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Admin Nav Breadcrumbs
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */

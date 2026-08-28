@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Templates Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -28,7 +28,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function init() {
 		if ( is_admin() ) {
@@ -51,7 +51,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * connectAdditionalAdminAssets.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function connectAdditionalAdminAssets() {
 		if ( is_rtl() ) {
@@ -71,7 +71,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadAdminCoreJs.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadAdminCoreJs() {
 		WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-dialog' );
@@ -91,7 +91,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadCoreJs.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadCoreJs() {
 		WooBeWoo_PF_Frame::_()->addScript( 'jquery' );
@@ -130,7 +130,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadTooltipster.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadTooltipster() {
 		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-tooltipster', WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/tooltipster/jquery.tooltipster.min.js' );
@@ -140,7 +140,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadCoreCss.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadCoreCss( $isElementorEditor = false ) {
 		$this->_styles = array(
@@ -183,7 +183,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadJqueryUi.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadJqueryUi( $slider = true ) {
 		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-jquery-ui', WPF_CSS_PATH . 'jquery-ui.min.css' );
@@ -197,7 +197,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadJqGrid.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadJqGrid() {
 		static $loaded = false;
@@ -229,7 +229,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadFontAwesome.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadFontAwesome() {
 		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-font-awesome', WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'css/font-awesome.min.css' );
@@ -238,7 +238,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadChosenSelects.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadChosenSelects() {
 		$modPath = WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'lib/tom-select/';
@@ -249,7 +249,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadDatePicker.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadDatePicker() {
 		WooBeWoo_PF_Frame::_()->addScript( 'jquery-ui-datepicker' );
@@ -258,7 +258,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadSortable.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadSortable() {
 		static $loaded = false;
@@ -276,7 +276,7 @@ class WooBeWoo_PF_Templates extends WooBeWoo_PF_Module {
 	/**
 	 * loadBootstrap.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadBootstrap() {
 		static $loaded = false;

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Frame Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -42,7 +42,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function __construct() {
 		$this->_res = woobewoo_pf_toe_create_obj( 'response', array() );
@@ -51,7 +51,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * getInstance.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function getInstance() {
 		static $instance;
@@ -72,7 +72,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * parseRoute.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function parseRoute() {
 		// Check plugin
@@ -120,7 +120,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * _extractModules.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _extractModules() {
 		$activeModules = $this->getTable( 'modules' )
@@ -178,7 +178,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function init() {
 		$this->_extractTables();
@@ -234,7 +234,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Check permissions for action in controller by $code.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $code   Code of controller that need to be checked
 	 * @param string $action Action that need to be checked
@@ -377,7 +377,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * _doExec.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _doExec() {
 		$mod = $this->getModule( $this->_mod );
@@ -416,7 +416,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * _extractTable.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _extractTable( $tableName, $tablesDir = WPF_TABLES_DIR ) {
 		if ( ! class_exists( 'noClassNameHere' ) ) {
@@ -458,7 +458,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Return table by name.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $tableName table name in database
 	 *
@@ -523,7 +523,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * Push data to script array to use it all in addScripts method.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @see     wp_enqueue_script definition
 	 */
@@ -614,7 +614,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * addStyle.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addStyle( $handle, $src = false, $deps = array(), $ver = false, $media = 'all' ) {
 		$src = empty( $src ) ? $src : WooBeWoo_PF_Uri::_( $src );
@@ -667,7 +667,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * isTplEditor.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function isTplEditor() {
 		$tplEditor = WooBeWoo_PF_Req::getVar( 'tplEditor' );
@@ -678,7 +678,7 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * This is custom method for each plugin and should be modified if you create copy from this instance.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function isAdminPlugOptsPage() {
 		$page = WooBeWoo_PF_Req::getVar( 'page' );

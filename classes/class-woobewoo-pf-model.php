@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -34,7 +34,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * isEnableStatistics.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getModule() {
 		return WooBeWoo_PF_Frame::_()->getModule( $this->_code );
@@ -99,7 +99,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * isEnableStatistics.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getFromTbl( $params = array() ) {
 		$this->_lastGetCount = 0;
@@ -156,7 +156,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * getCount.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getCount( $params = array() ) {
 		$tbl   = isset( $params['tbl'] ) ? $params['tbl'] : $this->_tbl;
@@ -175,7 +175,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * _buildQuery.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _buildQuery( $table = null ) {
 		if ( ! $table ) {
@@ -199,7 +199,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * woobewoo_pf_remove_group.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_remove_group( $ids ) {
 		if ( ! is_array( $ids ) ) {
@@ -225,7 +225,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * delete.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function delete( $params = array() ) {
 		if ( WooBeWoo_PF_Frame::_()->getTable( $this->_tbl )->delete( $params ) ) {
@@ -243,7 +243,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * insert.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function insert( $data ) {
 		$data = $this->_dataSave( $data, false );
@@ -269,7 +269,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * update.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function update( $data, $where ) {
 		$data = $this->_dataSave( $data, true );
@@ -295,7 +295,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * dropIndexes.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function dropIndexes( $withPrimary = false ) {
 		$table   = WooBeWoo_PF_Db::sanitizeIdentifier( $this->_tbl );
@@ -324,7 +324,7 @@ abstract class WooBeWoo_PF_Model extends WooBeWoo_PF_Base_Object {
 	/**
 	 * addIndexes.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addIndexes( $delete = true ) {
 		if ( empty( $this->_indexes ) ) {

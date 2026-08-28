@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Req Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -52,7 +52,7 @@ class WooBeWoo_PF_Req {
 	/**
 	 * startSession.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function startSession() {
 		if ( ! WooBeWoo_PF_Utils::isSessionStarted() ) {
@@ -67,7 +67,7 @@ class WooBeWoo_PF_Req {
 	/**
 	 * endSession.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function endSession() {
 		if ( WooBeWoo_PF_Utils::isSessionStarted() ) {
@@ -78,7 +78,7 @@ class WooBeWoo_PF_Req {
 	/**
 	 * Function getVar.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $name key in variables array
 	 * @param string $from from where get result = "all", "input", "get"
@@ -223,7 +223,7 @@ class WooBeWoo_PF_Req {
 	/**
 	 * setVar.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function setVar( $name, $val, $in = 'input', $params = array() ) {
 		$in = strtolower( $in );
@@ -324,7 +324,7 @@ class WooBeWoo_PF_Req {
 	 * Sanitizes a $_FILES array: file names and MIME types are cleaned;
 	 * tmp_name is server-generated and left as-is.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 * @since   3.3.0
 	 *
 	 * @param array $files Raw $_FILES array.

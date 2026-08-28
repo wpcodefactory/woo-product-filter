@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Default_Widget Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WooBeWoo_PF_Woofilters_Default_Widget extends WP_Widget {
 	/**
 	 * widget.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function widget( $args, $instance ) {
 		if ( is_array( $args ) ) {
@@ -34,7 +34,7 @@ class WooBeWoo_PF_Woofilters_Default_Widget extends WP_Widget {
 	/**
 	 * form.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function form( $instance ) {
 		extract( $instance );

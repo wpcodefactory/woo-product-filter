@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Widget Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -61,7 +61,7 @@ class WooBeWoo_PF_Woofilters_Widget extends WooBeWoo_PF_Module {
 	/**
 	 * registerElementorWidget.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function registerElementorWidget() {
 		$this->includeElementorWidgetsFiles();
@@ -71,7 +71,7 @@ class WooBeWoo_PF_Woofilters_Widget extends WooBeWoo_PF_Module {
 	/**
 	 * woofiltersElementorEditorScripts.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woofiltersElementorEditorScripts() {
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
@@ -111,7 +111,7 @@ class WooBeWoo_PF_Woofilters_Widget extends WooBeWoo_PF_Module {
 	/**
 	 * getFiltersSettings.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function getFiltersSettings() {
 		$filters            = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
@@ -130,7 +130,7 @@ class WooBeWoo_PF_Woofilters_Widget extends WooBeWoo_PF_Module {
 	/**
 	 * gutenberg block.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 * @since   3.1.7
 	 */
 	public function enqueueGutenbergEditorAssets() {

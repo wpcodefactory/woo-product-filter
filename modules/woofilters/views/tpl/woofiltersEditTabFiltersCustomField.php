@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Edit Tab Filters Custom Field
  *
- * @version 3.3.2
+ * @version 3.4.0
  * @since   3.1.7
  *
  * @author woobewoo

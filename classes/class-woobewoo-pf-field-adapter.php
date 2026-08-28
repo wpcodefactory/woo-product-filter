@@ -5,7 +5,7 @@
  * Class to adapt field before display
  * return ONLY htmlParams property
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  *
@@ -33,7 +33,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * Executes field Adaption process.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param object type field or value $fieldOrValue if DB adaption - this must be a value of field, else if html - field object.
 	 */
@@ -78,7 +78,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * userFieldDestToDB.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function userFieldDestToDB( $value ) {
 		return WooBeWoo_PF_Utils::jsonEncode( $value );
@@ -87,7 +87,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * userFieldDestFromDB.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function userFieldDestFromDB( $value ) {
 		return WooBeWoo_PF_Utils::jsonDecode( $value );
@@ -172,7 +172,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * Function to get extra field options.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param object $field
 	 *
@@ -195,7 +195,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * Function to get field params.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param object $params
 	 */
@@ -243,7 +243,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * Save this in static var - to further usage.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @return array with countries.
 	 */
@@ -257,7 +257,7 @@ class WooBeWoo_PF_Field_Adapter {
 	/**
 	 * Save this in static var - to further usage.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @return array with states.
 	 */

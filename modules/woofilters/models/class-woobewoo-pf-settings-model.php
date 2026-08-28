@@ -6,7 +6,7 @@
  * You can use it in any part of your code with construction
  * WooBeWoo_PF_Frame::_()->getModule('woofilters')->getModel('settings');
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -17,7 +17,7 @@ class WooBeWoo_PF_Settings_Model extends WooBeWoo_PF_Model {
 	/**
 	 * Get specific filter block settings.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param int $filterId
 	 *
@@ -41,7 +41,7 @@ class WooBeWoo_PF_Settings_Model extends WooBeWoo_PF_Model {
 	 * Except filters order we have some settings specific to individual filters
 	 * that we keep in order settings too
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array $filterSettings
 	 * @param int   $filterId
@@ -71,7 +71,7 @@ class WooBeWoo_PF_Settings_Model extends WooBeWoo_PF_Model {
 	 * We can have many filters in the filter block with the same type
 	 * In such case we return all filters with the same type
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $filterType
 	 * @param array  $order

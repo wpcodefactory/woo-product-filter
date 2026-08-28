@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Module Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -34,7 +34,7 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 	/**
 	 * __construct.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function __construct( $d ) {
 		$this->setTypeID( $d['type_id'] );
@@ -166,7 +166,7 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 	/**
 	 * _createController.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _createController() {
 		$controller_class_name     = WPF_CLASS_PREFIX . ucwords( $this->getCode() ) . '_Controller';
@@ -195,7 +195,7 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 	/**
 	 * Method to call module helper if it exists.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @return class WooBeWoo_PF_Helper
 	 */
@@ -294,7 +294,7 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 	/**
 	 * pro_label.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 * @since   3.3.0
 	 */
 	public function pro_label() {

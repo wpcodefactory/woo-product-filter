@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -97,7 +97,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * getCurrentSettings.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getCurrentSettings( $id = 0 ) {
 		if ( ! empty( $id ) ) {
@@ -113,7 +113,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * getTabContent.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getTabContent() {
 		$addWC = ( WooBeWoo_PF_Frame::_()->isWCLicense() ? '-wc' : '' );
@@ -138,7 +138,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * getEditTabContent.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getEditTabContent( $idIn ) {
 
@@ -197,7 +197,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
@@ -369,7 +369,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * Add common styles and scripts.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $modPath
 	 */
@@ -402,7 +402,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * Add assets  to render html(shortcode and widget).
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $modPath
 	 */
@@ -440,7 +440,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * Add plugin custom styles.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $modPath
 	 * @param bool   $isCustomStyle
@@ -531,7 +531,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );
@@ -853,7 +853,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateOverlayHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateOverlayHtml( $settings ) {
 		$settings          = $this->getFilterSetting( $settings, 'settings', array() );
@@ -900,7 +900,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateIconCloseOpenTitleHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateIconCloseOpenTitleHtml( $filter, $filterSettings, $showTitle ) {
 		if ( empty( $filter['settings'] ) ) {
@@ -959,7 +959,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFilterHeaderHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateFilterHeaderHtml( $filter, $filterSettings, $noActive = true, $customFieldLabel = '' ) {
 
@@ -1042,7 +1042,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generatePriceFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generatePriceFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		// Find min and max price in current result set.
@@ -1084,7 +1084,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generatePriceInputsHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generatePriceInputsHtml( $settings ) {
 		$dataStep = 1;
@@ -1191,7 +1191,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generatePriceRangeFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generatePriceRangeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings  = $this->getFilterSetting( $filter, 'settings', array() );
@@ -1284,7 +1284,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateSortByFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateSortByFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$optionsAll = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'SortBy' );
@@ -1418,7 +1418,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateCategoryFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateCategoryFilterHtml( $filter, $filterSettings, $blockStyle, $prodCatId = false, $key = 1, $viewId = '' ) {
 		$settings                = $this->getFilterSetting( $filter, 'settings', array() );
@@ -1721,7 +1721,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * Generate custom taxonomy filter for a specific plugin.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @link https://wordpress.org/plugins/perfect-woocommerce-brands/
 	 *
@@ -1926,7 +1926,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateTagsFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateTagsFilterHtml( $filter, $filterSettings, $blockStyle, $key = 0, $viewId = '' ) {
 		$settings = $this->getFilterSetting( $filter, 'settings', array() );
@@ -2114,7 +2114,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateAuthorFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateAuthorFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings = $this->getFilterSetting( $filter, 'settings', array() );
@@ -2237,7 +2237,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFeaturedFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateFeaturedFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_featured';
@@ -2312,7 +2312,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateOnSaleFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateOnSaleFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName = 'pr_onsale';
@@ -2389,7 +2389,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateCustomFieldFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 * @since   3.1.7
 	 */
 	public function generateCustomFieldFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
@@ -2488,7 +2488,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateInStockFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateInStockFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$optionsAll = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'woofilters' )->getFilterLabels( 'InStock' );
@@ -2581,7 +2581,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateRatingFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateRatingFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$filterName     = 'pr_rating';
@@ -2678,7 +2678,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateAttributeFilterHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function generateAttributeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings                              = $this->getFilterSetting( $filter, 'settings', array() );
@@ -3053,7 +3053,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * Recursively get taxonomy and its children.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $taxonomy
 	 * @param int    $parent - parent term id
@@ -3138,7 +3138,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * wpfGetFilteredPriceFromProductList.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function wpfGetFilteredPriceFromProductList( $settings, $listTable, $convert = true, $dec = 0, $tax = '' ) {
 		global $wpdb;
@@ -3230,7 +3230,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateTaxonomyOptionsHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	private function generateTaxonomyOptionsHtml( $filterItemList, $selectedElem, $filter = false, $excludeIds = false, $pre = '', $layout = 0, $includeIds = false, $showedTerms = false, $countsTerms = false, $itemLevel = 0, $currentCategoryId = 0 ) {
 		$html     = '';
@@ -3481,7 +3481,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generatePriceRangeOptionsHtml.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	private function generatePriceRangeOptionsHtml( $filter, $ranges, $layout ) {
 		$html    = '';
@@ -3932,7 +3932,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * Set filter common data attributes.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array  $filter
 	 * @param string $filterName
@@ -3957,7 +3957,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * getFilterUrlData.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getFilterUrlData( $filterName, $defFilterName = '' ) {
 		$data = WooBeWoo_PF_Req::getVar( $filterName );

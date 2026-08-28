@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Overview_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -155,7 +155,7 @@ class WooBeWoo_PF_Overview_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getPluginData.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getPluginData() {
 		return array(
@@ -177,7 +177,7 @@ class WooBeWoo_PF_Overview_Model extends WooBeWoo_PF_Model {
 	/**
 	 * _req.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	private function _req( $action, $data = array() ) {
 		add_filter( 'http_api_curl', array( $this, 'overviewHttpRequestTimeout' ), 100, 1 );

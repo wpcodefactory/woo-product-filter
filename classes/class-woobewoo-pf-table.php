@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Table Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -57,7 +57,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * getInstance.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function getInstance( $table = '' ) {
 		static $instances = array();
@@ -117,7 +117,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * fillFromDB.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function fillFromDB( $id = 0, $where = '' ) {
 		$res = $this;
@@ -168,7 +168,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * Return table name
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param bool $transform need to transform to standard WP tables view or not
 	 * @return string table name
@@ -268,7 +268,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * get.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function get( $fields = '*', $where = '', $tables = '', $return = 'all' ) {
 		if ( ! $tables ) {
@@ -315,7 +315,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * store.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function store( $data, $method = 'INSERT', $where = '' ) {
 		$this->_clearErrors();
@@ -379,7 +379,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * Delete record(s)
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param mixed $where condition to use in query, if numeric givven - use delete by ID column
 	 * @return query result
@@ -399,7 +399,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * Convert to database query
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param mixed  $data if array given - convert it into string where key - is column name, value - database value to set;
 	 *  if key == "additionalCondition" then we will just add value to string
@@ -461,7 +461,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * Add new WooBeWoo_PF_Field for children table (@see class field)
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $name name of a field
 	 * @param string $html html type of field (text, textarea, etc. @see html class)
@@ -490,7 +490,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * exists.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function exists( $value, $field = '' ) {
 		if ( ! $field ) {
@@ -524,7 +524,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * Prepare data before send it to database
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function prepareInput( $d = array() ) {
 		$ignore = isset( $d['ignore'] ) ? $d['ignore'] : array();
@@ -551,7 +551,7 @@ abstract class WooBeWoo_PF_Table {
 	/**
 	 * Prepare data after extracting it from database
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function prepareOutput( $d = array() ) {
 		$ignore = isset( $d['ignore'] ) ? $d['ignore'] : array();

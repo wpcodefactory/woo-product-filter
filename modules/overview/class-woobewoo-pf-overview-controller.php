@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Overview_Controller Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -14,7 +14,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_subscribe.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_subscribe() {
 		$res = new WooBeWoo_PF_Response();
@@ -29,7 +29,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_contactus.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_contactus() {
 		$res = new WooBeWoo_PF_Response();
@@ -44,7 +44,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_rating.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_rating() {
 		$res = new WooBeWoo_PF_Response();
@@ -59,7 +59,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_dismiss_notice.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_dismiss_notice() {
 		$res  = new WooBeWoo_PF_Response();
@@ -77,7 +77,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_approve_notice.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_approve_notice() {
 		$res  = new WooBeWoo_PF_Response();

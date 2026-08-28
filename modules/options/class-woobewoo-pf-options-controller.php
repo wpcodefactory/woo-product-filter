@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Options_Controller Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -14,7 +14,7 @@ class WooBeWoo_PF_Options_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_save_group.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_save_group() {
 		WooBeWoo_PF_Req::verifyRequest();

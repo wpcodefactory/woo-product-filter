@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -45,7 +45,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function init() {
 		add_shortcode( WPF_SHORTCODE, array( $this, 'render' ) );
@@ -276,7 +276,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Discourages search engines from indexing if the current URL has params starting with `wpf_`.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 * @since   2.9.9
 	 *
 	 * @param $robots
@@ -307,7 +307,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addFilterAgrsToQuery.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addFilterAgrsToQuery( $args ) {
 		$data   = WooBeWoo_PF_Req::get( 'post' );
@@ -325,7 +325,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * my_aws_search_results_products_ids.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function my_aws_search_results_products_ids( $ids ) {
 		if ( ! $this->isFiltered( false ) ) {
@@ -419,7 +419,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addElementorParamsToPagenationLinks.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addElementorParamsToPagenationLinks( $widget_content ) {
 		$pattern = '/<a\s+[^>]*class=["\'][^"\']*page-numbers[^"\']*["\'][^>]*href=["\']([^"\']+)["\'][^>]*>/i';
@@ -472,7 +472,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * forceProductFilter.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function forceProductFilter( $query ) {
 
@@ -669,7 +669,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * replaceArgsIfBuilderGridUsed.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function replaceArgsIfBuilderGridUsed( $args ) {
 
@@ -915,7 +915,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getMetaKeyId.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getMetaKeyId( $key, $field = 'id' ) {
 		$key = strtolower( $key );
@@ -936,7 +936,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * isFiltered.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function isFiltered( $filtered ) {
 		$ignoreKey = array( 'wpf_count', 'wpf_fbv', 'wpf_dpv', 'wpf_skip', '_' );
@@ -956,7 +956,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * existsWpfParams.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 * @since   2.8.6
 	 */
 	public function existsWpfParams( $get = false ) {
@@ -976,7 +976,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * newLoopShopPerPage.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function newLoopShopPerPage( $count ) {
 		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel( 'options' )->getAll();
@@ -990,7 +990,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addWooOptions.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addWooOptions( $args ) {
 		if ( get_option( 'woocommerce_hide_out_of_stock_items' ) == 'yes' ) {
@@ -1168,7 +1168,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getPreselectedParamsForFilter.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getPreselectedParamsForFilter( $filterId ) {
 		if ( ! isset( $this->preFilters[ $filterId ] ) ) {
@@ -1217,7 +1217,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addCustomFieldsQuery.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addCustomFieldsQuery( $data, $mode ) {
 		$fields = array();
@@ -1268,7 +1268,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addCustomMetaQuery.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addCustomMetaQuery( $metaQuery, $data, $mode ) {
 		if ( ! is_array( $metaQuery ) ) {
@@ -1410,7 +1410,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addCustomTaxQuery.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addCustomTaxQuery( $taxQuery, $data, $mode ) {
 
@@ -1657,7 +1657,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * loadProductsFilter.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadProductsFilter( $q ) {
 		$this->addPreselectedParams();
@@ -1947,7 +1947,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getQueryVars.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getQueryVars( $args, $exludeParam = array(), $params = array() ) {
 		// set url params
@@ -1997,7 +1997,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addPriceOrder.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addPriceOrder( $args ) {
 		global $wpdb;
@@ -2030,7 +2030,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addPriceOrderDesc.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addPriceOrderDesc( $args ) {
 		global $wpdb;
@@ -2181,7 +2181,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * loadProductsFilterForProductGrid.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadProductsFilterForProductGrid( $q ) {
 		$action = WooBeWoo_PF_Req::getVar( 'action' );
@@ -2205,7 +2205,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * loadShortcodeProductsFilter.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function loadShortcodeProductsFilter( $args, $attributes = array(), $type = '' ) {
 		$hash         = md5( maybe_serialize( $args ) . maybe_serialize( $attributes ) );
@@ -2362,7 +2362,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addBeforeFiltersFrontendArgs.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addBeforeFiltersFrontendArgs( $args, $filterSettings = array(), $urlQuery = array() ) {
 
@@ -2635,7 +2635,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getRenderMode.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getRenderMode( $id, $settings, $isWidget = true ) {
 		if ( ! isset( $this->renderModes[ $id ] ) || empty( $this->renderModes[ $id ] ) ) {
@@ -2920,7 +2920,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Group together wp_query taxonomies params args with the same taxonomy name.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array $taxQuery
 	 *
@@ -3084,7 +3084,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * preparePriceFilter.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function preparePriceFilter( $minPrice = null, $maxPrice = null, $rate = null ) {
 		if ( ! is_null( $minPrice ) ) {
@@ -3241,7 +3241,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getEditTabContent.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getEditTabContent() {
 		$id = WooBeWoo_PF_Req::getVar( 'id', 'get' );
@@ -3252,7 +3252,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getEditLink.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getEditLink( $id, $tableTab = '' ) {
 		$link  = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( $this->getCode() . '_edit' );
@@ -3267,7 +3267,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * renderProductsList.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function render( $params ) {
 		$p = array(
@@ -3280,7 +3280,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * renderProductsList.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function renderProductsList( $params ) {
 		$params = array();
@@ -3303,7 +3303,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * showAdminErrors.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function showAdminErrors() {
 		// check WooCommerce is installed and activated
@@ -3418,7 +3418,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getAttributeTerms.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAttributeTerms( $slug ) {
 		$terms = array();
@@ -3448,7 +3448,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getFilterTaxonomies.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getFilterTaxonomies( $settings, $calcCategories = false, $filterSettings = array(), $ajax = false, $urlQuery = array() ) {
 
@@ -3677,7 +3677,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * createTemporaryTable.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function createTemporaryTable( $table, $sql, $postfix = '' ) {
 
@@ -3763,7 +3763,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addToArgsForLogicAnd.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addToArgsForLogicAnd( $addArgs, $args, $urlQuery = array() ) {
 		$calc = array();
@@ -3786,7 +3786,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Get filter existing individual filters items.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param int | null $args wp_query args
 	 * @param array      $taxonomies
@@ -4071,7 +4071,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Returns previously stored arguments in an object.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param $args
 	 *
@@ -4170,7 +4170,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Adds arguments to $args array.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param $args
 	 * @param $param
@@ -4298,7 +4298,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4593,7 +4593,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * filterToOnlyChildrenOfSelectedParent.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function filterToOnlyChildrenOfSelectedParent( $existTerms, $isHierarchicalTaxonomy ) {
 		$urlQuery = WooBeWoo_PF_Req::get( 'get' );
@@ -4776,7 +4776,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Returns additional data on minimum and maximum prices and users.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param $args
 	 * @param $param
@@ -4924,7 +4924,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getAllPages.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAllPages() {
 		global $wpdb;
@@ -4949,7 +4949,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Get logic for filtering.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @return array
 	 */
@@ -5040,7 +5040,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getAttributesDisplay.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAttributesDisplay( $withCustom = true ) {
 		$productAttr = function_exists( 'wc_get_attribute_taxonomies' ) ? wc_get_attribute_taxonomies() : array();
@@ -5134,7 +5134,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Add shortcode attributes to additional html data attributes.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array $attributes
 	 */
@@ -5234,7 +5234,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * queryResults.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function queryResults( $result ) {
 		if ( 0 === $result->total && $this->isFiltered( false ) ) {
@@ -5272,7 +5272,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * addWpfMetaClauses.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addWpfMetaClauses( $params ) {
 		if ( empty( $params['values'] || $params['keyId'] ) ) {
@@ -5392,7 +5392,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * getDefaultSettings.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getDefaultSettings() {
 		$defaults = array(

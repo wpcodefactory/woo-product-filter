@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Field Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -91,7 +91,7 @@ class WooBeWoo_PF_Field {
 	 * Sure - it is public and can be set directly, but it can be more
 	 * comfortable to use this method in future
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param mixed $value value to be set
 	 */
@@ -135,7 +135,7 @@ class WooBeWoo_PF_Field {
 	/**
 	 * displayValue.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function displayValue() {
 		$value = '';
@@ -193,7 +193,7 @@ class WooBeWoo_PF_Field {
 	/**
 	 * showValue.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function showValue() {
 		WooBeWoo_PF_Html::echoEscapedHtml( $this->displayValue() );
@@ -216,7 +216,7 @@ class WooBeWoo_PF_Field {
 	/**
 	 * Check if the element exists in array
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array $param
 	 */
@@ -227,7 +227,7 @@ class WooBeWoo_PF_Field {
 	/**
 	 * Prepares configuration options
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param file $xml
 	 * @return array $config_params

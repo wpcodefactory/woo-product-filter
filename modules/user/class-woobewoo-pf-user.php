@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_User Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -22,7 +22,7 @@ class WooBeWoo_PF_User extends WooBeWoo_PF_Module {
 	/**
 	 * isAdmin.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function isAdmin() {
 		return current_user_can( WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainCap() );
@@ -65,7 +65,7 @@ class WooBeWoo_PF_User extends WooBeWoo_PF_Module {
 	/**
 	 * getAdminsList.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAdminsList() {
 		global $wpdb;

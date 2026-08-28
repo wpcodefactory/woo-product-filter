@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Options Settings Tab Content
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Options_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -76,7 +76,7 @@ class WooBeWoo_PF_Options_Model extends WooBeWoo_PF_Model {
 	/**
 	 * woobewoo_pf_save_group.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_save_group( $d = array() ) {
 		if ( isset( $d['opt_values'] ) && is_array( $d['opt_values'] ) && ! empty( $d['opt_values'] ) ) {

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Modules_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -17,7 +17,7 @@ class WooBeWoo_PF_Modules_Model extends WooBeWoo_PF_Model {
 	/**
 	 * get.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function get( $d = array() ) {
 		if ( isset( $d['id'] ) && $d['id'] && is_numeric( $d['id'] ) ) {
@@ -41,7 +41,7 @@ class WooBeWoo_PF_Modules_Model extends WooBeWoo_PF_Model {
 	/**
 	 * put.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function put( $d = array() ) {
 		$res = new WooBeWoo_PF_Response();

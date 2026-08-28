@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Validator Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -16,7 +16,7 @@ class WooBeWoo_PF_Validator {
 	/**
 	 * validate.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function validate( $field, $label = '', $validate = array() ) {
 		self::$errors = array();
@@ -177,7 +177,7 @@ class WooBeWoo_PF_Validator {
 	/**
 	 * getProductValidationMethods.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function getProductValidationMethods() {
 		$res = array();
@@ -193,7 +193,7 @@ class WooBeWoo_PF_Validator {
 	/**
 	 * getUserValidationMethods.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function getUserValidationMethods() {
 		// here validation for user fields

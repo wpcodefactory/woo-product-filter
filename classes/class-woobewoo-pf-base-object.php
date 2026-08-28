@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Base_Object Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -52,7 +52,7 @@ abstract class WooBeWoo_PF_Base_Object {
 	/**
 	 * Get settings in specific filter in filter block.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array  $settings
 	 * @param string $name

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Adminmenu Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -37,7 +37,7 @@ class WooBeWoo_PF_Adminmenu extends WooBeWoo_PF_Module {
 	/**
 	 * initMenu.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function initMenu() {
 		$mainCap             = $this->getMainCap();
@@ -98,7 +98,7 @@ class WooBeWoo_PF_Adminmenu extends WooBeWoo_PF_Module {
 	/**
 	 * getMainLink.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getMainLink() {
 		return WooBeWoo_PF_Uri::_(
@@ -116,7 +116,7 @@ class WooBeWoo_PF_Adminmenu extends WooBeWoo_PF_Module {
 	/**
 	 * getMainCap.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getMainCap() {
 		return WooBeWoo_PF_Dispatcher::applyFilters( 'adminMenuAccessCap', $this->_mainCap );

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getAllFilters.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAllFilters() {
 		$filterTypes = array(
@@ -392,7 +392,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * _dataSave.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _dataSave( $data, $update = false ) {
 		$esettings = isset( $data['esettings'] ) ? WooBeWoo_PF_Utils::jsonDecode( stripslashes( $data['esettings'] ) ) : array();
@@ -424,7 +424,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * WPML string translation.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	private function translateStrings( $data_settings ) {
 		$filters_arr = json_decode( $data_settings['filters']['order'], true );
@@ -495,7 +495,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getDataFilterMetaKeys.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getDataFilterMetaKeys( $filters, $save = true ) {
 		$filters  = WooBeWoo_PF_Utils::jsonDecode( $filters );
@@ -526,7 +526,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getFiltersMetaKeys.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getFiltersMetaKeys( $id = 0, $deep = false ) {
 		$keys = array();

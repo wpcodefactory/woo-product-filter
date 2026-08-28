@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Options_View Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -37,7 +37,7 @@ class WooBeWoo_PF_Options_View extends WooBeWoo_PF_View {
 	/**
 	 * getAdminPage.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getAdminPage() {
 		$tabs      = $this->getModule()->getTabs();
@@ -131,7 +131,7 @@ class WooBeWoo_PF_Options_View extends WooBeWoo_PF_View {
 	/**
 	 * getSettingsTabContent.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getSettingsTabContent() {
 		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
@@ -150,7 +150,7 @@ class WooBeWoo_PF_Options_View extends WooBeWoo_PF_View {
 	/**
 	 * getProTabContent.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getProTabContent() {
 		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );

@@ -4,7 +4,7 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -26,7 +26,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * Install new WooBeWoo_PF_Module into plugin.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $module new WooBeWoo_PF_Module data (@see classes/tables/modules.php)
 	 * @param string $path path to the main plugin file from what module is installed
@@ -75,7 +75,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * _runModuleInstall.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected static function _runModuleInstall( $module, $action = 'install' ) {
 		$moduleLocationDir = WPF_MODULES_DIR;
@@ -114,7 +114,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * Move files to plugin modules directory.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $code code for module.
 	 * @param string $path path from what module will be moved.
@@ -147,7 +147,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * _getPluginLocations.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	private static function _getPluginLocations() {
 		$locations = array();
@@ -177,7 +177,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * Try to parse xml file with module data.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $xmlPath
 	 *
@@ -217,7 +217,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * Check whether modules is installed or not, if not and must be activated - install it.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array  $codes array with modules data to store in database.
 	 * @param string $path  path to plugin file where modules is stored (__FILE__ for example).
@@ -268,7 +268,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * Deactivate module after deactivating external plugin.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function deactivate( $exclude = array() ) {
 		$locations = self::_getPluginLocations();
@@ -300,7 +300,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * activate.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function activate( $modDataArr ) {
 		$locations = self::_getPluginLocations();
@@ -328,7 +328,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * Display all errors for module installer, must be used ONLY if You really need it.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function displayErrors( $exit = true ) {
 		$errors = WooBeWoo_PF_Errors::get( WooBeWoo_PF_Errors::MOD_INSTALL );
@@ -343,7 +343,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * uninstall.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function uninstall() {
 		$locations = self::_getPluginLocations();
@@ -360,7 +360,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * _uninstallTables.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected static function _uninstallTables( $module ) {
 		if ( is_dir( WPF_MODULES_DIR . $module['code'] . WPF_DS . 'tables' ) ) {
@@ -379,7 +379,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * _installTables.
 	 *
-	 * @vertion 3.3.2
+	 * @vertion 3.4.0
 	 */
 	public static function _installTables( $module, $action = 'install' ) {
 		$modDir = empty( $module['ex_plug_dir'] ) ? WPF_MODULES_DIR . $module['code'] . WPF_DS : WooBeWoo_PF_Utils::getPluginDir( $module['ex_plug_dir'] ) . $module['code'] . WPF_DS;

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Errors Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -49,7 +49,7 @@ class WooBeWoo_PF_Errors {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function init() {
 		$wpfErrors = WooBeWoo_PF_Req::getVar( 'wpfErrors' );
@@ -86,7 +86,7 @@ class WooBeWoo_PF_Errors {
 	/**
 	 * getSession.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function getSession() {
 		return WooBeWoo_PF_Req::getVar( 'sesErrors', 'session' );
@@ -95,7 +95,7 @@ class WooBeWoo_PF_Errors {
 	/**
 	 * clearSession.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function clearSession() {
 		WooBeWoo_PF_Req::clearVar( 'sesErrors', 'session' );

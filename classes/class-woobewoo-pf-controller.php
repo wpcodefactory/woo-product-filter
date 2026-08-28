@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Controller Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -36,7 +36,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * exec.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function exec( $task = '' ) {
 		$permissions = $this->getPermissions();
@@ -73,7 +73,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * _createModel.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _createModel( $name = '' ) {
 		if ( empty( $name ) ) {
@@ -104,7 +104,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * _createView.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function _createView( $name = '' ) {
 		if ( empty( $name ) ) {
@@ -186,7 +186,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * getModule.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getModule() {
 		return WooBeWoo_PF_Frame::_()->getModule( $this->getCode() );
@@ -200,7 +200,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * Common method for list table data
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_get_list_for_table() {
 		WooBeWoo_PF_Req::verifyRequest();
@@ -281,7 +281,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_remove_group.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_remove_group() {
 		WooBeWoo_PF_Req::verifyRequest();
@@ -300,7 +300,7 @@ abstract class WooBeWoo_PF_Controller {
 	/**
 	 * clear.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function clear() {
 		$res = new WooBeWoo_PF_Response();

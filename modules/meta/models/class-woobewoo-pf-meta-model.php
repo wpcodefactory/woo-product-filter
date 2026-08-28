@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -44,7 +44,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * recalcMetaValues.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function recalcMetaValues( $productId = 0, $params = array() ) {
 		$result = $this->doRecalcMetaValues( $productId, $params );
@@ -60,7 +60,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * doRecalcMetaValues.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function doRecalcMetaValues( $productId, $params ) {
 		if ( ! empty( $productId ) && ! is_numeric( $productId ) ) {
@@ -668,7 +668,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * saveMeta_wpf_product_type.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function saveMeta_wpf_product_type( $productId, $keyData, $tempTable ) {
 		$keyId = $keyData['id'];
@@ -708,7 +708,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * afterCalcMeta_stock_status.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function afterCalcMeta_stock_status( $productId, $keyData, $tempTable ) {
 		$groupedTerm = get_term_by( 'name', 'grouped', 'product_type', ARRAY_A );
@@ -796,7 +796,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * optimizeMetaTables.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function optimizeMetaTables() {
 		$optimizeTables = array( 'meta_data', 'meta_values', 'meta_values_bk' );
@@ -814,7 +814,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * addCompatibilities.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addCompatibilities( $productId, $tempTable ) {
 		if ( class_exists( 'WC_Measurement_Price_Calculator' ) ) {
@@ -925,7 +925,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * controlMetaFieldType.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function controlMetaFieldType( $metaType, $keyName ) {
 		if ( 'wcb2b_product_group_prices' == $keyName ) {

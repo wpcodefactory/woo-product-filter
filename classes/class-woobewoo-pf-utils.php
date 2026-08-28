@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Utils Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -14,7 +14,7 @@ class WooBeWoo_PF_Utils {
 	/**
 	 * jsonEncode.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function jsonEncode( $arr ) {
 		return ( is_array( $arr ) || is_object( $arr ) ) ? woobewoo_pf_json_encode_utf_normal( $arr ) : woobewoo_pf_json_encode_utf_normal( array() );
@@ -83,7 +83,7 @@ class WooBeWoo_PF_Utils {
 	/**
 	 * Copy all files from one directory ($source) to another ($destination).
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param string $source      Path to source directory.
 	 * @param string $destination Path to destination directory.
@@ -334,7 +334,7 @@ class WooBeWoo_PF_Utils {
 	/**
 	 * isThisCommercialEdition.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function isThisCommercialEdition() {
 		foreach ( WooBeWoo_PF_Frame::_()->getModules() as $m ) {
@@ -447,7 +447,7 @@ class WooBeWoo_PF_Utils {
 	/**
 	 * Activate all CSP Plugins.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @return NULL Check if it's site or multisite and activate.
 	 */
@@ -541,7 +541,7 @@ class WooBeWoo_PF_Utils {
 	/**
 	 * isPluginsPage.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function isPluginsPage() {
 		return ( basename( WooBeWoo_PF_Req::getVar( 'SCRIPT_NAME', 'server' ) ) === 'plugins.php' );
@@ -809,7 +809,7 @@ class WooBeWoo_PF_Utils {
 	/**
 	 * getReferalUrl.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function getReferalUrl() {
 		// Simple for now

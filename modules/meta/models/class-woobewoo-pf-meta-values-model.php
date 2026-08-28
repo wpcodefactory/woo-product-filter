@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Values_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function __construct() {
 		$this->_setTbl( 'meta_values' );
@@ -47,7 +47,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getKeyValueIds.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getKeyValueIds( $keyId, $keys = array(), $reverse = false ) {
 		$this->addIndexes();
@@ -87,7 +87,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getFieldValuesList.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getFieldValuesList( $keyId, $field, $keys = array(), $group = false ) {
 		$metaModel  = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta' );
@@ -111,7 +111,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getMetaValueTerms.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getMetaValueTerms( $keyId, $keys = array() ) {
 		$cntField = ( empty( $keys['fbv'] ) ? 'product_cnt' : 'variation_cnt' );
@@ -207,7 +207,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getMetaValueIds.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param $keyId
 	 * @param $values
@@ -248,7 +248,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * recalcValuesCount.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function recalcValuesCount( $keyIds = array() ) {
 
@@ -275,7 +275,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * backupOldValues.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function backupOldValues( $keyIds ) {
 		$keyIds = array_map( 'intval', (array) $keyIds );
@@ -299,7 +299,7 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * restoreOldValues.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function restoreOldValues( $keyIds ) {
 		$where = ' WHERE key_id' . ( count( $keyIds ) ? ' IN (' . implode( ',', $keyIds ) . ')' : '=' . $keyIds[0] );

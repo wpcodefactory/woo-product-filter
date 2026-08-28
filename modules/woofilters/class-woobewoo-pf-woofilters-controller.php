@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Controller Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -205,7 +205,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * _prepareListForTbl.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function _prepareListForTbl( $data ) {
 		foreach ( $data as $key => $row ) {
@@ -223,7 +223,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_draw_filter_ajax.
 	 *
-	 * @since 3.3.2
+	 * @since 3.4.0
 	 */
 	public function woobewoo_pf_draw_filter_ajax() {
 		$res  = new WooBeWoo_PF_Response();
@@ -249,7 +249,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_save.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_save() {
 
@@ -284,7 +284,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_save_category_label.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 * @since   3.1.7
 	 */
 	public function woobewoo_pf_save_category_label() {
@@ -309,7 +309,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_delete_by_id.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_delete_by_id() {
 		WooBeWoo_PF_Req::verifyRequest();
@@ -328,7 +328,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * createTable.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function createTable() {
 		WooBeWoo_PF_Req::verifyRequest();
@@ -351,7 +351,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_filters_frontend.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_filters_frontend() {
 		$res = new WooBeWoo_PF_Response();
@@ -830,7 +830,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_get_taxonomy_terms.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_get_taxonomy_terms() {
 
@@ -850,7 +850,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables

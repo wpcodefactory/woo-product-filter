@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Keys_Model Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -41,7 +41,7 @@ class WooBeWoo_PF_Meta_Keys_Model extends WooBeWoo_PF_Model {
 	/**
 	 * getKeysWithCalcControl.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function getKeysWithCalcControl( $params = array() ) {
 		if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
@@ -79,7 +79,7 @@ class WooBeWoo_PF_Meta_Keys_Model extends WooBeWoo_PF_Model {
 	/**
 	 * saveKeyData.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function saveKeyData( $data ) {
 		unset( $data['id'], $data['added'], $data['calculated'] );
@@ -91,7 +91,7 @@ class WooBeWoo_PF_Meta_Keys_Model extends WooBeWoo_PF_Model {
 	/**
 	 * updateKeyData
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function updateKeyData( $id, $data ) {
 		$now = WooBeWoo_PF_Db::get( 'SELECT CURRENT_TIMESTAMP', 'one' );
@@ -118,7 +118,7 @@ class WooBeWoo_PF_Meta_Keys_Model extends WooBeWoo_PF_Model {
 	/**
 	 * addFilterMetaKeys.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addFilterMetaKeys( $filterKeys, $remove = false ) {
 		if ( ! is_array( $filterKeys ) ) {
@@ -174,7 +174,7 @@ class WooBeWoo_PF_Meta_Keys_Model extends WooBeWoo_PF_Model {
 	/**
 	 * controlFiltersMetaKeys.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function controlFiltersMetaKeys( $deep = false ) {
 		$filtersModel = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel();

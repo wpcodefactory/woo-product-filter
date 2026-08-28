@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Html Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -762,7 +762,7 @@ class WooBeWoo_PF_Html {
 	/**
 	 * _loadCategoriesOptions.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected static function _loadCategoriesOptions() {
 		if ( empty( self::$categoriesOptions ) ) {
@@ -778,7 +778,7 @@ class WooBeWoo_PF_Html {
 	/**
 	 * _loadProductsOptions.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected static function _loadProductsOptions() {
 		if ( empty( self::$productsOptions ) ) {

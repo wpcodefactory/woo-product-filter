@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Overview Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -14,7 +14,7 @@ class WooBeWoo_PF_Overview extends WooBeWoo_PF_Module {
 	/**
 	 * init.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function init() {
 		WooBeWoo_PF_Dispatcher::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
@@ -23,7 +23,7 @@ class WooBeWoo_PF_Overview extends WooBeWoo_PF_Module {
 	/**
 	 * addAdminTab.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addAdminTab( $tabs ) {
 		if ( ! WooBeWoo_PF_Frame::_()->isWCLicense() ) {

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Elementor_Widget Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function __construct( $data = array(), $args = null ) {
 		parent::__construct( $data, $args );
@@ -95,7 +95,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * getFiltersSettings.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function getFiltersSettings() {
 		$filters            = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
@@ -242,7 +242,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * render.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	protected function render() {
 		$filter_id = absint( $this->get_settings_for_display( 'filter_id' ) );
@@ -262,7 +262,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * render_plain_content.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function render_plain_content() {
 		$filter_id = absint( $this->get_settings_for_display( 'filter_id' ) );
@@ -281,7 +281,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 	/**
 	 * addWooFilterContentTabControls.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public function addWooFilterContentTabControls() {
 		$this->start_controls_section(

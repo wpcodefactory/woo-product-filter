@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Installer_Db_Updater Class
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -14,7 +14,7 @@ class WooBeWoo_PF_Installer_Db_Updater {
 	/**
 	 * runUpdate.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function runUpdate( $current_version ) {
 		if ( WooBeWoo_PF_Db::get( "SELECT 1 FROM `@__modules` WHERE code='meta'", 'one' ) != 1 ) {

@@ -4,7 +4,7 @@
  *
  * Shell - class to work with $wpdb global object.
  *
- * @version 3.3.2
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -133,7 +133,7 @@ class WooBeWoo_PF_Db {
 	/**
 	 * timeToDate.
 	 *
-	 * @version 3.3.2
+	 * @version 3.4.0
 	 */
 	public static function timeToDate( $timestamp = 0 ) {
 		if ( $timestamp ) {
