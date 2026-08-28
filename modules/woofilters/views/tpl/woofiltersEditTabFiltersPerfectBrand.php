@@ -245,7 +245,7 @@ WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCatego
 			WooBeWoo_PF_Html::text(
 				'f_search_label',
 				array(
-					'placeholder' => esc_html( $this->getModel( 'woofilters' )->getFilterLabels( 'Category' ) ),
+					'placeholder' => esc_html( $this->getModel( 'woofilters' )->getFilterLabels( 'Category' )['search'] ),
 					'attrs'       => 'class="woobewoo-flat-input"',
 				)
 			);

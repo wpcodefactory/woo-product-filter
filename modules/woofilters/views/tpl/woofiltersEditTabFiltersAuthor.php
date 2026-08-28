@@ -109,7 +109,7 @@ WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 			WooBeWoo_PF_Html::text(
 				'f_search_label',
 				array(
-					'placeholder' => esc_attr( $this->getModel( 'woofilters' )->getFilterLabels( 'Author' ) ),
+					'placeholder' => esc_attr( $this->getModel( 'woofilters' )->getFilterLabels( 'Author' )['search'] ),
 					'attrs'       => 'class="woobewoo-flat-input"',
 				)
 			);

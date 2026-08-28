@@ -44,7 +44,7 @@ WooBeWoo_PF_View::display( 'woofiltersEditTabCommonTitle' );
 					'f_checkbox_label',
 					array(
 						'placeholder' => esc_attr(
-							$this->getModel( 'woofilters' )->getFilterLabels( 'OnSale' )
+							$this->getModel( 'woofilters' )->getFilterLabels( 'OnSale' )['onsale']
 						),
 						'attrs'       => 'class="woobewoo-flat-input"',
 					)
