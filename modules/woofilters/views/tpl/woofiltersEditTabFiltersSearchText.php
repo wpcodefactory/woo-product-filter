@@ -19,6 +19,5 @@ if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 	</a>
 	<?php } ?>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSearchText' );
-}
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSearchText' );

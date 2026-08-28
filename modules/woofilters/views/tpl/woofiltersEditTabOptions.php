@@ -70,9 +70,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 					<?php
 					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
-					} else {
-						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_page_list' );
 					}
+					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_page_list' );
 					?>
 
 				</div>
@@ -82,9 +81,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 					<?php
 					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
-					} else {
-						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_cat_list' );
 					}
+					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_cat_list' );
 					?>
 				</div>
 
@@ -98,11 +96,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 
 					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
-					} else {
-						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_child_cat', $display_child_cat );
 					}
+					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_child_cat', $display_child_cat );
 					?>
-
 				</div>
 
 				<?php $classHidden = 'custom_pwb' != $displayOnPage ? 'wpfHidden' : ''; ?>
@@ -111,9 +107,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 					<?php
 					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
-					} else {
-						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_pwb_list' );
 					}
+					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_page_list', $this->settings['settings'], 'display_pwb_list' );
 					?>
 				</div>
 
@@ -127,9 +122,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 
 					if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 						WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
-					} else {
-						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_child_brand', $display_child_brand );
 					}
+					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_child_brand', $display_child_brand );
 					?>
 				</div>
 
@@ -187,9 +181,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 		</div>
 
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsMain',  $this->settings );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsMain',  $this->settings );
+		?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -723,9 +717,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsButtons', $this->settings );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsButtons', $this->settings );
+		?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-options-content">
 		<div class="settings-block-title">
@@ -1003,9 +997,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 						<?php
 						if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 							WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
-						} else {
-							WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_product_variations', $this->settings );
 						}
+						WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_display_product_variations', $this->settings );
 						?>
 					</div>
 				</div>
@@ -1058,9 +1051,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php } else{
+		<?php }
 			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsContent', $this->filter['id'], $this->filter['id'] );
-		} ?>
+		?>
 
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-lg-3">
@@ -1243,9 +1236,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 				<?php
 				if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 					WooBeWoo_PF_Html::echoEscapedHtml( $pro_label );
-				} else {
-					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_apply_loader_settings_to_all_filters' );
 				}
+				WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_apply_loader_settings_to_all_filters' );
 				?>
 			</div>
 		</div>
@@ -1403,9 +1395,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 					<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 				</div>
 			</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsLoaderBottom', $this->settings, $this->filter['id'] );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsLoaderBottom', $this->settings, $this->filter['id'] );
+		?>
 	</div>
 	<div class="wpfLoaderIconTemplate wpfHidden">
 		<?php

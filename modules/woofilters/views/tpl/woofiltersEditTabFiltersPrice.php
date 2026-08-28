@@ -76,9 +76,8 @@ if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 			break;
 		}
 	}
-} else {
-	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceSkin' );
 }
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceSkin' );
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label col-xs-4 col-sm-3">
@@ -162,7 +161,6 @@ if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) {
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceOptions' );
-}
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceOptions' );
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

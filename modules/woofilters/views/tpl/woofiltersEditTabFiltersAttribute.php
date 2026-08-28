@@ -153,9 +153,9 @@ foreach ( $attributesTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_type_options' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_type_options' );
+?>
 
 <?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
 <div class="row-settings-block wpfSliderTypeBlock wpfTypeSwitchable" data-type="slider">
@@ -210,9 +210,9 @@ foreach ( $attributesTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_slider_options' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_slider_options' );
+?>
 
 <?php WooBeWoo_PF_View::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -293,9 +293,9 @@ foreach ( $attributesTypes as $key => $value ) {
 			</div>
 			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_hierarchical_options' );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_hierarchical_options' );
+		?>
 	</div>
 </div>
 <div class="row-settings-block" data-parent="f_list" data-no-values="custom_meta_field_check">
@@ -421,9 +421,9 @@ foreach ( $attributesTypes as $key => $value ) {
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_sort_as_numbers_option' );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_attribute_sort_as_numbers_option' );
+		?>
 	</div>
 </div>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list radio" data-parent="f_list" data-no-values="custom_meta_field_check">

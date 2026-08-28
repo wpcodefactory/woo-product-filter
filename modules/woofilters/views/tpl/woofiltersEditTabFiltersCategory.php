@@ -67,9 +67,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_show_on_frontend_as_select_option' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_show_on_frontend_as_select_option' );
+?>
 
 <div class="row-settings-block wpfTypeSwitchable" data-not-type="buttons">
 	<div class="settings-block-label col-xs-4 col-sm-3">
@@ -103,9 +103,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_collapsible_option' );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_collapsible_option' );
+		?>
 
 		<div class="settings-value wpfTypeSwitchable" data-not-type="buttons list dropdown" data-parent-switch="f_show_hierarchical">
 			<div class="settings-value-label">
@@ -148,9 +148,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCollapseLevel' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersCollapseLevel' );
+?>
 
 <div class="row-settings-block wpfTypeSwitchable" data-type="list dropdown">
 	<div class="settings-value settings-w100">
@@ -211,9 +211,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_show_on_frontend_as_options' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_show_on_frontend_as_options' );
+?>
 
 <?php WooBeWoo_PF_View::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -265,9 +265,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
+		?>
 	</div>
 </div>
 <div class="row-settings-block">
@@ -515,7 +515,6 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_max_terms_and_switch_options' );
-}
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_category_max_terms_and_switch_options' );
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

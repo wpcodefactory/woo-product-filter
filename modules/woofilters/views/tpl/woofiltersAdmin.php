@@ -65,9 +65,9 @@ defined( 'ABSPATH' ) || exit;
 						</span>
 					</a>
 				</li>
-				<?php } else {
-					WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_list_import_export', $this->settings );
-				} ?>
+				<?php }
+				WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_list_import_export', $this->settings );
+				?>
 			</ul>
 		</div>
 		<div id="containerWrapper">

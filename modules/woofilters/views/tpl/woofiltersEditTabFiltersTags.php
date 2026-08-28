@@ -102,9 +102,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		</div>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_tags_show_on_frontend_as_select_option' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_tags_show_on_frontend_as_select_option' );
+?>
 
 <?php WooBeWoo_PF_View::display( 'woofiltersEditTabCustomTags' ); ?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="dropdown mul_dropdown">
@@ -178,9 +178,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersSortAsNumbers' );
+		?>
 	</div>
 </div>
 <div class="row-settings-block">

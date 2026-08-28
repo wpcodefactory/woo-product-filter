@@ -130,9 +130,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // 
 		<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceRange' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersPriceRange' );
+?>
 <div class="row-settings-block wpfTypeSwitchable" data-type="list">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Layout', 'woo-product-filter' ); ?>

@@ -236,9 +236,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // 
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignBlocks', $this->settings );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignBlocks', $this->settings );
+		?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-titles">
 		<div class="settings-block-title">
@@ -254,9 +254,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // 
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignTitles', $this->settings );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignTitles', $this->settings );
+		?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-buttons">
 		<div class="settings-block-title">
@@ -272,9 +272,9 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // 
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignButtons', $this->settings );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignButtons', $this->settings );
+		?>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-design-floating">
 		<div class="settings-block-title">
@@ -290,8 +290,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // 
 				<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
 			</div>
 		</div>
-		<?php } else {
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignFloating', $this->settings );
-		} ?>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignFloating', $this->settings );
+		?>
 	</div>
 </div>

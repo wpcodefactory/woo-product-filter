@@ -90,9 +90,9 @@ foreach ( $ratingTypes as $key => $value ) {
 		</div>
 	</div>
 </div>
-<?php } else {
-	WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersRatingStars' );
-} ?>
+<?php }
+WooBeWoo_PF_Dispatcher::doAction( 'addEditTabFilters', 'partEditTabFiltersRatingStars' );
+?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">
 		<?php esc_html_e( 'Additional text for 1-4', 'woo-product-filter' ); ?>
