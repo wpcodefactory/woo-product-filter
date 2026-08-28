@@ -65,7 +65,7 @@ abstract class WooBeWoo_PF_Table {
 			throw new Exception( 'Unknown table [' . esc_html( $table ) . ']' );
 		}
 		if ( ! isset( $instances[ $table ] ) ) {
-			$class = WPF_CLASS_PREFIX . strFirstUpWpf( $table ) . '_Table';
+			$class = WPF_CLASS_PREFIX . woobewoo_pf_str_first_up( $table ) . '_Table';
 			if ( class_exists( $class ) ) {
 				$instances[ $table ] = new $class();
 			} else {
@@ -142,7 +142,7 @@ abstract class WooBeWoo_PF_Table {
 					$row = array();
 					foreach ( $field as $k => $v ) {
 						if ( isset( $this->_fields[ $k ] ) ) {
-							$row[ $k ] = toeCreateObjWpf(
+							$row[ $k ] = woobewoo_pf_toe_create_obj(
 								'WooBeWoo_PF_Field',
 								array(
 									$this->_fields[ $k ]->name,
@@ -470,7 +470,7 @@ abstract class WooBeWoo_PF_Table {
 	 * @return object $this - pointer to current object
 	 */
 	protected function _addField( $name, $html = 'text', $type = 'other', $default = '', $label = '', $maxlen = 0, $dbAdapt = '', $htmlAdapt = '', $description = '' ) {
-		$this->_fields[ $name ] = toeCreateObjWpf( 'WooBeWoo_PF_Field', array( $name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description ) );
+		$this->_fields[ $name ] = woobewoo_pf_toe_create_obj( 'WooBeWoo_PF_Field', array( $name, $html, $type, $default, $label, $maxlen, $dbAdapt, $htmlAdapt, $description ) );
 		return $this;
 	}
 	/**

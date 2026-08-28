@@ -42,38 +42,38 @@ add_action(
  *
  * @version 3.3.2
  */
-if ( trueRequestWpf() ) {
+if ( woobewoo_pf_request() ) {
 
-	importClassWpf( 'WooBeWoo_PF_Db' );
-	importClassWpf( 'WooBeWoo_PF_Installer' );
-	importClassWpf( 'WooBeWoo_PF_Base_Object' );
-	importClassWpf( 'WooBeWoo_PF_Module' );
-	importClassWpf( 'WooBeWoo_PF_Model' );
-	importClassWpf( 'WooBeWoo_PF_View' );
-	importClassWpf( 'WooBeWoo_PF_Controller' );
-	importClassWpf( 'WooBeWoo_PF_Helper' );
-	importClassWpf( 'WooBeWoo_PF_Dispatcher' );
-	importClassWpf( 'WooBeWoo_PF_Field' );
-	importClassWpf( 'WooBeWoo_PF_Table' );
-	importClassWpf( 'WooBeWoo_PF_Frame' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Db' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Installer' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Base_Object' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Module' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Model' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_View' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Controller' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Helper' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Dispatcher' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Field' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Table' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Frame' );
 
 	/**
 	 * Deprecated classes.
 	 *
 	 * @deprecated since version 1.0.1
 	 */
-	importClassWpf( 'WooBeWoo_PF_Lang' );
-	importClassWpf( 'WooBeWoo_PF_Req' );
-	importClassWpf( 'WooBeWoo_PF_Uri' );
-	importClassWpf( 'WooBeWoo_PF_Html' );
-	importClassWpf( 'WooBeWoo_PF_Response' );
-	importClassWpf( 'WooBeWoo_PF_Field_Adapter' );
-	importClassWpf( 'WooBeWoo_PF_Validator' );
-	importClassWpf( 'WooBeWoo_PF_Errors' );
-	importClassWpf( 'WooBeWoo_PF_Utils' );
-	importClassWpf( 'WooBeWoo_PF_Mod_Installer' );
-	importClassWpf( 'WooBeWoo_PF_Installer_Db_Updater' );
-	importClassWpf( 'WooBeWoo_PF_Date' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Lang' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Req' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Uri' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Html' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Response' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Field_Adapter' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Validator' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Errors' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Utils' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Mod_Installer' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Installer_Db_Updater' );
+	woobewoo_pf_import_class( 'WooBeWoo_PF_Date' );
 
 	/**
 	 * Check plugin version - maybe we need to update database, and check global errors in request.

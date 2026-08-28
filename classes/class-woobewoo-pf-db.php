@@ -132,11 +132,13 @@ class WooBeWoo_PF_Db {
 
 	/**
 	 * timeToDate.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function timeToDate( $timestamp = 0 ) {
 		if ( $timestamp ) {
 			if ( ! is_numeric( $timestamp ) ) {
-				$timestamp = dateToTimestampWpf( $timestamp );
+				$timestamp = woobewoo_pf_date_to_timestamp( $timestamp );
 			}
 			return gmdate( 'Y-m-d', $timestamp );
 		} else {
@@ -152,10 +154,10 @@ class WooBeWoo_PF_Db {
 			return '';
 		}
 		if ( strpos( $date, WPF_DATE_DL ) ) {
-			return dateToTimestampWpf( $date );
+			return woobewoo_pf_date_to_timestamp( $date );
 		}
 		$arr = explode( '-', $date );
-		return dateToTimestampWpf( $arr[2] . WPF_DATE_DL . $arr[1] . WPF_DATE_DL . $arr[0] );
+		return woobewoo_pf_date_to_timestamp( $arr[2] . WPF_DATE_DL . $arr[1] . WPF_DATE_DL . $arr[0] );
 	}
 
 	/**

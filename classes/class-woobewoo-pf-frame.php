@@ -41,9 +41,11 @@ class WooBeWoo_PF_Frame {
 
 	/**
 	 * Constructor.
+	 *
+	 * @version 3.3.2
 	 */
 	public function __construct() {
-		$this->_res = toeCreateObjWpf( 'response', array() );
+		$this->_res = woobewoo_pf_toe_create_obj( 'response', array() );
 	}
 
 	/**
@@ -144,7 +146,7 @@ class WooBeWoo_PF_Frame {
 							}
 						}
 
-						$moduleClass = toeGetClassNameWpf( $code );
+						$moduleClass = woobewoo_pf_toe_get_class_name( $code );
 						if ( class_exists( $moduleClass ) ) {
 							$this->_modules[ $code ] = new $moduleClass( $m );
 							if ( is_dir( $moduleLocationDir . $code . WPF_DS . 'tables' ) ) {

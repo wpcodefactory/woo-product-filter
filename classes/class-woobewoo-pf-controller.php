@@ -88,7 +88,7 @@ abstract class WooBeWoo_PF_Controller {
 
 		if ( file_exists( $modal_class_location ) ) {
 			require $modal_class_location;
-			$className = toeGetClassNameWpf( $modal_class_name );
+			$className = woobewoo_pf_toe_get_class_name( $modal_class_name );
 		}
 
 		if ( $className ) {
@@ -119,7 +119,7 @@ abstract class WooBeWoo_PF_Controller {
 
 		if ( file_exists( $view_class_location ) ) {
 			require $view_class_location;
-			$className = toeGetClassNameWpf( $view_class_name );
+			$className = woobewoo_pf_toe_get_class_name( $view_class_name );
 		}
 
 		if ( $className ) {

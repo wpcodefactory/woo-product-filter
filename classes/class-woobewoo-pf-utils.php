@@ -13,9 +13,11 @@ class WooBeWoo_PF_Utils {
 
 	/**
 	 * jsonEncode.
+	 *
+	 * @version 3.3.2
 	 */
 	public static function jsonEncode( $arr ) {
-		return ( is_array( $arr ) || is_object( $arr ) ) ? jsonEncodeUTFnormalWpf( $arr ) : jsonEncodeUTFnormalWpf( array() );
+		return ( is_array( $arr ) || is_object( $arr ) ) ? woobewoo_pf_json_encode_utf_normal( $arr ) : woobewoo_pf_json_encode_utf_normal( array() );
 	}
 
 	/**

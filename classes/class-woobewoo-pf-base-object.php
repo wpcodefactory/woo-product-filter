@@ -52,7 +52,7 @@ abstract class WooBeWoo_PF_Base_Object {
 	/**
 	 * Get settings in specific filter in filter block.
 	 *
-	 * @version 3.3.1
+	 * @version 3.3.2
 	 *
 	 * @param array  $settings
 	 * @param string $name
@@ -116,7 +116,7 @@ abstract class WooBeWoo_PF_Base_Object {
 			'selected_clean_word',
 		);
 		if ( in_array( $name, $translatable_names, true ) ) {
-			$value = wpf_translate_string( $value );
+			$value = woobewoo_pf_translate_string( $value );
 		}
 
 

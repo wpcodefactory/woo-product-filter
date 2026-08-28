@@ -93,7 +93,7 @@ class WooBeWoo_PF_Mod_Installer {
 				}
 			}
 
-			$moduleClass = toeGetClassNameWpf( $module['code'] );
+			$moduleClass = woobewoo_pf_toe_get_class_name( $module['code'] );
 			$moduleObj   = new $moduleClass( $module );
 			if ( $moduleObj ) {
 				$moduleObj->$action();

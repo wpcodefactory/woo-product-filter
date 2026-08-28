@@ -134,6 +134,8 @@ class WooBeWoo_PF_Field {
 
 	/**
 	 * displayValue.
+	 *
+	 * @version 3.3.2
 	 */
 	public function displayValue() {
 		$value = '';
@@ -175,9 +177,9 @@ class WooBeWoo_PF_Field {
 							foreach ( $this->value as $v ) {
 								$valArr[] = $options[ $v ];
 							}
-							$value = recImplodeWpf( '<br />', $valArr );
+							$value = woobewoo_pf_recursive_implode( '<br />', $valArr );
 						} else {
-							$value = recImplodeWpf( '<br />', $this->value );
+							$value = woobewoo_pf_recursive_implode( '<br />', $this->value );
 						}
 					} else {
 						$value = $this->value;

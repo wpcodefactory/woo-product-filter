@@ -182,7 +182,7 @@ abstract class WooBeWoo_PF_Module extends WooBeWoo_PF_Base_Object {
 		if ( file_exists( $controller_class_location ) ) {
 			$className = '';
 			require $controller_class_location;
-			$className = toeGetClassNameWpf( $controller_class_name );
+			$className = woobewoo_pf_toe_get_class_name( $controller_class_name );
 			if ( ! empty( $className ) ) {
 				$this->_controller = new $className( $this->getCode() );
 				$this->_controller->init();

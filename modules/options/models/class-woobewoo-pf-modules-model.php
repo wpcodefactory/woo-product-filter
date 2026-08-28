@@ -46,7 +46,7 @@ class WooBeWoo_PF_Modules_Model extends WooBeWoo_PF_Model {
 	public function put( $d = array() ) {
 		$res = new WooBeWoo_PF_Response();
 		$id  = $this->_getIDFromReq( $d );
-		$d   = prepareParamsWpf( $d );
+		$d   = woobewoo_pf_prepare_params( $d );
 		if ( is_numeric( $id ) && $id ) {
 			if ( isset( $d['active'] ) ) {
 				$d['active'] = ( ( is_string( $d['active'] ) && 'true' == $d['active'] ) || 1 == $d['active'] ) ? 1 : 0;           // mmm.... govnokod?....)))
