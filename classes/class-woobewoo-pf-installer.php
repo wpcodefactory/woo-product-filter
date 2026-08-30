@@ -250,9 +250,10 @@ class WooBeWoo_PF_Installer {
 
 	/**
 	 * delete.
+	 *
+	 * @version 3.4.0
 	 */
 	public static function delete() {
-		self::_checkSendStat( 'delete' );
 		global $wpdb;
 		$wpPrefix = $wpdb->prefix;
 		$wpdb->query( 'DROP TABLE IF EXISTS `' . $wpdb->prefix . esc_sql( WPF_DB_PREF ) . 'modules`' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
