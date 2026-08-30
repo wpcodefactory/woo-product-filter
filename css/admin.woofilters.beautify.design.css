@@ -316,7 +316,7 @@
 	margin-right: 4px;
 }
 
-#wpfFiltersEditForm .woobewoo-tooltip {
+.woobewoo-tooltip {
 	border: 0 !important;
 	outline: none !important;
 	height: 18px !important;
@@ -1383,8 +1383,8 @@ select.woobewoo-flat-input {
 }
 
 .wpfFiltersTabContents .woobewoo_row {
-	margin-left: 0;
-	margin-right: 0;
+	margin-left: -15px;
+	margin-right: -15px;
 }
 
 .settings-block-label.settings-w100:last-of-type {

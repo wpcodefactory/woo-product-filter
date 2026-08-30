@@ -1224,10 +1224,6 @@ select.woobewoo-flat-input {
 	display: flex;
 	border-radius: 16px;
 }
-.wpfFiltersTabContents .woobewoo_row {
-	margin-left: 0;
-	margin-right: 0;
-}
 .settings-block-label.settings-w100:last-of-type {
 	display: flex;
 	flex-direction: column;
