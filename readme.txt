@@ -166,7 +166,8 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.3.4 - 28/08/2026 =
+= 3.4.0 - 30/08/2026 =
+* Dev - Updated checkbox border color to `#767676`.
 * Dev - Fixed "Filter" text translation.
 * Dev - Security - Escaped shortcode output.
 * Dev - Prefixed PHP class names with `WooBeWoo_PF_`.

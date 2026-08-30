@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - UI CSS
  *
- * @version 3.3.0
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -554,10 +554,6 @@ ul.woobewoo-bar-controls > li.separator {
 	outline: none;
 	margin:0;
 	line-height: normal;
-}
-.woobewoo-plugin input:not([type=radio]), .woobewoo-plugin select, .woobewoo-plugin textarea {
-	border-radius: 0 !important;
-	border-color: #e2e7ea !important;
 }
 .woobewoo-plugin input[type=text] {
 	padding: 7px 5px;

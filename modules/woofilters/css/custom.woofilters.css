@@ -1,10 +1,14 @@
 /**
  * Product Filter by WBW - Custom Woofilters CSS
  *
- * @version 3.1.7
+ * @version 3.4.0
  *
  * @author woobewoo
  */
+
+:root {
+	--woobewoo-pf-input-border-color: #767676;
+}
 
 .wpfFilterWrapper label{
 	font-weight: normal;
@@ -14,8 +18,10 @@
 	background-color: #f9f9f9;
 	border: 1px solid #6e6666;
 	color: black;
-	font-family: myFont;
-	font: normal 14px Arial, Helvetica, sans-serif;
+	font-family: myFont, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
 	border-radius: 5px;
 	height: 26px;
 	padding: 5px;
@@ -70,15 +76,7 @@
 .wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfFilterContent .wpfCheckboxHier input,
 .wpfFilterWrapper[data-filter-type="wpfRating"] .wpfFilterContent .wpfCheckboxHier input,
 .wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfFilterContent .wpfCheckboxHier input[type="checkbox"]{
-	width: 1.3em;
-	height: 1.3em;
-	background-color: white;
 	border-radius: 50%;
-	vertical-align: middle;
-	border: 1px solid #ddd;
-	-webkit-appearance: none;
-	outline: none;
-	cursor: pointer;
 }
 .wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfFilterContent .wpfCheckboxHier .ms-options input {
 	border-radius: 0;
@@ -122,7 +120,7 @@
 	width: 18px;
 	min-width: 18px;
 	height: 18px;
-	border: 1px solid #e0e0e0;
+	border: 1px solid var(--woobewoo-pf-input-border-color);
 	background-color: transparent;
 	border-radius: 0;
 	box-shadow: none;
