@@ -148,6 +148,8 @@ class WooBeWoo_PF_Db {
 
 	/**
 	 * dateToTime.
+	 *
+	 * @version 3.4.0
 	 */
 	public static function dateToTime( $date ) {
 		if ( empty( $date ) ) {
