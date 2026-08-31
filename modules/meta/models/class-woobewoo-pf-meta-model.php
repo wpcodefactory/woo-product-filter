@@ -164,8 +164,8 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 
 		$maxCountProducts += 100;
 		WooBeWoo_PF_Db::query( 'SET session wait_timeout=600' );
-		global $wpfMetaSeparator;
-		$wpfMetaSeparator = ','; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+		global $woobewoo_pf_meta_separator;
+		$woobewoo_pf_meta_separator = ',';
 
 		foreach ( $keys as $key ) {
 			$keyName = $key['meta_key'];
@@ -369,7 +369,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 								$insertValues = '';
 								foreach ( $data as $k => $values ) {
 									if ( 5 == $keyType ) {
-										$valuesArr = empty( $values['meta_value'] ) ? false : explode( $wpfMetaSeparator, $values['meta_value'] );
+										$valuesArr = empty( $values['meta_value'] ) ? false : explode( $woobewoo_pf_meta_separator, $values['meta_value'] );
 									} else {
 										$valuesArr = ( 7 == $keyType ? $values['meta_value'] : maybe_unserialize( $values['meta_value'] ) );
 									}

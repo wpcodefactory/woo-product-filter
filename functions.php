@@ -318,7 +318,7 @@ if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
 			return;
 		}
 
-		if ( apply_filters( 'woobee_show_pro_notice', false ) ) { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+		if ( apply_filters( 'woobewoo_pf_show_pro_notice', false ) ) {
 			return;
 		}
 		if ( WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'start_indexing' ) == 2 ) {
