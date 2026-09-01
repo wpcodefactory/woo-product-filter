@@ -59,7 +59,7 @@ define( 'WPF_CURRENT', 'current' );
 define( 'WPF_EOL', "\n" );
 
 define( 'WPF_PLUGIN_INSTALLED', true );
-define( 'WPF_VERSION', '3.4.1-dev-20260901-1440' );
+define( 'WPF_VERSION', '3.4.1' );
 define( 'WPF_PRO_REQUIRES', '3.4.1' );
 define( 'WPF_USER', 'user' );
 

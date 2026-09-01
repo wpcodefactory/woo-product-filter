@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 3.4.0
+Stable tag: 3.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,7 +167,7 @@ This plugin may communicate with the following third-party services:
 == Changelog ==
 
 = 3.4.1 - 01/09/2026 =
-* Renamed the AJAX object `wbwFiltersData` to `woobewooPfFiltersData`.
+* Dev - Renamed AJAX object.
 
 = 3.4.0 - 31/08/2026 =
 * Dev - Updated checkbox border color.

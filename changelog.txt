@@ -1,7 +1,7 @@
 == Changelog ==
 
 = 3.4.1 - 01/09/2026 =
-* Renamed the AJAX object `wbwFiltersData` to `woobewooPfFiltersData`.
+* Dev - Renamed AJAX object.
 
 = 3.4.0 - 31/08/2026 =
 * Dev - Updated checkbox border color.
