@@ -4,7 +4,7 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.4.0
+ * @version 3.4.1
  *
  * @author woobewoo
  */
@@ -177,7 +177,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * Try to parse xml file with module data.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.1
 	 *
 	 * @param string $xmlPath
 	 *
@@ -209,7 +209,7 @@ class WooBeWoo_PF_Mod_Installer {
 				WooBeWoo_PF_Errors::push( esc_html__( 'No XML file were found', 'woo-product-filter' ), WooBeWoo_PF_Errors::MOD_INSTALL );
 			}
 		} else {
-			$modDataArr = maybe_unserialize( WPF_PRO_MODULES );
+			$modDataArr = maybe_unserialize( WOOBEWOO_PF_PRO_MODULES );
 		}
 		return $modDataArr;
 	}
