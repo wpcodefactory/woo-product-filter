@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Overview_Model Class
  *
- * @version 3.4.1
+ * @version 3.4.0
  *
  * @author woobewoo
  */
@@ -28,8 +28,6 @@ class WooBeWoo_PF_Overview_Model extends WooBeWoo_PF_Model {
 
 	/**
 	 * subscribe.
-	 *
-	 * @version 3.4.1
 	 */
 	public function subscribe( $params ) {
 		$email = empty( $params['email'] ) ? '' : $params['email'];

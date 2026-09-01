@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Widget Class
  *
- * @version 3.4.0
+ * @version 3.4.1
  *
  * @author woobewoo
  */
@@ -130,7 +130,7 @@ class WooBeWoo_PF_Woofilters_Widget extends WooBeWoo_PF_Module {
 	/**
 	 * gutenberg block.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.1
 	 * @since   3.1.7
 	 */
 	public function enqueueGutenbergEditorAssets() {
