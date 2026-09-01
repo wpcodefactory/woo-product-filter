@@ -166,6 +166,9 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
+= 3.4.1 - 01/09/2026 =
+* Renamed the AJAX object `wbwFiltersData` to `woobewooPfFiltersData`.
+
 = 3.4.0 - 31/08/2026 =
 * Dev - Updated checkbox border color.
 * Dev - Fixed "Filter" text translation.

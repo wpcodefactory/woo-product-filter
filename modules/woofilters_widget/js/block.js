@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Block JS
  *
- * @version 3.1.7
+ * @version 3.4.1
  * @since   3.1.7
  *
  * @author woobewoo
@@ -26,7 +26,7 @@ registerBlockType('wbw/woofilters', {
 
 	edit: function (props) {
 		const { attributes, setAttributes } = props;
-		const filters = window.wbwFiltersData?.filters || {};
+		const filters = window.woobewooPfFiltersData?.filters || {};
 
 		const options = [];
 

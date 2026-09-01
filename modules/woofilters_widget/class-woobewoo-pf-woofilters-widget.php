@@ -173,7 +173,7 @@ class WooBeWoo_PF_Woofilters_Widget extends WooBeWoo_PF_Module {
 		}
 		wp_localize_script(
 			'woobewoo-pf-admin-woofilters-block',
-			'wbwFiltersData',
+			'woobewooPfFiltersData',
 			array(
 				'filters' => $filtersOpts,
 			)
