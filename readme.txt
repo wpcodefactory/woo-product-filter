@@ -166,6 +166,9 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
+= 3.4.2 - 01/09/2026 =
+* Fix - Fixed fatal error caused by the missing `class-woobewoo-pf-mod-installer.php` file.
+
 = 3.4.1 - 01/09/2026 =
 * Dev - Renamed AJAX object.
 
