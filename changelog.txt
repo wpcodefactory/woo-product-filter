@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 3.4.3 - 06/09/2026 =
+* Fix - Filter - Appearance - Blocks - Fixed checkbox border issue.
+* Dev - Security - Escaped custom CSS output.
+
 = 3.4.2 - 01/09/2026 =
 * Fix - Fixed fatal error caused by the missing `class-woobewoo-pf-mod-installer.php` file.
 

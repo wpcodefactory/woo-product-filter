@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters CSS
  *
- * @version 3.4.0
+ * @version 3.4.3
  *
  * @author woobewoo
  */
@@ -290,12 +290,11 @@
 .wpfFilterWrapper ul li::before {
 	display:none !important;
 }
+
 .wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
-	width: auto !important;
-}
-.wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
-	padding-left: 0px !important;
-	margin-left: 0px !important;
+	padding-left: 0;
+	margin-left: 0;
+	margin-bottom: 5px;
 }
 .rtl .wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
 	padding-right: 0px !important;
@@ -1592,11 +1591,6 @@ select.woobewoo-flat-input {
 }
 #mainContainer nav .active .menuItem {
 	background-color: var(--woobewoo-color-f4f5f5);
-}
-
-#containerWrapper .wpfFilterWrapper .wpfCheckbox label {
-	width: 100% !important;
-	display: flex !important;
 }
 .wpfRadio input[type="radio"] {
 	--bs-form-check-bg: var(--bs-body-bg);

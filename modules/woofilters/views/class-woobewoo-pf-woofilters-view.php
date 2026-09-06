@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
- * @version 3.4.0
+ * @version 3.4.3
  *
  * @author woobewoo
  */
@@ -531,7 +531,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.3
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );
@@ -831,7 +831,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		);
 		wp_add_inline_style(
 			'woobewoo-pf-frontend-filters',
-			$custom_css
+			wp_strip_all_tags( $custom_css )
 		);
 
 		$this->resetFilterExistsTerms();

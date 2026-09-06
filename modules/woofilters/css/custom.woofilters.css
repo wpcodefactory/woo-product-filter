@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Custom Woofilters CSS
  *
- * @version 3.4.0
+ * @version 3.4.3
  *
  * @author woobewoo
  */
@@ -212,7 +212,7 @@
 .wpfFilterWrapper .wpfCheckbox label {
 	position: relative !important;
 	display: inline-block !important;
-	margin-bottom: 0;
+	margin-right: 5px;
 }
 .wpfFilterWrapper .wpfCheckbox label::before,
 .wpfFilterWrapper .wpfCheckbox label::after {

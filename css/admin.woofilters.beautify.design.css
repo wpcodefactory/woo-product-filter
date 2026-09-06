@@ -225,11 +225,6 @@
 	background-color: var(--woobewoo-color-f4f5f5);
 }
 
-#containerWrapper .wpfFilterWrapper .wpfCheckbox label {
-	width: 100% !important;
-	display: flex !important;
-}
-
 .wpfRadio input[type="radio"] {
 	--bs-form-check-bg: var(--bs-body-bg);
 	flex-shrink: 0 !important;
