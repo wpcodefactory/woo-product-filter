@@ -168,6 +168,7 @@ This plugin may communicate with the following third-party services:
 
 = 3.4.3 - 06/09/2026 =
 * Fix - Filter - Appearance - Blocks - Fixed checkbox border issue.
+* Fix - Fixed 404 error when paginating filtered results with multiple values.
 * Dev - Security - Escaped custom CSS output.
 
 = 3.4.2 - 01/09/2026 =
