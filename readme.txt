@@ -170,7 +170,9 @@ This plugin may communicate with the following third-party services:
 * Fix - Filter - Appearance - Blocks - Fixed checkbox border issue.
 * Fix - Fixed 404 error when paginating filtered results with multiple values.
 * Fix - Security - Fixed potential JavaScript injection through the filter ID parameter.
+* Fix - Fixed "Filter" and "Clear" text translation.
 * Dev - Security - Escaped custom CSS output.
+* WC tested up to: 11.1.
 
 = 3.4.2 - 01/09/2026 =
 * Fix - Fixed fatal error caused by the missing `class-woobewoo-pf-mod-installer.php` file.
