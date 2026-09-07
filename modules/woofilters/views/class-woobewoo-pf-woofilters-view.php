@@ -197,7 +197,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.3
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
@@ -235,7 +235,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		if ( '1' === WooBeWoo_PF_Req::getVar( 'wpf_skip' ) && ! $recalculateFilters ) {
 			$fid = WooBeWoo_PF_Req::getVar( 'wpf_fid' );
 			if ( $fid ) {
-				$this->assign( 'html', '<div class="wpfExistsTermsJS" data-fid="' . esc_attr( $fid ) . '"></div>' );
+				$this->assign( 'html', '<div class="wpfExistsTermsJS" data-fid="' . absint( $fid ) . '"></div>' );
 				return parent::getContent( 'woofiltersHtml' );
 			}
 			return false;

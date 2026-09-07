@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters Class
  *
- * @version 3.4.0
+ * @version 3.4.3
  *
  * @author woobewoo
  */
@@ -3786,7 +3786,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Get filter existing individual filters items.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.3
 	 *
 	 * @param int | null $args wp_query args
 	 * @param array      $taxonomies
@@ -4060,9 +4060,12 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		if ( '1' === WooBeWoo_PF_Req::getVar( 'wpf_skip' ) ) {
 			$recalculateFilters = $this->getFilterSetting( $settings, 'recalculate_filters', false );
 			if ( $recalculateFilters ) {
-				$fid                     = WooBeWoo_PF_Req::getVar( 'wpf_fid' );
-				$jsFound                 = ( ! is_null( $fid ) && ! empty( $fid ) ? 'wpfDoActionsAfterLoad(' . $fid . ',' . ( empty( $result['have_posts'] ) ? 0 : 1 ) . ');' : '' );
-				$result['existsTermsJS'] = '<div class="wpfExistsTermsJS" data-fid="' . esc_attr( $fid ) . '"><script type="text/javascript">' . $jsFound . 'wpfShowHideFiltersAtts(' . wp_json_encode( $result['exists'] ) . ', ' . wp_json_encode( $result['existsUsers'] ) . ');</script><script type="text/javascript">wpfChangeFiltersCount(' . wp_json_encode( $result['exists'] ) . ');</script></div>';
+				$fid                     = absint( WooBeWoo_PF_Req::getVar( 'wpf_fid' ) );
+				$jsFound                 = ( ! is_null( $fid ) && ! empty( $fid ) ?
+					'wpfDoActionsAfterLoad(' . $fid . ',' . ( empty( $result['have_posts'] ) ? 0 : 1 ) . ');' :
+					''
+				);
+				$result['existsTermsJS'] = '<div class="wpfExistsTermsJS" data-fid="' . $fid . '"><script type="text/javascript">' . $jsFound . 'wpfShowHideFiltersAtts(' . wp_json_encode( $result['exists'] ) . ', ' . wp_json_encode( $result['existsUsers'] ) . ');</script><script type="text/javascript">wpfChangeFiltersCount(' . wp_json_encode( $result['exists'] ) . ');</script></div>';
 			}
 		}
 		return $result;
