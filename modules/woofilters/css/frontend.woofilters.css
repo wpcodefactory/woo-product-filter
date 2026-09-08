@@ -290,7 +290,6 @@
 .wpfFilterWrapper ul li::before {
 	display:none !important;
 }
-
 .wpfFilterWrapper ul:not(.wpfButtonsFilter) li {
 	padding-left: 0;
 	margin-left: 0;

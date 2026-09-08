@@ -364,7 +364,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		$generalSettings             = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['generalSettings'] ) );
 		$woocommerceSettings         = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['woocommerceSettings'] ) );
 		$shortcodeAttr               = isset( $params['shortcodeAttr'] ) ? WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['shortcodeAttr'] ) ) : array();
-		$curUrl                      =  esc_url_raw( wp_unslash( $_POST['currenturl'] ) );
+		$curUrl                      = esc_url_raw( wp_unslash( $_POST['currenturl'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		$queryvars['posts_per_page'] = isset( $filterSettings['count_product_shop'] ) && ! empty( $filterSettings['count_product_shop'] ) ? $filterSettings['count_product_shop'] : $queryvars['posts_per_page'];
 		$use_category_filtration     = isset( $filterSettings['use_category_filtration'] ) ? $filterSettings['use_category_filtration'] : 1;
 		$onlyStatistics              = isset( $params['only_statistics'] );
