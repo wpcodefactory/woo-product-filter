@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 3.4.2
+Stable tag: 3.4.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,7 +166,7 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.4.3 - 07/09/2026 =
+= 3.4.3 - 08/09/2026 =
 * Fix - Filter - Appearance - Blocks - Fixed checkbox border issue.
 * Fix - Fixed 404 error when paginating filtered results with multiple values.
 * Fix - Security - Fixed potential JavaScript injection through the filter ID parameter.
