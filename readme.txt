@@ -166,6 +166,9 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
+= 3.4.4 - 09/09/2026 =
+* Fix - Fixed fatal error when term data is returned as an object.
+
 = 3.4.3 - 08/09/2026 =
 * Fix - Filter - Appearance - Blocks - Fixed checkbox border issue.
 * Fix - Fixed 404 error when paginating filtered results with multiple values.

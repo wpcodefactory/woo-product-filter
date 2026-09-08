@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters Class
  *
- * @version 3.4.3
+ * @version 3.4.4
  *
  * @author woobewoo
  */
@@ -4301,7 +4301,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.4
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4467,7 +4467,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 				)
 			);
 		} else {
-			$sql['main']              = WooBeWoo_PF_Dispatcher::applyFilters(
+			$sql['main']  = WooBeWoo_PF_Dispatcher::applyFilters(
 				'addCustomAttributesSql',
 				$sql['main'],
 				array(
@@ -4478,8 +4478,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 					'currentSettings' => $param['currentSettings'],
 				)
 			);
-			$wpdb->wpf_prepared_query = $sql['main'];
-			$termProducts             = $wpdb->get_results( $wpdb->wpf_prepared_query ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$termProducts = WooBeWoo_PF_Db::get( $sql['main'] );
 		}
 
 		$existTerms = array();
