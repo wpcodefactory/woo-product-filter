@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Design
  *
- * @version 3.4.0
+ * @version 3.4.5
  *
  * @author woobewoo
  */
@@ -185,6 +185,28 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label(); // 
 				</div>
 			</div>
 		</div>
+		<?php if ( ! apply_filters( 'woobewoo_pf_is_pro', false ) ) { ?>
+			<div class="woobewoo_row row-settings-block">
+				<div class="settings-block-label col-xs-4 col-sm-3">
+					<?php esc_html_e( 'CSS editor', 'woo-product-filter' ); ?>
+					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Custom CSS.', 'woo-product-filter' ) . ' <a href="' . esc_url( 'https://' . WPF_WP_PLUGIN_URL . '/documentation/product-filter-design-modification-guide-css/' ) . '" class="wupsales-wc-hidden" target="_blank">' . __( 'Learn More', 'woo-product-filter' ) . '</a>' ); ?>"></i>
+				</div>
+				<div class="settings-block-values col-xs-8 col-sm-9">
+					<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
+				</div>
+			</div>
+			<div class="woobewoo_row row-settings-block">
+				<div class="settings-block-label col-xs-4 col-sm-3">
+					<?php esc_html_e( 'JS editor', 'woo-product-filter' ); ?>
+					<i class="fa fa-question woobewoo-tooltip" title="<?php echo esc_attr( __( 'Custom JS.', 'woo-product-filter' ) ); ?>"></i>
+				</div>
+				<div class="settings-block-values col-xs-8 col-sm-9">
+					<?php WooBeWoo_PF_Html::echoEscapedHtml( $pro_label ); ?>
+				</div>
+			</div>
+		<?php }
+		WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabDesignGeneralCustomCssJs', $this->settings );
+		?>
 		<div class="woobewoo_row row-settings-block">
 			<div class="settings-block-label col-xs-4 col-sm-3">
 				<?php esc_html_e( 'Don\'t load Fontawesome', 'woo-product-filter' ); ?>

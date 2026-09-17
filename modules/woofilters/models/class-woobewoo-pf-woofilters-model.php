@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Model Class
  *
- * @version 3.4.0
+ * @version 3.4.5
  *
  * @author woobewoo
  */
@@ -392,7 +392,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * _dataSave.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.5
 	 */
 	protected function _dataSave( $data, $update = false ) {
 		$esettings = isset( $data['esettings'] ) ? WooBeWoo_PF_Utils::jsonDecode( stripslashes( $data['esettings'] ) ) : array();
@@ -412,6 +412,8 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 		}
 		$metaKeys          = $this->getDataFilterMetaKeys( $data['settings']['filters']['order'] );
 		$data['meta_keys'] = count( $metaKeys ) > 0 ? implode( '|', $metaKeys ) : '';
+
+		$data = WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_filter_settings_saving_data', $data, $settings, $update );
 
 		$settingData          = array( 'settings' => $data['settings'] );
 		$data['setting_data'] = addslashes( maybe_serialize( $settingData ) );

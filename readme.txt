@@ -166,6 +166,10 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
+= 3.4.5 - 17/09/2026 =
+* Dev - Security - Improved output escaping.
+* Dev - Added custom JS and CSS editor.
+
 = 3.4.4 - 09/09/2026 =
 * Fix - Fixed fatal error when term data is returned as an object.
 

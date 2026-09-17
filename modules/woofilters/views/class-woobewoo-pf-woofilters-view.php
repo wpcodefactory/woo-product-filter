@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
- * @version 3.4.3
+ * @version 3.4.5
  *
  * @author woobewoo
  */
@@ -531,7 +531,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.4.3
+	 * @version 3.4.5
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );
@@ -828,7 +828,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 
 
 		$custom_css = WooBeWoo_PF_Dispatcher::applyFilters(
-			'addCustomCss',
+			'woobewoo_pf_add_custom_css',
 			self::$filtersCss,
 			$settings,
 			$filterId
@@ -836,6 +836,17 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		wp_add_inline_style(
 			'woobewoo-pf-frontend-filters',
 			wp_strip_all_tags( $custom_css )
+		);
+
+		$custom_js = WooBeWoo_PF_Dispatcher::applyFilters(
+			'woobewoo_pf_add_custom_js',
+			'',
+			$settings,
+			$filterId
+		);
+		wp_add_inline_script(
+			'woobewoo-pf-frontend-filters',
+			wp_strip_all_tags( $custom_js )
 		);
 
 		$this->resetFilterExistsTerms();
