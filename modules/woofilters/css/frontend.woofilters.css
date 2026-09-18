@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters CSS
  *
- * @version 3.4.3
+ * @version 3.4.5
  *
  * @author woobewoo
  */
@@ -468,14 +468,14 @@ ul ul.wpfHideAllParent {
 }
 .wpfFilterButton.wpfButton,
 .wpfClearButton.wpfButton {
-	color: #64808e !important;
-	background: #f0f0f0 !important;
-	min-height: 40px !important;
-	font-size: 16px !important;
+	color: #64808e;
+	background: #f0f0f0;
+	min-height: 40px;
+	font-size: 16px;
 	padding: 5px;
 	align-items: center;
 	border-radius: 4px;
-	text-decoration: none !important;
+	text-decoration: none;
 	text-align: center;
 	text-transform: uppercase;
 	transition: all 0.2s;
