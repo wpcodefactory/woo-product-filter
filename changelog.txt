@@ -1,9 +1,8 @@
 == Changelog ==
 
-= 3.4.5 - 18/09/2026 =
+= 3.4.5 - 21/09/2026 =
 * Fix - Fixed checkbox checked state style issue.
-* Dev - Removed !important from button styles.
-* Dev - Added custom JS and CSS editor.
+* Dev - Removed `!important` from button styles.
 
 = 3.4.4 - 09/09/2026 =
 * Fix - Fixed fatal error when term data is returned as an object.

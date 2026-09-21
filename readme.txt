@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 3.4.4
+Stable tag: 3.4.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,10 +166,9 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.4.5 - 18/09/2026 =
+= 3.4.5 - 21/09/2026 =
 * Fix - Fixed checkbox checked state style issue.
-* Dev - Removed !important from button styles.
-* Dev - Added custom JS and CSS editor.
+* Dev - Removed `!important` from button styles.
 
 = 3.4.4 - 09/09/2026 =
 * Fix - Fixed fatal error when term data is returned as an object.
