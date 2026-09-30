@@ -1,5 +1,22 @@
 == Changelog ==
 
+= 3.4.6 - 30/09/2026 =
+* Fix - Fixed PRO "Content" options (selected filters, category slugs in URL, synchronization, scroll, one filter open, view more) being reset on save.
+* Fix - Fixed `[wpf-selected-filters]` shortcode displaying nothing.
+* Fix - Fixed AJAX filtering error and lost filter blocks when a filter setting contains a quote or backslash.
+* Fix - Fixed empty product grid on filtered categories in "Subcategories" display mode.
+* Fix - Fixed filtering not working when the page URL contains "thrive" or "_preview".
+* Fix - Fixed missing PRO styles and Google fonts when the Free and PRO versions differ.
+* Fix - Fixed PRO modules staying disabled after an update on licensed sites.
+* Fix - Fixed full re-index not recalculating the value counts.
+* Fix - Fixed indexing staying locked for 20 minutes after a failed run.
+* Fix - WPML/Polylang - Filter strings are no longer registered on every page view.
+* Fix - WPML/Polylang - Fixed filter labels showing the translation of another label.
+* Fix - Custom CSS/JS - Fixed HTML inside strings being removed.
+* Fix - Security - Escaped "No products found" text.
+* Fix - Security - Restricted product query arguments sent from the browser.
+* Dev - Added notice when the PRO version is not compatible.
+
 = 3.4.5 - 21/09/2026 =
 * Fix - Fixed checkbox checked state style issue.
 * Dev - Removed `!important` from button styles.
