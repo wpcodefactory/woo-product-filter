@@ -1909,6 +1909,10 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		// on full page reload after filters are applied.
 		$display_type = get_term_meta( $categoryPageId, 'display_type', true );
 		$display_type = '' === $display_type ? get_option( 'woocommerce_category_archive_display', '' ) : $display_type;
+		// Same as woocommerce_get_loop_display_mode(): show products when there are no subcategories to show.
+		if ( 'subcategories' === $display_type && ! $this->needSubcategoriesDisplay( $categoryPageId ) ) {
+			return $loop_html;
+		}
 		if ( 'subcategories' === $display_type || 'both' === $display_type ) {
 			add_filter( 'term_link', array( $this, 'setSubcategoriesLink' ), 99 );
 			$taxonomies  = $this->getFilterTaxonomies( array(), true );
@@ -3297,7 +3301,11 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 			'id' => ( isset( $params['id'] ) ? (int) $params['id'] : 0 ),
 		);
 
-		return apply_filters( 'woobewoo_pf_render_selected_filters', '', $p );
+		// Rendered by the Free view, as in 3.3.0. The Pro listener on the Dispatcher hook
+		// (`wpf_woobewoo_pf_render_selected_filters`) is never reached by the plain hook below.
+		$html = WooBeWoo_PF_Frame::_()->isPro() ? WooBeWoo_PF_Html::escapedHtml( $this->getView()->renderSelectedFiltersHtml( $p ) ) : '';
+
+		return apply_filters( 'woobewoo_pf_render_selected_filters', $html, $p );
 	}
 
 	/**

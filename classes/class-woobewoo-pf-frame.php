@@ -742,8 +742,9 @@ class WooBeWoo_PF_Frame {
 	 */
 	public function proVersionCompare( $requires, $compare = '>', $notPro = true ) {
 		if ( is_null( $this->_proVersion ) ) {
-			if ( $this->isPro() && function_exists( 'getProPlugFullPathWpf' ) ) {
-				$plugin_data       = get_file_data( getProPlugFullPathWpf(), array( 'Version' => 'Version' ) );
+			$proPath = $this->isPro() ? woobewoo_pf_get_pro_full_path() : false;
+			if ( $proPath ) {
+				$plugin_data       = get_file_data( $proPath, array( 'Version' => 'Version' ) );
 				$this->_proVersion = $plugin_data['Version'];
 			} else {
 				$this->_proVersion = false;

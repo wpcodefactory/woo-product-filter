@@ -1052,7 +1052,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			</div>
 		</div>
 		<?php }
-			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsContent', $this->filter['id'], $this->filter['id'] );
+			WooBeWoo_PF_Dispatcher::doAction( 'addEditTabDesign', 'partEditTabOptionsContent', $this->settings, $this->filter['id'] );
 		?>
 
 		<div class="woobewoo_row row-settings-block">

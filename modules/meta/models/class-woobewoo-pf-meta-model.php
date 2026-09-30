@@ -19,6 +19,11 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	public $metaVarSuf     = '#wpfvar#';
 	public $startLockLimit = 20;
 
+	/**
+	 * Whether the current run has set the full-indexing lock (`start_indexing` = 2).
+	 */
+	private $indexingLockAcquired = false;
+
 	public function __construct() {
 		$this->existMB = function_exists( 'mb_substr' );
 		$this->_setTbl( 'meta_data' );
@@ -47,7 +52,16 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	 * @version 3.4.0
 	 */
 	public function recalcMetaValues( $productId = 0, $params = array() ) {
-		$result = $this->doRecalcMetaValues( $productId, $params );
+		$this->indexingLockAcquired = false;
+		$result                     = $this->doRecalcMetaValues( $productId, $params );
+		// Release the full-indexing lock taken by this run if it did not finish (errors, nothing to index...).
+		if ( $this->indexingLockAcquired ) {
+			$optModel = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel();
+			if ( 2 == $optModel->get( 'start_indexing' ) ) {
+				$optModel->save( 'start_indexing', 1 );
+			}
+			$this->indexingLockAcquired = false;
+		}
 		if ( ! $result && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'logging' ) == 1 ) {
 			$logger = wc_get_logger();
 			if ( $logger ) {
@@ -88,6 +102,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 		}
 		if ( $fullRecalc ) {
 			$optModel->save( 'start_indexing', 2 );
+			$this->indexingLockAcquired = true;
 		}
 
 		if ( $isAllKeys ) {
@@ -536,7 +551,13 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 			}
 			set_time_limit( 300 ); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 
-			if ( ! $valsModel->recalcValuesCount( $isAllKeys ? array() : $keyRecalc ) ) {
+			// All keys: full recalculation on a full re-index, only this product's values on a product update.
+			if ( $isAllKeys ) {
+				$countsOk = $isAllProducts ? $valsModel->recalcValuesCount( array(), true ) : $valsModel->recalcProductValuesCount( $productId );
+			} else {
+				$countsOk = $valsModel->recalcValuesCount( $keyRecalc );
+			}
+			if ( ! $countsOk ) {
 				$this->pushError( $valsModel->getErrors() );
 				return false;
 			}

@@ -230,7 +230,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		$data = WooBeWoo_PF_Req::get( 'post' );
 		if ( isset( $data ) && $data ) {
 			if ( ! empty( $data['settings']['filters']['order'] ) ) {
-				$metaKeys = $this->getDataFilterMetaKeys( stripcslashes( $data['settings']['filters']['order'] ) );
+				$metaKeys = $this->getDataFilterMetaKeys( $data['settings']['filters']['order'] );
 				if ( count( $metaKeys ) > 0 ) {
 					WooBeWoo_PF_Frame::_()->getModule( 'meta' )->calcNeededMetaValues();
 				}
@@ -358,12 +358,12 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 
 		$params = WooBeWoo_PF_Req::get( 'post' );
 
-		$filtersDataBackend          = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['filtersDataBackend'] ) );
-		$queryvars                   = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['queryvars'] ) );
-		$filterSettings              = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['filterSettings'] ) );
-		$generalSettings             = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['generalSettings'] ) );
-		$woocommerceSettings         = WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['woocommerceSettings'] ) );
-		$shortcodeAttr               = isset( $params['shortcodeAttr'] ) ? WooBeWoo_PF_Utils::jsonDecode( stripslashes( $params['shortcodeAttr'] ) ) : array();
+		$filtersDataBackend          = WooBeWoo_PF_Utils::jsonDecode( $params['filtersDataBackend'] ); // Already unslashed by WooBeWoo_PF_Req::get().
+		$queryvars                   = WooBeWoo_PF_Utils::jsonDecode( $params['queryvars'] ); // Already unslashed by WooBeWoo_PF_Req::get().
+		$filterSettings              = WooBeWoo_PF_Utils::jsonDecode( $params['filterSettings'] ); // Already unslashed by WooBeWoo_PF_Req::get().
+		$generalSettings             = WooBeWoo_PF_Utils::jsonDecode( $params['generalSettings'] ); // Already unslashed by WooBeWoo_PF_Req::get().
+		$woocommerceSettings         = WooBeWoo_PF_Utils::jsonDecode( $params['woocommerceSettings'] ); // Already unslashed by WooBeWoo_PF_Req::get().
+		$shortcodeAttr               = isset( $params['shortcodeAttr'] ) ? WooBeWoo_PF_Utils::jsonDecode( $params['shortcodeAttr'] ) : array();
 		$curUrl                      = esc_url_raw( wp_unslash( $_POST['currenturl'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		$queryvars['posts_per_page'] = isset( $filterSettings['count_product_shop'] ) && ! empty( $filterSettings['count_product_shop'] ) ? $filterSettings['count_product_shop'] : $queryvars['posts_per_page'];
 		$use_category_filtration     = isset( $filterSettings['use_category_filtration'] ) ? $filterSettings['use_category_filtration'] : 1;
@@ -595,10 +595,10 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 					endwhile;
 					$productsHtml = ob_get_clean();
 					if ( empty( $productsHtml ) ) {
-						$productsHtml = ' <div class="no-products-found">' . $filterSettings['text_no_products'] . '</div>';
+						$productsHtml = ' <div class="no-products-found">' . wp_kses_post( isset( $filterSettings['text_no_products'] ) ? $filterSettings['text_no_products'] : '' ) . '</div>';
 					}
 				} else {
-					$productsHtml = ' <div class="no-products-found">' . $filterSettings['text_no_products'] . '</div>';
+					$productsHtml = ' <div class="no-products-found">' . wp_kses_post( isset( $filterSettings['text_no_products'] ) ? $filterSettings['text_no_products'] : '' ) . '</div>';
 				}
 			}
 
@@ -893,8 +893,17 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			'wpf_query'           => 1,
 			'tax_query'           => array( 'wpf_tax' => 1 ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		);
-		if ( ! empty( $filterSettings['default_query'] ) ) {
-			$args = array_merge( $args, $filterSettings['default_query'] );
+		if ( ! empty( $filterSettings['default_query'] ) && is_array( $filterSettings['default_query'] ) ) {
+			// The default query comes from the browser: it must not widen the queried post types or statuses.
+			$defaultQuery = $filterSettings['default_query'];
+			if ( isset( $defaultQuery['post_status'] ) && ! in_array( $defaultQuery['post_status'], array( '', 'publish' ), true ) ) {
+				unset( $defaultQuery['post_status'] );
+			}
+			if ( isset( $defaultQuery['post_type'] ) && array_diff( array_filter( (array) $defaultQuery['post_type'] ), array( 'product', 'product_variation' ) ) ) {
+				unset( $defaultQuery['post_type'] );
+			}
+			unset( $defaultQuery['perm'], $defaultQuery['post_password'], $defaultQuery['has_password'] );
+			$args = array_merge( $args, $defaultQuery );
 		}
 
 		$args['tax_query'] = $module->addHiddenFilterQuery( $args['tax_query'] ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query

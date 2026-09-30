@@ -167,7 +167,8 @@ class WooBeWoo_PF_Mod_Installer {
 			}
 		}
 
-		$locations['plugPath']     = empty( $plug ) && function_exists( 'getProPlugFullPathWpf' ) ? plugin_basename( getProPlugFullPathWpf() ) : plugin_basename( trim( $plug ) );
+		$proPath                   = empty( $plug ) ? woobewoo_pf_get_pro_full_path() : false;
+		$locations['plugPath']     = $proPath ? plugin_basename( $proPath ) : plugin_basename( trim( $plug ) );
 		$locations['plugDir']      = dirname( WP_PLUGIN_DIR . WPF_DS . $locations['plugPath'] );
 		$locations['plugMainFile'] = WP_PLUGIN_DIR . WPF_DS . $locations['plugPath'];
 		$locations['xmlPath']      = $locations['plugDir'] . WPF_DS . 'install.xml';

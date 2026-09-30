@@ -13,14 +13,19 @@
  * @since   3.1.8
  */
 function wpfIsThriveEditor() {
-	var href = window.location.href;
-	return (
-		href.includes('tve=') ||
-		href.includes('tvet=') ||
-		href.includes('_preview') ||
-		href.includes('tcbf=') ||
-		href.includes('thrive')
-	);
+	// Match Thrive's query parameter names only (not domains, paths or parameter values).
+	var query = window.location.search.replace(/^\?/, '').split('&');
+	for (var i = 0; i < query.length; i++) {
+		var key = query[i].split('=')[0] || '';
+		try {
+			key = decodeURIComponent(key);
+		} catch (e) {}
+		key = key.toLowerCase();
+		if ('tve' === key || 'tvet' === key || 'tcbf' === key || '_preview' === key || 0 === key.indexOf('thrive')) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /**
