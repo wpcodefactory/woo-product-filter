@@ -59,7 +59,7 @@ define( 'WPF_CURRENT', 'current' );
 define( 'WPF_EOL', "\n" );
 
 define( 'WPF_PLUGIN_INSTALLED', true );
-define( 'WPF_VERSION', '3.4.6' );
+define( 'WPF_VERSION', '3.4.6-dev-20261005-1625' );
 define( 'WPF_PRO_REQUIRES', '3.4.0' ); // Oldest compatible PRO (class/file naming introduced in 3.4.0).
 define( 'WPF_USER', 'user' );
 

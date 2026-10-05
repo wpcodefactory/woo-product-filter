@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Functions
  *
- * @version 3.4.0
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -340,7 +340,7 @@ if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
 /**
  * woobewoo_pf_deactivate.
  *
- * @version 3.4.0
+ * @version 3.4.6
  */
 add_action( 'admin_init', 'woobewoo_pf_deactivate' );
 if ( ! function_exists( 'woobewoo_pf_deactivate' ) ) {
@@ -348,12 +348,12 @@ if ( ! function_exists( 'woobewoo_pf_deactivate' ) ) {
 		if ( ! class_exists( 'WooBeWoo_PF_Frame' ) ) {
 			return;
 		}
-		$pathPro = woobewoo_pf_get_pro_full_path();
-		if ( ! $pathPro || ! is_plugin_active( plugin_basename( $pathPro ) ) ) {
+		$path_pro = woobewoo_pf_get_pro_full_path();
+		if ( ! $path_pro || ! is_plugin_active( plugin_basename( $path_pro ) ) ) {
 			return;
 		}
-		$pluginData = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
-		if ( ! version_compare( $pluginData['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
+		$plugin_data = get_file_data( $path_pro, array( 'Version' => 'Version' ) );
+		if ( ! version_compare( $plugin_data['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
 			// Too old PRO: its modules can't be loaded by this version (see woobewoo_pf_pro_incompatible_notice()).
 			return;
 		}
@@ -410,19 +410,19 @@ if ( ! function_exists( 'woobewoo_pf_pro_incompatible_notice' ) ) {
 		if ( ! current_user_can( 'activate_plugins' ) || ! class_exists( 'WooBeWoo_PF_Frame' ) ) {
 			return;
 		}
-		$pathPro = woobewoo_pf_get_pro_full_path();
-		if ( ! $pathPro || ! is_plugin_active( plugin_basename( $pathPro ) ) ) {
+		$path_pro = woobewoo_pf_get_pro_full_path();
+		if ( ! $path_pro || ! is_plugin_active( plugin_basename( $path_pro ) ) ) {
 			return;
 		}
-		$pluginData = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
-		if ( version_compare( $pluginData['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
+		$plugin_data = get_file_data( $path_pro, array( 'Version' => 'Version' ) );
+		if ( version_compare( $plugin_data['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
 			return;
 		}
 		echo '<div class="notice notice-error"><p><strong>';
 		printf(
 			/* translators: 1: PRO version, 2: Free version, 3: required PRO version */
 			esc_html__( 'Product Filter by WBW: PRO version %1$s is not compatible with the Free (Base) version %2$s, so PRO features are disabled. Please update the PRO plugin to version %3$s or later.', 'woo-product-filter' ),
-			esc_html( $pluginData['Version'] ),
+			esc_html( $plugin_data['Version'] ),
 			esc_html( WPF_VERSION ),
 			esc_html( WPF_PRO_REQUIRES )
 		);

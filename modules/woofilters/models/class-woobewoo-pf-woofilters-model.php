@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Model Class
  *
- * @version 3.4.5
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -392,7 +392,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * _dataSave.
 	 *
-	 * @version 3.4.5
+	 * @version 3.4.6
 	 */
 	protected function _dataSave( $data, $update = false ) {
 		$esettings = isset( $data['esettings'] ) ? WooBeWoo_PF_Utils::jsonDecode( $data['esettings'] ) : array();
@@ -402,7 +402,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 
 		$settings = isset( $data['settings'] ) ? $data['settings'] : array();
 
-		$data['settings']['filters']['order'] = isset( $settings['filters'] ) && isset( $settings['filters']['order'] ) ? $settings['filters']['order'] : ''; // Already unslashed by WooBeWoo_PF_Req::get().
+		$data['settings']['filters']['order'] = isset( $settings['filters'] ) && isset( $settings['filters']['order'] ) ? $settings['filters']['order'] : '';
 		$notEdit                              = array( 'filters' );
 		foreach ( $data['settings'] as $key => $value ) {
 			if ( ! in_array( $key, $notEdit ) && is_string( $value ) ) {
@@ -426,7 +426,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	/**
 	 * WPML string translation.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.6
 	 */
 	private function translateStrings( $data_settings ) {
 		$filters_arr = json_decode( $data_settings['filters']['order'], true );
@@ -472,25 +472,25 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 		}
 		// here goes other plugin settings strings
 		if ( ! empty( $data_settings['filtering_button_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['filtering_button_word'], '', 'woo-product-filter', true ); // ?
+			woobewoo_pf_translate_string( $data_settings['filtering_button_word'], '', 'woo-product-filter', true );
 		}
 		if ( ! empty( $data_settings['show_clean_button_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['show_clean_button_word'], '', 'woo-product-filter', true ); // ?
+			woobewoo_pf_translate_string( $data_settings['show_clean_button_word'], '', 'woo-product-filter', true );
 		}
 		if ( ! empty( $data_settings['hide_button_hide_text'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['hide_button_hide_text'], '', 'woo-product-filter', true ); // ?
+			woobewoo_pf_translate_string( $data_settings['hide_button_hide_text'], '', 'woo-product-filter', true );
 		}
 		if ( ! empty( $data_settings['hide_button_show_text'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['hide_button_show_text'], '', 'woo-product-filter', true ); // ?
+			woobewoo_pf_translate_string( $data_settings['hide_button_show_text'], '', 'woo-product-filter', true );
 		}
 		if ( ! empty( $data_settings['text_no_products'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['text_no_products'], '', 'woo-product-filter', true ); // ?
+			woobewoo_pf_translate_string( $data_settings['text_no_products'], '', 'woo-product-filter', true );
 		}
 		if ( ! empty( $data_settings['enable_overlay_word'] ) && '1' == $data_settings['enable_overlay_word'] && ! empty( $data_settings['overlay_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['overlay_word'], '', 'woo-product-filter', true ); // ?
+			woobewoo_pf_translate_string( $data_settings['overlay_word'], '', 'woo-product-filter', true );
 		}
 		if ( ! empty( $data_settings['selected_params_clear'] ) && '1' == $data_settings['selected_params_clear'] && ! empty( $data_settings['selected_clean_word'] ) ) {
-			woobewoo_pf_translate_string( $data_settings['selected_clean_word'], '', 'woo-product-filter', true ); // ?
+			woobewoo_pf_translate_string( $data_settings['selected_clean_word'], '', 'woo-product-filter', true );
 		}
 	}
 

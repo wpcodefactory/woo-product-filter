@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
- * @version 3.4.5
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -197,7 +197,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.4.3
+	 * @version 3.4.6
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
@@ -218,9 +218,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 
 		// preview case
 		if ( isset( $params['settings'] ) ) {
-			// `order` is already unslashed by WooBeWoo_PF_Req::get().
 			$settings = $params;
-			// other
 		} else {
 			$settings = $this->getCurrentSettings( $id );
 		}
@@ -531,7 +529,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.4.5
+	 * @version 3.4.6
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );

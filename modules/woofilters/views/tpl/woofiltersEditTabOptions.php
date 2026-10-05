@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Options
  *
- * @version 3.4.0
+ * @version 3.4.6
  *
  * @author woobewoo
  */

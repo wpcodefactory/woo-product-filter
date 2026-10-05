@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Controller Class
  *
- * @version 3.4.3
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -223,7 +223,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_draw_filter_ajax.
 	 *
-	 * @since 3.4.0
+	 * @since 3.4.6
 	 */
 	public function woobewoo_pf_draw_filter_ajax() {
 		$res  = new WooBeWoo_PF_Response();
@@ -351,18 +351,18 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_filters_frontend.
 	 *
-	 * @version 3.4.3
+	 * @version 3.4.6
 	 */
 	public function woobewoo_pf_filters_frontend() {
 		$res = new WooBeWoo_PF_Response();
 
 		$params = WooBeWoo_PF_Req::get( 'post' );
 
-		$filtersDataBackend          = WooBeWoo_PF_Utils::jsonDecode( $params['filtersDataBackend'] ); // Already unslashed by WooBeWoo_PF_Req::get().
-		$queryvars                   = WooBeWoo_PF_Utils::jsonDecode( $params['queryvars'] ); // Already unslashed by WooBeWoo_PF_Req::get().
-		$filterSettings              = WooBeWoo_PF_Utils::jsonDecode( $params['filterSettings'] ); // Already unslashed by WooBeWoo_PF_Req::get().
-		$generalSettings             = WooBeWoo_PF_Utils::jsonDecode( $params['generalSettings'] ); // Already unslashed by WooBeWoo_PF_Req::get().
-		$woocommerceSettings         = WooBeWoo_PF_Utils::jsonDecode( $params['woocommerceSettings'] ); // Already unslashed by WooBeWoo_PF_Req::get().
+		$filtersDataBackend          = WooBeWoo_PF_Utils::jsonDecode( $params['filtersDataBackend'] );
+		$queryvars                   = WooBeWoo_PF_Utils::jsonDecode( $params['queryvars'] );
+		$filterSettings              = WooBeWoo_PF_Utils::jsonDecode( $params['filterSettings'] );
+		$generalSettings             = WooBeWoo_PF_Utils::jsonDecode( $params['generalSettings'] );
+		$woocommerceSettings         = WooBeWoo_PF_Utils::jsonDecode( $params['woocommerceSettings'] );
 		$shortcodeAttr               = isset( $params['shortcodeAttr'] ) ? WooBeWoo_PF_Utils::jsonDecode( $params['shortcodeAttr'] ) : array();
 		$curUrl                      = esc_url_raw( wp_unslash( $_POST['currenturl'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		$queryvars['posts_per_page'] = isset( $filterSettings['count_product_shop'] ) && ! empty( $filterSettings['count_product_shop'] ) ? $filterSettings['count_product_shop'] : $queryvars['posts_per_page'];
