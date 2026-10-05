@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Html Class
  *
- * @version 3.4.0
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WooBeWoo_PF_Html {
 	 * output. Extends the 'post' context with form elements and data-* / aria-*
 	 * attributes that the filter widget emits.
 	 *
-	 * @version 3.3.0
+	 * @version 4.4.6
 	 * @since   3.3.0
 	 *
 	 * @return array
@@ -174,6 +174,17 @@ class WooBeWoo_PF_Html {
 				'stroke'  => true,
 			)
 		);
+		$allowed['symbol'] = array_merge(
+			$common,
+			array(
+				'id'      => true,
+				'viewbox' => true,
+				'width'   => true,
+				'height'  => true,
+				'fill'    => true,
+				'stroke'  => true,
+			)
+		);
 		$allowed['path']     = array(
 			'd'            => true,
 			'fill'         => true,
@@ -198,7 +209,7 @@ class WooBeWoo_PF_Html {
 			'y2'     => true,
 			'stroke' => true,
 		);
-		$allowed['use']      = array(
+		$allowed['use'] = array(
 			'xlink:href' => true,
 			'href'       => true,
 		);
