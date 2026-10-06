@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Custom Woofilters CSS
  *
- * @version 3.4.5
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -78,7 +78,8 @@
 .wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfFilterContent .wpfCheckboxHier input[type="checkbox"]{
 	border-radius: 50%;
 }
-.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfFilterContent .wpfCheckboxHier .ms-options input {
+.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfFilterContent .wpfCheckboxHier .ms-options input,
+.wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfCheckbox.wpfMulti input {
 	border-radius: 0;
 }
 .wpfFilterWrapper[data-filter-type="wpfCategory"] .wpfCheckboxHier input:checked,

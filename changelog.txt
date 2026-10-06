@@ -1,6 +1,6 @@
 == Changelog ==
 
-= 3.4.6 - 05/10/2026 =
+= 3.4.6 - 06/10/2026 =
 * Fix - Fixed PRO "Content" options (selected filters, category slugs in URL, synchronization, scroll, one filter open, view more) being reset on save.
 * Fix - Fixed `[wpf-selected-filters]` shortcode displaying nothing.
 * Fix - Fixed AJAX filtering error and lost filter blocks when a filter setting contains a quote or backslash.
@@ -16,6 +16,7 @@
 * Fix - Security - Escaped "No products found" text.
 * Fix - Security - Restricted product query arguments sent from the browser.
 * Fix - SVG icons not displaying correctly in filter items.
+* Fix - Fixed the default multi-select checkbox style.
 * Dev - Added notice when the PRO version is not compatible.
 
 = 3.4.5 - 21/09/2026 =
