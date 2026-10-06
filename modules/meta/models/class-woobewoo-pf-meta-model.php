@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Model Class
  *
- * @version 3.4.0
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -18,6 +18,11 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	private $existMB       = false;
 	public $metaVarSuf     = '#wpfvar#';
 	public $startLockLimit = 20;
+
+	/**
+	 * Whether the current run has set the full-indexing lock (`start_indexing` = 2).
+	 */
+	private $indexingLockAcquired = false;
 
 	public function __construct() {
 		$this->existMB = function_exists( 'mb_substr' );
@@ -44,10 +49,19 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * recalcMetaValues.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.6
 	 */
 	public function recalcMetaValues( $productId = 0, $params = array() ) {
-		$result = $this->doRecalcMetaValues( $productId, $params );
+		$this->indexingLockAcquired = false;
+		$result                     = $this->doRecalcMetaValues( $productId, $params );
+		// Release the full-indexing lock taken by this run if it did not finish (errors, nothing to index...).
+		if ( $this->indexingLockAcquired ) {
+			$optModel = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel();
+			if ( 2 == $optModel->get( 'start_indexing' ) ) {
+				$optModel->save( 'start_indexing', 1 );
+			}
+			$this->indexingLockAcquired = false;
+		}
 		if ( ! $result && WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'logging' ) == 1 ) {
 			$logger = wc_get_logger();
 			if ( $logger ) {
@@ -60,15 +74,15 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 	/**
 	 * doRecalcMetaValues.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.6
 	 */
 	public function doRecalcMetaValues( $productId, $params ) {
 		if ( ! empty( $productId ) && ! is_numeric( $productId ) ) {
 			return false;
 		}
 		$isAllProducts = empty( $productId );
-		$isAllKeys     = empty( $params );
-		$fullRecalc    = $isAllProducts && $isAllKeys;
+		$is_all_keys     = empty( $params );
+		$fullRecalc    = $isAllProducts && $is_all_keys;
 		$keysModel     = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_keys' );
 		$optModel      = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel();
 
@@ -88,9 +102,10 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 		}
 		if ( $fullRecalc ) {
 			$optModel->save( 'start_indexing', 2 );
+			$this->indexingLockAcquired = true;
 		}
 
-		if ( $isAllKeys ) {
+		if ( $is_all_keys ) {
 			$params['parent'] = 0;
 		}
 
@@ -115,7 +130,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 
 		$isKnownKeyList = true;
 		$whereKeys      = $whereProduct;
-		if ( ! $isAllKeys ) {
+		if ( ! $is_all_keys ) {
 			$list = '';
 			foreach ( $keys as $key ) {
 				$list .= $key['id'] . ',';
@@ -536,7 +551,13 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 			}
 			set_time_limit( 300 ); // phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
 
-			if ( ! $valsModel->recalcValuesCount( $isAllKeys ? array() : $keyRecalc ) ) {
+			// All keys: full recalculation on a full re-index, only this product's values on a product update.
+			if ( $is_all_keys ) {
+				$counts_ok = $isAllProducts ? $valsModel->recalcValuesCount( array(), true ) : $valsModel->recalcProductValuesCount( $productId );
+			} else {
+				$counts_ok = $valsModel->recalcValuesCount( $keyRecalc );
+			}
+			if ( ! $counts_ok ) {
 				$this->pushError( $valsModel->getErrors() );
 				return false;
 			}

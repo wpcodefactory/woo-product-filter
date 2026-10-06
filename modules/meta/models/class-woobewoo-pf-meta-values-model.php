@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Meta_Values_Model Class
  *
- * @version 3.4.0
+ * @version 3.4.6
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -248,22 +248,48 @@ class WooBeWoo_PF_Meta_Values_Model extends WooBeWoo_PF_Model {
 	/**
 	 * recalcValuesCount.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.6
 	 */
-	public function recalcValuesCount( $keyIds = array() ) {
+	public function recalcValuesCount( $key_ids = array(), $all_keys = false ) {
 
-		$keyIds = array_map( 'intval', (array) $keyIds );
-		$keyIds = array_filter( $keyIds );
-		if ( empty( $keyIds ) ) {
+		$key_ids = array_map( 'intval', (array) $key_ids );
+		$key_ids = array_filter( $key_ids );
+		if ( empty( $key_ids ) && ! $all_keys ) {
 			return true;
 		}
 
 		$query = 'UPDATE `@__meta_values` as v SET ' .
 			' product_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var!=1 LIMIT 1),1,0),
 			  variation_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var=1 LIMIT 1),1,0) ';
-		if ( ! empty( $keyIds ) ) {
-			$query .= ' WHERE v.key_id IN (' . implode( ',', $keyIds ) . ')';
+		if ( ! empty( $key_ids ) ) {
+			$query .= ' WHERE v.key_id IN (' . implode( ',', $key_ids ) . ')';
 		}
+		if ( ! WooBeWoo_PF_Db::query( $query ) ) {
+			$this->pushError( WooBeWoo_PF_Db::getError() );
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * recalcProductValuesCount.
+	 *
+	 * Recalculates counts only for the values used by one product (and its variations).
+	 *
+	 * @version 3.4.6
+	 * @since   3.4.6
+	 */
+	public function recalcProductValuesCount( $product_id ) {
+		$product_id = (int) $product_id;
+		if ( empty( $product_id ) ) {
+			return true;
+		}
+		$query = 'UPDATE `@__meta_values` as v SET ' .
+			' product_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var!=1 LIMIT 1),1,0),
+			  variation_cnt=IF(exists(SELECT 1 FROM `@__meta_data` m WHERE m.key_id=v.key_id AND m.val_id=v.id AND m.is_var=1 LIMIT 1),1,0) ' .
+			' WHERE v.id IN (SELECT pm.val_id FROM `@__meta_data` pm WHERE pm.product_id=' . $product_id .
+			" OR pm.product_id IN (SELECT pv.ID FROM `#__posts` pv WHERE pv.post_parent=" . $product_id . " AND pv.post_type='product_variation'))";
 		if ( ! WooBeWoo_PF_Db::query( $query ) ) {
 			$this->pushError( WooBeWoo_PF_Db::getError() );
 			return false;

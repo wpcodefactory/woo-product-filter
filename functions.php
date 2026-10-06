@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Functions
  *
- * @version 3.4.0
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -340,26 +340,93 @@ if ( ! function_exists( 'woobewoo_pf_install_base_msg' ) ) {
 /**
  * woobewoo_pf_deactivate.
  *
- * @version 3.4.0
+ * @version 3.4.6
  */
 add_action( 'admin_init', 'woobewoo_pf_deactivate' );
 if ( ! function_exists( 'woobewoo_pf_deactivate' ) ) {
 	function woobewoo_pf_deactivate() {
-		if ( class_exists( 'WooBeWoo_PF_Frame' ) && function_exists( 'getProPlugFullPathWpf' ) ) {
-			$pathPro   = getProPlugFullPathWpf();
-			$proPlugin = plugin_basename( $pathPro );
-			if ( is_plugin_active( $proPlugin ) ) {
-				$pluginData  = get_file_data( $pathPro, array( 'Version' => 'Version' ) );
-				$isProActive = WooBeWoo_PF_Frame::_()->moduleActive( 'access' );
-				if ( ! version_compare( $pluginData['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
-					if ( $isProActive ) {
-						call_user_func_array( array( 'WooBeWoo_PF_Mod_Installer', 'deactivate' ), array( array( 'license' ) ) );
-					}
-				} elseif ( ! $isProActive ) {
-					call_user_func_array( array( 'WooBeWoo_PF_Mod_Installer', 'activate' ), array( true ) );
-				}
-			}
+		if ( ! class_exists( 'WooBeWoo_PF_Frame' ) ) {
+			return;
 		}
+		$path_pro = woobewoo_pf_get_pro_full_path();
+		if ( ! $path_pro || ! is_plugin_active( plugin_basename( $path_pro ) ) ) {
+			return;
+		}
+		$plugin_data = get_file_data( $path_pro, array( 'Version' => 'Version' ) );
+		if ( ! version_compare( $plugin_data['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
+			// Too old PRO: its modules can't be loaded by this version (see woobewoo_pf_pro_incompatible_notice()).
+			return;
+		}
+		// PRO modules left inactive (e.g. by an older Free version) while PRO is active, compatible and licensed.
+		if ( ! WooBeWoo_PF_Frame::_()->moduleActive( 'access' ) && woobewoo_pf_is_pro_license_active() ) {
+			call_user_func_array( array( 'WooBeWoo_PF_Mod_Installer', 'activate' ), array( true ) );
+		}
+	}
+}
+
+/**
+ * woobewoo_pf_get_pro_full_path.
+ *
+ * PRO main file path, for PRO >= 3.4.0 and for older PRO versions.
+ *
+ * @version 3.4.6
+ * @since   3.4.6
+ */
+if ( ! function_exists( 'woobewoo_pf_get_pro_full_path' ) ) {
+	function woobewoo_pf_get_pro_full_path() {
+		if ( function_exists( 'woobeboo_pf_get_pro_plugin_full_path' ) ) {
+			return woobeboo_pf_get_pro_plugin_full_path();
+		}
+		if ( function_exists( 'getProPlugFullPathWpf' ) ) {
+			return getProPlugFullPathWpf();
+		}
+		return false;
+	}
+}
+
+/**
+ * woobewoo_pf_is_pro_license_active.
+ *
+ * @version 3.4.6
+ * @since   3.4.6
+ */
+if ( ! function_exists( 'woobewoo_pf_is_pro_license_active' ) ) {
+	function woobewoo_pf_is_pro_license_active() {
+		$license = WooBeWoo_PF_Frame::_()->getModule( 'license' );
+		$model   = $license ? $license->getModel() : null;
+		return $model && method_exists( $model, 'isActive' ) && $model->isActive();
+	}
+}
+
+/**
+ * woobewoo_pf_pro_incompatible_notice.
+ *
+ * @version 3.4.6
+ * @since   3.4.6
+ */
+add_action( 'admin_notices', 'woobewoo_pf_pro_incompatible_notice' );
+if ( ! function_exists( 'woobewoo_pf_pro_incompatible_notice' ) ) {
+	function woobewoo_pf_pro_incompatible_notice() {
+		if ( ! current_user_can( 'activate_plugins' ) || ! class_exists( 'WooBeWoo_PF_Frame' ) ) {
+			return;
+		}
+		$path_pro = woobewoo_pf_get_pro_full_path();
+		if ( ! $path_pro || ! is_plugin_active( plugin_basename( $path_pro ) ) ) {
+			return;
+		}
+		$plugin_data = get_file_data( $path_pro, array( 'Version' => 'Version' ) );
+		if ( version_compare( $plugin_data['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
+			return;
+		}
+		echo '<div class="notice notice-error"><p><strong>';
+		printf(
+			/* translators: 1: PRO version, 2: Free version, 3: required PRO version */
+			esc_html__( 'Product Filter by WBW: PRO version %1$s is not compatible with the Free (Base) version %2$s, so PRO features are disabled. Please update the PRO plugin to version %3$s or later.', 'woo-product-filter' ),
+			esc_html( $plugin_data['Version'] ),
+			esc_html( WPF_VERSION ),
+			esc_html( WPF_PRO_REQUIRES )
+		);
+		echo '</strong></p></div>';
 	}
 }
 
@@ -369,15 +436,26 @@ if ( ! function_exists( 'woobewoo_pf_deactivate' ) ) {
  * @version 3.4.0
  */
 if ( ! function_exists( 'woobewoo_pf_translate_string' ) ) {
-	function woobewoo_pf_translate_string( $value, $name = '', $context = 'woo-product-filter' ) {
+	function woobewoo_pf_translate_string( $value, $name = '', $context = 'woo-product-filter', $register = null ) {
 		if ( has_action( 'wpml_register_single_string' ) ) {
-			// Register the string.
-			do_action(
-				'wpml_register_single_string', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
-				$context,
-				$name,
-				$value
-			);
+			// Each string needs its own name: with an empty name WPML/Polylang keep only the last string
+			// registered and Polylang copies translations between them. The lookup below uses the value as name.
+			if ( '' === (string) $name ) {
+				$name = $value;
+			}
+			// Register the string only when a filter is saved or in wp-admin screens, never on
+			// front-end page views or AJAX filtering (Polylang/WPML write to the DB on each call).
+			if ( null === $register ) {
+				$register = is_admin() && ! wp_doing_ajax();
+			}
+			if ( $register ) {
+				do_action(
+					'wpml_register_single_string', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+					$context,
+					$name,
+					$value
+				);
+			}
 
 			// Get the translated value.
 			return apply_filters(

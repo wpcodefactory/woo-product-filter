@@ -4,7 +4,7 @@ Donate link: https://woobewoo.com/product/woocommerce-filter/
 Tags: product filter, WooCommerce product filter, shop filter, e-commerce filter, WooCommerce filter
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 3.4.5
+Stable tag: 3.4.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -165,6 +165,25 @@ This plugin may communicate with the following third-party services:
 * **Google Fonts** (https://fonts.googleapis.com) — Loaded only when a Google Font is explicitly selected in the plugin's design settings. No data is sent to Google; the request is a standard CSS font-stylesheet fetch. [Google Privacy Policy](https://policies.google.com/privacy).
 
 == Changelog ==
+
+= 3.4.6 - 06/10/2026 =
+* Fix - Fixed PRO "Content" options (selected filters, category slugs in URL, synchronization, scroll, one filter open, view more) being reset on save.
+* Fix - Fixed `[wpf-selected-filters]` shortcode displaying nothing.
+* Fix - Fixed AJAX filtering error and lost filter blocks when a filter setting contains a quote or backslash.
+* Fix - Fixed empty product grid on filtered categories in "Subcategories" display mode.
+* Fix - Fixed filtering not working when the page URL contains "thrive" or "_preview".
+* Fix - Fixed missing PRO styles and Google fonts when the Free and PRO versions differ.
+* Fix - Fixed PRO modules staying disabled after an update on licensed sites.
+* Fix - Fixed full re-index not recalculating the value counts.
+* Fix - Fixed indexing staying locked for 20 minutes after a failed run.
+* Fix - WPML/Polylang - Filter strings are no longer registered on every page view.
+* Fix - WPML/Polylang - Fixed filter labels showing the translation of another label.
+* Fix - Custom CSS/JS - Fixed HTML inside strings being removed.
+* Fix - Security - Escaped "No products found" text.
+* Fix - Security - Restricted product query arguments sent from the browser.
+* Fix - SVG icons not displaying correctly in filter items.
+* Fix - Fixed the default multi-select checkbox style.
+* Dev - Added notice when the PRO version is not compatible.
 
 = 3.4.5 - 21/09/2026 =
 * Fix - Fixed checkbox checked state style issue.

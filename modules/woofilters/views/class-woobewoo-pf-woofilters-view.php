@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
- * @version 3.4.5
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -197,7 +197,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * renderHtml.
 	 *
-	 * @version 3.4.3
+	 * @version 3.4.6
 	 */
 	public function renderHtml( $params ) {
 		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
@@ -218,9 +218,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 
 		// preview case
 		if ( isset( $params['settings'] ) ) {
-			$params['settings']['filters']['order'] = stripcslashes( $params['settings']['filters']['order'] );
-			$settings                               = $params;
-			// other
+			$settings = $params;
 		} else {
 			$settings = $this->getCurrentSettings( $id );
 		}
@@ -531,7 +529,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.4.5
+	 * @version 3.4.6
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );
@@ -833,9 +831,17 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 			$settings,
 			$filterId
 		);
+		// Backward compatibility: hook name used up to 3.4.4 (Pro <= 3.4.4 and custom code on `wpf_addCustomCss`).
+		$custom_css = WooBeWoo_PF_Dispatcher::applyFilters(
+			'addCustomCss',
+			$custom_css,
+			$settings,
+			$filterId
+		);
+		// Keep the code intact (tags inside strings, `a < b`...), only prevent it from closing its own element.
 		wp_add_inline_style(
 			'woobewoo-pf-frontend-filters',
-			wp_strip_all_tags( $custom_css )
+			preg_replace( '#</(style)#i', '<\/$1', (string) $custom_css )
 		);
 
 		$custom_js = WooBeWoo_PF_Dispatcher::applyFilters(
@@ -846,7 +852,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		);
 		wp_add_inline_script(
 			'woobewoo-pf-frontend-filters',
-			wp_strip_all_tags( $custom_js )
+			preg_replace( '#</(script)#i', '<\/$1', (string) $custom_js )
 		);
 
 		$this->resetFilterExistsTerms();

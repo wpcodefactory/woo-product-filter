@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Frame Class
  *
- * @version 3.4.0
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -738,12 +738,13 @@ class WooBeWoo_PF_Frame {
 	/**
 	 * proVersionCompare.
 	 *
-	 * @version 3.3.0
+	 * @version 3.4.6
 	 */
 	public function proVersionCompare( $requires, $compare = '>', $notPro = true ) {
 		if ( is_null( $this->_proVersion ) ) {
-			if ( $this->isPro() && function_exists( 'getProPlugFullPathWpf' ) ) {
-				$plugin_data       = get_file_data( getProPlugFullPathWpf(), array( 'Version' => 'Version' ) );
+			$pro_path = $this->isPro() ? woobewoo_pf_get_pro_full_path() : false;
+			if ( $pro_path ) {
+				$plugin_data       = get_file_data( $pro_path, array( 'Version' => 'Version' ) );
 				$this->_proVersion = $plugin_data['Version'];
 			} else {
 				$this->_proVersion = false;

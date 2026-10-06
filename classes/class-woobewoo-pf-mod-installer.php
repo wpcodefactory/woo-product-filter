@@ -4,7 +4,7 @@
  *
  * Handles the installation, activation, deactivation, and management of modules for the plugin.
  *
- * @version 3.4.1
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -147,7 +147,7 @@ class WooBeWoo_PF_Mod_Installer {
 	/**
 	 * _getPluginLocations.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.6
 	 */
 	private static function _getPluginLocations() {
 		$locations = array();
@@ -167,7 +167,8 @@ class WooBeWoo_PF_Mod_Installer {
 			}
 		}
 
-		$locations['plugPath']     = empty( $plug ) && function_exists( 'getProPlugFullPathWpf' ) ? plugin_basename( getProPlugFullPathWpf() ) : plugin_basename( trim( $plug ) );
+		$pro_path                   = empty( $plug ) ? woobewoo_pf_get_pro_full_path() : false;
+		$locations['plugPath']     = $pro_path ? plugin_basename( $pro_path ) : plugin_basename( trim( $plug ) );
 		$locations['plugDir']      = dirname( WP_PLUGIN_DIR . WPF_DS . $locations['plugPath'] );
 		$locations['plugMainFile'] = WP_PLUGIN_DIR . WPF_DS . $locations['plugPath'];
 		$locations['xmlPath']      = $locations['plugDir'] . WPF_DS . 'install.xml';
