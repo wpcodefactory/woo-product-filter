@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 4.4.6
+ * @version 3.4.6
  *
  * @author woobewoo
  */
@@ -9,7 +9,7 @@
 /**
  * Detect Thrive editor context.
  *
- * @version 4.4.6
+ * @version 3.4.6
  * @since   3.1.8
  */
 function wpfIsThriveEditor() {

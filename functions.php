@@ -249,7 +249,7 @@ if ( ! function_exists( 'woobewoo_pf_prepare_field_code' ) ) {
 /**
  * Recursive implode of array.
  *
- * @verson 3.4.0
+ * @version 3.4.0
  *
  * @param string $glue  imploder
  * @param array  $array array to implode
@@ -357,7 +357,7 @@ if ( ! function_exists( 'woobewoo_pf_deactivate' ) ) {
 			// Too old PRO: its modules can't be loaded by this version (see woobewoo_pf_pro_incompatible_notice()).
 			return;
 		}
-		// PRO modules left inactive (e.g. by an older Free version) while PRO is active, compatible and licensed.
+		// PRO modules left inactive (e.g., by an older Free version) while PRO is active, compatible and licensed.
 		if ( ! WooBeWoo_PF_Frame::_()->moduleActive( 'access' ) && woobewoo_pf_is_pro_license_active() ) {
 			call_user_func_array( array( 'WooBeWoo_PF_Mod_Installer', 'activate' ), array( true ) );
 		}
@@ -433,7 +433,7 @@ if ( ! function_exists( 'woobewoo_pf_pro_incompatible_notice' ) ) {
 /**
  * woobewoo_pf_translate_string.
  *
- * @version 3.4.0
+ * @version 3.4.6
  */
 if ( ! function_exists( 'woobewoo_pf_translate_string' ) ) {
 	function woobewoo_pf_translate_string( $value, $name = '', $context = 'woo-product-filter', $register = null ) {

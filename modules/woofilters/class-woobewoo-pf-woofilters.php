@@ -1901,7 +1901,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * maybeShowProductSubcategories.
 	 *
-	 * @version 4.4.6
+	 * @version 3.4.6
 	 */
 	public function maybeShowProductSubcategories( $loop_html, $categoryPageId ) {
 		// Use term meta directly instead of woocommerce_get_loop_display_mode(), which
@@ -3297,7 +3297,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * renderSelectedFilters.
 	 *
-	 * @version 4.4.6
+	 * @version 3.4.6
 	 */
 	public function renderSelectedFilters( $params ) {
 		$p = array(

@@ -595,10 +595,10 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 					endwhile;
 					$productsHtml = ob_get_clean();
 					if ( empty( $productsHtml ) ) {
-						$productsHtml = ' <div class="no-products-found">' . wp_kses_post( isset( $filterSettings['text_no_products'] ) ? $filterSettings['text_no_products'] : '' ) . '</div>';
+						$productsHtml = ' <div class="no-products-found">' . wp_kses_post( $filterSettings['text_no_products'] ?? '' ) . '</div>';
 					}
 				} else {
-					$productsHtml = ' <div class="no-products-found">' . wp_kses_post( isset( $filterSettings['text_no_products'] ) ? $filterSettings['text_no_products'] : '' ) . '</div>';
+					$productsHtml = ' <div class="no-products-found">' . wp_kses_post( $filterSettings['text_no_products'] ?? '' ) . '</div>';
 				}
 			}
 
@@ -850,7 +850,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.6
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables
@@ -893,13 +893,22 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			'wpf_query'           => 1,
 			'tax_query'           => array( 'wpf_tax' => 1 ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		);
-		if ( ! empty( $filterSettings['default_query'] ) && is_array( $filterSettings['default_query'] ) ) {
+		if (
+			! empty( $filterSettings['default_query'] ) &&
+			is_array( $filterSettings['default_query'] )
+		) {
 			// The default query comes from the browser: it must not widen the queried post types or statuses.
 			$defaultQuery = $filterSettings['default_query'];
-			if ( isset( $defaultQuery['post_status'] ) && ! in_array( $defaultQuery['post_status'], array( '', 'publish' ), true ) ) {
+			if (
+				isset( $defaultQuery['post_status'] ) &&
+				! in_array( $defaultQuery['post_status'], array( '', 'publish' ), true )
+			) {
 				unset( $defaultQuery['post_status'] );
 			}
-			if ( isset( $defaultQuery['post_type'] ) && array_diff( array_filter( (array) $defaultQuery['post_type'] ), array( 'product', 'product_variation' ) ) ) {
+			if (
+				isset( $defaultQuery['post_type'] ) &&
+				array_diff( array_filter( (array) $defaultQuery['post_type'] ), array( 'product', 'product_variation' ) )
+			) {
 				unset( $defaultQuery['post_type'] );
 			}
 			unset( $defaultQuery['perm'], $defaultQuery['post_password'], $defaultQuery['has_password'] );

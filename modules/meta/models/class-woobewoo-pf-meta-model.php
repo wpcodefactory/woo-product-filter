@@ -21,6 +21,9 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 
 	/**
 	 * Whether the current run has set the full-indexing lock (`start_indexing` = 2).
+	 *
+	 * @version 3.4.6
+	 * @since   3.4.6
 	 */
 	private $indexingLockAcquired = false;
 
@@ -81,7 +84,7 @@ class WooBeWoo_PF_Meta_Model extends WooBeWoo_PF_Model {
 			return false;
 		}
 		$isAllProducts = empty( $productId );
-		$is_all_keys     = empty( $params );
+		$is_all_keys   = empty( $params );
 		$fullRecalc    = $isAllProducts && $is_all_keys;
 		$keysModel     = WooBeWoo_PF_Frame::_()->getModule( 'meta' )->getModel( 'meta_keys' );
 		$optModel      = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel();
