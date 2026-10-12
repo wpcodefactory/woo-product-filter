@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters JS
  *
- * @version 3.4.6
+ * @version 3.4.7
  *
  * @author woobewoo
  */
@@ -1805,6 +1805,11 @@ function wpfIsThriveEditor() {
 
 	});
 
+	/**
+	 * clearFilters.
+	 *
+	 * @version 3.4.7
+	 */
 	WpfFrontendPage.prototype.clearFilters = (function (filter, clearAll) {
 		var _thisObj = this.$obj,
 			noWooPage = _thisObj.noWoo,
@@ -1821,9 +1826,16 @@ function wpfIsThriveEditor() {
 			}
 
 			filterAttribute = filterAttribute.split(",");
+
+			// Add group param (e.g. groupwpf__color_*) so the loop below removes it too.
+			let uniqId = $filter.attr( 'data-uniq-id' ) || '';
+			if ( 'wpfAttribute' === $filter.attr( 'data-filter-type' ) && uniqId ) {
+				filterAttribute.push( 'group' + filterAttribute[ 0 ].replace( 'filter', '' ) + uniqId.replace( /^wpf/, '' ) );
+			}
+
 			var count = filterAttribute.length;
-			for(var i = 0; i < count; i++){
-				_thisObj.QStringWork(filterAttribute[i], '', noWooPage, $filterWrapper, 'remove');
+			for ( var i = 0; i < count; i++ ) {
+				_thisObj.QStringWork( filterAttribute[ i ], '', noWooPage, $filterWrapper, 'remove' );
 			}
 
 			if($filter.hasClass('wpfHidden')){
@@ -1950,6 +1962,11 @@ function wpfIsThriveEditor() {
 		}
 	});
 
+	/**
+	 * changeUrlByFilterParams.
+	 *
+	 * @version 3.4.7
+	 */
 	WpfFrontendPage.prototype.changeUrlByFilterParams = (function ($filtersDataFrontend) {
 		var _thisObj = this.$obj,
 			noWooPage = _thisObj.noWoo;
@@ -2053,8 +2070,16 @@ function wpfIsThriveEditor() {
 							_thisObj.QStringWork(product_taxonomy, '', noWooPage, filterWrapper, 'remove');
 						}
 
-						if (typeof $filtersDataFrontend[i]['idBlock']!== 'undefined' && typeof $filtersDataFrontend[i]['idFilter']!== 'undefined' ) {
-							_thisObj.QStringWork('group' + product_taxonomy.replace('filter', '') + $filtersDataFrontend[i]['idBlock'], $filtersDataFrontend[i]['idFilter'], noWooPage, filterWrapper, 'change');
+						if (
+							typeof $filtersDataFrontend[ i ][ 'idBlock' ] !== 'undefined' &&
+							typeof $filtersDataFrontend[ i ][ 'idFilter' ] !== 'undefined'
+						) {
+							let groupKey = 'group' + product_taxonomy.replace( 'filter', '' ) + $filtersDataFrontend[ i ][ 'idBlock' ];
+							if ( product_attr.length > 0 ) {
+								_thisObj.QStringWork( groupKey, $filtersDataFrontend[ i ][ 'idFilter' ], noWooPage, filterWrapper, 'change' );
+							} else {
+								_thisObj.QStringWork( groupKey, '', noWooPage, filterWrapper, 'remove' );
+							}
 						}
 						break;
 					case 'wpfAuthor':
