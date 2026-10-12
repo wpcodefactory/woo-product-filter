@@ -852,7 +852,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * Create args for WP_Query.
 	 *
-	 * @version 3.4.6
+	 * @version 3.4.7
 	 *
 	 * @param array $filtersDataBackend Filters arranged with filtering order with some specific filtering data in it
 	 * @param array $queryvars Query filtering variables
@@ -899,22 +899,69 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			! empty( $filterSettings['default_query'] ) &&
 			is_array( $filterSettings['default_query'] )
 		) {
-			// The default query comes from the browser: it must not widen the queried post types or statuses.
-			$defaultQuery = $filterSettings['default_query'];
-			if (
-				isset( $defaultQuery['post_status'] ) &&
-				! in_array( $defaultQuery['post_status'], array( '', 'publish' ), true )
-			) {
-				unset( $defaultQuery['post_status'] );
-			}
-			if (
-				isset( $defaultQuery['post_type'] ) &&
-				array_diff( array_filter( (array) $defaultQuery['post_type'] ), array( 'product', 'product_variation' ) )
-			) {
-				unset( $defaultQuery['post_type'] );
-			}
-			unset( $defaultQuery['perm'], $defaultQuery['post_password'], $defaultQuery['has_password'] );
+			// Only allow supported query arguments from third-party product grids.
+			$allowedQueryArgs = array(
+				'tax_query',
+				'meta_query',
+				'orderby',
+				'order',
+				'meta_key',
+				'meta_value',
+				'meta_type',
+				'author',
+				'author_name',
+				'author__in',
+				'post__in',
+				'post__not_in',
+				'product_cat',
+				'product_tag',
+				'product_brand',
+				'pwb-brand',
+				's',
+				'date_query',
+				'year',
+				'monthnum',
+				'day',
+			);
+
+			$defaultQuery = array_intersect_key(
+				$filterSettings['default_query'],
+				array_flip( $allowedQueryArgs )
+			);
+
+			// Merge only approved query arguments.
 			$args = array_merge( $args, $defaultQuery );
+
+			// Preserve the allowed WooCommerce post types.
+			if ( isset( $filterSettings['default_query']['post_type'] ) ) {
+				$requestedPostTypes = array_filter(
+					(array) $filterSettings['default_query']['post_type']
+				);
+
+				if (
+					! array_diff(
+						$requestedPostTypes,
+						array( 'product', 'product_variation' )
+					)
+				) {
+					$args['post_type'] = $requestedPostTypes;
+				}
+			}
+
+			// Enforce trusted query restrictions.
+			$args['post_status']    = $postStatus;
+			$args['posts_per_page'] = $queryvars['posts_per_page'];
+			$args['paged']          = 1;
+
+			unset(
+				$args['nopaging'],
+				$args['posts_per_archive_page'],
+				$args['showposts'],
+				$args['offset'],
+				$args['perm'],
+				$args['post_password'],
+				$args['has_password']
+			);
 		}
 
 		$args['tax_query'] = $module->addHiddenFilterQuery( $args['tax_query'] ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
