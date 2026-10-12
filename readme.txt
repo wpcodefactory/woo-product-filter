@@ -166,6 +166,10 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
+= 3.4.7 - 12/10/2026 =
+* Fix - Security - Improved output escaping and AJAX response handling in the frontend filter request.
+* Dev - Added `JSON_HEX_TAG`, `JSON_HEX_AMP`, `JSON_HEX_APOS` and `JSON_HEX_QUOT` flags to `WooBeWoo_PF_Response::ajaxExec()`.
+
 = 3.4.6 - 06/10/2026 =
 * Fix - Fixed PRO "Content" options (selected filters, category slugs in URL, synchronization, scroll, one filter open, view more) being reset on save.
 * Fix - Fixed `[wpf-selected-filters]` shortcode displaying nothing.

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Controller Class
  *
- * @version 3.4.6
+ * @version 3.4.7
  *
  * @author woobewoo
  */
@@ -351,7 +351,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_filters_frontend.
 	 *
-	 * @version 3.4.6
+	 * @version 3.4.7
 	 */
 	public function woobewoo_pf_filters_frontend() {
 		$res = new WooBeWoo_PF_Response();
@@ -369,7 +369,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		$use_category_filtration     = isset( $filterSettings['use_category_filtration'] ) ? $filterSettings['use_category_filtration'] : 1;
 		$onlyStatistics              = isset( $params['only_statistics'] );
 		$onlyFilterRecount           = $onlyStatistics || isset( $params['only_recound'] );
-		$synchroFilterId             = ! empty( $params['synchro_filter_id'] ) ? $params['synchro_filter_id'] : '';
+		$synchroFilterId             = ! empty( $params['synchro_filter_id'] ) ? sanitize_html_class( $params['synchro_filter_id'] ) : '';
 
 		if ( $onlyStatistics ) {
 			$filterSettings['only_have_found'] = true;
@@ -508,9 +508,11 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		}
 		$recount                  = isset( $filterSettings['filter_recount'] ) && $filterSettings['filter_recount'];
 		$removeActions            = isset( $filterSettings['remove_actions'] ) && $filterSettings['remove_actions'];
-		$filteringVariations      = isset( $filterSettings['filtering_by_variations'] ) ? $filterSettings['filtering_by_variations'] : false;
-		$displayProductVariations = $filteringVariations && isset( $filterSettings['display_product_variations'] ) ? $filterSettings['display_product_variations'] : false;
-		$wpfFId                   = ! empty( $filterSettings['wpf_fid'] ) ? $filterSettings['wpf_fid'] : '';
+		$filteringVariations      = $filterSettings['filtering_by_variations'] ?? false;
+		$displayProductVariations = $filteringVariations &&
+		                            isset( $filterSettings['display_product_variations'] ) &&
+		                            $filterSettings['display_product_variations'];
+		$wpfFId                   = ! empty( $filterSettings['wpf_fid'] ) ? absint( $filterSettings['wpf_fid'] ) : 0;
 
 		if ( $removeActions ) {
 			remove_all_filters( 'posts_orderby' );
@@ -595,10 +597,10 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 					endwhile;
 					$productsHtml = ob_get_clean();
 					if ( empty( $productsHtml ) ) {
-						$productsHtml = ' <div class="no-products-found">' . wp_kses_post( $filterSettings['text_no_products'] ?? '' ) . '</div>';
+						$productsHtml = ' <div class="no-products-found">' . esc_html( $filterSettings['text_no_products'] ?? '' ) . '</div>';
 					}
 				} else {
-					$productsHtml = ' <div class="no-products-found">' . wp_kses_post( $filterSettings['text_no_products'] ?? '' ) . '</div>';
+					$productsHtml = ' <div class="no-products-found">' . esc_html( $filterSettings['text_no_products'] ?? '' ) . '</div>';
 				}
 			}
 

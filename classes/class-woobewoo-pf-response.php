@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Response Class
  *
- * @version 3.4.0
+ * @version 3.4.7
  *
  * @author woobewoo
  */
@@ -70,16 +70,22 @@ class WooBeWoo_PF_Response {
 	/**
 	 * ajaxExec.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.7
 	 */
 	public function ajaxExec( $forceAjax = false ) {
-		$isAjax   = $this->isAjax();
-		$redirect = WooBeWoo_PF_Req::getVar( 'redirect' );
+		$isAjax = $this->isAjax();
 		if ( count( $this->errors ) > 0 ) {
 			$this->error = true;
 		}
 		if ( $isAjax || $forceAjax ) {
-			echo wp_json_encode( $this );
+			if ( ! headers_sent() ) {
+				header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+				header( 'X-Content-Type-Options: nosniff' );
+			}
+			echo wp_json_encode(
+				$this,
+				JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+			);
 			WooBeWoo_PF_Req::endSession();
 			exit();
 		}
