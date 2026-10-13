@@ -1718,6 +1718,11 @@ function wpfIsThriveEditor() {
 		}
 	});
 
+	/**
+	 * getAjaxRequestData.
+	 *
+	 * @version 3.4.7
+	 */
 	WpfFrontendPage.prototype.getAjaxRequestData = (function ($filtersDataBackend, $queryVars, $filterSettings, $generalSettings, $shortcodeAttr, $woocommerceSettings) {
 		$generalSettings = $generalSettings ? $generalSettings['settings']['filters']['order'] : [];
 		var typeSettings = typeof $generalSettings;
@@ -1733,6 +1738,7 @@ function wpfIsThriveEditor() {
 			generalSettings: $generalSettings,
 			shortcodeAttr: $shortcodeAttr,
 			woocommerceSettings: JSON.stringify($woocommerceSettings),
+			woobewoo_pf_filter_nonce: $( 'input[name="woobewoo_pf_filter_nonce"]' ).first().val() || '',
 			currenturl: window.location.href,
 		};
 	});

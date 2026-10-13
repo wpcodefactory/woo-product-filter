@@ -824,7 +824,15 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		$html .= '</div>';
 		$html .= self::$filterExistsTermsJS;
 
-
+		// Add nonce field.
+		if ( $enableAjax ) {
+			$html .= wp_nonce_field(
+				'woobewoo_pf_filter_action',
+				'woobewoo_pf_filter_nonce',
+				true,
+				false
+			);
+		}
 		$custom_css = WooBeWoo_PF_Dispatcher::applyFilters(
 			'woobewoo_pf_add_custom_css',
 			self::$filtersCss,

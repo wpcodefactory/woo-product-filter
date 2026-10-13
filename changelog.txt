@@ -1,6 +1,6 @@
 == Changelog ==
 
-= 3.4.7 - 12/10/2026 =
+= 3.4.7 - 13/10/2026 =
 * Fix - Security - Improved output escaping and AJAX response handling in the frontend filter request.
 * Fix - Security - Fixed an unauthenticated information disclosure vulnerability in the frontend product query.
 * Fix - Fixed filter parameters not being removed from the URL when clearing filters.
