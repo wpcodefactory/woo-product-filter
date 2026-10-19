@@ -166,9 +166,11 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 3.4.7 - 13/10/2026 =
+= 3.4.7 - 19/10/2026 =
 * Fix - Security - Improved output escaping and AJAX response handling in the frontend filter request.
 * Fix - Security - Fixed an unauthenticated information disclosure vulnerability in the frontend product query.
+* Fix - Security - Fixed an SQL injection vulnerability in product filters.
+* Fix - Improved temporary table creation and SQL query handling.
 * Fix - Fixed filter parameters not being removed from the URL when clearing filters.
 * Dev - Added `JSON_HEX_TAG`, `JSON_HEX_AMP`, `JSON_HEX_APOS` and `JSON_HEX_QUOT` flags to `WooBeWoo_PF_Response::ajaxExec()`.
 

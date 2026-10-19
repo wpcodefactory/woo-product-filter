@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters Class
  *
- * @version 3.4.6
+ * @version 3.4.7
  *
  * @author woobewoo
  */
@@ -3459,9 +3459,32 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	}
 
 	/**
+	 * resolveFilterTaxonomy.
+	 *
+	 * @version 3.4.7
+	 * @since   3.4.7
+	 */
+	private function resolve_filter_taxonomy( $slug, $filter ) {
+		$taxonomy = is_numeric( $slug ) ?
+			wc_attribute_taxonomy_name_by_id( (int) $slug ) :
+			WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomAttributeName', $slug, $filter );
+
+		if ( ! is_string( $taxonomy ) || '' === $taxonomy ) {
+			return '';
+		}
+		if (
+			taxonomy_exists( $taxonomy ) ||
+			preg_match( '/^[A-Za-z0-9_.%\-]{1,200}$/', $taxonomy )
+		) {
+			return $taxonomy;
+		}
+		return '';
+	}
+
+	/**
 	 * getFilterTaxonomies.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.7
 	 */
 	public function getFilterTaxonomies( $settings, $calcCategories = false, $filterSettings = array(), $ajax = false, $urlQuery = array() ) {
 
@@ -3502,10 +3525,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 
 				case 'wpfAttribute':
 					if ( ! empty( $filter['settings']['f_list'] ) ) {
-						$slug     = $filter['settings']['f_list'];
-						$taxonomy = ( is_numeric( $slug ) )
-							? wc_attribute_taxonomy_name_by_id( (int) $slug )
-							: WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomAttributeName', $slug, $filter );
+						$taxonomy = $this->resolve_filter_taxonomy( $filter['settings']['f_list'], $filter );
 					}
 
 					$frontendType = $this->getFilterSetting( $filter['settings'], 'f_frontend_type', '' );
@@ -3543,10 +3563,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 					break;
 				case 'wpfSearchNumber':
 					if ( ! empty( $filter['settings']['f_conrol_products'] ) && ! empty( $filter['settings']['f_list'] ) ) {
-						$slug     = $filter['settings']['f_list'];
-						$taxonomy = ( is_numeric( $slug ) ) ?
-							wc_attribute_taxonomy_name_by_id( (int) $slug ) :
-							WooBeWoo_PF_Dispatcher::applyFilters( 'getCustomAttributeName', $slug, $filter );
+						$taxonomy = $this->resolve_filter_taxonomy( $filter['settings']['f_list'], $filter );
 					}
 					break;
 				default:
@@ -3690,7 +3707,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * createTemporaryTable.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.7
 	 */
 	public function createTemporaryTable( $table, $sql, $postfix = '' ) {
 
@@ -3699,6 +3716,9 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		}
 
 		$resultTable = WooBeWoo_PF_Db::sanitizeIdentifier( $table );
+		if ( '' === $resultTable ) {
+			return false;
+		}
 
 		if ( isset( $this->clausesByParam['not_for_temporary_table'] ) ) {
 
@@ -3708,17 +3728,34 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		}
 
 		$sql      = str_replace( 'SQL_CALC_FOUND_ROWS', '', $sql );
-		$orderPos = strpos( $sql, 'ORDER' );
+		/**
+		 * Remove only the final ORDER BY clause.
+		 *
+		 * This avoids removing "ORDER" if it appears somewhere
+		 * inside WHERE, subqueries, strings, etc.
+		 */
+		$sql = preg_replace(
+			'/\s+ORDER\s+BY\s+.+?(?=\s+LIMIT\s+|\s*$)/is',
+			'',
+			trim( $sql )
+		);
 
-		if ( $orderPos ) {
-			$sql = substr( $sql, 0, $orderPos );
-		} else {
-			$limitPos = strpos( $sql, 'LIMIT' );
+		/**
+		 * Remove only the final LIMIT clause.
+		 *
+		 * Handles:
+		 * LIMIT 20
+		 * LIMIT 0, 20
+		 * LIMIT 0, -1
+		 */
+		$sql = preg_replace(
+			'/\s+LIMIT\s+\d+(?:\s*,\s*-?\d+)?\s*$/i',
+			'',
+			trim( $sql )
+		);
 
-			if ( $limitPos ) {
-				$sql = substr( $sql, 0, $limitPos );
-			}
-		}
+		// Remove a trailing semicolon.
+		$sql = rtrim( trim( $sql ), ';' );
 		$needPrimaryKey = WooBeWoo_PF_Db::get( "SHOW SESSION variables like 'sql_require_primary_key'" );
 		if ( ! empty( $needPrimaryKey ) && isset( $needPrimaryKey[0]['Value'] ) && 'ON' == $needPrimaryKey[0]['Value'] ) {
 			WooBeWoo_PF_Db::query( 'SET SESSION sql_require_primary_key=0' );
@@ -3799,7 +3836,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Get filter existing individual filters items.
 	 *
-	 * @version 3.4.3
+	 * @version 3.4.7
 	 *
 	 * @param int | null $args wp_query args
 	 * @param array      $taxonomies
@@ -3987,9 +4024,11 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 
 					if ( '' !== $query ) {
 						$baseTable                 = $this->createTemporaryTable( $this->tempVarTable, $query, $mode );
-						$filterLoop->request       = str_replace( $this->tempVarTable, $baseTable, $filterLoop->request );
-						$listTable                 = $this->createTemporaryTable( $tempTable, $filterLoop->request, $mode );
-						$createOtherTemporaryTable = true;
+						if ( ! empty( $baseTable ) ) {
+							$filterLoop->request       = str_replace( $this->tempVarTable, $baseTable, $filterLoop->request );
+							$listTable                 = $this->createTemporaryTable( $tempTable, $filterLoop->request, $mode );
+							$createOtherTemporaryTable = true;
+						}
 					}
 				}
 
@@ -4314,7 +4353,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Returns items in filter blocks.
 	 *
-	 * @version 3.4.4
+	 * @version 3.4.7
 	 *
 	 * @param $filterLoop
 	 * @param $param
@@ -4405,6 +4444,9 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 						' INNER JOIN @__meta_keys as md_keys ON (md_keys.id=md_attr.key_id)' .
 						str_replace( 'wpf_temp.', 'p_vars.', $stockJoin );
 					$listVariationAttributes = $this->createTemporaryTable( $this->tempFilterTable . '_var_attrs', $query );
+					if ( empty( $listVariationAttributes ) ) {
+						$byVariations = false;
+					}
 
 					$typeJoin  = '';
 					$metaKeyId = $this->getMetaKeyId( '_wpf_product_type' );
@@ -4480,6 +4522,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 				)
 			);
 		} else {
+			$sql['main'] = $sql['main'] ?? '';
 			$sql['main']  = WooBeWoo_PF_Dispatcher::applyFilters(
 				'addCustomAttributesSql',
 				$sql['main'],
@@ -4491,7 +4534,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 					'currentSettings' => $param['currentSettings'],
 				)
 			);
-			$termProducts = WooBeWoo_PF_Db::get( $sql['main'] );
+			$termProducts = ( '' === $sql['main'] ) ? array() : WooBeWoo_PF_Db::get( $sql['main'] );
 		}
 
 		$existTerms = array();
@@ -4791,7 +4834,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	/**
 	 * Returns additional data on minimum and maximum prices and users.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.7
 	 *
 	 * @param $args
 	 * @param $param
@@ -4809,6 +4852,9 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 			$result['existsUsers']               = array();
 		}
 		$listTable = $param['listTable'];
+		if ( empty( $listTable ) ) {
+			return $result;
+		}
 
 		$mode = $param['calcMode'];
 		$need = ( 'full' === $mode && ! key_exists( 'light', $param['calcVars'] ) ) || 'light' === $mode;
@@ -4842,7 +4888,10 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 								if ( $issetArgsPrice ) {
 									$filterLoop = new WP_Query( $args );
 									if ( $filterLoop->have_posts() ) {
-										$listTableForPrice = $this->createTemporaryTable( $this->tempFilterTable . '_price', $filterLoop->request );
+										$priceTable = $this->createTemporaryTable( $this->tempFilterTable . '_price', $filterLoop->request );
+										if ( ! empty( $priceTable ) ) {
+											$listTableForPrice = $priceTable;
+										}
 									}
 								}
 							}

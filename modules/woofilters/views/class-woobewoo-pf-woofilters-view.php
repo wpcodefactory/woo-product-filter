@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
- * @version 3.4.6
+ * @version 3.4.7
  *
  * @author woobewoo
  */
@@ -2707,7 +2707,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateAttributeFilterHtml.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.7
 	 */
 	public function generateAttributeFilterHtml( $filter, $filterSettings, $blockStyle, $key = 1, $viewId = '' ) {
 		$settings                              = $this->getFilterSetting( $filter, 'settings', array() );
@@ -2795,7 +2795,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 
 		// doing the sorting through the hook while some themes/plugins impose their own
 		if ( $isCustomOrder ) {
-			$args['wpf_orderby'] = implode( ',', $includeAttsId );
+			$args['wpf_orderby'] = implode( ',', array_map( 'absint', $includeAttsId ) );
 			add_filter( 'terms_clauses', array( $this, 'wpfAddTermsClauses' ), 99, 3 );
 		}
 		if ( $isCustom ) {
@@ -3167,10 +3167,19 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * wpfGetFilteredPriceFromProductList.
 	 *
-	 * @version 3.4.0
+	 * @version 3.4.7
 	 */
 	public function wpfGetFilteredPriceFromProductList( $settings, $listTable, $convert = true, $dec = 0, $tax = '' ) {
 		global $wpdb;
+
+		if (
+			! is_string( $listTable ) ||
+			'' === $listTable ||
+			! preg_match( '/^[A-Za-z0-9_]+$/', $listTable ) ) {
+			return false;
+		}
+
+		$dec = absint( $dec );
 
 		list( $tax, $taxSql ) = WooBeWoo_PF_Dispatcher::applyFilters( 'priceTax', array( '', '' ), 'add', $settings );
 		$module               = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' );
@@ -3195,7 +3204,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 						$query = $sql . ' FROM ' . $listTable . ' AS wpf_temp ' .
 							' INNER JOIN @__meta_data pm ON (pm.product_id=wpf_temp.ID)' .
 							' INNER JOIN @__meta_values vm ON (vm.id=pm.val_id)' .
-							' WHERE pm.key_id=' . $metaId . ' AND vm.key_id=' . $metaId . " AND vm.key2='" . $groupId . "'";
+							' WHERE pm.key_id=' . $metaId . ' AND vm.key_id=' . $metaId . " AND vm.key2='" . esc_sql( $groupId ) . "'";
 
 					}
 				}
@@ -3229,7 +3238,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 				}
 				$query = $sql . ' FROM ' . $listTable . ' AS wpf_temp ' .
 					' INNER JOIN ' . $wpdb->postmeta . ' pm ON (pm.post_id=wpf_temp.ID)
-					WHERE meta_key IN ("' . implode( "','", array_map( 'esc_sql', $metas ) ) . '")';
+					WHERE meta_key IN (\'' . implode( "','", array_map( 'esc_sql', $metas ) ) . '\')';
 			}
 		}
 
