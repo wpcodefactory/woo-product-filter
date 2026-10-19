@@ -172,6 +172,7 @@ This plugin may communicate with the following third-party services:
 * Fix - Security - Fixed an SQL injection vulnerability in product filters.
 * Fix - Improved temporary table creation and SQL query handling.
 * Fix - Fixed filter parameters not being removed from the URL when clearing filters.
+* Fix - Fixed the default multi-select list spacing.
 * Dev - Added `JSON_HEX_TAG`, `JSON_HEX_AMP`, `JSON_HEX_APOS` and `JSON_HEX_QUOT` flags to `WooBeWoo_PF_Response::ajaxExec()`.
 
 = 3.4.6 - 06/10/2026 =

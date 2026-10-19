@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Frontend Woofilters CSS
  *
- * @version 3.4.5
+ * @version 3.4.7
  *
  * @author woobewoo
  */
@@ -1830,7 +1830,7 @@ select.woobewoo-flat-input {
 	background-color: transparent;
 	border-radius: 0;
 	box-shadow: none;
-	vertical-align: top;
+	vertical-align: middle;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;

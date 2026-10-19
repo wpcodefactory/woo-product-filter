@@ -1,7 +1,7 @@
 /**
  * Product Filter by WBW - Custom Woofilters CSS
  *
- * @version 3.4.6
+ * @version 3.4.7
  *
  * @author woobewoo
  */
@@ -125,7 +125,7 @@
 	background-color: transparent;
 	border-radius: 0;
 	box-shadow: none;
-	vertical-align: top;
+	vertical-align: middle;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -163,9 +163,7 @@
 .wpfFilterWrapper[data-filter-type="wpfPriceRange"] .wpfCheckbox input[type=checkbox]:checked:before {
 	content:none;
 }
-.wpfFilterWrapper  .ms-options-wrap > .ms-options > ul label {
-	line-height: 30px;
-}
+
 .wpfFilterTitle {
 	display: block;
 	margin: 0;
