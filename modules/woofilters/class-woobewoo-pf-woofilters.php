@@ -3459,7 +3459,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	}
 
 	/**
-	 * resolveFilterTaxonomy.
+	 * resolve_filter_taxonomy.
 	 *
 	 * @version 3.4.7
 	 * @since   3.4.7
