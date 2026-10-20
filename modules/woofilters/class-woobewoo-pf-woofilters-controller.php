@@ -511,9 +511,11 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		$recount                  = isset( $filterSettings['filter_recount'] ) && $filterSettings['filter_recount'];
 		$removeActions            = isset( $filterSettings['remove_actions'] ) && $filterSettings['remove_actions'];
 		$filteringVariations      = $filterSettings['filtering_by_variations'] ?? false;
-		$displayProductVariations = $filteringVariations &&
-		                            isset( $filterSettings['display_product_variations'] ) &&
-		                            $filterSettings['display_product_variations'];
+		$displayProductVariations = (
+			$filteringVariations &&
+			isset( $filterSettings['display_product_variations'] ) &&
+			$filterSettings['display_product_variations']
+		);
 		$wpfFId                   = ! empty( $filterSettings['wpf_fid'] ) ? absint( $filterSettings['wpf_fid'] ) : 0;
 
 		if ( $removeActions ) {
@@ -837,7 +839,6 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_get_taxonomy_terms() {
-
 		$res   = new WooBeWoo_PF_Response();
 		$slug  = WooBeWoo_PF_Req::getVar( 'slug' );
 		$terms = array();

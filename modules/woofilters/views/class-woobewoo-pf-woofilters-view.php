@@ -529,7 +529,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	/**
 	 * generateFiltersHtml.
 	 *
-	 * @version 3.4.6
+	 * @version 3.4.7
 	 */
 	public function generateFiltersHtml( $filterSettings, $viewId, $prodCatId = false, $noWooPage = false, $taxonomies = array() ) {
 		$this->setCurrentSettings( $filterSettings );
@@ -833,6 +833,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 				false
 			);
 		}
+
 		$custom_css = WooBeWoo_PF_Dispatcher::applyFilters(
 			'woobewoo_pf_add_custom_css',
 			self::$filtersCss,

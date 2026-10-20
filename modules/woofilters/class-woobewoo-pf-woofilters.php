@@ -3710,7 +3710,6 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	 * @version 3.4.7
 	 */
 	public function createTemporaryTable( $table, $sql, $postfix = '' ) {
-
 		if ( '' !== $postfix ) {
 			$table .= '_' . str_replace( '-', '_', trim( $postfix ) );
 		}
@@ -3721,13 +3720,13 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		}
 
 		if ( isset( $this->clausesByParam['not_for_temporary_table'] ) ) {
-
 			foreach ( $this->clausesByParam['not_for_temporary_table'] as $sqlPart ) {
 				$sql = str_replace( $sqlPart, '', $sql );
 			}
 		}
 
-		$sql      = str_replace( 'SQL_CALC_FOUND_ROWS', '', $sql );
+		$sql = str_replace( 'SQL_CALC_FOUND_ROWS', '', $sql );
+
 		/**
 		 * Remove only the final ORDER BY clause.
 		 *
@@ -3756,10 +3755,12 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 
 		// Remove a trailing semicolon.
 		$sql = rtrim( trim( $sql ), ';' );
+
 		$needPrimaryKey = WooBeWoo_PF_Db::get( "SHOW SESSION variables like 'sql_require_primary_key'" );
 		if ( ! empty( $needPrimaryKey ) && isset( $needPrimaryKey[0]['Value'] ) && 'ON' == $needPrimaryKey[0]['Value'] ) {
 			WooBeWoo_PF_Db::query( 'SET SESSION sql_require_primary_key=0' );
 		}
+
 		if ( ! WooBeWoo_PF_Db::query( "DROP TEMPORARY TABLE IF EXISTS `{$table}`" ) ) {
 			return false;
 		}
@@ -4023,7 +4024,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 					}
 
 					if ( '' !== $query ) {
-						$baseTable                 = $this->createTemporaryTable( $this->tempVarTable, $query, $mode );
+						$baseTable = $this->createTemporaryTable( $this->tempVarTable, $query, $mode );
 						if ( ! empty( $baseTable ) ) {
 							$filterLoop->request       = str_replace( $this->tempVarTable, $baseTable, $filterLoop->request );
 							$listTable                 = $this->createTemporaryTable( $tempTable, $filterLoop->request, $mode );
