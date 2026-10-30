@@ -357,6 +357,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 		check_ajax_referer( 'woobewoo_pf_filter_action', 'woobewoo_pf_filter_nonce' );
 
 		$res = new WooBeWoo_PF_Response();
+
 		$params = WooBeWoo_PF_Req::get( 'post' );
 
 		$filtersDataBackend          = WooBeWoo_PF_Utils::jsonDecode( $params['filtersDataBackend'] );
