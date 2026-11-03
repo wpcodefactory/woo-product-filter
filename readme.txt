@@ -207,7 +207,7 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 4.0.0 - 26/10/2026 =
+= 4.0.0 - 03/11/2026 =
 * Add - Builder: a "Filter engine" stripe at the top says in plain words which engine runs the filter (New 4.0 or Classic 3.x), switches it in one click and explains which one to pick. The engine choice moved there from Advanced.
 * Add - Admin menu (free version): "Upgrade" is a filled button at the end of the WBW Product Filter menu, in the open menu and the fly-out. It does not show when Pro is active.
 * Fix - Builder: settings only the other engine reads are folded into one closed "Only for the Classic engine" section at the end of Advanced instead of hundreds of greyed rows.
@@ -252,13 +252,6 @@ This plugin may communicate with the following third-party services:
 * Add - Export filters as JSON in Free (Filters home, "Export all" and "Pick filters to export"): the same `wpf-filters/1` file Pro writes and reads, so files move between Free and Pro stores unchanged. New admin AJAX handler `woobewoo_pf_export_filters` (nonce + manage_options). Pro's own export keeps working when Pro is active.
 * Add - Speed and SEO: an "AI shopping readiness" card with the score out of 100, a fix line per failed check, "Check again" and a one click "Create llms.txt" (Free readiness model, `woobewoo_pf_readiness`).
 * Dev - Smart setup fires `woobewoo_pf_setup_ai_suggest( $suggestions, $scan, $storeType )` once the rule based suggestions are final, so the Pro AI layer can refine the why / watch out lines and propose extra attribute filters.
-* Add - Engine migration: every classic (3.x) filter can move to the 4.0 storefront engine from the Filters screen ("Preview on 4.0", "Switch to 4.0", "Switch back" for one release). The notice lists exactly what changes per filter (settings mapped to their 4.0 equivalent, settings dropped, custom CSS / JS to check). Filters that use no classic-only setting, no custom code and no page-builder grid plugin switch on update, logged under `wpf_engine_migration_log`. The classic engine is removed in 4.2 (31 March 2027); a dated notice says so on filters still on it.
-* Add - Ported to 4.0 from the classic engine: "Update results without reloading" per filter, the Filter/Apply button text, "Move picked choices to the top", "Dim the products while loading".
-* Add - 4.0 engine filters page-builder product grids (Essential Addons, Ultimate Addons for Elementor, Element Pack, JetWooBuilder, Divi Plus) with AJAX: the grid is swapped from the filtered page, and their load-more / pagination calls carry the filter (`with_wpf_filter`).
-* Add - docs/engine-4-styling.md: the supported 4.0 class names and --wpf4-* custom properties, with a classic-to-4.0 selector table.
-* Add - Switch from another filter: a three step wizard (Review, Map, Switch) brings over the filters of YITH WooCommerce Ajax Product Filter, HUSKY (WOOF), BeRocket AJAX Product Filters, Filter Everything, annasta Filters and the WooCommerce filter widgets and blocks, active or inactive. Their filter sets are listed with counts and previewed next to ours on the real shop page; the owner confirms each mapping, look and name, and the mapped and unmapped settings are reported. After import, Switch can swap their widgets, shortcodes, blocks, Elementor widgets, automatic shop placement and product grid for ours, deactivate the old plugin and 301 its old filter links to ours (`wpf_switch_live`); one click Undo restores every placement, setting and the old plugin from a snapshot (`wpf_switch_log`).
-* Fix - 4.0 engine: a filter placed on a single page by shortcode or block now filters that page's product grid, price slider ends sit on the step grid, and WP-CLI `filter create|update` keeps the `show_more_rows`, `display_type` and `logic` block keys.
-* Fix - 32 places read a filter row with maybe_unserialize(): a filter saved by the 4.0 builder (JSON) crashed them (PHP 8 TypeError), for example the [wpf-selected-filters] shortcode, Pro statistics and A/B tests. All read through woobewoo_pf_decode_settings() now.
 * Fix - Updating from 3.x: pretty URL rules are only registered when clean links are on or a 4.0 engine filter exists, and a real product, page or sub-category at the same address always wins. Stores with a "/shop/" product base lost product pages (/shop/sale-hoodie/ showed the shop) and sub-categories showed the parent category.
 * Fix - Updating from 3.x: with several shoppers on the site in the first second after the update, one of them could get "No products found" (the upgrade markers were read from a stale option cache). One request at a time runs the upgrade now (MySQL lock); the others serve the page with what exists.
 * Fix - Updating from 3.x: the utf8mb4 conversion no longer copies the meta index table (no text columns, instant change), a refused ALTER leaves that table as it was and converts the rest, and duplicate module rows from two concurrent first requests are no longer logged.
@@ -267,12 +260,13 @@ This plugin may communicate with the following third-party services:
 * Fix - Free 4.0 with Pro 3.x: Licence and Statistics are back in the rail and submenu, and new filters use the classic engine Pro 3.x extends.
 * Pro Fix - The headless API key only switches off the cookie nonce check for wpf/v1 routes (read from the REST route) and the request runs as nobody; the key is accepted in the X-WPF-Key header only.
 * Pro Fix - Saved searches and Notify me: the digest link is always on this store, at most 10 new subscriptions per email address per day, and only published, visible products are watched or mailed about. Web push uses wp_safe_remote_post().
-
-* Fix - Bot speed limit uses a 60 second window from the first request.
-* Fix - Two phone drawer buttons on one page no longer overlap.
-* Add - Speed and SEO: "Clear saved counts" button.
-* Fix - Builder live preview and "Preview on shop" showed the filter title with no blocks (settings JSON unslashed twice). JSON fields are now read once through `WooBeWoo_PF_Req::getJson()`.
-* Dev - New action `woobewoo_pf_frontend4_enqueue` for add-on storefront scripts on 4.0 filter pages.
+* Fix - Bot speed limit counted per clock minute, so a crawler could send nearly twice the limit across a minute boundary; it now counts a 60 second window from the crawler's first request.
+* Fix - Two filters with a phone drawer on one page put their floating "Filters" buttons on top of each other, so only one could be tapped. The buttons now stack.
+* Add - Speed and SEO: "Clear saved counts" button next to "Rebuild the index" (clears the classic counts cache and the 4.0 results and counts).
+* Fix - Builder live preview and "Preview on shop" showed the filter title with no blocks: the draft endpoint unslashed the settings JSON a second time, so the block list failed to decode. JSON fields are now read once through `WooBeWoo_PF_Req::getJson()` (raw POST, unslashed once, decoded, each value sanitized), and the storefront script starts any filter swapped into the preview (`wpfPreviewUpdated`).
+* Dev - New action `woobewoo_pf_frontend4_enqueue` fires after the 4.0 storefront assets are queued, so add-ons can queue their own storefront scripts on 4.0 filter pages.
+* Add - Admin polish: the seven step pills of the smart setup sit on a 2 px line (ink up to the current step, hairline after it), the rail has a hairline on its right edge, the question column is its own white card with paper boxes inside, the preview card sits beside it 24 px apart; the "Switch from another filter" cards get 16 px between them. Builder controls for the new storefront settings: "Width of the filter column" (filter, Look) and "Show more after this many rows" + "Show more pill text" (per block, Look).
+* Add - One page, one filter: when the smart setup publishes, every other filter the wizard placed on the same pages (above, sidebar or drawer) is switched to "shortcode only" and tagged Paused on the Filters list (`wbw_paused_by`, `wbw_paused_place`); the Publish step says which ones. Each change is a normal save, so History can undo it. Filters placed by hand are left alone.
 * Add - Storefront polish: the desktop filter column beside the products can no longer grow (row, side and main get their sizes inline as well as from the stylesheet; main column = the theme's content column beside the placement, else the nearest ancestor of the product grid that is the real content column; a placement that lands inside the grid is moved out; Elementor loop grids (`.e-loop-container`), block themes and `.woocommerce-loop` are found; the two stack when the row is narrower than 612px). New filter setting `side_width` (220 to 400 px, default 280). New block settings `show_more_rows` (default 2) and `show_more_label` (default "Show more"): chips, squares, swatches and tick box lists fold after N rendered rows behind a "Show more (12)" / "Show less" pill (measured from the real rows, recomputed on resize and after each update, picked values stay visible, folded values leave the tab order, focus stays on the pill). The rating block is one row of five star pills (inline SVG stars, the picked pill in ink with white stars, counts inside, empty values dimmed or hidden, "Clear" only once something is picked, a radio group with arrow keys, sideways scroll on phones). Values with no products are dimmed, never struck through. Block title and chevron share one line with the chevron at the right edge, 16px between blocks, 8px from a title to its values, chips keep an even 8px gap, the price inputs stay inside the column.
 * Add - One click smart setup wizard (Setup screen), seven steps on one frame: Welcome (real scan numbers, theme, builder and product grid tags), Filters (cards with a switch, why, watch out, benchmark percent, fill rate and speed tags), Look (four picture cards, theme colours), Phone (five switch rows, phone frame), Place (four option cards and the product grid self test), Speed and SEO (six rows), Publish (checklist, shortcode and block copy boxes, first week card). Every step shows the real shop page in an iframe with a desktop / phone toggle; the draft updates in place without a reload where possible. The scan runs by itself when the wizard opens without a fresh scan.
 * Add - Live preview of any draft on the real shop page (`?wpf_preview=<draft>`, admins only, admin bar hidden), used by the wizard and the builder (`woobewoo_pf_setup_draft_settings`, `woobewoo_pf_setup_preview_html`).
@@ -295,19 +289,21 @@ This plugin may communicate with the following third-party services:
 * Add - WooCommerce Store API: `/wc/store/v1/products` honours the canonical `wpf_*` parameters (and the 3.x names) and carries `extensions.woobewoo.facets` with counts for the current query (`woocommerce_store_api_register_endpoint_data`).
 * Add - Developer docs generated from the code: `docs/HOOKS.md`, `docs/REST.md` and `docs/postman_collection.json` (from `docs/openapi.json`), `docs/JS-EVENTS.md`, `docs/CLI.md`. The generator scripts live in the source repository (`dev-tools/docs/`), not in the plugin.
 * Add - Builders and blocks (modules/builders, one file per integration, each guarded): Gutenberg block `woobewoo/product-filter` (block.json, server render, plain JS editor script with a filter picker fed by `wpf/v1/filters-list`, "Block theme mode" wrapper compatible with Product Collection and the core Product Filters block), Bricks element, Breakdance element, Oxygen element, Divi module (Divi 4 and the Divi 5 shortcode module list), WPBakery element, Avada (Fusion Builder) element, Beaver Builder module. Self test rows "builder modules registered" through `woobewoo_pf_selftest_rows`.
+* Add - Switch from another filter: a three step wizard (Review, Map, Switch) brings over the filters of YITH WooCommerce Ajax Product Filter, HUSKY (WOOF), BeRocket AJAX Product Filters, Filter Everything, annasta Filters and the WooCommerce filter widgets and blocks, active or inactive. Their filter sets are listed with counts and previewed next to ours on the real shop page; the owner confirms each mapping, look and name, and the mapped and unmapped settings are reported. After import, Switch can swap their widgets, shortcodes, blocks, Elementor widgets, automatic shop placement and product grid for ours, deactivate the old plugin and 301 its old filter links to ours (`wpf_switch_live`); one click Undo restores every placement, setting and the old plugin from a snapshot (`wpf_switch_log`).
+* Fix - 4.0 engine: a filter placed on a single page by shortcode or block now filters that page's product grid, price slider ends sit on the step grid, and WP-CLI `filter create|update` keeps the `show_more_rows`, `display_type` and `logic` block keys.
 * Add - WooCommerce Brands block in Free (modules/brands): list, dropdown and checkbox displays, logos from the term image (`wpf_term_image` meta, the WooCommerce brand thumbnail or Perfect Brands) as a list or as tiles, brand archive pages. Perfect Brands keeps its own block.
 * Add - `uninstall.php`: removes every plugin table, option, transient, cron hook and term meta when "Delete all plugin data on uninstall" (`wbw_delete_on_uninstall`) is on.
 * Tweak - Filter settings are stored as JSON (`WooBeWoo_PF_Settings_Model::decode_settings()` / `encode_settings()`, `woobewoo_pf_decode_settings()`), reading the old serialized rows transparently.
 * Tweak - Every old `wpf_` table is converted to utf8mb4 on upgrade (row counts checked before and after, report in `wpf_utf8mb4_report`); new installs create utf8mb4 tables.
 * Tweak - Every admin AJAX handler verifies the nonce and the capability (`verifyRequest()`), including the Overview notices, rating, subscribe and contact handlers and the builder preview and attribute term handlers.
 * Tweak - Removed dead files: the GeoIP database (`files/SxGeo.dat`), progressmeter, wp.tabs.js, jquery-dialog.css, woobewoo-ui.css, woobewoo-ui-wc.css, admin.options.js and four unused images.
-
 * Fix - Upgrade from 3.x: every 4.0 save stores the storefront engine and a row without one (written by 3.x, for example during a rollback to 3.4.7) keeps the classic engine; the builder shows and saves the engine a filter really runs (its option key was "classic", which the storefront read as 4.0); a duplicate keeps its source's engine; classic filters get no Share button and no links script; classic pages get no ETag / 304 and no shopper with a cart ever gets a 304; 3.x "Products per page" also applies on engine 4 pages; 3.x only links on a page without an engine 4 filter stay with the classic engine; index batches stop at 60% of memory_limit or 20 s and free the in-memory cache every 50 products (188 MB to 36 MB per batch on 1,000 variable products); the settings helpers live in functions.php so a stale opcode cache of the main file right after a folder swap cannot fatal; a full uninstall also removes the widget ids from sidebars_widgets; Help store check row "Filters from before 4.0".
+* Fix - Upgrade in real store setups (multisite, Polylang, page builders, block themes, page and JS optimisers, currency switchers): classic filter links keep their query string after the smart setup turns "Clean links" on (no 301 to a pretty URL, no address rewrite while a classic filter is on the page, so "Clear" and reloads work); a wizard filter placed with the shortcode no longer drives shop, category and tag pages where it is not placed (classic hidden preselects and counts stay); the counts cache is keyed by page; no setup redirect after an update; filter links on a subdirectory network site or a WordPress in a folder no longer double the folder; 4.0 filters on ordinary pages keep query string links (no 404 on reload); "Above the products" and "In the shop sidebar" placements only on the shop and product archives (not inside every `[products paginate="true"]`); 4.0 requests send the shopper's cookies and the page language and carry currency, language and index version in the URL, browsers no longer reuse an answer (shared caches 60 s, logged in private); a currency the index has no prices for is converted with the switcher's own rate (slider was 0 to 0); Polylang and WPML stores count and list only the current language's products; the 3.x "Products per page" also applies to 4.0 AJAX pages.
 * Add - Facet index (storefront engine 4): four utf8mb4 tables (`wpf_index_products`, `wpf_index_terms`, `wpf_index_meta`, `wpf_index_prices`) with one row per product and per variation, kept fresh on product save, trash, stock change, term edit, import and completed orders, rebuilt in batches of 500 through Action Scheduler (WP-Cron fallback) with a lock, progress and health data (`WooBeWoo_PF_Index::health()`). Prices per currency through `woobewoo_pf_index_currencies` (WOOCS, WPML, Aelia, CURCY supported).
 * Add - Every result set and every count of the 4.0 storefront comes from index queries: AND between blocks, OR or AND inside a block (`logic`), variation aware (size 42 and red match only when one variation has both), stock at variation level, price in the shopper's currency, cached in the object cache and transients keyed by filter, params, index version, currency and language. No temporary tables, no PHP session, full page caches work.
-* Add - Query plans for large catalogues: the narrowed product id set is computed once per request and every count reads from it (one GROUP BY for all unselected taxonomies, one pass over the product rows for stock, sale, featured, rating and price bounds), the most selective term joins the query first, parent rows carry `root_id` and `price_max`, wide pages walk the sort index, whole catalogue counts are cached per index version.
+* Add - Query plans for large catalogues: the narrowed product id set is computed once per request and every count reads from it (one GROUP BY for all unselected taxonomies, one pass over the product rows for stock, sale, featured, rating and price bounds), the most selective term joins the query first, parent rows carry `root_id` and `price_max` so price ranges and variation rows are reached without scans, wide pages walk the sort index, whole catalogue counts are cached per index version.
 * Add - Canonical filter URLs (`wpf_size=42,43`, `wpf_price=50-120`, `wpf_stock=in`, `wpf_sale=1`, `wpf_featured=1`, `wpf_rating=4`, `wpf_sort=price`, `wpf_page=2`, `wpf_q=text`, `wpf_<meta_key>=min-max`) with `WooBeWoo_PF_Query::from_request()` / `::to_params()`; the 3.x parameters keep working.
-* Add - Storefront engine 4 (vanilla JS, no jQuery, no jQuery UI, no ion.rangeSlider, no Font Awesome): JSON endpoint `woobewoo_pf_query`, live counts and greyed values, chips, clear all, pushState with pretty links and Back without a reload, scroll position kept, live region, focus kept on the changed control, keyboard swatches and squares, price slider on two native range inputs with number inputs, look presets and accent colour, pagination as pages, "Show more" or infinite scroll with the page in the URL. Events on document: `wpf:change`, `wpf:request`, `wpf:results`, `wpf:error`. New filters use engine 4; filters created before 4.0 keep the legacy engine until the owner switches (`frontend_engine`).
+* Add - Storefront engine 4 (vanilla JS, no jQuery, no jQuery UI, no ion.rangeSlider, no Font Awesome): JSON endpoint `woobewoo_pf_query`, live counts and greyed values, chips, clear all, pushState with pretty links and Back without a reload, scroll position kept, live region, focus kept on the changed control, keyboard swatches and squares, price slider on two native range inputs with number inputs, look presets and accent colour, pagination as pages, "Show more" or infinite scroll with the page in the URL. Events on document: `wpf:change`, `wpf:request`, `wpf:results`, `wpf:error`. New filters use engine 4; filters created before 4.0 keep the legacy engine until the owner switches (`frontend_engine`). On desktop, a sidebar placement on a theme without a real sidebar column gets its own 280px filter column next to the products (`.wpf4-layout`).
 * Add - Phone drawer rebuilt: sticky "Filters (N)" pill above theme bars, bottom sheet dialog, chips, "Show N results", "Use your last filters again?", focus trap, Escape, focus return.
 * Add - Step by step finder (`finder` setting): one question per step, progress segments, chips of answers, counts per option, budget steps, back, skip to all products.
 * Add - Variations as products (`variations_as_products`): result cards show the matching variation's picture, price and stock, open at that variation (`?attribute_pa_size=42`) and carry an "Only 2 left in 42" badge from the index (`sizes_left_badge`, `sizes_left_threshold`).
@@ -322,174 +318,6 @@ This plugin may communicate with the following third-party services:
 * Fix - Setup scan tells the truth and never times out: the catalogue is scanned in batches of 250 products with direct SQL (posts, term relationships, `wc_product_meta_lookup`, postmeta fallback when the lookup table is missing), at most 20 seconds per request (less when `max_execution_time` is lower), the browser chains the requests and paints the meter with "n of m products", no WP-Cron for the first run (the remainder is queued only when the owner leaves the page). Zero published products says "Add products first" with a link. Any exception is returned as `class: message at file:line` (administrators) and shown under the headline; an HTML answer (firewall page, PHP error page) shows its HTTP status and first 200 characters; stray PHP output is captured instead of breaking the JSON. "Try again" visibly resets the meter and forces a fresh scan. The product grid self test sends the admin's login cookies, so it sees the real shop page in WooCommerce "coming soon" mode, and says so plainly when it cannot.
 * Tweak - WordPress.org Plugin Check: zero errors (translators comments on every placeholder string, `$wpdb->prepare()` with placeholders, escaped output, explained `phpcs:ignore` reasons on the intentional direct queries of the facet index tables). The development scripts (`benchmarks/run.php`, `docs/generate-hooks.php`, `docs/generate-rest-docs.php`) moved out of the shipped plugin into the source repository's `dev-tools/`; the plugin never writes into its own folder at runtime. Plugin header: Requires at least 6.0, Requires PHP 7.4.
 * Dev - PHP 7.4 compatibility checked with PHPCompatibility (no PHP 8 only syntax or functions); every PHP file passes `php -l`, every script `node --check`.
-
-= 3.4.7 - 20/10/2026 =
-* Fix - Security - Improved output escaping and AJAX response handling in the frontend filter request.
-* Fix - Security - Fixed an unauthenticated information disclosure vulnerability in the frontend product query.
-* Fix - Security - Fixed an SQL injection vulnerability in product filters.
-* Fix - Improved temporary table creation and SQL query handling.
-* Fix - Fixed filter parameters not being removed from the URL when clearing filters.
-* Fix - Fixed the default multi-select list spacing.
-* Dev - Added `JSON_HEX_TAG`, `JSON_HEX_AMP`, `JSON_HEX_APOS` and `JSON_HEX_QUOT` flags to `WooBeWoo_PF_Response::ajaxExec()`.
-* WC tested up to: 11.2.
-
-= 3.4.6 - 06/10/2026 =
-* Fix - Fixed PRO "Content" options (selected filters, category slugs in URL, synchronization, scroll, one filter open, view more) being reset on save.
-* Fix - Fixed `[wpf-selected-filters]` shortcode displaying nothing.
-* Fix - Fixed AJAX filtering error and lost filter blocks when a filter setting contains a quote or backslash.
-* Fix - Fixed empty product grid on filtered categories in "Subcategories" display mode.
-* Fix - Fixed filtering not working when the page URL contains "thrive" or "_preview".
-* Fix - Fixed missing PRO styles and Google fonts when the Free and PRO versions differ.
-* Fix - Fixed PRO modules staying disabled after an update on licensed sites.
-* Fix - Fixed full re-index not recalculating the value counts.
-* Fix - Fixed indexing staying locked for 20 minutes after a failed run.
-* Fix - WPML/Polylang - Filter strings are no longer registered on every page view.
-* Fix - WPML/Polylang - Fixed filter labels showing the translation of another label.
-* Fix - Custom CSS/JS - Fixed HTML inside strings being removed.
-* Fix - Security - Escaped "No products found" text.
-* Fix - Security - Restricted product query arguments sent from the browser.
-* Fix - SVG icons not displaying correctly in filter items.
-* Fix - Fixed the default multi-select checkbox style.
-* Dev - Added notice when the PRO version is not compatible.
-
-= 3.4.5 - 21/09/2026 =
-* Fix - Fixed checkbox checked state style issue.
-* Dev - Removed `!important` from button styles.
-
-= 3.4.4 - 09/09/2026 =
-* Fix - Fixed fatal error when term data is returned as an object.
-
-= 3.4.3 - 08/09/2026 =
-* Fix - Filter - Appearance - Blocks - Fixed checkbox border issue.
-* Fix - Fixed 404 error when paginating filtered results with multiple values.
-* Fix - Security - Fixed potential JavaScript injection through the filter ID parameter.
-* Fix - Fixed "Filter" and "Clear" text translation.
-* Dev - Security - Escaped custom CSS output.
-* WC tested up to: 11.1.
-
-= 3.4.2 - 01/09/2026 =
-* Fix - Fixed fatal error caused by the missing `class-woobewoo-pf-mod-installer.php` file.
-
-= 3.4.1 - 01/09/2026 =
-* Dev - Renamed AJAX object.
-
-= 3.4.0 - 31/08/2026 =
-* Dev - Updated checkbox border color.
-* Dev - Fixed "Filter" text translation.
-* Dev - Security - Escaped shortcode output.
-* Dev - Prefixed PHP class names with `WooBeWoo_PF_`.
-* Dev - Prefixed class file names with `class-woobewoo-pf-`.
-* Dev - Code refactoring.
-* Tested up to: 7.1.
-
-= 3.3.1 - 13/08/2026 =
-* Fix - Fixed WPML translation issues.
-* Dev - Fixed Plugin Check OutputNotEscaped warnings.
-
-= 3.3.0 - 12/08/2026 =
-* Fix - Fixed subcategories filter bug on page load.
-* Fix - Fixed Brizy builder pagination reset issue.
-* Fix - "Creation of dynamic property is deprecated" notice fixed.
-* Fix - Fixed attribute filter selection issue.
-* Fix - Fixed admin notice dismiss permissions.
-* Dev - Replaced outdated library `chosen` with `tom-select`.
-* Dev - Removed Mobile Detect library and replaced it with `wp_is_mobile()`.
-* Dev - Removed promo, pages, mail modules from the plugin.
-* Dev - Added plugin prefix to CSS/JavaScript handles, AJAX action/object.
-* Dev - Improved coding standards and code cleaned up.
-* Dev - Code refactoring.
-* WC tested up to: 11.0.
-
-= 3.1.8 - 01/06/2026 =
-* Fix - Fixed filter not working with Brizy products widget.
-* Fix - Fixed Brizy editor shortcode render issue.
-* Fix - Security - Fixed SQL injection vulnerability.
-* Fix - Fixed collapse toggle icon rendering.
-* Fix - Fixed filtered page results issue.
-* Fix - Fixed brand attribute filter detection bug.
-* Fix - Fixed multi-site permission bug.
-* Fix - Fixed "save statistics" permission error.
-* Fix - Resolved SQL `IN()` clause issue caused by missing quotes in color taxonomy list.
-* Fix - Fixed Thrive Editor loading issue.
-* Fix - Added support for all WooCommerce product shortcodes to resolve AJAX pagination issues.
-* Dev - Added keyboard accessibility support for filters.
-* Dev - Improved coding standards and code cleaned up.
-* WC tested up to: 10.8.
-* Tested up to: 7.0.
-
-= 3.1.7 - 22/04/2026 =
-* Dev - Block component created for page create so that admin can select filtering.
-* Dev - Stock status default checkbox selected.
-* Dev - Exclude ID option added as a dropdown.
-* Dev - Admin dashboard design completely revamped.
-* Dev - Category edit option now available from plugin settings.
-* Dev - AJAX pagination implemented.
-* Dev - Title collapse option made optional.
-* Dev - "Pro" text changed to indicate "Pro Feature".
-* Dev - Default theme design option now auto-selected.
-* Dev - During filter creation, filter options gray out and display "Added to Filter" text once selected.
-* Dev - Slug-wise filtering option now enabled from settings.
-* Dev - Radio and checkbox design and icons updated.
-* WC tested up to: 10.7.
-
-= 3.1.6 - 09/04/2026 =
-* Fix - Reverted to v3.1.3 due to stability issues introduced in v3.1.4.
-
-= 3.1.5 - 09/04/2026 =
-* Dev - Coding standards improved.
-
-= 3.1.3 - 20/03/2026 =
-* Fix - Security - SQL injection vulnerability fixed.
-* Fix - Security - Missing authorization vulnerability fixed.
-* Fix - Not working if the AJAX option is disabled.
-* Dev - Custom `plugins` directory compatibility added.
-* WC tested up to: 10.6.
-
-= 3.1.2 - 10/03/2026 =
-* Fix - Searching query filter reset bug.
-* Fix - Space replacement with `+` sign in search query.
-* Dev - Admin settings titles updated.
-* Readme.txt - "Patchstack Vulnerability Disclosure Program" link added.
-
-= 3.1.1 - 18/02/2026 =
-* Dev - Corrected price sorting (ASC/DESC) to ensure proper numeric ordering.
-
-= 3.1.0 - 12/02/2026 =
-* Readme.txt - Changelog - Truncated (full changelog moved to the `changelog.txt` file).
-* Readme.txt - Rename plugin from "Product Filter by WBW" to "Product Filter for WooCommerce by WBW".
-
-= 3.0.9 - 05/02/2026 =
-* Dev - Settings - Change the settings option name from "Browser compatibility" to "Floating mode browser compatibility".
-* Dev - Rename plugin from "Product Filter by WBW" to "Product Filter for WooCommerce by WBW".
-
-= 3.0.8 - 23/01/2026 =
-* Dev - Settings - "Browser compatibility" option added (defaults to `no`).
-
-= 3.0.7 - 12/01/2026 =
-* Dev - Coding standards improved.
-
-= 3.0.6 - 24/12/2025 =
-* Dev - Coding standards improved.
-
-= 3.0.5 - 23/12/2025 =
-* WC tested up to: 10.4.
-* Tested up to: 6.9.
-
-= 3.0.4 - 28/11/2025 =
-* Fix - Check permissions - `exit` function fixed.
-* Fix - Breadcrumbs - "Edit" breadcrumb fixed.
-
-= 3.0.3 - 26/11/2025 =
-* Dev - Coding standards improved.
-
-= 3.0.2 - 19/11/2025 =
-* Dev - Settings - "WooCommerce product query action priority" option added.
-* WC tested up to: 10.3.
-
-= 3.0.1 - 22/10/2025 =
-* Fix - Security - "Missing Authorization to Unauthenticated Settings Update" vulnerability fixed.
-* Fix - Text typo fixed.
-* Dev - Coding standards improved.
 
 [See changelog for all versions](https://plugins.svn.wordpress.org/woo-product-filter/trunk/changelog.txt).
 
