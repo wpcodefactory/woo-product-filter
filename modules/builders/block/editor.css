@@ -1,0 +1,7 @@
+/* Product Filter by WBW - block editor styles (4.0) */
+.wpf-block-edit { border-radius: 22px; background: #F7F4EA; padding: 16px; }
+.wpf-block-edit .components-placeholder { border-radius: 22px; background: #fff; box-shadow: none; border: 0; }
+.wpf-block-edit__preview { pointer-events: none; }
+.wpf-block-edit__preview .wpfMainWrapper, .wpf-block-edit__preview .wpf4 { pointer-events: none; }
+.wpf-block-edit__error { color: #C42B1A; font-weight: 700; }
+.wpf-builder-empty { padding: 16px; border-radius: 10px; background: #ECE7D6; color: #171509; font-size: 14px; }

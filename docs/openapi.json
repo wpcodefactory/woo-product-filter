@@ -1,0 +1,1233 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Product Filter for WooCommerce by WBW",
+    "version": "4.0.0",
+    "description": "Facets, product filtering and short links for this WooCommerce shop. Read operations are public (rate limited); the same operations are WordPress Abilities (woobewoo/*) and are served over MCP by the plugin itself at https://example.com/wp-json/wpf/v1/mcp."
+  },
+  "servers": [
+    {
+      "url": "https://example.com/wp-json/wpf/v1"
+    }
+  ],
+  "x-mcp": {
+    "endpoint": "https://example.com/wp-json/wpf/v1/mcp",
+    "transport": "streamable-http",
+    "protocolVersions": [
+      "2025-06-18",
+      "2025-03-26",
+      "2024-11-05"
+    ],
+    "tools": [
+      "woobewoo_facets-list",
+      "woobewoo_products-filter"
+    ],
+    "config": {
+      "mcpServers": {
+        "product-filter": {
+          "url": "https://example.com/wp-json/wpf/v1/mcp"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "read",
+      "description": "Public read operations (120 requests a minute per IP)."
+    },
+    {
+      "name": "write",
+      "description": "Admin write operations (Pro)."
+    },
+    {
+      "name": "links",
+      "description": "Short shareable links."
+    },
+    {
+      "name": "meta",
+      "description": "Documents and scores."
+    }
+  ],
+  "paths": {
+    "/facets": {
+      "get": {
+        "operationId": "facetsList",
+        "summary": "List facets",
+        "description": "Attributes, categories, tags, brands, price range and stock values with product counts, optionally narrowed by a category or any filter selection. Also available as the WordPress Ability \"woobewoo/facets-list\".",
+        "tags": [
+          "read"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacetsListOutput"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit: 120 requests a minute per IP for public routes."
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "integer"
+              ],
+              "description": "Category id or slug."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "integer"
+              ],
+              "description": "Tag id or slug."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "integer"
+              ],
+              "description": "Brand id or slug (WooCommerce Brands or Perfect Brands)."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "description": "taxonomy or attribute slug => list of term slugs or ids, e.g. {\"color\":[\"red\"],\"size\":[\"42\",\"43\"]}. Several values of one attribute are OR, attributes are AND.",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "integer"
+                  ]
+                }
+              }
+            },
+            "style": "deepObject",
+            "explode": true
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "in_stock",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Only products that can be bought now."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "on_sale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "min_rating",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "style": "form",
+            "explode": true
+          }
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "operationId": "productsFilterGet",
+        "summary": "Filter products",
+        "description": "Filter products by attributes, category, tag, brand, price range, stock, sale and rating. Variation aware: returns the matching variation and its stock when attributes are given. Also available as the WordPress Ability \"woobewoo/products-filter\".",
+        "tags": [
+          "read"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductsFilterOutput"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit: 120 requests a minute per IP for public routes."
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "integer"
+              ],
+              "description": "Category id or slug."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "integer"
+              ],
+              "description": "Tag id or slug."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "integer"
+              ],
+              "description": "Brand id or slug (WooCommerce Brands or Perfect Brands)."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "description": "taxonomy or attribute slug => list of term slugs or ids, e.g. {\"color\":[\"red\"],\"size\":[\"42\",\"43\"]}. Several values of one attribute are OR, attributes are AND.",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "integer"
+                  ]
+                }
+              }
+            },
+            "style": "deepObject",
+            "explode": true
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "minimum": 0
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "in_stock",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Only products that can be bought now."
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "on_sale",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "min_rating",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "default",
+                "price",
+                "price-desc",
+                "date",
+                "popularity",
+                "rating",
+                "title"
+              ],
+              "default": "default"
+            },
+            "style": "form",
+            "explode": true
+          }
+        ]
+      },
+      "post": {
+        "operationId": "productsFilter",
+        "summary": "Filter products",
+        "description": "Filter products by attributes, category, tag, brand, price range, stock, sale and rating. Variation aware: returns the matching variation and its stock when attributes are given. Also available as the WordPress Ability \"woobewoo/products-filter\".",
+        "tags": [
+          "read"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductsFilterOutput"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit: 120 requests a minute per IP for public routes."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductsFilterInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/short-links": {
+      "post": {
+        "operationId": "shortLinkCreate",
+        "summary": "Create a short shareable link for a filtered page.",
+        "tags": [
+          "links"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "filter_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Short link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShortLink"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit: 20 a minute per IP."
+          }
+        }
+      }
+    },
+    "/short-links/{slug}": {
+      "get": {
+        "operationId": "shortLinkGet",
+        "summary": "Read a short link.",
+        "tags": [
+          "links"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Short link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShortLink"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such link"
+          }
+        }
+      }
+    },
+    "/short-links/{slug}/qr": {
+      "get": {
+        "operationId": "shortLinkQr",
+        "summary": "QR code (SVG) of a short link.",
+        "tags": [
+          "links"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SVG image",
+            "content": {
+              "image/svg+xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mcp": {
+      "get": {
+        "operationId": "mcpCard",
+        "summary": "MCP server card: name, protocol versions, endpoint and tool names.",
+        "tags": [
+          "meta"
+        ],
+        "responses": {
+          "200": {
+            "description": "Server card (JSON)"
+          }
+        }
+      },
+      "post": {
+        "operationId": "mcp",
+        "summary": "MCP endpoint (Streamable HTTP, JSON-RPC 2.0): initialize, ping, tools/list, tools/call. Each ability is a tool.",
+        "tags": [
+          "meta"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "A JSON-RPC 2.0 request, or an array of them (batch)."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JSON-RPC 2.0 response (or an array for a batch)"
+          },
+          "202": {
+            "description": "Notification accepted, empty body"
+          },
+          "400": {
+            "description": "Invalid JSON or unsupported MCP-Protocol-Version"
+          },
+          "403": {
+            "description": "A write tool without a signed in user or a valid X-WPF-Key"
+          },
+          "429": {
+            "description": "Rate limit: 120 tool calls a minute per IP for public tools."
+          }
+        }
+      }
+    },
+    "/openapi": {
+      "get": {
+        "operationId": "openapi",
+        "summary": "This document.",
+        "tags": [
+          "meta"
+        ],
+        "responses": {
+          "200": {
+            "description": "OpenAPI 3.1 document"
+          }
+        }
+      }
+    },
+    "/readiness": {
+      "get": {
+        "operationId": "readiness",
+        "summary": "AI shopping readiness score with a fix line per failed check (manage_options).",
+        "tags": [
+          "meta"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "applicationPassword": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Score",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Readiness"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/llms": {
+      "post": {
+        "operationId": "llmsCreate",
+        "summary": "Create or refresh llms.txt (manage_options).",
+        "tags": [
+          "meta"
+        ],
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "applicationPassword": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FacetsListInput": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": [
+              "string",
+              "integer"
+            ],
+            "description": "Category id or slug."
+          },
+          "tag": {
+            "type": [
+              "string",
+              "integer"
+            ],
+            "description": "Tag id or slug."
+          },
+          "brand": {
+            "type": [
+              "string",
+              "integer"
+            ],
+            "description": "Brand id or slug (WooCommerce Brands or Perfect Brands)."
+          },
+          "attributes": {
+            "type": "object",
+            "description": "taxonomy or attribute slug => list of term slugs or ids, e.g. {\"color\":[\"red\"],\"size\":[\"42\",\"43\"]}. Several values of one attribute are OR, attributes are AND.",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "integer"
+                ]
+              }
+            }
+          },
+          "min_price": {
+            "type": "number",
+            "minimum": 0
+          },
+          "max_price": {
+            "type": "number",
+            "minimum": 0
+          },
+          "in_stock": {
+            "type": "boolean",
+            "description": "Only products that can be bought now."
+          },
+          "on_sale": {
+            "type": "boolean"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "min_rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "search": {
+            "type": "string",
+            "maxLength": 200
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacetsListOutput": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "integer",
+            "description": "Products matching the selection."
+          },
+          "currency": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "slug",
+                "count"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "slug",
+                "count"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "brands": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "slug",
+                "count"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "Attribute slug without pa_ (the url segment and the wpf_<key> query var)."
+                },
+                "taxonomy": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "terms": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "slug": {
+                        "type": "string"
+                      },
+                      "count": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "slug",
+                      "count"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "taxonomy",
+                "label",
+                "terms"
+              ]
+            }
+          },
+          "price": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "min",
+              "max"
+            ]
+          },
+          "stock": {
+            "type": "object",
+            "properties": {
+              "instock": {
+                "type": "integer"
+              },
+              "outofstock": {
+                "type": "integer"
+              },
+              "onbackorder": {
+                "type": "integer"
+              }
+            }
+          },
+          "on_sale": {
+            "type": "integer"
+          },
+          "featured": {
+            "type": "integer"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Shop page for this selection (pretty URL when clean links are on)."
+          }
+        },
+        "required": [
+          "products",
+          "currency",
+          "categories",
+          "attributes",
+          "price",
+          "stock"
+        ]
+      },
+      "ProductsFilterInput": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": [
+              "string",
+              "integer"
+            ],
+            "description": "Category id or slug."
+          },
+          "tag": {
+            "type": [
+              "string",
+              "integer"
+            ],
+            "description": "Tag id or slug."
+          },
+          "brand": {
+            "type": [
+              "string",
+              "integer"
+            ],
+            "description": "Brand id or slug (WooCommerce Brands or Perfect Brands)."
+          },
+          "attributes": {
+            "type": "object",
+            "description": "taxonomy or attribute slug => list of term slugs or ids, e.g. {\"color\":[\"red\"],\"size\":[\"42\",\"43\"]}. Several values of one attribute are OR, attributes are AND.",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "integer"
+                ]
+              }
+            }
+          },
+          "min_price": {
+            "type": "number",
+            "minimum": 0
+          },
+          "max_price": {
+            "type": "number",
+            "minimum": 0
+          },
+          "in_stock": {
+            "type": "boolean",
+            "description": "Only products that can be bought now."
+          },
+          "on_sale": {
+            "type": "boolean"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "min_rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "search": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "per_page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 20
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1
+          },
+          "orderby": {
+            "type": "string",
+            "enum": [
+              "default",
+              "price",
+              "price-desc",
+              "date",
+              "popularity",
+              "rating",
+              "title"
+            ],
+            "default": "default"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductsFilterOutput": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "per_page": {
+            "type": "integer"
+          },
+          "pages": {
+            "type": "integer"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "sku": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "price_max": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": "string"
+                },
+                "stock_status": {
+                  "type": "string",
+                  "enum": [
+                    "instock",
+                    "outofstock",
+                    "onbackorder"
+                  ]
+                },
+                "in_stock": {
+                  "type": "boolean"
+                },
+                "on_sale": {
+                  "type": "boolean"
+                },
+                "rating": {
+                  "type": "number"
+                },
+                "matching_variation_id": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "permalink": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "image": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "price",
+                "currency",
+                "stock_status",
+                "in_stock",
+                "permalink"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "per_page",
+          "products"
+        ]
+      },
+      "ShortLink": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "short_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "filter_id": {
+            "type": "integer"
+          },
+          "params": {
+            "type": "object"
+          },
+          "hits": {
+            "type": "integer"
+          },
+          "created": {
+            "type": "string"
+          },
+          "qr": {
+            "type": "string",
+            "description": "Inline SVG"
+          },
+          "qr_url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Readiness": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "weight": {
+                  "type": "integer"
+                },
+                "points": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "pass",
+                    "partial",
+                    "fail"
+                  ]
+                },
+                "detail": {
+                  "type": "string"
+                },
+                "fix": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "computed": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-WP-Nonce"
+      },
+      "applicationPassword": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}

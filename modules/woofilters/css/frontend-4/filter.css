@@ -1,0 +1,1973 @@
+/*
+ * Product Filter by WBW - storefront engine 4
+ * Tokens follow the WooBeWoo 4.0 design spec. No forced (important) rules, no borders on controls, no shadows, no gradients.
+ */
+.wpf4 {
+	--wpf4-paper: #F7F4EA;
+	--wpf4-card: #FFFFFF;
+	--wpf4-chip: #ECE7D6;
+	--wpf4-chip-hover: #E2DCC8;
+	--wpf4-ink: #171509;
+	--wpf4-ink-2: #5A5645;
+	--wpf4-ink-3: #948F7C;
+	--wpf4-hairline: #E8E3D2;
+	--wpf4-knob: #C9C3B4;
+	--wpf4-tint: #E4F3FF;
+	--wpf4-tool-text: #046BD2;
+	--wpf4-accent: #6BBFFF;
+	--wpf4-on-accent: #171509;
+	--wpf4-pass-soft: rgba(44, 156, 87, .12);
+	--wpf4-pass-text: #1F7A43;
+	--wpf4-partial-soft: rgba(233, 167, 15, .16);
+	--wpf4-partial-text: #7A5C00;
+	--wpf4-critical-soft: rgba(196, 43, 26, .10);
+	--wpf4-critical-text: #C42B1A;
+	--wpf4-snap: 280ms cubic-bezier(.2, 1.4, .4, 1);
+	--wpf4-slide: 360ms cubic-bezier(.2, .9, .1, 1);
+	--wpf4-gap: 24px;
+	--wpf4-opt-size: 40px;
+	--wpf4-swatch-size: 32px;
+	color: var(--wpf4-ink);
+	font-size: 15px;
+	line-height: 1.55;
+	display: flex;
+	flex-direction: column;
+	gap: var(--wpf4-gap);
+	box-sizing: border-box;
+	min-width: 0;
+}
+.wpf4.wpf4 *,
+.wpf4.wpf4 *::before,
+.wpf4.wpf4 *::after {
+	box-sizing: border-box;
+}
+.wpf4.wpf4 button,
+.wpf4.wpf4 input,
+.wpf4.wpf4 select {
+	font: inherit;
+	color: inherit;
+}
+.wpf4.wpf4 button {
+	cursor: pointer;
+	border: 0;
+	background: none;
+	padding: 0;
+	margin: 0;
+	border-radius: 999px;
+	min-height: 44px;
+	min-width: 44px;
+	text-decoration: none;
+	box-shadow: none;
+	transition: background-color var(--wpf4-snap), color var(--wpf4-snap), transform var(--wpf4-snap);
+}
+.wpf4.wpf4 button:hover {
+	background: none;
+	color: inherit;
+}
+.wpf4.wpf4 button:focus,
+.wpf4.wpf4 input:focus,
+.wpf4.wpf4 select:focus,
+.wpf4.wpf4 summary:focus,
+.wpf4.wpf4 a:focus {
+	outline: none;
+	box-shadow: none;
+}
+.wpf4.wpf4 :focus-visible,
+.wpf4.wpf4 button:focus-visible,
+.wpf4.wpf4 input:focus-visible,
+.wpf4.wpf4 select:focus-visible,
+.wpf4.wpf4 summary:focus-visible,
+.wpf4.wpf4 a:focus-visible {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 3px;
+	box-shadow: none;
+}
+.wpf4 .wpf4__sr,
+.wpf4-drawer .wpf4__sr,
+.wpf4-finder .wpf4__sr {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+.wpf4 [hidden],
+.wpf4-drawer[hidden],
+.wpf4-finder[hidden],
+.wpf4-scrim[hidden],
+.wpf4.wpf4 .wpf4-drawerBtn[hidden] {
+	display: none;
+}
+.wpf4__icon {
+	width: 24px;
+	height: 24px;
+	flex: 0 0 auto;
+}
+
+/* ---------------------------------------------------------------- form, head, chips */
+.wpf4__form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wpf4-gap);
+	margin: 0;
+}
+.wpf4__head {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+}
+.wpf4__title {
+	font-size: 17px;
+	font-weight: 700;
+}
+.wpf4.wpf4 .wpf4__clear {
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--wpf4-ink);
+	padding: 0 12px;
+	min-height: 36px;
+	background: var(--wpf4-chip);
+}
+.wpf4.wpf4 .wpf4__clear:hover {
+	background: var(--wpf4-chip-hover);
+	color: var(--wpf4-ink);
+}
+.wpf4.wpf4 .wpf4__chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+.wpf4.wpf4 .wpf4__chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 34px;
+	padding: 0 12px;
+	background: var(--wpf4-ink);
+	color: var(--wpf4-card);
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1;
+}
+.wpf4.wpf4 .wpf4__chip:hover {
+	background: #2F3139;
+	color: var(--wpf4-card);
+}
+.wpf4.wpf4 .wpf4__finderBtn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	min-height: 46px;
+	padding: 0 20px;
+	background: var(--wpf4-tint);
+	color: var(--wpf4-ink);
+	font-size: 15px;
+	font-weight: 700;
+}
+.wpf4.wpf4 .wpf4__finderBtn:hover {
+	background: var(--wpf4-accent);
+	color: var(--wpf4-on-accent);
+}
+.wpf4.wpf4 .wpf4__finderBtn .wpf4__icon {
+	width: 20px;
+	height: 20px;
+}
+.wpf4__blocks {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.wpf4.wpf4 .wpf4__apply {
+	min-height: 46px;
+	padding: 0 24px;
+	background: var(--wpf4-accent);
+	color: var(--wpf4-on-accent);
+	font-size: 15px;
+	font-weight: 700;
+	align-self: flex-start;
+}
+.wpf4.wpf4 .wpf4__apply:hover {
+	background: var(--wpf4-accent);
+	color: var(--wpf4-on-accent);
+	transform: translateY(-1px);
+}
+.wpf4--auto .wpf4__apply {
+	display: none;
+}
+.wpf4__live {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+.wpf4.is-loading .wpf4__blocks {
+	opacity: .6;
+	transition: opacity var(--wpf4-snap);
+}
+
+/* ---------------------------------------------------------------- blocks */
+.wpf4__block {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	min-width: 0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+.wpf4__legend {
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.4;
+	padding: 0;
+	margin: 0 0 8px;
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	gap: 4px;
+	width: 100%;
+	min-height: 24px;
+	float: left;
+	box-sizing: border-box;
+}
+.wpf4__legend + * {
+	clear: both;
+}
+.wpf4__legendText {
+	flex: 0 1 auto;
+	min-width: 0;
+}
+.wpf4__hint {
+	flex: 1 1 auto;
+	min-width: 0;
+	font-weight: 400;
+	font-size: 13px;
+	color: var(--wpf4-ink-2);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+/* The chevron sits at the right edge of the title line; the 44px hit area overhangs the line without changing its height. */
+.wpf4.wpf4 .wpf4__fold {
+	position: static;
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 44px;
+	min-width: 44px;
+	height: 44px;
+	min-height: 44px;
+	margin: -10px -10px -10px auto;
+	padding: 0 10px 0 0;
+	color: var(--wpf4-ink-2);
+}
+.wpf4.wpf4 .wpf4__fold .wpf4__icon {
+	transition: transform var(--wpf4-snap);
+}
+.wpf4.wpf4 .wpf4__fold[aria-expanded="false"] .wpf4__icon {
+	transform: rotate(-90deg);
+}
+.wpf4__body {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.wpf4__body[hidden] {
+	display: none;
+}
+.wpf4__options--mobile {
+	display: none;
+}
+.wpf4--phone .wpf4__options--mobile {
+	display: block;
+}
+.wpf4--phone .wpf4__block[data-display-mobile] .wpf4__options--desktop {
+	display: none;
+}
+.wpf4__list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	overflow: auto;
+}
+.wpf4__options--chips .wpf4__list,
+.wpf4__options--squares .wpf4__list,
+.wpf4__options--swatches .wpf4__list {
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 8px 8px;
+}
+.wpf4__options--swatches .wpf4__list {
+	gap: 10px;
+}
+.wpf4__opt {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 44px;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 400;
+	color: var(--wpf4-ink);
+	position: relative;
+	border-radius: 10px;
+}
+.wpf4__opt--child {
+	padding-inline-start: calc(var(--wpf4-depth, 1) * 20px);
+}
+.wpf4__opt--list input {
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	accent-color: var(--wpf4-ink);
+	flex: 0 0 auto;
+}
+.wpf4__optText {
+	min-width: 0;
+}
+.wpf4__chipOpt .wpf4__optText,
+.wpf4__square .wpf4__optText {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.wpf4__count {
+	color: var(--wpf4-ink-2);
+	font-size: 13px;
+	font-weight: 400;
+}
+.wpf4__opt.is-empty .wpf4__optText,
+.wpf4__opt.is-empty .wpf4__count {
+	color: var(--wpf4-ink-3);
+	text-decoration: none;
+}
+.wpf4__opt--list.is-empty input {
+	opacity: .55;
+}
+
+/* "Show more (12)" after N rows; folded values leave the flow (and the tab order) until the pill opens them.
+   Stronger than every display rule of chips, squares, swatches and list rows. */
+.wpf4.wpf4 .wpf4__opt.wpf4__opt--folded,
+.wpf4.wpf4 .wpf4__chipOpt.wpf4__opt--folded,
+.wpf4.wpf4 .wpf4__square.wpf4__opt--folded,
+.wpf4.wpf4 .wpf4__swatch.wpf4__opt--folded {
+	display: none;
+}
+.wpf4.wpf4 .wpf4__more {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	align-self: flex-start;
+	min-height: 36px;
+	padding: 0 14px;
+	margin: 2px 0 0;
+	background: var(--wpf4-chip);
+	color: var(--wpf4-ink);
+	font-size: 13px;
+	font-weight: 700;
+}
+.wpf4.wpf4 .wpf4__more:hover {
+	background: var(--wpf4-chip-hover);
+	color: var(--wpf4-ink);
+}
+.wpf4.wpf4 .wpf4__more[hidden] {
+	display: none;
+}
+
+/* chips, squares, swatches: the native input stays in the tab order, visually hidden */
+.wpf4.wpf4 .wpf4__chipOpt input,
+.wpf4__square input,
+.wpf4__swatch input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	opacity: 0;
+	pointer-events: none;
+}
+.wpf4.wpf4 .wpf4__chipOpt {
+	flex: 0 0 auto;
+	width: auto;
+	max-width: 100%;
+	white-space: nowrap;
+	box-sizing: border-box;
+	display: inline-flex;
+	gap: 8px;
+	margin: 0;
+	min-height: 36px;
+	padding: 0 14px;
+	border-radius: 999px;
+	background: var(--wpf4-paper);
+	font-size: 14px;
+	font-weight: 700;
+	transition: background-color var(--wpf4-snap), color var(--wpf4-snap);
+}
+.wpf4.wpf4 .wpf4__chipOpt:hover {
+	background: var(--wpf4-chip);
+}
+.wpf4.wpf4 .wpf4__chipOpt.is-checked,
+.wpf4.wpf4 .wpf4__chipOpt:has(input:checked) {
+	background: var(--wpf4-ink);
+	color: var(--wpf4-card);
+}
+.wpf4.wpf4 .wpf4__chipOpt.is-checked .wpf4__count,
+.wpf4.wpf4 .wpf4__chipOpt:has(input:checked) .wpf4__count {
+	color: var(--wpf4-card);
+}
+/* A square for short values (sizes 40, 42, XL); a longer value widens it to fit its text instead of being cut. */
+.wpf4__square {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: auto;
+	min-width: var(--wpf4-opt-size);
+	max-width: 100%;
+	height: var(--wpf4-opt-size);
+	min-height: var(--wpf4-opt-size);
+	padding: 0 10px;
+	gap: 0;
+	white-space: nowrap;
+	box-sizing: border-box;
+	border-radius: 10px;
+	background: var(--wpf4-paper);
+	font-size: 14px;
+	transition: background-color var(--wpf4-snap), color var(--wpf4-snap);
+}
+.wpf4__square .wpf4__count {
+	display: none;
+}
+.wpf4__square:hover {
+	background: var(--wpf4-chip);
+}
+.wpf4__square.is-checked,
+.wpf4__square:has(input:checked) {
+	background: var(--wpf4-ink);
+	color: var(--wpf4-card);
+	font-weight: 700;
+}
+.wpf4__square.is-empty .wpf4__optText {
+	color: var(--wpf4-ink-3);
+	text-decoration: none;
+}
+.wpf4__swatch {
+	display: inline-flex;
+	width: var(--wpf4-swatch-size);
+	height: var(--wpf4-swatch-size);
+	min-height: var(--wpf4-swatch-size);
+	padding: 0;
+	gap: 0;
+	border-radius: 10px;
+	position: relative;
+}
+.wpf4__swatchColor {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-size: cover;
+	background-position: center;
+	box-shadow: inset 0 0 0 1px rgba(23, 21, 9, .08);
+	transition: outline-color var(--wpf4-snap);
+}
+.wpf4__swatchColor--text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--wpf4-paper);
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+.wpf4__swatch.is-checked .wpf4__swatchColor,
+.wpf4__swatch:has(input:checked) .wpf4__swatchColor {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 3px;
+}
+.wpf4__swatch.is-empty .wpf4__swatchColor {
+	opacity: .35;
+}
+.wpf4__swatch:has(input:focus-visible) .wpf4__swatchColor,
+.wpf4__square:has(input:focus-visible),
+.wpf4.wpf4 .wpf4__chipOpt:has(input:focus-visible) {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 3px;
+}
+.wpf4__swatch.is-checked:has(input:focus-visible) .wpf4__swatchColor {
+	outline-color: var(--wpf4-tool-text);
+}
+/* rating: one row of five star pills, scrolls sideways when the column is narrower than the row */
+.wpf4__options--stars {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	min-width: 0;
+}
+/* Desktop: the star choices wrap onto as many lines as the column needs, so every choice is in view (a narrow
+   sidebar showed two and hid the rest behind a sideways scroll). Phone and drawer: one row that scrolls sideways. */
+.wpf4__stars {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	min-width: 0;
+	max-width: 100%;
+	padding: 4px;
+	margin: -4px;
+}
+.wpf4--phone .wpf4__stars,
+.wpf4-drawer__body .wpf4__stars {
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	scroll-snap-type: x proximity;
+	scrollbar-width: none;
+}
+.wpf4--phone .wpf4__stars::-webkit-scrollbar,
+.wpf4-drawer__body .wpf4__stars::-webkit-scrollbar {
+	display: none;
+}
+.wpf4.wpf4 .wpf4__star {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	min-height: 36px;
+	padding: 0 12px;
+	margin: 0;
+	border-radius: 999px;
+	background: var(--wpf4-paper);
+	color: var(--wpf4-ink);
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1;
+	white-space: nowrap;
+	scroll-snap-align: start;
+	transition: background-color var(--wpf4-snap), color var(--wpf4-snap);
+}
+.wpf4.wpf4 .wpf4__star:hover {
+	background: var(--wpf4-chip);
+}
+.wpf4.wpf4 .wpf4__star input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	opacity: 0;
+	pointer-events: none;
+}
+.wpf4__starRow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0;
+}
+.wpf4__starIcon {
+	width: 16px;
+	height: 16px;
+	flex: 0 0 auto;
+	margin: 0 -1px;
+}
+.wpf4__starUp {
+	margin-left: 2px;
+}
+.wpf4.wpf4 .wpf4__star .wpf4__count {
+	font-size: 11px;
+	font-weight: 700;
+	color: var(--wpf4-ink-2);
+	margin-left: 2px;
+}
+.wpf4.wpf4 .wpf4__star.is-checked,
+.wpf4.wpf4 .wpf4__star:has(input:checked) {
+	background: var(--wpf4-ink);
+	color: var(--wpf4-card);
+}
+.wpf4.wpf4 .wpf4__star.is-checked .wpf4__count,
+.wpf4.wpf4 .wpf4__star:has(input:checked) .wpf4__count {
+	color: var(--wpf4-card);
+}
+.wpf4.wpf4 .wpf4__star.is-empty {
+	color: var(--wpf4-ink-3);
+}
+.wpf4.wpf4 .wpf4__star.is-empty .wpf4__count {
+	color: var(--wpf4-ink-3);
+}
+.wpf4.wpf4 .wpf4__star:has(input:focus-visible) {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 2px;
+}
+/* 4.0.0: five equal boxes in one short line ("1+ ★" … "5 ★"), also in a 240px sidebar and on phones. */
+.wpf4.wpf4 .wpf4__stars--compact {
+	flex-wrap: nowrap;
+	overflow: visible;
+	gap: 4px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	scroll-snap-type: none;
+}
+.wpf4.wpf4 .wpf4__stars--compact .wpf4__star {
+	flex: 1 1 0;
+	min-width: 0;
+	justify-content: center;
+	gap: 3px;
+	padding: 0 4px;
+	min-height: 36px;
+	border-radius: 10px;
+	font-size: 13px;
+}
+.wpf4__stars--compact .wpf4__starIcon {
+	width: 14px;
+	height: 14px;
+	margin: 0;
+	color: #E0A200;
+}
+.wpf4.wpf4 .wpf4__stars--compact .wpf4__star.is-checked .wpf4__starIcon,
+.wpf4.wpf4 .wpf4__stars--compact .wpf4__star:has(input:checked) .wpf4__starIcon {
+	color: #FFC531;
+}
+.wpf4.wpf4 .wpf4__stars--compact .wpf4__star.is-empty .wpf4__starIcon {
+	color: var(--wpf4-ink-3);
+}
+.wpf4__starNum {
+	font-variant-numeric: tabular-nums;
+}
+.wpf4.wpf4 .wpf4__starClear {
+	align-self: flex-start;
+	min-height: 32px;
+	min-width: 0;
+	padding: 0 2px;
+	background: none;
+	color: var(--wpf4-ink);
+	font-size: 13px;
+	font-weight: 700;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	border-radius: 6px;
+}
+.wpf4.wpf4 .wpf4__starClear:hover {
+	background: none;
+	color: var(--wpf4-tool-text);
+}
+.wpf4.wpf4 .wpf4__starClear[hidden] {
+	display: none;
+}
+.wpf4__tip {
+	position: absolute;
+	left: 50%;
+	bottom: calc(100% + 6px);
+	transform: translateX(-50%);
+	background: var(--wpf4-ink);
+	color: var(--wpf4-card);
+	font-size: 12px;
+	font-weight: 700;
+	padding: 4px 8px;
+	border-radius: 8px;
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity var(--wpf4-snap);
+	z-index: 2;
+}
+.wpf4__swatch:hover .wpf4__tip,
+.wpf4__swatch:has(input:focus-visible) .wpf4__tip {
+	opacity: 1;
+}
+.wpf4.wpf4 .wpf4__select,
+.wpf4.wpf4 .wpf4__text {
+	width: 100%;
+	min-height: 44px;
+	padding: 0 16px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--wpf4-paper);
+	color: var(--wpf4-ink);
+	font-size: 15px;
+	appearance: none;
+	-webkit-appearance: none;
+}
+.wpf4.wpf4 .wpf4__select {
+	padding-right: 40px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23171509' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+}
+.wpf4__dd {
+	position: relative;
+}
+.wpf4.wpf4 .wpf4__ddSummary {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	min-height: 44px;
+	padding: 0 12px 0 16px;
+	border-radius: 999px;
+	background: var(--wpf4-paper);
+	cursor: pointer;
+}
+.wpf4.wpf4 .wpf4__ddSummary::-webkit-details-marker {
+	display: none;
+}
+.wpf4__dd[open] .wpf4__ddSummary .wpf4__icon {
+	transform: rotate(180deg);
+}
+.wpf4__ddList {
+	padding: 8px 4px 0;
+}
+.wpf4__search {
+	margin-bottom: 4px;
+}
+.wpf4.wpf4 .wpf4__searchInput {
+	width: 100%;
+	min-height: 40px;
+	padding: 0 14px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--wpf4-paper);
+	font-size: 14px;
+}
+
+/* toggle */
+.wpf4__toggle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	min-height: 44px;
+	margin: 0;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 700;
+	position: relative;
+}
+.wpf4__toggle input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	opacity: 0;
+}
+.wpf4__switch {
+	display: inline-flex;
+	flex: 0 0 auto;
+	width: 52px;
+	height: 30px;
+	border-radius: 999px;
+	background: var(--wpf4-knob);
+	position: relative;
+	transition: background-color var(--wpf4-snap);
+}
+.wpf4__switch::after {
+	content: "";
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 24px;
+	height: 24px;
+	border-radius: 999px;
+	background: var(--wpf4-card);
+	transition: transform var(--wpf4-snap);
+}
+.wpf4__toggle input:checked + .wpf4__switch {
+	background: var(--wpf4-accent);
+}
+.wpf4__toggle input:checked + .wpf4__switch::after {
+	transform: translateX(22px);
+}
+.wpf4__toggle input:focus-visible + .wpf4__switch {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 3px;
+}
+
+/* slider: two native ranges on one track */
+.wpf4__slider {
+	position: relative;
+	height: 44px;
+	margin: 0 12px;
+	min-width: 0;
+}
+.wpf4__options--slider {
+	min-width: 0;
+	max-width: 100%;
+}
+.wpf4__sliderTrack {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 18px;
+	height: 8px;
+	border-radius: 999px;
+	background: var(--wpf4-paper);
+}
+.wpf4__sliderFill {
+	position: absolute;
+	top: 0;
+	height: 8px;
+	border-radius: 999px;
+	background: var(--wpf4-accent);
+}
+.wpf4.wpf4 .wpf4__range {
+	position: absolute;
+	left: -12px;
+	right: -12px;
+	top: 0;
+	width: calc(100% + 24px);
+	height: 44px;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	appearance: none;
+	-webkit-appearance: none;
+	pointer-events: none;
+	border: 0;
+}
+.wpf4.wpf4 .wpf4__range::-webkit-slider-runnable-track {
+	background: transparent;
+	height: 44px;
+}
+.wpf4.wpf4 .wpf4__range::-moz-range-track {
+	background: transparent;
+	height: 44px;
+}
+.wpf4.wpf4 .wpf4__range::-webkit-slider-thumb {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 24px;
+	height: 24px;
+	margin-top: 10px;
+	border-radius: 999px;
+	background: var(--wpf4-ink);
+	border: 0;
+	pointer-events: auto;
+	cursor: grab;
+}
+.wpf4.wpf4 .wpf4__range::-moz-range-thumb {
+	width: 24px;
+	height: 24px;
+	border-radius: 999px;
+	background: var(--wpf4-ink);
+	border: 0;
+	pointer-events: auto;
+	cursor: grab;
+}
+.wpf4.wpf4 .wpf4__range:focus-visible {
+	outline: none;
+}
+.wpf4.wpf4 .wpf4__range:focus-visible::-webkit-slider-thumb {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 3px;
+}
+.wpf4.wpf4 .wpf4__range:focus-visible::-moz-range-thumb {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 3px;
+}
+.wpf4.wpf4 .wpf4__sliderValues {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	color: var(--wpf4-ink-2);
+}
+.wpf4.wpf4 .wpf4__sliderOut {
+	grid-column: 1 / -1;
+	order: -1;
+}
+.wpf4__num {
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	gap: 4px;
+	margin: 0;
+	min-height: 44px;
+	padding: 0 10px;
+	border-radius: 999px;
+	background: var(--wpf4-paper);
+	font-size: 13px;
+	min-width: 0;
+	max-width: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.wpf4__numLabel,
+.wpf4__cur {
+	flex: 0 0 auto;
+}
+.wpf4__numLabel {
+	font-weight: 700;
+	color: var(--wpf4-ink-2);
+}
+.wpf4__cur {
+	color: var(--wpf4-ink-2);
+}
+.wpf4.wpf4 .wpf4__num input {
+	flex: 1 1 0;
+	width: auto;
+	min-width: 0;
+	max-width: 100%;
+	border: 0;
+	background: transparent;
+	padding: 0;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--wpf4-ink);
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+.wpf4.wpf4 .wpf4__num input::-webkit-outer-spin-button,
+.wpf4.wpf4 .wpf4__num input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+.wpf4__sliderOut {
+	font-weight: 700;
+	color: var(--wpf4-ink);
+	text-align: center;
+}
+.wpf4__sliderBounds {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	color: var(--wpf4-ink-2);
+}
+
+/* ---------------------------------------------------------------- look presets */
+.wpf4--compact {
+	--wpf4-gap: 16px;
+	--wpf4-opt-size: 36px;
+	--wpf4-swatch-size: 28px;
+	font-size: 14px;
+}
+.wpf4--compact .wpf4__opt {
+	min-height: 40px;
+	font-size: 14px;
+}
+.wpf4--compact .wpf4__legend {
+	margin-bottom: 6px;
+}
+.wpf4--swatches .wpf4__options--squares .wpf4__list {
+	gap: 8px;
+}
+
+/* ---------------------------------------------------------------- hook containers (Pro: Save this search …) */
+.wpf4.wpf4 .wpf4__before,
+.wpf4.wpf4 .wpf4__after {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+	min-width: 0;
+}
+.wpf4.wpf4 .wpf4__after > *,
+.wpf4.wpf4 .wpf4__before > * {
+	margin: 0;
+	min-width: 0;
+}
+
+/* ---------------------------------------------------------------- desktop layout when the theme has no real sidebar
+   filter.js builds the row and also writes these values inline, so a theme rule can never let the filter column grow. */
+.wpf4-layout {
+	--wpf4-side: 280px;
+	display: flex;
+	align-items: flex-start;
+	gap: 32px;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	clear: both;
+	box-sizing: border-box;
+}
+.wpf4-layout > .wpf4-layout__side.wpf4-layout__side {
+	flex: 0 0 var(--wpf4-side, 280px);
+	width: var(--wpf4-side, 280px);
+	min-width: min(240px, var(--wpf4-side, 280px));
+	max-width: var(--wpf4-side, 280px);
+	float: none;
+	margin: 0;
+	padding: 0;
+	position: static;
+	box-sizing: border-box;
+}
+.wpf4-layout > .wpf4-layout__main.wpf4-layout__main {
+	flex: 1 1 0;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	float: none;
+	margin: 0;
+	padding: 0;
+	position: static;
+	box-sizing: border-box;
+}
+.wpf4-layout__main > .wpf4-layout__inner.wpf4-layout__inner {
+	float: none;
+	width: auto;
+	max-width: none;
+	min-width: 0;
+	box-sizing: border-box;
+}
+.wpf4-layout__main img,
+.wpf4-layout__main video {
+	max-width: 100%;
+}
+.wpf4-layout > .wpf4-layout__side .wpf4 {
+	width: 100%;
+	max-width: 100%;
+}
+/* Not enough room for a 300px product column beside the filter: stack, the filter keeps its column width */
+.wpf4-layout.wpf4-layout--stack {
+	display: block;
+}
+.wpf4-layout.wpf4-layout--stack > .wpf4-layout__side.wpf4-layout__side {
+	width: auto;
+	margin: 0 0 24px;
+}
+.wpf4-layout.wpf4-layout--stack > .wpf4-layout__main.wpf4-layout__main {
+	width: auto;
+}
+@media (max-width: 899px) {
+	.wpf4-layout {
+		display: block;
+	}
+	.wpf4-layout > .wpf4-layout__side.wpf4-layout__side,
+	.wpf4-layout > .wpf4-layout__main.wpf4-layout__main {
+		width: auto;
+		max-width: none;
+	}
+	.wpf4-layout > .wpf4-layout__side.wpf4-layout__side {
+		margin: 0 0 24px;
+	}
+}
+
+/* ---------------------------------------------------------------- result cards */
+.wpf4-badge {
+	display: inline-flex;
+	align-items: center;
+	min-height: 24px;
+	padding: 0 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1;
+	margin: 4px 0 8px;
+}
+.wpf4-badge--passed {
+	background: var(--wpf4-pass-soft, rgba(44, 156, 87, .12));
+	color: var(--wpf4-pass-text, #1F7A43);
+}
+.wpf4-badge--partial {
+	background: var(--wpf4-partial-soft, rgba(233, 167, 15, .16));
+	color: var(--wpf4-partial-text, #7A5C00);
+}
+.wpf4-badge--critical {
+	background: var(--wpf4-critical-soft, rgba(196, 43, 26, .10));
+	color: var(--wpf4-critical-text, #C42B1A);
+}
+.wpf4-products--empty {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.wpf4-empty {
+	width: 100%;
+	grid-column: 1 / -1;
+}
+.wpf4-empty__text {
+	margin: 0;
+}
+.wpf4-loadMore {
+	display: flex;
+	justify-content: center;
+	margin: 24px 0;
+}
+.wpf4-loadMore__btn {
+	font: inherit;
+	cursor: pointer;
+	border: 0;
+	min-height: 46px;
+	padding: 0 24px;
+	border-radius: 999px;
+	background: #ECE7D6;
+	color: #171509;
+	font-size: 15px;
+	font-weight: 700;
+}
+.wpf4-loadMore__btn:hover {
+	background: #E2DCC8;
+	color: #171509;
+}
+.wpf4-loadMore__btn:focus-visible {
+	outline: 3px solid #171509;
+	outline-offset: 3px;
+}
+.wpf4-sentinel {
+	height: 1px;
+}
+.wpf4-pagination .page-numbers {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	list-style: none;
+	padding: 0;
+	margin: 24px 0 0;
+}
+.wpf4-pagination .page-numbers li {
+	margin: 0;
+}
+.wpf4-pagination .page-numbers a,
+.wpf4-pagination .page-numbers span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0 14px;
+	border-radius: 999px;
+	background: #F7F4EA;
+	color: #171509;
+	text-decoration: none;
+	font-weight: 700;
+	border: 0;
+}
+.wpf4-pagination .page-numbers a:hover {
+	background: #ECE7D6;
+	color: #171509;
+}
+.wpf4-pagination .page-numbers .current {
+	background: #171509;
+	color: #FFFFFF;
+}
+.wpf4-pagination .page-numbers .dots {
+	background: none;
+}
+.wpf4-a11y-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 32px;
+	padding: 0 14px;
+	border-radius: 999px;
+	background: rgba(44, 156, 87, .12);
+	color: #1F7A43;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+/* ---------------------------------------------------------------- phone drawer */
+.wpf4.wpf4 .wpf4-drawerBtn {
+	position: fixed;
+	left: 50%;
+	bottom: 16px;
+	transform: translateX(-50%);
+	z-index: 99990;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 48px;
+	padding: 0 20px 0 16px;
+	border: 0;
+	border-radius: 999px;
+	background: #171509;
+	color: #FFFFFF;
+	font: inherit;
+	font-size: 15px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform var(--wpf4-snap, 280ms cubic-bezier(.2, 1.4, .4, 1));
+}
+.wpf4.wpf4 .wpf4-drawerBtn:hover {
+	background: #2F3139;
+	color: #FFFFFF;
+	transform: translateX(-50%) translateY(-2px);
+}
+.wpf4.wpf4 .wpf4-drawerBtn .wpf4__icon {
+	width: 20px;
+	height: 20px;
+}
+.wpf4.wpf4 .wpf4-drawerBtn__n:empty {
+	display: none;
+}
+.wpf4-scrim {
+	position: fixed;
+	inset: 0;
+	background: rgba(23, 21, 9, .42);
+	z-index: 99991;
+	opacity: 0;
+	transition: opacity var(--wpf4-slide, 360ms cubic-bezier(.2, .9, .1, 1));
+}
+.wpf4-scrim.is-open {
+	opacity: 1;
+}
+.wpf4-drawer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99992;
+	background: #FFFFFF;
+	color: #171509;
+	border-radius: 28px 28px 0 0;
+	padding: 12px 20px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	max-height: 92vh;
+	max-height: 92dvh;
+	transform: translateY(100%);
+	transition: transform var(--wpf4-slide, 360ms cubic-bezier(.2, .9, .1, 1));
+	font-size: 15px;
+	line-height: 1.55;
+}
+.wpf4-drawer.is-open {
+	transform: translateY(0);
+}
+.wpf4.wpf4 .wpf4-drawer button {
+	font: inherit;
+	cursor: pointer;
+	border: 0;
+	border-radius: 999px;
+	box-shadow: none;
+	padding: 0;
+}
+.wpf4-drawer__handle {
+	width: 40px;
+	height: 5px;
+	border-radius: 999px;
+	background: #C9C3B4;
+	margin: 0 auto;
+	flex: 0 0 auto;
+}
+.wpf4-drawer__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+}
+.wpf4-drawer__title {
+	margin: 0;
+	font-size: 22px;
+	font-weight: 700;
+	letter-spacing: -.02em;
+	line-height: 1.2;
+}
+.wpf4-drawer__actions {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+.wpf4.wpf4 .wpf4-drawer__clear {
+	font-size: 13px;
+	font-weight: 700;
+	min-height: 36px;
+	padding: 0 12px;
+	background: #ECE7D6;
+	color: #171509;
+}
+.wpf4.wpf4 .wpf4-drawer__clear:hover,
+.wpf4.wpf4 .wpf4-drawer__close:hover {
+	background: #E2DCC8;
+	color: #171509;
+}
+.wpf4.wpf4 .wpf4-drawer__close {
+	width: 44px;
+	height: 44px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	background: #ECE7D6;
+	color: #171509;
+}
+.wpf4.wpf4 .wpf4__remember,
+.wpf4.wpf4 .wpf4-drawer__remember {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	text-align: left;
+	background: #E4F3FF;
+	color: #171509;
+	border-radius: 14px;
+	padding: 10px 14px;
+	font-size: 13px;
+	min-height: 44px;
+	line-height: 1.4;
+}
+.wpf4.wpf4 .wpf4__remember:hover,
+.wpf4.wpf4 .wpf4-drawer__remember:hover {
+	background: #6BBFFF;
+	color: #171509;
+}
+.wpf4.wpf4 .wpf4__remember .wpf4__icon,
+.wpf4.wpf4 .wpf4-drawer__remember .wpf4__icon {
+	width: 18px;
+	height: 18px;
+}
+.wpf4.wpf4 .wpf4__remember[hidden],
+.wpf4.wpf4 .wpf4-drawer__remember[hidden] {
+	display: none;
+}
+.wpf4-drawer__body {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	overflow: auto;
+	min-height: 0;
+	flex: 1 1 auto;
+	padding: 2px;
+}
+.wpf4-drawer__body .wpf4__form {
+	gap: 16px;
+}
+.wpf4-drawer__body .wpf4__head {
+	display: none;
+}
+.wpf4-drawer__body .wpf4__apply {
+	display: none;
+}
+.wpf4-drawer__body .wpf4__legend {
+	margin-bottom: 8px;
+}
+.wpf4.wpf4 .wpf4-drawer__show {
+	min-height: 52px;
+	background: var(--wpf4-accent, #6BBFFF);
+	color: var(--wpf4-on-accent, #171509);
+	font-size: 17px;
+	font-weight: 700;
+	flex: 0 0 auto;
+}
+.wpf4.wpf4 .wpf4-drawer__show:hover {
+	background: var(--wpf4-accent, #6BBFFF);
+	color: var(--wpf4-on-accent, #171509);
+}
+.wpf4-drawer__live {
+	margin: 0;
+	text-align: center;
+	font-size: 12px;
+	color: #5A5645;
+}
+.wpf4-drawer__live:empty {
+	display: none;
+}
+.wpf4--phone {
+	--wpf4-opt-size: 44px;
+	--wpf4-swatch-size: 36px;
+}
+.wpf4--drawer-moved > .wpf4__form {
+	display: none;
+}
+.wpf4-drawer__body .wpf4__form {
+	display: flex;
+}
+.wpf4-drawer__body .wpf4__chips {
+	display: flex;
+}
+.wpf4-drawer__body .wpf4__chips[hidden],
+.wpf4--drawer-nochips .wpf4-drawer__body .wpf4__chips {
+	display: none;
+}
+.wpf4-drawer__body .wpf4__finderBtn {
+	display: inline-flex;
+}
+body.wpf4-locked {
+	overflow: hidden;
+}
+
+/* ---------------------------------------------------------------- finder */
+.wpf4-finder {
+	position: fixed;
+	inset: 0;
+	padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+	z-index: 99993;
+	background: #F7F4EA;
+	color: #171509;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	overflow: auto;
+	font-size: 15px;
+	line-height: 1.5;
+}
+.wpf4.wpf4 .wpf4-finder button {
+	font: inherit;
+	cursor: pointer;
+	border: 0;
+	border-radius: 999px;
+	box-shadow: none;
+	padding: 0;
+}
+.wpf4-finder__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+}
+.wpf4-finder__name {
+	font-size: 17px;
+	font-weight: 700;
+}
+.wpf4.wpf4 .wpf4-finder__skip {
+	font-size: 13px;
+	font-weight: 700;
+	color: #171509;
+	background: none;
+	min-height: 44px;
+	padding: 0 8px;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.wpf4.wpf4 .wpf4-finder__skip:hover {
+	color: #046BD2;
+	background: none;
+}
+.wpf4-finder__steps {
+	display: flex;
+	gap: 6px;
+}
+.wpf4-finder__step {
+	flex: 1;
+	height: 6px;
+	border-radius: 999px;
+	background: #E8E3D2;
+	transition: background-color var(--wpf4-snap, 280ms cubic-bezier(.2, 1.4, .4, 1));
+}
+.wpf4-finder__step.is-done {
+	background: #171509;
+}
+.wpf4-finder__step.is-current {
+	background: #6BBFFF;
+}
+.wpf4-finder__answers {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+.wpf4-finder__answers:empty {
+	display: none;
+}
+.wpf4-finder__answer {
+	min-height: 30px;
+	padding: 0 12px;
+	border-radius: 999px;
+	background: #E4F3FF;
+	color: #171509;
+	font-size: 12px;
+	font-weight: 700;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+.wpf4-finder__kicker {
+	margin: 0 0 6px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .16em;
+	text-transform: uppercase;
+	color: #5A5645;
+}
+.wpf4-finder__question {
+	margin: 0;
+	font-size: 32px;
+	line-height: 1.05;
+	font-weight: 700;
+	letter-spacing: -.03em;
+}
+.wpf4-finder__question:focus {
+	outline: none;
+}
+.wpf4-finder__help {
+	margin: 8px 0 0;
+	font-size: 14px;
+	color: #5A5645;
+}
+.wpf4.wpf4 .wpf4-finder__options {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.wpf4.wpf4 .wpf4-finder__opt {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	background: #FFFFFF;
+	color: #171509;
+	border-radius: 22px;
+	padding: 18px 20px;
+	font-size: 17px;
+	font-weight: 700;
+	text-align: left;
+	min-height: 44px;
+	width: 100%;
+	transition: box-shadow var(--wpf4-snap, 280ms cubic-bezier(.2, 1.4, .4, 1));
+}
+.wpf4.wpf4 .wpf4-finder__opt:hover {
+	background: #FFFFFF;
+	color: #171509;
+	box-shadow: inset 0 0 0 3px #E2DCC8;
+}
+.wpf4.wpf4 .wpf4-finder__opt[aria-pressed="true"],
+.wpf4.wpf4 .wpf4-finder__opt[aria-checked="true"] {
+	box-shadow: inset 0 0 0 3px #171509;
+}
+.wpf4.wpf4 .wpf4-finder__optCount {
+	font-size: 13px;
+	font-weight: 700;
+	color: #5A5645;
+}
+.wpf4.wpf4 .wpf4-finder__opt[aria-pressed="true"] .wpf4-finder__optCount,
+.wpf4.wpf4 .wpf4-finder__opt[aria-checked="true"] .wpf4-finder__optCount {
+	color: #046BD2;
+}
+.wpf4.wpf4 .wpf4-finder__opt.is-empty {
+	opacity: .5;
+}
+.wpf4.wpf4 .wpf4-finder__optSwatch {
+	width: 28px;
+	height: 28px;
+	border-radius: 10px;
+	flex: 0 0 auto;
+	box-shadow: inset 0 0 0 1px rgba(23, 21, 9, .08);
+}
+.wpf4.wpf4 .wpf4-finder__optLabel {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	min-width: 0;
+}
+.wpf4-finder__foot {
+	margin-top: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.wpf4.wpf4 .wpf4-finder__next {
+	min-height: 52px;
+	background: var(--wpf4-accent, #6BBFFF);
+	color: var(--wpf4-on-accent, #171509);
+	font-size: 17px;
+	font-weight: 700;
+}
+.wpf4.wpf4 .wpf4-finder__next:hover {
+	background: var(--wpf4-accent, #6BBFFF);
+	color: var(--wpf4-on-accent, #171509);
+}
+.wpf4.wpf4 .wpf4-finder__back {
+	min-height: 44px;
+	background: #ECE7D6;
+	color: #171509;
+	font-size: 15px;
+	font-weight: 700;
+}
+.wpf4.wpf4 .wpf4-finder__back:hover {
+	background: #E2DCC8;
+	color: #171509;
+}
+.wpf4.wpf4 .wpf4-finder__back[hidden] {
+	display: none;
+}
+.wpf4-finder__note {
+	margin: 0;
+	text-align: center;
+	font-size: 12px;
+	color: #5A5645;
+}
+@media (min-width: 768px) {
+	.wpf4-finder {
+		padding: 32px;
+	}
+	.wpf4-finder__head,
+	.wpf4-finder__steps,
+	.wpf4-finder__answers,
+	.wpf4-finder__q,
+.wpf4.wpf4 .wpf4-finder__options,
+	.wpf4-finder__foot {
+		width: 100%;
+		max-width: 560px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.wpf4-finder__foot {
+		margin-top: auto;
+	}
+}
+
+/* ---------------------------------------------------------------- motion */
+@media (prefers-reduced-motion: reduce) {
+	.wpf4 *,
+	.wpf4-drawer,
+	.wpf4-scrim,
+.wpf4.wpf4 .wpf4-drawerBtn,
+	.wpf4-finder * {
+		transition: none;
+	}
+}
+.wpf4.wpf4 .wpf4__head .wpf4__remember {
+	flex: 1 1 100%;
+	margin-top: 8px;
+}
+/* Product list while results load (filter setting "Dim the products while loading"). */
+.wpf4-loading {
+	opacity: .45;
+	transition: opacity .2s ease;
+	pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+	.wpf4-loading { transition: none; }
+}
+
+/* ---------------------------------------------------------------- theme button guard (4.0.0)
+ * Some themes paint every button with a strong rule, for example Twenty Twenty-One:
+ * `button:not(:hover):not(:active):not(.has-background)` (specificity 0,3,1), which turned the fold chevrons,
+ * "Show more", Apply, Clear and the drawer buttons into dark pills. The same colours as the rules above, with the
+ * theme's own `:not(:hover):not(:active)` pair (0,5,0), so hover and pressed states stay as they are. Pro custom
+ * CSS is scoped one level higher and still wins. */
+.wpf4.wpf4 .wpf4__fold:not(:hover):not(:active) {
+	background: none;
+	color: var(--wpf4-ink-2);
+}
+.wpf4.wpf4 .wpf4__starClear:not(:hover):not(:active) {
+	background: none;
+	color: var(--wpf4-ink);
+}
+.wpf4.wpf4 .wpf4__clear:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4__more:not(:hover):not(:active) {
+	background: var(--wpf4-chip);
+	color: var(--wpf4-ink);
+}
+/* The pills keep their inner space on themes that zero every button's padding. */
+.wpf4.wpf4 .wpf4__more:not(.wpf4--x),
+.wpf4.wpf4 .wpf4__clear:not(.wpf4--x),
+.wpf4.wpf4 .wpf4-drawer__clear:not(.wpf4--x) {
+	padding-left: 14px;
+	padding-right: 14px;
+	width: auto;
+	white-space: nowrap;
+}
+.wpf4.wpf4 .wpf4__apply:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4-drawer__show:not(:hover):not(:active) {
+	background: var(--wpf4-accent, #6BBFFF);
+	color: var(--wpf4-on-accent, #171509);
+}
+.wpf4.wpf4:not(.wpf4--floating) .wpf4-drawerBtn:not(:hover):not(:active) {
+	background: #171509;
+	color: #FFFFFF;
+}
+.wpf4.wpf4 .wpf4-drawer__clear:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4-drawer__close:not(:hover):not(:active) {
+	background: #ECE7D6;
+	color: #171509;
+}
+.wpf4.wpf4 .wpf4__remember:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4-drawer__remember:not(:hover):not(:active) {
+	background: #E4F3FF;
+	color: #171509;
+}
+
+/* ---------------------------------------------------------------- 2 to 4 choices as tabs (4.0.0)
+ * One rounded row, equal segments, the picked ones filled. Any number of tabs can be picked (the block's logic stays). */
+.wpf4.wpf4 .wpf4__list--tabs {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 2px;
+	padding: 3px;
+	border-radius: 14px;
+	background: var(--wpf4-paper);
+	overflow: visible;
+	max-height: none;
+}
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__chipOpt {
+	flex: 1 1 0;
+	min-width: 0;
+	justify-content: center;
+	text-align: center;
+	padding: 0 8px;
+	min-height: 40px;
+	border-radius: 11px;
+	background: transparent;
+	font-size: 14px;
+}
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__chipOpt:hover {
+	background: var(--wpf4-chip);
+}
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__chipOpt.is-checked,
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__chipOpt:has(input:checked) {
+	background: var(--wpf4-card, #FFFFFF);
+	color: var(--wpf4-ink);
+	box-shadow: 0 0 0 2px var(--wpf4-ink);
+}
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__chipOpt.is-checked .wpf4__count,
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__chipOpt:has(input:checked) .wpf4__count {
+	color: var(--wpf4-ink-2);
+}
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__count {
+	font-size: 12px;
+}
+.wpf4.wpf4 .wpf4__list--tabs .wpf4__chipOpt:has(input:focus-visible) {
+	outline: 3px solid var(--wpf4-ink);
+	outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------- price bars (4.0.0)
+ * Where the prices sit: one bar per price bucket above the slider, the picked part in the accent colour. */
+.wpf4__hist {
+	display: flex;
+	align-items: flex-end;
+	gap: 2px;
+	height: 40px;
+	margin: 4px 12px -14px;
+	pointer-events: none;
+}
+.wpf4__hist[hidden] {
+	display: none;
+}
+.wpf4__histBar {
+	flex: 1 1 0;
+	min-width: 0;
+	border-radius: 3px 3px 0 0;
+	background: var(--wpf4-ink-3, #B9B4A3);
+	opacity: .45;
+	transition: background-color var(--wpf4-snap), opacity var(--wpf4-snap);
+}
+.wpf4__histBar.is-in {
+	background: var(--wpf4-accent, #6BBFFF);
+	opacity: 1;
+}
+
+/* ---------------------------------------------------------------- filter bar (4.0.0)
+ * "Above the products" on wide screens: one row with "All filters (N)" and one dropdown button per filter. A button
+ * opens its filter in a panel under it; "All filters" opens every filter in a pop-up over a dim overlay.
+ * js/frontend-4/bar.js moves the blocks into the panel or the pop-up and back. */
+.wpf4.wpf4 .wpf4-bar[hidden],
+.wpf4.wpf4 .wpf4-bar__pop[hidden],
+.wpf4.wpf4 .wpf4-bar__modal[hidden],
+.wpf4.wpf4 .wpf4-bar__scrim[hidden] {
+	display: none;
+}
+.wpf4--bar-on .wpf4__blocks,
+.wpf4--bar-on .wpf4__head .wpf4__title {
+	display: none;
+}
+.wpf4--bar-on .wpf4__form {
+	position: relative;
+	gap: 12px;
+}
+/* Empty parts must not leave gaps under the bar: the head when only its (hidden) title is left, the chips row
+   while nothing is picked, and the hook container above the form when no add-on printed anything into it. */
+.wpf4.wpf4 .wpf4__chips[hidden] {
+	display: none;
+}
+/* (:has() in its own rule: a browser without it skips only this rule.) */
+.wpf4--bar-on .wpf4__head:not(:has(> :not([hidden]):not(.wpf4__title))),
+.wpf4.wpf4 .wpf4__before:not(:has(> :not([hidden]))),
+.wpf4.wpf4 .wpf4__after:not(:has(> :not([hidden]))) {
+	display: none;
+}
+.wpf4.wpf4 .wpf4-bar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+}
+.wpf4.wpf4 .wpf4-bar__all,
+.wpf4.wpf4 .wpf4-bar__pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 40px;
+	padding: 0 14px;
+	margin: 0;
+	border-radius: 999px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1;
+	white-space: nowrap;
+	box-shadow: inset 0 0 0 1px rgba(23, 21, 9, .22);
+}
+.wpf4.wpf4 .wpf4-bar__all:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4-bar__pill:not(:hover):not(:active) {
+	background: var(--wpf4-card, #FFFFFF);
+	color: var(--wpf4-ink, #171509);
+}
+.wpf4.wpf4 .wpf4-bar__all:hover,
+.wpf4.wpf4 .wpf4-bar__pill:hover {
+	background: var(--wpf4-paper, #F7F4EA);
+	color: var(--wpf4-ink, #171509);
+}
+.wpf4.wpf4 .wpf4-bar__pill.is-open,
+.wpf4.wpf4 .wpf4-bar__pill.is-picked,
+.wpf4.wpf4 .wpf4-bar__all.is-picked {
+	box-shadow: inset 0 0 0 2px var(--wpf4-ink, #171509);
+}
+.wpf4.wpf4 .wpf4-bar__pill[hidden] {
+	display: none;
+}
+.wpf4-bar__pill svg {
+	transition: transform var(--wpf4-snap);
+}
+.wpf4-bar__pill.is-open svg {
+	transform: rotate(180deg);
+}
+.wpf4-bar__n {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 20px;
+	height: 20px;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: var(--wpf4-ink, #171509);
+	color: var(--wpf4-card, #FFFFFF);
+	font-size: 12px;
+	font-weight: 700;
+	box-sizing: border-box;
+}
+.wpf4-bar__n[hidden] {
+	display: none;
+}
+.wpf4.wpf4 .wpf4-bar__pop {
+	position: absolute;
+	z-index: 1000;
+	width: 340px;
+	max-width: calc(100vw - 32px);
+	max-height: min(60vh, 520px);
+	overflow: auto;
+	padding: 16px;
+	border-radius: 16px;
+	background: var(--wpf4-card, #FFFFFF);
+	box-shadow: 0 12px 40px rgba(23, 21, 9, .18), 0 0 0 1px rgba(23, 21, 9, .08);
+	box-sizing: border-box;
+}
+.wpf4-bar__pop .wpf4__legend {
+	display: none;
+}
+.wpf4.wpf4 .wpf4-bar__mbody .wpf4__legend {
+	background: none;
+	padding: 0;
+	border: 0;
+}
+.wpf4-bar__pop .wpf4__block,
+.wpf4-bar__mbody .wpf4__block {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	width: auto;
+	max-width: none;
+}
+.wpf4-bar__scrim {
+	position: fixed;
+	inset: 0;
+	z-index: 99998;
+	background: rgba(23, 21, 9, .45);
+}
+.wpf4.wpf4 .wpf4-bar__modal {
+	position: fixed;
+	z-index: 99999;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	width: min(600px, calc(100vw - 32px));
+	max-height: min(86vh, 900px);
+	border-radius: 20px;
+	background: var(--wpf4-card, #FFFFFF);
+	box-shadow: 0 24px 80px rgba(23, 21, 9, .3);
+	overflow: hidden;
+}
+.wpf4-bar__mhead {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 14px 16px 14px 24px;
+	border-bottom: 1px solid rgba(23, 21, 9, .1);
+}
+.wpf4.wpf4 .wpf4-bar__mtitle {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.3;
+	color: var(--wpf4-ink, #171509);
+}
+.wpf4.wpf4 .wpf4-bar__close:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4-bar__close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	background: none;
+	color: var(--wpf4-ink, #171509);
+}
+.wpf4-bar__mbody {
+	flex: 1 1 auto;
+	overflow: auto;
+	padding: 8px 24px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.wpf4-bar__mbody .wpf4__block {
+	padding: 16px 0;
+	border-bottom: 1px solid rgba(23, 21, 9, .08);
+}
+.wpf4-bar__mbody .wpf4__block:last-child {
+	border-bottom: 0;
+}
+.wpf4-bar__mfoot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 14px 24px;
+	border-top: 1px solid rgba(23, 21, 9, .1);
+}
+.wpf4.wpf4 .wpf4-bar__clear:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4-bar__clear {
+	min-height: 44px;
+	padding: 0 8px;
+	background: none;
+	color: var(--wpf4-ink, #171509);
+	font-size: 15px;
+	font-weight: 700;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.wpf4.wpf4 .wpf4-bar__show:not(:hover):not(:active),
+.wpf4.wpf4 .wpf4-bar__show {
+	min-height: 48px;
+	padding: 0 24px;
+	border-radius: 12px;
+	background: var(--wpf4-ink, #171509);
+	color: var(--wpf4-card, #FFFFFF);
+	font-size: 15px;
+	font-weight: 700;
+}
+html.wpf4-bar-lock,
+html.wpf4-bar-lock body {
+	overflow: hidden;
+}
+
+/* ---------------------------------------------------------------- one sort menu */
+/* A filter with a Sort by block replaces the shop's own "Default sorting" dropdown (filter.js hideShopSort() does
+   the same where :has() is missing). */
+body:has([data-wpf4] .wpf4__block--sort) .woocommerce-ordering,
+body:has([data-wpf4] .wpf4__block--sort) .wc-block-catalog-sorting { display: none; }

@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// 4.0.0: per block look (chips / swatches), set from the picture cards in the builder.
+WooBeWoo_PF_Html::hidden( 'f_wbw_style', array( 'value' => '', 'attrs' => 'class="wpfWbwStyle"' ) );
 ?>
 <div class="row-settings-block">
 	<div class="settings-block-label settings-w100 col-xs-4 col-sm-3">

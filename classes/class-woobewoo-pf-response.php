@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// Pro statistics and older modules set extra response fields (values) directly.
+#[\AllowDynamicProperties]
 class WooBeWoo_PF_Response {
 	public $code     = 0;
 	public $error    = false;

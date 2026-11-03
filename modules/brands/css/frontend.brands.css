@@ -1,0 +1,16 @@
+/* Product Filter by WBW - brand logos in the Brands block (4.0) */
+.wpfFilterWrapper .wpfBrandLogo { display: inline-block; width: 40px; height: 40px; object-fit: contain; border-radius: 10px; background: #fff; margin-right: 8px; vertical-align: middle; }
+.wpfFilterWrapper .wpfBrandLogo--empty { background: #ECE7D6; }
+.wpfFilterWrapper .wpfBrandLogos--list label { display: flex; align-items: center; gap: 8px; }
+/* Swatch layout: logo tiles in a grid, the checkbox stays reachable but is drawn as the tile border. */
+.wpfFilterWrapper .wpfBrandLogos--swatch { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; list-style: none; padding: 0; margin: 0; }
+.wpfFilterWrapper .wpfBrandLogos--swatch li { margin: 0; }
+.wpfFilterWrapper .wpfBrandLogos--swatch label { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 4px; border-radius: 10px; background: #F7F4EA; cursor: pointer; text-align: center; font-size: 12px; line-height: 1.3; }
+.wpfFilterWrapper .wpfBrandLogos--swatch label .wpfBrandLogo { width: 48px; height: 48px; margin: 0; }
+.wpfFilterWrapper .wpfBrandLogos--swatch label .icheckbox_minimal,
+.wpfFilterWrapper .wpfBrandLogos--swatch label .iradio_minimal,
+.wpfFilterWrapper .wpfBrandLogos--swatch label input[type="checkbox"],
+.wpfFilterWrapper .wpfBrandLogos--swatch label input[type="radio"] { position: absolute; opacity: 0; width: 1px; height: 1px; overflow: hidden; }
+.wpfFilterWrapper .wpfBrandLogos--swatch li.wpfChecked label,
+.wpfFilterWrapper .wpfBrandLogos--swatch label:has(input:checked) { outline: 3px solid #171509; outline-offset: -3px; background: #E4F3FF; }
+.wpfFilterWrapper .wpfBrandLogos--swatch label:focus-within { outline: 3px solid #171509; outline-offset: 3px; }

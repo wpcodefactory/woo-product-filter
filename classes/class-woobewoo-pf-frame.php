@@ -224,8 +224,18 @@ class WooBeWoo_PF_Frame {
 		if ( $this->havePermissions( $code, $action ) ) {
 			return true;
 		} else {
+			// 4.0.0: this can run while the plugin loads (before `init`); translating then triggers the
+			// WordPress 6.7+ "_load_textdomain_just_in_time" notice, so the text is only translated
+			// once `init` has run. The `code` lets the client translate the refusal itself.
+			$message = 'You have no permissions to view this page';
+			if ( did_action( 'init' ) ) {
+				$message = esc_html__( 'You have no permissions to view this page', 'woo-product-filter' );
+			}
 			wp_send_json_error(
-				array( 'message' => esc_html__( 'You have no permissions to view this page', 'woo-product-filter' ) ),
+				array(
+					'code'    => 'wpf_forbidden',
+					'message' => $message,
+				),
 				403
 			);
 		}
@@ -521,6 +531,53 @@ class WooBeWoo_PF_Frame {
 	}
 
 	/**
+	 * Cache busting version for one of our asset URLs: WPF_VERSION plus the file's modification
+	 * time, so a new build is never served from a cache that kept the previous build under the
+	 * same `?ver=4.0.0` URL (browser, CDN, host page cache, optimizer plugins). Works for any
+	 * file under the plugins directory (Free and Pro), falls back to the plain version.
+	 *
+	 * @since 4.0.0
+	 * @param string $src Asset URL.
+	 * @return string
+	 */
+	public static function assetVer( $src ) {
+		static $cache = array();
+		$src = (string) $src;
+		if ( '' === $src ) {
+			return WPF_VERSION;
+		}
+		if ( isset( $cache[ $src ] ) ) {
+			return $cache[ $src ];
+		}
+		$ver  = WPF_VERSION;
+		$file = '';
+		$path = strtok( $src, '?#' );
+		if ( 0 === strpos( $path, WPF_PLUGINS_URL ) ) {
+			$file = WPF_DIR . substr( $path, strlen( WPF_PLUGINS_URL ) );
+		} else {
+			$pluginsUrl = trailingslashit( plugins_url() );
+			if ( 0 === strpos( $path, $pluginsUrl ) ) {
+				$file = trailingslashit( WP_PLUGIN_DIR ) . substr( $path, strlen( $pluginsUrl ) );
+			} else {
+				$scheme = wp_parse_url( $path, PHP_URL_SCHEME );
+				$plain  = $scheme ? substr( $path, strlen( $scheme ) + 1 ) : $path;
+				$base   = substr( $pluginsUrl, strpos( $pluginsUrl, '//' ) );
+				if ( 0 === strpos( $plain, $base ) ) {
+					$file = trailingslashit( WP_PLUGIN_DIR ) . substr( $plain, strlen( $base ) );
+				}
+			}
+		}
+		if ( '' !== $file && false === strpos( $file, '..' ) && is_file( $file ) ) {
+			$mtime = @filemtime( $file ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- unreadable file falls back to the plain version
+			if ( $mtime ) {
+				$ver = WPF_VERSION . '.' . $mtime;
+			}
+		}
+		$cache[ $src ] = $ver;
+		return $ver;
+	}
+
+	/**
 	 * Push data to script array to use it all in addScripts method.
 	 *
 	 * @version 3.4.0
@@ -530,7 +587,7 @@ class WooBeWoo_PF_Frame {
 	public function addScript( $handle, $src = '', $deps = array(), $ver = false, $in_footer = false, $vars = array() ) {
 		$src = empty( $src ) ? $src : WooBeWoo_PF_Uri::_( $src );
 		if ( ! $ver ) {
-			$ver = WPF_VERSION;
+			$ver = self::assetVer( $src );
 		}
 		if ( $this->_scriptsInitialized ) {
 			wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
@@ -619,7 +676,7 @@ class WooBeWoo_PF_Frame {
 	public function addStyle( $handle, $src = false, $deps = array(), $ver = false, $media = 'all' ) {
 		$src = empty( $src ) ? $src : WooBeWoo_PF_Uri::_( $src );
 		if ( ! $ver ) {
-			$ver = WPF_VERSION;
+			$ver = self::assetVer( $src );
 		}
 		if ( $this->_stylesInitialized ) {
 			wp_enqueue_style( $handle, $src, $deps, $ver, $media );

@@ -1,0 +1,54 @@
+/**
+ * Product Filter by WBW - Look presets (4.0): Clean, Chips, Swatches, Compact
+ *
+ * Applied through classes on the filter wrapper (.wpfStyle-<preset>) and per block
+ * ([data-wbw-style="chips|swatches"]). Chips and swatches restyle the plugin's own
+ * checkbox and radio lists, so they work in Free without the Pro display types.
+ *
+ * @version 4.0.0
+ * @since   4.0.0
+ */
+.wpfMainWrapper.wpfStyle-chips .wpfFilterContent li,
+.wpfMainWrapper.wpfStyle-swatches .wpfFilterContent li,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="chips"] .wpfFilterContent li,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="swatches"] .wpfFilterContent li { display: inline-block; margin: 0 6px 8px 0 !important; }
+.wpfMainWrapper.wpfStyle-chips .wpfFilterContent .wpfLiLabel,
+.wpfMainWrapper.wpfStyle-swatches .wpfFilterContent .wpfLiLabel,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="chips"] .wpfFilterContent .wpfLiLabel,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="swatches"] .wpfFilterContent .wpfLiLabel {
+	display: inline-flex !important; align-items: center; gap: 8px; min-height: 40px; padding: 6px 14px !important;
+	border-radius: 999px; background: var(--wpf-chip, #ECE7D6); color: inherit; cursor: pointer; line-height: 1.2;
+	transition: background 280ms cubic-bezier(.2,1.4,.4,1);
+}
+.wpfMainWrapper.wpfStyle-chips .wpfFilterContent .wpfLiLabel:hover,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="chips"] .wpfFilterContent .wpfLiLabel:hover,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="swatches"] .wpfFilterContent .wpfLiLabel:hover { background: var(--wpf-chip-hover, #E2DCC8); }
+.wpfMainWrapper.wpfStyle-chips .wpfFilterContent .wpfLiLabel input,
+.wpfMainWrapper.wpfStyle-swatches .wpfFilterContent .wpfLiLabel input,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="chips"] .wpfFilterContent .wpfLiLabel input,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="swatches"] .wpfFilterContent .wpfLiLabel input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.wpfMainWrapper.wpfStyle-chips .wpfFilterContent .wpfLiLabel .wpfCheck,
+.wpfMainWrapper.wpfStyle-chips .wpfFilterContent .wpfLiLabel .wpfRadio,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="chips"] .wpfFilterContent .wpfLiLabel .wpfCheck,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="chips"] .wpfFilterContent .wpfLiLabel .wpfRadio,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="swatches"] .wpfFilterContent .wpfLiLabel .wpfCheck,
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="swatches"] .wpfFilterContent .wpfLiLabel .wpfRadio { display: none !important; }
+.wpfMainWrapper .wpfFilterContent .wpfLiLabel.wpfChipOn,
+.wpfMainWrapper .wpfFilterContent li.wpfChipOn > .wpfLiLabel { background: var(--wpf-accent, #171509) !important; color: var(--wpf-on-accent, #fff) !important; }
+.wpfMainWrapper .wpfFilterContent .wpfLiLabel:focus-within { outline: 3px solid var(--wpf-accent, #171509); outline-offset: 2px; }
+
+/* swatches: a colour dot before the name when the term name is a known colour */
+.wpfMainWrapper .wpfFilterWrapper[data-wbw-style="swatches"] .wpfLiLabel .wpfSwatchDot { width: 18px; height: 18px; border-radius: 50%; display: inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); flex: 0 0 18px; }
+
+/* compact: dropdowns in a tight row */
+.wpfMainWrapper.wpfStyle-compact .wpfFilterWrapper { margin-bottom: 8px !important; padding: 0 8px 0 0 !important; }
+.wpfMainWrapper.wpfStyle-compact .wpfFilterWrapper .wpfFilterTitle { font-size: 13px; margin-bottom: 4px; }
+.wpfMainWrapper.wpfStyle-compact select, .wpfMainWrapper.wpfStyle-compact .wpfSelectDropdown { border-radius: 999px; min-height: 40px; }
+
+/* clean: a little breathing room and pill buttons */
+.wpfMainWrapper.wpfStyle-clean .wpfFilterWrapper { margin-bottom: 16px; }
+.wpfMainWrapper.wpfStyle-clean .wpfButton,
+.wpfMainWrapper.wpfStyle-chips .wpfButton,
+.wpfMainWrapper.wpfStyle-swatches .wpfButton,
+.wpfMainWrapper.wpfStyle-compact .wpfButton { border-radius: 999px; }
+.wpfMainWrapper[class*="wpfStyle-"] .wpfFilterButton.wpfButton { background: var(--wpf-accent, #171509); color: var(--wpf-on-accent, #fff); border-color: transparent; }

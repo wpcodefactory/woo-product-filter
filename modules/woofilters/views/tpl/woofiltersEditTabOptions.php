@@ -19,6 +19,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 		<a href="#sub-tab-options-buttons" class="button disabled"><?php esc_html_e( 'Buttons', 'woo-product-filter' ); ?></a>
 		<a href="#sub-tab-options-content" class="button disabled"><?php esc_html_e( 'Content', 'woo-product-filter' ); ?></a>
 		<a href="#sub-tab-options-loader" class="button disabled"><?php esc_html_e( 'Loader', 'woo-product-filter' ); ?></a>
+		<a href="#sub-tab-options-phone" class="button disabled"><?php esc_html_e( 'Phone', 'woo-product-filter' ); ?></a>
 	</div>
 	<div class="col-xs-12 sub-tab-content" id="sub-tab-options-main" data-no-preview="1">
 		<div class="settings-block-title">
@@ -1453,6 +1454,7 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 			<?php } ?>
 		</div>
 	</div>
+<?php require_once 'woofiltersEditTabWbw.php'; ?>
 </div>
 <?php
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

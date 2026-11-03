@@ -1,0 +1,86 @@
+/**
+ * Product Filter by WBW - Smart setup (4.0)
+ *
+ * Step specific rules only; the components come from the admin skin (wbw-admin.css).
+ *
+ * @version 4.0.0
+ * @since   4.0.0
+ */
+/* The question column is a white card (radius 22, padding 32); the preview column is the white preview card
+   (padding 20); 24px between them (.wbw-two). Boxes inside the question card sit on paper so they read as
+   inside the card: stat box, suggestion cards, picture cards, phone rows, the checklist, the speed rows. */
+.wbw-setup__pane { display: flex; flex-direction: column; gap: 16px; }
+.wbw-setup[data-step="welcome"] .wbw-setup__pane { gap: 20px; }
+.wbw-setup__pane > .wbw-h1:focus { outline: 0; }
+.wbw-setup__pane > .wbw-card:not(.wbw-card--ink) { background: var(--wbw-paper); border-radius: 16px; padding: 20px 24px; }
+.wbw-setup__found { gap: 14px; }
+.wbw-setup__side { display: flex; flex-direction: column; gap: 16px; }
+.wbw-setup__side > .wbw-preview { align-self: stretch; width: 100%; }
+.wbw-setup__aside { display: flex; flex-direction: column; gap: 16px; }
+
+/* Filters step cards */
+.wbw-sug { background: var(--wbw-paper); border-radius: 16px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+.wbw-sug .wbw-tag { background: var(--wbw-card); }
+.wbw-sug .wbw-tag--pass { background: var(--wbw-pass-soft); }
+.wbw-sug .wbw-tag--partial { background: var(--wbw-partial-soft); }
+.wbw-sug__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.wbw-sug__head { display: flex; justify-content: space-between; gap: 8px; align-items: center; flex-wrap: wrap; }
+.wbw-sug__name { font-size: 17px; font-weight: 700; }
+.wbw-sug__line { font-size: 14px; line-height: 1.5; color: var(--wbw-ink); }
+.wbw-sug__line--watch { color: var(--wbw-ink-2); }
+.wbw-sug__line b { color: var(--wbw-ink); }
+.wbw-sug__tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.wbw-sug--off { opacity: .92; }
+.wbw-sug-cards { display: flex; flex-direction: column; gap: 8px; }
+
+/* Look step pictures */
+.wbw-look-pic { display: flex; flex-direction: column; gap: 6px; font-size: 11px; color: var(--wbw-ink); }
+.wbw-look-pic--chips { flex-direction: row; flex-wrap: wrap; }
+.wbw-look-pic .wbw-chip-pic { height: 26px; padding: 0 10px; border-radius: var(--wbw-r-pill); background: var(--wbw-chip); font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; }
+.wbw-look-pic .wbw-chip-pic--on { background: var(--wbw-ink); color: #FFFFFF; }
+.wbw-look-pic .wbw-dd-pic { height: 26px; border-radius: var(--wbw-r-pill); background: var(--wbw-chip); font-size: 11px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; }
+.wbw-look-pic .wbw-sq-pic { width: 26px; height: 26px; border-radius: 10px; background: var(--wbw-chip); font-size: 10px; display: inline-flex; align-items: center; justify-content: center; }
+.wbw-look-pic .wbw-sq-pic--on { background: var(--wbw-ink); color: #FFFFFF; }
+.wbw-look-pic .wbw-bar-pic { height: 4px; border-radius: var(--wbw-r-pill); background: var(--wbw-tool); width: 70%; margin-top: 4px; }
+.wbw-colours-row { background: var(--wbw-paper); border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.wbw-colours-row > span:first-child { font-size: 14px; font-weight: 700; }
+.wbw-colours-row .wbw-swatches { display: inline-flex; gap: 6px; }
+
+/* Look and Place picture cards inside the question card: paper card, white picture box, chip coloured drawings */
+.wbw-setup__pane .wbw-card-btn { background: var(--wbw-paper); border-radius: 16px; }
+.wbw-setup__pane .wbw-card-btn__pic { background: var(--wbw-card); }
+.wbw-setup__pane .wbw-mini-dot { box-shadow: inset 0 0 0 1px var(--wbw-hairline); }
+
+/* Place step */
+.wbw-place-pic { display: block; background: var(--wbw-card); border-radius: 14px; padding: 12px; min-height: 72px; }
+.wbw-place-pic svg rect[fill="#FFFFFF"] { fill: var(--wbw-chip); }
+.wbw-place-pic svg { width: 100%; height: 48px; display: block; }
+.wbw-selector { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.wbw-selector .wbw-input { flex: 1 1 200px; font-family: var(--wbw-mono); font-size: 14px; }
+
+/* Phone step rows: paper rows inside the question card, white input */
+.wbw-setup__pane .wbw-row--card { background: var(--wbw-paper); border-radius: 16px; }
+.wbw-setup__pane .wbw-row--card .wbw-input { background: var(--wbw-card); }
+
+/* Speed step */
+.wbw-speed-rows .wbw-row { align-items: flex-start; }
+.wbw-speed-rows .wbw-check > span:first-child { margin-top: 2px; }
+/* The tick and its text take the free width and wrap; the switch or tag on the right keeps its size
+   (the shared row rule stops every part but .wbw-row__text from shrinking, which pushed long help text and
+   the switches out of the card on narrower screens). */
+.wbw-speed-rows .wbw-row > .wbw-check { flex: 1 1 auto; min-width: 0; align-items: flex-start; }
+.wbw-speed-rows .wbw-row__help { font-weight: 400; line-height: 1.5; }
+.wbw-speed-rows .wbw-row > :last-child { margin-top: 2px; }
+
+/* Publish step */
+.wbw-publish-list { gap: 14px; }
+.wbw-first-week { display: flex; gap: 16px; align-items: flex-start; }
+.wbw-first-week .wbw-icon { width: 24px; height: 24px; color: var(--wbw-tool); }
+.wbw-first-week p + p { margin-top: 4px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.75); }
+.wbw-seo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.wbw-seo-grid > div { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.wbw-type-pick { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--wbw-ink-2); }
+.wbw-type-pick select { height: 36px; padding: 0 36px 0 14px; font-size: 13px; }
+
+/* Scan failure reason (4.0.0 hardening): the server's own words, wrapped, in mono. */
+.wbw-reason { font-family: var(--wbw-mono); font-size: 13px; line-height: 1.5; background: var(--wbw-paper); border-radius: var(--wbw-r-sm); padding: 12px 16px; margin: 0; white-space: pre-wrap; word-break: break-word; max-width: 720px; color: var(--wbw-ink); }

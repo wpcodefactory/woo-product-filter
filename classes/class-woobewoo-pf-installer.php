@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Installer Class
  *
- * @version 3.4.0
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -53,7 +53,7 @@ class WooBeWoo_PF_Installer {
 					  `ex_plug_dir` varchar(255) DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  UNIQUE INDEX `code` (`code`)
-					) DEFAULT CHARSET=utf8;"
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;"
 				)
 			);
 			WooBeWoo_PF_Db::query(
@@ -66,7 +66,18 @@ class WooBeWoo_PF_Installer {
 				(NULL, 'woofilters',1,1,'woofilters'),
 				(NULL, 'woofilters_widget',1,1,'woofilters_widget'),
 				(NULL, 'meta',1,1,'meta'),
-				(NULL, 'overview',1,1,'overview');"
+				(NULL, 'overview',1,1,'overview'),
+				(NULL, 'setup',1,1,'setup'),
+				(NULL, 'speed',1,1,'speed'),
+				(NULL, 'help',1,1,'help'),
+				(NULL, 'links',1,1,'links'),
+				(NULL, 'schema',1,1,'schema'),
+				(NULL, 'abilities',1,1,'abilities'),
+				(NULL, 'cli',1,1,'cli'),
+				(NULL, 'storeapi',1,1,'storeapi'),
+				(NULL, 'builders',1,1,'builders'),
+				(NULL, 'importers',1,1,'importers'),
+				(NULL, 'brands',1,1,'brands');"
 			);
 		}
 		/**
@@ -79,7 +90,7 @@ class WooBeWoo_PF_Installer {
 					  `id` smallint(3) NOT NULL AUTO_INCREMENT,
 					  `label` varchar(32) NOT NULL,
 					  PRIMARY KEY (`id`)
-					) AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;'
+					) AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
 				)
 			);
 			WooBeWoo_PF_Db::query(
@@ -99,7 +110,7 @@ class WooBeWoo_PF_Installer {
 						`title` VARCHAR(128) NULL DEFAULT NULL,
 						`setting_data` MEDIUMTEXT NOT NULL,
 						PRIMARY KEY (`id`)
-					) DEFAULT CHARSET=utf8;'
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
 				)
 			);
 		}
@@ -121,7 +132,7 @@ class WooBeWoo_PF_Installer {
 					  `modify_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 					  UNIQUE INDEX `code` (`code`),
 					  PRIMARY KEY (`id`)
-					) DEFAULT CHARSET=utf8;"
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;"
 				)
 			);
 			WooBeWoo_PF_Db::query( "INSERT INTO `@__usage_stat` (code, visits) VALUES ('installed', 1)" );
@@ -147,7 +158,7 @@ class WooBeWoo_PF_Installer {
 					  `calculated` TIMESTAMP,
 					  PRIMARY KEY (`id`),
 					  UNIQUE INDEX `meta_key` (`meta_key`)
-					) DEFAULT CHARSET=utf8;'
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
 				)
 			);
 			WooBeWoo_PF_Db::query(
@@ -177,7 +188,7 @@ class WooBeWoo_PF_Installer {
 					  `val_id` bigint,
 					  `updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					  PRIMARY KEY (`id`)
-					) DEFAULT CHARSET=utf8;'
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
 				)
 			);
 		}
@@ -190,14 +201,14 @@ class WooBeWoo_PF_Installer {
 					'CREATE TABLE IF NOT EXISTS `@__meta_values` (
 					  `id` bigint NOT NULL AUTO_INCREMENT,
 					  `key_id` INT(11) NOT NULL,
-					  `key2` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-					  `key3` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-					  `key4` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-					  `value` varchar(150) CHARACTER SET utf8 COLLATE utf8_bin,
+					  `key2` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+					  `key3` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+					  `key4` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+					  `value` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
 					  `product_cnt` INT(11) NOT NULL DEFAULT 0,
 					  `variation_cnt` INT(11) NOT NULL DEFAULT 0,
 					  PRIMARY KEY (`id`)
-					) DEFAULT CHARSET=utf8;'
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
 				)
 			);
 		}
@@ -216,7 +227,27 @@ class WooBeWoo_PF_Installer {
 					  `value` varchar(150),
 					  PRIMARY KEY (`id`),
 					  INDEX `key_id` (`key_id`)
-					) DEFAULT CHARSET=utf8;'
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
+				)
+			);
+		}
+
+		/**
+		 * Table filter_versions (version history and undo, since 4.0.0).
+		 */
+		if ( ! WooBeWoo_PF_Db::exist( '@__filter_versions' ) ) {
+			dbDelta(
+				WooBeWoo_PF_Db::prepareQuery(
+					'CREATE TABLE IF NOT EXISTS `@__filter_versions` (
+					  `id` bigint NOT NULL AUTO_INCREMENT,
+					  `filter_id` INT(11) NOT NULL,
+					  `title` VARCHAR(128) NULL DEFAULT NULL,
+					  `setting_data` LONGTEXT NULL,
+					  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+					  `user_id` bigint NOT NULL DEFAULT 0,
+					  PRIMARY KEY (`id`),
+					  INDEX `filter_id` (`filter_id`)
+					) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
 				)
 			);
 		}
@@ -228,10 +259,40 @@ class WooBeWoo_PF_Installer {
 			update_user_meta( get_current_user_id(), WPF_CODE . '-tour-hst', array( 'closed' => 1 ) );
 		}
 		update_option( $wpPrefix . WPF_DB_PREF . 'db_version', WPF_VERSION );
+		update_option( 'wpf_links_flush_needed', '1', false ); // 4.0.0: modules/links re-registers its pretty URL rules and flushes once.
 		add_option( $wpPrefix . WPF_DB_PREF . 'db_installed', 1 );
+		add_option( 'wbw_delete_on_uninstall', '0' ); // 4.0.0: uninstall.php removes everything only when this is '1'.
+		// 4.0.0: send the owner to the one click setup right after activation when no filter exists. Never after an
+		// update (an automatic update from 3.x must not take over the next dashboard visit, on any site of a network).
+		if ( self::$_firstTimeActivated || ( ! $isUpdate && ! WooBeWoo_PF_Db::get( 'SELECT COUNT(*) FROM `@__filters`', 'one' ) ) ) {
+			set_transient( 'wpf_setup_redirect', 1, 5 * MINUTE_IN_SECONDS );
+		}
 		if ( ! wp_next_scheduled( 'wpf_calc_meta_indexing' ) ) {
 			wp_schedule_single_event( time() + 5, 'wpf_calc_meta_indexing' );
 		}
+	}
+
+	/**
+	 * installDataByUid: called by the Pro licence model (3.4.x and 4.0) when the licence server answers
+	 * with `db_install` data. No Free version since 3.4.0 had it, so that answer was a fatal error; the
+	 * server data is not written any more (no table takes rows by uid), the call is logged and refused.
+	 *
+	 * @version 4.0.0
+	 * @since   4.0.0
+	 *
+	 * @param string $table Table alias such as `@__options`.
+	 * @param string $uid   Row uid from the licence server.
+	 * @param mixed  $data  Row data.
+	 * @return bool Always false.
+	 */
+	public static function installDataByUid( $table, $uid, $data ) {
+		/**
+		 * Fires instead of the removed licence server data install.
+		 *
+		 * @since 4.0.0
+		 */
+		do_action( 'woobewoo_pf_install_data_by_uid', $table, $uid, $data );
+		return false;
 	}
 
 	/**
@@ -275,8 +336,28 @@ class WooBeWoo_PF_Installer {
 			! $currentVersion ||
 			version_compare( WPF_VERSION, $currentVersion, '>' )
 		) {
-			self::init( true );
-			update_option( $wpPrefix . WPF_DB_PREF . 'db_version', WPF_VERSION );
+			// 4.0.1: one request at a time runs the upgrade. Right after an update several requests arrive at once;
+			// without the lock each of them converted the same tables again (ALTER TABLE ... CONVERT TO copies the
+			// whole table) and queued behind each other's metadata locks.
+			$lockName = 'wpf_upgrade_' . md5( DB_NAME . $wpPrefix );
+			$locked   = (string) $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, 0)', $lockName ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			if ( '0' === $locked ) {
+				return; // another request is upgrading; this one serves the page with what exists.
+			}
+			try {
+				if ( version_compare( WPF_VERSION, (string) get_option( $wpPrefix . WPF_DB_PREF . 'db_version', 0 ), '>' ) || ! $currentVersion ) {
+					self::init( true );
+					update_option( $wpPrefix . WPF_DB_PREF . 'db_version', WPF_VERSION );
+					// 4.0.0: pretty URL rules change with the version; modules/links flushes them on the next init.
+					update_option( 'wpf_links_flush_needed', '1', false );
+				}
+			} finally {
+				if ( '1' === $locked ) {
+					$wpdb->query( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', $lockName ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				}
+			}
+		} else {
+			WooBeWoo_PF_Installer_Db_Updater::syncModules();
 		}
 	}
 }

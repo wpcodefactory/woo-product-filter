@@ -17,6 +17,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_subscribe() {
+		WooBeWoo_PF_Req::verifyRequest(); // 4.0.0: nonce + manage_options on every admin AJAX handler.
 		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->subscribe( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -32,6 +33,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_contactus() {
+		WooBeWoo_PF_Req::verifyRequest(); // 4.0.0: nonce + manage_options on every admin AJAX handler.
 		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->contactus( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -47,6 +49,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_rating() {
+		WooBeWoo_PF_Req::verifyRequest(); // 4.0.0: nonce + manage_options on every admin AJAX handler.
 		$res = new WooBeWoo_PF_Response();
 		if ( $this->getModel()->rating( WooBeWoo_PF_Req::get( 'post' ) ) ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -62,6 +65,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_dismiss_notice() {
+		WooBeWoo_PF_Req::verifyRequest(); // 4.0.0: nonce + manage_options on every admin AJAX handler.
 		$res  = new WooBeWoo_PF_Response();
 		$slug = WooBeWoo_PF_Req::getVar( 'slug' );
 		if (
@@ -80,6 +84,7 @@ class WooBeWoo_PF_Overview_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_approve_notice() {
+		WooBeWoo_PF_Req::verifyRequest(); // 4.0.0: nonce + manage_options on every admin AJAX handler.
 		$res  = new WooBeWoo_PF_Response();
 		$slug = WooBeWoo_PF_Req::getVar( 'slug' );
 		if (

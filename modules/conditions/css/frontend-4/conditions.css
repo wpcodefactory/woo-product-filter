@@ -1,0 +1,6 @@
+/* Product Filter by WBW - storefront engine 4: block conditions. One hidden state only: a block that starts hidden
+   (a dependent block whose parent has no pick yet) stays out of sight until the script has evaluated the rules,
+   so it never flashes. After that the `hidden` attribute (styled by filter.css) does the work. No motion. */
+.wpf4 .wpf4__block[data-cond-start="hidden"] {
+	display: none;
+}

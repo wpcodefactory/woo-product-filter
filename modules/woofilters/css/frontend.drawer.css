@@ -1,0 +1,54 @@
+/**
+ * Product Filter by WBW - Storefront mobile drawer (4.0)
+ *
+ * Bottom sheet, fixed pill button, chips, "Show N results". Colours use currentColor and
+ * the --wpf-accent custom property (set per filter from the accent colour) so the theme
+ * look shows through.
+ *
+ * @version 4.0.0
+ * @since   4.0.0
+ */
+.wpfDrawerLive { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+.wpfDrawerButton {
+	position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 9998;
+	display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 12px 20px;
+	border: 0; border-radius: 999px; background: var(--wpf-accent, #171509); color: var(--wpf-on-accent, #fff);
+	font: 700 15px/1 inherit; font-family: inherit; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,.18);
+	transition: transform 280ms cubic-bezier(.2,1.4,.4,1);
+}
+.wpfDrawerButton svg { width: 20px; height: 20px; }
+.wpfDrawerButton:focus-visible { outline: 3px solid var(--wpf-on-accent, #fff); outline-offset: 3px; }
+.wpfDrawerOpen .wpfDrawerButton { transform: translate(-50%, 120%); }
+
+.wpfDrawer { position: fixed; inset: 0; z-index: 9999; }
+.wpfDrawer[hidden] { display: none; }
+.wpfDrawerBackdrop { position: absolute; inset: 0; background: rgba(23,21,9,.45); opacity: 0; transition: opacity 280ms ease; }
+.wpfDrawer.is-open .wpfDrawerBackdrop { opacity: 1; }
+.wpfDrawerPanel {
+	position: absolute; left: 0; right: 0; bottom: 0; max-height: 88vh; display: flex; flex-direction: column;
+	background: #fff; color: #171509; border-radius: 22px 22px 0 0; box-shadow: 0 -10px 40px rgba(0,0,0,.2);
+	transform: translateY(100%); transition: transform 360ms cubic-bezier(.2,.9,.1,1);
+}
+.wpfDrawer.is-open .wpfDrawerPanel { transform: translateY(0); }
+.wpfDrawerHead { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 8px; }
+.wpfDrawerHandle { position: absolute; top: 8px; left: 50%; width: 40px; height: 4px; border-radius: 2px; background: #E8E3D2; transform: translateX(-50%); }
+.wpfDrawerTitle { margin: 0; font-size: 18px; font-weight: 700; }
+.wpfDrawerClose { width: 44px; height: 44px; border: 0; border-radius: 50%; background: #ECE7D6; color: #171509; font-size: 24px; line-height: 1; cursor: pointer; }
+.wpfDrawerClose:focus-visible, .wpfDrawerChip:focus-visible, .wpfDrawerShow:focus-visible { outline: 3px solid #171509; outline-offset: 3px; }
+.wpfDrawerChips { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 20px 8px; }
+.wpfDrawerChips:empty { display: none; }
+.wpfDrawerChip { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 6px 12px; border: 0; border-radius: 999px; background: #ECE7D6; color: #171509; font: 700 13px/1.2 inherit; font-family: inherit; cursor: pointer; }
+.wpfDrawerChip i { font-style: normal; font-size: 16px; line-height: 1; }
+.wpfDrawerChip.wpfDrawerLast { background: var(--wpf-accent-tint, #E4F3FF); color: var(--wpf-accent-text, #046BD2); }
+.wpfDrawerBody { overflow: auto; padding: 8px 20px 16px; -webkit-overflow-scrolling: touch; }
+.wpfDrawerBody .wpfMainWrapper { width: 100% !important; }
+.wpfDrawerBody .wpfFilterWrapper { width: 100% !important; float: none !important; }
+.wpfDrawerFoot { padding: 12px 20px calc(16px + env(safe-area-inset-bottom)); box-shadow: 0 -1px 0 #E8E3D2; }
+.wpfDrawerFoot[hidden] { display: none; }
+.wpfDrawerShow { width: 100%; min-height: 48px; border: 0; border-radius: 999px; background: var(--wpf-accent, #171509); color: var(--wpf-on-accent, #fff); font: 700 16px/1 inherit; font-family: inherit; cursor: pointer; }
+.wpfDrawerOpen { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+	.wpfDrawerPanel, .wpfDrawerBackdrop, .wpfDrawerButton { transition: none; }
+}

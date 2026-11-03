@@ -55,33 +55,14 @@ class WooBeWoo_PF_Options_View extends WooBeWoo_PF_View {
 			}
 		}
 
-		WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-options', 'wpfActiveTab', $activeTab );
 		$this->assign( 'tabs', $tabs );
 		$this->assign( 'activeTab', $activeTab );
 		$this->assign( 'content', $content );
 		$this->assign( 'mainUrl', $this->getModule()->getTabUrl() );
 		$this->assign( 'activeParentTabs', $activeParentTabs );
-		$this->assign( 'breadcrumbs', WooBeWoo_PF_Frame::_()->getModule( 'admin_nav' )->getView()->getBreadcrumbs() );
 
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-create-table', WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModPath() . 'js/create-filter.js', array(), false, true );
-		WooBeWoo_PF_Frame::_()->addJSVar(
-			'woobewoo-pf-admin-create-table',
-			'woobewoo_pf_admin_ajax_object',
-			array(
-				'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
-				'nonce'         => wp_create_nonce( 'woobewoo-pf-save-nonce' ),
-				'wpfTblDataUrl' => WooBeWoo_PF_Uri::mod(
-					'woofilters',
-					'woobewoo_pf_get_list_for_table',
-					array(
-						'reqType'  => 'ajax',
-						'wpfNonce' => wp_create_nonce( 'woobewoo-pf-save-nonce' ),
-					),
-				),
-			)
-		);
-
-		parent::display( 'optionsAdminPage' );
+		// 4.0: screens escape their own output; the shell is printed as is so iframes, buttons and SVG survive.
+		echo parent::getContent( 'optionsAdminPage' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	public function sortOptsSet( $a, $b ) {
@@ -129,36 +110,86 @@ class WooBeWoo_PF_Options_View extends WooBeWoo_PF_View {
 	}
 
 	/**
-	 * getSettingsTabContent.
+	 * getSettingsTabContent: the old Settings table lives inside Help as "Advanced settings".
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 */
 	public function getSettingsTabContent() {
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
-		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'css/admin.settings.css' );
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadJqueryUi();
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-
-		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_enqueue_admin_option_pro_assets' );
-
-		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getAll();
-		$this->assign( 'options', $options );
-		$this->assign( 'exportAllSubscribersUrl', WooBeWoo_PF_Uri::mod( 'subscribe', 'getWpCsvList' ) );
-		return parent::getContent( 'optionsSettingsTabContent' );
+		$speed = WooBeWoo_PF_Frame::_()->getModule( 'speed' );
+		return $speed ? $speed->getView()->getTabContent( 'settings' ) : '';
 	}
 
 	/**
-	 * getProTabContent.
+	 * getProTabContent: the Upgrade screen (modules/upgrade).
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 */
 	public function getProTabContent() {
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'js/admin.settings.js' );
-		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-settings', $this->getModule()->getModPath() . 'css/admin.settings.css' );
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadBootstrap();
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadJqueryUi();
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-
-		return parent::getContent( 'optionsProTabContent' );
+		$file = WPF_MODULES_DIR . 'upgrade' . WPF_DS . 'class-woobewoo-pf-upgrade-screen.php';
+		if ( file_exists( $file ) ) {
+			require_once $file;
+			return WooBeWoo_PF_Upgrade_Screen::render();
+		}
+		return '';
+	}
+	/**
+	 * Data for the skin diagnostic card (optionsAdminPage.php): our enqueued stylesheet and
+	 * script URLs (Free and Pro), the active plugins and a few environment facts.
+	 *
+	 * @since 4.0.0
+	 * @return array
+	 */
+	public function getDiagnosticData() {
+		$assets    = array();
+		$templates = WooBeWoo_PF_Frame::_()->getModule( 'templates' );
+		if ( $templates && method_exists( $templates, 'skinUrl' ) ) {
+			// The skin itself always goes first, even when something deregistered its handle.
+			$assets[] = array( 'handle' => WooBeWoo_PF_Templates::SKIN_HANDLE, 'src' => add_query_arg( 'ver', WooBeWoo_PF_Frame::assetVer( $templates->skinUrl() ), $templates->skinUrl() ) );
+		}
+		foreach ( array( wp_styles(), wp_scripts() ) as $deps ) {
+			$handles = array_unique( array_merge( (array) $deps->queue, (array) $deps->done ) );
+			foreach ( $handles as $handle ) {
+				if ( empty( $deps->registered[ $handle ] ) || empty( $deps->registered[ $handle ]->src ) ) {
+					continue;
+				}
+				$src = (string) $deps->registered[ $handle ]->src;
+				if ( ! WooBeWoo_PF_Templates::isOurAsset( $handle, $src ) ) {
+					continue;
+				}
+				if ( WooBeWoo_PF_Templates::SKIN_HANDLE === $handle ) {
+					continue;
+				}
+				$ver      = $deps->registered[ $handle ]->ver;
+				$assets[] = array(
+					'handle' => (string) $handle,
+					'src'    => add_query_arg( 'ver', $ver ? $ver : $deps->default_version, $src ),
+				);
+			}
+		}
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		$plugins = array();
+		$all     = get_plugins();
+		foreach ( (array) get_option( 'active_plugins', array() ) as $file ) {
+			$plugins[] = isset( $all[ $file ]['Name'] ) ? $all[ $file ]['Name'] . ' ' . $all[ $file ]['Version'] : $file;
+		}
+		if ( is_multisite() ) {
+			foreach ( array_keys( (array) get_site_option( 'active_sitewide_plugins', array() ) ) as $file ) {
+				$plugins[] = isset( $all[ $file ]['Name'] ) ? $all[ $file ]['Name'] . ' ' . $all[ $file ]['Version'] . ' (network)' : $file;
+			}
+		}
+		$theme = wp_get_theme();
+		return array(
+			'assets'  => $assets,
+			'plugins' => $plugins,
+			'env'     => array(
+				'Product Filter' => WPF_VERSION . ' in ' . WPF_PLUG_NAME,
+				'WordPress'      => get_bloginfo( 'version' ),
+				'PHP'            => PHP_VERSION,
+				'Theme'          => $theme->get( 'Name' ) . ' ' . $theme->get( 'Version' ),
+				'Locale'         => get_locale() . ( is_rtl() ? ' RTL' : '' ),
+			),
+		);
 	}
 }

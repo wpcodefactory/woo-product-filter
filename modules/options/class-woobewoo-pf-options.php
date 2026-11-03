@@ -35,6 +35,9 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 		add_action( 'init', array( $this, 'startSession' ), -1 );
 		add_action( 'init', array( $this, 'initAllOptValues' ), 99 ); // It should be init after all languages was inited
 		WooBeWoo_PF_Dispatcher::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
+		// 4.0: keep the rail and the WordPress submenu identical (Setup, Filters, Speed and SEO, Help, Upgrade, Pro).
+		WooBeWoo_PF_Dispatcher::addFilter( 'mainAdminTabs', array( $this, 'hideLegacyTabs' ), 999 );
+		WooBeWoo_PF_Dispatcher::addFilter( 'adminMenuOptions', array( $this, 'mirrorRailInSubmenu' ), 999 );
 	}
 
 	/**
@@ -47,7 +50,10 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 		$filters        = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getFromTbl();
 
 		foreach ( $filters as $filter ) {
-			$filtersSettings = maybe_unserialize( $filter['setting_data'] );
+			$filtersSettings = function_exists( 'woobewoo_pf_decode_settings' ) ? woobewoo_pf_decode_settings( $filter['setting_data'] ) : maybe_unserialize( $filter['setting_data'] );
+			if ( ! is_array( $filtersSettings ) || empty( $filtersSettings['settings'] ) || ! is_array( $filtersSettings['settings'] ) ) {
+				continue;
+			}
 			$multiLogic      = $this->getFilterSetting( $filtersSettings['settings'], 'f_multi_logic', 'and' );
 
 			if ( 'or' === $multiLogic ) {
@@ -118,18 +124,20 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	 * @version 3.4.0
 	 */
 	public function addAdminTab( $tabs ) {
+		// 4.0: the old Settings screen lives inside Help (Advanced settings); the tab stays for old links.
 		$tabs['settings'] = array(
 			'label'      => esc_html__( 'Settings', 'woo-product-filter' ),
 			'callback'   => array( $this, 'getSettingsTabContent' ),
 			'fa_icon'    => 'fa-gear',
 			'sort_order' => 30,
+			'hidden'     => 1,
 		);
 		if (
 			! ( WooBeWoo_PF_Frame::_()->moduleExists( 'license' ) && WooBeWoo_PF_Frame::_()->getModule( 'license' ) ) &&
 			! WooBeWoo_PF_Frame::_()->isWCLicense()
 		) {
 			$tabs['gopro'] = array(
-				'label'      => esc_html__( 'Go PRO', 'woo-product-filter' ),
+				'label'      => esc_html__( 'Upgrade', 'woo-product-filter' ),
 				'callback'   => array( $this, 'getProTabContent' ),
 				'fa_icon'    => 'fa-star',
 				'sort_order' => 998,
@@ -149,7 +157,154 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 	 * getProTabContent.
 	 */
 	public function getProTabContent() {
+		$file = WPF_MODULES_DIR . 'upgrade' . WPF_DS . 'class-woobewoo-pf-upgrade-screen.php';
+		if ( file_exists( $file ) ) {
+			require_once $file;
+			return WooBeWoo_PF_Upgrade_Screen::render();
+		}
 		return $this->getView()->getProTabContent();
+	}
+
+	/**
+	 * Tabs that are not screens in 4.0 (Overview, Add New Filter) are kept callable but hidden
+	 * from the rail and the WordPress submenu.
+	 *
+	 * @since 4.0.0
+	 */
+	public function hideLegacyTabs( $tabs ) {
+		foreach ( array( 'overview', 'woofilters#wpfadd', 'settings' ) as $key ) {
+			if ( isset( $tabs[ $key ] ) ) {
+				$tabs[ $key ]['hidden'] = 1;
+			}
+		}
+		if ( isset( $tabs['woofilters'] ) ) {
+			$tabs['woofilters']['label'] = esc_html__( 'Filters', 'woo-product-filter' );
+		}
+		if ( isset( $tabs['woofilters_edit'] ) ) {
+			$tabs['woofilters_edit']['full_width'] = true;
+		}
+		return $tabs;
+	}
+
+	/**
+	 * Rail order and groups. Main: Setup, tabs with rail_group "setup", Filters, Speed and SEO,
+	 * Help, Upgrade. Pro: tabs with rail_group "pro" in the order they were registered.
+	 *
+	 * @since 4.0.0
+	 */
+	public function getRailGroups( $tabs = null ) {
+		if ( is_null( $tabs ) ) {
+			$tabs = $this->getTabs();
+		}
+		$main = array();
+		$pro  = array();
+		$add  = function ( $key ) use ( &$main, $tabs ) {
+			if ( isset( $tabs[ $key ] ) && empty( $tabs[ $key ]['hidden'] ) ) {
+				$main[ $key ] = $tabs[ $key ];
+			}
+		};
+		$add( 'setup' );
+		foreach ( $tabs as $key => $t ) {
+			if ( isset( $t['rail_group'] ) && 'setup' === $t['rail_group'] && empty( $t['hidden'] ) ) {
+				$main[ $key ] = $t;
+			}
+		}
+		$add( 'woofilters' );
+		$add( 'speed' );
+		$add( 'help' );
+		$add( 'gopro' );
+		foreach ( $tabs as $key => $t ) {
+			if ( isset( $t['rail_group'] ) && 'pro' === $t['rail_group'] && empty( $t['hidden'] ) && ! isset( $main[ $key ] ) ) {
+				$pro[ $key ] = $t;
+			}
+		}
+		foreach ( $main as $key => $t ) {
+			if ( ! isset( $main[ $key ]['url'] ) ) {
+				$main[ $key ]['url'] = $this->getTabUrl( $key );
+			}
+		}
+		foreach ( $pro as $key => $t ) {
+			if ( ! isset( $pro[ $key ]['url'] ) ) {
+				$pro[ $key ]['url'] = $this->getTabUrl( $key );
+			}
+		}
+		return array( 'main' => $main, 'pro' => $pro );
+	}
+
+	/**
+	 * Which rail item is lit for the active tab (children light their parent).
+	 *
+	 * @since 4.0.0
+	 */
+	public function getRailActiveKey( $activeTab, $tabs = null ) {
+		if ( is_null( $tabs ) ) {
+			$tabs = $this->getTabs();
+		}
+		if ( 'woofilters_edit' === $activeTab || 'woofilters#wpfadd' === $activeTab ) {
+			return 'woofilters';
+		}
+		if ( 'settings' === $activeTab || 'overview' === $activeTab ) {
+			return 'help';
+		}
+		if ( isset( $tabs[ $activeTab ]['child_of'] ) ) {
+			return $tabs[ $activeTab ]['child_of'];
+		}
+		return $activeTab;
+	}
+
+	/**
+	 * Inline SVG icons for the rail (24 grid, 1.8 stroke, currentColor).
+	 *
+	 * @since 4.0.0
+	 */
+	public function getRailIcons() {
+		return array(
+			'setup'      => '<svg class="wbw-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="M5 17l.7 1.6L7.3 19.3l-1.6.7L5 21.6l-.7-1.6-1.6-.7 1.6-.7z"/><path d="M18.5 16l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>',
+			'woofilters' => '<svg class="wbw-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16"/><path d="M7 12h10"/><path d="M10 19h4"/></svg>',
+			'speed'      => '<svg class="wbw-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 1 1 16 0"/><path d="M12 14l4-5"/><path d="M4 20h16"/></svg>',
+			'help'       => '<svg class="wbw-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>',
+			'gopro'      => '<svg class="wbw-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 7.5-1.9"/></svg>',
+			'importers'  => '<svg class="wbw-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h12"/><path d="M12 8l4 4-4 4"/><path d="M20 4v16"/></svg>',
+			'default'    => '<svg class="wbw-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/></svg>',
+		);
+	}
+
+	/**
+	 * wp_kses allow list for inline SVG icons passed by other modules.
+	 *
+	 * @since 4.0.0
+	 */
+	public function getSvgKses() {
+		return array(
+			'svg'      => array( 'class' => true, 'viewbox' => true, 'width' => true, 'height' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'aria-hidden' => true, 'xmlns' => true, 'focusable' => true, 'role' => true ),
+			'path'     => array( 'd' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'fill-rule' => true, 'clip-rule' => true ),
+			'circle'   => array( 'cx' => true, 'cy' => true, 'r' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true ),
+			'rect'     => array( 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true, 'ry' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true ),
+			'line'     => array( 'x1' => true, 'y1' => true, 'x2' => true, 'y2' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true ),
+			'polyline' => array( 'points' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true ),
+			'polygon'  => array( 'points' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true ),
+			'g'        => array( 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'transform' => true ),
+		);
+	}
+
+	/**
+	 * The WordPress submenu under "Product Filter" mirrors the rail exactly.
+	 *
+	 * @since 4.0.0
+	 */
+	public function mirrorRailInSubmenu( $subMenus ) {
+		$groups = $this->getRailGroups();
+		$slug   = WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainSlug();
+		$out    = array();
+		foreach ( array_merge( $groups['main'], $groups['pro'] ) as $key => $t ) {
+			$out[] = array(
+				'title'      => $t['label'],
+				'capability' => WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainCap(),
+				'menu_slug'  => 'admin.php?page=' . $slug . '&tab=' . $key,
+				'function'   => '',
+			);
+		}
+		return $out;
 	}
 
 	/**
@@ -256,12 +411,6 @@ class WooBeWoo_PF_Options extends WooBeWoo_PF_Module {
 					'general' => array(
 						'label' => esc_html__( 'General', 'woo-product-filter' ),
 						'opts'  => array(
-							'send_stats'                 => array(
-								'label' => esc_html__( 'Send usage statistics', 'woo-product-filter' ),
-								'desc'  => esc_html__( 'Send information about what plugin options you prefer to use, this will help us make our solution better for You.', 'woo-product-filter' ),
-								'def'   => '0',
-								'html'  => 'checkboxHiddenVal',
-							),
 							'count_product_shop'         => array(
 								'label' => esc_html__( 'Set number of displayed products', 'woo-product-filter' ),
 								'desc'  => esc_html__( 'Set number of displayed products. Leave blank for the default value.', 'woo-product-filter' ),

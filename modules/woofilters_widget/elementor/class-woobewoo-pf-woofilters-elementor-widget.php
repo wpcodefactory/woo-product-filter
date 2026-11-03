@@ -105,7 +105,7 @@ class WooBeWoo_PF_Woofilters_Elementor_Widget extends Widget_Base {
 		$filtersSettings    = array();
 		foreach ( $filters as $filter ) {
 			$filtersOpts[ $filter['id'] ]     = $filter['title'];
-			$filtersSettings[ $filter['id'] ] = maybe_unserialize( $filter['setting_data'] );
+			$filtersSettings[ $filter['id'] ] = woobewoo_pf_decode_settings( $filter['setting_data'] );
 		}
 
 		return array( $filtersOpts, $filtersSettings );

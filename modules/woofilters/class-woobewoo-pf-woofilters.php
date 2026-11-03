@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters Class
  *
- * @version 3.4.7
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -52,13 +52,24 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		add_shortcode( WPF_SHORTCODE_PRODUCTS, array( $this, 'renderProductsList' ) );
 		add_shortcode( WPF_SHORTCODE_SELECTED_FILTERS, array( $this, 'renderSelectedFilters' ) );
 
+		// 4.0.0: storefront engine 4 (facet index, JSON endpoint, vanilla JS storefront) and swatches. Booted here so
+		// the index follows product changes everywhere (admin, REST, CLI, cron).
+		require_once $this->getModDir() . 'class-woobewoo-pf-blocks.php'; // 4.0.0: block registry, read by the query, engine, view, builder and CLI.
+		require_once $this->getModDir() . 'class-woobewoo-pf-frontend4.php';
+		WooBeWoo_PF_Frontend4::boot( $this );
+		require_once $this->getModDir() . 'class-woobewoo-pf-legacy-compat.php'; // Pro 3.x running next to Free 4.0.
+		if ( file_exists( WPF_MODULES_DIR . 'swatches' . WPF_DS . 'class-woobewoo-pf-swatches.php' ) ) {
+			require_once WPF_MODULES_DIR . 'swatches' . WPF_DS . 'class-woobewoo-pf-swatches.php';
+			WooBeWoo_PF_Swatches::boot();
+		}
+
 		$isThriveContext = (
 			isset( $_GET['tvet'] ) || // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			isset( $_GET['tcbf'] ) || // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			isset( $_GET['_preview'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		);
 		if ( $isThriveContext ) {
-			// Register shortcodes only — skip all heavy product query hooks
+			// Register shortcodes only - skip all heavy product query hooks
 			return;
 		}
 
@@ -72,10 +83,12 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 
 		WooBeWoo_PF_Dispatcher::addFilter( 'mainAdminTabs', array( $this, 'addAdminTab' ) );
 
+		// 4.0.0: jQuery helpers only when a filter still runs the legacy storefront engine.
+		$hasLegacy = WooBeWoo_PF_Frontend4::has_legacy_filters();
 		if ( is_admin() ) {
 			add_action( 'admin_notices', array( $this, 'showAdminErrors' ) );
 		} elseif ( '1' !== WooBeWoo_PF_Req::getVar( 'wpf_skip' ) ) {
-			if ( ! class_exists( 'Popup_Maker' ) ) {
+			if ( ! class_exists( 'Popup_Maker' ) && $hasLegacy ) {
 				add_action( 'wp_enqueue_scripts', array( $this, 'addScriptsLisener' ), 999 );
 			}
 			add_filter(
@@ -94,7 +107,9 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 			);
 		}
 
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
+		if ( $hasLegacy || is_admin() ) {
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-ui-autocomplete', '', array( 'jquery' ), false, true );
+		}
 
 		$loadProductsFilterWCProductQueryPriority = (int) WooBeWoo_PF_Frame::_()->getModule( 'options' )->getModel()->get( 'load_products_filter_wc_product_query_priority' );
 		if ( 0 == $loadProductsFilterWCProductQueryPriority ) {
@@ -271,6 +286,101 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 
 		// Discourages search engines from indexing.
 		add_action( 'wp_robots', array( $this, 'discourage_search_engines_from_indexing' ), 20 );
+
+		// 4.0.0: look presets (Clean, Chips, Swatches, Compact), accent colour and per block chip style.
+		WooBeWoo_PF_Dispatcher::addFilter( 'controlFilterSettings', array( $this, 'wbwBlockStyleAttributes' ) );
+		WooBeWoo_PF_Dispatcher::addFilter( 'addHtmlBeforeFilter', array( $this, 'wbwWrapperClasses' ), 10, 3 );
+		WooBeWoo_PF_Dispatcher::addFilter( 'woobewoo_pf_add_custom_css', array( $this, 'wbwAccentCss' ), 10, 3 );
+		// 4.0.0: plain words gettext map lives in modules/woofilters/plain-labels.php (applied by the templates module).
+		// 4.0.0: Pro probes for variation level stock in the index. Free 4.0 does not expose a variation
+		// stock lookup, so the first stays false and the second returns null (Pro falls back to WC objects).
+		add_filter( 'woobewoo_pf_has_variation_stock_index', array( $this, 'hasVariationStockIndex' ) );
+		add_filter( 'woobewoo_pf_variation_stock_lookup', array( $this, 'variationStockLookup' ), 10, 3 );
+	}
+
+	/**
+	 * Does the Free index expose variation level stock to Pro? Not in 4.0.0.
+	 *
+	 * @since 4.0.0
+	 */
+	public function hasVariationStockIndex( $has ) {
+		return class_exists( 'WooBeWoo_PF_Index' ) && WooBeWoo_PF_Index::installed() ? true : (bool) $has;
+	}
+
+	/**
+	 * Variation id and stock for a product + attributes from the index. Not built in 4.0.0: null lets Pro fall back.
+	 *
+	 * @since 4.0.0
+	 */
+	public function variationStockLookup( $result, $productId = 0, $attributes = array() ) {
+		return $result;
+	}
+
+	/**
+	 * Per block chip / swatch style: `f_wbw_style` -> data attribute on the block wrapper.
+	 *
+	 * @since 4.0.0
+	 */
+	public function wbwBlockStyleAttributes( $filter ) {
+		$style = empty( $filter['settings']['f_wbw_style'] ) ? '' : sanitize_key( $filter['settings']['f_wbw_style'] );
+		if ( in_array( $style, array( 'chips', 'swatches' ), true ) ) {
+			$filter['blockAttributes'] = ( empty( $filter['blockAttributes'] ) ? '' : $filter['blockAttributes'] . ' ' ) . 'data-wbw-style="' . esc_attr( $style ) . '"';
+		}
+		return $filter;
+	}
+
+	/**
+	 * Look preset class and accent custom properties on the main wrapper.
+	 *
+	 * @since 4.0.0
+	 */
+	public function wbwWrapperClasses( $html, $settings, $viewId ) {
+		$style  = empty( $settings['wbw_style'] ) ? '' : sanitize_key( $settings['wbw_style'] );
+		$accent = empty( $settings['wbw_accent'] ) ? '' : sanitize_hex_color( $settings['wbw_accent'] );
+		$extra  = '';
+		if ( in_array( $style, array( 'clean', 'chips', 'swatches', 'compact' ), true ) ) {
+			$extra .= ' wpfStyle-' . $style;
+		}
+		if ( ! empty( $settings['mobile_drawer'] ) ) {
+			$extra .= ' wpfHasMobileDrawer';
+		}
+		if ( $extra ) {
+			$html = preg_replace( '/class="wpfMainWrapper"/', 'class="wpfMainWrapper' . esc_attr( $extra ) . '"', $html, 1 );
+		}
+		if ( $accent ) {
+			$html = preg_replace( '/^<div class="wpfMainWrapper([^"]*)"/', '<div class="wpfMainWrapper$1" style="--wpf-accent:' . esc_attr( $accent ) . ';--wpf-on-accent:' . esc_attr( $this->wbwContrast( $accent ) ) . '"', $html, 1 );
+		}
+		return $html;
+	}
+
+	/**
+	 * Black or white text for a background colour (WCAG relative luminance).
+	 *
+	 * @since 4.0.0
+	 */
+	public function wbwContrast( $hex ) {
+		$hex = ltrim( (string) $hex, '#' );
+		if ( 3 === strlen( $hex ) ) {
+			$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+		}
+		if ( 6 !== strlen( $hex ) ) {
+			return '#ffffff';
+		}
+		$l = 0.2126 * hexdec( substr( $hex, 0, 2 ) ) + 0.7152 * hexdec( substr( $hex, 2, 2 ) ) + 0.0722 * hexdec( substr( $hex, 4, 2 ) );
+		return $l > 150 ? '#171509' : '#ffffff';
+	}
+
+	/**
+	 * Accent colour on the filter button and active states.
+	 *
+	 * @since 4.0.0
+	 */
+	public function wbwAccentCss( $css, $settings, $filterId ) {
+		$accent = empty( $settings['wbw_accent'] ) ? '' : sanitize_hex_color( $settings['wbw_accent'] );
+		if ( $accent ) {
+			$css .= '#' . $filterId . ' .wpfFilterButton.wpfButton,#' . $filterId . ' .wpfChipOn{background:' . $accent . ';color:' . $this->wbwContrast( $accent ) . ';}';
+		}
+		return $css;
 	}
 
 	/**
@@ -1175,7 +1285,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 			$preselects = array();
 			$filter     = $this->getModel( 'woofilters' )->getById( $filterId );
 			if ( $filter ) {
-				$settings = maybe_unserialize( $filter['setting_data'] );
+				$settings = woobewoo_pf_decode_settings( $filter['setting_data'] );
 				$mode     = $this->getRenderMode( $filterId, $settings );
 				if ( $mode > 0 ) {
 					$preselect = ! empty( $settings['settings']['filters']['preselect'] ) ? $settings['settings']['filters']['preselect'] : '';
@@ -1306,7 +1416,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 			$clauses       = array();
 			$fieldtype     = $CustomOptions[ $meta_key ]['type'] ?? '';
 			foreach ( $values as $single_value ) {
-				// Wrap in double quotes — matches how ACF / serialized strings are stored
+				// Wrap in double quotes - matches how ACF / serialized strings are stored
 				// MySQL LIKE is case-insensitive in most WP environments (utf8mb4_unicode_ci)
 				if ( $fieldtype == 'checkbox' ) {
 					$search = '"' . $single_value . '"';
@@ -1731,7 +1841,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 		$isUseCategoryFiltration = false;
 		$categoryPageId          = null;
 		foreach ( $filters as $key => $filter ) {
-			$filtersSettings = maybe_unserialize( $filter['setting_data'] );
+			$filtersSettings = woobewoo_pf_decode_settings( $filter['setting_data'] );
 			$multiLogic      = $this->getFilterSetting( $filtersSettings['settings'], 'f_multi_logic', 'and' );
 
 			if ( 'or' === $multiLogic ) {
@@ -1905,7 +2015,7 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	 */
 	public function maybeShowProductSubcategories( $loop_html, $categoryPageId ) {
 		// Use term meta directly instead of woocommerce_get_loop_display_mode(), which
-		// returns 'products' whenever is_filtered=true — causing subcategories to vanish
+		// returns 'products' whenever is_filtered=true - causing subcategories to vanish
 		// on full page reload after filters are applied.
 		$display_type = get_term_meta( $categoryPageId, 'display_type', true );
 		$display_type = '' === $display_type ? get_option( 'woocommerce_category_archive_display', '' ) : $display_type;
@@ -2662,7 +2772,8 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 				! empty( $_REQUEST['action'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				'in-front-editor' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			);
-			$displayOnPage = empty( $settings['display_on_page'] ) ? 'shop' : $settings['display_on_page'];
+			// No rule stored (a 4.0 filter whose "Show on" was never changed): the builder shows "Shop and category pages".
+			$displayOnPage = empty( $settings['display_on_page'] ) ? 'both' : $settings['display_on_page'];
 			if ( is_admin() || $isBrizyEditContext ) {
 				$displayShop = true;
 			} else {
@@ -3281,7 +3392,16 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 			'id'   => ( isset( $params['id'] ) ? (int) $params['id'] : 0 ),
 			'mode' => ( isset( $params['mode'] ) && 'widget' == $params['mode'] ? 'widget' : '' ),
 		);
-		return WooBeWoo_PF_Html::escapedHtml( $this->getView()->renderHtml( $p ) );
+		$html = $this->getView()->renderHtml( $p );
+		// 4.0.0: the engine 4 view escapes every attribute and text node where it builds them; the legacy kses pass
+		// would strip the accessibility attributes (aria-valuetext, role=switch) and the <output> element.
+		if ( $p['id'] && class_exists( 'WooBeWoo_PF_Frontend4' ) ) {
+			$row = WooBeWoo_PF_Frontend4::filter( $p['id'] );
+			if ( $row && WooBeWoo_PF_Frontend4::is_engine4( $row['id'], $row['settings'] ) ) {
+				return (string) $html;
+			}
+		}
+		return WooBeWoo_PF_Html::escapedHtml( $html );
 	}
 
 	/**
@@ -3290,25 +3410,55 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	 * @version 3.4.0
 	 */
 	public function renderProductsList( $params ) {
+		// A 4.0 filter on the page: a real WooCommerce grid that the engine narrows (Frontend4::onShortcodeQuery) and the
+		// 4.0 script refreshes. The 3.x list was an empty container only the classic script filled, so it stayed empty.
+		if ( class_exists( 'WooBeWoo_PF_Frontend4' ) && ( ! empty( WooBeWoo_PF_Frontend4::$current ) || WooBeWoo_PF_Frontend4::active_filter() ) ) {
+			$per = class_exists( 'WooBeWoo_PF_Engine' ) ? (int) WooBeWoo_PF_Engine::per_page() : 12;
+			return '<div class="woocommerce wpfNoWooPage">' . do_shortcode( '[products paginate="true" limit="' . max( 1, $per ) . '"]' ) . '</div>';
+		}
 		$params = array();
 		return WooBeWoo_PF_Html::escapedHtml( $this->getView()->renderProductsListHtml( $params ) );
 	}
 
 	/**
-	 * renderSelectedFilters.
+	 * renderSelectedFilters: the `[wpf-selected-filters]` shortcode.
 	 *
-	 * @version 3.4.6
+	 * 4.0.0: for a 4.0 engine filter (Free and Pro) it prints a second chips bar anywhere on the page
+	 * (`.wpf4__chips[data-wpf4-chips-external]`), which frontend-4/chips-external.js fills with the
+	 * picked values of that filter and keeps in step with the filter's own bar; a click on a chip
+	 * removes the value. With no id, the filter active on this page is used. Classic engine filters
+	 * keep the 3.x behaviour (the Pro view renders the bar).
+	 *
+	 * @version 4.0.0
 	 */
 	public function renderSelectedFilters( $params ) {
 		$p = array(
 			'id' => ( isset( $params['id'] ) ? (int) $params['id'] : 0 ),
 		);
 
-		// Rendered by the Free view, as in 3.3.0. The Pro listener on the Dispatcher hook
+		$html = '';
+		if ( class_exists( 'WooBeWoo_PF_Frontend4' ) ) {
+			$filter = $p['id'] ? WooBeWoo_PF_Frontend4::filter( $p['id'] ) : WooBeWoo_PF_Frontend4::active_filter();
+			if ( is_array( $filter ) && ! empty( $filter['id'] ) && WooBeWoo_PF_Frontend4::is_engine4( (int) $filter['id'], $filter['settings'] ) ) {
+				// The filter's own assets (filter.js registers the chips API) plus the external bar script.
+				WooBeWoo_PF_Frontend4::enqueue( $filter );
+				wp_enqueue_script(
+					'woobewoo-pf-frontend-4-chips-external',
+					WPF_MODULES_PATH . 'woofilters/js/frontend-4/chips-external.js',
+					array( 'woobewoo-pf-frontend-4' ),
+					defined( 'WPF_VERSION' ) ? WPF_VERSION : '4.0.0',
+					true
+				);
+				$html = '<div class="wpf4 wpf4--chips-external"><div class="wpf4__chips" role="group" aria-label="' . esc_attr__( 'Picked', 'woo-product-filter' ) . '" data-wpf4-chips-external data-filter="' . esc_attr( (int) $filter['id'] ) . '" hidden></div></div>';
+				return apply_filters( 'woobewoo_pf_render_selected_filters', $html, $p );
+			}
+		}
+
+		// Classic engine: rendered by the Free view, as in 3.3.0. The Pro listener on the Dispatcher hook
 		// (`wpf_woobewoo_pf_render_selected_filters`) is never reached by the plain hook below.
-		$html = WooBeWoo_PF_Frame::_()->isPro() ?
-			WooBeWoo_PF_Html::escapedHtml( $this->getView()->renderSelectedFiltersHtml( $p ) ) :
-			'';
+		if ( WooBeWoo_PF_Frame::_()->isPro() ) {
+			$html = WooBeWoo_PF_Html::escapedHtml( $this->getView()->renderSelectedFiltersHtml( $p ) );
+		}
 
 		return apply_filters( 'woobewoo_pf_render_selected_filters', $html, $p );
 	}
@@ -3850,6 +4000,56 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 	 * @return mixed
 	 */
 	public function getFilterExistsItems( $args, $taxonomies, $calcCategory = null, $prodCatId = false, $generalSettings = array(), $ajax = false, $currentSettings = array(), $settings = array(), $urlQuery = array() ) {
+		/**
+		 * 4.0.0 counts cache (conservative): the term counts of a filter for one query are kept in a
+		 * transient for 10 minutes, keyed by filter settings, query and request parameters, and
+		 * salted by a version that changes on product save, stock change, index rebuild and filter save.
+		 * Requests carrying `wpf_skip` build inline JS with the filter id, so they are never cached.
+		 */
+		$speed    = WooBeWoo_PF_Frame::_()->getModule( 'speed' );
+		$useCache = $speed && method_exists( $speed, 'cacheEnabled' ) && $speed->cacheEnabled() && '1' !== WooBeWoo_PF_Req::getVar( 'wpf_skip' ) && ! is_admin();
+		if ( $useCache ) {
+			$key    = $speed->cacheKey(
+				array(
+					'args'     => $args,
+					'tax'      => $taxonomies,
+					'cat'      => $calcCategory,
+					'prodCat'  => $prodCatId,
+					'general'  => $generalSettings,
+					'ajax'     => (bool) $ajax,
+					'current'  => $currentSettings,
+					'settings' => $settings,
+					'url'      => $urlQuery,
+					'get'      => WooBeWoo_PF_Req::get( 'get' ),
+					'post'     => $ajax ? WooBeWoo_PF_Req::getVar( 'currentUrl', 'post' ) : '',
+					// The page the counts are for: on a page load $args is empty and the main query (shop, a category,
+					// a tag) decides, so without this the shop showed the counts cached for a tag page.
+					'page'     => $ajax ? '' : ( isset( $_SERVER['REQUEST_URI'] ) ? (string) strtok( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), '?' ) : '' ),
+					'object'   => $ajax ? 0 : get_queried_object_id(),
+					'role'     => is_user_logged_in() ? 'user' : 'guest',
+					'lang'     => determine_locale(),
+					'currency' => function_exists( 'get_woocommerce_currency' ) ? get_woocommerce_currency() : '',
+				)
+			);
+			$cached = get_transient( $key );
+			if ( is_array( $cached ) && array_key_exists( 'result', $cached ) ) {
+				return $cached['result'];
+			}
+			$result = $this->getFilterExistsItemsUncached( $args, $taxonomies, $calcCategory, $prodCatId, $generalSettings, $ajax, $currentSettings, $settings, $urlQuery );
+			if ( is_array( $result ) ) {
+				set_transient( $key, array( 'result' => $result ), WooBeWoo_PF_Speed::CACHE_TTL );
+			}
+			return $result;
+		}
+		return $this->getFilterExistsItemsUncached( $args, $taxonomies, $calcCategory, $prodCatId, $generalSettings, $ajax, $currentSettings, $settings, $urlQuery );
+	}
+
+	/**
+	 * getFilterExistsItems without the 4.0 counts cache.
+	 *
+	 * @since 4.0.0 (body unchanged from 3.4.7)
+	 */
+	public function getFilterExistsItemsUncached( $args, $taxonomies, $calcCategory = null, $prodCatId = false, $generalSettings = array(), $ajax = false, $currentSettings = array(), $settings = array(), $urlQuery = array() ) {
 
 		if ( empty( $taxonomies['names'] ) && empty( $taxonomies['other_names'] ) && empty( $taxonomies['get_names'] ) ) {
 			return false;
@@ -4504,7 +4704,9 @@ class WooBeWoo_PF_Woofilters extends WooBeWoo_PF_Module {
 			}
 		}
 
-		if ( WooBeWoo_PF_Frame::_()->proVersionCompare( WPF_PRO_REQUIRES, '>=' ) ) {
+		// 4.0.0: the 3.4 `addCustomAttributesSql` arguments for every Pro from 3.4.0 on. WPF_PRO_REQUIRES became
+		// 4.0.0, which must not hand a Pro 3.4.x site (Free auto updated first) the pre 3.4 arguments.
+		if ( WooBeWoo_PF_Frame::_()->proVersionCompare( WooBeWoo_PF_Legacy_Compat::PRO_OLDEST, '>=' ) ) {
 			$termProducts = ! isset( $sql['main'] ) ? array() : WooBeWoo_PF_Db::get( $sql['main'] );
 
 			if ( false === $termProducts ) {

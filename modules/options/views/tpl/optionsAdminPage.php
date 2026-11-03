@@ -1,8 +1,12 @@
 <?php
 /**
- * Product Filter by WBW - Options Admin Page
+ * Product Filter by WBW - Admin page shell (4.0)
  *
- * @version 3.4.0
+ * Paper ground, 200px rail with pill items, main column. The builder (woofilters_edit)
+ * declares `full_width` and gets the whole frame without the rail. WordPress moves other
+ * plugins' notices after `.wp-header-end`, which sits above our frame.
+ *
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -10,121 +14,67 @@
 defined( 'ABSPATH' ) || exit;
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+$wbwReqTab    = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getActiveTab();
+$wbwTab       = isset( $this->tabs[ $wbwReqTab ] ) ? $this->tabs[ $wbwReqTab ] : array();
+$wbwFullWidth = ! empty( $wbwTab['full_width'] ) || 'woofilters_edit' === $wbwReqTab;
+$wbwDiag      = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getView()->getDiagnosticData();
 ?>
-	<div class="wrap woobewoo-wrap">
-		<div class="woobewoo-plugin woobewoo-main">
-			<section id="mainContainer" class="woobewoo-content woobewoo-d-flex woobewoo-items-stretch">
-				<nav class="woobewoo-navigation woobewoo-sticky <?php WooBeWoo_PF_Dispatcher::doAction( 'adminMainNavClassAdd' ); ?>">
-					<span class="woobewoo_logo woobewoo-d-inline-block">
-						<svg width="48" height="35" viewBox="0 0 48 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<g clip-path="url(#clip0_1_769)">
-								<path
-									d="M37.9799 1.02244C38.7399 -0.334244 40.6897 -0.342452 41.4613 1.00779L47.7074 11.9385H46.3314C45.6334 11.9385 44.9873 12.2973 44.6293 12.8965C41.123 18.7635 35.6081 28.8301 32.8676 33.8721C32.1291 35.2304 30.1966 35.2725 29.3939 33.9512L22.7982 23.0888C20.5178 27.1784 18.3089 31.2203 16.8676 33.8721C16.1291 35.2304 14.1966 35.2725 13.3939 33.9512L6.81872 22.9385L0.279662 11.9043C-0.0759926 11.3041 -0.09367 10.5613 0.233763 9.94529L4.47888 1.95994C5.23893 0.603345 7.18878 0.595078 7.96033 1.94529L13.2074 10.5C13.565 11.153 13.5305 11.9508 13.1176 12.5703L8.04333 20.9336C7.82433 21.2621 7.3799 22.2097 7.37988 22.6045V23.5H8.20703C8.93094 23.5 9.92596 22.5466 10.2797 21.915L21.9799 1.02244C22.7399 -0.334243 24.6897 -0.342451 25.4613 1.00779L31.8781 11.9181L30.3314 11.9385C29.6334 11.9385 28.9873 12.2973 28.6293 12.8965C26.9899 15.6397 24.9129 19.3019 22.8842 22.9385H24.5345C25.2585 22.9385 25.926 22.5466 26.2797 21.915L37.9799 1.02244Z"
-									fill="black"/>
-							</g>
-							<defs>
-								<clipPath id="clip0_1_769">
-									<rect width="48" height="35" fill="white"/>
-								</clipPath>
-							</defs>
-						</svg>
-					</span>
-					<ul>
-						<?php foreach ( $this->tabs as $tabKey => $t ) { ?>
-							<?php
-							if ( isset( $t['hidden'] ) && $t['hidden'] ) {
-								continue;
-							}
-							?>
-							<li class="woobewoo-tab-<?php echo esc_attr( $tabKey ); ?> <?php echo( ( $this->activeTab == $tabKey || in_array( $tabKey, $this->activeParentTabs ) ) ? 'active' : '' ); ?>">
-								<a class="menuItem woobewoo-d-inline-block woobewoo-wdt-100"
-									href="<?php echo esc_url( $t['url'] ); ?>"
-									title="<?php echo esc_attr( $t['label'] ); ?>" <?php echo empty( $t['blank'] ) ? '' : ' target="_blank"'; ?>>
-									<?php if ( isset( $t['fa_icon'] ) ) { ?>
-										<i class="fa <?php echo esc_attr( $t['fa_icon'] ); ?>"></i>
-									<?php } elseif ( isset( $t['wp_icon'] ) ) { ?>
-										<i class="dashicons-before <?php echo esc_attr( $t['wp_icon'] ); ?>"></i>
-									<?php } elseif ( isset( $t['icon'] ) ) { ?>
-										<i class="<?php echo esc_attr( $t['icon'] ); ?>"></i>
-									<?php } ?>
-									<span class="sup-tab-label"><?php echo esc_html( $t['label'] ); ?></span>
-								</a>
-							</li>
-						<?php } ?>
-					</ul>
-				</nav>
-				<div class="contantArea woobewoo-container woobewoo-wdt-100 woobewoo-relative woobewoo-<?php echo esc_attr( $this->activeTab ); ?>">
-					<div class="breadcrumb_heading">
-						<?php WooBeWoo_PF_Html::echoEscapedHtml( $this->breadcrumbs ); ?>
-					</div>
-					<?php WooBeWoo_PF_Html::echoEscapedHtml( $this->content ); ?>
-					<div class="clear"></div>
-				</div>
-			</section>
-			<?php
-			$filtersList = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel()->getAllFilters();
-			?>
-			<div
-				id="wpfAddDialog"
-				class="woobewoo-plugin woobewoo-hidden"
-				title="<?php echo esc_attr__( 'Add new product filter', 'woo-product-filter' ); ?>"
-				data-button="<?php echo esc_attr__( 'Create', 'woo-product-filter' ); ?>"
-			>
-				<div>
-					<form id="tableForm">
-						<div class="wpfPopupBlock">
-							<label class="wpfPopupLabel"><?php esc_html_e( 'Filter name', 'woo-product-filter' ); ?></label>
-							<input id="addDialog_title" class="woobewoo-text woobewoo-width-full" type="text"
-									placeholder="e.g. Shop Sidebar Filter"/>
-						</div>
-						<div class="wpfPopupBlock">
-							<label class="wpfPopupLabel"><?php esc_html_e( 'Choose filter types ', 'woo-product-filter' ); ?>
-								<span><?php esc_html_e( '(You can change them later)', 'woo-product-filter' ); ?></span>
-							</label>
-							<ul class="wpfPopupList" id="addDialog_list">
-								<?php
-								foreach ( $filtersList as $filter => $data ) {
-									if ( 'wpfPriceRange' != $filter ) {
-										echo '<li><input type="checkbox" data-unique-id="' . esc_attr( uniqid( 'wpf_' ) ) .
-											'" data-value="' . esc_attr( $filter ) .
-											'"><label>' . esc_html( $data['name'] ) .
-											'</label></li>';
-									}
-								}
-								?>
-							</ul>
-						</div>
-						<input type="hidden" id="addDialog_duplicateid" class="woobewoo-text woobewoo-width-full"/>
-					</form>
-					<div id="formError" class="woobewoo-hidden">
-						<p></p>
-					</div>
-				</div>
+	<div class="wrap wbw-wrap woobewoo-wrap">
+		<h1 class="wbw-wp-heading"><?php esc_html_e( 'Product Filter', 'woo-product-filter' ); ?></h1>
+		<hr class="wp-header-end">
+		<div class="wbw wbw-admin woobewoo-plugin" id="wpfAdmin" data-tab="<?php echo esc_attr( $this->activeTab ); ?>"
+			data-wpf-assets="<?php echo esc_attr( wp_json_encode( $wbwDiag['assets'] ) ); ?>"
+			data-wpf-plugins="<?php echo esc_attr( wp_json_encode( $wbwDiag['plugins'] ) ); ?>"
+			data-wpf-env="<?php echo esc_attr( wp_json_encode( $wbwDiag['env'] ) ); ?>">
+			<div class="wbw-page">
+				<?php if ( ! $wbwFullWidth ) { ?>
+					<nav class="wbw-rail" aria-label="<?php esc_attr_e( 'Product Filter screens', 'woo-product-filter' ); ?>">
+						<?php require __DIR__ . DIRECTORY_SEPARATOR . 'optionsRail.php'; ?>
+					</nav>
+					<main class="wbw-main" id="wpfMain">
+						<?php echo $this->content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- screen templates escape their own output ?>
+					</main>
+				<?php } else { ?>
+					<?php echo $this->content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- screen templates escape their own output ?>
+				<?php } ?>
 			</div>
-			<div
-				id="wpfDuplicateDialog"
-				class="woobewoo-plugin woobewoo-hidden"
-				title="<?php echo esc_attr__( 'Duplicate product filter', 'woo-product-filter' ); ?>"
-				data-button="<?php echo esc_attr__( 'Duplicate', 'woo-product-filter' ); ?>"
-			>
-				<div>
-					<form id="tableForm">
-						<div class="wpfPopupBlock">
-							<label class="wpfPopupLabel"><?php esc_html_e( 'Filter name', 'woo-product-filter' ); ?></label>
-							<input id="addDialog_titleDuplicate" class="woobewoo-text woobewoo-width-full" type="text"/>
-						</div>
-						<input type="hidden" id="addDialog_duplicateid" class="woobewoo-text woobewoo-width-full"/>
-					</form>
-					<div id="formError" class="woobewoo-hidden">
-						<p></p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="woobewoo-plugin-loader">
-			<div>Loading...<i class="fa fa-spinner fa-spin"></i></div>
 		</div>
 	</div>
+<?php if ( ! $wbwFullWidth ) { ?>
+	<script id="wpf-skin-check">
+	/* 4.0.0: if the skin did not apply 300 ms after the page loaded, show a diagnostic card that the owner can copy for support. */
+	( function () {
+		function check() {
+			setTimeout( function () {
+				var rail = document.querySelector( '.wbw-rail' ), root = document.getElementById( 'wpfAdmin' );
+				if ( ! rail || ! root || document.getElementById( 'wpf-skin-diag' ) ) { return; }
+				if ( getComputedStyle( rail ).display === 'flex' ) { return; }
+				var parse = function ( a ) { try { return JSON.parse( root.getAttribute( a ) || '[]' ); } catch ( e ) { return []; } };
+				var assets = parse( 'data-wpf-assets' ), plugins = parse( 'data-wpf-plugins' ), env = parse( 'data-wpf-env' );
+				var esc = function ( s ) { return String( s == null ? '' : s ).replace( /[&<>"']/g, function ( c ) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ c ]; } ); };
+				var box = document.createElement( 'div' );
+				box.id = 'wpf-skin-diag';
+				box.setAttribute( 'style', 'margin:16px 20px;padding:16px 20px;border:2px solid #C42B1A;border-radius:12px;background:#fff;color:#171509;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;max-width:960px' );
+				var html = '<p style="margin:0 0 8px;font-weight:700;font-size:16px">The Product Filter design did not load.</p>';
+				html += '<p style="margin:0 0 12px">Copy this box and send it to support.</p>';
+				html += '<p style="margin:0 0 4px"><strong>Site</strong>: ' + Object.keys( env ).map( function ( k ) { return esc( k ) + ' ' + esc( env[ k ] ); } ).join( ' · ' ) + '</p>';
+				html += '<p style="margin:8px 0 4px"><strong>Our stylesheets and scripts</strong> (status of a HEAD request from this browser):</p><ul id="wpf-skin-diag-assets" style="margin:0 0 8px 18px;padding:0;list-style:disc">';
+				assets.forEach( function ( a, i ) { html += '<li data-i="' + i + '" style="word-break:break-all"><code>' + esc( a.handle ) + '</code> ' + esc( a.src ) + ' - <span class="wpf-st">checking…</span></li>'; } );
+				html += '</ul><p style="margin:8px 0 4px"><strong>Active plugins</strong>: ' + esc( plugins.join( ', ' ) ) + '</p>';
+				box.innerHTML = html;
+				root.parentNode.insertBefore( box, root );
+				assets.forEach( function ( a, i ) {
+					var li = box.querySelector( 'li[data-i="' + i + '"] .wpf-st' );
+					fetch( a.src, { method: 'HEAD', credentials: 'same-origin', cache: 'no-store' } ).then( function ( r ) {
+						li.textContent = r.status + ( r.ok ? '' : ' (' + ( r.statusText || 'error' ) + ')' );
+					} ).catch( function () { li.textContent = 'blocked'; } );
+				} );
+			}, 300 );
+		}
+		if ( document.readyState === 'loading' ) { document.addEventListener( 'DOMContentLoaded', check ); } else { check(); }
+	} )();
+	</script>
+<?php } ?>
 <?php
 WooBeWoo_PF_Dispatcher::doAction( 'afterWoobewooWrap' );
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

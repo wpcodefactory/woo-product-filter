@@ -402,6 +402,11 @@ function wpfIsThriveEditor() {
 		var sliderWrapper = filter.find("#wpfSliderRange"),
 			autoFilteringEnable = (wrapper.find('.wpfFilterButton').length == 0),
 			skin = filter.attr('data-price-skin');
+		// 4.0 (26/10): a delayed or missing jQuery UI must not take the whole filter down with it.
+		if(skin === 'default' && typeof sliderWrapper.slider !== 'function'){
+			if (window.console) { console.warn('WBW Product Filter: jQuery UI slider is not loaded (delayed by a cache plugin?); the price slider is skipped.'); }
+			return;
+		}
 		if(skin === 'default'){
 			sliderWrapper.slider({
 				range: true,
@@ -2908,8 +2913,78 @@ function wpfIsThriveEditor() {
 	});
 
 	WpfFrontendPage.prototype.getFilterOptionsByType = (function($filter, filterType){
-		var _thisObj = this.$obj;
-		return _thisObj['get' + filterType.replace('wpf', '') + 'FilterOptions']($filter);
+		var _thisObj = this.$obj,
+			getter = _thisObj['get' + filterType.replace('wpf', '') + 'FilterOptions'];
+		if (typeof getter !== 'function') {
+			// 4.0.0: a block whose reader comes with Pro (Pro inactive, unlicensed or older) must not stop the
+			// whole filter. Brand is a Free block since 4.0 and gets the Free reader; anything else is skipped.
+			getter = ('wpfBrand' === filterType) ? _thisObj.getBrandFilterOptionsFree : _thisObj.getEmptyFilterOptions;
+		}
+		return getter.call(_thisObj, $filter);
+	});
+
+	WpfFrontendPage.prototype.getEmptyFilterOptions = (function ($filter) {
+		var optionsArray = [];
+		optionsArray['backend'] = [];
+		optionsArray['frontend'] = [];
+		optionsArray['frontend']['taxonomy'] = $filter.attr('data-get-attribute');
+		optionsArray['frontend']['settings'] = [];
+		optionsArray['selected'] = {'is_one': true, 'list': []};
+		optionsArray['stats'] = [];
+		return optionsArray;
+	});
+
+	// Same reading as Pro's getBrandFilterOptions (list, multi, dropdown, mul_dropdown).
+	WpfFrontendPage.prototype.getBrandFilterOptionsFree = (function ($filter) {
+		var _thisObj = this.$obj,
+			optionsArray = [],
+			frontendOptions = [],
+			options = [],
+			filterType = $filter.attr('data-display-type'),
+			selectedOptions = {'is_one': (filterType != 'mul_dropdown'), 'list': []},
+			statistics = [],
+			withCount = $filter.hasClass('wpfShowCount'),
+			i = 0;
+
+		if (filterType === 'list' || filterType === 'multi') {
+			$filter.find('input:checked').each(function () {
+				var li = jQuery(this).closest('li'),
+					id = li.attr('data-term-id'),
+					name = li.find('.wpfValue').html();
+				options[i] = id;
+				frontendOptions[i] = li.attr('data-term-slug');
+				selectedOptions['list'][id] = name;
+				statistics.push(li.find('.wpfFilterTaxNameWrapper').length ? li.find('.wpfFilterTaxNameWrapper').html() : name);
+				i++;
+			});
+		} else if (filterType === 'dropdown') {
+			var option = $filter.find(':selected'),
+				value = option.val();
+			options[i] = value;
+			if (value != '') {
+				frontendOptions[i] = option.attr('data-slug');
+				var label = _thisObj.getClearLabel(option.html(), withCount);
+				selectedOptions['list'][option.attr('data-term-id')] = label;
+				statistics.push(label);
+			}
+		} else if (filterType === 'mul_dropdown') {
+			$filter.find(':selected').each(function () {
+				var opt = jQuery(this),
+					label = _thisObj.getClearLabel(opt.html(), withCount);
+				options[i] = opt.val();
+				frontendOptions[i] = opt.attr('data-slug');
+				selectedOptions['list'][opt.attr('data-term-id')] = label;
+				statistics.push(label);
+				i++;
+			});
+		}
+		optionsArray['backend'] = options;
+		optionsArray['frontend'] = [];
+		optionsArray['frontend']['taxonomy'] = $filter.attr('data-get-attribute');
+		optionsArray['frontend']['settings'] = frontendOptions;
+		optionsArray['selected'] = selectedOptions;
+		optionsArray['stats'] = statistics;
+		return optionsArray;
 	});
 
 	WpfFrontendPage.prototype.getPriceFilterOptions = (function ($filter) {

@@ -418,6 +418,19 @@ if ( ! function_exists( 'woobewoo_pf_pro_incompatible_notice' ) ) {
 		if ( version_compare( $plugin_data['Version'], WPF_PRO_REQUIRES, '>=' ) ) {
 			return;
 		}
+		if ( version_compare( $plugin_data['Version'], '3.4.0', '>=' ) ) {
+			// 4.0.0: Pro 3.4.x keeps running on the legacy engine (see WooBeWoo_PF_Legacy_Compat); one plain notice.
+			echo '<div class="notice notice-warning wpf-pro-update-notice"><p>';
+			printf(
+				/* translators: 1: installed PRO version, 2: link start, 3: link end */
+				esc_html__( 'Update Product Filter Pro to 4.0 to get the new screens. Your filters and Pro %1$s features keep working until then. %2$sGo to Plugins%3$s', 'woo-product-filter' ),
+				esc_html( $plugin_data['Version'] ),
+				'<a href="' . esc_url( admin_url( 'plugins.php' ) ) . '">',
+				'</a>'
+			);
+			echo '</p></div>';
+			return;
+		}
 		echo '<div class="notice notice-error"><p><strong>';
 		printf(
 			/* translators: 1: PRO version, 2: Free version, 3: required PRO version */
@@ -468,4 +481,83 @@ if ( ! function_exists( 'woobewoo_pf_translate_string' ) ) {
 
 		return $value;
 	}
+}
+
+if ( ! function_exists( 'woobewoo_pf_decode_settings' ) ) {
+	/**
+	 * Decode a filter's stored setting_data (JSON since 4.0, serialized before).
+	 * Loads the settings model when needed so every module can call it early.
+	 *
+	 * @since 4.0.0
+	 * @param string|array $raw Stored value.
+	 * @return array
+	 */
+	function woobewoo_pf_decode_settings( $raw ) {
+		if ( ! class_exists( 'WooBeWoo_PF_Settings_Model' ) && class_exists( 'WooBeWoo_PF_Frame' ) ) {
+			$wf = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' );
+			if ( $wf ) {
+				$wf->getModel( 'settings' );
+			}
+		}
+		if ( class_exists( 'WooBeWoo_PF_Settings_Model' ) ) {
+			return WooBeWoo_PF_Settings_Model::decode_settings( $raw );
+		}
+		$d = is_array( $raw ) ? $raw : maybe_unserialize( (string) $raw );
+		return is_array( $d ) ? $d : array();
+	}
+}
+
+if ( ! function_exists( 'woobewoo_pf_encode_settings' ) ) {
+	/**
+	 * Encode filter settings for storage (JSON).
+	 *
+	 * @since 4.0.0
+	 * @param array $settings Settings.
+	 * @return string
+	 */
+	function woobewoo_pf_encode_settings( $settings ) {
+		if ( ! class_exists( 'WooBeWoo_PF_Settings_Model' ) && class_exists( 'WooBeWoo_PF_Frame' ) ) {
+			$wf = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' );
+			if ( $wf ) {
+				$wf->getModel( 'settings' );
+			}
+		}
+		if ( class_exists( 'WooBeWoo_PF_Settings_Model' ) ) {
+			return WooBeWoo_PF_Settings_Model::encode_settings( $settings );
+		}
+		return maybe_serialize( (array) $settings );
+	}
+}
+
+/**
+ * Asset versions follow the file, not the plugin version: every script and style URL of this plugin and of the
+ * Pro add-on gets `ver=<plugin version>-<file time>`, so a changed file reaches browsers and page caches at once,
+ * also when an update keeps the same version number.
+ *
+ * @since 4.0.0
+ */
+if ( ! function_exists( 'woobewoo_pf_asset_file_ver' ) ) {
+	function woobewoo_pf_asset_file_ver( $src ) {
+		static $base = null, $cache = array();
+		if ( ! is_string( $src ) || ( false === strpos( $src, '/woo-product-filter/' ) && false === strpos( $src, '/woofilter-pro/' ) ) ) {
+			return $src;
+		}
+		if ( null === $base ) {
+			$base = (string) wp_parse_url( plugins_url(), PHP_URL_PATH );
+		}
+		$path = (string) wp_parse_url( $src, PHP_URL_PATH );
+		if ( '' === $base || 0 !== strpos( $path, $base . '/' ) ) {
+			return $src;
+		}
+		if ( ! isset( $cache[ $path ] ) ) {
+			$file           = WP_PLUGIN_DIR . substr( $path, strlen( $base ) );
+			$cache[ $path ] = is_file( $file ) ? (string) filemtime( $file ) : '';
+		}
+		if ( '' === $cache[ $path ] ) {
+			return $src;
+		}
+		return add_query_arg( 'ver', ( defined( 'WPF_VERSION' ) ? WPF_VERSION . '-' : '' ) . $cache[ $path ], $src );
+	}
+	add_filter( 'script_loader_src', 'woobewoo_pf_asset_file_ver', 20 );
+	add_filter( 'style_loader_src', 'woobewoo_pf_asset_file_ver', 20 );
 }
