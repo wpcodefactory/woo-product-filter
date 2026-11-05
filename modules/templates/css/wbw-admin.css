@@ -96,6 +96,7 @@ body.wbw-body #wpfooter { display: none; }
 .wbw :focus-visible { outline: 3px solid var(--wbw-ink); outline-offset: 3px; }
 .wbw button, .wbw input, .wbw select, .wbw textarea { font: inherit; color: inherit; }
 .wbw input[type="text"], .wbw input[type="search"], .wbw input[type="number"], .wbw input[type="email"], .wbw input[type="url"], .wbw select, .wbw textarea { border: 0; box-shadow: none; border-radius: var(--wbw-r-pill); background: var(--wbw-paper); }
+.wbw[data-tab="license"] input{ border-radius: 0; background: #FFFFFF; border: 1px solid #949494; }
 .wbw input[type="checkbox"], .wbw input[type="radio"] { margin: 0; }
 .wbw button { cursor: pointer; }
 .wbw img, .wbw svg { max-width: 100%; }
@@ -342,6 +343,7 @@ body.wbw-body #wpfooter { display: none; }
 .wbw-dialog__backdrop { position: absolute; inset: 0; background: rgba(23,21,9,.45); }
 .wbw-dialog__panel { position: relative; background: var(--wbw-card); border-radius: var(--wbw-r-card); padding: 24px; width: min(520px, 100%); display: flex; flex-direction: column; gap: 14px; animation: wbw-pop var(--wbw-snap); }
 @keyframes wbw-pop { from { transform: scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
+.wbw-dialog[hidden] { display: none; }
 
 /* ------------------------------------------------------------------ misc */
 .wbw-details { background: var(--wbw-card); border-radius: var(--wbw-r-card); padding: 16px 24px; }

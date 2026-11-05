@@ -64,7 +64,7 @@ define( 'WPF_CURRENT', 'current' );
 define( 'WPF_EOL', "\n" );
 
 define( 'WPF_PLUGIN_INSTALLED', true );
-define( 'WPF_VERSION', '4.0.0' );
+define( 'WPF_VERSION', '4.0.0-dev-20261105-1940' );
 define( 'WPF_PRO_REQUIRES', '4.0.0' ); // Pro 4.0 requires Free 4.0 (new modules, version history table, drawer settings).
 /**
  * 4.0.0 platform modules shipped in Free. Bump WPF_MODULES_REV when a module is added so the
