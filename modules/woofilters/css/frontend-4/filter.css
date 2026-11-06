@@ -1118,43 +1118,6 @@
 .wpf4-sentinel {
 	height: 1px;
 }
-.wpf4-pagination .page-numbers {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 6px;
-	list-style: none;
-	padding: 0;
-	margin: 24px 0 0;
-}
-.wpf4-pagination .page-numbers li {
-	margin: 0;
-}
-.wpf4-pagination .page-numbers a,
-.wpf4-pagination .page-numbers span {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 44px;
-	min-height: 44px;
-	padding: 0 14px;
-	border-radius: 999px;
-	background: #F7F4EA;
-	color: #171509;
-	text-decoration: none;
-	font-weight: 700;
-	border: 0;
-}
-.wpf4-pagination .page-numbers a:hover {
-	background: #ECE7D6;
-	color: #171509;
-}
-.wpf4-pagination .page-numbers .current {
-	background: #171509;
-	color: #FFFFFF;
-}
-.wpf4-pagination .page-numbers .dots {
-	background: none;
-}
 .wpf4-a11y-badge {
 	display: inline-flex;
 	align-items: center;
