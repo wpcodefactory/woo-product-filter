@@ -207,7 +207,7 @@ This plugin may communicate with the following third-party services:
 
 == Changelog ==
 
-= 4.0.0 - 03/11/2026 =
+= 4.0.0 - 17/11/2026 =
 * Add - Builder: a "Filter engine" stripe at the top says in plain words which engine runs the filter (New 4.0 or Classic 3.x), switches it in one click and explains which one to pick. The engine choice moved there from Advanced.
 * Add - Admin menu (free version): "Upgrade" is a filled button at the end of the WBW Product Filter menu, in the open menu and the fly-out. It does not show when Pro is active.
 * Fix - Builder: settings only the other engine reads are folded into one closed "Only for the Classic engine" section at the end of Advanced instead of hundreds of greyed rows.
