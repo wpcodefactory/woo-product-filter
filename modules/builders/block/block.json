@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "woobewoo/product-filter",
+	"version": "4.0.0",
+	"title": "Product Filter",
+	"category": "woocommerce",
+	"icon": "filter",
+	"description": "A WooBeWoo product filter. Pick which filter to show.",
+	"keywords": [ "filter", "woocommerce", "products", "facets", "woobewoo" ],
+	"textdomain": "woo-product-filter",
+	"attributes": {
+		"filterId": { "type": "integer", "default": 0 },
+		"blockTheme": { "type": "boolean", "default": false },
+		"align": { "type": "string" }
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"spacing": { "margin": true, "padding": true },
+		"interactivity": { "clientNavigation": true }
+	},
+	"usesContext": [ "postId", "queryId" ],
+	"editorScript": "woobewoo-pf-block-editor",
+	"editorStyle": "woobewoo-pf-block-editor"
+}

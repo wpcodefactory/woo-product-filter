@@ -1,0 +1,417 @@
+<?php
+/**
+ * Product Filter by WBW - storefront engine 4 settings schema
+ *
+ * Every setting key the 4.0 storefront engine reads, with type and default. The admin UI builds controls
+ * from these keys; the engine reads them with WooBeWoo_PF_Frontend4::setting() / ::block_setting().
+ *
+ * scope "filter": a key inside the filter's `settings` array. scope "block": a key inside a block's `settings`.
+ *
+ * @version 4.0.0
+ * @since   4.0.0
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+return array(
+	/* ---------------------------------------------------------------- filter level */
+	'frontend_engine'            => array(
+		'scope'   => 'filter',
+		'type'    => 'enum',
+		'options' => array( '4', 'legacy' ),
+		'default' => '4',
+		'label'   => 'Storefront engine. New filters use 4; filters that existed before 4.0 stay on legacy until the owner switches.',
+	),
+	'mobile_drawer'              => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'On phones, show the filter in a bottom sheet behind a sticky "Filters (N)" button.',
+	),
+	'mobile_drawer_text'         => array(
+		'scope'   => 'filter',
+		'type'    => 'string',
+		'default' => 'Filters',
+		'label'   => 'Text of the sticky button.',
+	),
+	'mobile_drawer_chips'        => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show the picked values as chips at the top of the sheet.',
+	),
+	'mobile_drawer_results'      => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show the full width "Show N results" button.',
+	),
+	'mobile_drawer_always'       => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Use the drawer on every screen size, not only on phones.',
+	),
+	'top_bar'                    => array(
+		'scope'   => 'filter',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'A bar of dropdown buttons with "All filters" on wide screens: empty = when the filter sits above the products, 1 = always, 0 = never.',
+	),
+	'mobile_breakpoint'          => array(
+		'scope'   => 'filter',
+		'type'    => 'int',
+		'default' => 768,
+		'label'   => 'Width in px under which the phone layout (drawer, mobile overrides) applies.',
+	),
+	'remember_filters'           => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Remember the last used filters in the shopper\'s browser and offer "Use it again?".',
+	),
+	'wbw_style'                  => array(
+		'scope'   => 'filter',
+		'type'    => 'enum',
+		'options' => array( 'clean', 'chips', 'swatches', 'compact' ),
+		'default' => 'clean',
+		'label'   => 'Look preset.',
+	),
+	'wbw_accent'                 => array(
+		'scope'   => 'filter',
+		'type'    => 'hex',
+		'default' => '#6BBFFF',
+		'label'   => 'Accent colour (buttons, picked states, slider fill). Text on it is picked for contrast.',
+	),
+	'side_width'                 => array(
+		'scope'   => 'filter',
+		'type'    => 'int',
+		'default' => 280,
+		'min'     => 220,
+		'max'     => 400,
+		'group'   => 'look',
+		'label'   => 'Width of the filter column',
+		'help'    => 'In px, 220 to 400. Used when the filter sits beside the products on desktop. The products always get the rest of the row.',
+	),
+	'variations_as_products'     => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Result cards show the matching variation\'s image, price and stock.',
+	),
+	'open_matching_variation'    => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'The product link opens the product at the matching variation (?attribute_pa_size=42).',
+	),
+	'sizes_left_badge'           => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show "Only 2 left in 42" on result cards when the matching variation is low on stock.',
+	),
+	'sizes_left_threshold'       => array(
+		'scope'   => 'filter',
+		'type'    => 'int',
+		'default' => 3,
+		'label'   => 'Stock quantity at or under which the badge shows.',
+	),
+	'pagination_mode'            => array(
+		'scope'   => 'filter',
+		'type'    => 'enum',
+		'options' => array( 'pages', 'load_more', 'infinite' ),
+		'default' => 'pages',
+		'label'   => 'Page numbers, a "Show more" button, or loading as the shopper scrolls.',
+	),
+	'mobile_overrides'           => array(
+		'scope'   => 'filter',
+		'type'    => 'array',
+		'default' => array(
+			'enabled' => false,
+			'layout'  => '',
+			'blocks'  => array(),
+		),
+		'label'   => 'Phone only display types per block: array( enabled, layout, blocks => block uniqId => display_type ).',
+	),
+	'finder'                     => array(
+		'scope'   => 'filter',
+		'type'    => 'array',
+		'default' => array(
+			'enabled'     => false,
+			'steps'       => array(),
+			'questions'   => array(),
+			'show_counts' => true,
+			'title'       => '',
+		),
+		'label'   => 'Step by step finder: array( enabled, steps => ordered block uniqIds, questions => uniqId => text, show_counts, title ).',
+	),
+	'product_container_selector' => array(
+		'scope'   => 'filter',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'CSS selector of the product loop to replace; empty means auto-detect (ul.products and builder equivalents).',
+	),
+	'auto_update_filter'         => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Update results as soon as a control changes (off shows an Apply button).',
+	),
+	'show_clean_button'          => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show "Clear all".',
+	),
+	'show_clean_button_word'     => array(
+		'scope'   => 'filter',
+		'type'    => 'string',
+		'default' => 'Clear all',
+		'label'   => 'Text of the clear button.',
+	),
+	'filter_title'               => array(
+		'scope'   => 'filter',
+		'type'    => 'string',
+		'default' => 'Filters',
+		'label'   => 'Heading above the blocks.',
+	),
+	'show_chips'                 => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show the picked values as chips above the blocks (desktop).',
+	),
+	'show_counts_bar'            => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Announce "N products" in a live region after each update.',
+	),
+	'text_no_products'           => array(
+		'scope'   => 'filter',
+		'type'    => 'string',
+		'default' => 'No products match. Try removing a filter.',
+		'label'   => 'Message when nothing matches.',
+	),
+	'all_products_filtering'     => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'On category, tag and brand pages, filter the whole catalogue instead of that page\'s products.',
+	),
+	'canonical_filtered'         => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Update the page title with the picked values after each update.',
+	),
+	'enable_ajax'                => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Update results without reloading (per filter; the Speed and SEO store wide switch still wins when off). Ported from the classic engine in 4.0.',
+	),
+	'apply_button_word'          => array(
+		'scope'   => 'filter',
+		'type'    => 'string',
+		'default' => 'Apply',
+		'label'   => 'Text of the Apply button shown when auto update is off. Ported from the classic "Filter" button text.',
+	),
+	'checked_items_top'          => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Move picked choices to the top of their list. Ported from the classic engine.',
+	),
+	'loading_overlay'            => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Dim the product list while results load. Ported from the classic overlay.',
+	),
+	'legacy_css_check'           => array(
+		'scope'   => 'filter',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Set by the engine migration when the filter carries custom CSS or JavaScript written for the classic markup: the builder shows a check reminder until the owner clears it.',
+	),
+	/* ---------------------------------------------------------------- block level */
+	'display_type'               => array(
+		'scope'   => 'block',
+		'type'    => 'enum',
+		'options' => array( 'list', 'dropdown', 'chips', 'swatches', 'squares', 'slider', 'toggle', 'range_list' ),
+		'default' => 'list',
+		'label'   => 'How the block looks. Falls back to the legacy f_frontend_type when missing (list|radio|dropdown|mul_dropdown|slider).',
+	),
+	'logic'                      => array(
+		'scope'   => 'block',
+		'type'    => 'enum',
+		'options' => array( 'or', 'and' ),
+		'default' => 'or',
+		'label'   => 'Picking two values in this block: any of them (or) or all of them (and). Falls back to f_query_logic.',
+	),
+	'f_enable'                   => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Block is shown.',
+	),
+	'f_title'                    => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'Block heading (legend). Empty uses the attribute or taxonomy label.',
+	),
+	'f_show_count'               => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show the number of products next to each value.',
+	),
+	'f_price_bars'               => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show bars above the price slider with where most prices are.',
+	),
+	'f_few_as_tabs'              => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show two to four short choices as one row of tabs.',
+		'help'    => 'Lists and chips with 2 to 4 values of up to 18 letters, no child values.',
+	),
+	'f_hide_empty'               => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Hide values with no products instead of greying them out.',
+	),
+	'f_single_select'            => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Only one value can be picked (radio behaviour).',
+	),
+	'f_list'                     => array(
+		'scope'   => 'block',
+		'type'    => 'int',
+		'default' => 0,
+		'label'   => 'Attribute id (wpfAttribute blocks).',
+	),
+	'f_mlist[]'                  => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'Comma separated term ids to show (empty shows all).',
+	),
+	'f_exclude_terms[]'          => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'Comma separated term ids to hide.',
+	),
+	'f_sort_by'                  => array(
+		'scope'   => 'block',
+		'type'    => 'enum',
+		'options' => array( 'default', 'asc', 'desc', 'count' ),
+		'default' => 'default',
+		'label'   => 'Order of the values.',
+	),
+	'f_sort_as_numbers'          => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Sort values as numbers (sizes).',
+	),
+	'f_max_height'               => array(
+		'scope'   => 'block',
+		'type'    => 'int',
+		'default' => 0,
+		'label'   => 'Scroll the value list after this many px (0 = no limit).',
+	),
+	'show_more_rows'             => array(
+		'scope'   => 'block',
+		'type'    => 'int',
+		'default' => 2,
+		'min'     => 0,
+		'max'     => 8,
+		'group'   => 'look',
+		'label'   => 'Show this many rows, then a "Show more" pill',
+		'help'    => 'Chips, squares, swatches and tick box lists fold after this many rows; 0 shows every value. Picked values always stay visible.',
+	),
+	'show_more_top'              => array(
+		'scope'   => 'block',
+		'type'    => 'int',
+		'default' => 0,
+		'min'     => 0,
+		'max'     => 30,
+		'group'   => 'look',
+		'label'   => 'Show the most popular values first, this many',
+		'help'    => 'Chips, squares and tick box lists show the values with the most products first and fold the rest behind "Show more". 0 uses the rows rule. Picked values always stay visible. New blocks start at 5.',
+	),
+	'show_more_label'            => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => 'Show more',
+		'group'   => 'look',
+		'label'   => 'The pill says',
+		'help'    => 'The number of hidden values is added in brackets, for example "Show more (12)". It reads "Show less" once open.',
+	),
+	'f_show_search_input'        => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => false,
+		'label'   => 'Show a search box above long lists.',
+	),
+	'f_options[]'                => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'Comma separated options for Stock status (instock,outofstock,onbackorder) and Sort by blocks.',
+	),
+	'f_step'                     => array(
+		'scope'   => 'block',
+		'type'    => 'number',
+		'default' => 1,
+		'label'   => 'Step of the price slider.',
+	),
+	'f_range_by_hands_values'    => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'Price ranges for range_list display, one per line "min-max".',
+	),
+	'f_custom_fields'            => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'Meta key for a numeric custom field block.',
+	),
+	'f_checkbox_label'           => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => '',
+		'label'   => 'Label of a toggle (On sale, Featured).',
+	),
+	'f_dropdown_first_option_text' => array(
+		'scope'   => 'block',
+		'type'    => 'string',
+		'default' => 'Any',
+		'label'   => 'First option of a dropdown.',
+	),
+	'f_sizes_left'               => array(
+		'scope'   => 'block',
+		'type'    => 'bool',
+		'default' => true,
+		'label'   => 'Show "N left in 42" in the block legend for a picked size with low stock.',
+	),
+	'f_enable_title'             => array(
+		'scope'   => 'block',
+		'type'    => 'enum',
+		'options' => array( 'yes_open', 'yes_close', 'yes_closed', 'no' ),
+		'default' => 'yes_open',
+		'label'   => 'Show the heading; closed starts collapsed (the builder and 3.x store "yes_close").',
+	),
+);

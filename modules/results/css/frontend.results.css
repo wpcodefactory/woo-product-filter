@@ -1,0 +1,119 @@
+/*
+ * Product Filter by WBW - results module (storefront engine 4): products per page block, found count, skeleton loader.
+ */
+
+/* ---------------------------------------------------------------- products per page block */
+.wpf4.wpf4 .wpf-perPage__list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+.wpf4.wpf4 .wpf-perPage__list--chips {
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 8px;
+}
+
+/* ---------------------------------------------------------------- found count */
+.wpf-found {
+	font-variant-numeric: tabular-nums;
+}
+.wpf4.wpf4 .wpf4__found {
+	flex: 1 1 100%;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--wpf4-ink-2, inherit);
+}
+
+/* ---------------------------------------------------------------- skeleton loader (filter setting "Grey placeholder cards while loading") */
+.wpf-skeleton {
+	pointer-events: none;
+}
+/* The skeleton replaces the dim overlay when both are on. */
+.wpf-skeleton.wpf4-loading {
+	opacity: 1;
+}
+.wpf-skeleton .product,
+.wpf-skeleton .wc-block-product,
+.wpf-skeleton .wc-block-grid__product,
+.wpf-skeleton .wc-block-product-template__item,
+.wpf-skeleton .e-loop-item {
+	position: relative;
+	min-height: 180px;
+}
+/* The card keeps its size; its content hides behind the grey blocks (pseudo-elements are not children, they stay visible). */
+.wpf-skeleton .product > *,
+.wpf-skeleton .wc-block-product > *,
+.wpf-skeleton .wc-block-grid__product > *,
+.wpf-skeleton .wc-block-product-template__item > *,
+.wpf-skeleton .e-loop-item > * {
+	visibility: hidden;
+}
+/* Image block: the top 62% of the card. */
+.wpf-skeleton .product::before,
+.wpf-skeleton .wc-block-product::before,
+.wpf-skeleton .wc-block-grid__product::before,
+.wpf-skeleton .wc-block-product-template__item::before,
+.wpf-skeleton .e-loop-item::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 62%;
+	border-radius: 10px;
+	background: var(--wpf4-skeleton, #e5e7eb);
+	animation: wpf-skel-pulse 1.2s ease-in-out infinite;
+}
+/* Title, a second line and the price: three bars under the image, widths from the card. */
+.wpf-skeleton .product::after,
+.wpf-skeleton .wc-block-product::after,
+.wpf-skeleton .wc-block-grid__product::after,
+.wpf-skeleton .wc-block-product-template__item::after,
+.wpf-skeleton .e-loop-item::after {
+	content: "";
+	position: absolute;
+	top: calc(62% + 14px);
+	left: 0;
+	right: 0;
+	height: 64px;
+	background:
+		linear-gradient(var(--wpf4-skeleton, #e5e7eb), var(--wpf4-skeleton, #e5e7eb)) 0 0 / 85% 14px no-repeat,
+		linear-gradient(var(--wpf4-skeleton, #e5e7eb), var(--wpf4-skeleton, #e5e7eb)) 0 24px / 60% 12px no-repeat,
+		linear-gradient(var(--wpf4-skeleton, #e5e7eb), var(--wpf4-skeleton, #e5e7eb)) 0 46px / 35% 16px no-repeat;
+	animation: wpf-skel-pulse 1.2s ease-in-out infinite;
+}
+@keyframes wpf-skel-pulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: .45; }
+}
+/* Sidebar counts: a subtle shimmer while the new numbers are on their way. */
+.wpf4.wpf4.wpf-skeleton-counts .wpf4__count {
+	color: transparent;
+	min-width: 1.6em;
+	border-radius: 4px;
+	background: linear-gradient(90deg, var(--wpf4-skeleton, #e5e7eb) 25%, var(--wpf4-skeleton-hi, #f3f4f6) 50%, var(--wpf4-skeleton, #e5e7eb) 75%);
+	background-size: 200% 100%;
+	animation: wpf-skel-shimmer 1.2s linear infinite;
+}
+@keyframes wpf-skel-shimmer {
+	from { background-position: 200% 0; }
+	to { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.wpf-skeleton .product::before,
+	.wpf-skeleton .product::after,
+	.wpf-skeleton .wc-block-product::before,
+	.wpf-skeleton .wc-block-product::after,
+	.wpf-skeleton .wc-block-grid__product::before,
+	.wpf-skeleton .wc-block-grid__product::after,
+	.wpf-skeleton .wc-block-product-template__item::before,
+	.wpf-skeleton .wc-block-product-template__item::after,
+	.wpf-skeleton .e-loop-item::before,
+	.wpf-skeleton .e-loop-item::after,
+	.wpf4.wpf4.wpf-skeleton-counts .wpf4__count {
+		animation: none;
+	}
+}

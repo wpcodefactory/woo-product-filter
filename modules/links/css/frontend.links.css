@@ -1,0 +1,27 @@
+/* Product Filter by WBW - Share button and short link popover (4.0) */
+.wpf-share { position: relative; display: flex; justify-content: flex-end; margin: 8px 0 0; font-family: inherit; }
+.wpf-share__btn,
+.wpf-share__copy {
+	display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 16px;
+	border: 0; border-radius: 999px; background: #ECE7D6; color: #171509; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer;
+}
+.wpf-share__btn:hover, .wpf-share__copy:hover { background: #E2DCC8; }
+.wpf-share__btn:focus-visible, .wpf-share__copy:focus-visible, .wpf-share__close:focus-visible, .wpf-share__url:focus-visible { outline: 3px solid #171509; outline-offset: 3px; }
+.wpf-share__icon { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.wpf-share__pop {
+	position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; width: min(320px, 90vw);
+	background: #fff; color: #171509; border-radius: 22px; padding: 24px; box-shadow: 0 24px 64px rgba(23,21,9,.18);
+}
+.wpf-share__pop[hidden] { display: none; }
+.wpf-share__label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #948F7C; margin-bottom: 8px; }
+.wpf-share__row { display: flex; gap: 8px; align-items: center; }
+.wpf-share__url { flex: 1 1 auto; min-width: 0; min-height: 44px; border: 0; border-radius: 999px; background: #F7F4EA; padding: 8px 14px; font: inherit; font-size: 14px; color: #171509; }
+.wpf-share__qr { margin: 16px auto 0; width: 148px; height: 148px; }
+.wpf-share__qr svg { width: 100%; height: 100%; border-radius: 10px; }
+.wpf-share__qr:empty { display: none; }
+.wpf-share__live { display: block; margin-top: 12px; font-size: 13px; font-weight: 700; color: #1F7A43; min-height: 1.2em; }
+.wpf-share__close { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: #ECE7D6; color: #171509; font-size: 18px; line-height: 1; cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) {
+	.wpf-share__pop { animation: wpfSharePop 280ms cubic-bezier(.2,1.4,.4,1); }
+	@keyframes wpfSharePop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}

@@ -17,8 +17,13 @@ if ( ! defined( 'WPF_DS' ) ) {
 	define( 'WPF_DS', DIRECTORY_SEPARATOR );
 }
 
+/**
+ * 4.0.0: paths come from this file's real location, never from WP_PLUGIN_DIR + an assumed folder
+ * name, so the plugin keeps working when the folder is renamed by an upload
+ * (for example woo-product-filter-4.0.0) or lives behind a symlink.
+ */
 define( 'WPF_PLUG_NAME', basename( __DIR__ ) );
-define( 'WPF_DIR', WP_PLUGIN_DIR . WPF_DS . WPF_PLUG_NAME . WPF_DS );
+define( 'WPF_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPF_TPL_DIR', WPF_DIR . 'tpl' . WPF_DS );
 define( 'WPF_CLASSES_DIR', WPF_DIR . 'classes' . WPF_DS );
 define( 'WPF_TABLES_DIR', WPF_CLASSES_DIR . 'tables' . WPF_DS );
@@ -59,13 +64,21 @@ define( 'WPF_CURRENT', 'current' );
 define( 'WPF_EOL', "\n" );
 
 define( 'WPF_PLUGIN_INSTALLED', true );
-define( 'WPF_VERSION', '3.4.8' );
-define( 'WPF_PRO_REQUIRES', '3.4.0' ); // Oldest compatible PRO (class/file naming introduced in 3.4.0).
+define( 'WPF_VERSION', '4.0.0' );
+define( 'WPF_PRO_REQUIRES', '4.0.0' ); // Pro 4.0 requires Free 4.0 (new modules, version history table, drawer settings).
+/**
+ * 4.0.0 platform modules shipped in Free. Bump WPF_MODULES_REV when a module is added so the
+ * modules table is synced on the next request (see WooBeWoo_PF_Installer_Db_Updater::syncModules()).
+ */
+define( 'WPF_MODULES_REV', '4.0.0-platform-4' );
+define( 'WPF_FREE_MODULES', 'setup,speed,help,links,schema,abilities,cli,storeapi,builders,importers,brands,conditions,measures,results,usage' );
+/** Free registers the read abilities woobewoo/facets-list and woobewoo/products-filter (Pro skips them). */
+define( 'WOOBEWOO_PF_ABILITIES', true );
 define( 'WPF_USER', 'user' );
 
 define( 'WPF_CLASS_PREFIX', 'WooBeWoo_PF_' );
 define( 'WPF_FREE_VERSION', false );
-define( 'WPF_TEST_MODE', true );
+define( 'WPF_TEST_MODE', false ); // Shipped builds never show raw database errors (see WooBeWoo_PF_Table::_addError).
 
 define( 'WPF_SUCCESS', 'Success' );
 define( 'WPF_FAILED', 'Failed' );

@@ -1,0 +1,19 @@
+/*
+ * Product Filter by WBW - measures module (size and weight, stock quantity, new arrivals).
+ * Storefront engine 4 only: the unit next to the slider numbers. Everything else reuses filter.css.
+ */
+.wpf4 .wpf4__unit {
+	font-size: 12px;
+	white-space: nowrap;
+	opacity: 0.85;
+}
+.wpf4 .wpf4__num--after .wpf4__unit {
+	padding-right: 2px;
+}
+.wpf4 .wpf4__num--before .wpf4__unit {
+	padding-left: 2px;
+}
+.wpf4 .wpf4__block--dimensions .wpf4__sliderBounds span,
+.wpf4 .wpf4__block--stockqty .wpf4__sliderBounds span {
+	white-space: nowrap;
+}

@@ -288,6 +288,30 @@ class WooBeWoo_PF_Req {
 	}
 
 	/**
+	 * A JSON payload sent as one POST field, decoded once and sanitized leaf by leaf.
+	 *
+	 * WordPress adds slashes to $_POST, so the raw string is unslashed exactly once and decoded
+	 * before any text sanitizing: running sanitize_text_field() or a second wp_unslash() over the
+	 * JSON string first breaks escaped quotes inside it (a nested JSON string such as a filter's
+	 * block list then fails to decode and arrives empty).
+	 *
+	 * @since 4.0.0
+	 * @param string   $name     POST field name.
+	 * @param callable $sanitize Leaf sanitizer; null returns the decoded data for the caller to sanitize.
+	 * @return array|null Decoded array, or null when the field is missing or not JSON.
+	 */
+	public static function getJson( $name, $sanitize = 'sanitize_textarea_field' ) {
+		if ( ! isset( $_POST[ $name ] ) || ! is_string( $_POST[ $name ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- callers verify the nonce first
+			return isset( $_POST[ $name ] ) && is_array( $_POST[ $name ] ) ? map_deep( wp_unslash( $_POST[ $name ] ), 'sanitize_text_field' ) : null; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized by map_deep
+		}
+		$decoded = json_decode( wp_unslash( $_POST[ $name ] ), true ); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- decoded here, every leaf sanitized below
+		if ( ! is_array( $decoded ) ) {
+			return null;
+		}
+		return $sanitize ? map_deep( $decoded, $sanitize ) : $decoded;
+	}
+
+	/**
 	 * get.
 	 *
 	 * @version 3.3.0

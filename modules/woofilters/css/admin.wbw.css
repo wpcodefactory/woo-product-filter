@@ -1,0 +1,216 @@
+/**
+ * Product Filter by WBW - Filters home and builder (4.0)
+ *
+ * Screen specific rules; components come from the admin skin (wbw-admin.css).
+ * Canvas: Builder.dc.html and FilterList.dc.html.
+ *
+ * @version 4.0.0
+ * @since   4.0.0
+ */
+
+/* ------------------------------------------------------------------ Filters home */
+.wbw-filters__bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.wbw-fcard { gap: 12px; position: relative; }
+.wbw-fcard__actions { display: flex; gap: 4px; flex-wrap: wrap; border-top: 1px solid var(--wbw-hairline); padding-top: 12px; margin-top: auto; }
+.wbw-first-week-card { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 24px; padding: 24px 28px; }
+.wbw-first-week-card__text { flex: 1 1 320px; min-width: 0; }
+.wbw-first-week-card__text .wbw-kicker { margin-bottom: 6px; }
+.wbw-first-week-card h2 { font-size: 22px; line-height: 1.15; font-weight: 700; margin-bottom: 8px; }
+.wbw-first-week-card p { font-size: 14px; color: rgba(255,255,255,.75); }
+
+/* Import or export card: white, radius 22, padding 24, two columns (Import with a paper drop zone, Export). */
+.wbw-ie { flex-direction: row; flex-wrap: wrap; gap: 24px; padding: 24px; position: relative; }
+.wbw-ie__close { position: absolute; top: 12px; right: 12px; }
+.wbw-ie__col { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.wbw-ie__col--export { flex-basis: 280px; padding-right: 40px; }
+.wbw-ie__text { font-size: 15px; line-height: 1.5; color: var(--wbw-ink-2); }
+.wbw-ie__meta { font-size: 13px; color: var(--wbw-ink-3); }
+.wbw-ie__link { font-size: 13px; font-weight: 700; color: var(--wbw-ink-2); }
+.wbw-drop { background: var(--wbw-paper); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; transition: background var(--wbw-snap); }
+.wbw-drop.is-over { background: var(--wbw-tool-tint); }
+.wbw-drop .wbw-icon { width: 28px; height: 28px; }
+.wbw-drop__title { font-size: 15px; font-weight: 700; }
+.wbw-drop__note { font-size: 13px; color: var(--wbw-ink-2); }
+.wbw-drop__file { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.wbw-btn--chip { height: 36px; padding: 0 16px; font-size: 13px; }
+.wpf-ie-handler { display: none; }
+.wbw-ie__status { font-size: 13px; color: var(--wbw-ink-2); min-height: 20px; }
+.wbw-ie__status.is-err { color: var(--wbw-critical-text); font-weight: 700; }
+.wbw-ie__status.is-ok { color: var(--wbw-pass-text); font-weight: 700; }
+/* Select mode: a tick box in the top right of every filter card. */
+.wbw-fcard__pick { display: none; position: absolute; top: 20px; right: 20px; width: 28px; height: 28px; border-radius: 8px; background: var(--wbw-chip); align-items: center; justify-content: center; cursor: pointer; }
+.wbw-fcard__pick input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: pointer; }
+.wbw-fcard__pick:focus-within { outline: 3px solid var(--wbw-ink); outline-offset: 3px; }
+.wbw-fcard__pick svg { width: 16px; height: 16px; display: none; color: #FFFFFF; }
+.wbw-fcard__pick.is-on { background: var(--wbw-ink); }
+.wbw-fcard__pick.is-on svg { display: block; }
+.wbw-fcard.is-picked { box-shadow: inset 0 0 0 2px var(--wbw-ink); }
+.is-selecting .wbw-fcard__pick { display: inline-flex; }
+.is-selecting .wbw-fcard .wbw-card__head { padding-right: 36px; }
+
+/* ------------------------------------------------------------------ Builder frame */
+/* Top bar: sticky under the WordPress admin bar (32px, 46px under 782px), white, hairline below. */
+.wbw-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 32px; background: var(--wbw-card); width: 100%; position: sticky; top: 32px; z-index: 20; box-shadow: inset 0 -1px 0 var(--wbw-hairline); }
+.wbw-top__left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.wbw-top__back { width: 44px; height: 44px; border-radius: var(--wbw-r-pill); background: var(--wbw-chip); display: inline-flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; }
+.wbw-top .wbw-input--title { background: var(--wbw-paper); }
+/* Three columns on paper, 24px apart, no wrapping above the phone width: blocks 300px fixed, the settings column and the
+   preview column share the rest (each at least 340px wide at 1280 with the WordPress menu open; below that they shrink
+   together). The preview column is stretched so its sticky card has the whole height to travel. */
+.wbw-cols { --wbw-top-h: 78px; display: flex; flex-wrap: nowrap; gap: 24px; padding: 24px 32px 32px; align-items: flex-start; width: 100%; }
+.wbw-left { flex: 0 0 300px; max-width: 300px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.wbw-mid { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.wbw-right { flex: 1 1 340px; min-width: 0; align-self: stretch; }
+.wbw-left > .wbw-kicker { margin-bottom: 4px; }
+/* Blocks in this filter: white cards, radius 14, padding 12px 14px, 8px apart; a hairline (12px of air above and below)
+   separates the Whole filter row from the blocks. */
+.wbw-blocks { display: flex; flex-direction: column; gap: 8px; }
+.wbw-block { background: var(--wbw-card); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; cursor: pointer; border: 0; width: 100%; text-align: left; color: var(--wbw-ink); font-family: inherit; line-height: 1.3; transition: box-shadow var(--wbw-snap); }
+.wbw-block > .wbw-icon { color: var(--wbw-ink); }
+.wbw-block.is-editing { box-shadow: inset 0 0 0 2px var(--wbw-ink); }
+.wbw-block__text { min-width: 0; flex: 1 1 auto; display: flex; flex-direction: column; }
+.wbw-block__title { font-size: 15px; font-weight: 700; }
+.wbw-block__spec { margin-top: 2px; font-size: 12px; font-weight: 400; color: var(--wbw-ink-3); line-height: 1.35; }
+.wbw-block__state { margin-left: auto; font-size: 12px; color: var(--wbw-tool-text); font-weight: 700; flex: none; }
+.wbw-block__off { margin-left: auto; font-size: 12px; color: var(--wbw-ink-3); font-weight: 700; flex: none; }
+.wbw-block.is-off .wbw-block__title { color: var(--wbw-ink-2); }
+.wbw-block.is-dragging { opacity: .5; }
+.wbw-blocks .wbw-grip { flex: none; }
+.wbw-hr { height: 1px; background: var(--wbw-hairline); margin: 4px 0; flex: none; } /* 8px flex gap + 4px = 12px of air on each side */
+/* Add a block: kicker, pill search field (36px, paper), groups with a small kicker, 3 column picture cards 8px apart. */
+.wbw-addblock { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; } /* + the list's 8px gap = 20px below the last block */
+.wbw-addblock > .wbw-kicker { margin-bottom: 2px; }
+.wbw .wbw-find, .wbw input.wbw-find { border: 0; font: inherit; font-size: 13px; height: 36px; min-height: 36px; box-sizing: border-box; padding: 0 14px; border-radius: var(--wbw-r-pill); background: var(--wbw-card); color: var(--wbw-ink); width: 100%; box-shadow: none; }
+.wbw .wbw-find::placeholder { color: var(--wbw-ink-3); }
+.wbw-group { display: flex; flex-direction: column; gap: 8px; }
+.wbw-group + .wbw-group { margin-top: 4px; }
+.wbw-kicker--group { color: var(--wbw-ink-2); }
+.wbw-pics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.wbw-pic { display: flex; flex-direction: column; gap: 4px; align-items: center; justify-content: flex-start; background: var(--wbw-card); border-radius: 14px; padding: 10px 6px; font-size: 11px; font-weight: 700; line-height: 1.25; text-align: center; text-decoration: none; color: var(--wbw-ink); border: 0; cursor: pointer; width: 100%; min-height: 78px; font-family: inherit; transition: box-shadow var(--wbw-snap); }
+.wbw-pic:hover { background: var(--wbw-tool-tint); }
+.wbw-pic .wbw-icon, .wbw-pic svg { width: 24px; height: 24px; margin-bottom: 2px; flex: none; color: var(--wbw-ink); }
+.wbw-pic__name { font-size: 11px; font-weight: 700; overflow-wrap: anywhere; }
+.wbw-pic__spec { font-size: 11px; font-weight: 400; color: var(--wbw-ink-3); }
+/* Children dimmed, not the card: the hover tooltip ([data-wbw-tip]) stays fully readable. */
+.wbw-pic--pro > *, .wbw-pic.is-added > * { opacity: .55; }
+.wbw-pic.is-added { cursor: default; }
+.wbw-pic.is-added:hover { background: var(--wbw-card); }
+.wbw a.wbw-pic--pro:hover { color: var(--wbw-ink); }
+.wbw-chip-btn { align-self: flex-start; display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: var(--wbw-r-pill); background: var(--wbw-chip); color: var(--wbw-ink); font: inherit; font-size: 12px; font-weight: 700; border: 0; cursor: pointer; }
+.wbw-chip-btn:hover { background: var(--wbw-chip-hover); }
+.wbw-addblock__none { font-size: 13px; color: var(--wbw-ink-2); }
+/* Settings column: one white card per section (radius 22, padding 20px 24px), 24px between them; rows keep their hairline. */
+.wbw-mid .wbw-card { padding: 20px 24px; gap: 0; background: var(--wbw-card); border-radius: var(--wbw-r-card); }
+/* A row keeps its control beside the words while there is room (a switch always fits), and puts a wide control
+   (select, text field) under the words in a narrow column instead of squeezing them to one word per line. */
+.wbw-mid .wbw-row { flex-wrap: wrap; }
+.wbw-mid .wbw-row__text { flex: 1 1 140px; }
+.wbw-mid .wbw-row > :not(.wbw-row__text) { max-width: 100%; }
+.wbw-mid .wbw-card--ink { background: var(--wbw-ink); }
+.wbw-mid .wbw-card > .wbw-kicker { margin-bottom: 4px; }
+.wbw-mid .wbw-card > .wbw-kicker--pics { margin-bottom: 10px; }
+.wbw-mid .wbw-h2 { margin-bottom: 4px; }
+.wbw-mid .wbw-block-meta { font-size: 13px; color: var(--wbw-ink-2); margin-bottom: 8px; }
+.wbw-mid .wbw-row:first-of-type { padding-top: 12px; }
+.wbw-mid .wbw-input { width: 200px; max-width: 100%; }
+.wbw-mid .wbw-input--wide { width: 100%; }
+.wbw-mid .wbw-input--short { width: 110px; }
+.wbw-mid .wbw-cards--4 .wbw-pic-btn { min-height: 74px; }
+.wbw-mid .wbw-details { background: var(--wbw-card); border-radius: var(--wbw-r-card); padding: 16px 24px; }
+.wbw-mid .wbw-details .wbw-muted { margin-top: 12px; }
+.wbw-mid .wbw-details .wbw-row:first-of-type { padding-top: 12px; }
+.wbw-adv-group { margin-top: 12px; }
+.wbw-adv-group > .wbw-kicker { margin: 12px 0 4px; }
+/* Tick lists ("Ways to sort"): title on top, the choices as a grid of cards with a round tick under it. */
+.wbw-mid .wbw-row--multi { flex-direction: column; align-items: stretch; gap: 12px; }
+.wbw-mid .wbw-row--multi > .wbw-row__text { flex: none; }
+.wbw-mid .wbw-select-list__count { margin-left: 6px; padding: 2px 8px; border-radius: var(--wbw-r-pill); background: var(--wbw-paper); color: var(--wbw-ink-2); font-size: 12px; font-weight: 600; vertical-align: 2px; white-space: nowrap; }
+.wbw-mid .wbw-select-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.wbw-mid .wbw-select-list__item { position: relative; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; box-sizing: border-box; border-radius: 12px; background: var(--wbw-paper); box-shadow: inset 0 0 0 1px var(--wbw-hairline); color: var(--wbw-ink-2); font-size: 13px; font-weight: 600; line-height: 1.3; cursor: pointer; transition: background .15s, box-shadow .15s, color .15s; }
+.wbw-mid .wbw-select-list__item:hover { background: var(--wbw-chip); }
+.wbw-mid .wbw-select-list__item input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.wbw-mid .wbw-select-list__box { flex: none; width: 20px; height: 20px; box-sizing: border-box; border-radius: 50%; background: var(--wbw-card); box-shadow: inset 0 0 0 1.5px var(--wbw-knob-off); transition: background .15s, box-shadow .15s; }
+.wbw-mid .wbw-select-list__item.is-on { background: var(--wbw-tool-tint); box-shadow: inset 0 0 0 1.5px var(--wbw-tool); color: var(--wbw-ink); }
+.wbw-mid .wbw-select-list__item.is-on .wbw-select-list__box { background: var(--wbw-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-6.5' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat; box-shadow: none; }
+.wbw-mid .wbw-select-list__item:focus-within { outline: 2px solid var(--wbw-tool-text); outline-offset: 2px; }
+.wbw-mid .wbw-row--engine-off .wbw-select-list__item { opacity: .45; cursor: not-allowed; }
+.wbw-right .wbw-preview__note--err { color: var(--wbw-critical-text); font-weight: 700; }
+/* The preview card stays on screen: 24px under the sticky top bar (admin bar 32px + the bar's measured height). */
+.wbw-right .wbw-preview { position: sticky; top: calc(32px + var(--wbw-top-h) + 24px); }
+.wbw-right .wbw-preview__frame { min-height: 480px; }
+.wbw-finder-steps { display: flex; flex-direction: column; gap: 6px; }
+.wbw-finder-steps .wbw-block { padding: 10px 14px; font-size: 14px; background: var(--wbw-paper); }
+.wbw-finder-steps .wbw-block .wbw-input { margin-left: auto; width: 55%; }
+.wbw-builder-msg { font-size: 13px; color: var(--wbw-ink-2); }
+.wbw-builder-msg--err { color: var(--wbw-critical-text); font-weight: 700; }
+@media (max-width: 1100px) {
+	.wbw-top { padding: 12px 24px; gap: 12px; }
+	.wbw-top .wbw-input--title { width: 150px; font-size: 17px; }
+	.wbw-top .wbw-btn { padding: 0 16px; }
+	.wbw-cols { padding: 24px; gap: 16px; }
+	.wbw-left { flex-basis: 240px; max-width: 240px; }
+}
+@media (max-width: 782px) {
+	.wbw-top { top: 46px; padding: 12px 16px; gap: 8px; }
+	.wbw-top__left { flex: 1 1 100%; gap: 8px; }
+	.wbw-top .wbw-input--title { flex: 1 1 100px; width: auto; min-width: 0; font-size: 16px; }
+	.wbw-top .wbw-actions { flex: 1 1 100%; gap: 6px; }
+	.wbw-top .wbw-btn { height: 38px; padding: 0 14px; font-size: 14px; }
+	.wbw-cols { flex-wrap: wrap; padding: 16px; gap: 16px; }
+	.wbw-left { flex: 1 1 100%; max-width: none; padding-bottom: 16px; box-shadow: inset 0 -1px 0 var(--wbw-hairline); }
+	.wbw-mid, .wbw-right { flex: 1 1 100%; }
+	.wbw-right .wbw-preview { position: static; }
+	.wbw-mid .wbw-card { padding: 20px; }
+	.wbw-pics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.wbw-ie { padding: 20px; }
+	/* One column: the Import kicker shares its line with the close button instead of the drop zone sliding under it. */
+	.wbw-ie__col:first-of-type > .wbw-kicker { display: flex; align-items: center; min-height: 44px; margin-top: -8px; padding-right: 52px; }
+	.wbw-ie__col--export { padding-right: 0; }
+}
+/* Under 600px WordPress lets the admin bar scroll away (position: absolute), so the top bar sticks to the very top. */
+@media (max-width: 600px) {
+	.wbw-top { top: 0; }
+}
+
+/* Controls the filter's storefront engine ignores (admin.builder.js engineOffLine): dimmed, disabled, one plain line. */
+.wbw .wbw-row--engine-off .wbw-toggle,
+.wbw .wbw-row--engine-off .wbw-input,
+.wbw .wbw-row--engine-off .wbw-pic-btn,
+.wbw .wbw-row--engine-off .wbw-row__title {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+.wbw .wbw-row__engine {
+	color: var(--wbw-ink-2, #5A5645);
+	font-style: normal;
+}
+
+/* Dimmed rows and cards say why on hover or focus ([data-wbw-tip]): one tooltip box, admin.builder.js showTip(). */
+.wbw-row--engine-off[data-wbw-tip] { cursor: help; }
+.wbw-tip { position: fixed; z-index: 100000; max-width: min(320px, calc(100vw - 16px)); box-sizing: border-box; padding: 12px 14px; border-radius: 12px; background: var(--wbw-ink, #171509); color: #FFFFFF; font: 500 13px/1.45 var(--wbw-font, sans-serif); box-shadow: 0 10px 28px rgba(23, 21, 9, .28); }
+.wbw-tip[hidden] { display: none; }
+.wbw-tip p { margin: 0; color: inherit; font: inherit; }
+
+/* Filter engine stripe above the columns: which engine runs the filter, in plain words. */
+.wbw-engine { margin: 24px 32px 0; padding: 16px 20px; border-radius: var(--wbw-r-card); background: var(--wbw-tool-tint); box-shadow: inset 0 0 0 1.5px var(--wbw-tool); scroll-margin-top: 140px; }
+.wbw-engine.is-classic { background: var(--wbw-partial-soft); box-shadow: inset 0 0 0 1.5px var(--wbw-partial); }
+.wbw-engine__head { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.wbw-engine__icon { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--wbw-card); color: var(--wbw-ink); }
+.wbw-engine__text { flex: 1 1 320px; min-width: 0; }
+.wbw .wbw-engine__title { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--wbw-ink); }
+.wbw-engine__lead { margin: 2px 0 0; font-size: 14px; line-height: 1.45; color: var(--wbw-ink-2); }
+.wbw-engine__pick { display: inline-flex; gap: 4px; padding: 4px; border-radius: 16px; background: var(--wbw-card); }
+.wbw-engine__pick button { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-width: 132px; padding: 8px 14px; border: 0; border-radius: 12px; background: transparent; color: var(--wbw-ink-2); font-family: inherit; text-align: left; cursor: pointer; }
+.wbw-engine__pick button strong { font-size: 14px; color: inherit; }
+.wbw-engine__pick button span { font-size: 12px; }
+.wbw-engine__pick button:hover { background: var(--wbw-paper); }
+.wbw-engine__pick button[aria-checked="true"] { background: var(--wbw-ink); color: #FFFFFF; cursor: default; }
+.wbw-engine__pick button:focus-visible { outline: 2px solid var(--wbw-tool-text); outline-offset: 2px; }
+.wbw-engine__more { margin: 10px 0 0 56px; font-size: 14px; color: var(--wbw-ink-2); }
+.wbw-engine__more summary { display: inline-block; font-weight: 700; color: var(--wbw-tool-text); cursor: pointer; }
+.wbw-engine__more ul { margin: 8px 0 0; padding-left: 18px; list-style: disc; }
+.wbw-engine__more li { margin: 4px 0; line-height: 1.5; }
+@media (max-width: 1100px) { .wbw-engine { margin: 24px 24px 0; } }
+@media (max-width: 782px) { .wbw-engine { margin: 16px 16px 0; } .wbw-engine__more { margin-left: 0; } .wbw-engine__pick { width: 100%; } .wbw-engine__pick button { flex: 1; min-width: 0; } }
+.wbw-mid .wbw-details--off { margin-top: 16px; padding: 12px 16px; background: var(--wbw-paper); }
+.wbw-mid .wbw-details--off > summary { font-size: 14px; color: var(--wbw-ink-2); }

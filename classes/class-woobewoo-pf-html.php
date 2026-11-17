@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Html Class
  *
- * @version 3.4.6
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -21,7 +21,7 @@ class WooBeWoo_PF_Html {
 	 * output. Extends the 'post' context with form elements and data-* / aria-*
 	 * attributes that the filter widget emits.
 	 *
-	 * @version 3.4.6
+	 * @version 4.0.0
 	 * @since   3.3.0
 	 *
 	 * @return array
@@ -30,14 +30,15 @@ class WooBeWoo_PF_Html {
 		$allowed = wp_kses_allowed_html( 'post' );
 
 		$common = array(
-			'id'       => true,
-			'class'    => true,
-			'style'    => true,
-			'title'    => true,
-			'role'     => true,
-			'tabindex' => true,
-			'data-*'   => true,
-			'aria-*'   => true,
+			'id'            => true,
+			'class'         => true,
+			'style'         => true,
+			'title'         => true,
+			'role'          => true,
+			'tabindex'      => true,
+			'data-*'        => true,
+			'aria-*'        => true,
+			'aria-controls' => true,
 		);
 
 		// Extend elements that 'post' already defines.

@@ -1,0 +1,459 @@
+{
+    "info": {
+        "name": "Product Filter for WooCommerce by WBW 4.0.0",
+        "description": "Facets, product filtering and short links for this WooCommerce shop. Read operations are public (rate limited); the same operations are WordPress Abilities (woobewoo/*) and are served over MCP at https://example.com/wp-json/mcp/mcp-adapter-default-server.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "List facets",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/facets",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "facets"
+                    ],
+                    "query": [
+                        {
+                            "key": "category",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Category id or slug."
+                        },
+                        {
+                            "key": "tag",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Tag id or slug."
+                        },
+                        {
+                            "key": "brand",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Brand id or slug (WooCommerce Brands or Perfect Brands)."
+                        },
+                        {
+                            "key": "attributes",
+                            "value": "",
+                            "disabled": true,
+                            "description": "taxonomy or attribute slug => list of term slugs or ids, e.g. {\"color\":[\"red\"],\"size\":[\"42\",\"43\"]}. Several values of one attribute are OR, attributes are AND."
+                        },
+                        {
+                            "key": "min_price",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "max_price",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "in_stock",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Only products that can be bought now."
+                        },
+                        {
+                            "key": "on_sale",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "featured",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "min_rating",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "search",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        }
+                    ]
+                },
+                "description": "Attributes, categories, tags, brands, price range and stock values with product counts, optionally narrowed by a category or any filter selection. Also available as the WordPress Ability \"woobewoo/facets-list\"."
+            }
+        },
+        {
+            "name": "Filter products",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/products",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "products"
+                    ],
+                    "query": [
+                        {
+                            "key": "category",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Category id or slug."
+                        },
+                        {
+                            "key": "tag",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Tag id or slug."
+                        },
+                        {
+                            "key": "brand",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Brand id or slug (WooCommerce Brands or Perfect Brands)."
+                        },
+                        {
+                            "key": "attributes",
+                            "value": "",
+                            "disabled": true,
+                            "description": "taxonomy or attribute slug => list of term slugs or ids, e.g. {\"color\":[\"red\"],\"size\":[\"42\",\"43\"]}. Several values of one attribute are OR, attributes are AND."
+                        },
+                        {
+                            "key": "min_price",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "max_price",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "in_stock",
+                            "value": "",
+                            "disabled": true,
+                            "description": "Only products that can be bought now."
+                        },
+                        {
+                            "key": "on_sale",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "featured",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "min_rating",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "search",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "per_page",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "page",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        },
+                        {
+                            "key": "orderby",
+                            "value": "",
+                            "disabled": true,
+                            "description": ""
+                        }
+                    ]
+                },
+                "description": "Filter products by attributes, category, tag, brand, price range, stock, sale and rating. Variation aware: returns the matching variation and its stock when attributes are given. Also available as the WordPress Ability \"woobewoo/products-filter\"."
+            }
+        },
+        {
+            "name": "Filter products",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/products",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "products"
+                    ]
+                },
+                "description": "Filter products by attributes, category, tag, brand, price range, stock, sale and rating. Variation aware: returns the matching variation and its stock when attributes are given. Also available as the WordPress Ability \"woobewoo/products-filter\".",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"category\": \"\",\n    \"tag\": \"\",\n    \"brand\": \"\",\n    \"attributes\": {},\n    \"min_price\": 0,\n    \"max_price\": 0,\n    \"in_stock\": false,\n    \"on_sale\": false,\n    \"featured\": false,\n    \"min_rating\": 0,\n    \"search\": \"\",\n    \"per_page\": 20,\n    \"page\": 1,\n    \"orderby\": \"default\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Create a short shareable link for a filtered page.",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/short-links",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "short-links"
+                    ]
+                },
+                "description": "",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"url\": \"\",\n    \"filter_id\": 0\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Read a short link.",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/short-links/:slug",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "short-links",
+                        ":slug"
+                    ],
+                    "variable": [
+                        {
+                            "key": "slug",
+                            "value": ""
+                        }
+                    ]
+                },
+                "description": ""
+            }
+        },
+        {
+            "name": "QR code (SVG) of a short link.",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/short-links/:slug/qr",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "short-links",
+                        ":slug",
+                        "qr"
+                    ],
+                    "variable": [
+                        {
+                            "key": "slug",
+                            "value": ""
+                        }
+                    ]
+                },
+                "description": ""
+            }
+        },
+        {
+            "name": "This document.",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/openapi",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "openapi"
+                    ]
+                },
+                "description": ""
+            }
+        },
+        {
+            "name": "AI shopping readiness score with a fix line per failed check (manage_options).",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/readiness",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "readiness"
+                    ]
+                },
+                "description": "",
+                "auth": {
+                    "type": "basic",
+                    "basic": [
+                        {
+                            "key": "username",
+                            "value": "{{username}}",
+                            "type": "string"
+                        },
+                        {
+                            "key": "password",
+                            "value": "{{applicationPassword}}",
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create or refresh llms.txt (manage_options).",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/llms",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "llms"
+                    ]
+                },
+                "description": "",
+                "body": {
+                    "mode": "raw",
+                    "raw": "[]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "auth": {
+                    "type": "basic",
+                    "basic": [
+                        {
+                            "key": "username",
+                            "value": "{{username}}",
+                            "type": "string"
+                        },
+                        {
+                            "key": "password",
+                            "value": "{{applicationPassword}}",
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "https://example.com/wp-json/wpf/v1"
+        },
+        {
+            "key": "username",
+            "value": ""
+        },
+        {
+            "key": "applicationPassword",
+            "value": ""
+        }
+    ]
+}

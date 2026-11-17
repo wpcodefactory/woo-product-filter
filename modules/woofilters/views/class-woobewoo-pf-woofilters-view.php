@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_View Class
  *
- * @version 3.4.7
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -116,23 +116,89 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	 * @version 3.4.0
 	 */
 	public function getTabContent() {
-		$addWC = ( WooBeWoo_PF_Frame::_()->isWCLicense() ? '-wc' : '' );
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadJqGrid();
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-woofilters-list', $this->getModule()->getModPath() . 'js/admin.woofilters.list.js' );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-create-table', $this->getModule()->getModPath() . 'js/create-filter.js', array(), false, true );
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadFontAwesome();
+		$modPath = $this->getModule()->getModPath();
+		$this->addWbwAdminAssets();
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-woofilters-list', $modPath . 'js/admin.woofilters.list.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addJSVar(
+			'woobewoo-pf-admin-woofilters-list',
+			'wpfListData',
+			array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'woobewoo-pf-save-nonce' ),
+				'i18n'    => array(
+					'newFilter'      => __( 'New filter', 'woo-product-filter' ),
+					'newTitle'       => __( 'What should it be called?', 'woo-product-filter' ),
+					'newBtn'         => __( 'Create and open the builder', 'woo-product-filter' ),
+					'duplicate'      => __( 'Duplicate', 'woo-product-filter' ),
+					'duplicateTitle' => __( 'Name for the copy', 'woo-product-filter' ),
+					'duplicateBtn'   => __( 'Make the copy', 'woo-product-filter' ),
+					'copy'           => __( 'copy', 'woo-product-filter' ),
+					'defaultName'    => __( 'Shop filter', 'woo-product-filter' ),
+					'saving'         => __( 'Saving…', 'woo-product-filter' ),
+					'error'          => __( 'Something went wrong. Try again.', 'woo-product-filter' ),
+					/* translators: %s: filter name */
+					'confirmDelete'  => __( 'Delete "%s"? Its history goes with it.', 'woo-product-filter' ),
+				),
+			)
+		);
 
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadBootstrap();
-		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-filters', $this->getModule()->getModPath() . 'css/admin.woofilters' . $addWC . '.css' );
-		$proLink = WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' );
+		$tabs    = $options->getTabs();
+		$import  = $options->getTabUrl( 'gopro' );
+		foreach ( $tabs as $key => $t ) {
+			if ( isset( $t['rail_group'] ) && 'setup' === $t['rail_group'] ) {
+				$import = $options->getTabUrl( $key );
+				break;
+			}
+		}
+		$this->assign( 'importUrl', $import );
+		$this->assign( 'setupUrl', $options->getTabUrl( 'setup' ) );
+		$this->assign( 'addNewLink', $options->getTabUrl( 'woofilters' ) . '#new' );
 
-		$this->assign( 'proLink', $proLink );
-		$this->assign( 'addNewLink', WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( 'woofilters#wpfadd' ) );
+		$filters = $this->getModel( 'woofilters' )->setOrderBy( 'id' )->setSortOrder( 'desc' )->getFromTbl();
+		$this->assign( 'filtersList', is_array( $filters ) ? $filters : array() );
+		$this->assign( 'versionsModel', $this->getModel( 'versions' ) );
+		$this->assign( 'versionStats', $this->getModel( 'versions' )->statsForAll() );
+		$counts = wp_count_posts( 'product' );
+		$this->assign( 'productCount', isset( $counts->publish ) ? (int) $counts->publish : 0 );
+
+		$setup = WooBeWoo_PF_Frame::_()->getModule( 'setup' );
+		$this->assign( 'firstWeekCard', $setup ? $setup->getView()->getFirstWeekCard() : '' );
 
 		WooBeWoo_PF_Dispatcher::doAction( 'woobewoo_pf_admin_woofilters_list_enqueue_script' );
 
 		return parent::getContent( 'woofiltersAdmin' );
+	}
+
+	/**
+	 * 4.0 admin assets shared by the list and the builder: cards and the history drawer.
+	 *
+	 * @since 4.0.0
+	 */
+	public function addWbwAdminAssets() {
+		$modPath = $this->getModule()->getModPath();
+		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-wbw', $modPath . 'css/admin.wbw.css', array( 'woobewoo-pf-wbw-admin' ) );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-history', $modPath . 'js/admin.history.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addJSVar(
+			'woobewoo-pf-admin-history',
+			'wpfHistoryData',
+			array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'woobewoo-pf-save-nonce' ),
+				'i18n'    => array(
+					'history'   => __( 'History', 'woo-product-filter' ),
+					'intro'     => __( 'Every save is a version. Restoring makes a new version first, so nothing is ever lost.', 'woo-product-filter' ),
+					'version'   => __( 'Version', 'woo-product-filter' ),
+					'liveNow'   => __( 'Live now', 'woo-product-filter' ),
+					'restore'   => __( 'Restore', 'woo-product-filter' ),
+					'restoring' => __( 'Restoring…', 'woo-product-filter' ),
+					'loading'   => __( 'Loading…', 'woo-product-filter' ),
+					'empty'     => __( 'No versions yet. Save once and it appears here.', 'woo-product-filter' ),
+					'close'     => __( 'Close history', 'woo-product-filter' ),
+					'error'     => __( 'Something went wrong. Try again.', 'woo-product-filter' ),
+				),
+			)
+		);
 	}
 
 	/**
@@ -141,56 +207,152 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 	 * @version 3.4.0
 	 */
 	public function getEditTabContent( $idIn ) {
-
-		$isWooCommercePluginActivated = $this->getModule()->isWooCommercePluginActivated();
-		if ( ! $isWooCommercePluginActivated ) {
+		if ( ! $this->getModule()->isWooCommercePluginActivated() ) {
 			return;
 		}
 		$idIn     = isset( $idIn ) ? (int) $idIn : 0;
 		$filter   = $this->getModel( 'woofilters' )->getById( $idIn );
-		$settings = maybe_unserialize( $filter['setting_data'] );
+		if ( ! $filter ) {
+			return '<div class="wbw-main"><p class="wbw-text">' . esc_html__( 'This filter does not exist.', 'woo-product-filter' ) . '</p></div>';
+		}
+		$settings = function_exists( 'woobewoo_pf_decode_settings' ) ? woobewoo_pf_decode_settings( $filter['setting_data'] ) : woobewoo_pf_decode_settings( $filter['setting_data'] );
+		$main     = isset( $settings['settings'] ) && is_array( $settings['settings'] ) ? $settings['settings'] : array();
+		// Show (and save back) the engine the storefront really uses, so "Save" on a filter made before 4.0
+		// keeps it on the classic engine instead of the builder's first option.
+		if ( ( ! isset( $main['frontend_engine'] ) || '' === $main['frontend_engine'] ) && class_exists( 'WooBeWoo_PF_Frontend4' ) ) {
+			$main['frontend_engine'] = WooBeWoo_PF_Frontend4::engine_of( $idIn, $settings );
+		}
+		$order    = empty( $main['filters']['order'] ) ? array() : WooBeWoo_PF_Utils::jsonDecode( $main['filters']['order'] );
+		$preselect = isset( $main['filters']['preselect'] ) ? $main['filters']['preselect'] : '';
+		unset( $main['filters'] );
 		$modPath  = $this->getModule()->getModPath();
-		$addWC    = ( WooBeWoo_PF_Frame::_()->isWCLicense() ? '-wc' : '' );
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadChosenSelects();
-		WooBeWoo_PF_Frame::_()->getModule( 'templates' )->loadBootstrap();
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-notify', WPF_JS_PATH . 'notify.js', array(), false, true );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-filters', $modPath . 'js/admin.woofilters.js' );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-colorpicker-alhpa', WPF_JS_PATH . 'admin.wp.colorpicker.alpha.js', array( 'wp-color-picker' ) );
-		WooBeWoo_PF_Frame::_()->addJSVar( 'wp-color-picker', 'wpColorPickerL10n', array() );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-create-table', $modPath . 'js/create-filter.js', array(), false, true );
-		WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-filters', 'url', admin_url( 'admin-ajax.php' ) );
-		WooBeWoo_PF_Frame::_()->addJSVar(
-			'woobewoo-pf-admin-filters',
-			'wpfI18n',
-			array( 'edit_category_label' => esc_html__( 'Enter custom category name', 'woo-product-filter' ) )
+
+		require_once $this->getModule()->getModDir() . 'admin-schema.php';
+		$schema = WooBeWoo_PF_Admin_Schema::build( $settings );
+
+		$this->addWbwAdminAssets();
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-wbw-preview', WooBeWoo_PF_Frame::_()->getModule( 'templates' )->getModPath() . 'js/wbw-preview.js', array(), false, true );
+		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-admin-builder', $modPath . 'js/admin.builder.js', array( 'woobewoo-pf-wbw-preview' ), false, true );
+
+		// Attributes, with fill numbers from the smart setup scan when it exists.
+		$attributes = array();
+		$setup      = WooBeWoo_PF_Frame::_()->getModule( 'setup' );
+		$scan       = $setup ? $setup->getModel()->getScan() : false;
+		$scanAttrs  = $scan ? $scan['attributes'] : array();
+		if ( function_exists( 'wc_get_attribute_taxonomies' ) ) {
+			foreach ( WooBeWoo_PF_Dispatcher::applyFilters( 'addCustomAttributes', wc_get_attribute_taxonomies() ) as $attr ) {
+				$tax   = isset( $attr->attribute_name ) ? wc_attribute_taxonomy_name( $attr->attribute_name ) : '';
+				$id    = (int) $attr->attribute_id;
+				$terms = $tax && taxonomy_exists( $tax ) ? (int) wp_count_terms( array( 'taxonomy' => $tax, 'hide_empty' => false ) ) : 0;
+				$with  = isset( $scanAttrs[ $tax ]['with_value'] ) ? (int) $scanAttrs[ $tax ]['with_value'] : null;
+				$attributes[] = array(
+					'id'         => $id ? $id : ( isset( $attr->attribute_slug ) ? $attr->attribute_slug : '' ),
+					'label'      => $attr->attribute_label,
+					'taxonomy'   => $tax,
+					'terms'      => $terms,
+					'with_value' => $with,
+				);
+			}
+		}
+		$customFields = array();
+		foreach ( (array) $this->getModel( 'woofilters' )->getCustomFieldFilterOptions( 'product' ) as $key => $cf ) {
+			$customFields[ $key ] = $cf['label'];
+		}
+		$blockNames = array();
+		foreach ( (array) $this->getModel( 'woofilters' )->getAllFilters() as $key => $def ) {
+			$blockNames[ $key ] = array( 'name' => $def['name'], 'enabled' => ! empty( $def['enabled'] ), 'unique' => ! empty( $def['unique'] ) );
+			// The title the 4.0 storefront shows for a block without its own title ("Category", "Stock", "Seller"), so the builder list matches the shop.
+			if ( class_exists( 'WooBeWoo_PF_Engine' ) && class_exists( 'WooBeWoo_PF_Frontend4' ) && 'wpfAttribute' !== $key ) {
+				$probe = array( 'id' => $key, 'settings' => array() );
+				$nb    = WooBeWoo_PF_Engine::normalize_block( $probe );
+				if ( $nb && ! in_array( $nb['kind'], array( 'meta', 'text' ), true ) ) {
+					$blockNames[ $key ]['shop'] = WooBeWoo_PF_Frontend4::block_title( $probe, $nb );
+				}
+			}
+		}
+		// Pro adds its own picture cards; "pro" cards render dimmed and link to Upgrade.
+		$cards = array();
+		foreach ( $schema['blockCards'] as $key => $card ) {
+			$cards[ $key ] = array( 'id' => $key, 'label' => $card['label'], 'icon' => $card['icon'], 'pro' => false );
+		}
+		$cards = apply_filters( 'woobewoo_pf_builder_block_cards', $cards, $settings );
+		$svgKses = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getSvgKses();
+		foreach ( $cards as $k => $c ) {
+			$cards[ $k ]['icon'] = isset( $c['icon'] ) ? wp_kses( $c['icon'], $svgKses ) : ( isset( $c['svg'] ) ? wp_kses( $c['svg'], $svgKses ) : '' );
+		}
+
+		$stats   = $this->getModel( 'versions' )->statsForAll();
+		$vs      = isset( $stats[ $idIn ] ) ? $stats[ $idIn ] : array( 'count' => 0, 'last' => '' );
+		$isDraft = empty( $order ) || ! empty( $main['wbw_draft'] );
+		$ago     = ! empty( $vs['last'] ) ? human_time_diff( strtotime( $vs['last'] . ' UTC' ), time() ) : '';
+		/* translators: %s: time ago */
+		$stateText = $isDraft ? esc_html__( 'Draft', 'woo-product-filter' ) : ( $ago ? sprintf( esc_html__( 'Live · saved %s ago', 'woo-product-filter' ), $ago ) : esc_html__( 'Live', 'woo-product-filter' ) );
+
+		$options = WooBeWoo_PF_Frame::_()->getModule( 'options' );
+		$shopUrl = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+		$counts  = wp_count_posts( 'product' );
+		$data    = array(
+			'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
+			'nonce'        => wp_create_nonce( 'woobewoo-pf-save-nonce' ),
+			'filterId'     => $idIn,
+			'title'        => (string) $filter['title'],
+			'settings'     => $main,
+			'order'        => is_array( $order ) ? array_values( $order ) : array(),
+			'preselect'    => $preselect,
+			'schema'       => $schema,
+			'attributes'   => $attributes,
+			'sortby'       => $this->getModel( 'woofilters' )->getFilterLabels( 'SortBy' ),
+			'instock'      => $this->getModel( 'woofilters' )->getFilterLabels( 'InStock' ),
+			'customfields' => $customFields,
+			'blockNames'   => $blockNames,
+			'cards'        => array_values( $cards ),
+			'shopUrl'      => $shopUrl,
+			'filtersUrl'   => $options->getTabUrl( 'woofilters' ),
+			'upgradeUrl'   => $options->getTabUrl( 'gopro' ),
+			'isPro'        => (bool) WooBeWoo_PF_Frame::_()->isPro(),
+			'isDraft'      => $isDraft,
+			'productCount' => isset( $counts->publish ) ? (int) $counts->publish : 0,
+			'versions'     => (int) $vs['count'],
+			'i18n'         => array(
+				'saving'              => __( 'Saving…', 'woo-product-filter' ),
+				'saved'               => __( 'Live · saved just now', 'woo-product-filter' ),
+				'unsaved'             => __( 'Unsaved changes', 'woo-product-filter' ),
+				'engine4Only'         => __( 'Works with the 4.0 engine only. Switch the engine at the top of this page to use it.', 'woo-product-filter' ),
+				'classicOnly'         => __( 'Works with the classic engine only. The 4.0 storefront does not use it.', 'woo-product-filter' ),
+				'engine4OnlyTip'      => __( 'Greyed out because this filter runs the Classic engine, which does not have this setting. Pick "New 4.0" in the Filter engine stripe at the top of this page to use it.', 'woo-product-filter' ),
+				'classicOnlyTip'      => __( 'Greyed out because this filter runs the New 4.0 engine, which does not use this setting. Your old value is kept. To use it, pick "Classic 3.x" in the Filter engine stripe at the top of this page.', 'woo-product-filter' ),
+				'offGroupClassic'     => __( 'Only for the Classic engine', 'woo-product-filter' ),
+				'offGroupClassicHelp' => __( 'These do nothing while this filter runs New 4.0. They are kept, so nothing is lost if you switch back to Classic.', 'woo-product-filter' ),
+				'offGroup4'           => __( 'Only for the New 4.0 engine', 'woo-product-filter' ),
+				'offGroup4Help'       => __( 'These do nothing while this filter runs Classic. Pick New 4.0 at the top of this page to use them.', 'woo-product-filter' ),
+				'addedTip'            => __( 'Already in this filter. Click it in the list above to change it.', 'woo-product-filter' ),
+				'proTip'              => __( 'This block comes with Pro. Click to see what Pro adds.', 'woo-product-filter' ),
+				/* translators: 1: number of ticked choices, 2: number of choices */
+				'pickedOf'            => __( '%1$s of %2$s on', 'woo-product-filter' ),
+				'previewPlaced'       => __( 'Your shop page does not show filters by itself, so the preview placed this one above the products. To show it on the live shop, add its shortcode to that page.', 'woo-product-filter' ),
+				'previewFailed'       => __( 'The preview could not update. Your changes are still here: press Save, then reload this page.', 'woo-product-filter' ),
+				'error'               => __( 'Something went wrong. Try again.', 'woo-product-filter' ),
+				'leave'               => __( 'You have unsaved changes.', 'woo-product-filter' ),
+				/* translators: %s: number */
+				'match'               => __( '%s products match. Updated as you change settings.', 'woo-product-filter' ),
+				'matchNone'           => __( 'Updated as you change settings.', 'woo-product-filter' ),
+			),
 		);
-		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-admin-filters', $modPath . 'css/admin.woofilters' . $addWC . '.css' );
+		WooBeWoo_PF_Frame::_()->addJSVar( 'woobewoo-pf-admin-builder', 'wpfBuilderData', $data );
 
-		$this->addCommonAssets( $modPath );
-		$this->addPluginCustomStyles( $modPath, true );
+		/**
+		 * Pro: enqueue builder assets (schema additions are made through `woobewoo_pf_admin_schema`).
+		 *
+		 * @since 4.0.0
+		 */
+		do_action( 'woobewoo_pf_builder_assets', $settings, $idIn );
 
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-hash-table', $modPath . 'js/jquery_slider/jshashtable-2.1_src.js' );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-number-formatter', $modPath . 'js/jquery_slider/jquery.numberformatter-1.2.3.js' );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-slider-depend-class', $modPath . 'js/jquery_slider/jquery.dependClass-0.1.js' );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-slider-draggable', $modPath . 'js/jquery_slider/draggable-0.1.js' );
-		WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-jquery-slider', $modPath . 'js/jquery_slider/jquery.slider.js' );
-		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-jquery-slider', $modPath . 'css/jquery.slider.min.css' );
-
-		WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-loaders', $modPath . 'css/loaders.css' );
-
-		WooBeWoo_PF_Dispatcher::doAction( 'addScriptsContent', true, $settings );
-
-		$link        = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( $this->getCode() );
-		$linkSetting = WooBeWoo_PF_Frame::_()->getModule( 'options' )->getTabUrl( 'settings' );
-		$proLink     = WooBeWoo_PF_Frame::_()->getModule( 'adminmenu' )->getMainLink() . '&tab=gopro';
-
-		$this->assign( 'proLink', $proLink );
-		$this->assign( 'link', $link );
-		$this->assign( 'linkSetting', $linkSetting );
+		$this->assign( 'link', $options->getTabUrl( $this->getCode() ) );
 		$this->assign( 'settings', $settings );
 		$this->assign( 'filter', $filter );
-		$this->assign( 'is_pro', WooBeWoo_PF_Frame::_()->isPro() );
-
+		$this->assign( 'shopUrl', $shopUrl );
+		$this->assign( 'stateText', $stateText );
+		$this->assign( 'versionCount', (int) $vs['count'] );
 		return parent::getContent( 'woofiltersEditAdmin' );
 	}
 
@@ -211,8 +373,6 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 			return false;
 		}
 
-		WooBeWoo_PF_Frame::_()->getModule( 'meta' )->calcNeededMetaValues( true );
-
 		$this->assign( 'filterId', $id );
 		$this->filter['id'] = $id;
 
@@ -222,6 +382,13 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		} else {
 			$settings = $this->getCurrentSettings( $id );
 		}
+
+		// 4.0.0: the storefront engine 4 renders from the facet index and never touches the legacy meta index.
+		if ( class_exists( 'WooBeWoo_PF_Frontend4' ) && is_array( $settings ) && WooBeWoo_PF_Frontend4::is_engine4( $id, $settings ) ) {
+			return $this->renderHtml4( $id, $settings, $params );
+		}
+
+		WooBeWoo_PF_Frame::_()->getModule( 'meta' )->calcNeededMetaValues( true );
 
 		if ( defined( 'WPF_FREE_REQUIRES' ) && version_compare( '1.4.9', WPF_FREE_REQUIRES, '==' ) ) {
 			$preselects = WooBeWoo_PF_Dispatcher::applyFilters( 'addDefaultFilterData', array(), $id, $settings );
@@ -330,6 +497,56 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		return parent::getContent( 'woofiltersHtml' );
 	}
 
+	/**
+	 * Engine 4 rendering: facet index counts, semantic markup, vanilla JS assets.
+	 *
+	 * @since 4.0.0
+	 */
+	public function renderHtml4( $id, $settings, $params ) {
+		$isWidget = $this->getFilterSetting( $params, 'mode', '' ) == 'widget';
+		$module   = $this->getModule();
+		$preview  = isset( $params['settings'] );
+		$mode     = $module->getRenderMode( $id, $settings, $isWidget );
+		if ( empty( $mode ) && ! $preview ) {
+			return false;
+		}
+		if ( ! isset( $settings['settings'] ) || ! is_array( $settings['settings'] ) ) {
+			return false;
+		}
+		$module->setCurrentFilter( $id, $isWidget );
+		if ( ! class_exists( 'WooBeWoo_PF_Frontend4_View' ) ) {
+			require_once __DIR__ . WPF_DS . 'class-woobewoo-pf-frontend4-view.php';
+		}
+		$row    = $preview ? null : WooBeWoo_PF_Frontend4::filter( $id );
+		$filter = array(
+			'id'       => (int) $id,
+			'title'    => $row ? $row['title'] : ( isset( $params['title'] ) ? $params['title'] : '' ),
+			'settings' => $settings,
+		);
+		if ( $preview ) {
+			// Wizard and builder previews (?wpf_preview=<draft>): the script filters against the draft, not a saved row.
+			$draftId = sanitize_text_field( (string) WooBeWoo_PF_Req::getVar( 'wpf_preview', 'get' ) );
+			if ( preg_match( '/^[a-z0-9]{8,32}$/', $draftId ) ) {
+				$filter['draft'] = $draftId;
+			}
+		}
+		$query  = WooBeWoo_PF_Query::from_request();
+		$ctx    = WooBeWoo_PF_Frontend4::page_context( $settings );
+		$engine = WooBeWoo_PF_Frontend4::make_engine( $filter, $query, $ctx );
+		if ( ! WooBeWoo_PF_Frontend4::$current ) {
+			WooBeWoo_PF_Frontend4::begin_request( $filter, $query, $ctx, $engine );
+		}
+		WooBeWoo_PF_Frontend4::enqueue( $filter );
+		WooBeWoo_PF_Dispatcher::doAction( 'addScriptsContent', false, $settings );
+		$view = new WooBeWoo_PF_Frontend4_View();
+		$html = $view->render( $filter, $query, $engine, $ctx, array( 'uid' => (string) wp_rand( 0, 999999 ) ) );
+		$html = WooBeWoo_PF_Dispatcher::applyFilters( 'woobewoo_pf_frontend4_html', $html, $filter, $query );
+		$html = WooBeWoo_PF_Dispatcher::applyFilters( 'filtersHtml', $html );
+		// Every attribute and text node is escaped where the view builds it; the legacy kses template would strip
+		// the accessibility attributes (aria-valuetext, role=switch) and the <output> element.
+		return $html;
+	}
+
 	private function getVendor() {
 		if ( class_exists( 'WC_Vendors' ) ) {
 			$vendor_shop = urldecode( get_query_var( 'vendor_shop' ) );
@@ -432,6 +649,17 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 
 		if ( isset( $options['move_sidebar'] ) && isset( $options['move_sidebar']['value'] ) && ! empty( $options['move_sidebar']['value'] ) ) {
 			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-move-sidebar', $modPath . 'css/move.sidebar.css' );
+		}
+
+		// 4.0.0: mobile drawer (only when the filter asks for it) and look presets.
+		if ( ! empty( $settings['mobile_drawer'] ) || ! empty( $settings['mobile_drawer_always'] ) || ( isset( $settings['wbw_placement'] ) && 'drawer' === $settings['wbw_placement'] ) ) {
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-frontend-drawer', $modPath . 'css/frontend.drawer.css' );
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-frontend-drawer', $modPath . 'js/frontend.drawer.js', array(), false, true );
+		}
+		$wbwStyle = empty( $settings['wbw_style'] ) ? '' : $settings['wbw_style'];
+		if ( $wbwStyle || false !== strpos( $order, 'f_wbw_style' ) ) {
+			WooBeWoo_PF_Frame::_()->addStyle( 'woobewoo-pf-frontend-styles', $modPath . 'css/frontend.styles.css' );
+			WooBeWoo_PF_Frame::_()->addScript( 'woobewoo-pf-frontend-styles', $modPath . 'js/frontend.styles.js', array(), false, true );
 		}
 	}
 
@@ -2112,7 +2340,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 			$this->setFilterCss( '#' . self::$blockId . ' {' . $blockStyle . '}' );
 		}
 
-		$showCount = $filter['settings']['f_show_count'] ? ' wpfShowCount' : '';
+		$showCount = ! empty( $filter['settings']['f_show_count'] ) ? ' wpfShowCount' : '';
 		$html      =
 			'<div class="wpfFilterWrapper ' . $noActive . $showCount . $preselected . '"' .
 
@@ -2747,7 +2975,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 		}
 
 		$needIndex = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getView()->needIndex;
-		$index     = ( in_array( $filter['name'], $needIndex ) ) ? "_{$key}" : '';
+		$index     = ( isset( $filter['name'] ) && in_array( $filter['name'], $needIndex ) ) ? "_{$key}" : ''; // 4.0: blocks written by the wizard / builder may carry no legacy "name".
 
 		$isCustom = ! empty( $filter['custom_taxonomy'] );
 		if ( $isCustom ) {
@@ -2910,7 +3138,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 
 		$noActive  = $defSelected ? '' : 'wpfNotActive';
 		$noActive  = $hidden_atts ? 'wpfHidden' : $noActive;
-		$showCount = $filter['settings']['f_show_count'] ? ' wpfShowCount' : '';
+		$showCount = ! empty( $filter['settings']['f_show_count'] ) ? ' wpfShowCount' : '';
 
 		$preselected = $hidden_atts ? ' wpfPreselected' : '';
 
@@ -3863,7 +4091,7 @@ class WooBeWoo_PF_Woofilters_View extends WooBeWoo_PF_View {
 			return false;
 		}
 
-		$settings        = maybe_unserialize( $filter['setting_data'] )['settings'];
+		$settings        = woobewoo_pf_decode_settings( $filter['setting_data'] )['settings'];
 		$isDisplayParams = $this->getFilterSetting( $settings, 'display_selected_params', false );
 
 		return $isDisplayParams ? '<div class="wpfSelectedParameters wpfHidden" data-filter="' . $id . '"></div>' : '';

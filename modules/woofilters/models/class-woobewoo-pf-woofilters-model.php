@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Model Class
  *
- * @version 3.4.6
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -177,6 +177,18 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 			);
 		}
 
+		/**
+		 * Blocks registered with WooBeWoo_PF_Blocks (4.0.0): name, slug, enabled (a Pro block only with Pro), unique,
+		 * content_type. A built-in id is never overwritten.
+		 */
+		if ( class_exists( 'WooBeWoo_PF_Blocks' ) ) {
+			foreach ( WooBeWoo_PF_Blocks::all() as $id => $def ) {
+				if ( ! isset( $filterTypes[ $id ] ) ) {
+					$filterTypes[ $id ] = WooBeWoo_PF_Blocks::filter_type( $def );
+				}
+			}
+		}
+
 		return WooBeWoo_PF_Dispatcher::applyFilters( 'addFilterTypes', $filterTypes );
 	}
 
@@ -336,7 +348,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 			if ( empty( $row['setting_data'] ) ) {
 				continue;
 			}
-			$decoded = maybe_unserialize( $row['setting_data'] );
+			$decoded = woobewoo_pf_decode_settings( $row['setting_data'] );
 			if ( is_array( $decoded ) && ! empty( $decoded['settings']['slug_format'] ) ) {
 				$enabled = 1;
 				break;
@@ -349,9 +361,18 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 	}
 
 	/**
+	 * Version history model.
+	 *
+	 * @since 4.0.0
+	 */
+	public function getVersions() {
+		return WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->getModel( 'versions' );
+	}
+
+	/**
 	 * save.
 	 *
-	 * @version 3.3.0
+	 * @version 4.0.0
 	 */
 	public function save( $data = array() ) {
 
@@ -362,9 +383,12 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 		$duplicateId   = isset( $data['duplicateId'] ) ? $data['duplicateId'] : false;
 		// already created filter
 		if ( ! empty( $id ) && ! empty( $title ) ) {
-			$data['id']   = (string) $id;
+			$data['id'] = (string) $id;
+			// 4.0.0: keep a copy of the row before it changes (version history and undo).
+			$this->getVersions()->snapshot( (int) $id );
 			$statusUpdate = $this->updateById( $data, $id );
 			if ( $statusUpdate ) {
+				$this->getVersions()->snapshot( (int) $id );
 				return $id;
 			}
 		} elseif ( empty( $id ) && ! empty( $title ) && empty( $duplicateId ) ) {  // empty filter
@@ -375,15 +399,23 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 				}
 				$data['id'] = (string) $idInsert;
 				$this->updateById( $data, $idInsert );
+				$this->getVersions()->snapshot( (int) $idInsert );
 			}
 			return $idInsert;
 		} elseif ( empty( $id ) && ! empty( $title ) && ! empty( $duplicateId ) ) {  // duplicate filter
 			$duplicateData             = $this->getById( $duplicateId );
-			$settings                  = maybe_unserialize( $duplicateData['setting_data'] );
-			$duplicateData['settings'] = $settings['settings'];
+			$settings                  = woobewoo_pf_decode_settings( $duplicateData['setting_data'] );
+			$duplicateData['settings'] = isset( $settings['settings'] ) && is_array( $settings['settings'] ) ? $settings['settings'] : array();
+			// A copy looks like its source on the storefront: same engine (classic for a filter made before 4.0).
+			if ( empty( $duplicateData['settings']['frontend_engine'] ) && class_exists( 'WooBeWoo_PF_Frontend4' ) ) {
+				$duplicateData['settings']['frontend_engine'] = WooBeWoo_PF_Frontend4::engine_of( (int) $duplicateId, $settings );
+			}
 			$duplicateData['title']    = isset( $title ) ? $title : 'untitled';
 			$duplicateData['id']       = '';
 			$idInsert                  = $this->insert( $duplicateData );
+			if ( $idInsert ) {
+				$this->getVersions()->snapshot( (int) $idInsert );
+			}
 			return $idInsert;
 		}
 		return false;
@@ -402,6 +434,18 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 
 		$settings = isset( $data['settings'] ) ? $data['settings'] : array();
 
+		// 4.0.0: every 4.0 save stores the storefront engine, so a row without one was written by 3.x (for example
+		// while the owner had rolled back to 3.4.7) and WooBeWoo_PF_Frontend4::engine_of() keeps it on the classic engine.
+		if ( isset( $data['settings'] ) && is_array( $data['settings'] ) && ( ! isset( $data['settings']['frontend_engine'] ) || '' === (string) $data['settings']['frontend_engine'] ) && class_exists( 'WooBeWoo_PF_Frontend4' ) ) {
+			// 4.0.1: filterable, so Free 4.0 with Pro 3.x keeps new filters on the engine that Pro 3.x extends.
+			$engine = (string) apply_filters( 'woobewoo_pf_new_filter_engine', '4' );
+			if ( $update && ! empty( $data['id'] ) ) {
+				$row    = $this->getById( (int) $data['id'] );
+				$engine = WooBeWoo_PF_Frontend4::engine_of( (int) $data['id'], $row ? woobewoo_pf_decode_settings( $row['setting_data'] ) : array() );
+			}
+			$data['settings']['frontend_engine'] = $engine;
+		}
+
 		$data['settings']['filters']['order'] = isset( $settings['filters'] ) && isset( $settings['filters']['order'] ) ? $settings['filters']['order'] : '';
 		$notEdit                              = array( 'filters' );
 		foreach ( $data['settings'] as $key => $value ) {
@@ -417,6 +461,11 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 
 		$settingData          = array( 'settings' => $data['settings'] );
 		$data['setting_data'] = addslashes( maybe_serialize( $settingData ) );
+		// The table class puts string values into the SQL as they are and every caller passes an unslashed title
+		// (WooBeWoo_PF_Req::get() unslashes): escape it here, or "Men's shoes" breaks the query.
+		if ( isset( $data['title'] ) && is_string( $data['title'] ) ) {
+			$data['title'] = esc_sql( $data['title'] );
+		}
 
 		$this->translateStrings( $data['settings'] );
 
@@ -553,7 +602,7 @@ class WooBeWoo_PF_Woofilters_Model extends WooBeWoo_PF_Model {
 			}
 			$data = $this->setSelectFields( 'id, setting_data' )->getFromTbl();
 			foreach ( $data as $filter ) {
-				$settings = maybe_unserialize( $filter['setting_data'] );
+				$settings = woobewoo_pf_decode_settings( $filter['setting_data'] );
 				$metaKeys = $settings && ! empty( $settings['settings']['filters']['order'] ) ?
 					$this->getDataFilterMetaKeys( $settings['settings']['filters']['order'], false ) :
 					array();

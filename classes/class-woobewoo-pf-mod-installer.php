@@ -37,6 +37,12 @@ class WooBeWoo_PF_Mod_Installer {
 		$exPlugDest = explode( $plugin_dir, $path );
 		if ( ! empty( $exPlugDest[1] ) ) {
 			$module['ex_plug_dir'] = str_replace( WPF_DS, '', $exPlugDest[1] );
+		} else {
+			// 4.0.0: symlinked or custom plugin directories: take the folder from plugin_basename().
+			$folder = dirname( plugin_basename( trailingslashit( $path ) . 'index.php' ) );
+			if ( '' !== $folder && '.' !== $folder && false === strpos( $folder, '/' ) ) {
+				$module['ex_plug_dir'] = $folder;
+			}
 		}
 		$path = $path . WPF_DS . $module['code'];
 		if ( ! empty( $module ) && ! empty( $path ) && is_dir( $path ) ) {
@@ -51,10 +57,15 @@ class WooBeWoo_PF_Mod_Installer {
 					if ( WooBeWoo_PF_Frame::_()->getTable( 'modules' )->exists( $module['code'], 'code' ) ) {
 						WooBeWoo_PF_Frame::_()->getTable( 'modules' )->delete( array( 'code' => $module['code'] ) );
 					}
+					// 4.0.1: right after an update two requests can install the same module at once; the second insert
+					// hits the unique code key. That is expected, not an error worth a debug.log line.
+					global $wpdb;
+					$wasSuppressed = $wpdb->suppress_errors( true );
 					if ( 'license' != $module['code'] ) {
 						$module['active'] = WooBeWoo_PF_Frame::_()->getTable( 'modules' )->get( 'active', array( 'code' => 'access' ), '', 'one' ) == 1 ? 1 : 0;
 					}
 					WooBeWoo_PF_Frame::_()->getTable( 'modules' )->insert( $module );
+					$wpdb->suppress_errors( $wasSuppressed );
 					self::_runModuleInstall( $module );
 					self::_installTables( $module );
 
@@ -122,25 +133,22 @@ class WooBeWoo_PF_Mod_Installer {
 	 * @return bool is success - true, else - false.
 	 */
 	public static function moveFiles( $code, $path ) {
-		if ( ! is_dir( WPF_MODULES_DIR . $code ) ) {
-			if ( mkdir( WPF_MODULES_DIR . $code ) ) { // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
-				WooBeWoo_PF_Utils::copyDirectories( $path, WPF_MODULES_DIR . $code );
-				return true;
-			} else {
-				WooBeWoo_PF_Errors::push(
-					esc_html(
-						sprintf(
-							/* translators: %s: modules dir */
-							__( 'Cannot create module directory. Try to set permission to %s directory 755 or 777', 'woo-product-filter' ),
-							WPF_MODULES_DIR
-						)
-					),
-					WooBeWoo_PF_Errors::MOD_INSTALL
-				);
-			}
-		} else {
+		// 4.0.0: the plugin never writes into its own folder at runtime. Modules are loaded from the
+		// plugin that ships them (ex_plug_dir); a module that already exists in our modules folder is fine.
+		if ( is_dir( WPF_MODULES_DIR . $code ) ) {
 			return true;
 		}
+		WooBeWoo_PF_Errors::push(
+			esc_html(
+				sprintf(
+					/* translators: 1: module code, 2: path the module was found at */
+					__( 'The module %1$s at %2$s is outside the plugins directory and cannot be loaded from there. Install the plugin that ships it in wp-content/plugins.', 'woo-product-filter' ),
+					$code,
+					$path
+				)
+			),
+			WooBeWoo_PF_Errors::MOD_INSTALL
+		);
 		return false;
 	}
 

@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - Woofilters Edit Tab Filters
  *
- * @version 3.4.0
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -15,7 +15,8 @@ $pro_label = WooBeWoo_PF_Frame::_()->getModule( 'woofilters' )->pro_label();
 ?>
 <div class="woobewoo_row row-tab active" id="row-tab-filters">
 	<div class="col-xs-12 row-settings-block">
-		<div class="woobewoo-input-group" id="wpfChooseFiltersBlock" data-no-preview="1">
+		<?php require __DIR__ . DIRECTORY_SEPARATOR . 'woofiltersEditTabBlockCards.php'; // 4.0.0 picture cards ?>
+		<div class="woobewoo-input-group wbw-addblock__select" id="wpfChooseFiltersBlock" data-no-preview="1">
 			<div class="woobewoo-group-label">
 				<?php esc_html_e( 'Select filters to add', 'woo-product-filter' ); ?>
 			</div>

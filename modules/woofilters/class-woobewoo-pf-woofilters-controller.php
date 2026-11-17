@@ -2,7 +2,7 @@
 /**
  * Product Filter by WBW - WooBeWoo_PF_Woofilters_Controller Class
  *
- * @version 3.4.8
+ * @version 4.0.0
  *
  * @author woobewoo
  */
@@ -226,6 +226,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	 * @since 3.4.6
 	 */
 	public function woobewoo_pf_draw_filter_ajax() {
+		WooBeWoo_PF_Req::verifyRequest(); // 4.0.0: nonce + manage_options on every admin AJAX handler.
 		$res  = new WooBeWoo_PF_Response();
 		$data = WooBeWoo_PF_Req::get( 'post' );
 		if ( isset( $data ) && $data ) {
@@ -271,7 +272,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 			$res->addData( 'edit_link', $this->getModule()->getEditLink( $id ) );
 			$filter   = $this->getModel( 'woofilters' )->getById( $id );
-			$settings = maybe_unserialize( $filter['setting_data'] );
+			$settings = woobewoo_pf_decode_settings( $filter['setting_data'] );
 			$res->addData( 'filter', $filter );
 			$res->addData( 'filterSettings', $settings );
 		} else {
@@ -307,14 +308,59 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	}
 
 	/**
+	 * Version history of a filter (4.0.0).
+	 */
+	public function woobewoo_pf_versions_list() {
+		WooBeWoo_PF_Req::verifyRequest();
+		$res      = new WooBeWoo_PF_Response();
+		$filterId = absint( WooBeWoo_PF_Req::getVar( 'filter_id', 'post' ) );
+		if ( ! $filterId ) {
+			$res->pushError( esc_html__( 'Invalid ID', 'woo-product-filter' ) );
+			return $res->ajaxExec();
+		}
+		$res->addData( 'filter_id', $filterId );
+		$res->addData( 'versions', $this->getModel( 'versions' )->listForFilter( $filterId ) );
+		return $res->ajaxExec();
+	}
+
+	/**
+	 * Restore a version (creates a new version of the current state first) (4.0.0).
+	 */
+	public function woobewoo_pf_versions_restore() {
+		WooBeWoo_PF_Req::verifyRequest();
+		$res       = new WooBeWoo_PF_Response();
+		$versionId = absint( WooBeWoo_PF_Req::getVar( 'version_id', 'post' ) );
+		$filterId  = $versionId ? $this->getModel( 'versions' )->restore( $versionId ) : false;
+		if ( $filterId ) {
+			$res->addMessage( esc_html__( 'Restored.', 'woo-product-filter' ) );
+			$res->addData( 'filter_id', $filterId );
+			$res->addData( 'edit_link', $this->getModule()->getEditLink( $filterId ) );
+			$res->addData( 'versions', $this->getModel( 'versions' )->listForFilter( $filterId ) );
+		} else {
+			$res->pushError( $this->getModel( 'versions' )->getErrors() );
+		}
+		return $res->ajaxExec();
+	}
+
+	/**
+	 * Remove several filters and their version history (4.0.0 override).
+	 */
+	public function woobewoo_pf_remove_group() {
+		WooBeWoo_PF_Req::verifyRequest();
+		$this->getModel( 'versions' )->deleteForFilters( WooBeWoo_PF_Req::getVar( 'listIds', 'post' ) );
+		return parent::woobewoo_pf_remove_group();
+	}
+
+	/**
 	 * woobewoo_pf_delete_by_id.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 */
 	public function woobewoo_pf_delete_by_id() {
 		WooBeWoo_PF_Req::verifyRequest();
 
 		$res = new WooBeWoo_PF_Response();
+		$this->getModel( 'versions' )->deleteForFilters( array( WooBeWoo_PF_Req::getVar( 'id', 'post' ) ) );
 
 		if ( $this->getModel( 'woofilters' )->delete( WooBeWoo_PF_Req::get( 'post' ) ) != false ) {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
@@ -322,6 +368,68 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			$res->pushError( $this->getModel( 'woofilters' )->getErrors() );
 		}
 
+		return $res->ajaxExec();
+	}
+
+	/**
+	 * Export filters as JSON (Free, 4.0.0): the same `wpf-filters/1` file Pro's `woobewoo_pf_export_group`
+	 * writes and both import paths read (ids in listIds[], the JSON text in data.tables), so files move
+	 * between Free and Pro stores unchanged. Rendered when Pro has not registered its own export handler
+	 * on `woobewoo_pf_filters_import_export`.
+	 *
+	 * @since 4.0.0
+	 */
+	public function woobewoo_pf_export_filters() {
+		WooBeWoo_PF_Req::verifyRequest(); // nonce + manage_options
+		$res = new WooBeWoo_PF_Response();
+		$ids = WooBeWoo_PF_Req::getVar( 'listIds', 'post' );
+		if ( ! is_array( $ids ) ) {
+			$ids = array( $ids );
+		}
+		$ids = array_values( array_unique( array_filter( array_map( 'absint', $ids ) ) ) );
+		if ( empty( $ids ) ) {
+			$res->pushError( esc_html__( 'Pick at least one filter to export.', 'woo-product-filter' ) );
+			return $res->ajaxExec();
+		}
+		$rows = array();
+		foreach ( $ids as $id ) {
+			$row = WooBeWoo_PF_Db::get( 'SELECT id, title, setting_data, is_stats, meta_keys FROM `@__filters` WHERE id = %d', 'row', ARRAY_A, array( (int) $id ) );
+			if ( ! $row ) {
+				continue;
+			}
+			$settings = woobewoo_pf_decode_settings( $row['setting_data'] );
+			if ( ! is_array( $settings ) || ! isset( $settings['settings'] ) || ! is_array( $settings['settings'] ) ) {
+				$settings = array( 'settings' => array() );
+			}
+			// A filter with no stored engine runs on the one engine_of() resolves (classic for filters from 3.x);
+			// the file names it, so the imported copy looks the same on the shop (same rule as Pro's export).
+			if ( ( ! isset( $settings['settings']['frontend_engine'] ) || '' === $settings['settings']['frontend_engine'] ) && class_exists( 'WooBeWoo_PF_Frontend4' ) ) {
+				$settings['settings']['frontend_engine'] = WooBeWoo_PF_Frontend4::engine_of( (int) $row['id'], $settings );
+			}
+			$rows[] = array(
+				'title'     => (string) $row['title'],
+				'settings'  => $settings['settings'],
+				'is_stats'  => (int) $row['is_stats'],
+				'meta_keys' => (string) $row['meta_keys'],
+			);
+		}
+		if ( empty( $rows ) ) {
+			$res->pushError( esc_html__( 'No filter with these ids.', 'woo-product-filter' ) );
+			return $res->ajaxExec();
+		}
+		$json = wp_json_encode(
+			array(
+				'format'   => 'wpf-filters/1',
+				'version'  => WPF_VERSION,
+				'site'     => home_url( '/' ),
+				'exported' => gmdate( 'c' ),
+				'filters'  => $rows,
+			),
+			JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+		);
+		$res->addData( 'tables', $json );
+		$res->addData( 'count', count( $rows ) );
+		$res->addData( 'fileName', 'wpf-filters-export.json' );
 		return $res->ajaxExec();
 	}
 
@@ -339,7 +447,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 			$res->addMessage( esc_html__( 'Done', 'woo-product-filter' ) );
 			$res->addData( 'edit_link', $this->getModule()->getEditLink( $id ) );
 			$filter   = $this->getModel( 'woofilters' )->getById( $id );
-			$settings = maybe_unserialize( $filter['setting_data'] );
+			$settings = woobewoo_pf_decode_settings( $filter['setting_data'] );
 			$res->addData( 'filter', $filter );
 			$res->addData( 'filterSettings', $settings );
 		} else {
@@ -351,14 +459,14 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	/**
 	 * woobewoo_pf_filters_frontend.
 	 *
-	 * @version 3.4.8
+	 * @version 3.4.7
 	 */
 	public function woobewoo_pf_filters_frontend() {
-		check_ajax_referer( 'woobewoo_pf_filter_action', 'woobewoo_pf_filter_nonce' );
-
 		$res = new WooBeWoo_PF_Response();
 
 		$params = WooBeWoo_PF_Req::get( 'post' );
+
+		check_ajax_referer( 'woobewoo_pf_filter_action', 'woobewoo_pf_filter_nonce' );
 
 		$filtersDataBackend          = WooBeWoo_PF_Utils::jsonDecode( $params['filtersDataBackend'] );
 		$queryvars                   = WooBeWoo_PF_Utils::jsonDecode( $params['queryvars'] );
@@ -839,6 +947,7 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 	 * @version 3.4.0
 	 */
 	public function woobewoo_pf_get_taxonomy_terms() {
+		WooBeWoo_PF_Req::verifyRequest(); // 4.0.0: nonce + manage_options on every admin AJAX handler.
 		$res   = new WooBeWoo_PF_Response();
 		$slug  = WooBeWoo_PF_Req::getVar( 'slug' );
 		$terms = array();
@@ -1583,6 +1692,15 @@ class WooBeWoo_PF_Woofilters_Controller extends WooBeWoo_PF_Controller {
 					WPF_GUEST,
 					WPF_ADMIN,
 					WPF_LOGGED,
+				),
+				'woobewoo_pf_versions_list'       => array(
+					WPF_ADMIN,
+				),
+				'woobewoo_pf_versions_restore'    => array(
+					WPF_ADMIN,
+				),
+				'woobewoo_pf_export_filters'      => array(
+					WPF_ADMIN,
 				),
 			),
 		);

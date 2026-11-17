@@ -21,6 +21,24 @@ class WooBeWoo_PF_Utils {
 	}
 
 	/**
+	 * unserialize: called by the Pro licence model (3.4.x and 4.0) on licence server data. Missing since
+	 * Free 3.4.0 (a fatal error on that path); restored without objects (`allowed_classes` false).
+	 *
+	 * @version 4.0.0
+	 * @since   4.0.0
+	 *
+	 * @param string $str Serialized string.
+	 * @return array Unserialized array, or an empty array.
+	 */
+	public static function unserialize( $str ) {
+		if ( ! is_string( $str ) || '' === $str || ! is_serialized( $str ) ) {
+			return array();
+		}
+		$val = @unserialize( $str, array( 'allowed_classes' => false ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize, WordPress.PHP.NoSilencedErrors.Discouraged -- objects refused, broken data returns an empty array.
+		return is_array( $val ) ? $val : array();
+	}
+
+	/**
 	 * jsonDecode.
 	 */
 	public static function jsonDecode( $str ) {

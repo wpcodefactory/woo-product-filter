@@ -1,0 +1,70 @@
+/* Product Filter by WBW - Switch from another filter screen (4.0): cards, pills, tags on the paper ground. */
+.woobewoo-plugin .wbw-importers { display: flex; flex-direction: column; gap: 16px; }
+.woobewoo-plugin .wbw-importers__cards { display: flex; flex-direction: column; gap: 16px; }
+.woobewoo-plugin .wbw-importers__hero h2 { margin: 4px 0 8px; font-size: 28px; letter-spacing: -0.02em; }
+.woobewoo-plugin .wbw-importers__hero p { max-width: 720px; margin: 0; }
+.woobewoo-plugin .wbw-rival { display: flex; flex-direction: column; gap: 8px; }
+.woobewoo-plugin .wbw-rival--missing .wbw-big, .woobewoo-plugin .wbw-rival--missing .wbw-kicker { color: var(--wbw-ink-3, #948F7C); }
+.woobewoo-plugin .wbw-rival__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.woobewoo-plugin .wbw-rival__count { display: flex; align-items: baseline; gap: 10px; margin-top: 8px; }
+.woobewoo-plugin .wbw-rival__sets { margin-top: 8px; }
+.woobewoo-plugin .wbw-rival__sets { list-style: none; margin: 0; padding: 0; }
+.woobewoo-plugin .wbw-rival__set { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 12px 0; border-bottom: 1px solid var(--wbw-hairline, #E8E3D2); }
+.woobewoo-plugin .wbw-rival__set:last-child { border-bottom: 0; }
+.woobewoo-plugin .wbw-rival__set .wbw-chip em { font-style: normal; color: var(--wbw-ink-3, #948F7C); margin-left: 6px; }
+.woobewoo-plugin .wbw-rival__actions { margin-left: auto; display: flex; gap: 8px; }
+.woobewoo-plugin .wbw-btn.is-busy { opacity: .6; pointer-events: none; }
+.woobewoo-plugin .wbw-preview__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+.woobewoo-plugin .wbw-preview__head h2 { margin: 4px 0 0; }
+.woobewoo-plugin .wbw-preview__frames { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.woobewoo-plugin .wbw-preview__col { display: flex; flex-direction: column; gap: 8px; }
+.woobewoo-plugin .wbw-preview__frame { background: var(--wbw-paper, #F7F4EA); border-radius: 22px; min-height: 420px; overflow: hidden; display: flex; }
+.woobewoo-plugin .wbw-preview__frame iframe { width: 100%; height: 560px; border: 0; background: #fff; border-radius: 22px; }
+.woobewoo-plugin .wbw-preview__note { padding: 24px; color: var(--wbw-ink-2, #5A5645); align-self: center; }
+.woobewoo-plugin .wbw-table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; }
+.woobewoo-plugin .wbw-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--wbw-ink-3, #948F7C); padding: 8px 12px 8px 0; border-bottom: 1px solid var(--wbw-hairline, #E8E3D2); }
+.woobewoo-plugin .wbw-table td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--wbw-hairline, #E8E3D2); vertical-align: top; font-size: 14px; word-break: break-word; }
+.woobewoo-plugin .wbw-table tr:last-child td { border-bottom: 0; }
+.woobewoo-plugin .wbw-report__h { display: flex; align-items: center; gap: 8px; margin: 16px 0 4px; font-size: 15px; }
+.woobewoo-plugin .wbw-report__item { padding: 16px 0; border-bottom: 1px solid var(--wbw-hairline, #E8E3D2); }
+.woobewoo-plugin .wbw-report__item:last-child { border-bottom: 0; }
+.woobewoo-plugin .wbw-report__item-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.woobewoo-plugin .wbw-importers__live { min-height: 1.2em; margin: 0; }
+@media (max-width: 900px) {
+	.woobewoo-plugin .wbw-preview__frames { grid-template-columns: 1fr; }
+}
+/* 4.0.1: guided switch (review, places, done) and history. */
+.woobewoo-plugin .wbw-wizard__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.woobewoo-plugin .wbw-wizard__head h2 { margin: 4px 0 0; }
+.woobewoo-plugin .wbw-wizard__steps { display: flex; flex-wrap: wrap; gap: 8px 24px; list-style: none; margin: 16px 0; padding: 0 0 12px; border-bottom: 2px solid var(--wbw-hairline, #E8E3D2); counter-reset: wbwstep; }
+.woobewoo-plugin .wbw-wizard__steps li { counter-increment: wbwstep; color: var(--wbw-ink-3, #948F7C); font-weight: 600; margin: 0; }
+.woobewoo-plugin .wbw-wizard__steps li::before { content: counter(wbwstep) ". "; }
+.woobewoo-plugin .wbw-wizard__steps li.is-current { color: var(--wbw-ink, #1F1D16); }
+.woobewoo-plugin .wbw-wizard__steps li.is-done { color: var(--wbw-ink-2, #5A5645); }
+.woobewoo-plugin .wbw-wizard__body { display: flex; flex-direction: column; gap: 12px; }
+.woobewoo-plugin .wbw-wizard .wbw-field { display: flex; flex-direction: column; gap: 4px; max-width: 480px; }
+.woobewoo-plugin .wbw-wizard .wbw-field__label { font-weight: 600; }
+.woobewoo-plugin .wbw-wizard .wbw-input, .woobewoo-plugin .wbw-wizard .wbw-select { min-height: 36px; width: 100%; max-width: 100%; box-sizing: border-box; }
+.woobewoo-plugin .wbw-map td { vertical-align: middle; }
+.woobewoo-plugin .wbw-map td:first-child { width: 48px; }
+.woobewoo-plugin .wbw-details summary { cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.woobewoo-plugin .wbw-places { list-style: none; margin: 0; padding: 0; }
+.woobewoo-plugin .wbw-places li { padding: 10px 0; border-bottom: 1px solid var(--wbw-hairline, #E8E3D2); }
+.woobewoo-plugin .wbw-places li:last-child { border-bottom: 0; }
+.woobewoo-plugin .wbw-notice { background: var(--wbw-paper, #F7F4EA); border-radius: 12px; padding: 10px 14px; margin-top: 6px; }
+.woobewoo-plugin .wbw-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+@media (max-width: 782px) {
+	.woobewoo-plugin .wbw-map thead { display: none; }
+	.woobewoo-plugin .wbw-map tr { display: grid; grid-template-columns: 40px 1fr; gap: 4px 8px; padding: 8px 0; border-bottom: 1px solid var(--wbw-hairline, #E8E3D2); }
+	.woobewoo-plugin .wbw-map td { border: 0; padding: 0; }
+	.woobewoo-plugin .wbw-map td:nth-child(n+3) { grid-column: 2; }
+	/* Recent switches: words were broken letter by letter at 375px; the table scrolls inside its card instead. */
+	.woobewoo-plugin .wbw-history { overflow-x: auto; }
+	.woobewoo-plugin .wbw-history .wbw-table { min-width: 520px; }
+}
+/* 4.0.1: both previews are drawn at desktop width and scaled to the pane, so neither plugin folds into its phone mode. */
+.woobewoo-plugin .wbw-wizard .wbw-preview__frame { position: relative; height: 560px; min-height: 0; }
+.woobewoo-plugin .wbw-wizard .wbw-preview__frame iframe { position: absolute; top: 0; left: 0; width: 200%; height: 1120px; transform: scale(.5); transform-origin: 0 0; border-radius: 44px; }
+@media (max-width: 900px) {
+	.woobewoo-plugin .wbw-wizard .wbw-preview__frame iframe { width: 100%; height: 560px; transform: none; border-radius: 22px; }
+}

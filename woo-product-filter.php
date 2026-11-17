@@ -3,10 +3,11 @@
  * Plugin Name: Product Filter for WooCommerce by WBW
  * Plugin URI: https://woobewoo.com/product/woocommerce-filter/
  * Description: Filter products in your store in most efficient way
- * Version: 3.4.8
+ * Version: 4.0.0
  * Author: woobewoo
  * Author URI: https://woobewoo.com/
- * Requires at least: 5.0
+ * Requires at least: 6.0
+ * Requires PHP: 7.4
  * Text Domain: woo-product-filter
  * Domain Path: /languages
  * WC tested up to: 11.2
@@ -27,6 +28,9 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'config.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 
+// woobewoo_pf_decode_settings() and woobewoo_pf_encode_settings() live in functions.php (loaded above), so they
+// exist even while a host's opcode cache still serves an older copy of this file right after the folder is replaced.
+
 /**
  * HPOS.
  */
@@ -44,7 +48,8 @@ add_action(
  *
  * @version 3.4.0
  */
-if ( woobewoo_pf_request() ) {
+// 4.0.0: also boot under WP-CLI (no REQUEST_URI there) so `wp wpf ...` commands and eval scripts can use the plugin.
+if ( woobewoo_pf_request() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 
 	woobewoo_pf_import_class( 'WooBeWoo_PF_Db' );
 	woobewoo_pf_import_class( 'WooBeWoo_PF_Installer' );
